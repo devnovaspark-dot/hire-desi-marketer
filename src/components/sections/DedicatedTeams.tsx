@@ -110,6 +110,7 @@ export function DedicatedTeams() {
   const [selectedSquad, setSelectedSquad] = useState<3 | 5 | 7>(5);
   const [showAllDetails, setShowAllDetails] = useState(false);
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
+  const [mobileComparisonMode, setMobileComparisonMode] = useState<"cards" | "table">("cards");
 
   const squadSummaries = {
     3: {
@@ -171,9 +172,8 @@ export function DedicatedTeams() {
             subtitle="No freelancers. No shared accounts. 100% full-time specialists working exclusively on your brand under strict Western SLAs."
             align="center"
           />
-
-          {/* 3 High-Contrast Tactile Squad Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-stretch">
+          {/* 3 High-Contrast Tactile Squad Cards — Compact on Mobile */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3.5 sm:gap-5 items-stretch">
             {DEDICATED_TEAM_TIERS.map((tier) => {
               const isHighlight = tier.highlight;
               const isSelected = selectedSquad === tier.size;
@@ -182,7 +182,7 @@ export function DedicatedTeams() {
                 <div
                   key={tier.name}
                   onClick={() => setSelectedSquad(tier.size as 3 | 5 | 7)}
-                  className={`rounded-3xl p-5 flex flex-col justify-between relative transition-colors duration-200 cursor-pointer border-2 ${
+                  className={`rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 flex flex-col justify-between relative transition-colors duration-200 cursor-pointer border-2 ${
                     isSelected
                       ? "bg-[#0A122A] text-white shadow-[0_20px_50px_rgba(10,18,42,0.35)] border-[#FFB020] z-10"
                       : "bg-white text-[#0B1B3A] shadow-sm border-[#D8D0C0] hover:border-[#0B1B3A]"
@@ -191,19 +191,19 @@ export function DedicatedTeams() {
                   {/* Popular Badge */}
                   {isHighlight && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <span className="btn-luxury-gold btn-shimmer px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider shadow-md flex items-center gap-1 whitespace-nowrap">
+                      <span className="btn-luxury-gold btn-shimmer px-3 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-wider shadow-md flex items-center gap-1 whitespace-nowrap">
                         <Star className="w-3 h-3 fill-[#060B22]" />
                         Most Popular Squad
                       </span>
                     </div>
                   )}
 
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-2 sm:gap-3">
                     {/* Card Header */}
-                    <div className="flex items-center justify-between pb-2.5 border-b border-black/10 dark:border-white/15">
+                    <div className="flex items-center justify-between pb-2 border-b border-black/10 dark:border-white/15">
                       <div>
                         <span
-                          className={`text-xs font-black uppercase tracking-wider flex items-center gap-1.5 ${
+                          className={`text-[10px] sm:text-xs font-black uppercase tracking-wider flex items-center gap-1.5 ${
                             isSelected ? "text-[#FFB020]" : "text-[#7B5B14]"
                           }`}
                         >
@@ -211,7 +211,7 @@ export function DedicatedTeams() {
                           Team of {tier.size} Specialists
                         </span>
                         <h3
-                          className={`font-display text-xl sm:text-2xl font-black mt-0.5 tracking-tight ${
+                          className={`font-display text-lg sm:text-2xl font-black mt-0.5 tracking-tight ${
                             isSelected ? "text-white" : "text-[#0B1B3A]"
                           }`}
                         >
@@ -219,7 +219,7 @@ export function DedicatedTeams() {
                         </h3>
                       </div>
                       <span
-                        className={`text-xs font-black px-2.5 py-1 rounded-full ${
+                        className={`text-[10px] sm:text-xs font-black px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full ${
                           isSelected
                             ? "bg-[#FFB020] text-[#060B22]"
                             : "bg-[#0B1B3A] text-white"
@@ -230,7 +230,7 @@ export function DedicatedTeams() {
                     </div>
 
                     <p
-                      className={`text-xs leading-relaxed ${
+                      className={`text-[11px] sm:text-xs leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none ${
                         isSelected ? "text-slate-300" : "text-[#5A6680]"
                       }`}
                     >
@@ -238,15 +238,15 @@ export function DedicatedTeams() {
                     </p>
 
                     {/* Roles Included Mini List */}
-                    <div className="flex flex-col gap-1.5 pt-1">
+                    <div className="flex flex-col gap-1 pt-1">
                       <span
-                        className={`text-[10px] font-black uppercase tracking-wider ${
+                        className={`text-[9px] sm:text-[10px] font-black uppercase tracking-wider ${
                           isSelected ? "text-[#FFB020]" : "text-[#7B5B14]"
                         }`}
                       >
                         Squad Composition:
                       </span>
-                      <ul className="grid grid-cols-1 gap-1 text-xs">
+                      <ul className="grid grid-cols-1 gap-1 text-[11px] sm:text-xs">
                         {tier.roles.map((role, idx) => (
                           <li
                             key={idx}
@@ -255,7 +255,7 @@ export function DedicatedTeams() {
                             }`}
                           >
                             <Check
-                              className={`w-3.5 h-3.5 shrink-0 ${
+                              className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${
                                 isSelected ? "text-[#FFB020]" : "text-emerald-600"
                               }`}
                             />
@@ -267,7 +267,7 @@ export function DedicatedTeams() {
                   </div>
 
                   {/* Bottom Action */}
-                  <div className="pt-4 mt-3 border-t border-black/10 dark:border-white/15">
+                  <div className="pt-3 sm:pt-4 mt-2 sm:mt-3 border-t border-black/10 dark:border-white/15">
                     <button
                       type="button"
                       onClick={() => {
@@ -275,7 +275,7 @@ export function DedicatedTeams() {
                         const comp = document.getElementById("comparison");
                         if (comp) comp.scrollIntoView({ behavior: "smooth" });
                       }}
-                      className={`w-full h-[40px] px-3 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer shadow-sm transition-all ${
+                      className={`w-full h-[36px] sm:h-[40px] px-3 rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer shadow-sm transition-all ${
                         isSelected
                           ? "btn-luxury-gold btn-shimmer"
                           : "btn-luxury-navy btn-shimmer"
@@ -296,7 +296,7 @@ export function DedicatedTeams() {
       <section id="comparison" className="py-4 sm:py-6 bg-[#EFECE3] border-t border-[#DED7CA] scroll-mt-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-3">
           {/* Main Skeuomorphic Comparison Console */}
-          <div className="bg-gradient-to-b from-[#FFFFFF] via-[#FAF8F5] to-[#F5F2EB] rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 shadow-[0_20px_50px_-15px_rgba(11,27,58,0.12),inset_0_2px_0_rgba(255,255,255,1)] border-2 border-[#D8D0C0] border-b-[4px] border-b-[#C4B8A2] flex flex-col gap-2.5 sm:gap-3 relative overflow-hidden">
+          <div className="bg-gradient-to-b from-[#FFFFFF] via-[#FAF8F5] to-[#F5F2EB] rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-[0_20px_50px_-15px_rgba(11,27,58,0.12),inset_0_2px_0_rgba(255,255,255,1)] border-2 border-[#D8D0C0] border-b-[4px] border-b-[#C4B8A2] flex flex-col gap-2.5 sm:gap-3 relative overflow-hidden">
             {/* Specular Top Rim */}
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#FFB020] to-transparent opacity-80" />
 
@@ -307,11 +307,11 @@ export function DedicatedTeams() {
                   <Sparkles className="w-3 h-3 text-[#FFB020]" />
                   Interactive Department Inspector
                 </div>
-                <h3 className="font-display text-lg sm:text-xl font-black text-[#0B1B3A] tracking-tight">
+                <h3 className="font-display text-base sm:text-xl font-black text-[#0B1B3A] tracking-tight">
                   Squad Role Comparison Matrix
                 </h3>
-                <p className="text-[11px] text-[#5A6680] mt-0.5">
-                  Click any squad tab or table column to inspect staffing allocations, tools, and sprint deliverables.
+                <p className="text-[10px] sm:text-[11px] text-[#5A6680] mt-0.5">
+                  Select a squad tab to inspect role allocations, tools, and sprint deliverables.
                 </p>
               </div>
 
@@ -320,7 +320,7 @@ export function DedicatedTeams() {
                 <button
                   type="button"
                   onClick={() => setSelectedSquad(3)}
-                  className={`h-8 px-3.5 rounded-lg text-xs font-black transition-colors cursor-pointer flex items-center justify-center gap-1 border ${
+                  className={`h-7 sm:h-8 px-2.5 sm:px-3.5 rounded-lg text-[11px] sm:text-xs font-black transition-colors cursor-pointer flex items-center justify-center gap-1 border ${
                     selectedSquad === 3
                       ? "bg-[#0B1B3A] text-white shadow-[0_3px_10px_rgba(11,27,58,0.35)] border-[#0B1B3A]"
                       : "text-[#5A6680] hover:text-[#0B1B3A] hover:bg-white/60 border-transparent"
@@ -331,19 +331,19 @@ export function DedicatedTeams() {
                 <button
                   type="button"
                   onClick={() => setSelectedSquad(5)}
-                  className={`h-8 px-3.5 rounded-lg text-xs font-black transition-colors cursor-pointer flex items-center justify-center gap-1 border ${
+                  className={`h-7 sm:h-8 px-2.5 sm:px-3.5 rounded-lg text-[11px] sm:text-xs font-black transition-colors cursor-pointer flex items-center justify-center gap-1 border ${
                     selectedSquad === 5
                       ? "btn-luxury-gold btn-shimmer text-[#060B22] shadow-[0_3px_12px_rgba(255,176,32,0.45)] border-[#FFB020]"
                       : "text-[#5A6680] hover:text-[#0B1B3A] hover:bg-white/60 border-transparent"
                   }`}
                 >
-                  <Star className="w-3 h-3 fill-[#060B22]" />
+                  <Star className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-[#060B22]" />
                   <span>Growth (5) ★</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setSelectedSquad(7)}
-                  className={`h-8 px-3.5 rounded-lg text-xs font-black transition-colors cursor-pointer flex items-center justify-center gap-1 border ${
+                  className={`h-7 sm:h-8 px-2.5 sm:px-3.5 rounded-lg text-[11px] sm:text-xs font-black transition-colors cursor-pointer flex items-center justify-center gap-1 border ${
                     selectedSquad === 7
                       ? "bg-[#0B1B3A] text-white shadow-[0_3px_10px_rgba(11,27,58,0.35)] border-[#0B1B3A]"
                       : "text-[#5A6680] hover:text-[#0B1B3A] hover:bg-white/60 border-transparent"
@@ -354,20 +354,20 @@ export function DedicatedTeams() {
               </div>
             </div>
 
-            {/* Dynamic Benchmark Control Console (Ultra-Sleek & Locked Height) */}
-            <div className="p-2 sm:p-2.5 rounded-xl bg-gradient-to-r from-[#FAF8F2] via-[#F4EFE6] to-[#ECE6DA] border border-[#DDD5C7] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_2px_8px_rgba(11,27,58,0.03)] grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-3 items-center min-h-[66px]">
+            {/* Dynamic Benchmark Control Console (Compact on Mobile) */}
+            <div className="p-2 sm:p-2.5 rounded-xl bg-gradient-to-r from-[#FAF8F2] via-[#F4EFE6] to-[#ECE6DA] border border-[#DDD5C7] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_2px_8px_rgba(11,27,58,0.03)] grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-3 items-center">
               {/* Active Selection Details */}
               <div className="md:col-span-4 flex flex-col justify-center min-w-0">
                 <div className="flex items-center gap-2">
                   <span className="text-[9px] font-black uppercase tracking-wider text-[#9A5B00] bg-[#FFB020]/20 px-1.5 py-0.2 rounded-full border border-[#FFB020]/40 shrink-0">
                     Active Inspection
                   </span>
-                  <span className="text-[11px] text-slate-500 font-bold shrink-0">
+                  <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold shrink-0">
                     {activeSummary.monthlyHours}
                   </span>
                 </div>
                 <div className="flex items-baseline gap-1.5 mt-0.5 min-w-0">
-                  <h4 className="font-display font-black text-base sm:text-lg text-[#0B1B3A] leading-tight truncate">
+                  <h4 className="font-display font-black text-sm sm:text-lg text-[#0B1B3A] leading-tight truncate">
                     {activeSummary.title}
                   </h4>
                 </div>
@@ -379,13 +379,13 @@ export function DedicatedTeams() {
               {/* Benchmark Pricing & Savings */}
               <div className="md:col-span-5 flex flex-col justify-center sm:border-l sm:border-[#D5CDBC] sm:pl-3 min-w-0">
                 <div className="flex items-baseline gap-2">
-                  <span className="font-display font-black text-xl sm:text-2xl text-[#0B1B3A] tracking-tight shrink-0">
+                  <span className="font-display font-black text-lg sm:text-2xl text-[#0B1B3A] tracking-tight shrink-0">
                     {activeSummary.monthlyEst}
                   </span>
-                  <span className="text-[11px] font-bold text-slate-400 line-through shrink-0">
+                  <span className="text-[10px] sm:text-[11px] font-bold text-slate-400 line-through shrink-0">
                     {activeSummary.usAgencyEst} US
                   </span>
-                  <span className="text-[10px] font-extrabold text-emerald-800 bg-emerald-100 border border-emerald-300 px-1.5 py-0.2 rounded-full shrink-0">
+                  <span className="text-[9px] sm:text-[10px] font-extrabold text-emerald-800 bg-emerald-100 border border-emerald-300 px-1.5 py-0.2 rounded-full shrink-0">
                     Saves {activeSummary.savings}
                   </span>
                 </div>
@@ -398,7 +398,7 @@ export function DedicatedTeams() {
               <div className="md:col-span-3 flex justify-start md:justify-end shrink-0">
                 <a
                   href="#quote"
-                  className="btn-luxury-gold btn-shimmer w-full md:w-auto h-[34px] px-3.5 rounded-lg text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap cursor-pointer"
+                  className="btn-luxury-gold btn-shimmer w-full md:w-auto h-[32px] sm:h-[34px] px-3 rounded-lg text-[11px] sm:text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap cursor-pointer"
                 >
                   <span>Select {activeSummary.size}-Person Squad</span>
                   <ArrowRight className="w-3.5 h-3.5 stroke-[3]" />
@@ -407,24 +407,156 @@ export function DedicatedTeams() {
             </div>
 
             {/* Quick Inspection Controls Bar */}
-            <div className="flex items-center justify-between text-[11px] py-0.5">
-              <span className="font-bold text-[#5A6680] flex items-center gap-1">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] py-0.5">
+              <span className="font-bold text-[#5A6680] flex items-center gap-1 text-[10px] sm:text-[11px]">
                 <Sliders className="w-3 h-3 text-[#9A5B00]" />
-                <span>Showing 7 Core Specialized Disciplines</span>
+                <span>7 Core Specialized Disciplines</span>
               </span>
+
+              {/* Mobile View Toggle: 2-Col Roles vs Full Swipe Table */}
+              <div className="flex md:hidden items-center gap-1 bg-[#EAE4D7] p-0.5 rounded-lg border border-[#D5CDBC]">
+                <button
+                  type="button"
+                  onClick={() => setMobileComparisonMode("cards")}
+                  className={cn(
+                    "px-2 py-0.5 rounded text-[10px] font-black transition-colors",
+                    mobileComparisonMode === "cards"
+                      ? "bg-[#0B1B3A] text-white shadow-2xs"
+                      : "text-[#5A6680] hover:text-[#0B1B3A]"
+                  )}
+                >
+                  Roles (2-Col)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMobileComparisonMode("table")}
+                  className={cn(
+                    "px-2 py-0.5 rounded text-[10px] font-black transition-colors",
+                    mobileComparisonMode === "table"
+                      ? "bg-[#0B1B3A] text-white shadow-2xs"
+                      : "text-[#5A6680] hover:text-[#0B1B3A]"
+                  )}
+                >
+                  Table (Swipe ⇄)
+                </button>
+              </div>
+
               <button
                 type="button"
                 onClick={() => setShowAllDetails(!showAllDetails)}
-                className="text-[11px] font-black text-[#9A5B00] hover:text-[#0B1B3A] flex items-center gap-1 cursor-pointer transition-colors bg-white px-2.5 py-1 rounded-lg border border-[#DDD5C7] shadow-2xs"
+                className="text-[10px] sm:text-[11px] font-black text-[#9A5B00] hover:text-[#0B1B3A] flex items-center gap-1 cursor-pointer transition-colors bg-white px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg border border-[#DDD5C7] shadow-2xs"
               >
                 <Eye className="w-3 h-3 text-[#FFB020]" />
-                <span>{showAllDetails ? "Collapse Technical Specs" : "Expand All Deliverables & Tools"}</span>
+                <span>{showAllDetails ? "Collapse Specs" : "Expand All Specs"}</span>
               </button>
             </div>
 
-            {/* Interactive Roles Table with 3D Tactile Indicators & Column Spotlight */}
-            <div className="overflow-x-auto rounded-xl border-2 border-[#DDD5C7] shadow-xs bg-white">
-              <table className="w-full text-left border-collapse text-xs table-fixed">
+            {/* MOBILE ONLY: Clean 2-Column Roles Grid (Solves Screenshot 2 Clutter Completely!) */}
+            <div className={cn("md:hidden", mobileComparisonMode === "cards" ? "block" : "hidden")}>
+              <div className="grid grid-cols-2 gap-2">
+                {ROLE_COMPARISON_MATRIX.map((row) => {
+                  const meta = ROLE_METADATA[row.role] || {
+                    icon: Briefcase,
+                    colorGrad: "from-[#4B5563] via-[#374151] to-[#1F2937]",
+                    shadowColor: "rgba(0,0,0,0.2)",
+                    category: "Core Discipline",
+                    tools: ["Standard Industry Suite"],
+                    deliverable: "Continuous campaign execution and sprint deliverables.",
+                    hoursEst: "Dedicated hours",
+                  };
+                  const RoleIcon = meta.icon;
+                  const isRowExpanded = showAllDetails || expandedRow === row.role;
+                  const isIncluded =
+                    selectedSquad === 3
+                      ? row.team3 === true
+                      : selectedSquad === 5
+                      ? row.team5 === true
+                      : row.team7 === true;
+
+                  return (
+                    <div
+                      key={row.role}
+                      onClick={() => toggleRow(row.role)}
+                      className={cn(
+                        "p-2.5 rounded-xl border-2 transition-all flex flex-col justify-between gap-2 shadow-2xs cursor-pointer",
+                        isIncluded
+                          ? "bg-white border-[#DDD5C7] hover:border-[#FFB020]"
+                          : "bg-[#F7F4EE] border-[#E2DBD0] opacity-90"
+                      )}
+                    >
+                      <div className="flex flex-col gap-1.5">
+                        <div className="flex items-center justify-between">
+                          <div
+                            style={{
+                              boxShadow: `0 3px 6px ${meta.shadowColor}, inset 0 1px 1px rgba(255,255,255,0.7)`,
+                            }}
+                            className={cn(
+                              "w-7 h-7 rounded-lg bg-gradient-to-b p-0.5 flex items-center justify-center shrink-0 border border-white/30 text-white",
+                              meta.colorGrad
+                            )}
+                          >
+                            <RoleIcon className="w-3.5 h-3.5 text-white" />
+                          </div>
+
+                          {isIncluded ? (
+                            <span className="px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-[9px] font-black flex items-center gap-0.5 shadow-2xs">
+                              <Check className="w-2.5 h-2.5 stroke-[3]" />
+                              <span>Full-Time</span>
+                            </span>
+                          ) : (
+                            <span className="px-1.5 py-0.2 rounded-full bg-[#EAE5D9] border border-[#D5CDBC] text-[8px] font-bold text-[#6B788E]">
+                              + Add-on
+                            </span>
+                          )}
+                        </div>
+
+                        <div>
+                          <span className="text-[8px] font-black uppercase tracking-wider text-[#9A5B00] block truncate">
+                            {meta.category}
+                          </span>
+                          <h5 className="font-display font-black text-xs text-[#0B1B3A] leading-tight line-clamp-2">
+                            {row.role}
+                          </h5>
+                        </div>
+
+                        <p className="text-[10px] text-[#5A6680] leading-snug line-clamp-2">
+                          {row.description}
+                        </p>
+                      </div>
+
+                      {/* Expandable Technical Specs for Mobile */}
+                      {isRowExpanded && (
+                        <div className="pt-1.5 mt-1 border-t border-[#E8E2D5] flex flex-col gap-1 animate-in fade-in duration-150 text-[9px]">
+                          <span className="font-black text-[#9A5B00] uppercase tracking-wider">
+                            Tools:
+                          </span>
+                          <div className="flex flex-wrap gap-1">
+                            {meta.tools.map((t) => (
+                              <span
+                                key={t}
+                                className="px-1 py-0.2 rounded bg-[#FAF8F4] border border-[#DDD5C7] font-bold text-[#0B1B3A]"
+                              >
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                          <span className="font-bold text-emerald-800 bg-emerald-50 px-1 py-0.5 rounded border border-emerald-200 mt-0.5 truncate">
+                            {meta.hoursEst}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* DESKTOP (or Mobile Table Mode): Full Table Matrix */}
+            <div className={cn(
+              "overflow-x-auto rounded-xl border-2 border-[#DDD5C7] shadow-xs bg-white",
+              mobileComparisonMode === "table" ? "block" : "hidden md:block"
+            )}>
+              <table className="w-full text-left border-collapse text-xs min-w-[500px] md:min-w-0 md:table-fixed">
                 <thead>
                   <tr className="bg-[#FAF8F5] border-b-2 border-[#E2DBD0] text-[10px] font-black uppercase text-[#5A6680]">
                     <th className="py-2 px-3 w-[43%]">Role &amp; Specialized Responsibility</th>
@@ -511,7 +643,7 @@ export function DedicatedTeams() {
                           {/* Role Name + 3D Embossed Icon Capsule */}
                           <td className="py-1.5 sm:py-2 px-3 w-[43%]">
                             <div className="flex items-center gap-2.5">
-                              {/* 3D Skeuomorphic Embossed Capsule (Compact) */}
+                              {/* 3D Skeuomorphic Embossed Capsule */}
                               <div
                                 style={{
                                   boxShadow: `0 3px 6px ${meta.shadowColor}, inset 0 1px 1px rgba(255,255,255,0.7), inset 0 -1px 2px rgba(0,0,0,0.4)`,
@@ -549,7 +681,7 @@ export function DedicatedTeams() {
                             )}
                           >
                             {row.team3 === true ? (
-                              <div className="w-6 h-6 rounded-full bg-gradient-to-b from-[#34D399] via-[#059669] to-[#047857] border border-[#A7F3D0] shadow-[0_2px_5px_rgba(5,150,105,0.4),inset_0_1px_1px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.3)] flex items-center justify-center text-white mx-auto">
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-b from-[#34D399] via-[#059669] to-[#047857] border border-[#A7F3D0] shadow-[0_2px_5px_rgba(5,150,105,0.4),inset_0_1px_1px_rgba(255,255,255,0.8),inset_0_-1px_2px rgba(0,0,0,0.3)] flex items-center justify-center text-white mx-auto">
                                 <Check className="w-3.5 h-3.5 stroke-[3]" />
                               </div>
                             ) : (
@@ -569,7 +701,7 @@ export function DedicatedTeams() {
                             )}
                           >
                             {row.team5 === true ? (
-                              <div className="w-6 h-6 rounded-full bg-gradient-to-b from-[#34D399] via-[#059669] to-[#047857] border border-[#A7F3D0] shadow-[0_2px_5px_rgba(5,150,105,0.4),inset_0_1px_1px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.3)] flex items-center justify-center text-white mx-auto">
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-b from-[#34D399] via-[#059669] to-[#047857] border border-[#A7F3D0] shadow-[0_2px_5px_rgba(5,150,105,0.4),inset_0_1px_1px_rgba(255,255,255,0.8),inset_0_-1px_2px rgba(0,0,0,0.3)] flex items-center justify-center text-white mx-auto">
                                 <Check className="w-3.5 h-3.5 stroke-[3]" />
                               </div>
                             ) : (
@@ -587,7 +719,7 @@ export function DedicatedTeams() {
                             )}
                           >
                             {row.team7 === true ? (
-                              <div className="w-6 h-6 rounded-full bg-gradient-to-b from-[#34D399] via-[#059669] to-[#047857] border border-[#A7F3D0] shadow-[0_2px_5px_rgba(5,150,105,0.4),inset_0_1px_1px_rgba(255,255,255,0.8),inset_0_-1px_2px_rgba(0,0,0,0.3)] flex items-center justify-center text-white mx-auto">
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-b from-[#34D399] via-[#059669] to-[#047857] border border-[#A7F3D0] shadow-[0_2px_5px_rgba(5,150,105,0.4),inset_0_1px_1px_rgba(255,255,255,0.8),inset_0_-1px_2px rgba(0,0,0,0.3)] flex items-center justify-center text-white mx-auto">
                                 <Check className="w-3.5 h-3.5 stroke-[3]" />
                               </div>
                             ) : (
@@ -643,7 +775,7 @@ export function DedicatedTeams() {
             </div>
 
             {/* Bottom Institutional Assurance Banner */}
-            <div className="p-2 sm:p-2.5 rounded-xl bg-[#F4EFE6] border border-[#DDD5C7] flex flex-wrap items-center justify-between gap-2 text-[11px] text-[#0B1B3A]">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-[#F4EFE6] border border-[#DDD5C7] flex flex-wrap items-center justify-between gap-2 text-[10px] sm:text-[11px] text-[#0B1B3A]">
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                 <span className="font-bold">Zero Gig Subcontracting · 100% In-House Campus Staff</span>
@@ -660,7 +792,6 @@ export function DedicatedTeams() {
                 <ArrowRight className="w-3 h-3" />
               </a>
             </div>
-
           </div>
         </div>
       </section>

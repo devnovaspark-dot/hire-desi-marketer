@@ -90,7 +90,7 @@ export function Header() {
         <div
           className={cn(
             "pointer-events-auto w-full max-w-6xl rounded-full transition-[background-color,box-shadow,border-color] duration-200 flex items-center justify-between",
-            "bg-[#060B22]/95 backdrop-blur-2xl border border-white/20 py-2 px-4 sm:px-6",
+            "bg-[#060B22]/95 backdrop-blur-2xl border border-white/20 py-1.5 sm:py-2 px-3 sm:px-6",
             isScrolled
               ? "shadow-[0_25px_60px_rgba(0,0,0,0.85),inset_0_1px_1px_rgba(255,255,255,0.25)] border-white/30"
               : "shadow-[0_20px_45px_rgba(0,0,0,0.65),inset_0_1px_1px_rgba(255,255,255,0.2)]"

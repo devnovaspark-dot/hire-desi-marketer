@@ -277,16 +277,16 @@ export function CaseStudies() {
                   <ShieldCheck className="w-3 h-3 text-emerald-600" />
                   <span>What Our In-House India Squad Executed:</span>
                 </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-[#0B1B3A]">
+                <div className="grid grid-cols-2 gap-1.5 text-xs text-[#0B1B3A]">
                   {current.whatWeDid.map((step, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-2 p-2 rounded-lg bg-white border border-[#DDD5C7] shadow-2xs hover:border-[#FFB020] transition-colors"
+                      className="flex items-start gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-lg bg-white border border-[#DDD5C7] shadow-2xs hover:border-[#FFB020] transition-colors"
                     >
-                      <div className="w-4 h-4 rounded-full bg-gradient-to-b from-[#34D399] via-[#059669] to-[#047857] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-2xs border border-[#A7F3D0]">
-                        <Check className="w-2.5 h-2.5 stroke-[3]" />
+                      <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-gradient-to-b from-[#34D399] via-[#059669] to-[#047857] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-2xs border border-[#A7F3D0]">
+                        <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 stroke-[3]" />
                       </div>
-                      <span className="text-[10px] leading-snug font-bold text-[#0B1B3A]">{step}</span>
+                      <span className="text-[9px] sm:text-[10px] leading-snug font-bold text-[#0B1B3A]">{step}</span>
                     </div>
                   ))}
                 </div>

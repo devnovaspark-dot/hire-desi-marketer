@@ -72,8 +72,8 @@ export function TeamAvailability() {
           align="center"
         />
 
-        {/* Aerospace Mission Control Clock Console */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        {/* Aerospace Mission Control Clock Console — 2 Horizontally on Mobile */}
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-4">
           {CLIENT_TIMEZONES.map((loc) => {
             const data = timeState[loc.id] || {
               timeStr: mounted ? "--:--" : "12:00 PM",
@@ -85,52 +85,53 @@ export function TeamAvailability() {
               <div
                 key={loc.id}
                 className={cn(
-                  "rounded-3xl p-5 flex flex-col justify-between relative transition-all group",
+                  "rounded-2xl sm:rounded-3xl p-3 sm:p-5 flex flex-col justify-between relative transition-all group",
                   loc.isHq
-                    ? "skeuo-card-gold specular-shine shadow-[0_20px_50px_rgba(255,176,32,0.18)]"
-                    : "skeuo-card-dark specular-shine shadow-xl border border-white/10"
+                    ? "col-span-2 lg:col-span-1 skeuo-card-gold specular-shine shadow-[0_12px_35px_rgba(255,176,32,0.18)]"
+                    : "skeuo-card-dark specular-shine shadow-lg border border-white/10"
                 )}
               >
-                <div className="flex flex-col gap-2">
+                <div className={cn("flex flex-col gap-1 sm:gap-2", loc.isHq && "sm:flex-col")}>
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">
+                    <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-300">
                       {loc.region}
                     </span>
                     {loc.isHq ? (
-                      <span className="skeuo-badge-gold px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider">
+                      <span className="skeuo-badge-gold px-2 py-0.5 rounded-full text-[8px] sm:text-[9px] font-black uppercase tracking-wider">
                         HQ HUB
                       </span>
                     ) : (
-                      <Radio className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-400 transition-colors" />
+                      <Radio className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 group-hover:text-emerald-400 transition-colors" />
                     )}
                   </div>
 
-                  <h3 className="font-display font-black text-lg text-white">
+                  <h3 className="font-display font-black text-sm sm:text-lg text-white leading-tight">
                     {loc.city}
                   </h3>
-                  <span className="text-xs text-slate-300 font-medium">{loc.country}</span>
+                  <span className="text-[10px] sm:text-xs text-slate-300 font-medium truncate">{loc.country}</span>
                 </div>
 
                 {/* Digital LCD Time Display */}
-                <div className="pt-4 mt-4 border-t border-white/10 flex flex-col gap-2.5">
-                  <div className="skeuo-recessed-dark p-3 rounded-xl flex items-center justify-center border border-black/80">
-                    <span className="font-display text-2xl font-black text-[#FFB020] tracking-tight drop-shadow-[0_0_10px_rgba(255,176,32,0.3)]">
+                <div className="pt-2 sm:pt-4 mt-2 sm:mt-4 border-t border-white/10 flex flex-col gap-1.5 sm:gap-2.5">
+                  <div className="skeuo-recessed-dark p-2 sm:p-3 rounded-lg sm:rounded-xl flex items-center justify-center border border-black/80">
+                    <span className="font-display text-lg sm:text-2xl font-black text-[#FFB020] tracking-tight drop-shadow-[0_0_10px_rgba(255,176,32,0.3)]">
                       {mounted ? data.timeStr : "--:-- --"}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between px-1 text-xs">
-                    <span className="flex items-center gap-2">
+                  <div className="flex items-center justify-between px-0.5 sm:px-1 text-[10px] sm:text-xs">
+                    <span className="flex items-center gap-1.5">
                       <span
                         className={cn(
-                          "w-2 h-2 rounded-full",
+                          "w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full",
                           data.isOnline ? "bg-emerald-400 animate-pulse" : "bg-amber-400"
                         )}
                       />
                       <span
-                        className={
+                        className={cn(
+                          "text-[10px] sm:text-xs truncate",
                           data.isOnline ? "text-emerald-400 font-bold" : "text-amber-400 font-bold"
-                        }
+                        )}
                       >
                         {mounted ? data.statusText : "Active shift"}
                       </span>
@@ -142,41 +143,41 @@ export function TeamAvailability() {
           })}
         </div>
 
-        {/* Operational Rhythm Deck */}
-        <div className="skeuo-card-dark specular-shine rounded-3xl p-6 sm:p-8 lg:p-10 border border-white/15 shadow-2xl">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/10">
+        {/* Operational Rhythm Deck — Compact on Mobile */}
+        <div className="skeuo-card-dark specular-shine rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-10 border border-white/15 shadow-2xl">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-6 pb-4 sm:pb-6 border-b border-white/10">
             <div>
-              <span className="text-xs font-black uppercase tracking-widest text-[#FFB020]">
+              <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#FFB020]">
                 Daily Collaboration Protocol
               </span>
-              <h3 className="font-display text-2xl font-black text-white mt-1">
+              <h3 className="font-display text-lg sm:text-2xl font-black text-white mt-0.5">
                 How Work Gets Done Same-Day
               </h3>
             </div>
-            <span className="skeuo-button-navy px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2 w-fit">
+            <span className="skeuo-button-navy px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold flex items-center gap-2 w-fit">
               <Zap className="w-3.5 h-3.5 text-[#FFB020]" />
               <span>Slack Connect + Google Meet + ClickUp</span>
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 pt-4 sm:pt-8">
             {timelineSteps.map((step, idx) => (
               <div
                 key={idx}
-                className="skeuo-recessed-dark p-5 sm:p-6 rounded-2xl flex flex-col gap-3 border border-white/10 hover:border-[#FFB020]/40 transition-all"
+                className="skeuo-recessed-dark p-3.5 sm:p-6 rounded-xl sm:rounded-2xl flex flex-col gap-2 sm:gap-3 border border-white/10 hover:border-[#FFB020]/40 transition-all"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-display font-black text-base text-[#FFB020]">
+                  <span className="font-display font-black text-sm sm:text-base text-[#FFB020]">
                     {step.time}
                   </span>
-                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/10 flex items-center justify-center">
                     {step.icon}
                   </div>
                 </div>
-                <h4 className="font-display font-bold text-lg text-white">
+                <h4 className="font-display font-bold text-sm sm:text-lg text-white">
                   {step.title}
                 </h4>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                <p className="text-[11px] sm:text-sm text-slate-300 leading-relaxed">
                   {step.description}
                 </p>
               </div>

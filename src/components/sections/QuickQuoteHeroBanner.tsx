@@ -56,35 +56,35 @@ export function QuickQuoteHeroBanner() {
   };
 
   return (
-    <div className="relative -mt-14 sm:-mt-16 z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="relative -mt-6 sm:-mt-16 z-30 max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
       {/* High-Fidelity Skeuomorphic Proposal Console */}
-      <div className="relative bg-gradient-to-b from-[#FFFFFF] via-[#FAF8F3] to-[#F2EFE7] rounded-3xl p-5 sm:p-7 shadow-[0_30px_70px_-15px_rgba(11,27,58,0.25),0_12px_24px_-6px_rgba(11,27,58,0.1),inset_0_2px_0_rgba(255,255,255,1)] border border-[#DDD6C8] border-b-[5px] border-b-[#C4B8A2] overflow-hidden">
+      <div className="relative bg-gradient-to-b from-[#FFFFFF] via-[#FAF8F3] to-[#F2EFE7] rounded-2xl sm:rounded-3xl p-3.5 sm:p-7 shadow-[0_30px_70px_-15px_rgba(11,27,58,0.25),0_12px_24px_-6px_rgba(11,27,58,0.1),inset_0_2px_0_rgba(255,255,255,1)] border border-[#DDD6C8] border-b-[5px] border-b-[#C4B8A2] overflow-hidden">
         {/* Specular Top Rim */}
         <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#FFB020] to-transparent opacity-80" />
 
         {/* Card Header Row */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#E8E1D3]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 pb-3 sm:pb-4 border-b border-[#E8E1D3]">
           <div className="flex flex-col gap-0.5">
-            <span className="text-[11px] font-black uppercase tracking-wider text-[#9A5B00] flex items-center gap-1.5">
+            <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-[#9A5B00] flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
               Express Proposal Terminal
             </span>
-            <h2 className="font-display text-xl sm:text-2xl lg:text-3xl font-black text-[#0B1B3A] tracking-tight">
+            <h2 className="font-display text-lg sm:text-2xl lg:text-3xl font-black text-[#0B1B3A] tracking-tight">
               Get a free custom marketing plan in 24 hours
             </h2>
           </div>
-          <div className="flex items-center gap-2 text-xs font-black text-emerald-800 bg-emerald-100/90 px-3.5 py-1.5 rounded-full border border-emerald-300 w-fit shadow-xs">
-            <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0 stroke-[2.5]" />
+          <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-black text-emerald-800 bg-emerald-100/90 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-emerald-300 w-fit shadow-xs">
+            <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-700 shrink-0 stroke-[2.5]" />
             <span>Free · No obligation · Strict NDA</span>
           </div>
         </div>
 
         {/* Interactive Model Selection Pills (Zero Layout Shift Guaranteed) */}
-        <div className="pt-3 pb-1 flex flex-wrap items-center gap-2">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#5A6680] shrink-0">
+        <div className="pt-2.5 sm:pt-3 pb-1 flex flex-wrap items-center gap-2">
+          <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-[#5A6680] shrink-0">
             Selected Tier:
           </span>
-          <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-2xl bg-[#EAE4D7] border border-[#D5CDBC] shadow-[inset_0_2px_4px_rgba(0,0,0,0.08)]">
+          <div className="flex flex-wrap items-center gap-1 sm:gap-1.5 p-1 rounded-xl sm:rounded-2xl bg-[#EAE4D7] border border-[#D5CDBC] shadow-[inset_0_2px_4px_rgba(0,0,0,0.08)]">
             {planOptions.map((opt) => {
               const isSelected = formData.serviceInterest === opt.id;
               return (
@@ -93,7 +93,7 @@ export function QuickQuoteHeroBanner() {
                   type="button"
                   onClick={() => setFormData({ ...formData, serviceInterest: opt.id })}
                   className={cn(
-                    "px-3 py-1.5 rounded-xl text-xs font-black transition-colors cursor-pointer flex items-center gap-1.5 border-2",
+                    "px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-black transition-colors cursor-pointer flex items-center gap-1 sm:gap-1.5 border-2",
                     isSelected
                       ? "bg-[#0B1B3A] text-white border-[#FFB020] shadow-[0_4px_12px_rgba(11,27,58,0.25)]"
                       : "bg-white/80 text-[#0B1B3A] border-transparent hover:bg-white hover:text-[#0B1B3A]"
@@ -102,7 +102,7 @@ export function QuickQuoteHeroBanner() {
                   <span>{opt.label}</span>
                   <span
                     className={cn(
-                      "w-2 h-2 rounded-full transition-colors shrink-0",
+                      "w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-colors shrink-0",
                       isSelected ? "bg-[#FFB020] animate-pulse" : "bg-transparent"
                     )}
                   />

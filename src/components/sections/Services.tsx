@@ -26,48 +26,48 @@ export function Services() {
           align="center"
         />
 
-        {/* 6 Core Service Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+        {/* 6 Core Service Pillars Grid — 2 Horizontally on Mobile */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6">
           {SERVICE_CATEGORIES.map((category) => (
             <div
               key={category.id}
-              className="skeuo-card-dark rounded-3xl p-6 flex flex-col justify-between border border-white/10 hover:border-[#FFB020]/40 transition-all relative group"
+              className="skeuo-card-dark rounded-2xl sm:rounded-3xl p-3 sm:p-6 flex flex-col justify-between border border-white/10 hover:border-[#FFB020]/40 transition-all relative group"
             >
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2.5 sm:gap-4">
                 {/* Title & Subtitle */}
                 <div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#FFB020] block mb-1">
+                  <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-[#FFB020] block mb-0.5 sm:mb-1">
                     {category.subtitle}
                   </span>
-                  <h3 className="font-display text-xl sm:text-2xl font-black text-white">
+                  <h3 className="font-display text-xs sm:text-xl font-black text-white leading-tight">
                     {category.title}
                   </h3>
                 </div>
 
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <p className="text-[10px] sm:text-xs text-slate-300 leading-snug line-clamp-2 sm:line-clamp-none">
                   {category.description}
                 </p>
 
                 {/* Tool Icons Strip */}
-                <div className="flex flex-col gap-2 pt-2 border-t border-white/10">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
-                    Tools We Deploy Daily:
+                <div className="flex flex-col gap-1.5 pt-1.5 sm:pt-2 border-t border-white/10">
+                  <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-wider text-slate-400">
+                    Tools Deployed:
                   </span>
-                  <div className="flex flex-wrap items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-1 sm:gap-2">
                     {category.tools.map((tool) => (
                       <div
                         key={tool.name}
                         title={tool.name}
-                        className="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center p-1.5 hover:border-[#FFB020]/60 hover:scale-110 transition-all cursor-pointer relative group/tool"
+                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center p-1 sm:p-1.5 hover:border-[#FFB020]/60 hover:scale-110 transition-all cursor-pointer relative group/tool"
                       >
                         <Image
                           src={tool.icon}
                           alt={tool.name}
-                          width={16}
-                          height={16}
-                          className="w-4 h-4 object-contain"
+                          width={14}
+                          height={14}
+                          className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain"
                         />
-                        <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 bg-[#040716] border border-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded opacity-0 group-hover/tool:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20 shadow-xl">
+                        <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 bg-[#040716] border border-white/20 text-white text-[9px] font-bold px-1.5 py-0.2 rounded opacity-0 group-hover/tool:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20 shadow-xl">
                           {tool.name}
                         </div>
                       </div>
@@ -76,15 +76,15 @@ export function Services() {
                 </div>
 
                 {/* Deliverables */}
-                <div className="flex flex-col gap-1.5 pt-2 border-t border-white/10">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
-                    Core Deliverables:
+                <div className="flex flex-col gap-1 pt-1.5 sm:pt-2 border-t border-white/10">
+                  <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-wider text-slate-400">
+                    Deliverables:
                   </span>
-                  <ul className="flex flex-col gap-1.5 text-xs text-slate-300">
+                  <ul className="flex flex-col gap-1 text-[10px] sm:text-xs text-slate-300">
                     {category.deliverables.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                        <span className="leading-tight text-[11px] sm:text-xs">{item}</span>
+                      <li key={idx} className="flex items-start gap-1.5">
+                        <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                        <span className="leading-tight text-[9px] sm:text-xs truncate">{item}</span>
                       </li>
                     ))}
                   </ul>

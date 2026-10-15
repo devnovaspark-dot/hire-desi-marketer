@@ -93,8 +93,15 @@ const ROUTES: FlightRoute[] = [
 export function AnimatedGlobeHero() {
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
   const [hoveredRoute, setHoveredRoute] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
     const handleMouseMove = (e: MouseEvent) => {
       const cx = window.innerWidth / 2;
       const cy = window.innerHeight / 2;
@@ -107,7 +114,10 @@ export function AnimatedGlobeHero() {
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   return (
@@ -115,12 +125,12 @@ export function AnimatedGlobeHero() {
       {/* 1. Deep Space Midnight Base */}
       <div className="absolute inset-0 bg-[#040716]" />
 
-      {/* 2. Top Vignette — Guarantees the area behind the navbar is deep midnight with zero glare */}
-      <div className="absolute top-0 inset-x-0 h-48 bg-gradient-to-b from-[#040716] via-[#040716]/95 to-transparent z-10 pointer-events-none" />
+      {/* 2. Top Vignette — Deep midnight with zero glare behind navbar */}
+      <div className="absolute top-0 inset-x-0 h-32 sm:h-48 bg-gradient-to-b from-[#040716] via-[#040716]/95 to-transparent z-10 pointer-events-none" />
 
-      {/* 3. Subtle Ambient Light Orbs (Gentle, non-intrusive) */}
-      <div className="absolute -top-24 right-1/4 w-[500px] h-[500px] rounded-full bg-[#1E3A8A]/15 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 left-1/4 w-[450px] h-[450px] rounded-full bg-[#FFB020]/10 blur-3xl pointer-events-none" />
+      {/* 3. Subtle Ambient Light Orbs */}
+      <div className="absolute -top-24 right-1/4 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] rounded-full bg-[#1E3A8A]/15 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 left-1/4 w-[300px] sm:w-[450px] h-[300px] sm:h-[450px] rounded-full bg-[#FFB020]/10 blur-3xl pointer-events-none" />
 
       {/* 4. Interactive 3D Tilting Globe & Flight Arc System */}
       <div
@@ -129,22 +139,22 @@ export function AnimatedGlobeHero() {
           transform: `perspective(1200px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
         }}
       >
-        {/* Crisp Dotted World Map Base (Transparent SVG, subtle opacity) */}
-        <div className="absolute inset-0 opacity-30 pointer-events-none">
+        {/* Crisp Dotted World Map Base — framed cleanly on both mobile and desktop */}
+        <div className="absolute inset-0 opacity-25 sm:opacity-30 pointer-events-none flex items-center justify-center">
           <Image
             src="/images/world-dots-base.svg"
             alt="World Globe Network"
             fill
             priority
-            className="object-cover object-center"
+            className="object-contain sm:object-cover object-top sm:object-center pt-10 sm:pt-0"
           />
         </div>
 
         {/* Live Vector Telemetry & Animated Flight Arcs SVG */}
         <svg
           viewBox="0 0 1800 900"
-          preserveAspectRatio="xMidYMid slice"
-          className="absolute inset-0 w-full h-full pointer-events-auto"
+          preserveAspectRatio={isMobile ? "xMidYMin meet" : "xMidYMid slice"}
+          className="absolute inset-x-0 top-10 sm:top-0 w-full h-full pointer-events-auto"
         >
           <defs>
             {/* Golden Flight Arc Gradient */}
