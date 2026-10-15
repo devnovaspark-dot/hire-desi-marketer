@@ -1,0 +1,508 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-primary-navy: #0B1B3A;
+    --color-deep-midnight: #040716;
+    --color-signature-gold: #FFB020;
+    --color-gold-hover: #F0A010;
+    --color-warm-cream: #F4F1EA;
+    --color-cream-alt: #EBE6DA;
+    --color-white: #FFFFFF;
+    --color-muted-slate: #5A6680;
+    --color-soft-border: #E2DBD0;
+    --color-dark-border: rgba(255, 255, 255, 0.14);
+    --color-dark-card: #0B132B;
+    --color-dark-card-hover: #111D42;
+
+    --font-heading: 'Bricolage Grotesque', sans-serif;
+    --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+    color-scheme: light;
+  }
+
+  body {
+    background-color: var(--color-warm-cream);
+    color: var(--color-primary-navy);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(255, 176, 32, 0.04) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(11, 27, 58, 0.05) 0px, transparent 50%);
+  }
+
+  ::selection {
+    background-color: #FFB020;
+    color: #060B22;
+  }
+}
+
+/* Custom typography utilities */
+.font-display {
+  font-family: var(--font-heading), sans-serif;
+}
+
+.font-sans {
+  font-family: var(--font-body), sans-serif;
+}
+
+/* =========================================================================
+   ANIMATED GLOBE & FLIGHT TELEMETRY SYSTEM
+   ========================================================================= */
+
+@keyframes radar-sweep-line {
+  0% { transform: translateX(-10%); opacity: 0; }
+  15% { opacity: 0.35; }
+  85% { opacity: 0.35; }
+  100% { transform: translateX(110%); opacity: 0; }
+}
+
+.animate-radar-sweep {
+  animation: radar-sweep-line 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes sonar-wave {
+  0% {
+    r: 12px;
+    opacity: 0.85;
+    stroke-width: 2.5px;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    r: 180px;
+    opacity: 0;
+    stroke-width: 0.5px;
+  }
+}
+
+.animate-sonar-ring-1 {
+  animation: sonar-wave 4s cubic-bezier(0.1, 0.45, 0.1, 1) infinite;
+}
+
+.animate-sonar-ring-2 {
+  animation: sonar-wave 4s cubic-bezier(0.1, 0.45, 0.1, 1) infinite;
+  animation-delay: 1.33s;
+}
+
+.animate-sonar-ring-3 {
+  animation: sonar-wave 4s cubic-bezier(0.1, 0.45, 0.1, 1) infinite;
+  animation-delay: 2.66s;
+}
+
+@keyframes arc-dash-flow {
+  from {
+    stroke-dashoffset: 400;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-arc-flow {
+  stroke-dasharray: 14 160;
+  animation: arc-dash-flow 3.5s linear infinite;
+}
+
+.animate-arc-flow-fast {
+  stroke-dasharray: 10 120;
+  animation: arc-dash-flow 2.4s linear infinite;
+}
+
+@keyframes radar-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-radar-sweep {
+  animation: radar-sweep 5s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+
+/* =========================================================================
+   SKEUOMORPHIC & TACTILE DEPTH ENGINE
+   ========================================================================= */
+
+/* High-end Tactile Light Skeuomorphic Card */
+.skeuo-card-light {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F9F8F5 100%);
+  border: 1px solid #E2DBD0;
+  border-top: 1px solid rgba(255, 255, 255, 0.95);
+  border-bottom: 2px solid #D5CEBF;
+  box-shadow: 
+    0 1px 3px rgba(11, 27, 58, 0.04),
+    0 12px 28px -6px rgba(11, 27, 58, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skeuo-card-light:hover {
+  transform: translateY(-4px);
+  border-bottom: 3px solid #C9BFAC;
+  box-shadow: 
+    0 4px 8px rgba(11, 27, 58, 0.06),
+    0 24px 44px -10px rgba(11, 27, 58, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* Tactile Dark Skeuomorphic Card */
+.skeuo-card-dark {
+  background: linear-gradient(180deg, #0D1636 0%, #080E24 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.6);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 24px 48px -12px rgba(0, 0, 0, 0.7),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skeuo-card-dark:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 176, 32, 0.4);
+  border-top-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    0 32px 64px -12px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(255, 176, 32, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.25);
+}
+
+/* Featured Gold Skeuomorphic Card ($999 Growth Bundle) */
+.skeuo-card-gold {
+  background: linear-gradient(180deg, #101B42 0%, #0A112C 100%);
+  border: 2px solid #FFB020;
+  border-top: 2px solid #FFE082;
+  border-bottom: 3px solid #C47900;
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.5),
+    0 30px 60px -10px rgba(0, 0, 0, 0.75),
+    0 0 40px rgba(255, 176, 32, 0.25),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skeuo-card-gold:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.6),
+    0 40px 75px -12px rgba(0, 0, 0, 0.85),
+    0 0 55px rgba(255, 176, 32, 0.35),
+    inset 0 1px 3px rgba(255, 255, 255, 0.4);
+}
+
+/* Shimmer sweep animation */
+@keyframes shimmer-sweep {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  100% { transform: translateX(250%) skewX(-20deg); }
+}
+
+.animate-shimmer-sweep {
+  animation: shimmer-sweep 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes button-glint {
+  0% { transform: translateX(-160%) skewX(-25deg); opacity: 0; }
+  15% { opacity: 0.95; }
+  35% { transform: translateX(280%) skewX(-25deg); opacity: 0; }
+  100% { transform: translateX(280%) skewX(-25deg); opacity: 0; }
+}
+
+@keyframes button-glint-fast {
+  0% { transform: translateX(-160%) skewX(-25deg); opacity: 0; }
+  20% { opacity: 1; }
+  50% { transform: translateX(280%) skewX(-25deg); opacity: 0; }
+  100% { transform: translateX(280%) skewX(-25deg); opacity: 0; }
+}
+
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-shimmer::before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  left: 0;
+  width: 45%;
+  height: 130%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+  transform: translateX(-160%) skewX(-25deg);
+  pointer-events: none;
+  z-index: 1;
+  animation: button-glint 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.btn-shimmer:hover::before {
+  animation: button-glint-fast 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.btn-shimmer > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes button-gold-pulse {
+  0%, 100% {
+    box-shadow: 0 3px 10px rgba(255, 176, 32, 0.35), 0 1px 3px rgba(0, 0, 0, 0.15);
+  }
+  50% {
+    box-shadow: 0 4px 18px rgba(255, 176, 32, 0.65), 0 0 14px 2px rgba(255, 176, 32, 0.4);
+  }
+}
+
+/* 3D Tactile Luxury Gold Button - Sleek & Refined */
+.skeuo-button-gold,
+.btn-luxury-gold {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(180deg, #FFE28A 0%, #FFB020 48%, #E68A00 100%) !important;
+  color: #060B22 !important;
+  font-weight: 800 !important;
+  border: 1px solid #FFD166;
+  border-top: 1.5px solid #FFFFFF;
+  border-bottom: 2px solid #A86300;
+  box-shadow: 
+    0 3px 10px rgba(255, 176, 32, 0.35),
+    0 1px 3px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1), background 0.15s ease;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.skeuo-button-gold:hover,
+.btn-luxury-gold:hover {
+  background: linear-gradient(180deg, #FFEA9F 0%, #FFB933 48%, #F59300 100%) !important;
+  transform: translateY(-1.5px);
+  border-bottom-width: 2.5px;
+  box-shadow: 
+    0 6px 18px rgba(255, 176, 32, 0.55),
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.skeuo-button-gold:active,
+.btn-luxury-gold:active {
+  transform: translateY(1px);
+  border-bottom-width: 1px;
+  box-shadow: 
+    0 2px 5px rgba(255, 176, 32, 0.3),
+    inset 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* 3D Tactile Luxury Obsidian / Navy Button */
+.skeuo-button-navy,
+.btn-luxury-navy {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(180deg, #1A2A54 0%, #0E1A38 48%, #060D20 100%) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-bottom: 2px solid #020612;
+  box-shadow: 
+    0 3px 12px rgba(0, 0, 0, 0.45),
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1), background 0.15s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.skeuo-button-navy:hover,
+.btn-luxury-navy:hover {
+  background: linear-gradient(180deg, #24396E 0%, #122146 48%, #09132C 100%) !important;
+  transform: translateY(-1.5px);
+  border-bottom-width: 2.5px;
+  box-shadow: 
+    0 6px 18px rgba(11, 27, 58, 0.6),
+    0 2px 5px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.skeuo-button-navy:active,
+.btn-luxury-navy:active {
+  transform: translateY(1px);
+  border-bottom-width: 1px;
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Recessed Inset Sockets / Digital Wells */
+.skeuo-recessed-dark {
+  background: linear-gradient(180deg, #040817 0%, #080F29 100%);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    inset 0 2px 6px rgba(0, 0, 0, 0.7),
+    inset 0 1px 2px rgba(0, 0, 0, 0.9),
+    0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.skeuo-recessed-light {
+  background: linear-gradient(180deg, #ECE6DA 0%, #F5F1E9 100%);
+  border: 1px solid #D5CEBF;
+  border-bottom: 1px solid #FFFFFF;
+  box-shadow: 
+    inset 0 2px 5px rgba(11, 27, 58, 0.1),
+    inset 0 1px 2px rgba(11, 27, 58, 0.08),
+    0 1px 0 #FFFFFF;
+}
+
+/* Physical Embossed Pill Badges */
+.skeuo-badge-gold {
+  background: linear-gradient(180deg, #FFEAB5 0%, #FFD680 100%);
+  color: #7A4500;
+  border: 1px solid #FFC95C;
+  border-bottom: 2px solid #E6A117;
+  box-shadow: 
+    0 2px 4px rgba(255, 176, 32, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.skeuo-badge-dark {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+  color: #F1F5F9;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 
+    0 2px 5px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+/* Floating Glassmorphism Island (For Navbar) */
+.glass-island-nav {
+  background: rgba(6, 11, 34, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 
+    0 20px 45px rgba(0, 0, 0, 0.55),
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+/* Glossy Glass Specular Highlights */
+.specular-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.specular-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+/* Range input styling: Skeuomorphic Track & Heavy Brass Knob */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 12px;
+  background: #040817;
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8);
+  border-radius: 9999px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #FFEAB5, #FFB020 60%, #B37100 100%);
+  border: 2px solid #FFEAB5;
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.6),
+    0 1px 3px rgba(0, 0, 0, 0.4),
+    inset 0 2px 2px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.4);
+  cursor: grab;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 
+    0 6px 16px rgba(255, 176, 32, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    inset 0 2px 2px rgba(255, 255, 255, 0.9);
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.05);
+}
+
+/* Animated Aurora Background Mesh */
+@keyframes aurora-shift {
+  0% { transform: scale(1) translate(0%, 0%) rotate(0deg); opacity: 0.6; }
+  33% { transform: scale(1.15) translate(3%, -4%) rotate(3deg); opacity: 0.8; }
+  66% { transform: scale(0.95) translate(-3%, 3%) rotate(-3deg); opacity: 0.5; }
+  100% { transform: scale(1) translate(0%, 0%) rotate(0deg); opacity: 0.6; }
+}
+
+.animate-aurora {
+  animation: aurora-shift 18s ease-in-out infinite alternate;
+}
+
+/* Floating micro-motion utilities for Command Center */
+@keyframes hdmFloat1 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+}
+
+@keyframes hdmFloat2 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(6px); }
+}
+
+@keyframes hdmPulseRing {
+  0% { transform: scale(0.95); opacity: 0.85; }
+  50% { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(0.95); opacity: 0.85; }
+}
+
+.animate-float-1 {
+  animation: hdmFloat1 5.5s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: hdmFloat2 6.5s ease-in-out infinite 0.75s;
+}
+
+.animate-pulse-ring {
+  animation: hdmPulseRing 2.2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
