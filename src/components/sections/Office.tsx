@@ -42,19 +42,19 @@ export function Office() {
         {/* Unified Command Center Grid - Tight & Balanced Gap */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5 items-stretch">
           
-          {/* Left: Edge-to-Edge High-Tech Headquarters Map Display */}
-          <div className="lg:col-span-7 rounded-2xl sm:rounded-3xl overflow-hidden bg-[#070D1F] relative min-h-[220px] sm:min-h-[340px] lg:min-h-[460px] flex items-center justify-center shadow-[0_25px_60px_rgba(7,13,31,0.5)] border-2 border-white/15 group">
+          {/* Left: Edge-to-Edge High-Tech Headquarters World Map Display */}
+          <div className="lg:col-span-7 rounded-2xl sm:rounded-3xl overflow-hidden bg-[#050816] relative min-h-[260px] sm:min-h-[350px] lg:min-h-[480px] flex items-center justify-center shadow-[0_25px_60px_rgba(7,13,31,0.5)] border-2 border-white/15 group">
             {/* Specular Ambient Glow */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-[#FFB020]/15 rounded-full blur-3xl pointer-events-none z-10" />
 
-            {/* Edge-to-Edge Map Canvas (Zero Dead Space) */}
-            <div className="relative w-full h-[220px] sm:h-[340px] lg:h-full lg:min-h-[460px]">
+            {/* Edge-to-Edge World Map Canvas */}
+            <div className="relative w-full h-[260px] sm:h-[350px] lg:h-full lg:min-h-[480px]">
               <Image
-                src="/images/office-map.svg"
-                alt="Interactive Map of India highlighting Hire Desi Marketer campus headquarters in Bhubaneswar, Odisha"
+                src="/images/office-world-map.svg"
+                alt="Interactive World Map displaying global client connectivity to Hire Desi Marketer campus headquarters in Bhubaneswar, Odisha"
                 fill
                 priority
-                className="object-contain sm:object-cover object-center filter drop-shadow-[0_12px_30px_rgba(0,0,0,0.8)]"
+                className="object-contain object-center filter drop-shadow-[0_12px_30px_rgba(0,0,0,0.8)]"
               />
             </div>
           </div>
@@ -67,13 +67,13 @@ export function Office() {
               <div className="flex flex-col gap-0.5 sm:gap-1">
                 <div className="flex items-center gap-1.5 text-[11px] sm:text-xs font-black uppercase tracking-wider text-[#9A5B00]">
                   <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
-                  <span>Physical Infrastructure</span>
+                  <span>Physical Infrastructure • Global Delivery</span>
                 </div>
                 <h3 className="font-display font-black text-xl sm:text-2xl text-[#0B1B3A] tracking-tight">
                   India Headquarters
                 </h3>
                 <p className="text-[11px] sm:text-xs text-[#5A6680] leading-snug">
-                  Our central campus where campaigns are planned, engineered, and executed daily with zero freelance outsourcing.
+                  Our central campus where international campaigns are planned, engineered, and executed daily with zero freelance outsourcing.
                 </p>
               </div>
 
