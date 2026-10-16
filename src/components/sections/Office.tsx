@@ -43,12 +43,9 @@ export function Office() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5 items-stretch">
           
           {/* Left: Edge-to-Edge High-Tech Headquarters World Map Display */}
-          <div className="lg:col-span-7 rounded-2xl sm:rounded-3xl overflow-hidden bg-[#050816] relative min-h-[260px] sm:min-h-[350px] lg:min-h-[480px] flex items-center justify-center shadow-[0_25px_60px_rgba(7,13,31,0.5)] border-2 border-white/15 group">
-            {/* Specular Ambient Glow */}
-            <div className="absolute top-0 right-0 w-80 h-80 bg-[#FFB020]/15 rounded-full blur-3xl pointer-events-none z-10" />
-
-            {/* Edge-to-Edge World Map Canvas */}
-            <div className="relative w-full h-[260px] sm:h-[350px] lg:h-full lg:min-h-[480px]">
+          <div className="lg:col-span-7 rounded-2xl sm:rounded-3xl overflow-hidden bg-[#050816] relative min-h-[280px] sm:min-h-[360px] lg:min-h-[490px] flex items-center justify-center shadow-[0_25px_60px_rgba(7,13,31,0.5)] border-2 border-white/15 group">
+            {/* World Map Canvas with Safe-Zone Padding */}
+            <div className="relative w-full h-[280px] sm:h-[360px] lg:h-full lg:min-h-[490px] p-2 sm:p-3">
               <Image
                 src="/images/office-world-map.svg"
                 alt="Interactive World Map displaying global client connectivity to Hire Desi Marketer campus headquarters in Bhubaneswar, Odisha"
