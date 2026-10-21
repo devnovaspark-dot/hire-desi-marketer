@@ -110,13 +110,13 @@ export function CaseStudies() {
                   tabIndex={isSelected ? 0 : -1}
                   onClick={() => setActiveTab(idx)}
                   className={cn(
-                    "py-1.5 px-2 rounded-xl text-center transition-all duration-150 cursor-pointer flex flex-col items-center justify-center gap-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFB020]",
+                    "h-11 sm:h-12 px-2 rounded-xl text-center transition-all duration-150 cursor-pointer flex flex-col items-center justify-center gap-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFB020] box-border border",
                     isSelected
-                      ? "bg-[#0B1B3A] text-white shadow-[0_3px_10px_rgba(11,27,58,0.25)] border-t border-white/20"
-                      : "text-[#5A6680] hover:text-[#0B1B3A] hover:bg-white/60"
+                      ? "bg-[#0B1B3A] text-white shadow-[0_3px_10px_rgba(11,27,58,0.25)] border-[#0B1B3A] border-t-white/30"
+                      : "text-[#5A6680] hover:text-[#0B1B3A] hover:bg-white/60 border-transparent"
                   )}
                 >
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 max-w-full">
                     <TabIcon
                       className={cn(
                         "w-3 h-3 shrink-0",
@@ -158,35 +158,35 @@ export function CaseStudies() {
 
           {/* Top Quick-Impact Metrics & Title Bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-2.5 border-b border-[#E2DBD0]">
-            <div className="flex flex-col gap-0.5">
-              <div className="flex items-center gap-2 flex-wrap">
-                <div className="px-2 py-0.2 rounded-full bg-[#0B1B3A] text-[#FFB020] text-[9px] font-black uppercase tracking-wider flex items-center gap-1 shadow-2xs">
-                  <TrendingUp className="w-2.5 h-2.5 text-[#FFB020]" />
+            <div className="flex flex-col gap-0.5 min-w-0">
+              <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                <div className="px-2 py-0.5 rounded-full bg-[#0B1B3A] text-[#FFB020] text-[9px] font-black uppercase tracking-wider flex items-center gap-1 shadow-2xs whitespace-nowrap">
+                  <TrendingUp className="w-2.5 h-2.5 text-[#FFB020] shrink-0" />
                   <span>{highlight.tag}</span>
                 </div>
-                <div className="flex items-center gap-1 text-[10px] font-bold text-[#5A6680]">
-                  <MapPin className="w-2.5 h-2.5 text-[#9A5B00]" />
+                <div className="flex items-center gap-1 text-[10px] font-bold text-[#5A6680] whitespace-nowrap">
+                  <MapPin className="w-2.5 h-2.5 text-[#9A5B00] shrink-0" />
                   <span>{current.location}</span>
                 </div>
-                <span className="text-[9px] text-emerald-800 bg-emerald-100 border border-emerald-300 font-extrabold px-1.5 py-0.2 rounded-full">
+                <span className="text-[9px] text-emerald-800 bg-emerald-100 border border-emerald-300 font-extrabold px-1.5 py-0.5 rounded-full whitespace-nowrap">
                   Verified Client Sprint
                 </span>
               </div>
-              <h3 className="font-display font-black text-lg sm:text-xl text-[#0B1B3A] tracking-tight">
+              <h3 className="font-display font-black text-base sm:text-xl text-[#0B1B3A] tracking-tight leading-snug min-h-[44px] sm:min-h-0 flex items-center">
                 {current.clientType}
               </h3>
             </div>
 
-            {/* 3D Tactile Stat Trophy Capsule (Compact) */}
-            <div className="self-start sm:self-auto px-3 py-1.5 rounded-xl bg-gradient-to-b from-[#ECFDF5] via-[#D1FAE5] to-[#A7F3D0] border border-emerald-300 shadow-[0_2px_8px_rgba(5,150,105,0.12),inset_0_1px_0_rgba(255,255,255,0.9)] flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-b from-[#059669] to-[#047857] text-white flex items-center justify-center shrink-0 shadow-sm border border-white/20">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-100 stroke-[2.5]" />
+            {/* 3D Tactile Stat Trophy Capsule (Compact & Locked Dimensions) */}
+            <div className="self-start sm:self-auto min-w-[200px] h-[52px] px-3 py-1.5 rounded-xl bg-gradient-to-b from-[#ECFDF5] via-[#D1FAE5] to-[#A7F3D0] border border-emerald-300 shadow-[0_2px_8px_rgba(5,150,105,0.12),inset_0_1px_0_rgba(255,255,255,0.9)] flex items-center gap-2.5 shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-b from-[#059669] to-[#047857] text-white flex items-center justify-center shrink-0 shadow-sm border border-white/20">
+                <CheckCircle2 className="w-4 h-4 text-emerald-100 stroke-[2.5]" />
               </div>
-              <div className="flex flex-col">
-                <span className="font-display font-black text-lg sm:text-xl text-emerald-950 leading-none tracking-tight">
+              <div className="flex flex-col justify-center">
+                <span className="font-display font-black text-lg sm:text-xl text-emerald-950 leading-none tracking-tight tabular-nums">
                   {highlight.metric}
                 </span>
-                <span className="text-[10px] font-extrabold text-emerald-800 leading-tight mt-0.5">
+                <span className="text-[10px] font-extrabold text-emerald-800 leading-tight mt-0.5 whitespace-nowrap">
                   {highlight.label}
                 </span>
               </div>
@@ -230,19 +230,19 @@ export function CaseStudies() {
                 </div>
               </div>
 
-              {/* Tangible Sprint Assets Verified */}
-              <div className="p-2 rounded-xl bg-[#FAF8F5] border border-[#DDD5C7] shadow-2xs flex flex-col gap-1">
+              {/* Tangible Sprint Assets Verified - Locked Min-Height */}
+              <div className="p-2 rounded-xl bg-[#FAF8F5] border border-[#DDD5C7] shadow-2xs flex flex-col justify-between min-h-[66px] sm:min-h-[58px] gap-1">
                 <span className="text-[9px] font-black uppercase tracking-wider text-[#9A5B00] flex items-center gap-1">
-                  <Layers className="w-2.5 h-2.5 text-[#FFB020]" />
+                  <Layers className="w-2.5 h-2.5 text-[#FFB020] shrink-0" />
                   <span>Key Delivered Campaign Assets:</span>
                 </span>
                 <div className="flex flex-wrap gap-1">
                   {currentConfig.deliverables.map((item, idx) => (
                     <span
                       key={idx}
-                      className="px-1.5 py-0.2 rounded bg-white border border-[#D5CDBC] text-[9px] font-bold text-[#0B1B3A] shadow-2xs flex items-center gap-1"
+                      className="px-1.5 py-0.5 rounded bg-white border border-[#D5CDBC] text-[9px] font-bold text-[#0B1B3A] shadow-2xs flex items-center gap-1 whitespace-nowrap"
                     >
-                      <Check className="w-2 h-2 text-emerald-600 stroke-[3]" />
+                      <Check className="w-2 h-2 text-emerald-600 stroke-[3] shrink-0" />
                       <span>{item}</span>
                     </span>
                   ))}
@@ -260,10 +260,10 @@ export function CaseStudies() {
 
             {/* Right: Focused Strategy, Execution & Verified Metrics */}
             <div className="lg:col-span-7 flex flex-col gap-2.5 text-left">
-              {/* Challenge Box in Warm Tactile Well */}
-              <div className="p-2.5 rounded-xl bg-gradient-to-r from-[#FFFBEB] via-[#FEF3C7] to-[#FDE68A]/50 border border-amber-300/80 shadow-xs flex flex-col gap-0.5">
+              {/* Challenge Box in Warm Tactile Well - Locked Min-Height */}
+              <div className="p-2.5 rounded-xl bg-gradient-to-r from-[#FFFBEB] via-[#FEF3C7] to-[#FDE68A]/50 border border-amber-300/80 shadow-xs flex flex-col justify-center min-h-[78px] sm:min-h-[64px] gap-0.5">
                 <span className="text-[9px] font-black uppercase tracking-wider text-[#9A5B00] flex items-center gap-1">
-                  <Clock className="w-2.5 h-2.5 text-[#9A5B00]" />
+                  <Clock className="w-2.5 h-2.5 text-[#9A5B00] shrink-0" />
                   <span>The Challenge:</span>
                 </span>
                 <p className="text-[11px] sm:text-xs text-[#0B1B3A] leading-relaxed font-medium">
@@ -271,22 +271,24 @@ export function CaseStudies() {
                 </p>
               </div>
 
-              {/* What Our In-House India Team Executed */}
+              {/* What Our In-House India Team Executed - Locked Card Height to Prevent Jitter */}
               <div className="flex flex-col gap-1">
                 <span className="text-[10px] font-black uppercase tracking-wider text-[#0B1B3A] flex items-center gap-1">
-                  <ShieldCheck className="w-3 h-3 text-emerald-600" />
+                  <ShieldCheck className="w-3 h-3 text-emerald-600 shrink-0" />
                   <span>How Our India Team Addressed It:</span>
                 </span>
                 <div className="grid grid-cols-2 gap-1.5 text-xs text-[#0B1B3A]">
                   {current.whatWeDid.map((step, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-lg bg-white border border-[#DDD5C7] shadow-2xs hover:border-[#FFB020] transition-colors"
+                      className="flex items-start gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-lg bg-white border border-[#DDD5C7] shadow-2xs hover:border-[#FFB020] transition-colors min-h-[78px] sm:min-h-[60px]"
                     >
                       <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-gradient-to-b from-[#34D399] via-[#059669] to-[#047857] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-2xs border border-[#A7F3D0]">
                         <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 stroke-[3]" />
                       </div>
-                      <span className="text-[9px] sm:text-[10px] leading-snug font-bold text-[#0B1B3A]">{step}</span>
+                      <span className="text-[9px] sm:text-[10px] leading-snug font-bold text-[#0B1B3A] line-clamp-3 sm:line-clamp-none">
+                        {step}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -295,14 +297,14 @@ export function CaseStudies() {
               {/* Weekly Monitored Metrics on Client Call */}
               <div className="flex flex-col gap-1 pt-1.5 border-t border-[#E8E2D5]">
                 <span className="text-[9px] font-black uppercase tracking-wider text-[#5A6680] flex items-center gap-1">
-                  <BarChart3 className="w-3 h-3 text-[#0B1B3A]" />
+                  <BarChart3 className="w-3 h-3 text-[#0B1B3A] shrink-0" />
                   <span>Monitored Weekly on Live Client Video Call:</span>
                 </span>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
                   {current.measuredWeekly.map((metric, idx) => (
                     <div
                       key={idx}
-                      className="p-1.5 rounded-lg bg-white border border-[#DDD5C7] text-[9px] font-extrabold text-[#0B1B3A] flex items-center gap-1 shadow-2xs"
+                      className="h-[28px] px-1.5 rounded-lg bg-white border border-[#DDD5C7] text-[9px] font-extrabold text-[#0B1B3A] flex items-center gap-1 shadow-2xs"
                     >
                       <Sparkles className="w-2.5 h-2.5 text-[#FFB020] shrink-0" />
                       <span className="truncate">{metric}</span>
@@ -311,16 +313,17 @@ export function CaseStudies() {
                 </div>
               </div>
 
-              {/* Action Link & Direct Consultation CTA */}
-              <div className="pt-1 flex flex-wrap items-center gap-2.5">
+              {/* Action Link & Direct Consultation CTA - Zero Layout Shift */}
+              <div className="pt-1 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2.5">
                 <a
                   href="#quote"
-                  className="btn-luxury-gold btn-shimmer h-[38px] px-5 rounded-lg text-xs font-black uppercase tracking-wider inline-flex items-center gap-1.5 cursor-pointer shadow-sm"
+                  className="btn-luxury-gold btn-shimmer h-[38px] px-4 sm:px-5 rounded-lg text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-1.5 cursor-pointer shadow-sm whitespace-nowrap self-start"
                 >
-                  <span>Request Custom Strategy for {current.industry}</span>
-                  <ArrowRight className="w-3.5 h-3.5 stroke-[3]" />
+                  <span className="sm:inline hidden">Request Custom Strategy for {current.industry}</span>
+                  <span className="sm:hidden inline">Request Custom Strategy</span>
+                  <ArrowRight className="w-3.5 h-3.5 stroke-[3] shrink-0" />
                 </a>
-                <span className="text-[10px] font-bold text-[#5A6680]">
+                <span className="text-[10px] font-bold text-[#5A6680] leading-tight">
                   Free 24-hr scope &amp; competitive breakdown included
                 </span>
               </div>

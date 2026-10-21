@@ -105,22 +105,22 @@ export function TeamIntroduction() {
           {EXECUTIVE_LEADERSHIP.map((member) => (
             <div
               key={member.name}
-              className="bg-white rounded-2xl p-3 sm:p-3.5 flex flex-col justify-between gap-3 shadow-[0_10px_25px_rgba(11,27,58,0.06)] border border-[#D8D0C0] border-b-[3px] border-b-[#C9BFAC] hover:border-[#0B1B3A] hover:shadow-[0_16px_36px_rgba(11,27,58,0.12)] transition-all duration-300 group"
+              className="bg-white rounded-2xl p-2.5 sm:p-3 md:p-3.5 flex flex-col justify-between gap-2.5 sm:gap-3 shadow-[0_10px_25px_rgba(11,27,58,0.06)] border border-[#D8D0C0] border-b-[3px] border-b-[#C9BFAC] hover:border-[#0B1B3A] hover:shadow-[0_16px_36px_rgba(11,27,58,0.12)] transition-all duration-300 group max-w-[285px] sm:max-w-[330px] md:max-w-none mx-auto w-full"
             >
               {/* Executive Portrait Frame - Natural Headshot Aspect Ratio (100% Full Face & Chin Visibility) */}
-              <div className="relative w-full aspect-[4/4.5] rounded-xl overflow-hidden bg-[#F2EDE4] border border-[#DDD5C7] shadow-2xs">
+              <div className="relative w-full aspect-[4/3.8] sm:aspect-[4/4.2] md:aspect-[4/4.5] max-h-[210px] sm:max-h-[260px] md:max-h-none rounded-xl overflow-hidden bg-[#F2EDE4] border border-[#DDD5C7] shadow-2xs">
                 <Image
                   src={member.image}
                   alt={member.name}
                   fill
                   unoptimized
                   priority
-                  className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
+                  className="object-cover object-top sm:object-center group-hover:scale-102 transition-transform duration-500"
                 />
 
                 {/* Subtle Floating Live Desk Badge */}
-                <div className="absolute top-2 right-2 z-10">
-                  <span className="px-2 py-0.5 rounded-full bg-emerald-950/90 backdrop-blur-md border border-emerald-400/30 text-emerald-300 text-[9px] font-bold flex items-center gap-1 shadow-xs">
+                <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 z-10">
+                  <span className="px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-950/90 backdrop-blur-md border border-emerald-400/30 text-emerald-300 text-[8px] sm:text-[9px] font-bold flex items-center gap-1 shadow-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     Live Desk
                   </span>
@@ -128,31 +128,31 @@ export function TeamIntroduction() {
               </div>
 
               {/* Bio & Details Cleanly Below The Image - Compact Typography */}
-              <div className="flex flex-col gap-2 flex-1 justify-between">
+              <div className="flex flex-col gap-1.5 sm:gap-2 flex-1 justify-between">
                 {/* Identity Header */}
                 <div className="flex flex-col gap-0.5">
                   <div className="flex items-start justify-between gap-1.5">
                     <div>
-                      <h3 className="font-display font-black text-base sm:text-lg text-[#0B1B3A] tracking-tight leading-tight">
+                      <h3 className="font-display font-black text-sm sm:text-base md:text-lg text-[#0B1B3A] tracking-tight leading-tight">
                         {member.name}
                       </h3>
-                      <span className="text-[11px] sm:text-xs font-bold text-[#9A5B00] block">
+                      <span className="text-[10px] sm:text-xs font-bold text-[#9A5B00] block">
                         {member.role}
                       </span>
                     </div>
-                    <span className="px-2 py-0.5 rounded-md bg-[#EAE4D7] border border-[#D5CDBC] text-[#8C5300] text-[9px] font-black uppercase tracking-wider shrink-0">
+                    <span className="px-1.5 sm:px-2 py-0.5 rounded-md bg-[#EAE4D7] border border-[#D5CDBC] text-[#8C5300] text-[8px] sm:text-[9px] font-black uppercase tracking-wider shrink-0">
                       {member.badge}
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-1 text-[10px] text-[#5A6680] font-semibold mt-0.5">
-                    <Clock className="w-3 h-3 text-[#9A5B00]" />
+                  <div className="flex items-center gap-1 text-[9px] sm:text-[10px] text-[#5A6680] font-semibold mt-0.5">
+                    <Clock className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#9A5B00]" />
                     <span>{member.experience}</span>
                   </div>
                 </div>
 
                 {/* Bio Description (Concise 2 lines) */}
-                <p className="text-[11px] text-[#4A5568] leading-relaxed line-clamp-2">
+                <p className="text-[10px] sm:text-[11px] text-[#4A5568] leading-relaxed line-clamp-2">
                   {member.bio}
                 </p>
 
@@ -169,18 +169,18 @@ export function TeamIntroduction() {
                 </div>
 
                 {/* Direct SLA Guarantee Strip */}
-                <div className="pt-1.5 border-t border-[#EAE4D8] flex items-center justify-between text-[10px]">
+                <div className="pt-1.5 border-t border-[#EAE4D8] flex items-center justify-between text-[9px] sm:text-[10px]">
                   <span className="flex items-center gap-1 font-bold text-[#8C5300] truncate">
                     <UserCheck className="w-3 h-3 text-[#FFB020] shrink-0" />
                     <span className="truncate">{member.slaPill}</span>
                   </span>
-                  <span className="text-emerald-700 font-extrabold text-[9px] shrink-0 ml-1">Daily SLA</span>
+                  <span className="text-emerald-700 font-extrabold text-[8px] sm:text-[9px] shrink-0 ml-1">Daily SLA</span>
                 </div>
 
                 <a
                   href={member.ctaHref}
                   onClick={(e) => handleAnchorClick(e, member.ctaHref)}
-                  className="btn-luxury-navy btn-shimmer w-full h-[32px] sm:h-[34px] px-2.5 rounded-lg text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer shadow-xs group-hover:border-white/30"
+                  className="btn-luxury-navy btn-shimmer w-full h-[30px] sm:h-[34px] px-2.5 rounded-lg text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer shadow-xs group-hover:border-white/30"
                 >
                   <span>{member.ctaLabel}</span>
                   <ArrowRight className="w-3 h-3 stroke-[2.5] group-hover:translate-x-1 transition-transform" />
