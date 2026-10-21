@@ -198,16 +198,12 @@ export function CaseStudies() {
             <div className="lg:col-span-5 flex flex-col gap-2.5">
               <div className="relative aspect-[16/9] w-full rounded-xl overflow-hidden border-2 border-slate-700 bg-slate-900 shadow-md group">
                 {/* Browser top chrome */}
-                <div className="h-5 bg-slate-800 border-b border-slate-700 px-2.5 flex items-center justify-between z-10 relative">
+                <div className="h-5 bg-slate-800 border-b border-slate-700 px-2.5 flex items-center z-10 relative">
                   <div className="flex items-center gap-1.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-rose-500/80" />
                     <div className="w-1.5 h-1.5 rounded-full bg-amber-500/80" />
                     <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/80" />
-                    <span className="text-[8px] text-slate-400 font-mono ml-1.5 truncate">
-                      verified-campaign.internal/{current.id}
-                    </span>
                   </div>
-                  <span className="text-[8px] text-emerald-400 font-mono font-bold">100% In-House</span>
                 </div>
 
                 <div className="relative w-full h-[calc(100%-20px)]">
@@ -217,16 +213,6 @@ export function CaseStudies() {
                     fill
                     className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
                   />
-                  {/* Subtle Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none" />
-                </div>
-
-                {/* Floating Service Pill inside mockup */}
-                <div className="absolute bottom-2 left-2 right-2">
-                  <div className="bg-[#0A122A]/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 text-white text-[10px] font-bold flex items-center justify-between shadow-sm">
-                    <span className="truncate">{current.servicesTag}</span>
-                    <span className="text-emerald-400 font-mono text-[9px] shrink-0 font-black">99.4% SLA</span>
-                  </div>
                 </div>
               </div>
 
