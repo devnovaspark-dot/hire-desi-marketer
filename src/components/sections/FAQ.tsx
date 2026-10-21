@@ -21,11 +21,11 @@ export function FAQ() {
           kicker="Got Questions?"
           title={
             <>
-              Frequently asked{" "}
-              <span className="text-[#9A5B00]">questions.</span>
+              Frequently Asked{" "}
+              <span className="text-[#9A5B00]">Questions</span>
             </>
           }
-          subtitle="Everything you need to know about our $8/hr billing, delivery schedules, dedicated squads, and Western SLAs."
+          subtitle="Discover our billing models, packages, delivery time, dedicated marketing teams, and work across international time zones."
           align="center"
         />
 
@@ -39,10 +39,10 @@ export function FAQ() {
               <div
                 key={faq.question}
                 className={cn(
-                  "rounded-2xl overflow-hidden transition-all duration-200 relative",
+                  "rounded-2xl overflow-hidden transition-[border-color,box-shadow,background-color] duration-200 relative border-2 border-b-[4px]",
                   isOpen
-                    ? "bg-gradient-to-b from-[#FFFFFF] via-[#FFFDF9] to-[#FAF6ED] border-2 border-[#FFB020] border-b-[4.5px] border-b-[#C47900] shadow-[0_12px_28px_rgba(255,176,32,0.18),inset_0_2px_0_rgba(255,255,255,1)]"
-                    : "bg-gradient-to-b from-[#FFFFFF] via-[#FAF9F5] to-[#F3EFE7] border border-[#DDD6C8] border-b-[3.5px] border-b-[#C4B9A4] shadow-[0_4px_12px_rgba(11,27,58,0.05),inset_0_1px_0_rgba(255,255,255,1)] hover:border-[#0B1B3A] hover:border-b-[4px] hover:-translate-y-0.5"
+                    ? "bg-gradient-to-b from-[#FFFFFF] via-[#FFFDF9] to-[#FAF6ED] border-[#FFB020] border-b-[#C47900] shadow-[0_12px_28px_rgba(255,176,32,0.18),inset_0_2px_0_rgba(255,255,255,1)]"
+                    : "bg-gradient-to-b from-[#FFFFFF] via-[#FAF9F5] to-[#F3EFE7] border-[#DDD6C8] border-b-[#C4B9A4] shadow-[0_4px_12px_rgba(11,27,58,0.05),inset_0_1px_0_rgba(255,255,255,1)] hover:border-[#B8AE9C]"
                 )}
               >
                 <button
@@ -70,13 +70,13 @@ export function FAQ() {
                     </span>
                   </div>
 
-                  {/* 3D Tactile Toggle Knob */}
+                  {/* 3D Tactile Toggle Knob (Fixed Dimensions, Zero Shift) */}
                   <div
                     className={cn(
-                      "w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-transform duration-200",
+                      "w-8 h-8 rounded-full flex items-center justify-center shrink-0 border border-b-2 transition-colors duration-150",
                       isOpen
-                        ? "btn-luxury-gold text-[#060B22] shadow-md scale-105"
-                        : "bg-gradient-to-b from-white to-[#EAE4D7] text-[#0B1B3A] border border-[#D5CEBF] border-b-2 border-b-[#B8AE9C] shadow-xs hover:border-[#0B1B3A]"
+                        ? "btn-luxury-gold text-[#060B22] shadow-md border-[#FFD166] border-b-[#A86300]"
+                        : "bg-gradient-to-b from-white to-[#EAE4D7] text-[#0B1B3A] border-[#D5CEBF] border-b-[#B8AE9C] shadow-xs hover:border-[#0B1B3A]"
                     )}
                   >
                     {isOpen ? (
@@ -87,21 +87,21 @@ export function FAQ() {
                   </div>
                 </button>
 
-                {/* Recessed Answer Well */}
+                {/* Recessed Answer Well with zero-shift grid expansion */}
                 <div
                   id={`faq-answer-${idx}`}
                   role="region"
                   aria-labelledby={`faq-btn-${idx}`}
                   className={cn(
-                    "grid transition-all duration-300 ease-in-out px-4 sm:px-5",
-                    isOpen
-                      ? "grid-rows-[1fr] opacity-100 pb-4 sm:pb-5"
-                      : "grid-rows-[0fr] opacity-0 pb-0"
+                    "grid transition-[grid-template-rows,opacity] duration-300 ease-out",
+                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0 pointer-events-none"
                   )}
                 >
                   <div className="overflow-hidden">
-                    <div className="bg-[#F5F2EB] rounded-xl p-3.5 sm:p-4 border border-[#DDD5C7] shadow-[inset_0_2px_4px_rgba(11,27,58,0.06)] text-xs sm:text-sm text-[#334155] leading-relaxed">
-                      {faq.answer}
+                    <div className="px-4 sm:px-5 pb-4 sm:pb-5">
+                      <div className="bg-[#F5F2EB] rounded-xl p-3.5 sm:p-4 border border-[#DDD5C7] shadow-[inset_0_2px_4px_rgba(11,27,58,0.06)] text-xs sm:text-sm text-[#334155] leading-relaxed">
+                        {faq.answer}
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="640" height="120" viewBox="0 0 640 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800;12..96,900&amp;display=swap');
+      .brand-title {
+        font-family: 'Bricolage Grotesque', sans-serif;
+        font-weight: 900;
+        font-size: 56px;
+        fill: #FFFFFF;
+        letter-spacing: -0.03em;
+      }
+      .brand-sub {
+        font-family: 'Bricolage Grotesque', sans-serif;
+        font-weight: 900;
+        font-size: 26px;
+        fill: #FFB020;
+        letter-spacing: 0.42em;
+      }
+    </style>
+  </defs>
+  <g transform="translate(10, 12)">
+    <g stroke-linejoin="round" stroke-width="5">
+      <path transform="translate(5 5)" d="M4 14 h18 v26 h22 v-26 h18 v68 h-18 v-26 h-22 v26 h-18 z" fill="#E8590C" stroke="#E8590C" />
+      <path d="M4 14 h18 v26 h22 v-26 h18 v68 h-18 v-26 h-22 v26 h-18 z" fill="#FFC21A" stroke="#FFC21A" />
+      <path transform="translate(5 5)" fill-rule="evenodd" d="M82 14 h28 a34 34 0 0 1 0 68 h-28 z M100 30 h10 a18 18 0 0 1 0 36 h-10 z" fill="#0B2E8A" stroke="#0B2E8A" />
+      <path fill-rule="evenodd" d="M82 14 h28 a34 34 0 0 1 0 68 h-28 z M100 30 h10 a18 18 0 0 1 0 36 h-10 z" fill="#1D5FD6" stroke="#1D5FD6" />
+      <path transform="translate(5 5)" d="M162 82 V14 h17 l15 22 l15 -22 h17 v68 h-17 v-38 l-15 20 l-15 -20 v38 z" fill="#E8590C" stroke="#E8590C" />
+      <path d="M162 82 V14 h17 l15 22 l15 -22 h17 v68 h-17 v-38 l-15 20 l-15 -20 v38 z" fill="#FFC21A" stroke="#FFC21A" />
+    </g>
+    <circle cx="99" cy="13" r="9" fill="#FFFFFF" stroke="#0B1B3A" stroke-width="3.4" />
+    <circle cx="121" cy="13" r="9" fill="#FFFFFF" stroke="#0B1B3A" stroke-width="3.4" />
+    <path d="M108 12 Q110 9.5 112 12" fill="none" stroke="#0B1B3A" stroke-width="3" />
+    <circle cx="100.5" cy="14" r="3.4" fill="#0B1B3A" />
+    <circle cx="122.5" cy="14" r="3.4" fill="#0B1B3A" />
+    <circle cx="101.6" cy="12.8" r="1.1" fill="#FFFFFF" />
+    <circle cx="123.6" cy="12.8" r="1.1" fill="#FFFFFF" />
+    <path d="M100 30 h10 a18 18 0 0 1 0 36 h-10 z" fill="#EAF1FF" />
+    <path d="M103 50 Q110 59 117 50 Q110 53 103 50 Z" fill="#0B1B3A" />
+    <g transform="translate(230 14) rotate(-18) scale(1.25)">
+      <path d="M0 8 L18 0 V26 L0 18 Z" fill="#FFFFFF" />
+      <path d="M18 0 C22 4 22 22 18 26" fill="#1D5FD6" />
+      <rect x="-6" y="8" width="7" height="10" rx="2" fill="#FFFFFF" />
+    </g>
+    <path d="M256 8 L262 3 M258 22 H265 M255 35 L261 40" stroke="#FFC21A" stroke-width="3.4" stroke-linecap="round" />
+  </g>
+  <text x="310" y="60" class="brand-title">Hire Desi</text>
+  <text x="312" y="96" class="brand-sub">MARKETER</text>
+</svg>

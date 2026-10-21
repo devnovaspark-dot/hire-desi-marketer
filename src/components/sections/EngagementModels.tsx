@@ -20,11 +20,11 @@ export function EngagementModels() {
           kicker="Engagement Models"
           title={
             <>
-              Transparent pricing.{" "}
-              <span className="text-[#9A5B00]">Zero contracts.</span>
+              Marketing Support{" "}
+              <span className="text-[#9A5B00]">That Fits Your Business</span>
             </>
           }
-          subtitle="Choose between pay-as-you-go hourly sprints, our all-in $999 growth bundle, or a dedicated marketing department."
+          subtitle="Start with hourly projects, choose an all-in-one growth solution, or build a dedicated marketing team, all with flexible terms and no long-term commitments."
           align="center"
         />
 

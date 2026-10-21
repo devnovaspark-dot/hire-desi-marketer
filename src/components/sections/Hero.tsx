@@ -37,15 +37,15 @@ export function Hero() {
 
             {/* Main Headline */}
             <h1 className="font-display text-3xl sm:text-5xl md:text-5xl xl:text-6xl font-black tracking-tight leading-[1.1] sm:leading-[1.08] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
-              Your marketing team in India.{" "}
+              World-Class Marketing Talent.{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFD166] via-[#FFB020] to-[#FF8A00] block sm:inline">
-                From $8 an hour.
+                Starting at $8/Hour
               </span>
             </h1>
 
             {/* Concise Supporting Copy */}
             <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-xl font-normal leading-relaxed">
-              Strategists, media buyers, SEO leads, creators, and developers working your exact business hours across the US, UK, Canada, Australia, and the UAE.
+              Build your team with skilled marketers, SEO experts, paid media specialists, content creators, and developers who work your exact business hours, wherever you operate.
             </p>
 
             {/* Clear Primary & Secondary Actions - Sleek & Refined */}
@@ -58,15 +58,15 @@ export function Hero() {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform stroke-[2.5]" />
               </a>
 
-              <button
-                onClick={() => setVideoModalOpen(true)}
+              <a
+                href="#video-showcase"
                 className="btn-luxury-navy btn-shimmer px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold inline-flex items-center gap-2 shadow-md cursor-pointer group"
               >
                 <div className="w-4 h-4 rounded-full bg-[#FFB020] text-[#060B22] flex items-center justify-center shadow-xs group-hover:scale-110 transition-transform">
                   <Play className="w-2 h-2 fill-[#060B22] ml-0.5" />
                 </div>
-                <span>Watch 90-sec intro</span>
-              </button>
+                <span>Watch Team Walkthrough (43s)</span>
+              </a>
             </div>
 
             {/* 3 Clean Uncluttered Stats */}
@@ -268,24 +268,17 @@ export function Hero() {
       >
         <div className="flex flex-col gap-6">
           <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-white/20 bg-black">
-            <Image
-              src="/images/team-video-poster.jpg"
-              alt="Why Hire Desi Marketer Video Walkthrough"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-[#060B22]/50 backdrop-blur-[2px] flex flex-col items-center justify-center p-6 text-center">
-              <div className="w-16 h-16 rounded-full skeuo-button-gold text-[#060B22] flex items-center justify-center shadow-2xl mb-3 cursor-pointer">
-                <Play className="w-7 h-7 fill-[#060B22] ml-1" />
-              </div>
-              <h4 className="font-display font-bold text-xl sm:text-2xl text-white">
-                Meet The Leadership &amp; Operations Team
-              </h4>
-              <p className="text-xs sm:text-sm text-slate-300 max-w-md mt-1">
-                90-second operational walkthrough: How our Bhubaneswar hub executes
-                campaigns on US, UK, and Australian schedules.
-              </p>
-            </div>
+            <video
+              controls
+              playsInline
+              preload="metadata"
+              poster="/images/team-video-poster.jpg"
+              className="w-full h-full object-cover"
+            >
+              <source src="/Hire%20desi%20marketer%20video-%2017%20oct.mp4" type="video/mp4" />
+              <source src="/Hire desi marketer video- 17 oct.mp4" type="video/mp4" />
+              Your browser does not support HTML5 video.
+            </video>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-white/10 text-xs">

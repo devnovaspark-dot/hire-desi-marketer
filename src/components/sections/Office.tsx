@@ -31,11 +31,11 @@ export function Office() {
           kicker="Our Physical Office"
           title={
             <>
-              Find our physical operations in{" "}
-              <span className="text-[#9A5B00]">Bhubaneswar, Odisha.</span>
+              Your Dedicated Marketing Team,{" "}
+              <span className="text-[#9A5B00]">All Under One Roof.</span>
             </>
           }
-          subtitle="A real physical headquarters campus where our full-time marketing talent, media buyers, and operators collaborate daily under one roof."
+          subtitle="Our in-house specialists work together from our Bhubaneswar headquarters, ensuring direct collaboration, consistent execution, and time-zone alignment for international clients."
           align="center"
         />
 
@@ -208,8 +208,10 @@ export function Office() {
                         <Phone className="w-4 h-4 text-[#FFB020]" />
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-[10px] font-bold text-[#5A6680] uppercase">US &amp; Canada Desk</span>
-                        <strong className="text-xs text-[#0B1B3A]">+1 (555) 010-4477</strong>
+                        <span className="text-[10px] font-bold text-[#5A6680] uppercase">Direct Call Desk</span>
+                        <a href="tel:+918280788689" className="text-xs font-black text-[#0B1B3A] hover:underline">
+                          +91 8280788689
+                        </a>
                       </div>
                     </div>
 
@@ -219,7 +221,14 @@ export function Office() {
                       </div>
                       <div className="flex flex-col">
                         <span className="text-[10px] font-bold text-[#5A6680] uppercase">WhatsApp Dispatch Desk</span>
-                        <strong className="text-xs text-[#0B1B3A]">+1 (555) 010-4478</strong>
+                        <a
+                          href="https://wa.me/918280788689?text=Hi%20Hire%20Desi%20Marketer,%20I'd%20like%20to%20hire%20a%20marketing%20specialist."
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs font-black text-[#0B1B3A] hover:underline"
+                        >
+                          +91 8280788689
+                        </a>
                       </div>
                     </div>
 

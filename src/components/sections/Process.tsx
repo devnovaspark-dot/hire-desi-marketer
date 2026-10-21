@@ -21,46 +21,46 @@ export function Process() {
     {
       number: "01",
       icon: FileSearch,
-      title: "24-Hr Growth Audit & Plan",
-      subtitle: "Custom 90-Day Roadmap",
+      title: "24-Hour Growth Audit and Strategy",
+      subtitle: "Tailored 90-Day Roadmap",
       description:
-        "Share your targets and current stack. Within 24 hours, our senior operations desk builds a comprehensive 90-day growth roadmap, competitor gap audit, and channel model.",
+        "Share your business goals, existing marketing tools, and challenges. Receive a tailored 90-day growth roadmap, competitor gap analysis, and channel recommendations within 24 hours.",
       slaBadge: "< 24h Turnaround",
-      deliverable: "90-Day Roadmap + Competitor Gap Audit",
-      highlights: ["100% Free & No Obligation", "Strict Mutual NDA", "Senior Leadership Review"],
+      deliverable: "90-day roadmap and competitor analysis",
+      highlights: ["Free consultation with no obligation", "Mutual non-disclosure agreement"],
     },
     {
       number: "02",
       icon: Users,
-      title: "Select Engagement Model",
-      subtitle: "Hourly · Bundle · Squads",
+      title: "Choose Your Engagement Model",
+      subtitle: "Flexible Marketing Support for Your Needs",
       description:
-        "Select the velocity that matches your needs: flexible hourly support from $8/hr, our turnkey $999/mo All-In Growth Bundle, or full-time dedicated squads of 3, 5, or 7 in-house specialists.",
-      slaBadge: "Immediate Lock",
-      deliverable: "Role Matrix + Exact Scope Agreement",
-      highlights: ["$8/hr Pay-As-You-Go", "$999/mo Growth Bundle", "3 · 5 · 7 Dedicated Squads"],
+        "Choose pay-as-you-go hourly support, an all-in-one growth package, or a dedicated team of 3, 5, or 7 in-house marketing specialists.",
+      slaBadge: "Flexible Terms",
+      deliverable: "Defined team roles, deliverables, and project scope",
+      highlights: ["Flexible hourly support", "Integrated growth package"],
     },
     {
       number: "03",
       icon: MessageSquareCode,
-      title: "Day 1 Slack / Teams Bridge",
-      subtitle: "Live In-House Integration",
+      title: "Start Collaborating on Day One",
+      subtitle: "Seamless Team Integration",
       description:
-        "Meet your assigned in-house talent on a live kickoff call. We bridge directly into your Slack or Microsoft Teams, review brand guidelines, and launch sprint task #1.",
+        "Meet your assigned specialists on a kickoff call, connect through Slack or Microsoft Teams, review brand guidelines, and begin your first sprint with clear priorities.",
       slaBadge: "Day 1 Active",
-      deliverable: "Direct Slack Channel + Video Kickoff",
-      highlights: ["US & UK Shift Overlap", "Zero Third-Party Middlemen", "Direct Media Buyer Standby"],
+      deliverable: "Dedicated communication channel and kickoff meeting",
+      highlights: ["Working-hour alignment", "Direct collaboration with specialists"],
     },
     {
       number: "04",
       icon: LineChart,
-      title: "Weekly Sprint Delivery & ROI",
-      subtitle: "Measurable Weekly Conversions",
+      title: "Track Weekly Progress and Performance",
+      subtitle: "Consistent Delivery and Measurable Growth",
       description:
-        "Track live rankings, ROAS, and conversions via your private 24/7 Looker Studio dashboard. We review sprint pacing on a weekly video call and systematically scale winning angles.",
-      slaBadge: "Weekly Pacing",
-      deliverable: "Private Looker Dashboard + Video Call",
-      highlights: ["24/7 Real-Time GA4 Data", "Weekly Video Handover", "Transparent Conversion Logs"],
+        "Monitor campaign performance, search rankings, conversions, and ROAS through your reporting dashboard. Review weekly progress, identify opportunities, and refine marketing strategies using performance data.",
+      slaBadge: "Weekly Reviews",
+      deliverable: "Performance dashboard and weekly review call",
+      highlights: ["Campaign performance tracking", "Weekly optimisation and reporting"],
     },
   ];
 
@@ -72,11 +72,11 @@ export function Process() {
           kicker="How We Work"
           title={
             <>
-              From discovery to launch,{" "}
-              <span className="text-[#9A5B00]">in 4 predictable steps.</span>
+              A Clear Path from{" "}
+              <span className="text-[#9A5B00]">Planning to Execution</span>
             </>
           }
-          subtitle="No bureaucratic onboarding. No ambiguous scopes. A predictable, accountable collaboration process engineered for weekly execution."
+          subtitle="Get started with a straightforward process, transparent expectations, and weekly deliverables designed around your business goals."
           align="center"
         />
 

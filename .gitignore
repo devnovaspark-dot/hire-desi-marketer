@@ -40,6 +40,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local audit & build scratch
+# scratch frames & local audit files
+*_face.jpg
+brain_frame*.jpg
+frame_*.jpg
+next_640.webp
+*.docx
 _source_audit/
 setup_public_assets.js
+

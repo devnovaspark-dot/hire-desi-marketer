@@ -8,12 +8,12 @@ export const CASE_STUDIES: CaseStudy[] = [
     clientType: "Multi-Location Family Dental Practice",
     servicesTag: "Google Ads · 60-Sec Landing Page · Call Tracking",
     challenge:
-      "Ad spend was leaking to broad searches outside the primary catchment area, and incoming phone calls had zero conversion tracking — meaning leadership couldn't verify which campaigns actually booked paying patients.",
+      "Broad, poorly targeted searches were draining the advertising budget, while untracked phone calls left leadership without clear visibility into which campaigns were generating paying patients.",
     whatWeDid: [
-      "Geo-fenced, high-intent Google Search campaigns for high-value services (implants, invisalign, emergency)",
-      "High-converting 60-second mobile booking landing page with clear insurance & appointment friction-removers",
-      "Dynamic call tracking integration with GA4 server-side conversion routing",
-      "Weekly negative keyword pruning and automated target CPA bid strategy optimization",
+      "Set up implants, Invisalign, and emergency dental care geo-targeted Google Search ads.",
+      "Designed a mobile-responsive structure that makes appointments easier and reduces worry about insurance.",
+      "Integrated dynamic call tracking with GA4 server-side conversion tracking.",
+      "Tested and optimized negative keywords and target CPA bidding to prevent wasted spending on a weekly basis.",
     ],
     measuredWeekly: [
       "Verified booked appointments",

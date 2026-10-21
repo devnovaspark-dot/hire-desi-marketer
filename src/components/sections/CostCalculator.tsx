@@ -21,10 +21,10 @@ export function CostCalculator() {
   ];
 
   const coveredTasks = [
-    "Google & Meta ad campaign builds & bid pacing",
-    "Technical SEO audits, speed fixes & local citations",
-    "Daily social media scheduling & community response",
-    "High-converting landing page creation & updates",
+    "Set up Google and Meta advertising and pacing bidding.",
+    "Run technical SEO audits, boost site speed, and build local citations.",
+    "Plan social media posts and monitor community response.",
+    "Design and tune high-converting landing pages.",
   ];
 
   // Dynamic progress percentage for smooth butter track fill
@@ -49,10 +49,10 @@ export function CostCalculator() {
 
           <div>
             <h3 className="font-display text-xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
-              Adjust your daily sprint hours
+              Customize Your Daily Sprint Hours
             </h3>
             <p className="text-[11px] sm:text-sm text-slate-300 mt-1 leading-snug sm:leading-relaxed">
-              Drag the buttery slider or pick a preset below to instantly simulate your dedicated specialist allocation.
+              Adjust the slider or choose a preset to see how your dedicated specialist’s hours can fit your needs.
             </p>
           </div>
 
@@ -167,7 +167,7 @@ export function CostCalculator() {
           {/* Included Task Deck */}
           <div className="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-white/5 border border-white/5 flex flex-col gap-1.5 sm:gap-2">
             <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-300 block truncate">
-              What gets accomplished in {hoursPerDay} hrs/day:
+              What Your Specialist Can Accomplish in {hoursPerDay} Hours a Day:
             </span>
             <ul className="grid grid-cols-1 gap-1 sm:gap-1.5 text-[11px] sm:text-xs text-slate-200">
               {coveredTasks.map((task) => (

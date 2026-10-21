@@ -2,6 +2,7 @@ import React from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
+import { VideoShowcase } from "@/components/sections/VideoShowcase";
 import { QuickQuoteHeroBanner } from "@/components/sections/QuickQuoteHeroBanner";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { EngagementModels } from "@/components/sections/EngagementModels";
@@ -31,6 +32,9 @@ export default function HomePage() {
 
         {/* 2. Trust & Credibility Strip (Matching Reference Image 1) */}
         <TrustStrip />
+
+        {/* 2.5 Video Tour / In-House Campus Showcase (Fits in Single Window) */}
+        <VideoShowcase />
 
         {/* 3. Engagement Models (Fits in 1 window) */}
         <EngagementModels />

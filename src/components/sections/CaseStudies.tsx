@@ -76,11 +76,11 @@ export function CaseStudies() {
           kicker="Case Studies &amp; Proof"
           title={
             <>
-              Real campaigns.{" "}
-              <span className="text-[#9A5B00]">Measurable weekly growth.</span>
+              From Campaign Execution to{" "}
+              <span className="text-[#9A5B00]">Measurable Results</span>
             </>
           }
-          subtitle="Inspect actual campaign architectures, localized sprint deliverables, and verified conversion metrics."
+          subtitle="Get an inside look at our campaign strategies, location-focused sprints, and conversion tracking that brings marketing performance into focus."
           align="center"
         />
 
@@ -264,7 +264,7 @@ export function CaseStudies() {
               <div className="p-2.5 rounded-xl bg-gradient-to-r from-[#FFFBEB] via-[#FEF3C7] to-[#FDE68A]/50 border border-amber-300/80 shadow-xs flex flex-col gap-0.5">
                 <span className="text-[9px] font-black uppercase tracking-wider text-[#9A5B00] flex items-center gap-1">
                   <Clock className="w-2.5 h-2.5 text-[#9A5B00]" />
-                  <span>The Operational Challenge:</span>
+                  <span>The Challenge:</span>
                 </span>
                 <p className="text-[11px] sm:text-xs text-[#0B1B3A] leading-relaxed font-medium">
                   {current.challenge}
@@ -275,7 +275,7 @@ export function CaseStudies() {
               <div className="flex flex-col gap-1">
                 <span className="text-[10px] font-black uppercase tracking-wider text-[#0B1B3A] flex items-center gap-1">
                   <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                  <span>What Our In-House India Squad Executed:</span>
+                  <span>How Our India Team Addressed It:</span>
                 </span>
                 <div className="grid grid-cols-2 gap-1.5 text-xs text-[#0B1B3A]">
                   {current.whatWeDid.map((step, idx) => (

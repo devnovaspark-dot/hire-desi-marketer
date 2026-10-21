@@ -35,19 +35,19 @@ export function TeamAvailability() {
       time: "9:00 AM",
       icon: <Sunrise className="w-4 h-4 text-[#FFB020]" />,
       title: "Morning Stand-Up",
-      description: "Brief alignment in Slack or Zoom. Daily sprint priorities confirmed with your team.",
+      description: "Align priorities, confirm tasks, and set daily sprint goals with your team.",
     },
     {
       time: "All Day",
       icon: <MessageSquare className="w-4 h-4 text-[#FFB020]" />,
-      title: "Live on Slack & Direct Calls",
-      description: "Direct real-time communication with assigned specialists. No 24-hour delayed tickets.",
+      title: "Live Communication",
+      description: "Connect directly with specialists through Slack and calls for quick updates and decisions.",
     },
     {
       time: "Before 6:00 PM",
       icon: <CheckCircle className="w-4 h-4 text-emerald-400" />,
-      title: "Daily Work Delivered",
-      description: "Ad creatives, bid updates, and copy delivered before your business day closes.",
+      title: "Daily Delivery",
+      description: "Receive completed ad creatives, bid updates, and marketing copy before your workday ends.",
     },
   ];
 
@@ -63,11 +63,11 @@ export function TeamAvailability() {
           kicker="Mission Control · Time Zones"
           title={
             <>
-              Your time zone.{" "}
-              <span className="text-[#FFB020]">Your working hours.</span>
+              A Marketing Team That{" "}
+              <span className="text-[#FFB020]">Works on Your Schedule</span>
             </>
           }
-          subtitle="Our operations desk synchronizes shift schedules to your region — ensuring live daily communication throughout your working day."
+          subtitle="Our team aligns its schedules with your local business hours, ensuring consistent communication and day-to-day collaboration."
           theme="dark"
           align="center"
         />
@@ -151,7 +151,7 @@ export function TeamAvailability() {
                 Daily Collaboration Protocol
               </span>
               <h3 className="font-display text-lg sm:text-2xl font-black text-white mt-0.5">
-                How Work Gets Done Same-Day
+                How Same-Day Work Gets Done
               </h3>
             </div>
             <span className="skeuo-button-navy px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold flex items-center gap-2 w-fit">
