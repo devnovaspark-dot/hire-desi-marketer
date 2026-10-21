@@ -20,11 +20,13 @@ export function VideoShowcase() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const ambientVideoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
 
   const togglePlay = () => {
     const video = videoRef.current;
     if (!video) return;
     if (video.paused) {
+      setHasStarted(true);
       if (video.currentTime < 0.15) {
         video.currentTime = 0.15;
       }
@@ -40,16 +42,8 @@ export function VideoShowcase() {
     const ambient = ambientVideoRef.current;
     if (!video) return;
 
-    const handleLoadedMetadata = () => {
-      if (video.currentTime < 0.15) {
-        video.currentTime = 0.15;
-      }
-      if (ambient && ambient.currentTime < 0.15) {
-        ambient.currentTime = 0.15;
-      }
-    };
-
     const handlePlay = () => {
+      setHasStarted(true);
       setIsPlaying(true);
       if (video.currentTime < 0.15) {
         video.currentTime = 0.15;
@@ -78,19 +72,13 @@ export function VideoShowcase() {
       }
     };
 
-    video.addEventListener("loadedmetadata", handleLoadedMetadata);
     video.addEventListener("play", handlePlay);
     video.addEventListener("pause", handlePause);
     video.addEventListener("ended", handleEnded);
     video.addEventListener("seeking", handleSeek);
     video.addEventListener("timeupdate", handleTimeUpdate);
 
-    if (video.readyState >= 1 && video.currentTime < 0.15) {
-      handleLoadedMetadata();
-    }
-
     return () => {
-      video.removeEventListener("loadedmetadata", handleLoadedMetadata);
       video.removeEventListener("play", handlePlay);
       video.removeEventListener("pause", handlePause);
       video.removeEventListener("ended", handleEnded);
@@ -155,10 +143,10 @@ export function VideoShowcase() {
             <div className="relative w-full h-[380px] sm:h-[460px] md:h-[500px] max-h-[58vh] flex items-center justify-center overflow-hidden bg-[#070D18] group/stage">
               {/* Static Ambient Glow while video is paused / unplayed */}
               <img
-                src="/images/video-walkthrough-poster.jpg"
+                src="/images/Thumbnail.png"
                 alt=""
                 aria-hidden="true"
-                className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-30 scale-125 pointer-events-none"
+                className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-35 scale-125 pointer-events-none"
               />
 
               {/* Dynamic Ambient Glow during playback */}
@@ -169,7 +157,7 @@ export function VideoShowcase() {
                 muted
                 playsInline
                 preload="metadata"
-                poster="/images/video-walkthrough-poster.jpg"
+                poster="/images/Thumbnail.png"
                 className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-35 scale-110 pointer-events-none"
                 src="/Video.mp4"
               />
@@ -181,12 +169,21 @@ export function VideoShowcase() {
                 controls
                 playsInline
                 preload="metadata"
-                poster="/images/video-walkthrough-poster.jpg"
+                poster="/images/Thumbnail.png"
                 className="relative z-10 h-full w-auto max-w-full object-contain mx-auto drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
               >
                 <source src="/Video.mp4" type="video/mp4" />
                 Your browser does not support HTML5 video.
               </video>
+
+              {/* High-Resolution Thumbnail Image Overlay before playback */}
+              {!hasStarted && (
+                <img
+                  src="/images/Thumbnail.png"
+                  alt="Hire Desi Marketer Walkthrough Thumbnail"
+                  className="absolute inset-0 z-10 h-full w-auto max-w-full object-contain mx-auto drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)] pointer-events-none"
+                />
+              )}
 
               {/* Radiant Luxury Play Button Overlay */}
               {!isPlaying && (
@@ -194,7 +191,9 @@ export function VideoShowcase() {
                   type="button"
                   onClick={togglePlay}
                   aria-label="Play Walkthrough Video"
-                  className="absolute inset-0 z-20 flex items-center justify-center bg-black/25 hover:bg-black/15 transition-all cursor-pointer group/btn"
+                  className={`absolute inset-0 z-20 flex items-center justify-center bg-black/20 hover:bg-black/10 transition-all cursor-pointer group/btn ${
+                    hasStarted ? "pb-12" : ""
+                  }`}
                 >
                   <div className="relative flex items-center justify-center">
                     <span className="absolute -inset-4 sm:-inset-5 rounded-full bg-[#FFB020]/25 animate-ping pointer-events-none" />
