@@ -171,7 +171,7 @@ export function VideoShowcase() {
                 preload="metadata"
                 poster="/images/video-walkthrough-poster.jpg"
                 className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-35 scale-110 pointer-events-none"
-                src="/Hire%20desi%20marketer%20video-%2017%20oct.mp4"
+                src="/Video.mp4"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40 pointer-events-none" />
 
@@ -184,8 +184,7 @@ export function VideoShowcase() {
                 poster="/images/video-walkthrough-poster.jpg"
                 className="relative z-10 h-full w-auto max-w-full object-contain mx-auto drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
               >
-                <source src="/Hire%20desi%20marketer%20video-%2017%20oct.mp4" type="video/mp4" />
-                <source src="/Hire desi marketer video- 17 oct.mp4" type="video/mp4" />
+                <source src="/Video.mp4" type="video/mp4" />
                 Your browser does not support HTML5 video.
               </video>
 

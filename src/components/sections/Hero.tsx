@@ -275,8 +275,7 @@ export function Hero() {
               poster="/images/team-video-poster.jpg"
               className="w-full h-full object-cover"
             >
-              <source src="/Hire%20desi%20marketer%20video-%2017%20oct.mp4" type="video/mp4" />
-              <source src="/Hire desi marketer video- 17 oct.mp4" type="video/mp4" />
+              <source src="/Video.mp4" type="video/mp4" />
               Your browser does not support HTML5 video.
             </video>
           </div>
