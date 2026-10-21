@@ -194,26 +194,16 @@ export function CaseStudies() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 lg:gap-5 items-start">
-            {/* Left: Interactive Laptop Frame & Verified Sprint Deliverables */}
+            {/* Left: Campaign Mockup Showcase & Verified Sprint Deliverables */}
             <div className="lg:col-span-5 flex flex-col gap-2.5">
-              <div className="relative aspect-[16/9] w-full rounded-xl overflow-hidden border-2 border-slate-700 bg-slate-900 shadow-md group">
-                {/* Browser top chrome */}
-                <div className="h-5 bg-slate-800 border-b border-slate-700 px-2.5 flex items-center z-10 relative">
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-rose-500/80" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-amber-500/80" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/80" />
-                  </div>
-                </div>
-
-                <div className="relative w-full h-[calc(100%-20px)]">
-                  <Image
-                    src={current.mockupImage}
-                    alt={current.mockupAlt}
-                    fill
-                    className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
+              <div className="relative aspect-[1800/1140] w-full rounded-xl sm:rounded-2xl overflow-hidden border border-[#D5CDBC] shadow-md bg-white group">
+                <Image
+                  src={current.mockupImage}
+                  alt={current.mockupAlt}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  className="object-contain object-center group-hover:scale-[1.01] transition-transform duration-300"
+                />
               </div>
 
               {/* Tangible Sprint Assets Verified - Locked Min-Height */}
