@@ -25,6 +25,9 @@ export function VideoShowcase() {
     const video = videoRef.current;
     if (!video) return;
     if (video.paused) {
+      if (video.currentTime < 0.15) {
+        video.currentTime = 0.15;
+      }
       video.play().catch(() => {});
     } else {
       video.pause();
@@ -37,9 +40,26 @@ export function VideoShowcase() {
     const ambient = ambientVideoRef.current;
     if (!video) return;
 
+    const handleLoadedMetadata = () => {
+      if (video.currentTime < 0.15) {
+        video.currentTime = 0.15;
+      }
+      if (ambient && ambient.currentTime < 0.15) {
+        ambient.currentTime = 0.15;
+      }
+    };
+
     const handlePlay = () => {
       setIsPlaying(true);
-      if (ambient) ambient.play().catch(() => {});
+      if (video.currentTime < 0.15) {
+        video.currentTime = 0.15;
+      }
+      if (ambient) {
+        if (ambient.currentTime < 0.15) {
+          ambient.currentTime = 0.15;
+        }
+        ambient.play().catch(() => {});
+      }
     };
     const handlePause = () => {
       setIsPlaying(false);
@@ -58,13 +78,19 @@ export function VideoShowcase() {
       }
     };
 
+    video.addEventListener("loadedmetadata", handleLoadedMetadata);
     video.addEventListener("play", handlePlay);
     video.addEventListener("pause", handlePause);
     video.addEventListener("ended", handleEnded);
     video.addEventListener("seeking", handleSeek);
     video.addEventListener("timeupdate", handleTimeUpdate);
 
+    if (video.readyState >= 1 && video.currentTime < 0.15) {
+      handleLoadedMetadata();
+    }
+
     return () => {
+      video.removeEventListener("loadedmetadata", handleLoadedMetadata);
       video.removeEventListener("play", handlePlay);
       video.removeEventListener("pause", handlePause);
       video.removeEventListener("ended", handleEnded);
@@ -126,8 +152,16 @@ export function VideoShowcase() {
         <div className="w-full max-w-4xl lg:max-w-5xl mx-auto">
           <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#070D18] border border-[#233148] shadow-[0_25px_60px_-15px_rgba(11,27,58,0.35)]">
             {/* Theater Stage Viewport */}
-            <div className="relative w-full h-[380px] sm:h-[460px] md:h-[500px] max-h-[58vh] flex items-center justify-center overflow-hidden bg-black group/stage">
-              {/* Dynamic Ambient Glow */}
+            <div className="relative w-full h-[380px] sm:h-[460px] md:h-[500px] max-h-[58vh] flex items-center justify-center overflow-hidden bg-[#070D18] group/stage">
+              {/* Static Ambient Glow while video is paused / unplayed */}
+              <img
+                src="/images/video-walkthrough-poster.jpg"
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-30 scale-125 pointer-events-none"
+              />
+
+              {/* Dynamic Ambient Glow during playback */}
               <video
                 ref={ambientVideoRef}
                 aria-hidden="true"
@@ -135,6 +169,7 @@ export function VideoShowcase() {
                 muted
                 playsInline
                 preload="metadata"
+                poster="/images/video-walkthrough-poster.jpg"
                 className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-35 scale-110 pointer-events-none"
                 src="/Hire%20desi%20marketer%20video-%2017%20oct.mp4"
               />
@@ -146,6 +181,7 @@ export function VideoShowcase() {
                 controls
                 playsInline
                 preload="metadata"
+                poster="/images/video-walkthrough-poster.jpg"
                 className="relative z-10 h-full w-auto max-w-full object-contain mx-auto drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
               >
                 <source src="/Hire%20desi%20marketer%20video-%2017%20oct.mp4" type="video/mp4" />
@@ -159,7 +195,7 @@ export function VideoShowcase() {
                   type="button"
                   onClick={togglePlay}
                   aria-label="Play Walkthrough Video"
-                  className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-all cursor-pointer group/btn"
+                  className="absolute inset-0 z-20 flex items-center justify-center bg-black/25 hover:bg-black/15 transition-all cursor-pointer group/btn"
                 >
                   <div className="relative flex items-center justify-center">
                     <span className="absolute -inset-4 sm:-inset-5 rounded-full bg-[#FFB020]/25 animate-ping pointer-events-none" />
