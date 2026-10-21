@@ -105,17 +105,17 @@ export function TeamIntroduction() {
           {EXECUTIVE_LEADERSHIP.map((member) => (
             <div
               key={member.name}
-              className="bg-white rounded-2xl p-2.5 sm:p-3 md:p-3.5 flex flex-col justify-between gap-2.5 sm:gap-3 shadow-[0_10px_25px_rgba(11,27,58,0.06)] border border-[#D8D0C0] border-b-[3px] border-b-[#C9BFAC] hover:border-[#0B1B3A] hover:shadow-[0_16px_36px_rgba(11,27,58,0.12)] transition-all duration-300 group max-w-[285px] sm:max-w-[330px] md:max-w-none mx-auto w-full"
+              className="bg-white rounded-2xl p-2.5 sm:p-3 md:p-3.5 flex flex-col justify-between gap-2.5 sm:gap-3 shadow-[0_10px_25px_rgba(11,27,58,0.06)] border border-[#D8D0C0] border-b-[3px] border-b-[#C9BFAC] hover:border-[#0B1B3A] hover:shadow-[0_16px_36px_rgba(11,27,58,0.12)] transition-all duration-300 group max-w-[265px] sm:max-w-[310px] md:max-w-none mx-auto w-full"
             >
-              {/* Executive Portrait Frame - Natural Headshot Aspect Ratio (100% Full Face & Chin Visibility) */}
-              <div className="relative w-full aspect-[4/3.8] sm:aspect-[4/4.2] md:aspect-[4/4.5] max-h-[210px] sm:max-h-[260px] md:max-h-none rounded-xl overflow-hidden bg-[#F2EDE4] border border-[#DDD5C7] shadow-2xs">
+              {/* Executive Portrait Frame - Exact 9/10 Native Aspect Ratio (100% Full Head, Chin, Neck & Collar Visibility) */}
+              <div className="relative w-full aspect-[9/10] rounded-xl overflow-hidden bg-[#F2EDE4] border border-[#DDD5C7] shadow-2xs">
                 <Image
                   src={member.image}
                   alt={member.name}
                   fill
                   unoptimized
                   priority
-                  className="object-cover object-top sm:object-center group-hover:scale-102 transition-transform duration-500"
+                  className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
                 />
 
                 {/* Subtle Floating Live Desk Badge */}
