@@ -69,7 +69,7 @@ export function CaseStudies() {
   };
 
   return (
-    <section id="work" className="py-6 sm:py-8 lg:py-10 bg-[#F5F2EB] border-y border-[#DED7CA] scroll-mt-20">
+    <section id="work" className="py-6 sm:py-8 lg:py-10 bg-[#F5F2EB] border-y border-[#DED7CA] scroll-mt-28">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-3.5 sm:gap-4">
         {/* Section Heading - Sleek & Compact */}
         <SectionHeading
@@ -151,7 +151,7 @@ export function CaseStudies() {
           role="tabpanel"
           id={`panel-${current.id}`}
           aria-labelledby={`tab-${current.id}`}
-          className="bg-gradient-to-b from-[#FFFFFF] via-[#FAF8F5] to-[#F5F2EB] rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 lg:p-6 shadow-[0_20px_50px_-15px_rgba(11,27,58,0.1),inset_0_2px_0_rgba(255,255,255,1)] border-2 border-[#D8D0C0] border-b-[4px] border-b-[#C4B8A2] relative overflow-hidden flex flex-col gap-3 sm:gap-3.5"
+          className="bg-gradient-to-b from-[#FFFFFF] via-[#FAF8F5] to-[#F5F2EB] rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 lg:p-6 shadow-[0_20px_50px_-15px_rgba(11,27,58,0.1),inset_0_2px_0_rgba(255,255,255,1)] border-2 border-[#D8D0C0] border-b-[4px] border-b-[#C4B8A2] relative overflow-hidden flex flex-col gap-3 sm:gap-3.5 min-h-[620px] sm:min-h-[560px] lg:min-h-[490px]"
         >
           {/* Specular Top Rim */}
           <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#FFB020] to-transparent opacity-80" />
@@ -172,7 +172,7 @@ export function CaseStudies() {
                   Verified Client Sprint
                 </span>
               </div>
-              <h3 className="font-display font-black text-base sm:text-xl text-[#0B1B3A] tracking-tight leading-snug min-h-[44px] sm:min-h-0 flex items-center">
+              <h3 className="font-display font-black text-base sm:text-lg lg:text-xl text-[#0B1B3A] tracking-tight leading-snug min-h-[44px] sm:min-h-[36px] flex items-center">
                 {current.clientType}
               </h3>
             </div>
@@ -207,7 +207,7 @@ export function CaseStudies() {
               </div>
 
               {/* Tangible Sprint Assets Verified - Locked Min-Height */}
-              <div className="p-2 rounded-xl bg-[#FAF8F5] border border-[#DDD5C7] shadow-2xs flex flex-col justify-between min-h-[66px] sm:min-h-[58px] gap-1">
+              <div className="p-2 rounded-xl bg-[#FAF8F5] border border-[#DDD5C7] shadow-2xs flex flex-col justify-between min-h-[72px] sm:min-h-[62px] gap-1">
                 <span className="text-[9px] font-black uppercase tracking-wider text-[#9A5B00] flex items-center gap-1">
                   <Layers className="w-2.5 h-2.5 text-[#FFB020] shrink-0" />
                   <span>Key Delivered Campaign Assets:</span>
@@ -236,8 +236,8 @@ export function CaseStudies() {
 
             {/* Right: Focused Strategy, Execution & Verified Metrics */}
             <div className="lg:col-span-7 flex flex-col gap-2.5 text-left">
-              {/* Challenge Box in Warm Tactile Well - Locked Min-Height */}
-              <div className="p-2.5 rounded-xl bg-gradient-to-r from-[#FFFBEB] via-[#FEF3C7] to-[#FDE68A]/50 border border-amber-300/80 shadow-xs flex flex-col justify-center min-h-[78px] sm:min-h-[64px] gap-0.5">
+              {/* Challenge Box in Warm Tactile Well - Locked Min-Height Across All Cases */}
+              <div className="p-2.5 rounded-xl bg-gradient-to-r from-[#FFFBEB] via-[#FEF3C7] to-[#FDE68A]/50 border border-amber-300/80 shadow-xs flex flex-col justify-center min-h-[96px] sm:min-h-[82px] lg:min-h-[74px] gap-0.5">
                 <span className="text-[9px] font-black uppercase tracking-wider text-[#9A5B00] flex items-center gap-1">
                   <Clock className="w-2.5 h-2.5 text-[#9A5B00] shrink-0" />
                   <span>The Challenge:</span>
@@ -247,7 +247,7 @@ export function CaseStudies() {
                 </p>
               </div>
 
-              {/* What Our In-House India Team Executed - Locked Card Height to Prevent Jitter */}
+              {/* What Our In-House India Team Executed - Locked Card Height to Completely Eliminate Jitter */}
               <div className="flex flex-col gap-1">
                 <span className="text-[10px] font-black uppercase tracking-wider text-[#0B1B3A] flex items-center gap-1">
                   <ShieldCheck className="w-3 h-3 text-emerald-600 shrink-0" />
@@ -257,12 +257,12 @@ export function CaseStudies() {
                   {current.whatWeDid.map((step, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-lg bg-white border border-[#DDD5C7] shadow-2xs hover:border-[#FFB020] transition-colors min-h-[78px] sm:min-h-[60px]"
+                      className="flex items-start gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-lg bg-white border border-[#DDD5C7] shadow-2xs hover:border-[#FFB020] transition-colors min-h-[92px] sm:min-h-[76px] lg:min-h-[68px]"
                     >
                       <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-gradient-to-b from-[#34D399] via-[#059669] to-[#047857] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-2xs border border-[#A7F3D0]">
                         <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 stroke-[3]" />
                       </div>
-                      <span className="text-[9px] sm:text-[10px] leading-snug font-bold text-[#0B1B3A] line-clamp-3 sm:line-clamp-none">
+                      <span className="text-[9px] sm:text-[10px] leading-snug font-bold text-[#0B1B3A] line-clamp-3">
                         {step}
                       </span>
                     </div>

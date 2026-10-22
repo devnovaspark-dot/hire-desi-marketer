@@ -70,7 +70,7 @@ export function Header() {
       const targetId = href.replace("#", "");
       const element = document.getElementById(targetId);
       if (element) {
-        const headerOffset = 75;
+        const headerOffset = 85;
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -78,7 +78,7 @@ export function Header() {
           top: offsetPosition,
           behavior: "smooth",
         });
-        window.history.pushState(null, "", href);
+        window.history.replaceState(null, "", href);
       }
     }
   };
@@ -105,7 +105,7 @@ export function Header() {
             <BrandLogo size="md" />
           </Link>
 
-          {/* Center Navigation Links - Only Active Option is Engraved */}
+          {/* Center Navigation Links - Zero Layout Shift with Uniform Font Weight */}
           <nav
             aria-label="Main Navigation"
             className="hidden md:flex items-center gap-1 sm:gap-2"
@@ -118,10 +118,10 @@ export function Header() {
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
                   className={cn(
-                    "px-3.5 py-1.5 text-xs lg:text-[13px] font-bold rounded-full transition-all duration-150 cursor-pointer select-none",
+                    "px-3.5 py-1.5 text-xs lg:text-[13px] font-extrabold rounded-full transition-all duration-150 cursor-pointer select-none",
                     "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFB020]",
                     isActive
-                      ? "bg-[#030614] text-[#FFB020] border border-[#FFB020]/50 shadow-[inset_0_2px_6px_rgba(0,0,0,0.95),inset_0_-1px_1px_rgba(255,255,255,0.08)] font-black"
+                      ? "bg-[#030614] text-[#FFB020] border border-[#FFB020]/50 shadow-[inset_0_2px_6px_rgba(0,0,0,0.95),inset_0_-1px_1px_rgba(255,255,255,0.08)]"
                       : "text-slate-300 hover:text-white hover:bg-white/5 border border-transparent active:bg-[#030614] active:text-[#FFB020] active:shadow-[inset_0_2px_5px_rgba(0,0,0,0.95)]"
                   )}
                 >

@@ -40,37 +40,39 @@ export function FloatingActions() {
   return (
     <div
       aria-label="Quick Actions"
-      className="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2 sm:gap-2.5 animate-in fade-in slide-in-from-bottom-4 duration-500"
+      className="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-2 sm:gap-2.5 animate-in fade-in slide-in-from-bottom-4 duration-500"
     >
-      {/* Floating Enquire Button */}
+      {/* Tactile Skeuomorphic Floating Enquire Button — Placed Directly Above WhatsApp */}
       <a
         href="#quote"
         onClick={handleEnquire}
-        className="group relative flex items-center gap-1.5 sm:gap-2 px-3.5 py-2.5 sm:px-4.5 sm:py-3 rounded-full bg-gradient-to-r from-[#FFB020] via-[#FFC043] to-[#FF8A00] text-[#060B22] font-black text-xs sm:text-sm tracking-wide uppercase shadow-[0_8px_25px_rgba(255,176,32,0.45),inset_0_1px_1px_rgba(255,255,255,0.7)] hover:shadow-[0_12px_32px_rgba(255,176,32,0.65)] hover:scale-105 active:scale-95 transition-all duration-300 border border-[#FFE082]/60 cursor-pointer"
+        className="group relative flex items-center gap-1.5 sm:gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full bg-gradient-to-b from-[#FFF2B2] via-[#FFB020] to-[#DF7D00] text-[#060B22] font-black text-xs sm:text-sm tracking-wide uppercase cursor-pointer select-none transition-all duration-150 border-t border-t-white/90 border-x border-[#E08A00] border-b-[3px] border-b-[#994F00] shadow-[0_10px_25px_rgba(0,0,0,0.45),0_3px_8px_rgba(255,176,32,0.4),inset_0_1px_1px_rgba(255,255,255,0.9),inset_0_-2px_4px_rgba(153,79,0,0.35)] hover:brightness-105 hover:-translate-y-0.5 active:translate-y-[2px] active:border-b-[1px] active:shadow-[0_3px_8px_rgba(0,0,0,0.3),inset_0_2px_4px_rgba(0,0,0,0.25)]"
         title="Enquire now about hiring marketing talent"
       >
-        <span className="relative flex items-center justify-center">
+        {/* Specular gloss reflection cap */}
+        <span className="absolute top-0 inset-x-2 h-[45%] rounded-t-full bg-gradient-to-b from-white/70 via-white/20 to-transparent pointer-events-none" />
+
+        <span className="relative flex items-center justify-center drop-shadow-[0_1px_0_rgba(255,255,255,0.7)]">
           <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#060B22] fill-[#060B22] group-hover:rotate-12 transition-transform" />
         </span>
-        <span className="font-extrabold tracking-tight">Enquire Now</span>
+        <span className="relative font-black tracking-tight text-[#060B22] drop-shadow-[0_1px_0_rgba(255,255,255,0.6)]">
+          Enquire Now
+        </span>
       </a>
 
-      {/* Floating WhatsApp Quick Connect Button */}
+      {/* Floating WhatsApp Quick Connect Button — Clean Official Skeuomorphic Button (No Red Dot / No Beacon) */}
       <a
         href="https://wa.me/918280788689?text=Hi%20Hire%20Desi%20Marketer%2C%20I%20want%20to%20enquire%20about%20hiring%20a%20marketing%20specialist."
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative flex items-center justify-center w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#25D366] text-white shadow-[0_8px_25px_rgba(37,211,102,0.5),inset_0_1px_2px_rgba(255,255,255,0.6)] hover:shadow-[0_12px_32px_rgba(37,211,102,0.7)] hover:scale-110 active:scale-95 transition-all duration-300 border border-white/30 cursor-pointer"
+        className="group relative flex items-center justify-center w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-gradient-to-b from-[#48E783] via-[#25D366] to-[#128C46] text-white cursor-pointer select-none transition-all duration-150 border-t border-t-white/80 border-x border-[#25D366] border-b-[3px] border-b-[#0D6B34] shadow-[0_10px_25px_rgba(0,0,0,0.4),0_3px_10px_rgba(37,211,102,0.4),inset_0_1px_1px_rgba(255,255,255,0.8),inset_0_-2px_4px_rgba(13,107,52,0.4)] hover:brightness-105 hover:-translate-y-0.5 active:translate-y-[2px] active:border-b-[1px] active:shadow-[0_3px_8px_rgba(0,0,0,0.3),inset_0_2px_4px_rgba(0,0,0,0.25)]"
         title="Chat with us instantly on WhatsApp"
         aria-label="Chat on WhatsApp"
       >
-        {/* Pulsing Online Radar Halo */}
-        <span className="absolute -inset-1 rounded-full bg-[#25D366]/35 animate-ping pointer-events-none" />
-        
-        {/* Online Green Beacon Badge */}
-        <span className="absolute top-0 right-0 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#060B22] pointer-events-none" />
+        {/* Specular gloss reflection cap */}
+        <span className="absolute top-0 inset-x-1.5 h-[45%] rounded-t-full bg-gradient-to-b from-white/60 via-white/15 to-transparent pointer-events-none" />
 
-        <WhatsAppIcon className="w-5 h-5 sm:w-6 sm:h-6 fill-current drop-shadow-sm group-hover:scale-110 transition-transform" />
+        <WhatsAppIcon className="relative w-5 h-5 sm:w-6 sm:h-6 fill-current drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] group-hover:scale-110 transition-transform" />
       </a>
     </div>
   );

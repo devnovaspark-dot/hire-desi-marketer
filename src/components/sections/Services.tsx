@@ -84,22 +84,22 @@ export function Services() {
                     <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-wider text-slate-400">
                       Tools Deployed:
                     </span>
-                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 min-h-[32px] sm:min-h-[36px]">
+                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 min-h-[34px] sm:min-h-[40px]">
                       {category.tools.map((tool) => (
                         <div
                           key={tool.name}
                           title={tool.name}
                           onClick={(e) => e.stopPropagation()}
-                          className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center p-1 sm:p-1.5 hover:border-[#FFB020]/60 hover:scale-110 transition-all cursor-pointer relative group/tool shrink-0"
+                          className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-white/[0.09] hover:bg-white/[0.18] border border-white/15 hover:border-[#FFB020]/80 shadow-[0_2px_6px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.15)] flex items-center justify-center p-1.5 hover:scale-110 transition-all cursor-pointer relative group/tool shrink-0"
                         >
                           <Image
                             src={tool.icon}
                             alt={tool.name}
-                            width={16}
-                            height={16}
-                            className="w-4 h-4 object-contain"
+                            width={20}
+                            height={20}
+                            className="w-5 h-5 object-contain drop-shadow-xs"
                           />
-                          <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 bg-[#040716] border border-white/20 text-white text-[9px] font-bold px-1.5 py-0.2 rounded opacity-0 group-hover/tool:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20 shadow-xl">
+                          <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 bg-[#040716] border border-white/20 text-white text-[9px] font-bold px-1.5 py-0.5 rounded opacity-0 group-hover/tool:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20 shadow-xl">
                             {tool.name}
                           </div>
                         </div>
