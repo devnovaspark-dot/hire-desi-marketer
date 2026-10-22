@@ -151,28 +151,28 @@ export function CaseStudies() {
           role="tabpanel"
           id={`panel-${current.id}`}
           aria-labelledby={`tab-${current.id}`}
-          className="bg-gradient-to-b from-[#FFFFFF] via-[#FAF8F5] to-[#F5F2EB] rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 lg:p-6 shadow-[0_20px_50px_-15px_rgba(11,27,58,0.1),inset_0_2px_0_rgba(255,255,255,1)] border-2 border-[#D8D0C0] border-b-[4px] border-b-[#C4B8A2] relative overflow-hidden flex flex-col gap-3 sm:gap-3.5 min-h-[620px] sm:min-h-[560px] lg:min-h-[490px]"
+          className="bg-gradient-to-b from-[#FFFFFF] via-[#FAF8F5] to-[#F5F2EB] rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 lg:p-6 shadow-[0_20px_50px_-15px_rgba(11,27,58,0.1),inset_0_2px_0_rgba(255,255,255,1)] border-2 border-[#D8D0C0] border-b-[4px] border-b-[#C4B8A2] relative overflow-hidden flex flex-col gap-3 sm:gap-3.5"
         >
           {/* Specular Top Rim */}
           <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#FFB020] to-transparent opacity-80" />
 
           {/* Top Quick-Impact Metrics & Title Bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-2.5 border-b border-[#E2DBD0]">
-            <div className="flex flex-col gap-0.5 min-w-0">
-              <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
-                <div className="px-2 py-0.5 rounded-full bg-[#0B1B3A] text-[#FFB020] text-[9px] font-black uppercase tracking-wider flex items-center gap-1 shadow-2xs whitespace-nowrap">
+            <div className="flex flex-col gap-1 min-w-0">
+              <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap h-[44px] sm:h-auto overflow-hidden">
+                <div className="px-2 py-0.5 rounded-full bg-[#0B1B3A] text-[#FFB020] text-[9px] font-black uppercase tracking-wider flex items-center gap-1 shadow-2xs whitespace-nowrap shrink-0">
                   <TrendingUp className="w-2.5 h-2.5 text-[#FFB020] shrink-0" />
                   <span>{highlight.tag}</span>
                 </div>
-                <div className="flex items-center gap-1 text-[10px] font-bold text-[#5A6680] whitespace-nowrap">
+                <div className="flex items-center gap-1 text-[10px] font-bold text-[#5A6680] whitespace-nowrap shrink-0">
                   <MapPin className="w-2.5 h-2.5 text-[#9A5B00] shrink-0" />
                   <span>{current.location}</span>
                 </div>
-                <span className="text-[9px] text-emerald-800 bg-emerald-100 border border-emerald-300 font-extrabold px-1.5 py-0.5 rounded-full whitespace-nowrap">
+                <span className="text-[9px] text-emerald-800 bg-emerald-100 border border-emerald-300 font-extrabold px-1.5 py-0.5 rounded-full whitespace-nowrap shrink-0">
                   Verified Client Sprint
                 </span>
               </div>
-              <h3 className="font-display font-black text-base sm:text-lg lg:text-xl text-[#0B1B3A] tracking-tight leading-snug min-h-[44px] sm:min-h-[36px] flex items-center">
+              <h3 className="font-display font-black text-sm sm:text-base lg:text-xl text-[#0B1B3A] tracking-tight leading-snug h-[42px] sm:h-[36px] flex items-center line-clamp-2">
                 {current.clientType}
               </h3>
             </div>
@@ -206,13 +206,13 @@ export function CaseStudies() {
                 />
               </div>
 
-              {/* Tangible Sprint Assets Verified - Locked Min-Height */}
-              <div className="p-2 rounded-xl bg-[#FAF8F5] border border-[#DDD5C7] shadow-2xs flex flex-col justify-between min-h-[72px] sm:min-h-[62px] gap-1">
-                <span className="text-[9px] font-black uppercase tracking-wider text-[#9A5B00] flex items-center gap-1">
+              {/* Tangible Sprint Assets Verified - Locked Height Across All Tabs */}
+              <div className="p-2 rounded-xl bg-[#FAF8F5] border border-[#DDD5C7] shadow-2xs flex flex-col justify-between h-[84px] sm:h-[62px] gap-1 overflow-hidden">
+                <span className="text-[9px] font-black uppercase tracking-wider text-[#9A5B00] flex items-center gap-1 shrink-0">
                   <Layers className="w-2.5 h-2.5 text-[#FFB020] shrink-0" />
                   <span>Key Delivered Campaign Assets:</span>
                 </span>
-                <div className="flex flex-wrap gap-1">
+                <div className="flex flex-wrap gap-1 items-center flex-1 overflow-hidden">
                   {currentConfig.deliverables.map((item, idx) => (
                     <span
                       key={idx}
@@ -226,9 +226,9 @@ export function CaseStudies() {
               </div>
 
               {/* Data Integrity Notice */}
-              <div className="p-1.5 rounded-lg bg-[#F7F4EE] border border-[#DDD5C7] flex items-center gap-1.5 text-[10px] text-[#5A6680]">
+              <div className="p-1.5 rounded-lg bg-[#F7F4EE] border border-[#DDD5C7] flex items-center gap-1.5 text-[10px] text-[#5A6680] h-[30px] overflow-hidden">
                 <ShieldAlert className="w-3 h-3 text-[#9A5B00] shrink-0" />
-                <span className="leading-tight">
+                <span className="leading-tight truncate">
                   Representative architecture. GA4 logs shared under mutual NDA.
                 </span>
               </div>
@@ -236,18 +236,18 @@ export function CaseStudies() {
 
             {/* Right: Focused Strategy, Execution & Verified Metrics */}
             <div className="lg:col-span-7 flex flex-col gap-2.5 text-left">
-              {/* Challenge Box in Warm Tactile Well - Locked Min-Height Across All Cases */}
-              <div className="p-2.5 rounded-xl bg-gradient-to-r from-[#FFFBEB] via-[#FEF3C7] to-[#FDE68A]/50 border border-amber-300/80 shadow-xs flex flex-col justify-center min-h-[96px] sm:min-h-[82px] lg:min-h-[74px] gap-0.5">
-                <span className="text-[9px] font-black uppercase tracking-wider text-[#9A5B00] flex items-center gap-1">
+              {/* Challenge Box in Warm Tactile Well - Locked Exact Height Across All Tabs */}
+              <div className="p-2.5 rounded-xl bg-gradient-to-r from-[#FFFBEB] via-[#FEF3C7] to-[#FDE68A]/50 border border-amber-300/80 shadow-xs flex flex-col justify-center h-[116px] sm:h-[84px] lg:h-[74px] gap-0.5 overflow-hidden">
+                <span className="text-[9px] font-black uppercase tracking-wider text-[#9A5B00] flex items-center gap-1 shrink-0">
                   <Clock className="w-2.5 h-2.5 text-[#9A5B00] shrink-0" />
                   <span>The Challenge:</span>
                 </span>
-                <p className="text-[11px] sm:text-xs text-[#0B1B3A] leading-relaxed font-medium">
+                <p className="text-[11px] sm:text-xs text-[#0B1B3A] leading-relaxed font-medium line-clamp-4 sm:line-clamp-3 lg:line-clamp-2">
                   {current.challenge}
                 </p>
               </div>
 
-              {/* What Our In-House India Team Executed - Locked Card Height to Completely Eliminate Jitter */}
+              {/* What Our In-House India Team Executed - Locked Height Grid to Completely Eliminate Jitter */}
               <div className="flex flex-col gap-1">
                 <span className="text-[10px] font-black uppercase tracking-wider text-[#0B1B3A] flex items-center gap-1">
                   <ShieldCheck className="w-3 h-3 text-emerald-600 shrink-0" />
@@ -257,7 +257,7 @@ export function CaseStudies() {
                   {current.whatWeDid.map((step, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-lg bg-white border border-[#DDD5C7] shadow-2xs hover:border-[#FFB020] transition-colors min-h-[92px] sm:min-h-[76px] lg:min-h-[68px]"
+                      className="flex items-start gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-lg bg-white border border-[#DDD5C7] shadow-2xs hover:border-[#FFB020] transition-colors h-[90px] sm:h-[76px] lg:h-[68px] overflow-hidden"
                     >
                       <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-gradient-to-b from-[#34D399] via-[#059669] to-[#047857] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-2xs border border-[#A7F3D0]">
                         <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 stroke-[3]" />
@@ -280,7 +280,7 @@ export function CaseStudies() {
                   {current.measuredWeekly.map((metric, idx) => (
                     <div
                       key={idx}
-                      className="h-[28px] px-1.5 rounded-lg bg-white border border-[#DDD5C7] text-[9px] font-extrabold text-[#0B1B3A] flex items-center gap-1 shadow-2xs"
+                      className="h-[28px] px-1.5 rounded-lg bg-white border border-[#DDD5C7] text-[9px] font-extrabold text-[#0B1B3A] flex items-center gap-1 shadow-2xs overflow-hidden"
                     >
                       <Sparkles className="w-2.5 h-2.5 text-[#FFB020] shrink-0" />
                       <span className="truncate">{metric}</span>
@@ -290,7 +290,7 @@ export function CaseStudies() {
               </div>
 
               {/* Action Link & Direct Consultation CTA - Zero Layout Shift */}
-              <div className="pt-1 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2.5">
+              <div className="pt-1 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2.5 h-[42px] sm:h-[40px]">
                 <a
                   href="#quote"
                   className="btn-luxury-gold btn-shimmer h-[38px] px-4 sm:px-5 rounded-lg text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-1.5 cursor-pointer shadow-sm whitespace-nowrap self-start"
@@ -299,7 +299,7 @@ export function CaseStudies() {
                   <span className="sm:hidden inline">Request Custom Strategy</span>
                   <ArrowRight className="w-3.5 h-3.5 stroke-[3] shrink-0" />
                 </a>
-                <span className="text-[10px] font-bold text-[#5A6680] leading-tight">
+                <span className="text-[10px] font-bold text-[#5A6680] leading-tight truncate">
                   Free 24-hr scope &amp; competitive breakdown included
                 </span>
               </div>

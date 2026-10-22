@@ -46,14 +46,14 @@ export function FloatingActions() {
       <a
         href="#quote"
         onClick={handleEnquire}
-        className="group relative flex items-center justify-center w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-gradient-to-b from-[#FFF2B2] via-[#FFB020] to-[#DF7D00] text-[#060B22] cursor-pointer select-none transition-all duration-150 border-t border-t-white/95 border-x border-[#E08A00] border-b-[3px] border-b-[#994F00] shadow-[0_10px_25px_rgba(0,0,0,0.45),0_3px_8px_rgba(255,176,32,0.45),inset_0_1px_1px_rgba(255,255,255,0.9),inset_0_-2px_4px_rgba(153,79,0,0.35)] hover:brightness-105 hover:-translate-y-0.5 active:translate-y-[2px] active:border-b-[1px] active:shadow-[0_3px_8px_rgba(0,0,0,0.3),inset_0_2px_4px_rgba(0,0,0,0.25)]"
+        className="group relative flex items-center justify-center w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-gradient-to-b from-[#FFF2B2] via-[#FFB020] to-[#DF7D00] text-[#060B22] cursor-pointer select-none transition-all duration-150 border-t border-t-white/95 border-x border-[#E08A00] border-b-[3px] border-b-[#994F00] shadow-[0_10px_25px_rgba(0,0,0,0.45),0_3px_8px_rgba(255,176,32,0.45),inset_0_1px_1px_rgba(255,255,255,0.9),inset_0_-2px_4px_rgba(153,79,0,0.35)] hover:brightness-105 hover:-translate-y-0.5 active:translate-y-[2px] active:border-b-[1px] active:shadow-[0_3px_8px_rgba(0,0,0,0.3),inset_0_2px_4px_rgba(0,0,0,0.25)] animate-fab-enquire"
         title="Enquire now about hiring marketing talent"
         aria-label="Enquire Now"
       >
         {/* Specular gloss reflection cap */}
         <span className="absolute top-0 inset-x-1.5 h-[45%] rounded-t-full bg-gradient-to-b from-white/70 via-white/20 to-transparent pointer-events-none" />
 
-        <MessageSquarePlus className="relative w-5 h-5 sm:w-6 sm:h-6 text-[#060B22] stroke-[2.3] drop-shadow-[0_1px_0_rgba(255,255,255,0.7)] group-hover:scale-110 transition-transform" />
+        <MessageSquarePlus className="relative w-5 h-5 sm:w-6 sm:h-6 text-[#060B22] stroke-[2.3] drop-shadow-[0_1px_0_rgba(255,255,255,0.7)] group-hover:scale-110 transition-transform animate-fab-icon-enquire" />
 
         {/* Desktop Hover Tooltip Label */}
         <span className="hidden sm:block absolute right-full mr-2.5 px-2.5 py-1 rounded-lg bg-[#060B22]/95 backdrop-blur-md text-[#FFB020] border border-[#FFB020]/40 text-xs font-black tracking-tight whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all pointer-events-none">
@@ -66,14 +66,14 @@ export function FloatingActions() {
         href="https://wa.me/918280788689?text=Hi%20Hire%20Desi%20Marketer%2C%20I%20want%20to%20enquire%20about%20hiring%20a%20marketing%20specialist."
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative flex items-center justify-center w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-gradient-to-b from-[#48E783] via-[#25D366] to-[#128C46] text-white cursor-pointer select-none transition-all duration-150 border-t border-t-white/80 border-x border-[#25D366] border-b-[3px] border-b-[#0D6B34] shadow-[0_10px_25px_rgba(0,0,0,0.4),0_3px_10px_rgba(37,211,102,0.4),inset_0_1px_1px_rgba(255,255,255,0.8),inset_0_-2px_4px_rgba(13,107,52,0.4)] hover:brightness-105 hover:-translate-y-0.5 active:translate-y-[2px] active:border-b-[1px] active:shadow-[0_3px_8px_rgba(0,0,0,0.3),inset_0_2px_4px_rgba(0,0,0,0.25)]"
+        className="group relative flex items-center justify-center w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-gradient-to-b from-[#48E783] via-[#25D366] to-[#128C46] text-white cursor-pointer select-none transition-all duration-150 border-t border-t-white/80 border-x border-[#25D366] border-b-[3px] border-b-[#0D6B34] shadow-[0_10px_25px_rgba(0,0,0,0.4),0_3px_10px_rgba(37,211,102,0.4),inset_0_1px_1px_rgba(255,255,255,0.8),inset_0_-2px_4px_rgba(13,107,52,0.4)] hover:brightness-105 hover:-translate-y-0.5 active:translate-y-[2px] active:border-b-[1px] active:shadow-[0_3px_8px_rgba(0,0,0,0.3),inset_0_2px_4px_rgba(0,0,0,0.25)] animate-fab-whatsapp"
         title="Chat with us instantly on WhatsApp"
         aria-label="Chat on WhatsApp"
       >
         {/* Specular gloss reflection cap */}
         <span className="absolute top-0 inset-x-1.5 h-[45%] rounded-t-full bg-gradient-to-b from-white/60 via-white/15 to-transparent pointer-events-none" />
 
-        <WhatsAppIcon className="relative w-5 h-5 sm:w-6 sm:h-6 fill-current drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] group-hover:scale-110 transition-transform" />
+        <WhatsAppIcon className="relative w-5 h-5 sm:w-6 sm:h-6 fill-current drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] group-hover:scale-110 transition-transform animate-fab-icon-whatsapp" />
 
         {/* Desktop Hover Tooltip Label */}
         <span className="hidden sm:block absolute right-full mr-2.5 px-2.5 py-1 rounded-lg bg-[#060B22]/95 backdrop-blur-md text-[#25D366] border border-[#25D366]/40 text-xs font-black tracking-tight whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all pointer-events-none">
