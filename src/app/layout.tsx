@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Manrope } from "next/font/google";
 import "./globals.css";
+import { FloatingActions } from "@/components/ui/FloatingActions";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -92,6 +93,7 @@ export default function RootLayout({
     <html lang="en" className={`${bricolage.variable} ${manrope.variable} scroll-smooth`}>
       <body className="min-h-screen bg-[#F6F4EE] text-[#0B1B3A] antialiased selection:bg-[#FFB020] selection:text-[#060B22]">
         {children}
+        <FloatingActions />
       </body>
     </html>
   );

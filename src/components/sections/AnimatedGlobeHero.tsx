@@ -13,95 +13,87 @@ interface FlightRoute {
   duration: number; // in seconds
 }
 
-// Bhubaneswar HQ coordinates: (1306, 435)
-// Routes stay below Y=190 so the top 190px (navbar zone) remains pristine, dark, and uncluttered.
+// Bhubaneswar HQ exact map dot coordinates: (1281.5, 401.5)
 const ROUTES: FlightRoute[] = [
   {
     id: "nyc",
     name: "New York",
     tag: "US East (ET)",
-    path: "M1306 435 Q860 210 391 300",
-    destX: 391,
-    destY: 300,
+    path: "M1281.5 401.5 Q847 180 412.5 291.5",
+    destX: 412.5,
+    destY: 291.5,
     duration: 4.2,
-  },
-  {
-    id: "toronto",
-    name: "Toronto",
-    tag: "Canada (ET)",
-    path: "M1306 435 Q880 220 421 310",
-    destX: 421,
-    destY: 310,
-    duration: 4.0,
   },
   {
     id: "sfo",
     name: "San Francisco",
     tag: "US West (PT)",
-    path: "M1306 435 Q740 200 153 330",
-    destX: 153,
-    destY: 330,
+    path: "M1281.5 401.5 Q726 150 170.5 302.5",
+    destX: 170.5,
+    destY: 302.5,
     duration: 5.0,
+  },
+  {
+    id: "toronto",
+    name: "Toronto",
+    tag: "Canada (ET)",
+    path: "M1281.5 401.5 Q852 170 423.5 269.5",
+    destX: 423.5,
+    destY: 269.5,
+    duration: 4.0,
   },
   {
     id: "london",
     name: "London",
     tag: "UK (GMT)",
-    path: "M1306 435 Q1080 250 830 255",
-    destX: 830,
-    destY: 255,
+    path: "M1281.5 401.5 Q1061 210 841.5 247.5",
+    destX: 841.5,
+    destY: 247.5,
     duration: 3.4,
   },
   {
     id: "frankfurt",
     name: "Frankfurt",
     tag: "Europe (CET)",
-    path: "M1306 435 Q1110 265 905 250",
-    destX: 905,
-    destY: 250,
+    path: "M1281.5 401.5 Q1094 220 907.5 247.5",
+    destX: 907.5,
+    destY: 247.5,
     duration: 3.5,
   },
   {
     id: "dubai",
     name: "Dubai",
     tag: "UAE (GST)",
-    path: "M1306 435 Q1220 375 1137 395",
-    destX: 1137,
-    destY: 395,
+    path: "M1281.5 401.5 Q1215 360 1149.5 379.5",
+    destX: 1149.5,
+    destY: 379.5,
     duration: 2.8,
-  },
-  {
-    id: "sydney",
-    name: "Sydney",
-    tag: "Australia (AEST)",
-    path: "M1306 435 Q1170 510 986 673",
-    destX: 986,
-    destY: 673,
-    duration: 4.5,
   },
   {
     id: "singapore",
     name: "Singapore",
     tag: "Asia (SGT)",
-    path: "M1306 435 Q1355 450 1406 520",
-    destX: 1406,
-    destY: 520,
+    path: "M1281.5 401.5 Q1342 456 1402.5 511.5",
+    destX: 1402.5,
+    destY: 511.5,
     duration: 3.0,
+  },
+  {
+    id: "sydney",
+    name: "Sydney",
+    tag: "Australia (AEST)",
+    path: "M1281.5 401.5 Q1446 539 1611.5 676.5",
+    destX: 1611.5,
+    destY: 676.5,
+    duration: 4.5,
   },
 ];
 
 export function AnimatedGlobeHero() {
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
   const [hoveredRoute, setHoveredRoute] = useState<string | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 640);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
     const handleMouseMove = (e: MouseEvent) => {
       const cx = window.innerWidth / 2;
       const cy = window.innerHeight / 2;
@@ -115,7 +107,6 @@ export function AnimatedGlobeHero() {
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => {
-      window.removeEventListener("resize", checkMobile);
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
@@ -125,7 +116,7 @@ export function AnimatedGlobeHero() {
       {/* 1. Deep Space Midnight Base */}
       <div className="absolute inset-0 bg-[#040716]" />
 
-      {/* 2. Top Vignette — Deep midnight with zero glare behind navbar */}
+      {/* 2. Top Vignette */}
       <div className="absolute top-0 inset-x-0 h-32 sm:h-48 bg-gradient-to-b from-[#040716] via-[#040716]/95 to-transparent z-10 pointer-events-none" />
 
       {/* 3. Subtle Ambient Light Orbs */}
@@ -139,34 +130,16 @@ export function AnimatedGlobeHero() {
           transform: `perspective(1200px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
         }}
       >
-        {/* Crisp Dotted World Map Base — framed cleanly on both mobile and desktop */}
-        <div className="absolute inset-0 opacity-25 sm:opacity-30 pointer-events-none flex items-center justify-center">
-          <Image
-            src="/images/world-dots-base.svg"
-            alt="World Globe Network"
-            fill
-            priority
-            className="object-contain sm:object-cover object-top sm:object-center pt-10 sm:pt-0"
-          />
-        </div>
-
-        {/* Live Vector Telemetry & Animated Flight Arcs SVG */}
+        {/* Live Vector Telemetry & Precise Single Dots Map SVG */}
         <svg
           viewBox="0 0 1800 900"
-          preserveAspectRatio={isMobile ? "xMidYMin meet" : "xMidYMid slice"}
-          className="absolute inset-x-0 top-10 sm:top-0 w-full h-full pointer-events-auto"
+          preserveAspectRatio="xMidYMid slice"
+          className="absolute inset-0 w-full h-full pointer-events-auto"
         >
           <defs>
-            {/* Golden Flight Arc Gradient */}
-            <linearGradient id="live-arc" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#FFB020" stopOpacity="0.8" />
-              <stop offset="60%" stopColor="#FFC857" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#38BDF8" stopOpacity="0.85" />
-            </linearGradient>
-
             {/* Glowing Golden Arc Glow */}
             <filter id="glow-gold" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="2.5" result="blur" />
+              <feGaussianBlur stdDeviation="2" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
@@ -184,111 +157,109 @@ export function AnimatedGlobeHero() {
 
             {/* Bhubaneswar HQ Core Radial Halo */}
             <radialGradient id="hq-core-halo">
-              <stop offset="0%" stopColor="#FFB020" stopOpacity="0.45" />
-              <stop offset="40%" stopColor="#FF8A00" stopOpacity="0.15" />
+              <stop offset="0%" stopColor="#FFB020" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#FF8A00" stopOpacity="0.1" />
               <stop offset="100%" stopColor="#FF8A00" stopOpacity="0" />
             </radialGradient>
           </defs>
 
-          {/* Flight Routes Layer */}
+          {/* Dotted World Map Base perfectly synced in 1800x900 coordinate space */}
+          <image
+            href="/images/world-dots-base.svg"
+            x="0"
+            y="0"
+            width="1800"
+            height="900"
+            preserveAspectRatio="xMidYMid slice"
+            opacity="0.32"
+          />
+
+          {/* Subtle Network Vector Arcs (Clean, non-distracting connectivity lines) */}
           <g id="flight-arcs">
             {ROUTES.map((route) => {
               const isHovered = hoveredRoute === route.id;
               return (
-                <g key={route.id} className="cursor-pointer group">
-                  {/* Subtle static guide track */}
-                  <path
-                    d={route.path}
-                    fill="none"
-                    stroke="#FFB020"
-                    strokeWidth={isHovered ? 2 : 1}
-                    strokeOpacity={isHovered ? 0.5 : 0.12}
-                    strokeLinecap="round"
-                    className="transition-all duration-300"
-                  />
+                <path
+                  key={`arc-${route.id}`}
+                  d={route.path}
+                  fill="none"
+                  stroke="#FFB020"
+                  strokeWidth={isHovered ? 2 : 1.2}
+                  strokeOpacity={isHovered ? 0.75 : 0.22}
+                  strokeLinecap="round"
+                  strokeDasharray={isHovered ? "none" : "5 5"}
+                  className="transition-all duration-300 pointer-events-none"
+                />
+              );
+            })}
+          </g>
 
-                  {/* Animated Golden Dash Beam streaming along the arc */}
-                  <path
-                    d={route.path}
+          {/* Exact Destination Location Dots (One single dot per location on the exact map dot) */}
+          <g id="location-dots">
+            {ROUTES.map((route) => {
+              const isHovered = hoveredRoute === route.id;
+              return (
+                <g
+                  key={`dot-${route.id}`}
+                  transform={`translate(${route.destX}, ${route.destY})`}
+                  onMouseEnter={() => setHoveredRoute(route.id)}
+                  onMouseLeave={() => setHoveredRoute(null)}
+                  className="cursor-pointer group"
+                >
+                  {/* Subtle pulsing outer ring */}
+                  <circle
+                    r="7"
                     fill="none"
-                    stroke="url(#live-arc)"
-                    strokeWidth={isHovered ? 2.5 : 1.6}
-                    strokeLinecap="round"
-                    filter="url(#glow-gold)"
-                    className="animate-arc-flow"
-                  />
-
-                  {/* Traveling Photon Comet (Single smooth motion per path) */}
-                  <circle r={isHovered ? 4.5 : 3} fill="#FFFFFF" filter="url(#glow-gold)">
-                    <animateMotion
-                      path={route.path}
-                      dur={`${route.duration}s`}
+                    stroke="#38BDF8"
+                    strokeWidth="1.2"
+                    opacity="0.45"
+                  >
+                    <animate
+                      attributeName="r"
+                      values="5;11;5"
+                      dur="3.2s"
                       repeatCount="indefinite"
-                      rotate="auto"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      values="0.6;0.1;0.6"
+                      dur="3.2s"
+                      repeatCount="indefinite"
                     />
                   </circle>
 
-                  {/* Destination City Node (Clean, minimal LED marker) */}
+                  {/* Single Exact Location Dot */}
+                  <circle r="3.5" fill="#38BDF8" filter="url(#glow-cyan)" />
+                  <circle r="1.5" fill="#FFFFFF" />
+
+                  {/* Clean city label on hover */}
                   <g
-                    transform={`translate(${route.destX}, ${route.destY})`}
-                    onMouseEnter={() => setHoveredRoute(route.id)}
-                    onMouseLeave={() => setHoveredRoute(null)}
+                    className={`transition-all duration-200 pointer-events-none ${
+                      isHovered ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                    }`}
                   >
-                    {/* Pulsing Outer Node Ring */}
-                    <circle
-                      r="8"
-                      fill="none"
-                      stroke="#38BDF8"
-                      strokeWidth="1.2"
-                      opacity="0.4"
+                    <rect
+                      x="10"
+                      y="-12"
+                      width={route.name.length * 7 + 24}
+                      height="20"
+                      rx="10"
+                      fill="#060B22"
+                      stroke="#FFB020"
+                      strokeWidth="1"
+                    />
+                    <circle cx="18" cy="-2" r="2.5" fill="#38BDF8" />
+                    <text
+                      x="26"
+                      y="1.5"
+                      fill="#FFFFFF"
+                      fontSize="9.5"
+                      fontFamily="var(--font-heading), sans-serif"
+                      fontWeight="700"
+                      letterSpacing="0.04em"
                     >
-                      <animate
-                        attributeName="r"
-                        values="5;12;5"
-                        dur="3s"
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="opacity"
-                        values="0.6;0.1;0.6"
-                        dur="3s"
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-
-                    {/* Core LED dot */}
-                    <circle r="3" fill="#38BDF8" filter="url(#glow-cyan)" />
-                    <circle r="1.5" fill="#FFFFFF" />
-
-                    {/* Tooltip ONLY on hover or for key markers to avoid text collisions */}
-                    <g
-                      className={`transition-all duration-200 pointer-events-none ${
-                        isHovered ? "opacity-100 scale-100" : "opacity-0 scale-95"
-                      }`}
-                    >
-                      <rect
-                        x="10"
-                        y="-12"
-                        width={route.name.length * 7 + 22}
-                        height="18"
-                        rx="9"
-                        fill="#060B22"
-                        stroke="#FFB020"
-                        strokeWidth="1"
-                      />
-                      <circle cx="16" cy="-3" r="2" fill="#38BDF8" />
-                      <text
-                        x="23"
-                        y="0"
-                        fill="#FFFFFF"
-                        fontSize="9.5"
-                        fontFamily="var(--font-heading), sans-serif"
-                        fontWeight="700"
-                        letterSpacing="0.04em"
-                      >
-                        {route.name}
-                      </text>
-                    </g>
+                      {route.name}
+                    </text>
                   </g>
                 </g>
               );
@@ -296,65 +267,56 @@ export function AnimatedGlobeHero() {
           </g>
 
           {/* =========================================================================
-              BHUBANESWAR INDIA HEADQUARTERS HUB BEACON (1306, 435)
+              BHUBANESWAR INDIA HEADQUARTERS HUB BEACON (1281.5, 401.5)
              ========================================================================= */}
-          <g id="bhubaneswar-hub" transform="translate(1306, 435)">
+          <g id="bhubaneswar-hub" transform="translate(1281.5, 401.5)">
             {/* Subtle Gold Halo */}
-            <circle r="130" fill="url(#hq-core-halo)" className="pointer-events-none" />
+            <circle r="90" fill="url(#hq-core-halo)" className="pointer-events-none" />
 
-            {/* Concentric Expanding Sonar Ripple Rings */}
+            {/* Single Exact HQ Dot & Pulsing Beacon Ring */}
             <circle
-              r="15"
+              r="12"
               fill="none"
               stroke="#FFB020"
-              className="animate-sonar-ring-1 pointer-events-none"
-            />
-            <circle
-              r="15"
-              fill="none"
-              stroke="#FFB020"
-              className="animate-sonar-ring-2 pointer-events-none"
-            />
-
-            {/* Rotating Star Radar Crosshair */}
-            <circle r="22" fill="none" stroke="#FFB020" strokeWidth="1" strokeDasharray="3 3" opacity="0.5" />
-            <g>
-              <animateTransform
-                attributeName="transform"
-                type="rotate"
-                from="0"
-                to="360"
-                dur="30s"
+              strokeWidth="1.5"
+              opacity="0.6"
+            >
+              <animate
+                attributeName="r"
+                values="8;20;8"
+                dur="2.5s"
                 repeatCount="indefinite"
               />
-              <line x1="-12" y1="0" x2="12" y2="0" stroke="#FFE082" strokeWidth="1.2" />
-              <line x1="0" y1="-12" x2="0" y2="12" stroke="#FFE082" strokeWidth="1.2" />
-            </g>
+              <animate
+                attributeName="opacity"
+                values="0.8;0.1;0.8"
+                dur="2.5s"
+                repeatCount="indefinite"
+              />
+            </circle>
 
             {/* Solid Golden Beacon Core */}
-            <circle r="8" fill="#FFB020" filter="url(#glow-gold)" />
-            <circle r="3.5" fill="#FFFFFF" />
+            <circle r="5" fill="#FFB020" filter="url(#glow-gold)" />
+            <circle r="2" fill="#FFFFFF" />
 
-            {/* Clean Bhubaneswar HQ Label (Positioned right below beacon, clean & unobtrusive) */}
-            <g transform="translate(14, 8)" className="pointer-events-none">
+            {/* Clean Bhubaneswar HQ Badge */}
+            <g transform="translate(12, 6)" className="pointer-events-none">
               <rect
                 x="0"
                 y="0"
-                width="142"
-                height="22"
-                rx="11"
+                width="134"
+                height="20"
+                rx="10"
                 fill="#060B22"
-                stroke="rgba(255, 176, 32, 0.4)"
+                stroke="rgba(255, 176, 32, 0.5)"
                 strokeWidth="1"
               />
-              <circle cx="10" cy="11" r="3" fill="#10B981">
-                <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
-              </circle>
+              <circle cx="9" cy="10" r="2.5" fill="#10B981" />
               <text
-                x="18"
-                y="14"
+                x="16"
+                y="13"
                 fill="#FFB020"
-                fontSize="9"
+                fontSize="8.5"
                 fontFamily="var(--font-heading), sans-serif"
                 fontWeight="800"
                 letterSpacing="0.06em"

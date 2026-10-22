@@ -151,25 +151,25 @@ export function Hero() {
                   </div>
                 </div>
 
-                {/* Live 3-Tile KPI Bar (Spend, Revenue, CPA) */}
+                {/* 3-Tile Trust Scale (Developers, Countries, Clients) */}
                 <div className="grid grid-cols-3 gap-1 sm:gap-2 p-1.5 sm:p-2 rounded-xl bg-white/[0.04] border border-white/10 backdrop-blur-md">
                   <div className="flex flex-col">
-                    <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-slate-400">Monthly Spend</span>
-                    <span className="font-display font-black text-xs sm:text-sm text-white mt-0.5">$14,280</span>
+                    <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-slate-400">Scale</span>
+                    <span className="font-display font-black text-xs sm:text-sm md:text-base text-white mt-0.5">240+</span>
                     <span className="text-[8px] sm:text-[9px] font-bold text-emerald-400 flex items-center gap-1 mt-0.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
-                      On Target
+                      In-House Developers
                     </span>
                   </div>
                   <div className="flex flex-col border-l border-white/10 pl-2 sm:pl-2.5">
-                    <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-slate-400">Attributed Rev</span>
-                    <span className="font-display font-black text-xs sm:text-sm text-[#FFB020] mt-0.5">$65,688</span>
-                    <span className="text-[8px] sm:text-[9px] font-bold text-[#FFB020] mt-0.5">+342% YoY</span>
+                    <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-slate-400">Presence</span>
+                    <span className="font-display font-black text-xs sm:text-sm md:text-base text-[#FFB020] mt-0.5">8+</span>
+                    <span className="text-[8px] sm:text-[9px] font-bold text-[#FFB020] mt-0.5">Countries</span>
                   </div>
                   <div className="flex flex-col border-l border-white/10 pl-2 sm:pl-2.5">
-                    <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-slate-400">Blended CPA</span>
-                    <span className="font-display font-black text-xs sm:text-sm text-white mt-0.5">$18.40</span>
-                    <span className="text-[8px] sm:text-[9px] font-bold text-emerald-400 mt-0.5">-28% vs US</span>
+                    <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-slate-400">Track Record</span>
+                    <span className="font-display font-black text-xs sm:text-sm md:text-base text-white mt-0.5">40+</span>
+                    <span className="text-[8px] sm:text-[9px] font-bold text-emerald-400 mt-0.5">Clients</span>
                   </div>
                 </div>
               </div>

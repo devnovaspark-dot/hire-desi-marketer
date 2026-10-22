@@ -31,6 +31,14 @@ export function TrustStrip() {
                 <span>Meta Business Partner</span>
               </div>
 
+              {/* LinkedIn Partner */}
+              <div className="px-3 py-1.5 rounded-full bg-white border border-[#DDD6C8] text-xs font-black text-[#0B1B3A] inline-flex items-center gap-2 shadow-[0_2px_4px_rgba(11,27,58,0.06)] hover:scale-105 transition-transform">
+                <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="#0A66C2">
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.67 1.67 0 1 0 0-3.34 1.67 1.67 0 0 0 0 3.34m1.4 9.74v-8.37H5.06v8.37z" />
+                </svg>
+                <span>LinkedIn Partner</span>
+              </div>
+
               {/* HubSpot Partner */}
               <div className="px-3 py-1.5 rounded-full bg-white border border-[#DDD6C8] text-xs font-black text-[#0B1B3A] inline-flex items-center gap-2 shadow-[0_2px_4px_rgba(11,27,58,0.06)] hover:scale-105 transition-transform">
                 <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="#FF7A59">
