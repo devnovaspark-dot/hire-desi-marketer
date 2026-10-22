@@ -292,15 +292,15 @@ export function Footer() {
         {/* ============================================================== */}
         {/* MAIN NAVIGATION & CONTACT GRID                                */}
         {/* ============================================================== */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-6 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-8 border-b border-white/10">
           
-          {/* Brand Info & Core Badges */}
-          <div className="lg:col-span-2 flex flex-col gap-4">
+          {/* Brand Info & Core Badges (4 cols) */}
+          <div className="lg:col-span-4 flex flex-col gap-4">
             <Link href="/" className="flex items-center group">
               <BrandLogo size="lg" />
             </Link>
 
-            <p className="text-xs sm:text-sm text-slate-400 max-w-sm leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 max-w-sm leading-relaxed">
               Vetted, accountable digital marketing specialists, media buyers, SEO leads, and creators in India working your business hours. Zero freelancing chaos, zero agency markup.
             </p>
 
@@ -320,8 +320,8 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Engagement Models */}
-          <div className="flex flex-col gap-3">
+          {/* Column 2: Engagement Models (2 cols) */}
+          <div className="lg:col-span-2 flex flex-col gap-3">
             <h4 className="text-xs font-black uppercase tracking-widest text-[#FFB020]">
               Engagement Models
             </h4>
@@ -333,7 +333,7 @@ export function Footer() {
                   className="hover:text-white transition-colors flex items-center gap-1.5 group"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover:bg-[#FFB020] transition-colors" />
-                  <span>Hourly Talent ($8/hr flat)</span>
+                  <span>Hourly Talent ($8/hr)</span>
                 </a>
               </li>
               <li>
@@ -363,7 +363,7 @@ export function Footer() {
                   className="hover:text-white transition-colors flex items-center gap-1.5 group"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover:bg-[#FFB020] transition-colors" />
-                  <span>Client Case Studies & Proof</span>
+                  <span>Client Case Studies &amp; Proof</span>
                 </a>
               </li>
               <li>
@@ -379,8 +379,8 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: 2026 Core Pillars */}
-          <div className="flex flex-col gap-3">
+          {/* Column 3: 2026 Core Pillars (2 cols) */}
+          <div className="lg:col-span-2 flex flex-col gap-3">
             <h4 className="text-xs font-black uppercase tracking-widest text-[#FFB020]">
               Marketing Pillars
             </h4>
@@ -402,7 +402,7 @@ export function Footer() {
                   className="hover:text-white transition-colors flex items-center gap-1.5 group"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover:bg-[#FFB020] transition-colors" />
-                  <span>SEO &amp; Google Map-Pack</span>
+                  <span>SEO &amp; Map-Pack</span>
                 </a>
               </li>
               <li>
@@ -438,83 +438,94 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: India Headquarters & Interactive Direct Contact */}
-          <div className="flex flex-col gap-3">
+          {/* Column 4: India Headquarters & Interactive Direct Contact (4 cols) */}
+          <div className="lg:col-span-4 flex flex-col gap-3.5">
             <h4 className="text-xs font-black uppercase tracking-widest text-[#FFB020]">
               Headquarters &amp; Direct
             </h4>
             
-            <div className="flex flex-col gap-3 text-xs text-slate-300">
+            <div className="flex flex-col gap-2.5 text-xs text-slate-300">
+              {/* Address with Office Pin */}
               <a
                 href="#office"
                 onClick={(e) => handleSmoothNav(e, "#office")}
-                className="flex items-start gap-2 hover:text-white transition-colors group cursor-pointer"
+                className="flex items-start gap-2.5 text-xs text-slate-300 hover:text-white transition-colors group cursor-pointer leading-relaxed"
               >
-                <MapPin className="w-4 h-4 text-[#FFB020] shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                <div className="w-6 h-6 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:border-[#FFB020]/40 group-hover:bg-[#FFB020]/10 transition-colors">
+                  <MapPin className="w-3.5 h-3.5 text-[#FFB020] shrink-0 group-hover:scale-110 transition-transform" />
+                </div>
                 <span className="leading-snug">
                   Mallick Complex, Unit 3, Kharvela Nagar, Bhubaneswar, Odisha 751001, India
                 </span>
               </a>
 
-              {/* Interactive Email Copy Button */}
-              <div className="flex items-center justify-between p-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#FFB020]/40 transition-colors">
+              {/* Full Email with Copy Button - Zero Truncation */}
+              <div className="flex items-center justify-between px-3 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-[#FFB020]/50 transition-colors group">
                 <a
                   href="mailto:hello@hiredesimarketer.com"
-                  className="flex items-center gap-2 text-slate-200 hover:text-white truncate"
+                  className="flex items-center gap-2.5 min-w-0"
+                  title="Send email to hello@hiredesimarketer.com"
                 >
-                  <Mail className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
-                  <span className="truncate">hello@hiredesimarketer.com</span>
+                  <div className="w-7 h-7 rounded-lg bg-[#FFB020]/15 text-[#FFB020] flex items-center justify-center shrink-0">
+                    <Mail className="w-3.5 h-3.5" />
+                  </div>
+                  <span className="font-mono text-xs text-slate-100 hover:text-white transition-colors whitespace-nowrap">
+                    hello@hiredesimarketer.com
+                  </span>
                 </a>
                 <button
                   type="button"
                   onClick={() => copyToClipboard("hello@hiredesimarketer.com", "email")}
                   title="Copy email to clipboard"
-                  className="p-1 rounded-md text-slate-400 hover:text-[#FFB020] hover:bg-white/10 transition-colors cursor-pointer shrink-0 ml-1"
+                  className="px-2 py-1 rounded-md text-[11px] font-bold text-slate-400 hover:text-[#FFB020] hover:bg-white/10 transition-colors cursor-pointer flex items-center gap-1 shrink-0 ml-2"
                 >
                   {copiedEmail ? (
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    <>
+                      <Check className="w-3 h-3 text-emerald-400" />
+                      <span className="text-emerald-400">Copied</span>
+                    </>
                   ) : (
-                    <Copy className="w-3.5 h-3.5" />
+                    <>
+                      <Copy className="w-3 h-3" />
+                      <span>Copy</span>
+                    </>
                   )}
                 </button>
               </div>
 
-              {/* Direct Call / WhatsApp Card (Matching Screenshot with Real WhatsApp Icon) */}
-              <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#060D20] border border-amber-500/40 hover:border-[#FFB020] shadow-[0_4px_16px_rgba(0,0,0,0.5)] transition-all group">
+              {/* Direct Phone Call Card (Real Phone Branding, Single-Line Number) */}
+              <div className="flex items-center justify-between px-3 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-blue-400/50 transition-colors group">
                 <a
-                  href="https://wa.me/918280788689?text=Hi%20Hire%20Desi%20Marketer,%20I'd%20like%20to%20hire%20a%20marketing%20specialist."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="Call or WhatsApp us directly"
-                  className="flex items-center gap-3 text-white flex-1 min-w-0"
+                  href="tel:+918280788689"
+                  className="flex items-center gap-2.5 min-w-0"
+                  title="Call +91 8280788689"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-[#25D366]/15 border border-[#25D366]/40 text-[#25D366] flex items-center justify-center shrink-0 group-hover:scale-105 group-hover:bg-[#25D366]/25 transition-all shadow-[0_0_12px_rgba(37,211,102,0.25)]">
-                    <WhatsAppIcon className="w-5 h-5 fill-current" />
+                  <div className="w-7 h-7 rounded-lg bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                    <Phone className="w-3.5 h-3.5" />
                   </div>
                   <div className="flex flex-col text-left">
                     <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
-                      DIRECT CALL
+                      Direct Phone
                     </span>
-                    <span className="text-sm font-black text-white tracking-tight">
+                    <span className="text-xs sm:text-sm font-black text-white whitespace-nowrap font-mono tracking-tight">
                       +91 8280788689
                     </span>
                   </div>
                 </a>
 
-                <div className="flex items-center gap-1 shrink-0 ml-1">
+                <div className="flex items-center gap-1.5 shrink-0 ml-2">
                   <a
                     href="tel:+918280788689"
-                    title="Direct Phone Call"
-                    className="p-1.5 rounded-lg text-slate-400 hover:text-emerald-400 hover:bg-white/10 transition-colors cursor-pointer"
+                    title="Click to call directly"
+                    className="p-1.5 rounded-md text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                   >
-                    <Phone className="w-3.5 h-3.5" />
+                    <Phone className="w-3.5 h-3.5 text-blue-400" />
                   </a>
-
                   <button
                     type="button"
                     onClick={() => copyToClipboard("+918280788689", "phone")}
                     title="Copy phone number to clipboard"
-                    className="p-1.5 rounded-lg text-slate-400 hover:text-[#FFB020] hover:bg-white/10 transition-colors cursor-pointer"
+                    className="p-1.5 rounded-md text-slate-400 hover:text-[#FFB020] hover:bg-white/10 transition-colors cursor-pointer"
                   >
                     {copiedPhone ? (
                       <Check className="w-3.5 h-3.5 text-emerald-400" />
@@ -525,18 +536,27 @@ export function Footer() {
                 </div>
               </div>
 
-              {/* Instant WhatsApp Quick Connect */}
+              {/* Dedicated Instant WhatsApp Card */}
               <a
                 href="https://wa.me/918280788689?text=Hi%20Hire%20Desi%20Marketer,%20I'd%20like%20to%20hire%20a%20marketing%20specialist."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between p-2 rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] hover:bg-[#25D366]/20 transition-all font-bold cursor-pointer group"
+                className="flex items-center justify-between px-3 py-2.5 rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] hover:bg-[#25D366]/20 hover:border-[#25D366]/50 transition-all font-bold cursor-pointer group shadow-[0_2px_12px_rgba(37,211,102,0.12)]"
               >
-                <div className="flex items-center gap-2">
-                  <WhatsAppIcon className="w-4 h-4 fill-current" />
-                  <span>Instant WhatsApp Chat</span>
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-[#25D366]/20 border border-[#25D366]/40 text-[#25D366] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                    <WhatsAppIcon className="w-4 h-4 fill-current" />
+                  </div>
+                  <div className="flex flex-col text-left">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-emerald-400/80">
+                      WhatsApp Active
+                    </span>
+                    <span className="text-xs sm:text-sm font-black text-white">
+                      Instant WhatsApp Chat
+                    </span>
+                  </div>
                 </div>
-                <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                <ExternalLink className="w-4 h-4 text-[#25D366] group-hover:translate-x-0.5 transition-transform shrink-0" />
               </a>
             </div>
           </div>
@@ -545,19 +565,20 @@ export function Footer() {
         {/* ============================================================== */}
         {/* BOTTOM BAR & 3D TACTILE BACK-TO-TOP BUTTON                     */}
         {/* ============================================================== */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 pt-1">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 pt-4">
           <p className="text-center sm:text-left">
             © 2026 Hire Desi Marketer. All rights reserved. Zero lock-in contracts · Transparent weekly billing · Odisha HQ.
           </p>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
             <a
               href="#quote"
               onClick={(e) => handleSmoothNav(e, "#quote")}
-              className="hover:text-white transition-colors"
+              className="text-slate-300 hover:text-[#FFB020] transition-colors font-medium"
             >
               Request a Free Plan
             </a>
+            <span className="text-white/20">|</span>
             <button
               onClick={scrollToTop}
               className="px-4 py-2 rounded-full bg-[#070D1F] border border-white/20 text-white text-xs font-bold inline-flex items-center gap-2 cursor-pointer transition-all hover:bg-white/10 hover:border-[#FFB020]/50 shadow-[0_4px_10px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.15)] active:translate-y-0.5 active:shadow-inner"
