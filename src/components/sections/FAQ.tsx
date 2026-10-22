@@ -25,7 +25,7 @@ export function FAQ() {
               <span className="text-[#9A5B00]">Questions</span>
             </>
           }
-          subtitle="Discover our billing models, packages, delivery time, dedicated marketing teams, and work across international time zones."
+          subtitle="Learn about our billing models, packages, delivery times, dedicated marketing teams, and work across international time zones."
           align="center"
         />
 

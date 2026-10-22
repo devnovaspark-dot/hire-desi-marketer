@@ -19,11 +19,6 @@ const nextConfig: NextConfig = {
         destination: "/Video.mp4",
         permanent: true,
       },
-      {
-        source: "/video.mp4",
-        destination: "/Video.mp4",
-        permanent: true,
-      },
     ];
   },
 };

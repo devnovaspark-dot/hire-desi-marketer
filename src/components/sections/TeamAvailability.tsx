@@ -41,7 +41,7 @@ export function TeamAvailability() {
       time: "All Day",
       icon: <MessageSquare className="w-4 h-4 text-[#FFB020]" />,
       title: "Live Communication",
-      description: "Connect directly with specialists through Slack and calls for quick updates and decisions.",
+      description: "Connect directly with specialists through Slack and call for quick updates and decisions.",
     },
     {
       time: "Before 6:00 PM",

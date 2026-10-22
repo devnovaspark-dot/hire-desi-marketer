@@ -21,7 +21,7 @@ export function CostCalculator() {
   ];
 
   const coveredTasks = [
-    "Set up Google and Meta advertising and pacing bidding.",
+    "Set up Google and Meta advertising and pacing bids.",
     "Run technical SEO audits, boost site speed, and build local citations.",
     "Plan social media posts and monitor community response.",
     "Design and tune high-converting landing pages.",

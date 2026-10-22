@@ -24,7 +24,7 @@ export function EngagementModels() {
               <span className="text-[#9A5B00]">That Fits Your Business</span>
             </>
           }
-          subtitle="Start with hourly projects, choose an all-in-one growth solution, or build a dedicated marketing team, all with flexible terms and no long-term commitments."
+          subtitle="Get the flexibility your business needs with hourly projects, all-in-one marketing solutions, or dedicated teams, backed by adaptable terms and no long-term commitments."
           align="center"
         />
 

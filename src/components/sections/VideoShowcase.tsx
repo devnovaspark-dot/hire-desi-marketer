@@ -18,104 +18,40 @@ function WhatsAppIcon({ className = "w-4 h-4" }: { className?: string }) {
 
 export function VideoShowcase() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const ambientVideoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [hasStarted, setHasStarted] = useState(false);
 
-  const togglePlay = () => {
+  const handlePlayToggle = () => {
     const video = videoRef.current;
     if (!video) return;
+
     if (video.paused) {
-      setHasStarted(true);
-      if (video.currentTime < 0.15) {
-        video.currentTime = 0.15;
-      }
-      video.play().catch(() => {});
+      video.play().then(() => {
+        setIsPlaying(true);
+      }).catch((err) => {
+        console.warn("Video playback was blocked or failed:", err);
+      });
     } else {
       video.pause();
+      setIsPlaying(false);
     }
   };
 
-  // Sync ambient background video with main video playback and track playing state
   useEffect(() => {
     const video = videoRef.current;
-    const ambient = ambientVideoRef.current;
     if (!video) return;
 
-    const handlePlay = () => {
-      setHasStarted(true);
-      setIsPlaying(true);
-      if (video.currentTime < 0.15) {
-        video.currentTime = 0.15;
-      }
-      if (ambient) {
-        if (ambient.currentTime < 0.15) {
-          ambient.currentTime = 0.15;
-        }
-        ambient.play().catch(() => {});
-      }
-    };
-    const handlePause = () => {
-      setIsPlaying(false);
-      if (ambient) ambient.pause();
-    };
-    const handleEnded = () => {
-      setIsPlaying(false);
-      if (ambient) ambient.pause();
-    };
-    const handleSeek = () => {
-      if (ambient) ambient.currentTime = video.currentTime;
-    };
-    const handleTimeUpdate = () => {
-      if (ambient && Math.abs(ambient.currentTime - video.currentTime) > 0.4) {
-        ambient.currentTime = video.currentTime;
-      }
-    };
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+    const onEnded = () => setIsPlaying(false);
 
-    video.addEventListener("play", handlePlay);
-    video.addEventListener("pause", handlePause);
-    video.addEventListener("ended", handleEnded);
-    video.addEventListener("seeking", handleSeek);
-    video.addEventListener("timeupdate", handleTimeUpdate);
+    video.addEventListener("play", onPlay);
+    video.addEventListener("pause", onPause);
+    video.addEventListener("ended", onEnded);
 
     return () => {
-      video.removeEventListener("play", handlePlay);
-      video.removeEventListener("pause", handlePause);
-      video.removeEventListener("ended", handleEnded);
-      video.removeEventListener("seeking", handleSeek);
-      video.removeEventListener("timeupdate", handleTimeUpdate);
-    };
-  }, []);
-
-  // Auto-pause when client scrolls up or down out of view
-  useEffect(() => {
-    const video = videoRef.current;
-    const ambient = ambientVideoRef.current;
-    if (!video) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          // If video is less than 40% in view (client scrolled down or up away from it), auto-pause
-          if (!entry.isIntersecting || entry.intersectionRatio < 0.4) {
-            if (!video.paused) {
-              video.pause();
-            }
-            if (ambient && !ambient.paused) {
-              ambient.pause();
-            }
-          }
-        });
-      },
-      {
-        threshold: [0, 0.2, 0.4, 0.7, 1.0],
-      }
-    );
-
-    observer.observe(video);
-
-    return () => {
-      observer.disconnect();
+      video.removeEventListener("play", onPlay);
+      video.removeEventListener("pause", onPause);
+      video.removeEventListener("ended", onEnded);
     };
   }, []);
 
@@ -140,28 +76,14 @@ export function VideoShowcase() {
         <div className="w-full max-w-4xl lg:max-w-5xl mx-auto">
           <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#070D18] border border-[#233148] shadow-[0_25px_60px_-15px_rgba(11,27,58,0.35)]">
             {/* Theater Stage Viewport */}
-            <div className="relative w-full h-[380px] sm:h-[460px] md:h-[500px] max-h-[58vh] flex items-center justify-center overflow-hidden bg-[#070D18] group/stage">
-              {/* Static Ambient Glow while video is paused / unplayed */}
+            <div className="relative w-full h-[380px] sm:h-[460px] md:h-[520px] max-h-[62vh] flex items-center justify-center overflow-hidden bg-[#070D18]">
+              {/* Warm Ambient Glow from Thumbnail */}
               <img
                 src="/images/Thumbnail.png"
                 alt=""
                 aria-hidden="true"
                 className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-35 scale-125 pointer-events-none"
               />
-
-              {/* Dynamic Ambient Glow during playback */}
-              <video
-                ref={ambientVideoRef}
-                aria-hidden="true"
-                tabIndex={-1}
-                muted
-                playsInline
-                preload="metadata"
-                poster="/images/Thumbnail.png"
-                className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-35 scale-110 pointer-events-none"
-                src="/Video.mp4"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40 pointer-events-none" />
 
               {/* Main Interactive Video - object-contain ensures 100% full view with ZERO cropping */}
               <video
@@ -172,37 +94,33 @@ export function VideoShowcase() {
                 poster="/images/Thumbnail.png"
                 className="relative z-10 h-full w-auto max-w-full object-contain mx-auto drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
               >
-                <source src="/Video.mp4" type="video/mp4" />
+                <source src="/team-walkthrough.mp4?v=3" type="video/mp4" />
+                <source src="/Video.mp4?v=3" type="video/mp4" />
                 Your browser does not support HTML5 video.
               </video>
 
-              {/* High-Resolution Thumbnail Image Overlay before playback */}
-              {!hasStarted && (
-                <img
-                  src="/images/Thumbnail.png"
-                  alt="Hire Desi Marketer Walkthrough Thumbnail"
-                  className="absolute inset-0 z-10 h-full w-auto max-w-full object-contain mx-auto drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)] pointer-events-none"
-                />
-              )}
-
-              {/* Radiant Luxury Play Button Overlay */}
+              {/* Radiant Luxury Play Button Overlay (shown only when video is paused) */}
               {!isPlaying && (
-                <button
-                  type="button"
-                  onClick={togglePlay}
+                <div
+                  onClick={handlePlayToggle}
+                  className="absolute inset-0 z-20 flex items-center justify-center bg-black/20 hover:bg-black/10 transition-all cursor-pointer group/btn"
+                  role="button"
+                  tabIndex={0}
                   aria-label="Play Walkthrough Video"
-                  className={`absolute inset-0 z-20 flex items-center justify-center bg-black/20 hover:bg-black/10 transition-all cursor-pointer group/btn ${
-                    hasStarted ? "pb-12" : ""
-                  }`}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      handlePlayToggle();
+                    }
+                  }}
                 >
-                  <div className="relative flex items-center justify-center">
-                    <span className="absolute -inset-4 sm:-inset-5 rounded-full bg-[#FFB020]/25 animate-ping pointer-events-none" />
-                    <span className="absolute -inset-2 rounded-full bg-[#FFB020]/40 blur-md pointer-events-none" />
+                  <div className="relative flex items-center justify-center pointer-events-none">
+                    <span className="absolute -inset-4 sm:-inset-5 rounded-full bg-[#FFB020]/25 animate-ping" />
+                    <span className="absolute -inset-2 rounded-full bg-[#FFB020]/40 blur-md" />
                     <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-tr from-[#FFB020] via-[#FFC043] to-[#FFCF66] text-[#0B1B3A] shadow-[0_14px_35px_rgba(255,176,32,0.65),inset_0_2px_3px_rgba(255,255,255,0.7)] flex items-center justify-center group-hover/btn:scale-110 group-active/btn:scale-95 transition-all duration-300">
                       <Play className="w-7 h-7 sm:w-9 sm:h-9 fill-[#0B1B3A] ml-1 text-[#0B1B3A]" />
                     </div>
                   </div>
-                </button>
+                </div>
               )}
             </div>
           </div>

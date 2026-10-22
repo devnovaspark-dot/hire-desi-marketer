@@ -31,11 +31,11 @@ export function Office() {
           kicker="Our Physical Office"
           title={
             <>
-              Your Dedicated Marketing Team,{" "}
-              <span className="text-[#9A5B00]">All Under One Roof.</span>
+              A Dedicated Marketing Team{" "}
+              <span className="text-[#9A5B00]">Under One Roof</span>
             </>
           }
-          subtitle="Our in-house specialists work together from our Bhubaneswar headquarters, ensuring direct collaboration, consistent execution, and time-zone alignment for international clients."
+          subtitle="Our in-house experts in Bhubaneswar collaborate closely to ensure smooth workflows, consistent delivery, and time-zone alignment for global clients."
           align="center"
         />
 

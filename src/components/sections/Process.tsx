@@ -35,7 +35,7 @@ export function Process() {
       title: "Choose Your Engagement Model",
       subtitle: "Flexible Marketing Support for Your Needs",
       description:
-        "Choose pay-as-you-go hourly support, an all-in-one growth package, or a dedicated team of 3, 5, or 7 in-house marketing specialists.",
+        "Opt for pay-as-you-go hourly support, an all-in-one growth package, or a team of 3, 5, or 7 in-house marketers.",
       slaBadge: "Flexible Terms",
       deliverable: "Defined team roles, deliverables, and project scope",
       highlights: ["Flexible hourly support", "Integrated growth package"],
@@ -46,7 +46,7 @@ export function Process() {
       title: "Start Collaborating on Day One",
       subtitle: "Seamless Team Integration",
       description:
-        "Meet your assigned specialists on a kickoff call, connect through Slack or Microsoft Teams, review brand guidelines, and begin your first sprint with clear priorities.",
+        "Meet your dedicated team, connect through Slack or Microsoft Teams, share your brand guidelines, and kick off your first sprint with clear goals and priorities.",
       slaBadge: "Day 1 Active",
       deliverable: "Dedicated communication channel and kickoff meeting",
       highlights: ["Working-hour alignment", "Direct collaboration with specialists"],
@@ -76,7 +76,7 @@ export function Process() {
               <span className="text-[#9A5B00]">Planning to Execution</span>
             </>
           }
-          subtitle="Get started with a straightforward process, transparent expectations, and weekly deliverables designed around your business goals."
+          subtitle="Start with a straightforward process, transparent expectations, and weekly deliverables designed around your business goals."
           align="center"
         />
 

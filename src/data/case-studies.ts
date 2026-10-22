@@ -10,10 +10,10 @@ export const CASE_STUDIES: CaseStudy[] = [
     challenge:
       "Broad, poorly targeted searches were draining the advertising budget, while untracked phone calls left leadership without clear visibility into which campaigns were generating paying patients.",
     whatWeDid: [
-      "Set up implants, Invisalign, and emergency dental care geo-targeted Google Search ads.",
-      "Designed a mobile-responsive structure that makes appointments easier and reduces worry about insurance.",
-      "Integrated dynamic call tracking with GA4 server-side conversion tracking.",
-      "Tested and optimized negative keywords and target CPA bidding to prevent wasted spending on a weekly basis.",
+      "Ran geo-targeted Google Ads for implants, Invisalign, and emergency dental care.",
+      "Optimised mobile pages for easy bookings and insurance clarity.",
+      "Integrated dynamic call tracking and GA4 server-side conversions.",
+      "Refined negative keywords and target CPA bidding to reduce wasted spend.",
     ],
     measuredWeekly: [
       "Verified booked appointments",
