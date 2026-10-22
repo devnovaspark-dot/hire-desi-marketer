@@ -407,149 +407,149 @@ export function DedicatedTeams() {
             </div>
 
             {/* Quick Inspection Controls Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] py-0.5">
-              <span className="font-bold text-[#5A6680] flex items-center gap-1 text-[10px] sm:text-[11px]">
-                <Sliders className="w-3 h-3 text-[#9A5B00]" />
-                <span>7 Core Specialized Disciplines</span>
-              </span>
+            {(() => {
+              const activeRoles = ROLE_COMPARISON_MATRIX.filter((row) =>
+                selectedSquad === 3
+                  ? row.team3 === true
+                  : selectedSquad === 5
+                  ? row.team5 === true
+                  : row.team7 === true
+              );
 
-              {/* Mobile View Toggle: 2-Col Roles vs Full Swipe Table */}
-              <div className="flex md:hidden items-center gap-1 bg-[#EAE4D7] p-0.5 rounded-lg border border-[#D5CDBC]">
-                <button
-                  type="button"
-                  onClick={() => setMobileComparisonMode("cards")}
-                  className={cn(
-                    "px-2 py-0.5 rounded text-[10px] font-black transition-colors",
-                    mobileComparisonMode === "cards"
-                      ? "bg-[#0B1B3A] text-white shadow-2xs"
-                      : "text-[#5A6680] hover:text-[#0B1B3A]"
-                  )}
-                >
-                  Roles (2-Col)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setMobileComparisonMode("table")}
-                  className={cn(
-                    "px-2 py-0.5 rounded text-[10px] font-black transition-colors",
-                    mobileComparisonMode === "table"
-                      ? "bg-[#0B1B3A] text-white shadow-2xs"
-                      : "text-[#5A6680] hover:text-[#0B1B3A]"
-                  )}
-                >
-                  Table (Swipe ⇄)
-                </button>
-              </div>
+              return (
+                <>
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] py-0.5">
+                    <span className="font-bold text-[#5A6680] flex items-center gap-1 text-[10px] sm:text-[11px]">
+                      <Sliders className="w-3 h-3 text-[#9A5B00]" />
+                      <span>{activeRoles.length} Dedicated Roles Included in {selectedSquad === 3 ? "Starter (3)" : selectedSquad === 5 ? "Growth (5)" : "Scale (7)"}</span>
+                    </span>
 
-              <button
-                type="button"
-                onClick={() => setShowAllDetails(!showAllDetails)}
-                className="text-[10px] sm:text-[11px] font-black text-[#9A5B00] hover:text-[#0B1B3A] flex items-center gap-1 cursor-pointer transition-colors bg-white px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg border border-[#DDD5C7] shadow-2xs"
-              >
-                <Eye className="w-3 h-3 text-[#FFB020]" />
-                <span>{showAllDetails ? "Collapse Specs" : "Expand All Specs"}</span>
-              </button>
-            </div>
-
-            {/* MOBILE ONLY: Clean 2-Column Roles Grid (Solves Screenshot 2 Clutter Completely!) */}
-            <div className={cn("md:hidden", mobileComparisonMode === "cards" ? "block" : "hidden")}>
-              <div className="grid grid-cols-2 gap-2">
-                {ROLE_COMPARISON_MATRIX.map((row) => {
-                  const meta = ROLE_METADATA[row.role] || {
-                    icon: Briefcase,
-                    colorGrad: "from-[#4B5563] via-[#374151] to-[#1F2937]",
-                    shadowColor: "rgba(0,0,0,0.2)",
-                    category: "Core Discipline",
-                    tools: ["Standard Industry Suite"],
-                    deliverable: "Continuous campaign execution and sprint deliverables.",
-                    hoursEst: "Dedicated hours",
-                  };
-                  const RoleIcon = meta.icon;
-                  const isRowExpanded = showAllDetails || expandedRow === row.role;
-                  const isIncluded =
-                    selectedSquad === 3
-                      ? row.team3 === true
-                      : selectedSquad === 5
-                      ? row.team5 === true
-                      : row.team7 === true;
-
-                  return (
-                    <div
-                      key={row.role}
-                      onClick={() => toggleRow(row.role)}
-                      className={cn(
-                        "p-2.5 rounded-xl border-2 transition-all flex flex-col justify-between gap-2 shadow-2xs cursor-pointer",
-                        isIncluded
-                          ? "bg-white border-[#DDD5C7] hover:border-[#FFB020]"
-                          : "bg-[#F7F4EE] border-[#E2DBD0] opacity-90"
-                      )}
-                    >
-                      <div className="flex flex-col gap-1.5">
-                        <div className="flex items-center justify-between">
-                          <div
-                            style={{
-                              boxShadow: `0 3px 6px ${meta.shadowColor}, inset 0 1px 1px rgba(255,255,255,0.7)`,
-                            }}
-                            className={cn(
-                              "w-7 h-7 rounded-lg bg-gradient-to-b p-0.5 flex items-center justify-center shrink-0 border border-white/30 text-white",
-                              meta.colorGrad
-                            )}
-                          >
-                            <RoleIcon className="w-3.5 h-3.5 text-white" />
-                          </div>
-
-                          {isIncluded ? (
-                            <span className="px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-[9px] font-black flex items-center gap-0.5 shadow-2xs">
-                              <Check className="w-2.5 h-2.5 stroke-[3]" />
-                              <span>Full-Time</span>
-                            </span>
-                          ) : (
-                            <span className="px-1.5 py-0.2 rounded-full bg-[#EAE5D9] border border-[#D5CDBC] text-[8px] font-bold text-[#6B788E]">
-                              + Add-on
-                            </span>
-                          )}
-                        </div>
-
-                        <div>
-                          <span className="text-[8px] font-black uppercase tracking-wider text-[#9A5B00] block truncate">
-                            {meta.category}
-                          </span>
-                          <h5 className="font-display font-black text-xs text-[#0B1B3A] leading-tight line-clamp-2">
-                            {row.role}
-                          </h5>
-                        </div>
-
-                        <p className="text-[10px] text-[#5A6680] leading-snug line-clamp-2">
-                          {row.description}
-                        </p>
-                      </div>
-
-                      {/* Expandable Technical Specs for Mobile */}
-                      {isRowExpanded && (
-                        <div className="pt-1.5 mt-1 border-t border-[#E8E2D5] flex flex-col gap-1 animate-in fade-in duration-150 text-[9px]">
-                          <span className="font-black text-[#9A5B00] uppercase tracking-wider">
-                            Tools:
-                          </span>
-                          <div className="flex flex-wrap gap-1">
-                            {meta.tools.map((t) => (
-                              <span
-                                key={t}
-                                className="px-1 py-0.2 rounded bg-[#FAF8F4] border border-[#DDD5C7] font-bold text-[#0B1B3A]"
-                              >
-                                {t}
-                              </span>
-                            ))}
-                          </div>
-                          <span className="font-bold text-emerald-800 bg-emerald-50 px-1 py-0.5 rounded border border-emerald-200 mt-0.5 truncate">
-                            {meta.hoursEst}
-                          </span>
-                        </div>
-                      )}
+                    {/* Mobile View Toggle: Active Roles vs Full Swipe Table */}
+                    <div className="flex md:hidden items-center gap-1 bg-[#EAE4D7] p-0.5 rounded-lg border border-[#D5CDBC]">
+                      <button
+                        type="button"
+                        onClick={() => setMobileComparisonMode("cards")}
+                        className={cn(
+                          "px-2 py-0.5 rounded text-[10px] font-black transition-colors",
+                          mobileComparisonMode === "cards"
+                            ? "bg-[#0B1B3A] text-white shadow-2xs"
+                            : "text-[#5A6680] hover:text-[#0B1B3A]"
+                        )}
+                      >
+                        Roles ({activeRoles.length})
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setMobileComparisonMode("table")}
+                        className={cn(
+                          "px-2 py-0.5 rounded text-[10px] font-black transition-colors",
+                          mobileComparisonMode === "table"
+                            ? "bg-[#0B1B3A] text-white shadow-2xs"
+                            : "text-[#5A6680] hover:text-[#0B1B3A]"
+                        )}
+                      >
+                        Table (Swipe ⇄)
+                      </button>
                     </div>
-                  );
-                })}
-              </div>
-            </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setShowAllDetails(!showAllDetails)}
+                      className="text-[10px] sm:text-[11px] font-black text-[#9A5B00] hover:text-[#0B1B3A] flex items-center gap-1 cursor-pointer transition-colors bg-white px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg border border-[#DDD5C7] shadow-2xs"
+                    >
+                      <Eye className="w-3 h-3 text-[#FFB020]" />
+                      <span>{showAllDetails ? "Collapse Specs" : "Expand All Specs"}</span>
+                    </button>
+                  </div>
+
+                  {/* MOBILE ONLY: Exact Number of Role Cards Matching Header */}
+                  <div className={cn("md:hidden", mobileComparisonMode === "cards" ? "block" : "hidden")}>
+                    <div className={cn(
+                      "grid gap-2",
+                      activeRoles.length === 3 ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-2"
+                    )}>
+                      {activeRoles.map((row) => {
+                        const meta = ROLE_METADATA[row.role] || {
+                          icon: Briefcase,
+                          colorGrad: "from-[#4B5563] via-[#374151] to-[#1F2937]",
+                          shadowColor: "rgba(0,0,0,0.2)",
+                          category: "Core Discipline",
+                          tools: ["Standard Industry Suite"],
+                          deliverable: "Continuous campaign execution and sprint deliverables.",
+                          hoursEst: "Dedicated hours",
+                        };
+                        const RoleIcon = meta.icon;
+                        const isRowExpanded = showAllDetails || expandedRow === row.role;
+
+                        return (
+                          <div
+                            key={row.role}
+                            onClick={() => toggleRow(row.role)}
+                            className="p-2.5 rounded-xl border-2 transition-all flex flex-col justify-between gap-2 shadow-2xs cursor-pointer bg-white border-[#DDD5C7] hover:border-[#FFB020]"
+                          >
+                            <div className="flex flex-col gap-1.5">
+                              <div className="flex items-center justify-between">
+                                <div
+                                  style={{
+                                    boxShadow: `0 3px 6px ${meta.shadowColor}, inset 0 1px 1px rgba(255,255,255,0.7)`,
+                                  }}
+                                  className={cn(
+                                    "w-7 h-7 rounded-lg bg-gradient-to-b p-0.5 flex items-center justify-center shrink-0 border border-white/30 text-white",
+                                    meta.colorGrad
+                                  )}
+                                >
+                                  <RoleIcon className="w-3.5 h-3.5 text-white" />
+                                </div>
+
+                                <span className="px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-[9px] font-black flex items-center gap-0.5 shadow-2xs">
+                                  <Check className="w-2.5 h-2.5 stroke-[3]" />
+                                  <span>Full-Time</span>
+                                </span>
+                              </div>
+
+                              <div>
+                                <span className="text-[8px] font-black uppercase tracking-wider text-[#9A5B00] block truncate">
+                                  {meta.category}
+                                </span>
+                                <h5 className="font-display font-black text-xs text-[#0B1B3A] leading-tight line-clamp-2">
+                                  {row.role}
+                                </h5>
+                              </div>
+
+                              <p className="text-[10px] text-[#5A6680] leading-snug line-clamp-2">
+                                {row.description}
+                              </p>
+                            </div>
+
+                            {/* Expandable Technical Specs for Mobile */}
+                            {isRowExpanded && (
+                              <div className="pt-1.5 mt-1 border-t border-[#E8E2D5] flex flex-col gap-1 animate-in fade-in duration-150 text-[9px]">
+                                <span className="font-black text-[#9A5B00] uppercase tracking-wider">
+                                  Tools:
+                                </span>
+                                <div className="flex flex-wrap gap-1">
+                                  {meta.tools.map((t) => (
+                                    <span
+                                      key={t}
+                                      className="px-1 py-0.2 rounded bg-[#FAF8F4] border border-[#DDD5C7] font-bold text-[#0B1B3A]"
+                                    >
+                                      {t}
+                                    </span>
+                                  ))}
+                                </div>
+                                <span className="font-bold text-emerald-800 bg-emerald-50 px-1 py-0.5 rounded border border-emerald-200 mt-0.5 truncate">
+                                  {meta.hoursEst}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </>
+              );
+            })()}
 
             {/* DESKTOP (or Mobile Table Mode): Full Table Matrix */}
             <div className={cn(

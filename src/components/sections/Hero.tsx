@@ -112,11 +112,11 @@ export function Hero() {
                     </span>
                   </div>
 
-                  {/* 4.6x ROAS Badge */}
+                  {/* 10x ROAS Badge */}
                   <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg sm:rounded-xl bg-[#FFB020]/15 border border-[#FFB020]/40 text-[#FFB020] shadow-sm">
                     <TrendingUp className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
                     <div className="flex flex-col items-start leading-none">
-                      <span className="font-display font-black text-xs sm:text-base">4.6x</span>
+                      <span className="font-display font-black text-xs sm:text-base">10x</span>
                       <span className="text-[8px] sm:text-[9px] font-extrabold text-slate-300 uppercase tracking-wider">ROAS</span>
                     </div>
                   </div>

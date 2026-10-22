@@ -36,6 +36,9 @@ export default function HomePage() {
         {/* 2.5 Video Tour / In-House Campus Showcase (Fits in Single Window) */}
         <VideoShowcase />
 
+        {/* The Team Behind Your Growth */}
+        <TeamIntroduction />
+
         {/* 3. Engagement Models (Fits in 1 window) */}
         <EngagementModels />
 
@@ -60,9 +63,6 @@ export default function HomePage() {
 
         {/* 8. Process — How We Work */}
         <Process />
-
-        {/* 9. The Team Behind Your Growth */}
-        <TeamIntroduction />
 
         {/* 10. Physical Office in India */}
         <Office />
