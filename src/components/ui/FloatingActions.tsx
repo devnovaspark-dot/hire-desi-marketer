@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { MessageSquare, Sparkles } from "lucide-react";
+import { MessageSquarePlus } from "lucide-react";
 
 function WhatsAppIcon({ className = "w-5 h-5" }: { className?: string }) {
   return (
@@ -40,27 +40,28 @@ export function FloatingActions() {
   return (
     <div
       aria-label="Quick Actions"
-      className="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-2 sm:gap-2.5 animate-in fade-in slide-in-from-bottom-4 duration-500"
+      className="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-50 flex flex-col items-center gap-2.5 sm:gap-3 animate-in fade-in slide-in-from-bottom-4 duration-500"
     >
-      {/* Tactile Skeuomorphic Floating Enquire Button — Placed Directly Above WhatsApp */}
+      {/* Circular Tactile Skeuomorphic Floating Enquire Button — Placed Directly Above WhatsApp */}
       <a
         href="#quote"
         onClick={handleEnquire}
-        className="group relative flex items-center gap-1.5 sm:gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full bg-gradient-to-b from-[#FFF2B2] via-[#FFB020] to-[#DF7D00] text-[#060B22] font-black text-xs sm:text-sm tracking-wide uppercase cursor-pointer select-none transition-all duration-150 border-t border-t-white/90 border-x border-[#E08A00] border-b-[3px] border-b-[#994F00] shadow-[0_10px_25px_rgba(0,0,0,0.45),0_3px_8px_rgba(255,176,32,0.4),inset_0_1px_1px_rgba(255,255,255,0.9),inset_0_-2px_4px_rgba(153,79,0,0.35)] hover:brightness-105 hover:-translate-y-0.5 active:translate-y-[2px] active:border-b-[1px] active:shadow-[0_3px_8px_rgba(0,0,0,0.3),inset_0_2px_4px_rgba(0,0,0,0.25)]"
+        className="group relative flex items-center justify-center w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-gradient-to-b from-[#FFF2B2] via-[#FFB020] to-[#DF7D00] text-[#060B22] cursor-pointer select-none transition-all duration-150 border-t border-t-white/95 border-x border-[#E08A00] border-b-[3px] border-b-[#994F00] shadow-[0_10px_25px_rgba(0,0,0,0.45),0_3px_8px_rgba(255,176,32,0.45),inset_0_1px_1px_rgba(255,255,255,0.9),inset_0_-2px_4px_rgba(153,79,0,0.35)] hover:brightness-105 hover:-translate-y-0.5 active:translate-y-[2px] active:border-b-[1px] active:shadow-[0_3px_8px_rgba(0,0,0,0.3),inset_0_2px_4px_rgba(0,0,0,0.25)]"
         title="Enquire now about hiring marketing talent"
+        aria-label="Enquire Now"
       >
         {/* Specular gloss reflection cap */}
-        <span className="absolute top-0 inset-x-2 h-[45%] rounded-t-full bg-gradient-to-b from-white/70 via-white/20 to-transparent pointer-events-none" />
+        <span className="absolute top-0 inset-x-1.5 h-[45%] rounded-t-full bg-gradient-to-b from-white/70 via-white/20 to-transparent pointer-events-none" />
 
-        <span className="relative flex items-center justify-center drop-shadow-[0_1px_0_rgba(255,255,255,0.7)]">
-          <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#060B22] fill-[#060B22] group-hover:rotate-12 transition-transform" />
-        </span>
-        <span className="relative font-black tracking-tight text-[#060B22] drop-shadow-[0_1px_0_rgba(255,255,255,0.6)]">
+        <MessageSquarePlus className="relative w-5 h-5 sm:w-6 sm:h-6 text-[#060B22] stroke-[2.3] drop-shadow-[0_1px_0_rgba(255,255,255,0.7)] group-hover:scale-110 transition-transform" />
+
+        {/* Desktop Hover Tooltip Label */}
+        <span className="hidden sm:block absolute right-full mr-2.5 px-2.5 py-1 rounded-lg bg-[#060B22]/95 backdrop-blur-md text-[#FFB020] border border-[#FFB020]/40 text-xs font-black tracking-tight whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all pointer-events-none">
           Enquire Now
         </span>
       </a>
 
-      {/* Floating WhatsApp Quick Connect Button — Clean Official Skeuomorphic Button (No Red Dot / No Beacon) */}
+      {/* Circular Floating WhatsApp Quick Connect Button — Clean Official Skeuomorphic Button (No Red Dot / No Beacon) */}
       <a
         href="https://wa.me/918280788689?text=Hi%20Hire%20Desi%20Marketer%2C%20I%20want%20to%20enquire%20about%20hiring%20a%20marketing%20specialist."
         target="_blank"
@@ -73,6 +74,11 @@ export function FloatingActions() {
         <span className="absolute top-0 inset-x-1.5 h-[45%] rounded-t-full bg-gradient-to-b from-white/60 via-white/15 to-transparent pointer-events-none" />
 
         <WhatsAppIcon className="relative w-5 h-5 sm:w-6 sm:h-6 fill-current drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] group-hover:scale-110 transition-transform" />
+
+        {/* Desktop Hover Tooltip Label */}
+        <span className="hidden sm:block absolute right-full mr-2.5 px-2.5 py-1 rounded-lg bg-[#060B22]/95 backdrop-blur-md text-[#25D366] border border-[#25D366]/40 text-xs font-black tracking-tight whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all pointer-events-none">
+          WhatsApp Us
+        </span>
       </a>
     </div>
   );
