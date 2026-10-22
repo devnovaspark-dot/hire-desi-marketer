@@ -9,6 +9,9 @@ import {
   Play,
   TrendingUp,
   MessageSquare,
+  Users,
+  Globe2,
+  Building2,
 } from "lucide-react";
 
 export function Hero() {
@@ -42,7 +45,7 @@ export function Hero() {
             </h1>
 
             {/* Concise Supporting Copy */}
-            <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-xl font-normal leading-relaxed">
+            <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-xl font-normal leading-relaxed relative z-20 drop-shadow-[0_2px_8px_rgba(4,7,22,0.9)]">
               Need a marketing team that works on your schedule? Build a dedicated team of SEO specialists, content creators, paid media experts, and developers aligned with your business needs.
             </p>
 
@@ -151,25 +154,31 @@ export function Hero() {
                   </div>
                 </div>
 
-                {/* 3-Tile Trust Scale (Developers, Countries, Clients) */}
+                {/* 3-Tile Trust Scale (Marketers, Countries, Clients) */}
                 <div className="grid grid-cols-3 gap-1 sm:gap-2 p-1.5 sm:p-2 rounded-xl bg-white/[0.04] border border-white/10 backdrop-blur-md">
                   <div className="flex flex-col">
-                    <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-slate-400">Scale</span>
+                    <div className="flex items-center gap-1 text-slate-400">
+                      <Users className="w-3.5 h-3.5 text-emerald-400" />
+                    </div>
                     <span className="font-display font-black text-xs sm:text-sm md:text-base text-white mt-0.5">240+</span>
-                    <span className="text-[8px] sm:text-[9px] font-bold text-emerald-400 flex items-center gap-1 mt-0.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
-                      In-House Developers
+                    <span className="text-[8px] sm:text-[9px] font-bold text-emerald-400 flex items-center gap-1 mt-0.5 leading-tight">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse shrink-0" />
+                      <span className="truncate">In-House Marketers</span>
                     </span>
                   </div>
                   <div className="flex flex-col border-l border-white/10 pl-2 sm:pl-2.5">
-                    <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-slate-400">Presence</span>
+                    <div className="flex items-center gap-1 text-slate-400">
+                      <Globe2 className="w-3.5 h-3.5 text-[#FFB020]" />
+                    </div>
                     <span className="font-display font-black text-xs sm:text-sm md:text-base text-[#FFB020] mt-0.5">8+</span>
-                    <span className="text-[8px] sm:text-[9px] font-bold text-[#FFB020] mt-0.5">Countries</span>
+                    <span className="text-[8px] sm:text-[9px] font-bold text-[#FFB020] mt-0.5 whitespace-nowrap">Countries</span>
                   </div>
                   <div className="flex flex-col border-l border-white/10 pl-2 sm:pl-2.5">
-                    <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-slate-400">Track Record</span>
-                    <span className="font-display font-black text-xs sm:text-sm md:text-base text-white mt-0.5">40+</span>
-                    <span className="text-[8px] sm:text-[9px] font-bold text-emerald-400 mt-0.5">Clients</span>
+                    <div className="flex items-center gap-1 text-slate-400">
+                      <Building2 className="w-3.5 h-3.5 text-emerald-400" />
+                    </div>
+                    <span className="font-display font-black text-xs sm:text-sm md:text-base text-white mt-0.5">60+</span>
+                    <span className="text-[8px] sm:text-[9px] font-bold text-emerald-400 mt-0.5 whitespace-nowrap">Clients</span>
                   </div>
                 </div>
               </div>
@@ -184,17 +193,16 @@ export function Hero() {
         onClose={() => setVideoModalOpen(false)}
         title="Why US Brands Hire a Desi Marketer"
       >
-        <div className="flex flex-col gap-6">
-          <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-white/20 bg-black">
+        <div className="flex flex-col gap-6 items-center">
+          <div className="relative aspect-square w-full max-w-[340px] sm:max-w-[420px] md:max-w-[460px] max-h-[70vh] rounded-2xl overflow-hidden border border-white/20 bg-black shadow-2xl mx-auto">
             <video
               controls
               playsInline
               preload="metadata"
-              poster="/images/team-video-poster.jpg"
+              poster="/images/Thumbnail.png?v=5"
               className="w-full h-full object-cover"
             >
-              <source src="/team-walkthrough.mp4?v=3" type="video/mp4" />
-              <source src="/Video.mp4?v=3" type="video/mp4" />
+              <source src="/team-walkthrough.mp4?v=5" type="video/mp4" />
               Your browser does not support HTML5 video.
             </video>
           </div>

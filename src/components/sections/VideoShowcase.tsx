@@ -163,57 +163,53 @@ export function VideoShowcase() {
           </h2>
         </div>
 
-        {/* Centered Cinema Theater Player (Zero Cropping, Fits Single Window) */}
-        <div className="w-full max-w-4xl lg:max-w-5xl mx-auto">
-          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#070D18] border border-[#233148] shadow-[0_25px_60px_-15px_rgba(11,27,58,0.35)]">
-            {/* Theater Stage Viewport */}
-            <div className="relative w-full h-[380px] sm:h-[460px] md:h-[520px] max-h-[62vh] flex items-center justify-center overflow-hidden bg-[#070D18]">
-              {/* Warm Ambient Glow from Thumbnail */}
-              <img
-                src="/images/Thumbnail.png"
-                alt=""
-                aria-hidden="true"
-                className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-35 scale-125 pointer-events-none"
-              />
+        {/* Centered Luxury 1:1 Square Cinema Player */}
+        <div className="w-full max-w-[340px] sm:max-w-[420px] md:max-w-[480px] lg:max-w-[500px] mx-auto">
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#070D18] border border-[#233148] shadow-[0_25px_60px_-15px_rgba(11,27,58,0.35)] aspect-square">
+            {/* Warm Ambient Glow from 1:1 Thumbnail */}
+            <img
+              src="/images/Thumbnail.png?v=5"
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-40 scale-110 pointer-events-none"
+            />
 
-              {/* Main Interactive Video - object-contain ensures 100% full view with ZERO cropping */}
-              <video
-                ref={videoRef}
-                controls
-                playsInline
-                preload="metadata"
-                poster="/images/Thumbnail.png"
-                className="relative z-10 h-full w-auto max-w-full object-contain mx-auto drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
+            {/* Main Interactive Video - Fills the exact 1:1 square frame with ZERO cropping */}
+            <video
+              ref={videoRef}
+              controls
+              playsInline
+              preload="metadata"
+              poster="/images/Thumbnail.png?v=5"
+              className="relative z-10 w-full h-full object-cover drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
+            >
+              <source src="/team-walkthrough.mp4?v=5" type="video/mp4" />
+              Your browser does not support HTML5 video.
+            </video>
+
+            {/* Radiant Luxury Play Button Overlay (shown only when video is paused) */}
+            {!isPlaying && (
+              <div
+                onClick={handlePlayToggle}
+                className="absolute inset-0 z-20 flex items-center justify-center bg-black/15 hover:bg-black/5 transition-all cursor-pointer group/btn"
+                role="button"
+                tabIndex={0}
+                aria-label="Play Walkthrough Video"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    handlePlayToggle();
+                  }
+                }}
               >
-                <source src="/team-walkthrough.mp4?v=3" type="video/mp4" />
-                <source src="/Video.mp4?v=3" type="video/mp4" />
-                Your browser does not support HTML5 video.
-              </video>
-
-              {/* Radiant Luxury Play Button Overlay (shown only when video is paused) */}
-              {!isPlaying && (
-                <div
-                  onClick={handlePlayToggle}
-                  className="absolute inset-0 z-20 flex items-center justify-center bg-black/20 hover:bg-black/10 transition-all cursor-pointer group/btn"
-                  role="button"
-                  tabIndex={0}
-                  aria-label="Play Walkthrough Video"
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      handlePlayToggle();
-                    }
-                  }}
-                >
-                  <div className="relative flex items-center justify-center pointer-events-none">
-                    <span className="absolute -inset-4 sm:-inset-5 rounded-full bg-[#FFB020]/25 animate-ping" />
-                    <span className="absolute -inset-2 rounded-full bg-[#FFB020]/40 blur-md" />
-                    <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-tr from-[#FFB020] via-[#FFC043] to-[#FFCF66] text-[#0B1B3A] shadow-[0_14px_35px_rgba(255,176,32,0.65),inset_0_2px_3px_rgba(255,255,255,0.7)] flex items-center justify-center group-hover/btn:scale-110 group-active/btn:scale-95 transition-all duration-300">
-                      <Play className="w-7 h-7 sm:w-9 sm:h-9 fill-[#0B1B3A] ml-1 text-[#0B1B3A]" />
-                    </div>
+                <div className="relative flex items-center justify-center pointer-events-none">
+                  <span className="absolute -inset-4 sm:-inset-5 rounded-full bg-[#FFB020]/25 animate-ping" />
+                  <span className="absolute -inset-2 rounded-full bg-[#FFB020]/40 blur-md" />
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-tr from-[#FFB020] via-[#FFC043] to-[#FFCF66] text-[#0B1B3A] shadow-[0_14px_35px_rgba(255,176,32,0.65),inset_0_2px_3px_rgba(255,255,255,0.7)] flex items-center justify-center group-hover/btn:scale-110 group-active/btn:scale-95 transition-all duration-300">
+                    <Play className="w-7 h-7 sm:w-9 sm:h-9 fill-[#0B1B3A] ml-1 text-[#0B1B3A]" />
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
 

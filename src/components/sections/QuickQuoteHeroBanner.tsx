@@ -42,10 +42,32 @@ export function QuickQuoteHeroBanner() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          source: "Hero Express Proposal Banner",
           message: `Quick Quote Banner inquiry for ${formData.serviceInterest}`,
         }),
       });
       if (res.ok) {
+        setSubmitted(true);
+      } else {
+        // Fallback directly to FormSubmit
+        await fetch("https://formsubmit.co/ajax/novasdmagency@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            _subject: `New Lead (Hero Banner): ${formData.fullName} - ${formData.serviceInterest}`,
+            _template: "table",
+            _captcha: "false",
+            "Full Name": formData.fullName,
+            "Work Email": formData.email,
+            "Country": formData.country,
+            "Selected Plan": formData.serviceInterest,
+            "Source": "Hero Express Proposal Banner",
+            "Submitted At": new Date().toISOString(),
+          }),
+        });
         setSubmitted(true);
       }
     } catch {
@@ -121,7 +143,20 @@ export function QuickQuoteHeroBanner() {
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="pt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-end">
+          <form
+            action="https://formsubmit.co/novasdmagency@gmail.com"
+            method="POST"
+            onSubmit={handleSubmit}
+            className="pt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-end"
+          >
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+            <input
+              type="hidden"
+              name="_subject"
+              value={`New Quote Request (Hero): ${formData.fullName || "Inquiry"} - ${formData.serviceInterest}`}
+            />
+
             {/* Full Name */}
             <div className="lg:col-span-3 flex flex-col gap-1 text-left">
               <label htmlFor="quick-name" className="text-[11px] font-black uppercase tracking-wider text-[#4A5568]">
@@ -133,6 +168,7 @@ export function QuickQuoteHeroBanner() {
                 </div>
                 <input
                   id="quick-name"
+                  name="fullName"
                   type="text"
                   required
                   placeholder="Jane Cooper"
@@ -154,6 +190,7 @@ export function QuickQuoteHeroBanner() {
                 </div>
                 <input
                   id="quick-email"
+                  name="email"
                   type="email"
                   required
                   placeholder="jane@company.com"
@@ -175,6 +212,7 @@ export function QuickQuoteHeroBanner() {
                 </div>
                 <select
                   id="quick-country"
+                  name="country"
                   value={formData.country}
                   onChange={(e) => setFormData({ ...formData, country: e.target.value })}
                   className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-[#D5CDBC] border-t-[#BFB39E] bg-[#F7F4EE] text-sm font-bold text-[#0B1B3A] shadow-[inset_0_2px_4px_rgba(11,27,58,0.06)] focus:bg-white focus:border-[#FFB020] focus:ring-2 focus:ring-[#FFB020]/25 transition-all outline-none cursor-pointer"
@@ -202,6 +240,7 @@ export function QuickQuoteHeroBanner() {
                 </div>
                 <select
                   id="quick-service"
+                  name="serviceInterest"
                   value={formData.serviceInterest}
                   onChange={(e) => setFormData({ ...formData, serviceInterest: e.target.value })}
                   className="w-full pl-10 pr-2 py-2.5 rounded-xl border border-[#D5CDBC] border-t-[#BFB39E] bg-[#F7F4EE] text-xs font-bold text-[#0B1B3A] shadow-[inset_0_2px_4px_rgba(11,27,58,0.06)] focus:bg-white focus:border-[#FFB020] focus:ring-2 focus:ring-[#FFB020]/25 transition-all outline-none cursor-pointer truncate"

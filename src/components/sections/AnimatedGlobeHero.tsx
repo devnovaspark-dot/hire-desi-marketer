@@ -116,16 +116,9 @@ export function AnimatedGlobeHero() {
       {/* 1. Deep Space Midnight Base */}
       <div className="absolute inset-0 bg-[#040716]" />
 
-      {/* 2. Top Vignette */}
-      <div className="absolute top-0 inset-x-0 h-32 sm:h-48 bg-gradient-to-b from-[#040716] via-[#040716]/95 to-transparent z-10 pointer-events-none" />
-
-      {/* 3. Subtle Ambient Light Orbs */}
-      <div className="absolute -top-24 right-1/4 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] rounded-full bg-[#1E3A8A]/15 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 left-1/4 w-[300px] sm:w-[450px] h-[300px] sm:h-[450px] rounded-full bg-[#FFB020]/10 blur-3xl pointer-events-none" />
-
-      {/* 4. Interactive 3D Tilting Globe & Flight Arc System */}
+      {/* 2. Interactive 3D Tilting Globe & Flight Arc System (Placed at z-0) */}
       <div
-        className="relative w-full h-full transition-transform duration-500 ease-out flex items-center justify-center"
+        className="relative z-0 w-full h-full transition-transform duration-500 ease-out flex items-center justify-center"
         style={{
           transform: `perspective(1200px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
         }}
@@ -328,8 +321,17 @@ export function AnimatedGlobeHero() {
         </svg>
       </div>
 
+      {/* 3. Subtle Ambient Light Orbs (z-10 above map) */}
+      <div className="absolute -top-24 right-1/4 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] rounded-full bg-[#1E3A8A]/15 blur-3xl pointer-events-none z-10" />
+      <div className="absolute bottom-10 left-1/4 w-[300px] sm:w-[450px] h-[300px] sm:h-[450px] rounded-full bg-[#FFB020]/10 blur-3xl pointer-events-none z-10" />
+
+      {/* 4. Text Legibility Vignettes (z-10: Sits directly ABOVE globe to eliminate stray dots behind copy) */}
+      <div className="absolute inset-y-0 left-0 w-full sm:w-4/5 lg:w-3/5 bg-gradient-to-r from-[#040716] via-[#040716]/95 to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 inset-x-0 h-32 sm:h-48 bg-gradient-to-b from-[#040716] via-[#040716]/95 to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-[#040716]/65 sm:hidden z-10 pointer-events-none" />
+
       {/* 5. Bottom Gradient Transition into next section */}
-      <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-[#040716] to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-[#040716] to-transparent pointer-events-none z-10" />
     </div>
   );
 }

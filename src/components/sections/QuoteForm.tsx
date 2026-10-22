@@ -67,18 +67,45 @@ export function QuoteForm() {
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          source: "Main Section Quote Form",
+        }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Submission failed.");
+        // Direct FormSubmit fallback
+        const fallbackRes = await fetch("https://formsubmit.co/ajax/novasdmagency@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            _subject: `New Lead (Quote Form): ${formData.fullName} - ${formData.serviceInterest}`,
+            _template: "table",
+            _captcha: "false",
+            "Full Name": formData.fullName,
+            "Work Email": formData.email,
+            "Company": formData.company || "Not provided",
+            "Country / Region": formData.country,
+            "Service Model": formData.serviceInterest,
+            "Message / Goals": formData.message || "Not specified",
+            "Source": "Main Section Quote Form",
+            "Submitted At": new Date().toISOString(),
+          }),
+        });
+
+        if (!fallbackRes.ok) {
+          throw new Error(data.error || "Submission failed.");
+        }
       }
 
       setSuccessInfo({
-        mode: data.mode,
-        message: data.message,
+        mode: data.mode || "formsubmit",
+        message: data.message || "Thank you! Your quote request has been dispatched to our team.",
       });
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -172,7 +199,20 @@ export function QuoteForm() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <form
+                  action="https://formsubmit.co/novasdmagency@gmail.com"
+                  method="POST"
+                  onSubmit={handleSubmit}
+                  className="flex flex-col gap-4"
+                >
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_template" value="table" />
+                  <input
+                    type="hidden"
+                    name="_subject"
+                    value={`New Quote Request: ${formData.fullName || "Inquiry"} - ${formData.serviceInterest}`}
+                  />
+
                   <div className="flex items-center justify-between pb-3 border-b border-white/10">
                     <div>
                       <h3 className="font-display font-black text-xl text-white">
@@ -202,6 +242,7 @@ export function QuoteForm() {
                       </label>
                       <input
                         id="name-input"
+                        name="fullName"
                         type="text"
                         required
                         placeholder="e.g. Alex Morgan"
@@ -220,6 +261,7 @@ export function QuoteForm() {
                       </label>
                       <input
                         id="email-input"
+                        name="email"
                         type="email"
                         required
                         placeholder="alex@company.com"
@@ -240,6 +282,7 @@ export function QuoteForm() {
                       </label>
                       <input
                         id="company-input"
+                        name="company"
                         type="text"
                         placeholder="e.g. Acme Corp / acme.com"
                         value={formData.company}
@@ -257,6 +300,7 @@ export function QuoteForm() {
                       </label>
                       <select
                         id="country-select"
+                        name="country"
                         value={formData.country}
                         onChange={(e) =>
                           setFormData({ ...formData, country: e.target.value })
@@ -279,6 +323,7 @@ export function QuoteForm() {
                     </label>
                     <select
                       id="model-select"
+                      name="serviceInterest"
                       value={formData.serviceInterest}
                       onChange={(e) =>
                         setFormData({ ...formData, serviceInterest: e.target.value })
@@ -300,6 +345,7 @@ export function QuoteForm() {
                     </label>
                     <textarea
                       id="message-input"
+                      name="message"
                       rows={2}
                       placeholder="e.g. Scaling search ads, increasing local SEO ranking, or producing short-form Reels..."
                       value={formData.message}

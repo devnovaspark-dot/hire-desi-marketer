@@ -90,6 +90,7 @@ export function Footer() {
   // Quick Plan Form
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Copy feedback states
   const [copiedEmail, setCopiedEmail] = useState(false);
@@ -133,14 +134,56 @@ export function Footer() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleQuickSubmit = (e: React.FormEvent) => {
+  const handleQuickSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email || !email.includes("@")) return;
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: "Footer Lead",
+          email: email.trim(),
+          serviceInterest: "Free 90-Day Strategy Plan",
+          message: "Lead requested custom 90-day strategy plan from Footer quick terminal",
+          source: "Footer Quick Form",
+        }),
+      });
+
+      if (!res.ok) {
+        // Direct FormSubmit fallback
+        await fetch("https://formsubmit.co/ajax/novasdmagency@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            _subject: `New Lead (Footer): ${email.trim()} - Free Strategy Plan`,
+            _template: "table",
+            _captcha: "false",
+            "Work Email": email.trim(),
+            "Source": "Footer Quick Form",
+            "Submitted At": new Date().toISOString(),
+          }),
+        });
+      }
+
       setSubmitted(true);
       setTimeout(() => {
         setSubmitted(false);
         setEmail("");
       }, 5000);
+    } catch {
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setEmail("");
+      }, 5000);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -214,10 +257,23 @@ export function Footer() {
             </p>
           </div>
 
-          <form onSubmit={handleQuickSubmit} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full lg:w-auto">
+          <form
+            action="https://formsubmit.co/novasdmagency@gmail.com"
+            method="POST"
+            onSubmit={handleQuickSubmit}
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full lg:w-auto"
+          >
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+            <input
+              type="hidden"
+              name="_subject"
+              value="New 90-Day Strategy Plan Request (Footer)"
+            />
             <div className="relative w-full sm:w-72">
               <input
                 type="email"
+                name="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -227,9 +283,16 @@ export function Footer() {
             </div>
             <button
               type="submit"
-              className="btn-luxury-gold btn-shimmer w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-[#060B22] flex items-center justify-center gap-2 cursor-pointer shadow-lg whitespace-nowrap active:scale-95 transition-transform"
+              disabled={isSubmitting}
+              className="btn-luxury-gold btn-shimmer w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-[#060B22] flex items-center justify-center gap-2 cursor-pointer shadow-lg whitespace-nowrap active:scale-95 transition-transform disabled:opacity-50"
             >
-              <span>{submitted ? "Plan Requested!" : "Get My Free Plan"}</span>
+              <span>
+                {isSubmitting
+                  ? "Sending..."
+                  : submitted
+                  ? "Plan Requested!"
+                  : "Get My Free Plan"}
+              </span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </form>

@@ -16,7 +16,12 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/Hire%20desi%20marketer%20video-%2017%20oct.mp4",
-        destination: "/Video.mp4",
+        destination: "/team-walkthrough.mp4",
+        permanent: true,
+      },
+      {
+        source: "/Video.mp4",
+        destination: "/team-walkthrough.mp4",
         permanent: true,
       },
     ];
