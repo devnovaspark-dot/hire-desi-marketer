@@ -17,20 +17,26 @@ function WhatsAppIcon({ className = "w-4 h-4" }: { className?: string }) {
 }
 
 export function VideoShowcase() {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const wasPlayingRef = useRef(false);
+  const isAutoPausingRef = useRef(false);
+  const isVisibleRef = useRef(true);
 
   const handlePlayToggle = () => {
     const video = videoRef.current;
     if (!video) return;
 
     if (video.paused) {
+      wasPlayingRef.current = true;
       video.play().then(() => {
         setIsPlaying(true);
       }).catch((err) => {
         console.warn("Video playback was blocked or failed:", err);
       });
     } else {
+      wasPlayingRef.current = false;
       video.pause();
       setIsPlaying(false);
     }
@@ -40,15 +46,100 @@ export function VideoShowcase() {
     const video = videoRef.current;
     if (!video) return;
 
-    const onPlay = () => setIsPlaying(true);
-    const onPause = () => setIsPlaying(false);
-    const onEnded = () => setIsPlaying(false);
+    const onPlay = () => {
+      setIsPlaying(true);
+      if (!isAutoPausingRef.current) {
+        wasPlayingRef.current = true;
+      }
+    };
+
+    const onPause = () => {
+      setIsPlaying(false);
+      // Only reset wasPlayingRef if user manually paused (not our auto-pause on scroll)
+      if (!isAutoPausingRef.current) {
+        wasPlayingRef.current = false;
+      }
+    };
+
+    const onEnded = () => {
+      setIsPlaying(false);
+      wasPlayingRef.current = false;
+    };
 
     video.addEventListener("play", onPlay);
     video.addEventListener("pause", onPause);
     video.addEventListener("ended", onEnded);
 
+    // Auto-pause when user scrolls down past or above the video showcase section
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const currentVideo = videoRef.current;
+          if (!currentVideo) return;
+
+          // When video scrolls out of view (down below or up above the viewport)
+          if (!entry.isIntersecting || entry.intersectionRatio < 0.25) {
+            isVisibleRef.current = false;
+            if (!currentVideo.paused && !currentVideo.ended) {
+              isAutoPausingRef.current = true;
+              wasPlayingRef.current = true;
+              currentVideo.pause();
+              setIsPlaying(false);
+              setTimeout(() => {
+                isAutoPausingRef.current = false;
+              }, 150);
+            }
+          } else if (entry.isIntersecting && entry.intersectionRatio >= 0.45) {
+            // When user scrolls back into the exact section
+            isVisibleRef.current = true;
+            if (wasPlayingRef.current && currentVideo.paused && !currentVideo.ended) {
+              currentVideo.play().then(() => {
+                setIsPlaying(true);
+              }).catch(() => {
+                // In case browser policy restricts auto-resume
+                setIsPlaying(false);
+              });
+            }
+          }
+        });
+      },
+      {
+        threshold: [0, 0.2, 0.45, 0.75],
+        rootMargin: "0px 0px 0px 0px",
+      }
+    );
+
+    observer.observe(video);
+
+    // Also auto-pause if user switches browser tab or minimizes window
+    const handleVisibilityChange = () => {
+      const currentVideo = videoRef.current;
+      if (!currentVideo) return;
+
+      if (document.hidden) {
+        if (!currentVideo.paused && !currentVideo.ended) {
+          isAutoPausingRef.current = true;
+          wasPlayingRef.current = true;
+          currentVideo.pause();
+          setIsPlaying(false);
+          setTimeout(() => {
+            isAutoPausingRef.current = false;
+          }, 150);
+        }
+      } else {
+        if (wasPlayingRef.current && isVisibleRef.current && currentVideo.paused && !currentVideo.ended) {
+          currentVideo.play().then(() => {
+            setIsPlaying(true);
+          }).catch(() => {});
+        }
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       video.removeEventListener("play", onPlay);
       video.removeEventListener("pause", onPause);
       video.removeEventListener("ended", onEnded);
