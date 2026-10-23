@@ -38,9 +38,9 @@ export function Hero() {
 
             {/* Main Headline */}
             <h1 className="font-display text-3xl sm:text-5xl md:text-5xl xl:text-6xl font-black tracking-tight leading-[1.1] sm:leading-[1.08] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
-              World-Class Marketing Talent.{" "}
+              Hire Digital Marketing Team{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFD166] via-[#FFB020] to-[#FF8A00] block sm:inline">
-                Starting at $8/Hour
+                in India
               </span>
             </h1>
 

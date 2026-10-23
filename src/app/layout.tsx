@@ -24,14 +24,30 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Hire Desi Marketer",
+  "url": "https://hiredesimarketer.com/",
+  "description":
+    "Hire dedicated digital marketing specialists in India for SEO, paid advertising, content marketing, and social media marketing.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hire Desi Marketer",
+    "url": "https://hiredesimarketer.com/",
+  },
+  "inLanguage": "en",
+};
+
 export const metadata: Metadata = {
-  title: "Hire Desi Marketer | Your Marketing Team in India from $8/Hour",
+  title: "Hire Digital Marketing Team in India | Hire Desi Marketer",
   description:
-    "Hire dedicated marketing specialists, SEO leads, ad buyers, creators and developers from India working your exact hours. Simple hourly pricing from $8/hr, $999/mo bundle, or managed teams of 3 to 7 with zero lock-in contracts.",
+    "Hire skilled digital marketing team in India for SEO, paid ads, content and social media. Build a dedicated marketing team with flexible pricing.",
   keywords: [
+    "hire digital marketing team in India",
     "hire desi marketer",
-    "outsourced marketing team India",
     "digital marketing team India",
+    "outsourced marketing team India",
     "hire offshore marketer",
     "affordable marketing agency",
     "hourly marketing specialist",
@@ -39,7 +55,7 @@ export const metadata: Metadata = {
     "Google ads management",
     "Meta ads specialist",
   ],
-  authors: [{ name: "Hire Desi Marketer", url: "https://hiredesimarketer.com" }],
+  authors: [{ name: "Hire Desi Marketer", url: "https://hiredesimarketer.com/" }],
   creator: "Hire Desi Marketer",
   publisher: "Hire Desi Marketer",
   metadataBase: new URL("https://hiredesimarketer.com"),
@@ -47,10 +63,10 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Hire Desi Marketer — Your Marketing Team in India from $8/Hour",
+    title: "Hire Digital Marketing Team in India | Hire Desi Marketer",
     description:
-      "Strategists, media buyers, SEOs, designers & developers working US, UK, Canada & Australian hours. Flexible hourly rates, $999/mo bundle, or dedicated teams.",
-    url: "https://hiredesimarketer.com",
+      "Hire skilled digital marketing team in India for SEO, paid ads, content and social media. Build a dedicated marketing team with flexible pricing.",
+    url: "https://hiredesimarketer.com/",
     siteName: "Hire Desi Marketer",
     locale: "en_US",
     type: "website",
@@ -59,15 +75,15 @@ export const metadata: Metadata = {
         url: "/images/hero-mesh-bg.svg",
         width: 1200,
         height: 630,
-        alt: "Hire Desi Marketer - Outsourced Marketing Team in India",
+        alt: "Hire Desi Marketer - Digital Marketing Team in India",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hire Desi Marketer | Dedicated Marketing Teams from $8/hr",
+    title: "Hire Digital Marketing Team in India | Hire Desi Marketer",
     description:
-      "Skilled marketers, global standards, flexible pricing. Meet your dedicated marketing team in India.",
+      "Hire skilled digital marketing team in India for SEO, paid ads, content and social media. Build a dedicated marketing team with flexible pricing.",
     images: ["/images/hero-mesh-bg.svg"],
   },
   robots: {
@@ -91,6 +107,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${bricolage.variable} ${manrope.variable} scroll-smooth`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <body className="min-h-screen bg-[#F6F4EE] text-[#0B1B3A] antialiased selection:bg-[#FFB020] selection:text-[#060B22]">
         {children}
         <FloatingActions />
