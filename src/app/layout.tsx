@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Manrope } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { FloatingActions } from "@/components/ui/FloatingActions";
 
@@ -123,6 +124,21 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[#F6F4EE] text-[#0B1B3A] antialiased selection:bg-[#FFB020] selection:text-[#060B22]">
+        {/* Google Analytics (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-2EN2Z5G1JC"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-2EN2Z5G1JC');
+          `}
+        </Script>
+
         {children}
         <FloatingActions />
       </body>
