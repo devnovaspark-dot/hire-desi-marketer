@@ -261,7 +261,7 @@ export function Footer() {
             action="https://formsubmit.co/novasdmagency@gmail.com"
             method="POST"
             onSubmit={handleQuickSubmit}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full lg:w-auto"
+            className="flex flex-col gap-2 w-full lg:w-auto"
           >
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
@@ -270,31 +270,43 @@ export function Footer() {
               name="_subject"
               value="New 90-Day Strategy Plan Request (Footer)"
             />
-            <div className="relative w-full sm:w-72">
-              <input
-                type="email"
-                name="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your work email..."
-                className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/20 text-white placeholder-slate-400 text-xs focus:outline-none focus:border-[#FFB020] focus:ring-1 focus:ring-[#FFB020] shadow-inner backdrop-blur-md transition-colors"
-              />
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
+              <div className="relative w-full sm:w-72">
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your work email..."
+                  className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/20 text-white placeholder-slate-400 text-xs focus:outline-none focus:border-[#FFB020] focus:ring-1 focus:ring-[#FFB020] shadow-inner backdrop-blur-md transition-colors"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn-luxury-gold btn-shimmer w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-[#060B22] flex items-center justify-center gap-2 cursor-pointer shadow-lg whitespace-nowrap active:scale-95 transition-transform disabled:opacity-50"
+              >
+                <span>
+                  {isSubmitting
+                    ? "Sending..."
+                    : submitted
+                    ? "Plan Requested!"
+                    : "Get My Free Plan"}
+                </span>
+                {submitted ? (
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-900" />
+                ) : (
+                  <ArrowRight className="w-3.5 h-3.5" />
+                )}
+              </button>
             </div>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="btn-luxury-gold btn-shimmer w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-[#060B22] flex items-center justify-center gap-2 cursor-pointer shadow-lg whitespace-nowrap active:scale-95 transition-transform disabled:opacity-50"
-            >
-              <span>
-                {isSubmitting
-                  ? "Sending..."
-                  : submitted
-                  ? "Plan Requested!"
-                  : "Get My Free Plan"}
-              </span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+            {submitted && (
+              <p className="text-xs text-emerald-400 font-bold flex items-center gap-1.5 animate-in fade-in">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                Thank you! Your request has been dispatched to our team.
+              </p>
+            )}
           </form>
         </div>
 
