@@ -2,9 +2,13 @@ import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: "*",
-      disallow: "/",
-    },
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/thank-you", "/api/"],
+      },
+    ],
+    sitemap: "https://www.hiredesimarketer.com/sitemap.xml",
   };
 }
