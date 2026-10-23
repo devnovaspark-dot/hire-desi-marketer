@@ -164,7 +164,7 @@ export function QuoteForm() {
           </div>
 
           {/* Right Column: Clean, High-Conversion Conversion Terminal */}
-          <div className="lg:col-span-7">
+          <div id="quote-form" className="lg:col-span-7 scroll-mt-24 sm:scroll-mt-28">
             <div className="skeuo-card-dark specular-shine rounded-3xl p-6 sm:p-10 shadow-2xl relative border border-white/20">
               {successInfo ? (
                 <div className="flex flex-col items-center text-center py-10 gap-4 animate-in fade-in duration-300">
