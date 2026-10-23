@@ -96,6 +96,9 @@ export const metadata: Metadata = {
       noimageindex: true,
     },
   },
+  verification: {
+    google: "j3Xj5u9lg-K0k6kJoAaqSeUVV_IwVyoE7EUv77h5iA8",
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
