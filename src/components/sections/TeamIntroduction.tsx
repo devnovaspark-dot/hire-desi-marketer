@@ -91,12 +91,12 @@ export function TeamIntroduction() {
           </div>
 
           <h2 className="font-display text-xl sm:text-2xl lg:text-3xl font-black text-[#0B1B3A] tracking-tight leading-tight">
-            Led by veteran operators.{" "}
-            <span className="text-[#9A5B00]">Staffed by in-house specialists.</span>
+            Seasoned Experts and{" "}
+            <span className="text-[#9A5B00]">Dedicated Marketing Teams</span>
           </h2>
 
           <p className="text-xs sm:text-[13px] text-[#5A6680] leading-relaxed">
-            100% in-house physical campus in Bhubaneswar, India. Zero gig freelancers. Direct Western shift overlap.
+            Get a dedicated in-house marketing team backed by experienced leadership, seamless coordination, and business-aligned working hours.
           </p>
         </div>
 

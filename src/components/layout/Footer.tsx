@@ -247,13 +247,13 @@ export function Footer() {
           <div className="flex flex-col gap-1.5 max-w-xl">
             <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#FFB020]">
               <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-              <span>Get a Tailored 90-Day Strategy</span>
+              <span>TURN YOUR MARKETING INTO A GROWTH ENGINE</span>
             </div>
             <h3 className="font-display font-black text-xl sm:text-2xl text-white">
-              Ready to deploy your dedicated India marketing department?
+              What Could Your Business Achieve in the Next 90 Days?
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Receive a custom channel strategy, scope proposal, and talent roster within 24 hours. Zero obligation.
+              Discover the right channels, skilled marketing talent, and a practical action plan to turn your growth goals into measurable progress.
             </p>
           </div>
 

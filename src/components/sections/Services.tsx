@@ -29,11 +29,11 @@ export function Services() {
           kicker="Expertise &amp; 2026 Tech Stack"
           title={
             <>
-              Every channel.{" "}
-              <span className="text-[#FFB020]">The tools that matter now.</span>
+              Expertise Across Every Channel{" "}
+              <span className="text-[#FFB020]">That Drives Growth</span>
             </>
           }
-          subtitle="Our Indian marketing specialists are certified and experienced across the complete modern growth stack."
+          subtitle="Our Indian marketing specialists combine platform certifications and hands-on experience to support your marketing goals."
           theme="dark"
           align="center"
         />

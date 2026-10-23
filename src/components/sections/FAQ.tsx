@@ -123,14 +123,14 @@ export function FAQ() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
                 <span className="text-[10px] font-black uppercase tracking-wider text-emerald-800">
-                  Leadership Desk Online
+                  Direct Access to Leadership
                 </span>
               </div>
               <h4 className="font-display font-black text-base sm:text-lg text-[#0B1B3A]">
-                Have a specific question not covered here?
+                Need Answers Beyond the FAQs?
               </h4>
               <p className="text-xs text-[#5A6680] mt-0.5">
-                Chat directly with our Bhubaneswar founders on live Slack or email.
+                Connect directly with our Bhubaneswar founders via Slack or email for clear, first-hand answers.
               </p>
             </div>
           </div>
