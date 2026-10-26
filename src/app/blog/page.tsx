@@ -14,6 +14,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/blog",
   },
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
+  },
   openGraph: {
     title: "Stories & Playbooks That Scale Agencies | Hire Desi Marketer",
     description:
