@@ -29,10 +29,12 @@ export const author = defineType({
     }),
     defineField({
       name: 'image',
-      title: 'Profile Avatar',
+      title: 'Profile Avatar (WebP format required)',
+      description: 'Upload author photo in WebP format (.webp).',
       type: 'image',
       options: {
         hotspot: true,
+        accept: 'image/webp',
       },
       validation: (Rule) => Rule.required(),
     }),
@@ -45,11 +47,6 @@ export const author = defineType({
     defineField({
       name: 'linkedin',
       title: 'LinkedIn URL',
-      type: 'url',
-    }),
-    defineField({
-      name: 'twitter',
-      title: 'Twitter / X URL',
       type: 'url',
     }),
   ],

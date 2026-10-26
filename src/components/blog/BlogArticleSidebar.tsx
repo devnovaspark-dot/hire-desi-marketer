@@ -18,13 +18,6 @@ import {
 import { TocItem, BlogAuthor, BlogPost } from "@/types/blog";
 import { cn } from "@/lib/utils";
 
-function XTwitterIcon({ className = "w-4 h-4" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  );
-}
 
 function LinkedInIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
@@ -120,11 +113,11 @@ export function BlogArticleSidebar({
     }
   };
 
-  const shareOnTwitter = () => {
+  const shareOnWhatsApp = () => {
     if (typeof window !== "undefined") {
       const url = encodeURIComponent(window.location.href);
-      const text = encodeURIComponent(`Great read: ${title} via @HireDesiMarketer`);
-      window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, "_blank");
+      const text = encodeURIComponent(`Great read: ${title}`);
+      window.open(`https://api.whatsapp.com/send?text=${text}%20${url}`, "_blank");
     }
   };
 
@@ -247,11 +240,11 @@ export function BlogArticleSidebar({
 
         <div className="flex items-center gap-2">
           <button
-            onClick={shareOnTwitter}
-            title="Share on X / Twitter"
-            className="flex-1 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 transition-colors cursor-pointer"
+            onClick={shareOnWhatsApp}
+            title="Share on WhatsApp"
+            className="flex-1 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-center text-emerald-600 transition-colors cursor-pointer"
           >
-            <XTwitterIcon className="w-3.5 h-3.5" />
+            <WhatsAppIcon className="w-3.5 h-3.5" />
           </button>
           <button
             onClick={shareOnLinkedIn}

@@ -37,10 +37,12 @@ export const post = defineType({
     }),
     defineField({
       name: 'mainImage',
-      title: 'Main / Cover Image',
+      title: 'Main / Cover Image (WebP format required)',
+      description: 'Upload your article cover in modern WebP format (.webp) for high performance and fast loading.',
       type: 'image',
       options: {
         hotspot: true,
+        accept: 'image/webp',
       },
       fields: [
         {

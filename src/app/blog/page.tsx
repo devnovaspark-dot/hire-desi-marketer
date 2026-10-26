@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "Stories & Playbooks That Scale Agencies | Hire Desi Marketer",
     description:
       "Actionable blueprints on offshore digital marketing pods, paid media scaling, SEO in the AI search era, and agency margin optimization.",
-    images: ["/images/blog-hero-bg.jpg"],
+    images: ["/images/blog-hero-bg.webp"],
   },
 };
 
@@ -54,10 +54,10 @@ export default async function BlogPage() {
         {/* 1. Global Atmospheric Hero with Luxury Background Image        */}
         {/* ============================================================== */}
         <section className="relative overflow-hidden bg-[#040716] text-white pt-28 sm:pt-36 lg:pt-40 pb-16 sm:pb-24 lg:pb-28">
-          {/* Authentic High-Res Hero Background Image */}
+          {/* Authentic High-Res Hero Background Image in WebP */}
           <div className="absolute inset-0 z-0 pointer-events-none select-none">
             <Image
-              src="/images/blog-hero-bg.jpg"
+              src="/images/blog-hero-bg.webp"
               alt="Hire Desi Marketer Atmospheric Gold Telemetry"
               fill
               priority

@@ -46,12 +46,16 @@ export const blockContent = defineType({
       },
     }),
 
-    // 1. Rich Image Block
+    // 1. Rich Image Block (WebP format required)
     defineArrayMember({
       type: 'image',
       name: 'richImage',
-      title: 'Image',
-      options: { hotspot: true },
+      title: 'Image (WebP format required)',
+      description: 'Upload in-article images in modern WebP format (.webp) for fast loading.',
+      options: {
+        hotspot: true,
+        accept: 'image/webp',
+      },
       fields: [
         {
           name: 'alt',

@@ -10,7 +10,7 @@ export const ALL_POSTS_QUERY = `*[_type == "post" && defined(slug.current)] | or
   excerpt,
   publishedAt,
   _updatedAt,
-  "coverImage": mainImage.asset->url,
+  "coverImage": mainImage.asset->url + "?auto=format&fit=max&fm=webp",
   "coverImageAlt": coalesce(mainImage.alt, title),
   "coverBadge": coalesce(coverBadge, "Verified Strategic Guide"),
   readTimeMinutes,
@@ -30,10 +30,9 @@ export const ALL_POSTS_QUERY = `*[_type == "post" && defined(slug.current)] | or
     name,
     role,
     "slug": slug.current,
-    "image": image.asset->url,
+    "image": image.asset->url + "?auto=format&fit=max&fm=webp",
     bio,
-    linkedin,
-    twitter
+    linkedin
   }
 }`;
 
@@ -45,7 +44,7 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
   excerpt,
   publishedAt,
   _updatedAt,
-  "coverImage": mainImage.asset->url,
+  "coverImage": mainImage.asset->url + "?auto=format&fit=max&fm=webp",
   "coverImageAlt": coalesce(mainImage.alt, title),
   "coverBadge": coalesce(coverBadge, "Verified Strategic Guide"),
   readTimeMinutes,
@@ -65,10 +64,9 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
     name,
     role,
     "slug": slug.current,
-    "image": image.asset->url,
+    "image": image.asset->url + "?auto=format&fit=max&fm=webp",
     bio,
-    linkedin,
-    twitter
+    linkedin
   },
   body
 }`;

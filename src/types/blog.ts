@@ -14,7 +14,6 @@ export interface BlogAuthor {
   image: string;
   bio: string;
   linkedin?: string;
-  twitter?: string;
 }
 
 export type CustomBlockType =
