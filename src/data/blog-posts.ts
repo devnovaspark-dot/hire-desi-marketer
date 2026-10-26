@@ -3,37 +3,9 @@ import { BlogPost, BlogCategory, BlogAuthor } from "@/types/blog";
 export const BLOG_CATEGORIES: BlogCategory[] = [
   {
     id: "all",
-    title: "All Insights",
+    title: "All Stories",
     slug: "all",
     description: "Browse all offshore digital marketing and growth playbooks.",
-  },
-  {
-    id: "offshore-scaling",
-    title: "Offshore Marketing",
-    slug: "offshore-scaling",
-    description: "Strategies for scaling marketing capacity and reducing payroll friction.",
-    color: "from-amber-500/20 to-orange-500/10",
-  },
-  {
-    id: "seo-growth",
-    title: "SEO & AI Search",
-    slug: "seo-growth",
-    description: "Ranking tactics, technical audits, and surviving Google search evolution.",
-    color: "from-blue-500/20 to-cyan-500/10",
-  },
-  {
-    id: "paid-media",
-    title: "Paid Ads & ROI",
-    slug: "paid-media",
-    description: "Meta ads, Google PPC, ROAS optimization, and high-ticket lead gen.",
-    color: "from-emerald-500/20 to-teal-500/10",
-  },
-  {
-    id: "agency-ops",
-    title: "Agency Operations",
-    slug: "agency-ops",
-    description: "Building dedicated pods, SLA management, and Western timezone overlap.",
-    color: "from-purple-500/20 to-indigo-500/10",
   },
 ];
 

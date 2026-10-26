@@ -346,17 +346,17 @@ export async function getAllCategories(): Promise<BlogCategory[]> {
     try {
       const sanityCats = await sanityFetch<any[]>({
         query: CATEGORIES_QUERY,
-        revalidate: 120,
+        revalidate: 30,
       });
 
       if (Array.isArray(sanityCats) && sanityCats.length > 0) {
         return [
-          { id: "all", title: "All Insights", slug: "all" },
+          { id: "all", title: "All Stories", slug: "all" },
           ...sanityCats.map((c) => ({
             id: c.id,
             title: c.title,
             slug: c.slug,
-            description: c.description,
+            description: c.description || "",
           })),
         ];
       }

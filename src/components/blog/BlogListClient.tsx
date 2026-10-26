@@ -401,38 +401,44 @@ export function BlogListClient({ initialPosts, categories }: BlogListClientProps
               Categories
             </h4>
             <ul className="space-y-1.5 text-xs sm:text-sm">
-              {categories
-                .filter((c) => c.slug !== "all")
-                .map((cat) => {
-                  const isSelected = selectedCategory === cat.slug;
-                  const count = categoryCounts[cat.slug] || 0;
-                  return (
-                    <li key={cat.id}>
-                      <button
-                        onClick={() => setSelectedCategory(cat.slug)}
-                        className={cn(
-                          "w-full flex items-center justify-between py-2 px-3 rounded-xl transition-colors cursor-pointer text-left font-medium",
-                          isSelected
-                            ? "bg-[#060B22] text-[#FFB020] font-bold shadow-xs"
-                            : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3A]"
-                        )}
-                      >
-                        <span className="flex items-center gap-2">
-                          <span
-                            className={cn(
-                              "w-1.5 h-1.5 rounded-full",
-                              isSelected ? "bg-[#FFB020]" : "bg-slate-400"
-                            )}
-                          />
-                          <span>{cat.title}</span>
-                        </span>
-                        <span className="text-[11px] px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-600 font-bold">
-                          {count}
-                        </span>
-                      </button>
-                    </li>
-                  );
-                })}
+              {categories.filter((c) => c.slug !== "all").length === 0 ? (
+                <li className="text-xs text-slate-500 py-1.5 italic">
+                  Categories published in Sanity will appear here.
+                </li>
+              ) : (
+                categories
+                  .filter((c) => c.slug !== "all")
+                  .map((cat) => {
+                    const isSelected = selectedCategory === cat.slug;
+                    const count = categoryCounts[cat.slug] || 0;
+                    return (
+                      <li key={cat.id}>
+                        <button
+                          onClick={() => setSelectedCategory(cat.slug)}
+                          className={cn(
+                            "w-full flex items-center justify-between py-2 px-3 rounded-xl transition-colors cursor-pointer text-left font-medium",
+                            isSelected
+                              ? "bg-[#060B22] text-[#FFB020] font-bold shadow-xs"
+                              : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3A]"
+                          )}
+                        >
+                          <span className="flex items-center gap-2">
+                            <span
+                              className={cn(
+                                "w-1.5 h-1.5 rounded-full",
+                                isSelected ? "bg-[#FFB020]" : "bg-slate-400"
+                              )}
+                            />
+                            <span>{cat.title}</span>
+                          </span>
+                          <span className="text-[11px] px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-600 font-bold">
+                            {count}
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })
+              )}
             </ul>
 
             <button

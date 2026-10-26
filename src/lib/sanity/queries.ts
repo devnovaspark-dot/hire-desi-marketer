@@ -77,9 +77,10 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
 export const POST_SLUGS_QUERY = `*[_type == "post" && defined(slug.current)][].slug.current`;
 
 // Query all categories
-export const CATEGORIES_QUERY = `*[_type == "category"] | order(title asc) {
+export const CATEGORIES_QUERY = `*[_type == "category"] | order(coalesce(order, 999) asc, title asc) {
   "id": _id,
   title,
   "slug": slug.current,
-  description
+  description,
+  order
 }`;

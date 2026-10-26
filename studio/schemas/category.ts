@@ -28,6 +28,13 @@ export const category = defineType({
       rows: 2,
     }),
     defineField({
+      name: 'order',
+      title: 'Display Order / Priority',
+      type: 'number',
+      description: 'Lower numbers appear first in the header pills (e.g. 1, 2, 3). Defaults to 0.',
+      initialValue: 0,
+    }),
+    defineField({
       name: 'color',
       title: 'Accent Color / Gradient Key',
       type: 'string',
