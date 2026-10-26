@@ -202,10 +202,10 @@ export function Footer() {
 
   const handleSmoothNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
-      e.preventDefault();
       const targetId = href.replace("#", "");
       const element = document.getElementById(targetId);
       if (element) {
+        e.preventDefault();
         const headerOffset = 75;
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
@@ -213,6 +213,9 @@ export function Footer() {
           top: offsetPosition,
           behavior: "smooth",
         });
+      } else {
+        // Not on homepage: let browser navigate to root section
+        window.location.href = `/${href}`;
       }
     }
   };
@@ -450,6 +453,15 @@ export function Footer() {
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover:bg-[#FFB020] transition-colors" />
                   <span>Custom Squad Builder</span>
                 </a>
+              </li>
+              <li>
+                <Link
+                  href="/blog"
+                  className="hover:text-white transition-colors flex items-center gap-1.5 group"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FFB020] shadow-[0_0_6px_#FFB020]" />
+                  <span className="text-[#FFB020] font-bold">Growth Blog &amp; Insights</span>
+                </Link>
               </li>
             </ul>
           </div>

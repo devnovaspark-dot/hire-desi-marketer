@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight, Sparkles, Shield, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BrandLogo } from "@/components/ui/BrandLogo";
@@ -11,20 +12,32 @@ const NAV_LINKS = [
   { label: "Squads", href: "#teams" },
   { label: "Tech Stack", href: "#stack" },
   { label: "Case Studies", href: "#work" },
+  { label: "Blog", href: "/blog" },
   { label: "Bhubaneswar HQ", href: "#office" },
 ];
 
 export function Header() {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeNav, setActiveNav] = useState<string>("#pricing");
+  const [activeNav, setActiveNav] = useState<string>(isHomePage ? "#pricing" : "/blog");
 
   useEffect(() => {
+    if (!isHomePage) {
+      if (pathname.startsWith("/blog")) {
+        setActiveNav("/blog");
+      }
+      return;
+    }
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
       // Automatic scroll spy for active section highlight
-      const sectionIds = NAV_LINKS.map((l) => l.href.replace("#", ""));
+      const sectionIds = NAV_LINKS.filter((l) => l.href.startsWith("#")).map((l) =>
+        l.href.replace("#", "")
+      );
       const scrollPos = window.scrollY + 140;
 
       for (let i = sectionIds.length - 1; i >= 0; i--) {
@@ -42,7 +55,7 @@ export function Header() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHomePage, pathname]);
 
   // Handle escape key to close mobile menu
   useEffect(() => {
@@ -65,6 +78,10 @@ export function Header() {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
+      if (!isHomePage) {
+        // Allow normal navigation back to home page with hash
+        return;
+      }
       e.preventDefault();
       setActiveNav(href);
       const targetId = href.replace("#", "");
@@ -111,12 +128,17 @@ export function Header() {
             className="hidden md:flex items-center gap-1 sm:gap-2"
           >
             {NAV_LINKS.map((link) => {
-              const isActive = activeNav === link.href;
+              const isAnchor = link.href.startsWith("#");
+              const targetHref = isAnchor && !isHomePage ? `/${link.href}` : link.href;
+              const isActive = isAnchor
+                ? isHomePage && activeNav === link.href
+                : pathname === link.href || pathname.startsWith(`${link.href}/`);
+
               return (
-                <a
+                <Link
                   key={link.label}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
+                  href={targetHref}
+                  onClick={(e) => isAnchor ? handleNavClick(e as unknown as React.MouseEvent<HTMLAnchorElement>, link.href) : undefined}
                   className={cn(
                     "px-3.5 py-1.5 text-xs lg:text-[13px] font-extrabold rounded-full transition-all duration-150 cursor-pointer select-none",
                     "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFB020]",
@@ -126,7 +148,7 @@ export function Header() {
                   )}
                 >
                   {link.label}
-                </a>
+                </Link>
               );
             })}
           </nav>
@@ -134,14 +156,14 @@ export function Header() {
           {/* Desktop Right Action */}
           <div className="hidden md:flex items-center gap-3">
             {/* Shimmering 3D Luxury CTA Button - Sleek & Refined */}
-            <a
-              href="#quote"
-              onClick={(e) => handleNavClick(e, "#quote")}
+            <Link
+              href={isHomePage ? "#quote" : "/#quote"}
+              onClick={(e) => handleNavClick(e as unknown as React.MouseEvent<HTMLAnchorElement>, "#quote")}
               className="btn-luxury-gold btn-shimmer px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-wider inline-flex items-center gap-1.5 group cursor-pointer shadow-md"
             >
               <span>Get a Free Quote</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform stroke-[2.5]" />
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -181,20 +203,24 @@ export function Header() {
           </div>
 
           <nav className="flex flex-col gap-3 py-6">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={(e) => {
-                  setMobileMenuOpen(false);
-                  handleNavClick(e, link.href);
-                }}
-                className="text-xl font-display font-bold text-white hover:text-[#FFB020] transition-colors py-2.5 flex items-center justify-between border-b border-white/5"
-              >
-                <span>{link.label}</span>
-                <ArrowRight className="w-5 h-5 text-slate-400" />
-              </a>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const isAnchor = link.href.startsWith("#");
+              const targetHref = isAnchor && !isHomePage ? `/${link.href}` : link.href;
+              return (
+                <Link
+                  key={link.label}
+                  href={targetHref}
+                  onClick={(e) => {
+                    setMobileMenuOpen(false);
+                    if (isAnchor) handleNavClick(e as unknown as React.MouseEvent<HTMLAnchorElement>, link.href);
+                  }}
+                  className="text-xl font-display font-bold text-white hover:text-[#FFB020] transition-colors py-2.5 flex items-center justify-between border-b border-white/5"
+                >
+                  <span>{link.label}</span>
+                  <ArrowRight className="w-5 h-5 text-slate-400" />
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="flex flex-col gap-4 pt-4 border-t border-white/10">
@@ -202,17 +228,17 @@ export function Header() {
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Bhubaneswar HQ Online · Dedicated Western Shifts</span>
             </div>
-            <a
-              href="#quote"
+            <Link
+              href={isHomePage ? "#quote" : "/#quote"}
               onClick={(e) => {
                 setMobileMenuOpen(false);
-                handleNavClick(e, "#quote");
+                handleNavClick(e as unknown as React.MouseEvent<HTMLAnchorElement>, "#quote");
               }}
               className="btn-luxury-gold btn-shimmer py-3 px-4 rounded-xl text-center text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2"
             >
               <Sparkles className="w-4 h-4" />
               <span>Get Free 90-Day Plan &amp; Quote</span>
-            </a>
+            </Link>
           </div>
         </div>
       )}
