@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -54,11 +54,22 @@ export function BlogArticleSidebar({
 }: BlogArticleSidebarProps) {
   const [activeId, setActiveId] = useState<string>("");
   const [copied, setCopied] = useState<boolean>(false);
+  const tocNavRef = useRef<HTMLElement | null>(null);
 
+  // Track active heading on page scroll with bottom-of-page awareness
   useEffect(() => {
     if (!toc || toc.length === 0) return;
 
     const handleScroll = () => {
+      // If near bottom of the page, activate the last heading
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 70
+      ) {
+        setActiveId(toc[toc.length - 1].id);
+        return;
+      }
+
       // Viewport offset line below floating navbar
       const activationOffset = 160;
       let current = "";
@@ -87,6 +98,40 @@ export function BlogArticleSidebar({
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [toc]);
+
+  // Smoothly scroll the TOC container so the active item stays visible
+  useEffect(() => {
+    if (!activeId || !tocNavRef.current) return;
+    const container = tocNavRef.current;
+    const activeEl = container.querySelector<HTMLElement>(`[data-toc-id="${activeId}"]`);
+    if (!activeEl) return;
+
+    // If at the very first item, scroll container to top
+    if (toc.length > 0 && activeId === toc[0].id) {
+      container.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    const containerRect = container.getBoundingClientRect();
+    const activeRect = activeEl.getBoundingClientRect();
+    const buffer = 40;
+
+    if (activeRect.top < containerRect.top + buffer) {
+      // Active element is near or above top boundary -> scroll up so it sits nicely in view
+      const scrollDiff = activeRect.top - containerRect.top - containerRect.height * 0.3;
+      container.scrollBy({
+        top: scrollDiff,
+        behavior: "smooth",
+      });
+    } else if (activeRect.bottom > containerRect.bottom - buffer) {
+      // Active element is near or below bottom boundary -> scroll down to bring it into comfortable view
+      const scrollDiff = activeRect.bottom - containerRect.bottom + containerRect.height * 0.3;
+      container.scrollBy({
+        top: scrollDiff,
+        behavior: "smooth",
+      });
+    }
+  }, [activeId, toc]);
 
   const handleTocClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -132,8 +177,8 @@ export function BlogArticleSidebar({
     <aside className="space-y-6 sticky top-28">
       {/* 1. On This Page (Exact Reference Structure) */}
       {toc && toc.length > 0 && (
-        <div className="p-6 rounded-3xl skeuo-card-light space-y-3.5 border border-[#E2DBD0]">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div className="p-5 sm:p-6 rounded-3xl skeuo-card-light no-lift flex flex-col border border-[#E2DBD0] max-h-[calc(100vh-8.5rem)] shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3 shrink-0">
             <div className="flex items-center gap-2 text-sm font-bold text-[#0B1B3A]">
               <span className="w-2 h-2 rounded-full bg-[#0B1B3A]" />
               <span>On This Page</span>
@@ -143,7 +188,10 @@ export function BlogArticleSidebar({
             </span>
           </div>
 
-          <nav className="space-y-1">
+          <nav
+            ref={tocNavRef}
+            className="flex-1 overflow-y-auto space-y-1 pr-1.5 pt-2 toc-scrollbar overscroll-contain"
+          >
             {toc.map((item) => {
               const isActive = activeId === item.id;
               const isH3 = item.level === 3;
@@ -151,6 +199,7 @@ export function BlogArticleSidebar({
                 <a
                   key={item.id}
                   href={`#${item.id}`}
+                  data-toc-id={item.id}
                   onClick={(e) => handleTocClick(e, item.id)}
                   className={cn(
                     "block py-1.5 transition-all duration-150 leading-snug cursor-pointer select-none",
