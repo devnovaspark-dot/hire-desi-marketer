@@ -28,7 +28,8 @@ export type CustomBlockType =
   | "table"
   | "infographic"
   | "faq"
-  | "takeawayBox";
+  | "takeawayBox"
+  | "carousel";
 
 export interface RichTextBlock {
   type: "richText";
@@ -139,6 +140,26 @@ export interface TakeawayBoxBlock {
   ctaLink?: string;
 }
 
+export interface CarouselSlide {
+  image: string;
+  alt?: string;
+  title?: string;
+  description?: string;
+  badge?: string;
+  ctaText?: string;
+  ctaLink?: string;
+}
+
+export interface CarouselBlock {
+  type: "carousel";
+  title?: string;
+  subtitle?: string;
+  displayMode?: "standard" | "card" | "full";
+  autoplay?: boolean;
+  autoplayInterval?: number;
+  items: CarouselSlide[];
+}
+
 export type BlogContentBlock =
   | RichTextBlock
   | CalloutBlock
@@ -151,7 +172,8 @@ export type BlogContentBlock =
   | TableBlock
   | InfographicBlock
   | FaqBlock
-  | TakeawayBoxBlock;
+  | TakeawayBoxBlock
+  | CarouselBlock;
 
 export interface TocItem {
   id: string;

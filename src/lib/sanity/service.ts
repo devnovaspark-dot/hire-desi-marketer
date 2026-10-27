@@ -1,4 +1,4 @@
-import { BlogPost, BlogCategory, TocItem, BlogContentBlock } from "@/types/blog";
+import { BlogPost, BlogCategory, TocItem, BlogContentBlock, CarouselSlide } from "@/types/blog";
 import { sanityFetch, isSanityConfigured } from "./client";
 import { ALL_POSTS_QUERY, POST_BY_SLUG_QUERY, CATEGORIES_QUERY, POST_SLUGS_QUERY } from "./queries";
 import { BLOG_POSTS, BLOG_CATEGORIES } from "@/data/blog-posts";
@@ -196,6 +196,39 @@ function transformSanityBody(rawBody: any[]): {
         caption: block.caption,
         badge: block.badge,
       });
+      continue;
+    }
+
+    // 10. Interactive Carousel / Slider
+    if (block._type === "carousel") {
+      const items: CarouselSlide[] = Array.isArray(block.items)
+        ? block.items.map((item: any) => ({
+            image:
+              item.image?.asset?.url ||
+              item.image?.url ||
+              (typeof item.image === "string" ? item.image : "") ||
+              item.url ||
+              "/images/Thumbnail.webp",
+            alt: item.image?.alt || item.alt || item.title || "Carousel slide image",
+            title: item.title,
+            description: item.description,
+            badge: item.badge,
+            ctaText: item.ctaText,
+            ctaLink: item.ctaLink,
+          }))
+        : [];
+
+      if (items.length > 0) {
+        content.push({
+          type: "carousel",
+          title: block.title,
+          subtitle: block.subtitle,
+          displayMode: block.displayMode || "card",
+          autoplay: Boolean(block.autoplay),
+          autoplayInterval: typeof block.autoplayInterval === "number" ? block.autoplayInterval : 5,
+          items,
+        });
+      }
       continue;
     }
   }

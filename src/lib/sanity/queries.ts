@@ -68,7 +68,20 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
     bio,
     linkedin
   },
-  body
+  body[]{
+    ...,
+    _type == "richImage" => {
+      ...,
+      "url": asset->url + "?auto=format&fit=max&fm=webp"
+    },
+    _type == "carousel" => {
+      ...,
+      items[]{
+        ...,
+        "image": image.asset->url + "?auto=format&fit=max&fm=webp"
+      }
+    }
+  }
 }`;
 
 // Query all post slugs for generateStaticParams

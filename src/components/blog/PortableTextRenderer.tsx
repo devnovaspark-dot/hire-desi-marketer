@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -18,6 +18,11 @@ import {
   CheckCircle2,
   Table as TableIcon,
   HelpCircle,
+  ChevronLeft,
+  ChevronRight,
+  Play,
+  Pause,
+  Layers,
 } from "lucide-react";
 import { BlogContentBlock } from "@/types/blog";
 import { cn } from "@/lib/utils";
@@ -73,6 +78,9 @@ export function PortableTextRenderer({ blocks, className }: PortableTextRenderer
 
           case "faq":
             return <FaqBlockView key={index} block={block} />;
+
+          case "carousel":
+            return <CarouselBlockView key={index} block={block} />;
 
           default:
             return null;
@@ -626,6 +634,241 @@ function FaqBlockView({
             </div>
           );
         })}
+      </div>
+    </div>
+  );
+}
+
+// 12. Interactive Multi-Slide Carousel Block
+function CarouselBlockView({
+  block,
+}: {
+  block: Extract<BlogContentBlock, { type: "carousel" }>;
+}) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(block.autoplay ?? false);
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
+  const total = block.items?.length || 0;
+  const intervalSeconds = block.autoplayInterval || 5;
+
+  const nextSlide = useCallback(() => {
+    if (total === 0) return;
+    setCurrentIndex((prev) => (prev + 1) % total);
+  }, [total]);
+
+  const prevSlide = useCallback(() => {
+    if (total === 0) return;
+    setCurrentIndex((prev) => (prev - 1 + total) % total);
+  }, [total]);
+
+  // Autoplay timer
+  useEffect(() => {
+    if (!isPlaying || total <= 1) return;
+    const timer = setInterval(() => {
+      nextSlide();
+    }, intervalSeconds * 1000);
+    return () => clearInterval(timer);
+  }, [isPlaying, intervalSeconds, nextSlide, total]);
+
+  // Touch Swipe Handlers for mobile users
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const diff = touchStartX.current - touchEndX.current;
+    if (diff > 45) {
+      nextSlide();
+    } else if (diff < -45) {
+      prevSlide();
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
+  if (total === 0) return null;
+
+  const activeItem = block.items[currentIndex];
+  if (!activeItem) return null;
+
+  return (
+    <div
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={block.title || "Image Carousel"}
+      onMouseEnter={() => block.autoplay && setIsPlaying(false)}
+      onMouseLeave={() => block.autoplay && setIsPlaying(true)}
+      className="my-12 rounded-3xl bg-gradient-to-b from-[#060B24] to-[#040716] border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.4)] text-white overflow-hidden relative"
+    >
+      {/* Top Header with title, slide counter, and action controls */}
+      <div className="p-5 sm:p-7 border-b border-white/10 flex flex-wrap items-center justify-between gap-4">
+        <div className="space-y-1 max-w-lg">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FFB020]/20 border border-[#FFB020]/40 text-[#FFB020] text-[11px] font-black uppercase tracking-wider">
+            <Layers className="w-3 h-3" />
+            <span>Interactive Gallery</span>
+          </div>
+          {block.title && (
+            <h3 className="font-display font-black text-xl sm:text-2xl text-white tracking-tight">
+              {block.title}
+            </h3>
+          )}
+          {block.subtitle && (
+            <p className="text-xs sm:text-sm text-slate-300">
+              {block.subtitle}
+            </p>
+          )}
+        </div>
+
+        {/* Counter & Prev/Next Arrow buttons */}
+        <div className="flex items-center gap-3">
+          <div className="px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs font-mono font-bold text-slate-200">
+            <span className="text-[#FFB020] font-black">
+              {String(currentIndex + 1).padStart(2, "0")}
+            </span>
+            <span className="text-slate-500 mx-1">/</span>
+            <span>{String(total).padStart(2, "0")}</span>
+          </div>
+
+          {block.autoplay && (
+            <button
+              type="button"
+              onClick={() => setIsPlaying(!isPlaying)}
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center text-slate-200 hover:text-white transition-colors cursor-pointer"
+              title={isPlaying ? "Pause autoplay" : "Start autoplay"}
+              aria-label={isPlaying ? "Pause autoplay" : "Start autoplay"}
+            >
+              {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 ml-0.5" />}
+            </button>
+          )}
+
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={prevSlide}
+              aria-label="Previous slide"
+              className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FFB020] hover:text-[#060B22] border border-white/15 flex items-center justify-center text-white transition-all cursor-pointer group"
+            >
+              <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+            </button>
+            <button
+              type="button"
+              onClick={nextSlide}
+              aria-label="Next slide"
+              className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FFB020] hover:text-[#060B22] border border-white/15 flex items-center justify-center text-white transition-all cursor-pointer group"
+            >
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Viewport & Touch Area */}
+      <div
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        className="relative overflow-hidden group select-none"
+      >
+        <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full bg-slate-950">
+          <Image
+            src={activeItem.image}
+            alt={activeItem.alt || activeItem.title || "Slide image"}
+            fill
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.01]"
+            sizes="(max-width: 768px) 100vw, 900px"
+          />
+
+          {/* Top Left Slide Badge */}
+          {activeItem.badge && (
+            <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-[#060B22]/90 backdrop-blur-md border border-[#FFB020]/40 text-[#FFB020] text-xs font-black uppercase tracking-wider shadow-lg flex items-center gap-1.5">
+              <Sparkles className="w-3 h-3 text-[#FFB020]" />
+              <span>{activeItem.badge}</span>
+            </div>
+          )}
+
+          {/* Floating Next/Prev on Image Hover */}
+          <button
+            type="button"
+            onClick={prevSlide}
+            aria-label="Previous slide"
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-[#060B22]/80 hover:bg-[#FFB020] hover:text-[#060B22] text-white border border-white/20 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer shadow-lg"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            onClick={nextSlide}
+            aria-label="Next slide"
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-[#060B22]/80 hover:bg-[#FFB020] hover:text-[#060B22] text-white border border-white/20 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer shadow-lg"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+
+          {/* Bottom Gradient Overlay with Slide Title, Description & CTA */}
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#040716] via-[#040716]/85 to-transparent pt-14 pb-5 px-5 sm:px-7 z-10">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+              <div className="space-y-1 max-w-xl">
+                {activeItem.title && (
+                  <h4 className="font-display font-bold text-lg sm:text-xl text-white tracking-tight leading-snug drop-shadow-md">
+                    {activeItem.title}
+                  </h4>
+                )}
+                {activeItem.description && (
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-2 drop-shadow-sm">
+                    {activeItem.description}
+                  </p>
+                )}
+              </div>
+
+              {activeItem.ctaText && activeItem.ctaLink && (
+                <div className="shrink-0 pt-1 sm:pt-0">
+                  <Link
+                    href={activeItem.ctaLink}
+                    className="btn-luxury-gold px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-1.5 shadow-md hover:scale-105 transition-transform"
+                  >
+                    <span>{activeItem.ctaText}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Dot Track Navigation */}
+      <div className="p-3 sm:p-4 bg-[#030614] border-t border-white/10 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2 overflow-x-auto py-1">
+          {block.items.map((_, idx) => {
+            const isActive = idx === currentIndex;
+            return (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => setCurrentIndex(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+                className={cn(
+                  "h-2 rounded-full transition-all duration-300 cursor-pointer",
+                  isActive
+                    ? "w-8 bg-[#FFB020] shadow-[0_0_10px_rgba(255,176,32,0.6)]"
+                    : "w-2 bg-white/20 hover:bg-white/50"
+                )}
+              />
+            );
+          })}
+        </div>
+
+        {/* Swipe Hint on Mobile */}
+        <span className="text-[11px] text-slate-400 font-medium sm:hidden">
+          Swipe left/right
+        </span>
       </div>
     </div>
   );

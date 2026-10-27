@@ -433,5 +433,143 @@ export const blockContent = defineType({
         },
       ],
     }),
+
+    // 12. Interactive Carousel / Slider
+    defineArrayMember({
+      type: 'object',
+      name: 'carousel',
+      title: '🎠 Interactive Carousel / Slider',
+      fields: [
+        {
+          name: 'title',
+          type: 'string',
+          title: 'Carousel Title (Optional)',
+          placeholder: 'e.g. Campaign Creative Gallery or Performance Highlights',
+        },
+        {
+          name: 'subtitle',
+          type: 'string',
+          title: 'Carousel Subtitle (Optional)',
+          placeholder: 'e.g. Swipe through our high-converting ad variations and case snapshots',
+        },
+        {
+          name: 'displayMode',
+          type: 'string',
+          title: 'Display Style',
+          options: {
+            list: [
+              { title: 'Rich Card Slider (Image + Title + Description + Badge)', value: 'card' },
+              { title: 'Standard Minimal Slider (Image + Caption)', value: 'standard' },
+              { title: 'Full-Width Visual Showcase', value: 'full' },
+            ],
+            layout: 'radio',
+          },
+          initialValue: 'card',
+        },
+        {
+          name: 'autoplay',
+          type: 'boolean',
+          title: 'Auto-advance Slides',
+          description: 'Automatically rotate through slides every few seconds.',
+          initialValue: false,
+        },
+        {
+          name: 'autoplayInterval',
+          type: 'number',
+          title: 'Autoplay Interval (in seconds)',
+          initialValue: 5,
+        },
+        {
+          name: 'items',
+          type: 'array',
+          title: 'Slides / Carousel Items',
+          description: 'Add, edit, and reorder slides for this carousel slider.',
+          validation: (Rule) => Rule.required().min(1),
+          of: [
+            defineArrayMember({
+              type: 'object',
+              title: 'Slide',
+              fields: [
+                {
+                  name: 'image',
+                  type: 'image',
+                  title: 'Slide Image (WebP recommended)',
+                  options: {
+                    hotspot: true,
+                    accept: 'image/webp,image/png,image/jpeg',
+                  },
+                  fields: [
+                    {
+                      name: 'alt',
+                      type: 'string',
+                      title: 'Alternative Text',
+                      description: 'Crucial for SEO and accessibility.',
+                    },
+                  ],
+                  validation: (Rule) => Rule.required(),
+                },
+                {
+                  name: 'badge',
+                  type: 'string',
+                  title: 'Badge Label (Optional)',
+                  placeholder: 'e.g. ROAS +420%, Step 01, Case Study, Meta Ads',
+                },
+                {
+                  name: 'title',
+                  type: 'string',
+                  title: 'Slide Title (Optional)',
+                  placeholder: 'e.g. Dynamic Product Ads for Luxury Apparel',
+                },
+                {
+                  name: 'description',
+                  type: 'text',
+                  rows: 2,
+                  title: 'Slide Description / Caption (Optional)',
+                  placeholder: 'e.g. Generated $140k in 30 days using UGC video overlays.',
+                },
+                {
+                  name: 'ctaText',
+                  type: 'string',
+                  title: 'CTA Button Label (Optional)',
+                  placeholder: 'e.g. View Live Strategy',
+                },
+                {
+                  name: 'ctaLink',
+                  type: 'string',
+                  title: 'CTA Button Link (Optional)',
+                  placeholder: 'e.g. /get-a-quote or https://...',
+                },
+              ],
+              preview: {
+                select: {
+                  title: 'title',
+                  subtitle: 'description',
+                  media: 'image',
+                },
+              },
+            }),
+          ],
+        },
+      ],
+      preview: {
+        select: {
+          title: 'title',
+          subtitle: 'subtitle',
+          items: 'items',
+        },
+        prepare(selection: Record<string, unknown>) {
+          const { title, subtitle, items } = selection as {
+            title?: string;
+            subtitle?: string;
+            items?: unknown[];
+          };
+          const count = Array.isArray(items) ? items.length : 0;
+          return {
+            title: title || 'Carousel Slider',
+            subtitle: `${count} slide${count === 1 ? '' : 's'}${subtitle ? ` — ${subtitle}` : ''}`,
+          };
+        },
+      },
+    }),
   ],
 });

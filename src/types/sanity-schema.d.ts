@@ -60,6 +60,8 @@ declare module 'sanity' {
     type: string;
     name?: string;
     title?: string;
+    description?: string;
+    preview?: SchemaPreview;
     options?: Record<string, unknown>;
     fields?: SchemaField[];
     styles?: Array<{ title: string; value: string }>;
