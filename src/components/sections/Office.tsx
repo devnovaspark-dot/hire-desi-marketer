@@ -51,7 +51,8 @@ export function Office() {
                 src="/images/office-world-map.svg"
                 alt="Interactive World Map displaying global client connectivity to Hire Desi Marketer campus headquarters in Bhubaneswar, Odisha"
                 fill
-                priority
+                loading="lazy"
+                sizes="(max-width: 1024px) 100vw, 700px"
                 className="object-contain object-center filter drop-shadow-[0_12px_30px_rgba(0,0,0,0.8)]"
               />
             </div>

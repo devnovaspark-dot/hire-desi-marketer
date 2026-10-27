@@ -12,29 +12,30 @@ export const metadata: Metadata = {
   description:
     "Actionable blueprints on offshore digital marketing pods, paid media scaling, SEO in the AI search era, and agency margin optimization.",
   alternates: {
-    canonical: "/blog",
+    canonical: "https://www.hiredesimarketer.com/blog",
   },
   robots: {
-    index: false,
-    follow: false,
-    nocache: true,
+    index: true,
+    follow: true,
     googleBot: {
-      index: false,
-      follow: false,
-      noimageindex: true,
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   openGraph: {
     title: "Stories & Playbooks That Scale Agencies | Hire Desi Marketer",
     description:
       "Actionable blueprints on offshore digital marketing pods, paid media scaling, SEO in the AI search era, and agency margin optimization.",
-    url: "https://hiredesimarketer.com/blog",
+    url: "https://www.hiredesimarketer.com/blog",
     siteName: "Hire Desi Marketer",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "/images/hero-mesh-bg.svg",
+        url: "/images/blog-hero-bg.webp",
         width: 1200,
         height: 630,
         alt: "Hire Desi Marketer Journal - Stories Worth Thinking About",

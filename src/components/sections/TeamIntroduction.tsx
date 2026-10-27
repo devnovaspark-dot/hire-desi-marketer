@@ -30,7 +30,7 @@ const EXECUTIVE_LEADERSHIP: ExecutiveMember[] = [
     role: "Founder & CEO",
     badge: "Executive Leadership",
     experience: "10+ Yrs Growth Strategy",
-    image: "/images/team-sankarsan.png",
+    image: "/images/team-sankarsan.webp",
     bio: "Pioneering high-accountability Indian digital marketing teams for Western brands. Retains direct oversight of every client contract with a strict 100% delivery SLA guarantee.",
     slaPill: "Direct CEO Escalation Line",
     tags: ["Growth Strategy", "Retainer Backing", "Client Advisory"],
@@ -42,7 +42,7 @@ const EXECUTIVE_LEADERSHIP: ExecutiveMember[] = [
     role: "Founding Member & COO",
     badge: "Operations Desk",
     experience: "8+ Yrs Operations",
-    image: "/images/team-pranjal.png",
+    image: "/images/team-pranjal.webp",
     bio: "Overseeing day-to-day campaign governance, team training, client escalation resolution, and cross-border operational synchronization across US, UK & Australian time zones.",
     slaPill: "Daily Sprint Governance",
     tags: ["Operations", "Cross-Border Pacing", "15-Min Response"],
@@ -54,7 +54,7 @@ const EXECUTIVE_LEADERSHIP: ExecutiveMember[] = [
     role: "Operations Executive",
     badge: "Execution Desk",
     experience: "6+ Yrs Technical Ops",
-    image: "/images/team-bikram.png",
+    image: "/images/team-bikram.webp",
     bio: "Ensuring smooth tooling setups, daily sprint pacing, task completion audits, and team shift adherence with zero gig-economy or freelance outsourcing.",
     slaPill: "Daily Quality & Shift Audits",
     tags: ["Tooling & CRM", "Sprint Audits", "Shift Adherence"],
@@ -114,8 +114,8 @@ export function TeamIntroduction() {
                   src={member.image}
                   alt={member.name}
                   fill
-                  unoptimized
-                  priority
+                  sizes="(max-width: 768px) 100vw, 320px"
+                  loading="lazy"
                   className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
                 />
 

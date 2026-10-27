@@ -140,7 +140,7 @@ export function QuoteFormPageClient() {
           {/* Background Image: Real Team at Bhubaneswar HQ */}
           <div className="absolute inset-0 z-0">
             <Image
-              src="/images/1200_1000px.png"
+              src="/images/1200_1000px.webp"
               alt="Hire Desi Marketer Dedicated In-House Team at Bhubaneswar Campus"
               fill
               priority

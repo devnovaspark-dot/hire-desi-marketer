@@ -55,22 +55,23 @@ export async function generateMetadata({
     title: `${post.title} | Hire Desi Marketer Journal`,
     description: post.excerpt,
     alternates: {
-      canonical: `/blog/${post.slug}`,
+      canonical: `https://www.hiredesimarketer.com/blog/${post.slug}`,
     },
     robots: {
-      index: false,
-      follow: false,
-      nocache: true,
+      index: true,
+      follow: true,
       googleBot: {
-        index: false,
-        follow: false,
-        noimageindex: true,
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
       },
     },
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `https://hiredesimarketer.com/blog/${post.slug}`,
+      url: `https://www.hiredesimarketer.com/blog/${post.slug}`,
       siteName: "Hire Desi Marketer",
       locale: "en_US",
       type: "article",
@@ -130,15 +131,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     "publisher": {
       "@type": "Organization",
       "name": "Hire Desi Marketer",
-      "url": "https://hiredesimarketer.com",
+      "url": "https://www.hiredesimarketer.com",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://hiredesimarketer.com/images/hdm-logo.png",
+        "url": "https://www.hiredesimarketer.com/images/hdm-logo.png",
       },
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://hiredesimarketer.com/blog/${post.slug}`,
+      "@id": `https://www.hiredesimarketer.com/blog/${post.slug}`,
     },
   };
 

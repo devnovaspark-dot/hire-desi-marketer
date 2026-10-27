@@ -29,13 +29,13 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Hire Desi Marketer",
-  "url": "https://hiredesimarketer.com/",
+  "url": "https://www.hiredesimarketer.com/",
   "description":
     "Hire dedicated digital marketing specialists in India for SEO, paid advertising, content marketing, and social media marketing.",
   "publisher": {
     "@type": "Organization",
     "name": "Hire Desi Marketer",
-    "url": "https://hiredesimarketer.com/",
+    "url": "https://www.hiredesimarketer.com/",
   },
   "inLanguage": "en",
 };
@@ -56,18 +56,18 @@ export const metadata: Metadata = {
     "Google ads management",
     "Meta ads specialist",
   ],
-  authors: [{ name: "Hire Desi Marketer", url: "https://hiredesimarketer.com/" }],
+  authors: [{ name: "Hire Desi Marketer", url: "https://www.hiredesimarketer.com/" }],
   creator: "Hire Desi Marketer",
   publisher: "Hire Desi Marketer",
-  metadataBase: new URL("https://hiredesimarketer.com"),
+  metadataBase: new URL("https://www.hiredesimarketer.com"),
   alternates: {
-    canonical: "/",
+    canonical: "https://www.hiredesimarketer.com/",
   },
   openGraph: {
     title: "Hire Digital Marketing Team in India | Hire Desi Marketer",
     description:
       "Hire skilled digital marketing team in India for SEO, paid ads, content and social media. Build a dedicated marketing team with flexible pricing.",
-    url: "https://hiredesimarketer.com/",
+    url: "https://www.hiredesimarketer.com/",
     siteName: "Hire Desi Marketer",
     locale: "en_US",
     type: "website",
@@ -119,6 +119,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${bricolage.variable} ${manrope.variable} scroll-smooth`}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/1200_1000px.webp"
+          type="image/webp"
+          fetchPriority="high"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}

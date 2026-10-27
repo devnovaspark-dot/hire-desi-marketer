@@ -129,11 +129,11 @@ export function Hero() {
                 {/* High-Resolution Team Showcase (1200x1000) */}
                 <div className="relative w-full aspect-[6/5] rounded-xl sm:rounded-2xl overflow-hidden border border-white/15 bg-slate-950/60 shadow-[0_12px_35px_rgba(0,0,0,0.5)] group">
                   <Image
-                    src="/images/1200_1000px.png"
+                    src="/images/1200_1000px.webp"
                     alt="Hire Desi Marketer Dedicated In-House Team at Bhubaneswar Headquarters"
                     fill
                     priority
-                    sizes="(max-width: 768px) 100vw, 520px"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 520px"
                     className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
                   />
 
@@ -199,8 +199,8 @@ export function Hero() {
             <video
               controls
               playsInline
-              preload="metadata"
-              poster="/images/Thumbnail.png?v=5"
+              preload="none"
+              poster="/images/Thumbnail.webp"
               className="w-full h-full object-cover"
             >
               <source src="/team-walkthrough.mp4?v=5" type="video/mp4" />

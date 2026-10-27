@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
@@ -16,6 +17,12 @@ import { TeamIntroduction } from "@/components/sections/TeamIntroduction";
 import { Office } from "@/components/sections/Office";
 import { QuoteForm } from "@/components/sections/QuoteForm";
 import { FAQ } from "@/components/sections/FAQ";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://www.hiredesimarketer.com/",
+  },
+};
 
 export default function HomePage() {
   return (

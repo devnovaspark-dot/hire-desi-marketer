@@ -169,9 +169,11 @@ export function VideoShowcase() {
           <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#070D18] border border-[#233148] shadow-[0_25px_60px_-15px_rgba(11,27,58,0.35)] aspect-square">
             {/* Warm Ambient Glow from 1:1 Thumbnail */}
             <img
-              src="/images/Thumbnail.png?v=5"
+              src="/images/Thumbnail.webp"
               alt=""
               aria-hidden="true"
+              loading="lazy"
+              decoding="async"
               className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-40 scale-110 pointer-events-none"
             />
 
@@ -180,8 +182,8 @@ export function VideoShowcase() {
               ref={videoRef}
               controls
               playsInline
-              preload="metadata"
-              poster="/images/Thumbnail.png?v=5"
+              preload="none"
+              poster="/images/Thumbnail.webp"
               className="relative z-10 w-full h-full object-cover drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
             >
               <source src="/team-walkthrough.mp4?v=5" type="video/mp4" />

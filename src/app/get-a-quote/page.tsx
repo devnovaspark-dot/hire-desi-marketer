@@ -8,12 +8,15 @@ export const metadata: Metadata = {
   title: "Get a Quote | Request Your Free Marketing Plan | Hire Desi Marketer",
   description:
     "Tell us about your brand and growth goals. We will prepare an in-depth audit, a 90-day execution roadmap, and a transparent quote tailored to your budget.",
+  alternates: {
+    canonical: "https://www.hiredesimarketer.com/get-a-quote",
+  },
   openGraph: {
     title: "Get a Quote | Request Your Free Marketing Plan | Hire Desi Marketer",
     description:
       "Tell us about your brand and growth goals. We will prepare an in-depth audit, a 90-day execution roadmap, and a transparent quote tailored to your budget.",
-    url: "https://hiredesimarketer.com/get-a-quote",
-    images: ["/images/1200_1000px.png"],
+    url: "https://www.hiredesimarketer.com/get-a-quote",
+    images: ["/images/1200_1000px.webp"],
   },
 };
 

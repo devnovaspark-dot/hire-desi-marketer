@@ -15,12 +15,15 @@ export const metadata: Metadata = {
   title: "Thank You! | Hire Desi Marketer",
   description:
     "We have received your growth goals and quote request. Our senior marketing strategists will prepare your custom 90-day roadmap within 24 hours.",
+  alternates: {
+    canonical: "https://www.hiredesimarketer.com/thank-you-get-a-quote",
+  },
   openGraph: {
     title: "Thank You! | Hire Desi Marketer",
     description:
       "We have received your growth goals and quote request. Our senior marketing strategists will prepare your custom 90-day roadmap within 24 hours.",
-    url: "https://hiredesimarketer.com/thank-you-get-a-quote",
-    images: ["/images/1200_1000px.png"],
+    url: "https://www.hiredesimarketer.com/thank-you-get-a-quote",
+    images: ["/images/1200_1000px.webp"],
   },
 };
 
