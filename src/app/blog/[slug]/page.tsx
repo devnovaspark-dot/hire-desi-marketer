@@ -48,6 +48,14 @@ export async function generateMetadata({
   if (!post) {
     return {
       title: "Article Not Found | Hire Desi Marketer",
+      robots: {
+        index: false,
+        follow: false,
+        googleBot: {
+          index: false,
+          follow: false,
+        },
+      },
     };
   }
 
@@ -58,14 +66,11 @@ export async function generateMetadata({
       canonical: `https://www.hiredesimarketer.com/blog/${post.slug}`,
     },
     robots: {
-      index: true,
-      follow: true,
+      index: false,
+      follow: false,
       googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
+        index: false,
+        follow: false,
       },
     },
     openGraph: {
