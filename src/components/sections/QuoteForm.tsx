@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   CheckCircle2,
@@ -25,10 +25,10 @@ export function QuoteForm() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [successInfo, setSuccessInfo] = useState<{
-    mode: string;
-    message: string;
-  } | null>(null);
+
+  useEffect(() => {
+    router.prefetch("/thank-you");
+  }, [router]);
 
   const countries = [
     "United States",
@@ -105,21 +105,15 @@ export function QuoteForm() {
         }
       }
 
-      setSuccessInfo({
-        mode: data.mode || "formsubmit",
-        message: data.message || "Thank you! Your quote request has been dispatched to our team.",
-      });
-
-      // Navigate to dedicated Thank You page with bouncing glass ball
-      router.push("/thank-you");
+      // Fast, immediate redirect directly to /thank-you
+      window.location.href = "/thank-you";
     } catch (err: unknown) {
+      setIsLoading(false);
       if (err instanceof Error) {
         setErrorMsg(err.message);
       } else {
         setErrorMsg("An unexpected error occurred. Please try again.");
       }
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -171,45 +165,12 @@ export function QuoteForm() {
           {/* Right Column: Clean, High-Conversion Conversion Terminal */}
           <div id="quote-form" className="lg:col-span-7 scroll-mt-24 sm:scroll-mt-28">
             <div className="skeuo-card-dark specular-shine rounded-3xl p-6 sm:p-10 shadow-2xl relative border border-white/20">
-              {successInfo ? (
-                <div className="flex flex-col items-center text-center py-10 gap-4 animate-in fade-in duration-300">
-                  <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center shadow-xl">
-                    <CheckCircle2 className="w-7 h-7" />
-                  </div>
-
-                  <h3 className="font-display font-black text-2xl sm:text-3xl text-white">
-                    Request Received Successfully!
-                  </h3>
-
-                  <p className="text-sm text-slate-300 max-w-md leading-relaxed">
-                    Thank you, <strong>{formData.fullName}</strong>. Your inquiry for{" "}
-                    <strong>{formData.serviceInterest}</strong> has been logged. Our operations desk will reach out within 24 hours.
-                  </p>
-
-                  <button
-                    onClick={() => {
-                      setSuccessInfo(null);
-                      setFormData({
-                        fullName: "",
-                        email: "",
-                        company: "",
-                        country: "United States",
-                        serviceInterest: "Dedicated team — request a quote (3/5/7)",
-                        message: "",
-                      });
-                    }}
-                    className="skeuo-button-navy px-5 py-2.5 rounded-xl text-xs font-bold mt-2 cursor-pointer"
-                  >
-                    Submit Another Inquiry
-                  </button>
-                </div>
-              ) : (
-                <form
-                  action="https://formsubmit.co/novasdmagency@gmail.com"
-                  method="POST"
-                  onSubmit={handleSubmit}
-                  className="flex flex-col gap-4"
-                >
+              <form
+                action="https://formsubmit.co/novasdmagency@gmail.com"
+                method="POST"
+                onSubmit={handleSubmit}
+                className="flex flex-col gap-4"
+              >
                   <input type="hidden" name="_captcha" value="false" />
                   <input type="hidden" name="_template" value="table" />
                   <input
@@ -378,7 +339,6 @@ export function QuoteForm() {
                     <span>Your data is strictly confidential. No spam, ever.</span>
                   </div>
                 </form>
-              )}
             </div>
           </div>
         </div>

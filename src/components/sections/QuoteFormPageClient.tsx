@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
@@ -30,10 +30,10 @@ export function QuoteFormPageClient() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [successInfo, setSuccessInfo] = useState<{
-    mode: string;
-    message: string;
-  } | null>(null);
+
+  useEffect(() => {
+    router.prefetch("/thank-you");
+  }, [router]);
 
   const countries = [
     "United States",
@@ -116,23 +116,15 @@ export function QuoteFormPageClient() {
         }
       }
 
-      setSuccessInfo({
-        mode: data?.mode || "formsubmit",
-        message:
-          data?.message ||
-          "Thank you! Your quote request has been dispatched to our team.",
-      });
-
-      // Navigate directly to the dedicated Thank You page with bouncing glass ball
-      router.push("/thank-you");
+      // Fast, immediate redirect directly to /thank-you at the exact instant of submission
+      window.location.href = "/thank-you";
     } catch (err: unknown) {
+      setIsLoading(false);
       if (err instanceof Error) {
         setErrorMsg(err.message);
       } else {
         setErrorMsg("An unexpected error occurred. Please try again.");
       }
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -242,54 +234,7 @@ export function QuoteFormPageClient() {
             ========================================================================= */}
         <div className="lg:col-span-6 flex flex-col justify-center">
           <div className="skeuo-card-dark specular-shine rounded-3xl p-6 sm:p-8 lg:p-9 shadow-2xl relative border-2 border-white/20 h-full flex flex-col justify-between">
-            {successInfo ? (
-              /* Success State */
-              <div className="flex flex-col items-center text-center py-8 sm:py-12 gap-4 animate-in fade-in duration-300 my-auto">
-                <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center shadow-xl">
-                  <CheckCircle2 className="w-8 h-8" />
-                </div>
-
-                <h2 className="font-display font-black text-2xl sm:text-3xl text-white">
-                  Request Received Successfully!
-                </h2>
-
-                <p className="text-sm text-slate-300 max-w-md leading-relaxed">
-                  Thank you, <strong>{formData.fullName}</strong>. Your inquiry for{" "}
-                  <strong className="text-[#FFB020]">{formData.serviceInterest}</strong> has been logged.
-                  Our Bhubaneswar leadership desk will review your requirements and reach out within 24 hours.
-                </p>
-
-                <div className="flex flex-col sm:flex-row items-center gap-3 mt-3 w-full max-w-md">
-                  <a
-                    href="https://wa.me/918280788689?text=Hi%20Hire%20Desi%20Marketer,%20I%20just%20submitted%20my%20marketing%20plan%20request."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:flex-1 py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-colors shadow-md"
-                  >
-                    <MessageSquare className="w-4 h-4" />
-                    <span>WhatsApp Desk</span>
-                  </a>
-                  <button
-                    onClick={() => {
-                      setSuccessInfo(null);
-                      setFormData({
-                        fullName: "",
-                        email: "",
-                        company: "",
-                        country: "United States",
-                        serviceInterest: "Dedicated team — request a quote (3/5/7)",
-                        message: "",
-                      });
-                    }}
-                    className="w-full sm:flex-1 py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs uppercase tracking-wider transition-colors border border-white/15"
-                  >
-                    Submit Another
-                  </button>
-                </div>
-              </div>
-            ) : (
-              /* Form State */
-              <form onSubmit={handleSubmit} className="flex flex-col gap-3.5 sm:gap-4 my-auto">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3.5 sm:gap-4 my-auto">
                 {/* Form Header */}
                 <div className="flex items-center justify-between pb-3 border-b border-white/10">
                   <div>
@@ -469,7 +414,6 @@ export function QuoteFormPageClient() {
                   <span>Your data is strictly confidential. Mutual NDA guaranteed. Zero spam.</span>
                 </div>
               </form>
-            )}
           </div>
         </div>
 
