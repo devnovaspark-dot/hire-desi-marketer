@@ -28,7 +28,11 @@ export function Header() {
   const isHomePage = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeNav, setActiveNav] = useState<string>(isHomePage ? "#about" : "/blog");
+  const [activeNav, setActiveNav] = useState<string>(() => {
+    if (pathname.startsWith("/get-a-quote")) return "/get-a-quote";
+    if (pathname.startsWith("/blog")) return "/blog";
+    return "#about";
+  });
 
   const isClickScrollingRef = useRef(false);
   const scrollTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -57,8 +61,14 @@ export function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      // Strictly lock active tab while programmatic smooth scroll is underway
+      // Programmatic click-scroll is active:
+      // Keep pushing the lock forward as long as scroll events are firing.
+      // It will ONLY unlock 150ms AFTER smooth scroll has completely finished moving!
       if (isClickScrollingRef.current) {
+        if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
+        scrollTimerRef.current = setTimeout(() => {
+          isClickScrollingRef.current = false;
+        }, 150);
         return;
       }
 
@@ -68,8 +78,7 @@ export function Header() {
         return;
       }
 
-      // 2. Strict bounded inspection: a section is ONLY active while it is actually on screen!
-      // This permanently stops "Case Studies" from reflecting across the bottom half of the website.
+      // 2. Strict bounded inspection: only highlight a section if it is currently in view
       const inspectPoint = 160;
       for (const { id, href } of SPY_SECTIONS) {
         const el = document.getElementById(id);
@@ -122,14 +131,14 @@ export function Header() {
       }
       e.preventDefault();
       
-      // 2. Lock scroll-spy for 1000ms while smooth scrolling completes
+      // 2. Engage click scroll lock
       isClickScrollingRef.current = true;
       if (scrollTimerRef.current) {
         clearTimeout(scrollTimerRef.current);
       }
       scrollTimerRef.current = setTimeout(() => {
         isClickScrollingRef.current = false;
-      }, 1000);
+      }, 400);
 
       // 3. Smooth scroll to target section with floating header clearance
       const targetId = href.replace("#", "");
