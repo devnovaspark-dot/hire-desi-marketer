@@ -54,54 +54,40 @@ export function Header() {
       return;
     }
 
-    const handleManualScrollStart = () => {
-      // If user manually touches screen or scrolls with wheel, release click lock
-      isClickScrollingRef.current = false;
-      if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
-    };
-
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      // Prevent scroll-spy from jumping/bouncing through intermediate tabs while smooth scrolling to clicked tab
+      // Strictly lock active tab while programmatic smooth scroll is underway
       if (isClickScrollingRef.current) {
         return;
       }
 
-      // 1. If near top of page (Hero / Intro), highlight "#about"
-      if (window.scrollY < 350) {
+      // 1. If near top of page (Hero / Intro area), highlight About Us
+      if (window.scrollY < 300) {
         setActiveNav("#about");
         return;
       }
 
-      // 3. Continuous threshold detection (zero blind spots between sections)
-      // Inspect line at 200px from top of viewport (directly under floating header)
-      const scrollOffset = window.scrollY + 200;
-
-      let matchedNav = "#about";
+      // 2. Strict bounded inspection: a section is ONLY active while it is actually on screen!
+      // This permanently stops "Case Studies" from reflecting across the bottom half of the website.
+      const inspectPoint = 160;
       for (const { id, href } of SPY_SECTIONS) {
         const el = document.getElementById(id);
         if (el) {
-          const elTop = el.getBoundingClientRect().top + window.scrollY;
-          if (scrollOffset >= elTop) {
-            matchedNav = href;
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= inspectPoint && rect.bottom > inspectPoint) {
+            setActiveNav(href);
+            return;
           }
         }
       }
-
-      setActiveNav(matchedNav);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("wheel", handleManualScrollStart, { passive: true });
-    window.addEventListener("touchstart", handleManualScrollStart, { passive: true });
-
     handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("wheel", handleManualScrollStart);
-      window.removeEventListener("touchstart", handleManualScrollStart);
       if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
     };
   }, [isHomePage, pathname]);
@@ -126,6 +112,9 @@ export function Header() {
   }, [mobileMenuOpen]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // 1. Instantly set the clicked tab active with 0ms delay
+    setActiveNav(href);
+
     if (href.startsWith("#")) {
       if (!isHomePage) {
         // Allow normal navigation back to home page with hash
@@ -133,17 +122,14 @@ export function Header() {
       }
       e.preventDefault();
       
-      // 1. Instantly set the clicked tab as active
-      setActiveNav(href);
+      // 2. Lock scroll-spy for 1000ms while smooth scrolling completes
       isClickScrollingRef.current = true;
-
-      // 2. Lock scroll-spy during smooth scroll (up to 1200ms for full-page traversal)
       if (scrollTimerRef.current) {
         clearTimeout(scrollTimerRef.current);
       }
       scrollTimerRef.current = setTimeout(() => {
         isClickScrollingRef.current = false;
-      }, 1200);
+      }, 1000);
 
       // 3. Smooth scroll to target section with floating header clearance
       const targetId = href.replace("#", "");
@@ -200,7 +186,7 @@ export function Header() {
                 <Link
                   key={link.label}
                   href={targetHref}
-                  onClick={(e) => isAnchor ? handleNavClick(e as unknown as React.MouseEvent<HTMLAnchorElement>, link.href) : undefined}
+                  onClick={(e) => handleNavClick(e as unknown as React.MouseEvent<HTMLAnchorElement>, link.href)}
                   className={cn(
                     "px-3.5 py-1.5 text-xs lg:text-[13px] font-extrabold rounded-full transition-all duration-150 cursor-pointer select-none",
                     "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFB020]",
@@ -273,7 +259,7 @@ export function Header() {
                   href={targetHref}
                   onClick={(e) => {
                     setMobileMenuOpen(false);
-                    if (isAnchor) handleNavClick(e as unknown as React.MouseEvent<HTMLAnchorElement>, link.href);
+                    handleNavClick(e as unknown as React.MouseEvent<HTMLAnchorElement>, link.href);
                   }}
                   className="text-xl font-display font-bold text-white hover:text-[#FFB020] transition-colors py-2.5 flex items-center justify-between border-b border-white/5"
                 >
