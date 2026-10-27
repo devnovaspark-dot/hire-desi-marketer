@@ -16,6 +16,14 @@ const NAV_LINKS = [
   { label: "Contact Us", href: "#contact" },
 ];
 
+const SPY_SECTIONS: { id: string; href: string }[] = [
+  { id: "about", href: "#about" },
+  { id: "teams", href: "#teams" },
+  { id: "stack", href: "#stack" },
+  { id: "work", href: "#work" },
+  { id: "contact", href: "#contact" },
+];
+
 export function Header() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
@@ -25,6 +33,17 @@ export function Header() {
 
   const isClickScrollingRef = useRef(false);
   const scrollTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Sync activeNav with URL hash on initial load
+  useEffect(() => {
+    if (typeof window !== "undefined" && isHomePage && window.location.hash) {
+      const hash = window.location.hash;
+      const validHashes = SPY_SECTIONS.map((s) => s.href);
+      if (validHashes.includes(hash)) {
+        setActiveNav(hash);
+      }
+    }
+  }, [isHomePage]);
 
   useEffect(() => {
     if (!isHomePage) {
@@ -45,43 +64,42 @@ export function Header() {
 
       // Prevent scroll-spy from jumping/bouncing through intermediate tabs while smooth scrolling to clicked tab
       if (isClickScrollingRef.current) {
-        // Reset debounce timer: only release lock 250ms AFTER smooth-scroll completely finishes moving
-        if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
-        scrollTimerRef.current = setTimeout(() => {
-          isClickScrollingRef.current = false;
-        }, 250);
         return;
       }
 
-      // 1. If at bottom of page, highlight Contact Us
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80) {
+      // 1. If at bottom of page, always highlight Contact Us
+      const isNearBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 120;
+      if (isNearBottom) {
         setActiveNav("#contact");
         return;
       }
 
-      // 2. Exact inspection line at 130px from top of viewport (directly under floating header)
-      const inspectionLine = 130;
-      const sectionIds = ["about", "teams", "stack", "work", "contact"];
+      // 2. If near top of page (Hero / Intro), highlight "#about"
+      if (window.scrollY < 350) {
+        setActiveNav("#about");
+        return;
+      }
 
-      for (const id of sectionIds) {
+      // 3. Continuous threshold detection (zero blind spots between sections)
+      // Inspect line at 200px from top of viewport (directly under floating header)
+      const scrollOffset = window.scrollY + 200;
+
+      let matchedNav = "#about";
+      for (const { id, href } of SPY_SECTIONS) {
         const el = document.getElementById(id);
         if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= inspectionLine && rect.bottom > inspectionLine) {
-            setActiveNav(`#${id}`);
-            return;
+          const elTop = el.getBoundingClientRect().top + window.scrollY;
+          if (scrollOffset >= elTop) {
+            matchedNav = href;
           }
         }
       }
 
-      // 3. If near top of page (Hero), default to "#about"
-      if (window.scrollY < 400) {
-        setActiveNav("#about");
-      }
+      setActiveNav(matchedNav);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("scrollend", handleManualScrollStart, { passive: true });
     window.addEventListener("wheel", handleManualScrollStart, { passive: true });
     window.addEventListener("touchstart", handleManualScrollStart, { passive: true });
 
@@ -89,7 +107,6 @@ export function Header() {
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("scrollend", handleManualScrollStart);
       window.removeEventListener("wheel", handleManualScrollStart);
       window.removeEventListener("touchstart", handleManualScrollStart);
       if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
@@ -127,16 +144,21 @@ export function Header() {
       setActiveNav(href);
       isClickScrollingRef.current = true;
 
+      // 2. Lock scroll-spy during smooth scroll (up to 1200ms for full-page traversal)
       if (scrollTimerRef.current) {
         clearTimeout(scrollTimerRef.current);
       }
+      scrollTimerRef.current = setTimeout(() => {
+        isClickScrollingRef.current = false;
+      }, 1200);
 
+      // 3. Smooth scroll to target section with floating header clearance
       const targetId = href.replace("#", "");
       const element = document.getElementById(targetId);
       if (element) {
-        const headerOffset = 95;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+        const headerOffset = 85;
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = Math.max(0, elementPosition - headerOffset);
 
         window.scrollTo({
           top: offsetPosition,
