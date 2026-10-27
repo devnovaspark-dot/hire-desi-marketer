@@ -34,34 +34,64 @@ export function Header() {
       return;
     }
 
+    const handleManualScrollStart = () => {
+      // If user manually touches screen or scrolls with wheel, release click lock
+      isClickScrollingRef.current = false;
+      if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
+    };
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      // Prevent scroll-spy from jumping/bouncing through intermediate tabs during programmatic smooth scroll
-      if (isClickScrollingRef.current) return;
+      // Prevent scroll-spy from jumping/bouncing through intermediate tabs while smooth scrolling to clicked tab
+      if (isClickScrollingRef.current) {
+        // Reset debounce timer: only release lock 250ms AFTER smooth-scroll completely finishes moving
+        if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
+        scrollTimerRef.current = setTimeout(() => {
+          isClickScrollingRef.current = false;
+        }, 250);
+        return;
+      }
 
-      // Automatic scroll spy for active section highlight
-      const sectionIds = NAV_LINKS.filter((l) => l.href.startsWith("#")).map((l) =>
-        l.href.replace("#", "")
-      );
-      const scrollPos = window.scrollY + 140;
+      // 1. If at bottom of page, highlight Contact Us
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80) {
+        setActiveNav("#contact");
+        return;
+      }
 
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const sec = document.getElementById(sectionIds[i]);
-        if (sec) {
-          const top = sec.offsetTop;
-          if (scrollPos >= top) {
-            setActiveNav(`#${sectionIds[i]}`);
-            break;
+      // 2. Exact inspection line at 130px from top of viewport (directly under floating header)
+      const inspectionLine = 130;
+      const sectionIds = ["about", "teams", "stack", "work", "contact"];
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= inspectionLine && rect.bottom > inspectionLine) {
+            setActiveNav(`#${id}`);
+            return;
           }
         }
+      }
+
+      // 3. If near top of page (Hero), default to "#about"
+      if (window.scrollY < 400) {
+        setActiveNav("#about");
       }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scrollend", handleManualScrollStart, { passive: true });
+    window.addEventListener("wheel", handleManualScrollStart, { passive: true });
+    window.addEventListener("touchstart", handleManualScrollStart, { passive: true });
+
     handleScroll();
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scrollend", handleManualScrollStart);
+      window.removeEventListener("wheel", handleManualScrollStart);
+      window.removeEventListener("touchstart", handleManualScrollStart);
       if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
     };
   }, [isHomePage, pathname]);
@@ -93,7 +123,7 @@ export function Header() {
       }
       e.preventDefault();
       
-      // Instantly set active tab without delay
+      // 1. Instantly set the clicked tab as active
       setActiveNav(href);
       isClickScrollingRef.current = true;
 
@@ -104,9 +134,9 @@ export function Header() {
       const targetId = href.replace("#", "");
       const element = document.getElementById(targetId);
       if (element) {
-        const headerOffset = 85;
+        const headerOffset = 95;
         const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
         window.scrollTo({
           top: offsetPosition,
@@ -114,11 +144,6 @@ export function Header() {
         });
         window.history.replaceState(null, "", href);
       }
-
-      // Lock scroll-spy until smooth scroll animation settles
-      scrollTimerRef.current = setTimeout(() => {
-        isClickScrollingRef.current = false;
-      }, 850);
     }
   };
 
