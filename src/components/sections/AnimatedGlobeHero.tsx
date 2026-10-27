@@ -130,24 +130,6 @@ export function AnimatedGlobeHero() {
           className="absolute inset-0 w-full h-full pointer-events-auto"
         >
           <defs>
-            {/* Glowing Golden Arc Glow */}
-            <filter id="glow-gold" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="2" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-
-            {/* Cyan Hub Glow */}
-            <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="2.5" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-
             {/* Bhubaneswar HQ Core Radial Halo */}
             <radialGradient id="hq-core-halo">
               <stop offset="0%" stopColor="#FFB020" stopOpacity="0.4" />
@@ -222,7 +204,7 @@ export function AnimatedGlobeHero() {
                   </circle>
 
                   {/* Single Exact Location Dot */}
-                  <circle r="3.5" fill="#38BDF8" filter="url(#glow-cyan)" />
+                  <circle r="3.5" fill="#38BDF8" />
                   <circle r="1.5" fill="#FFFFFF" />
 
                   {/* Clean city label on hover */}
@@ -289,7 +271,7 @@ export function AnimatedGlobeHero() {
             </circle>
 
             {/* Solid Golden Beacon Core */}
-            <circle r="5" fill="#FFB020" filter="url(#glow-gold)" />
+            <circle r="5" fill="#FFB020" />
             <circle r="2" fill="#FFFFFF" />
 
             {/* Clean Bhubaneswar HQ Badge */}

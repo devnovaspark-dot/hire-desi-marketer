@@ -7,7 +7,7 @@ interface BrandLogoProps {
   priority?: boolean;
 }
 
-export function BrandLogo({ className = "", size = "md", priority = true }: BrandLogoProps) {
+export function BrandLogo({ className = "", size = "md", priority = false }: BrandLogoProps) {
   const dimensions = {
     sm: { width: 163, height: 30, className: "h-7 sm:h-8 w-auto" },
     md: { width: 196, height: 36, className: "h-8 sm:h-9 w-auto" },
