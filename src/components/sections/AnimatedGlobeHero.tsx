@@ -118,7 +118,7 @@ export function AnimatedGlobeHero() {
 
       {/* 2. Interactive 3D Tilting Globe & Flight Arc System (Placed at z-0) */}
       <div
-        className="relative z-0 w-full h-full transition-transform duration-500 ease-out flex items-center justify-center"
+        className="hidden sm:flex relative z-0 w-full h-full transition-transform duration-500 ease-out items-center justify-center"
         style={{
           transform: `perspective(1200px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
         }}
@@ -158,7 +158,7 @@ export function AnimatedGlobeHero() {
 
           {/* Dotted World Map Base perfectly synced in 1800x900 coordinate space */}
           <image
-            href="/images/world-dots-base.svg"
+            href="/images/world-dots-base.webp"
             x="0"
             y="0"
             width="1800"

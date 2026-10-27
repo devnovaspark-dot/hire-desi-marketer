@@ -97,6 +97,7 @@ export function Services() {
                             alt={tool.name}
                             width={20}
                             height={20}
+                            loading="lazy"
                             className="w-5 h-5 object-contain drop-shadow-xs"
                           />
                           <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 bg-[#040716] border border-white/20 text-white text-[9px] font-bold px-1.5 py-0.5 rounded opacity-0 group-hover/tool:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20 shadow-xl">

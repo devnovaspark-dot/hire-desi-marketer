@@ -133,7 +133,7 @@ export function Hero() {
                     alt="Hire Desi Marketer Dedicated In-House Team at Bhubaneswar Headquarters"
                     fill
                     priority
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 520px"
+                    sizes="(max-width: 640px) 380px, (max-width: 1024px) 500px, 520px"
                     className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
                   />
 
@@ -200,7 +200,7 @@ export function Hero() {
               controls
               playsInline
               preload="none"
-              poster="/images/Thumbnail.webp"
+              poster="/images/Thumbnail-poster.webp"
               className="w-full h-full object-cover"
             >
               <source src="/team-walkthrough.mp4?v=5" type="video/mp4" />

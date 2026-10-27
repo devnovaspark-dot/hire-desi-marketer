@@ -167,14 +167,10 @@ export function VideoShowcase() {
         {/* Centered Luxury 1:1 Square Cinema Player */}
         <div className="w-full max-w-[340px] sm:max-w-[420px] md:max-w-[480px] lg:max-w-[500px] mx-auto">
           <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#070D18] border border-[#233148] shadow-[0_25px_60px_-15px_rgba(11,27,58,0.35)] aspect-square">
-            {/* Warm Ambient Glow from 1:1 Thumbnail */}
-            <img
-              src="/images/Thumbnail.webp"
-              alt=""
+            {/* Ambient Cinema Lighting Glow (Pure CSS Zero-Payload) */}
+            <div
               aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-40 scale-110 pointer-events-none"
+              className="absolute inset-0 w-full h-full bg-gradient-to-tr from-[#FFB020]/20 via-[#1E3A8A]/35 to-emerald-500/20 blur-2xl opacity-60 pointer-events-none"
             />
 
             {/* Main Interactive Video - Fills the exact 1:1 square frame with ZERO cropping */}
@@ -183,7 +179,7 @@ export function VideoShowcase() {
               controls
               playsInline
               preload="none"
-              poster="/images/Thumbnail.webp"
+              poster="/images/Thumbnail-poster.webp"
               className="relative z-10 w-full h-full object-cover drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
             >
               <source src="/team-walkthrough.mp4?v=5" type="video/mp4" />

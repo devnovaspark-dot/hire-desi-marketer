@@ -21,7 +21,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Blended Return on Ad Spend (ROAS)",
       "First-time caller conversion rate",
     ],
-    mockupImage: "/images/case-study-dental.jpg",
+    mockupImage: "/images/case-study-dental.webp",
     mockupAlt:
       "Illustrative campaign architecture: Dental clinic landing page and Google search ad structure",
   },
@@ -45,7 +45,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Page-1 keyword volume for high-ticket terms",
       "Net-new 5-star customer reviews",
     ],
-    mockupImage: "/images/case-study-roofing.jpg",
+    mockupImage: "/images/case-study-roofing.webp",
     mockupAlt:
       "Illustrative campaign architecture: Roofing contractor localized keyword tracking and profile optimization",
   },
@@ -69,7 +69,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "In-store weekday offer redemptions",
       "Net-new local follower growth",
     ],
-    mockupImage: "/images/case-study-cafe.jpg",
+    mockupImage: "/images/case-study-cafe.webp",
     mockupAlt:
       "Illustrative campaign architecture: Specialty café content calendar and short-form video creative pacing",
   },
@@ -93,7 +93,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Average lead response speed (reduced to < 3 mins)",
       "Consultation attendance / show-up rate",
     ],
-    mockupImage: "/images/case-study-aesthetic.jpg",
+    mockupImage: "/images/case-study-aesthetic.webp",
     mockupAlt:
       "Illustrative campaign architecture: Medical aesthetics clinic mobile redesign and WhatsApp lead routing",
   },

@@ -17,7 +17,7 @@ export function BrandLogo({ className = "", size = "md", priority = true }: Bran
   return (
     <div className={`flex items-center shrink-0 ${className}`}>
       <Image
-        src="/images/Asset 36@2x.png"
+        src="/images/hdm-logo.webp"
         alt="Hire Desi Marketer"
         width={dimensions.width}
         height={dimensions.height}

@@ -214,7 +214,8 @@ export function CaseStudies() {
                   src={current.mockupImage}
                   alt={current.mockupAlt}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  loading="lazy"
+                  sizes="(max-width: 640px) 380px, (max-width: 1024px) 460px, 500px"
                   className="object-contain object-center group-hover:scale-[1.01] transition-transform duration-300"
                 />
               </div>
