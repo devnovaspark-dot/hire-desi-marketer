@@ -53,7 +53,7 @@ export function Hero() {
             {/* Clear Primary & Secondary Actions - Sleek & Refined */}
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1">
               <Link
-                href="/quote"
+                href="/get-a-quote"
                 className="btn-luxury-gold btn-shimmer px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-lg cursor-pointer group"
               >
                 <span>Build My Marketing Team</span>

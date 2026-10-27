@@ -7,7 +7,6 @@ import {
   ShieldCheck,
   Clock,
   CheckCircle2,
-  Globe2,
 } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { BouncingGlassBall } from "@/components/ui/BouncingGlassBall";
@@ -16,9 +15,16 @@ export const metadata: Metadata = {
   title: "Thank You! | Hire Desi Marketer",
   description:
     "We have received your growth goals and quote request. Our senior marketing strategists will prepare your custom 90-day roadmap within 24 hours.",
+  openGraph: {
+    title: "Thank You! | Hire Desi Marketer",
+    description:
+      "We have received your growth goals and quote request. Our senior marketing strategists will prepare your custom 90-day roadmap within 24 hours.",
+    url: "https://hiredesimarketer.com/thank-you-get-a-quote",
+    images: ["/images/1200_1000px.png"],
+  },
 };
 
-export default function ThankYouPage() {
+export default function ThankYouGetAQuotePage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#FAF8F5] text-[#0B1B3A] selection:bg-[#FFB020] selection:text-[#060B22] overflow-x-hidden justify-between">
       {/* Floating Global Navigation Header */}

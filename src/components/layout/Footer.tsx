@@ -446,7 +446,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/quote"
+                  href="/get-a-quote"
                   className="hover:text-white transition-colors flex items-center gap-1.5 group"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover:bg-[#FFB020] transition-colors" />
@@ -658,7 +658,7 @@ export function Footer() {
 
           <div className="flex items-center gap-4">
             <Link
-              href="/quote"
+              href="/get-a-quote"
               className="text-slate-300 hover:text-[#FFB020] transition-colors font-medium"
             >
               Request a Free Plan

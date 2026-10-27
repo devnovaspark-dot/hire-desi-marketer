@@ -26,9 +26,9 @@ export function FloatingActions() {
   }, []);
 
   const handleEnquire = (e: React.MouseEvent) => {
-    // If not already on /quote, navigate to /quote
-    if (window.location.pathname !== "/quote") {
-      window.location.href = "/quote";
+    // If not already on /get-a-quote, navigate to /get-a-quote
+    if (window.location.pathname !== "/get-a-quote") {
+      window.location.href = "/get-a-quote";
       return;
     }
     const nameInput = document.getElementById("form-page-name") || document.getElementById("name-input");
@@ -46,7 +46,7 @@ export function FloatingActions() {
     >
       {/* Circular Tactile Skeuomorphic Floating Enquire Button — Placed Directly Above WhatsApp */}
       <a
-        href="/quote"
+        href="/get-a-quote"
         onClick={handleEnquire}
         className="group relative flex items-center justify-center w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-gradient-to-b from-[#FFF2B2] via-[#FFB020] to-[#DF7D00] text-[#060B22] cursor-pointer select-none transition-all duration-150 border-t border-t-white/95 border-x border-[#E08A00] border-b-[3px] border-b-[#994F00] shadow-[0_10px_25px_rgba(0,0,0,0.45),0_3px_8px_rgba(255,176,32,0.45),inset_0_1px_1px_rgba(255,255,255,0.9),inset_0_-2px_4px_rgba(153,79,0,0.35)] hover:brightness-105 hover:-translate-y-0.5 active:translate-y-[2px] active:border-b-[1px] active:shadow-[0_3px_8px_rgba(0,0,0,0.3),inset_0_2px_4px_rgba(0,0,0,0.25)] animate-fab-enquire"
         title="Enquire now about hiring marketing talent"

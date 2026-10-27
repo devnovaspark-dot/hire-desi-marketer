@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/thank-you", "/api/"],
+        disallow: ["/thank-you", "/thank-you-get-a-quote", "/api/"],
       },
     ],
     sitemap: "https://www.hiredesimarketer.com/sitemap.xml",

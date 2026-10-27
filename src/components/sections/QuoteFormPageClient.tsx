@@ -32,7 +32,7 @@ export function QuoteFormPageClient() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
-    router.prefetch("/thank-you");
+    router.prefetch("/thank-you-get-a-quote");
   }, [router]);
 
   const countries = [
@@ -79,7 +79,7 @@ export function QuoteFormPageClient() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
-          source: "Dedicated Quote Form Page (/quote)",
+          source: "Dedicated Quote Form Page (/get-a-quote)",
         }),
       });
 
@@ -96,7 +96,7 @@ export function QuoteFormPageClient() {
               Accept: "application/json",
             },
             body: JSON.stringify({
-              _subject: `New Lead (/quote): ${formData.fullName} - ${formData.serviceInterest}`,
+              _subject: `New Lead (/get-a-quote): ${formData.fullName} - ${formData.serviceInterest}`,
               _template: "table",
               _captcha: "false",
               "Full Name": formData.fullName,
@@ -105,7 +105,7 @@ export function QuoteFormPageClient() {
               "Country / Region": formData.country,
               "Service Model": formData.serviceInterest,
               "Message / Goals": formData.message || "Not specified",
-              "Source": "Dedicated Quote Form Page (/quote)",
+              "Source": "Dedicated Quote Form Page (/get-a-quote)",
               "Submitted At": new Date().toISOString(),
             }),
           }
@@ -116,8 +116,8 @@ export function QuoteFormPageClient() {
         }
       }
 
-      // Fast, immediate redirect directly to /thank-you at the exact instant of submission
-      window.location.href = "/thank-you";
+      // Fast, immediate redirect directly to /thank-you-get-a-quote at the exact instant of submission
+      window.location.href = "/thank-you-get-a-quote";
     } catch (err: unknown) {
       setIsLoading(false);
       if (err instanceof Error) {

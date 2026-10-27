@@ -13,7 +13,7 @@ const NAV_LINKS = [
   { label: "Tech Stack", href: "#stack" },
   { label: "Case Studies", href: "#work" },
   { label: "Blog", href: "/blog" },
-  { label: "Contact Us", href: "#contact" },
+  { label: "Contact Us", href: "/get-a-quote" },
 ];
 
 const SPY_SECTIONS: { id: string; href: string }[] = [
@@ -21,7 +21,6 @@ const SPY_SECTIONS: { id: string; href: string }[] = [
   { id: "teams", href: "#teams" },
   { id: "stack", href: "#stack" },
   { id: "work", href: "#work" },
-  { id: "contact", href: "#contact" },
 ];
 
 export function Header() {
@@ -49,6 +48,8 @@ export function Header() {
     if (!isHomePage) {
       if (pathname.startsWith("/blog")) {
         setActiveNav("/blog");
+      } else if (pathname.startsWith("/get-a-quote")) {
+        setActiveNav("/get-a-quote");
       }
       return;
     }
@@ -67,15 +68,7 @@ export function Header() {
         return;
       }
 
-      // 1. If at bottom of page, always highlight Contact Us
-      const isNearBottom =
-        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 120;
-      if (isNearBottom) {
-        setActiveNav("#contact");
-        return;
-      }
-
-      // 2. If near top of page (Hero / Intro), highlight "#about"
+      // 1. If near top of page (Hero / Intro), highlight "#about"
       if (window.scrollY < 350) {
         setActiveNav("#about");
         return;
@@ -226,7 +219,7 @@ export function Header() {
           <div className="hidden md:flex items-center gap-3">
             {/* Shimmering 3D Luxury CTA Button - Sleek & Refined */}
             <Link
-              href="/quote"
+              href="/get-a-quote"
               className="btn-luxury-gold btn-shimmer px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-wider inline-flex items-center gap-1.5 group cursor-pointer shadow-md"
             >
               <span>Get a Free Quote</span>
@@ -297,7 +290,7 @@ export function Header() {
               <span>Bhubaneswar HQ Online · Dedicated Western Shifts</span>
             </div>
             <Link
-              href="/quote"
+              href="/get-a-quote"
               onClick={() => setMobileMenuOpen(false)}
               className="btn-luxury-gold btn-shimmer py-3 px-4 rounded-xl text-center text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2"
             >

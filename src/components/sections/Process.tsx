@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
   ArrowRight,
@@ -79,6 +80,18 @@ export function Process() {
           subtitle="Start with a straightforward process, transparent expectations, and weekly deliverables designed around your business goals."
           align="center"
         />
+
+        {/* Top Direct Action CTA Button */}
+        <div className="flex justify-center -mt-2 sm:-mt-3 mb-1">
+          <Link
+            href="/get-a-quote"
+            className="btn-luxury-gold btn-shimmer px-5 py-2.5 sm:px-6 sm:py-3 rounded-full text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-md cursor-pointer group"
+          >
+            <Sparkles className="w-3.5 h-3.5 stroke-[2.5]" />
+            <span>Claim Your 24-Hour Growth Plan &amp; Quote</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform stroke-[2.5]" />
+          </Link>
+        </div>
 
         {/* 4-Step High-Tech Skeuomorphic Pipeline Grid — 2 Horizontally on Mobile */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-5 items-stretch relative">
@@ -182,7 +195,7 @@ export function Process() {
           </div>
 
           <a
-            href="/quote"
+            href="/get-a-quote"
             className="btn-luxury-gold btn-shimmer h-[44px] px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 cursor-pointer shadow-md whitespace-nowrap self-start lg:self-auto"
           >
             <span>Get Your Free 24-Hour Growth Plan</span>

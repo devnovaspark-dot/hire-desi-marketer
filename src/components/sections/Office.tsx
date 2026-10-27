@@ -261,7 +261,7 @@ export function Office() {
                 </a>
 
                 <a
-                  href="/quote"
+                  href="/get-a-quote"
                   className="btn-luxury-gold btn-shimmer h-[38px] sm:h-[42px] rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wide flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
                 >
                   <span>Book HQ Video Call</span>

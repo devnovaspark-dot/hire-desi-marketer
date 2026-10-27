@@ -40,7 +40,7 @@ export const ENGAGEMENT_MODELS: PricingPlan[] = [
       "Month-to-month arrangement — cancel anytime",
     ],
     ctaLabel: "Start the $999 Plan",
-    ctaHref: "/quote",
+    ctaHref: "/get-a-quote",
   },
   {
     id: "dedicated-team",

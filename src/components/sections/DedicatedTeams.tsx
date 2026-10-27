@@ -397,7 +397,7 @@ export function DedicatedTeams() {
               {/* Direct CTA */}
               <div className="md:col-span-3 flex justify-start md:justify-end shrink-0">
                 <a
-                  href="/quote"
+                  href="/get-a-quote"
                   className="btn-luxury-gold btn-shimmer w-full md:w-auto h-[32px] sm:h-[34px] px-3 rounded-lg text-[11px] sm:text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap cursor-pointer"
                 >
                   <span>Select {activeSummary.size}-Person Squad</span>
@@ -785,7 +785,7 @@ export function DedicatedTeams() {
                 <span className="font-bold">US, UK &amp; AU Shift Handover Guaranteed</span>
               </div>
               <a
-                href="/quote"
+                href="/get-a-quote"
                 className="font-black text-[#9A5B00] hover:text-[#0B1B3A] underline flex items-center gap-1 cursor-pointer"
               >
                 <span>Request Custom Role Combination</span>

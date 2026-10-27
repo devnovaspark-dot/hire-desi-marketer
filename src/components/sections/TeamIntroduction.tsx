@@ -35,7 +35,7 @@ const EXECUTIVE_LEADERSHIP: ExecutiveMember[] = [
     slaPill: "Direct CEO Escalation Line",
     tags: ["Growth Strategy", "Retainer Backing", "Client Advisory"],
     ctaLabel: "Schedule Founder Call",
-    ctaHref: "/quote",
+    ctaHref: "/get-a-quote",
   },
   {
     name: "Pranjal Sharma",
@@ -47,7 +47,7 @@ const EXECUTIVE_LEADERSHIP: ExecutiveMember[] = [
     slaPill: "Daily Sprint Governance",
     tags: ["Operations", "Cross-Border Pacing", "15-Min Response"],
     ctaLabel: "Sync With Operations",
-    ctaHref: "/quote",
+    ctaHref: "/get-a-quote",
   },
   {
     name: "Bikram Keshari Sahu",
@@ -59,7 +59,7 @@ const EXECUTIVE_LEADERSHIP: ExecutiveMember[] = [
     slaPill: "Daily Quality & Shift Audits",
     tags: ["Tooling & CRM", "Sprint Audits", "Shift Adherence"],
     ctaLabel: "Inquire Sprint Setup",
-    ctaHref: "/quote",
+    ctaHref: "/get-a-quote",
   },
 ];
 

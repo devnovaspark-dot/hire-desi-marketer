@@ -27,7 +27,7 @@ export function QuoteForm() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
-    router.prefetch("/thank-you");
+    router.prefetch("/thank-you-get-a-quote");
   }, [router]);
 
   const countries = [
@@ -105,8 +105,8 @@ export function QuoteForm() {
         }
       }
 
-      // Fast, immediate redirect directly to /thank-you
-      window.location.href = "/thank-you";
+      // Fast, immediate redirect directly to /thank-you-get-a-quote
+      window.location.href = "/thank-you-get-a-quote";
     } catch (err: unknown) {
       setIsLoading(false);
       if (err instanceof Error) {

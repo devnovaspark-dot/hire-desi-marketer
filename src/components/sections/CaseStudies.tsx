@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CASE_STUDIES } from "@/data/case-studies";
 import {
@@ -83,6 +84,18 @@ export function CaseStudies() {
           subtitle="Get an inside look at our campaign strategies, location-focused sprints, and conversion tracking that brings marketing performance into focus."
           align="center"
         />
+
+        {/* Top Direct Action CTA Button */}
+        <div className="flex justify-center -mt-1 mb-1">
+          <Link
+            href="/get-a-quote"
+            className="btn-luxury-gold btn-shimmer px-5 py-2 sm:px-6 sm:py-2.5 rounded-full text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-md cursor-pointer group"
+          >
+            <Sparkles className="w-3.5 h-3.5 stroke-[2.5]" />
+            <span>Get a Free Quote for Your Brand</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform stroke-[2.5]" />
+          </Link>
+        </div>
 
         {/* Compact, Smaller-Width Tactile Tab Filter Bar */}
         <div className="w-full max-w-xl mx-auto">
@@ -292,7 +305,7 @@ export function CaseStudies() {
               {/* Action Link & Direct Consultation CTA - Zero Layout Shift */}
               <div className="pt-1 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2.5 h-[42px] sm:h-[40px]">
                 <a
-                  href="/quote"
+                  href="/get-a-quote"
                   className="btn-luxury-gold btn-shimmer h-[38px] px-4 sm:px-5 rounded-lg text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-1.5 cursor-pointer shadow-sm whitespace-nowrap self-start"
                 >
                   <span className="sm:inline hidden">Request Custom Strategy for {current.industry}</span>

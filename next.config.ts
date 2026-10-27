@@ -24,6 +24,26 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/quote",
+        destination: "/get-a-quote",
+        permanent: true,
+      },
+      {
+        source: "/thank-you",
+        destination: "/thank-you-get-a-quote",
+        permanent: true,
+      },
+      {
+        source: "/contact",
+        destination: "/get-a-quote",
+        permanent: true,
+      },
+      {
+        source: "/contact-us",
+        destination: "/get-a-quote",
+        permanent: true,
+      },
+      {
         source: "/Hire%20desi%20marketer%20video-%2017%20oct.mp4",
         destination: "/team-walkthrough.mp4",
         permanent: true,

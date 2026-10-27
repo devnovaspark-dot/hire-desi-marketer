@@ -218,7 +218,7 @@ export function VideoShowcase() {
         <div className="flex flex-col items-center gap-3 w-full max-w-xl mx-auto pt-1">
           <div className="flex flex-wrap items-center justify-center gap-3 w-full">
             <Link
-              href="/quote"
+              href="/get-a-quote"
               className="btn-luxury-gold btn-shimmer px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-md cursor-pointer group"
             >
               <span>Hire In-House Marketers — From $8/Hr</span>
