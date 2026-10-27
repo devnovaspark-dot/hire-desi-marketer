@@ -173,7 +173,7 @@ export function EngagementModels() {
 
             <div className="pt-2.5 sm:pt-3">
               <a
-                href="#start"
+                href="/quote"
                 className="btn-luxury-gold btn-shimmer w-full py-2 sm:py-2.5 px-3 rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 group cursor-pointer shadow-lg"
               >
                 <span>Claim $999 Growth Bundle</span>

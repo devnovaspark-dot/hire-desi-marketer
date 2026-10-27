@@ -135,7 +135,7 @@ export function FAQ() {
             </div>
           </div>
           <a
-            href="#quote"
+            href="/quote"
             className="btn-luxury-navy btn-shimmer px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-1.5 shrink-0 cursor-pointer shadow-md"
           >
             <span>Ask Us Directly</span>

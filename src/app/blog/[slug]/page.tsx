@@ -392,7 +392,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                   <Link
-                    href="/#quote"
+                    href="/quote"
                     className="btn-luxury-navy px-6 py-3 rounded-full text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-sm"
                   >
                     <span>Get Free 90-Day Plan</span>

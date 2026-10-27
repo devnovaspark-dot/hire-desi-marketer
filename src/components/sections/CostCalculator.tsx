@@ -181,7 +181,7 @@ export function CostCalculator() {
 
           {/* Physical 3D Button - Fixed height and non-wrapping */}
           <a
-            href="#quote"
+            href="/quote"
             className="btn-luxury-gold btn-shimmer h-[44px] sm:h-[48px] px-3 rounded-xl text-center text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 group cursor-pointer shadow-lg whitespace-nowrap"
           >
             <span className="tabular-nums">Lock in {hoursPerDay} Hours/Day at $8/hr</span>

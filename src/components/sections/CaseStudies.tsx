@@ -292,7 +292,7 @@ export function CaseStudies() {
               {/* Action Link & Direct Consultation CTA - Zero Layout Shift */}
               <div className="pt-1 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2.5 h-[42px] sm:h-[40px]">
                 <a
-                  href="#quote"
+                  href="/quote"
                   className="btn-luxury-gold btn-shimmer h-[38px] px-4 sm:px-5 rounded-lg text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-1.5 cursor-pointer shadow-sm whitespace-nowrap self-start"
                 >
                   <span className="sm:inline hidden">Request Custom Strategy for {current.industry}</span>

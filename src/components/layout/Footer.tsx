@@ -445,14 +445,13 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="#quote"
-                  onClick={(e) => handleSmoothNav(e, "#quote")}
+                <Link
+                  href="/quote"
                   className="hover:text-white transition-colors flex items-center gap-1.5 group"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover:bg-[#FFB020] transition-colors" />
                   <span>Custom Squad Builder</span>
-                </a>
+                </Link>
               </li>
               <li>
                 <Link
@@ -658,13 +657,12 @@ export function Footer() {
           </p>
 
           <div className="flex items-center gap-4">
-            <a
-              href="#quote"
-              onClick={(e) => handleSmoothNav(e, "#quote")}
+            <Link
+              href="/quote"
               className="text-slate-300 hover:text-[#FFB020] transition-colors font-medium"
             >
               Request a Free Plan
-            </a>
+            </Link>
             <span className="text-white/20">|</span>
             <button
               onClick={scrollToTop}

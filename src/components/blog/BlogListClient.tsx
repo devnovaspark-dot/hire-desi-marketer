@@ -502,7 +502,7 @@ export function BlogListClient({ initialPosts, categories }: BlogListClientProps
 
             <div className="space-y-2.5 pt-1">
               <Link
-                href="/#quote"
+                href="/quote"
                 className="btn-luxury-gold btn-shimmer w-full py-2.5 px-4 rounded-xl text-center text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md"
               >
                 <span>Book Free Consultation</span>
@@ -549,7 +549,7 @@ export function BlogListClient({ initialPosts, categories }: BlogListClientProps
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
             <Link
-              href="/#quote"
+              href="/quote"
               className="w-full sm:w-auto btn-luxury-gold btn-shimmer px-7 py-3.5 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-lg"
             >
               <span>Find Your Fastest Path to Growth</span>

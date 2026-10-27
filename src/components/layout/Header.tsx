@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight, Sparkles, Shield, Clock } from "lucide-react";
@@ -8,12 +8,12 @@ import { cn } from "@/lib/utils";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 
 const NAV_LINKS = [
-  { label: "Pricing", href: "#pricing" },
+  { label: "About Us", href: "#about" },
   { label: "Squads", href: "#teams" },
   { label: "Tech Stack", href: "#stack" },
   { label: "Case Studies", href: "#work" },
   { label: "Blog", href: "/blog" },
-  { label: "Bhubaneswar HQ", href: "#office" },
+  { label: "Contact Us", href: "#contact" },
 ];
 
 export function Header() {
@@ -21,7 +21,10 @@ export function Header() {
   const isHomePage = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeNav, setActiveNav] = useState<string>(isHomePage ? "#pricing" : "/blog");
+  const [activeNav, setActiveNav] = useState<string>(isHomePage ? "#about" : "/blog");
+
+  const isClickScrollingRef = useRef(false);
+  const scrollTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (!isHomePage) {
@@ -33,6 +36,9 @@ export function Header() {
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+
+      // Prevent scroll-spy from jumping/bouncing through intermediate tabs during programmatic smooth scroll
+      if (isClickScrollingRef.current) return;
 
       // Automatic scroll spy for active section highlight
       const sectionIds = NAV_LINKS.filter((l) => l.href.startsWith("#")).map((l) =>
@@ -54,7 +60,10 @@ export function Header() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
+    };
   }, [isHomePage, pathname]);
 
   // Handle escape key to close mobile menu
@@ -83,7 +92,15 @@ export function Header() {
         return;
       }
       e.preventDefault();
+      
+      // Instantly set active tab without delay
       setActiveNav(href);
+      isClickScrollingRef.current = true;
+
+      if (scrollTimerRef.current) {
+        clearTimeout(scrollTimerRef.current);
+      }
+
       const targetId = href.replace("#", "");
       const element = document.getElementById(targetId);
       if (element) {
@@ -97,6 +114,11 @@ export function Header() {
         });
         window.history.replaceState(null, "", href);
       }
+
+      // Lock scroll-spy until smooth scroll animation settles
+      scrollTimerRef.current = setTimeout(() => {
+        isClickScrollingRef.current = false;
+      }, 850);
     }
   };
 
@@ -157,8 +179,7 @@ export function Header() {
           <div className="hidden md:flex items-center gap-3">
             {/* Shimmering 3D Luxury CTA Button - Sleek & Refined */}
             <Link
-              href={isHomePage ? "#quote" : "/#quote"}
-              onClick={(e) => handleNavClick(e as unknown as React.MouseEvent<HTMLAnchorElement>, "#quote")}
+              href="/quote"
               className="btn-luxury-gold btn-shimmer px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-wider inline-flex items-center gap-1.5 group cursor-pointer shadow-md"
             >
               <span>Get a Free Quote</span>
@@ -229,11 +250,8 @@ export function Header() {
               <span>Bhubaneswar HQ Online · Dedicated Western Shifts</span>
             </div>
             <Link
-              href={isHomePage ? "#quote" : "/#quote"}
-              onClick={(e) => {
-                setMobileMenuOpen(false);
-                handleNavClick(e as unknown as React.MouseEvent<HTMLAnchorElement>, "#quote");
-              }}
+              href="/quote"
+              onClick={() => setMobileMenuOpen(false)}
               className="btn-luxury-gold btn-shimmer py-3 px-4 rounded-xl text-center text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2"
             >
               <Sparkles className="w-4 h-4" />

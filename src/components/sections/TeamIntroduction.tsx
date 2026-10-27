@@ -35,7 +35,7 @@ const EXECUTIVE_LEADERSHIP: ExecutiveMember[] = [
     slaPill: "Direct CEO Escalation Line",
     tags: ["Growth Strategy", "Retainer Backing", "Client Advisory"],
     ctaLabel: "Schedule Founder Call",
-    ctaHref: "#quote",
+    ctaHref: "/quote",
   },
   {
     name: "Pranjal Sharma",
@@ -47,7 +47,7 @@ const EXECUTIVE_LEADERSHIP: ExecutiveMember[] = [
     slaPill: "Daily Sprint Governance",
     tags: ["Operations", "Cross-Border Pacing", "15-Min Response"],
     ctaLabel: "Sync With Operations",
-    ctaHref: "#quote",
+    ctaHref: "/quote",
   },
   {
     name: "Bikram Keshari Sahu",
@@ -59,7 +59,7 @@ const EXECUTIVE_LEADERSHIP: ExecutiveMember[] = [
     slaPill: "Daily Quality & Shift Audits",
     tags: ["Tooling & CRM", "Sprint Audits", "Shift Adherence"],
     ctaLabel: "Inquire Sprint Setup",
-    ctaHref: "#quote",
+    ctaHref: "/quote",
   },
 ];
 
@@ -80,7 +80,8 @@ export function TeamIntroduction() {
   };
 
   return (
-    <section id="people" className="py-6 sm:py-8 bg-[#F5F2EB] border-t border-[#DED7CA] scroll-mt-24">
+    <section id="about" className="py-6 sm:py-8 bg-[#F5F2EB] border-t border-[#DED7CA] scroll-mt-28">
+      <div id="people" />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-3.5 sm:gap-4">
         
         {/* Section Heading - Compact & High-Impact */}

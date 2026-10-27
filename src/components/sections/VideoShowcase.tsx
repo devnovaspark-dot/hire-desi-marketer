@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
+import Link from "next/link";
 import { Play, ArrowRight, CheckCircle2 } from "lucide-react";
 
 function WhatsAppIcon({ className = "w-4 h-4" }: { className?: string }) {
@@ -216,13 +217,13 @@ export function VideoShowcase() {
         {/* Refined Luxury Button Pair — Matching Hero Styling Exactly */}
         <div className="flex flex-col items-center gap-3 w-full max-w-xl mx-auto pt-1">
           <div className="flex flex-wrap items-center justify-center gap-3 w-full">
-            <a
-              href="#quote"
+            <Link
+              href="/quote"
               className="btn-luxury-gold btn-shimmer px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-md cursor-pointer group"
             >
               <span>Hire In-House Marketers — From $8/Hr</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform stroke-[2.5]" />
-            </a>
+            </Link>
 
             <a
               href="https://wa.me/918280788689?text=Hi%20Hire%20Desi%20Marketer%2C%20I%20watched%20your%20team%20walkthrough%20and%20want%20to%20discuss%20hiring%20marketers."

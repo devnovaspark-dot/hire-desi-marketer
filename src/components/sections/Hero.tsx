@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Modal } from "@/components/ui/Modal";
 import { AnimatedGlobeHero } from "./AnimatedGlobeHero";
 import {
@@ -51,13 +52,13 @@ export function Hero() {
 
             {/* Clear Primary & Secondary Actions - Sleek & Refined */}
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1">
-              <a
-                href="#quote"
+              <Link
+                href="/quote"
                 className="btn-luxury-gold btn-shimmer px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-lg cursor-pointer group"
               >
                 <span>Build My Marketing Team</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform stroke-[2.5]" />
-              </a>
+              </Link>
 
               <a
                 href="#video-showcase"

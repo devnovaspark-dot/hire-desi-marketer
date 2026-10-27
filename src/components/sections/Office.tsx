@@ -25,7 +25,8 @@ export function Office() {
   const [activeTab, setActiveTab] = useState<"specs" | "sync" | "contact">("specs");
 
   return (
-    <section id="office" className="py-12 lg:py-16 bg-[#FAF8F5] relative border-t border-[#DED7CA] scroll-mt-28">
+    <section id="contact" className="py-12 lg:py-16 bg-[#FAF8F5] relative border-t border-[#DED7CA] scroll-mt-28">
+      <div id="office" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-8">
         <SectionHeading
           kicker="Our Physical Office"
@@ -260,7 +261,7 @@ export function Office() {
                 </a>
 
                 <a
-                  href="#quote"
+                  href="/quote"
                   className="btn-luxury-gold btn-shimmer h-[38px] sm:h-[42px] rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wide flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
                 >
                   <span>Book HQ Video Call</span>

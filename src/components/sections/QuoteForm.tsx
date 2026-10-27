@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   CheckCircle2,
   Clock,
@@ -12,6 +13,7 @@ import {
 } from "lucide-react";
 
 export function QuoteForm() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -107,6 +109,9 @@ export function QuoteForm() {
         mode: data.mode || "formsubmit",
         message: data.message || "Thank you! Your quote request has been dispatched to our team.",
       });
+
+      // Navigate to dedicated Thank You page with bouncing glass ball
+      router.push("/thank-you");
     } catch (err: unknown) {
       if (err instanceof Error) {
         setErrorMsg(err.message);
