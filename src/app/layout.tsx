@@ -128,7 +128,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-[#F6F4EE] text-[#0B1B3A] antialiased selection:bg-[#FFB020] selection:text-[#060B22]">
         {/* Google Analytics (gtag.js) */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-2EN2Z5G1JC"
+          src="https://www.googletagmanager.com/gtag/js?id=G-LTW9DHSLLC"
           strategy="lazyOnload"
         />
         <Script id="google-analytics" strategy="lazyOnload">
@@ -137,6 +137,7 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
+            gtag('config', 'G-LTW9DHSLLC');
             gtag('config', 'G-2EN2Z5G1JC');
           `}
         </Script>
