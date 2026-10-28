@@ -85,7 +85,12 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
       ...,
       items[]{
         ...,
-        "image": image.asset->url + "?auto=format&fit=max&fm=webp"
+        "image": coalesce(
+          asset->url + "?auto=format&fit=max&fm=webp",
+          image.asset->url + "?auto=format&fit=max&fm=webp",
+          image.url,
+          url
+        )
       }
     }
   }

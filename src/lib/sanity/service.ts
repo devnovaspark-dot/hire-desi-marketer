@@ -227,11 +227,13 @@ function transformSanityBody(rawBody: any[]): {
         ? block.items.map((item: any) => ({
             image:
               item.image?.asset?.url ||
+              item.asset?.url ||
               item.image?.url ||
-              (typeof item.image === "string" ? item.image : "") ||
               item.url ||
+              (typeof item.image === "string" ? item.image : "") ||
+              (typeof item.asset === "string" ? item.asset : "") ||
               "/images/Thumbnail.webp",
-            alt: item.image?.alt || item.alt || item.title || "Carousel slide image",
+            alt: item.alt || item.image?.alt || item.title || "Carousel slide image",
             title: item.title,
             description: item.description,
             badge: item.badge,

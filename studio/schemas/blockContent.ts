@@ -483,29 +483,26 @@ export const blockContent = defineType({
           name: 'items',
           type: 'array',
           title: 'Slides / Carousel Items',
-          description: 'Add, edit, and reorder slides for this carousel slider.',
+          description: 'Add, upload, and reorder slides for this carousel slider.',
+          options: {
+            layout: 'grid',
+          },
           validation: (Rule) => Rule.required().min(1),
           of: [
             defineArrayMember({
-              type: 'object',
+              type: 'image',
+              name: 'slide',
               title: 'Slide',
+              options: {
+                hotspot: true,
+                accept: 'image/webp,image/png,image/jpeg,image/gif',
+              },
               fields: [
                 {
-                  name: 'image',
-                  type: 'image',
-                  title: 'Slide Image (WebP recommended)',
-                  options: {
-                    hotspot: true,
-                    accept: 'image/webp,image/png,image/jpeg',
-                  },
-                  fields: [
-                    {
-                      name: 'alt',
-                      type: 'string',
-                      title: 'Alternative Text',
-                      description: 'Crucial for SEO and accessibility.',
-                    },
-                  ],
+                  name: 'alt',
+                  type: 'string',
+                  title: 'Alternative Text',
+                  description: 'Crucial for SEO and accessibility.',
                   validation: (Rule) => Rule.required(),
                 },
                 {
@@ -544,7 +541,19 @@ export const blockContent = defineType({
                 select: {
                   title: 'title',
                   subtitle: 'description',
-                  media: 'image',
+                  media: 'asset',
+                },
+                prepare(selection: Record<string, unknown>) {
+                  const { title, subtitle, media } = selection as {
+                    title?: string;
+                    subtitle?: string;
+                    media?: unknown;
+                  };
+                  return {
+                    title: title || 'Slide Image',
+                    subtitle: subtitle || 'Carousel Slide',
+                    media: media as any,
+                  };
                 },
               },
             }),
