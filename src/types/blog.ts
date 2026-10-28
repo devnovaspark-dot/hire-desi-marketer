@@ -98,6 +98,15 @@ export interface ImageBlock {
   badge?: string;
 }
 
+export interface GifBlock {
+  type: "gif";
+  url: string;
+  alt: string;
+  caption?: string;
+  badge?: string;
+  size?: "standard" | "wide" | "compact";
+}
+
 export interface TableBlock {
   type: "table";
   caption?: string;
@@ -169,6 +178,7 @@ export type BlogContentBlock =
   | QuoteBlock
   | CodeBlock
   | ImageBlock
+  | GifBlock
   | TableBlock
   | InfographicBlock
   | FaqBlock

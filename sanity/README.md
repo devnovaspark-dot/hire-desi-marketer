@@ -50,8 +50,14 @@ Writers choose structured visual blocks from the Sanity Studio editor dropdown, 
    - Column A (US In-House) vs Column B (Dedicated Desi Squad).
 8. **In-Article Conversion CTA (`inArticleCta`)**:
    - Drops a high-converting "Request Free Audit" or "Build Custom Squad" card.
-9. **Stylized Blockquotes (`quoteBlock`)** & **Code Snippets (`codeSnippet`)**.
-10. **Automated "• On This Page" Table of Contents**:
+9. **🎠 Interactive Carousel / Slider (`carousel`)**:
+   - Multi-slide interactive carousel with autoplay, custom slide badges, titles, descriptions, and CTA links.
+   - Display modes: Rich Card Slider, Standard Minimal Slider, or Full-Width Visual Showcase.
+10. **🎬 Animated GIF / Meme (`gifBlock`)**:
+   - Upload animated `.gif` files or paste direct URLs from Giphy, Tenor, or the web.
+   - Includes custom captions, SEO alt text, badge labels, and adjustable width (compact meme, standard, wide).
+11. **Stylized Blockquotes (`quoteBlock`)** & **Code Snippets (`codeSnippet`)**.
+12. **Automated "• On This Page" Table of Contents**:
    - Derived automatically with active scrollspy highlighting and section counter badge.
 
 ---

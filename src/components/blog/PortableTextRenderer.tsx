@@ -67,6 +67,9 @@ export function PortableTextRenderer({ blocks, className }: PortableTextRenderer
           case "image":
             return <ImageView key={index} block={block} />;
 
+          case "gif":
+            return <GifBlockView key={index} block={block} />;
+
           case "table":
             return <TableBlockView key={index} block={block} />;
 
@@ -369,6 +372,7 @@ function ImageView({
 }: {
   block: Extract<BlogContentBlock, { type: "image" }>;
 }) {
+  const isGif = block.url?.toLowerCase().includes(".gif");
   return (
     <figure className="my-10 space-y-3">
       <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden skeuo-card-light border border-slate-200 shadow-md">
@@ -376,6 +380,7 @@ function ImageView({
           src={block.url}
           alt={block.alt}
           fill
+          unoptimized={isGif}
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 800px"
         />
@@ -387,6 +392,59 @@ function ImageView({
       </div>
       {block.caption && (
         <figcaption className="text-center text-xs text-slate-500 font-medium">
+          {block.caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
+// 7b. Animated GIF / Meme Block
+function GifBlockView({
+  block,
+}: {
+  block: Extract<BlogContentBlock, { type: "gif" }>;
+}) {
+  const widthClasses = {
+    compact: "max-w-md",
+    standard: "max-w-2xl",
+    wide: "max-w-4xl",
+  };
+
+  const containerWidth = widthClasses[block.size || "standard"] || widthClasses.standard;
+
+  return (
+    <figure className={cn("my-10 mx-auto space-y-3", containerWidth)}>
+      <div className="relative w-full rounded-2xl overflow-hidden skeuo-card-light border border-slate-200 shadow-lg bg-slate-900/5 backdrop-blur-sm">
+        {/* GIF Media */}
+        <div className="relative w-full flex items-center justify-center p-1 sm:p-2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={block.url}
+            alt={block.alt}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-auto rounded-xl object-contain shadow-sm"
+          />
+        </div>
+
+        {/* Optional Badge */}
+        {block.badge && (
+          <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#060B22]/90 backdrop-blur-md border border-[#FFB020]/40 text-[#FFB020] text-xs font-black uppercase tracking-wider shadow-lg flex items-center gap-1.5">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#FFB020] animate-pulse" />
+            {block.badge}
+          </div>
+        )}
+
+        {/* Subtle GIF tag */}
+        <div className="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-black/60 backdrop-blur-md text-[10px] font-bold text-white/90 tracking-widest uppercase pointer-events-none">
+          GIF
+        </div>
+      </div>
+
+      {/* Caption */}
+      {block.caption && (
+        <figcaption className="text-center text-xs sm:text-sm text-slate-500 font-medium italic">
           {block.caption}
         </figcaption>
       )}

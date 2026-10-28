@@ -199,7 +199,29 @@ function transformSanityBody(rawBody: any[]): {
       continue;
     }
 
-    // 10. Interactive Carousel / Slider
+    // 10. Animated GIF / Meme Block
+    if (block._type === "gifBlock") {
+      const gifUrl =
+        block.uploadedUrl ||
+        block.gifFile?.asset?.url ||
+        block.gifFile?.url ||
+        block.gifUrl ||
+        "";
+
+      if (gifUrl) {
+        content.push({
+          type: "gif",
+          url: gifUrl,
+          alt: block.alt || "Animated GIF",
+          caption: block.caption,
+          badge: block.badge,
+          size: block.size || "standard",
+        });
+      }
+      continue;
+    }
+
+    // 11. Interactive Carousel / Slider
     if (block._type === "carousel") {
       const items: CarouselSlide[] = Array.isArray(block.items)
         ? block.items.map((item: any) => ({

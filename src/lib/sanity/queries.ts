@@ -72,7 +72,14 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
     ...,
     _type == "richImage" => {
       ...,
-      "url": asset->url + "?auto=format&fit=max&fm=webp"
+      "url": select(
+        asset->extension == "gif" => asset->url,
+        asset->url + "?auto=format&fit=max&fm=webp"
+      )
+    },
+    _type == "gifBlock" => {
+      ...,
+      "uploadedUrl": gifFile.asset->url
     },
     _type == "carousel" => {
       ...,

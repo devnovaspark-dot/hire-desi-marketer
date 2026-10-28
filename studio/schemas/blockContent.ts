@@ -46,15 +46,15 @@ export const blockContent = defineType({
       },
     }),
 
-    // 1. Rich Image Block (WebP format required)
+    // 1. Rich Image Block (WebP, PNG, JPEG, GIF)
     defineArrayMember({
       type: 'image',
       name: 'richImage',
-      title: 'Image (WebP format required)',
-      description: 'Upload in-article images in modern WebP format (.webp) for fast loading.',
+      title: 'Image / Graphic (WebP, PNG, JPG, GIF)',
+      description: 'Upload in-article images. Modern WebP recommended for static graphics; GIF supported for animations.',
       options: {
         hotspot: true,
-        accept: 'image/webp',
+        accept: 'image/webp,image/png,image/jpeg,image/gif',
       },
       fields: [
         {
@@ -567,6 +567,84 @@ export const blockContent = defineType({
           return {
             title: title || 'Carousel Slider',
             subtitle: `${count} slide${count === 1 ? '' : 's'}${subtitle ? ` — ${subtitle}` : ''}`,
+          };
+        },
+      },
+    }),
+
+    // 13. Animated GIF / Meme Block
+    defineArrayMember({
+      type: 'object',
+      name: 'gifBlock',
+      title: '🎬 Animated GIF / Meme',
+      fields: [
+        {
+          name: 'gifFile',
+          type: 'image',
+          title: 'Upload GIF File',
+          description: 'Upload an animated .gif file (drag & drop from your computer).',
+          options: {
+            accept: 'image/gif,image/webp',
+          },
+        },
+        {
+          name: 'gifUrl',
+          type: 'url',
+          title: 'Or Paste External GIF URL (Giphy / Tenor / Web)',
+          description: 'Or paste a direct GIF link from Giphy, Tenor, Imgur, etc. (e.g., https://media.giphy.com/media/.../giphy.gif).',
+          placeholder: 'https://media.giphy.com/media/.../giphy.gif',
+        },
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text (Alt Text)',
+          description: 'Crucial for SEO and screen readers. Briefly describe what happens in the GIF.',
+          placeholder: 'e.g. Marketing manager celebrating positive ROAS results',
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          name: 'caption',
+          type: 'string',
+          title: 'Caption (Optional)',
+          placeholder: 'e.g. Actual footage of our squad after cutting CPL by 40% in week 2.',
+        },
+        {
+          name: 'badge',
+          type: 'string',
+          title: 'Badge Label (Optional)',
+          placeholder: 'e.g. MEME, REACTION, QUICK DEMO, 2026 TREND',
+        },
+        {
+          name: 'size',
+          type: 'string',
+          title: 'Display Width',
+          options: {
+            list: [
+              { title: 'Standard Article Width (Centered, max 680px)', value: 'standard' },
+              { title: 'Compact / Meme Size (Centered, max 440px)', value: 'compact' },
+              { title: 'Wide Banner (Full column, max 900px)', value: 'wide' },
+            ],
+            layout: 'radio',
+          },
+          initialValue: 'standard',
+        },
+      ],
+      preview: {
+        select: {
+          title: 'caption',
+          alt: 'alt',
+          media: 'gifFile',
+        },
+        prepare(selection: Record<string, unknown>) {
+          const { title, alt, media } = selection as {
+            title?: string;
+            alt?: string;
+            media?: unknown;
+          };
+          return {
+            title: title || alt || 'Animated GIF',
+            subtitle: '🎬 Animated GIF / Meme',
+            media: media as any,
           };
         },
       },
