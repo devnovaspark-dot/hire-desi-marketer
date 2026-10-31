@@ -1,4 +1,5 @@
 import { defineType, defineArrayMember, defineField } from 'sanity';
+import { CarouselItemsInput } from '../components/CarouselItemsInput';
 
 /**
  * Portable Text Schema with Custom "Lego Blocks" for Writers.
@@ -490,11 +491,8 @@ export const blockContent = defineType({
           type: 'array',
           title: 'Slides / Carousel Items',
           description: 'Add, upload, and reorder slides for this carousel slider.',
-          options: {
-            modal: {
-              type: 'dialog',
-              width: 2,
-            },
+          components: {
+            input: CarouselItemsInput,
           },
           validation: (Rule) => Rule.required().min(1),
           of: [
