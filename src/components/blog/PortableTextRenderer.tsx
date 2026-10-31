@@ -23,9 +23,11 @@ import {
   Play,
   Pause,
   Layers,
+  ZoomIn,
 } from "lucide-react";
 import { BlogContentBlock } from "@/types/blog";
 import { cn } from "@/lib/utils";
+import { ZoomableImage, useImageZoom } from "./ImageZoomContext";
 
 interface PortableTextRendererProps {
   blocks: BlogContentBlock[];
@@ -366,45 +368,29 @@ function CodeBlockView({
   );
 }
 
-// 7. Responsive High-Def Image with Caption & Badge
+// 7. Responsive High-Def Image with Caption & Badge (with One-Click Zoom)
 function ImageView({
   block,
 }: {
   block: Extract<BlogContentBlock, { type: "image" }>;
 }) {
-  const isGif = block.url?.toLowerCase().includes(".gif");
   return (
-    <figure className="my-10 space-y-3">
-      <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden skeuo-card-light border border-slate-200 shadow-md">
-        <Image
-          src={block.url}
-          alt={block.alt}
-          fill
-          unoptimized={isGif}
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 800px"
-        />
-        {block.badge && (
-          <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#060B22]/90 backdrop-blur-md border border-[#FFB020]/40 text-[#FFB020] text-xs font-black uppercase tracking-wider shadow-lg">
-            {block.badge}
-          </div>
-        )}
-      </div>
-      {block.caption && (
-        <figcaption className="text-center text-xs text-slate-500 font-medium">
-          {block.caption}
-        </figcaption>
-      )}
-    </figure>
+    <ZoomableImage
+      src={block.url}
+      alt={block.alt}
+      caption={block.caption}
+      badge={block.badge}
+    />
   );
 }
 
-// 7b. Animated GIF / Meme Block
+// 7b. Animated GIF / Meme Block (with One-Click Zoom)
 function GifBlockView({
   block,
 }: {
   block: Extract<BlogContentBlock, { type: "gif" }>;
 }) {
+  const { openZoom } = useImageZoom();
   const widthClasses = {
     compact: "max-w-md",
     standard: "max-w-2xl",
@@ -415,7 +401,30 @@ function GifBlockView({
 
   return (
     <figure className={cn("my-10 mx-auto space-y-3", containerWidth)}>
-      <div className="relative w-full rounded-2xl overflow-hidden skeuo-card-light border border-slate-200 shadow-lg bg-slate-900/5 backdrop-blur-sm">
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={() =>
+          openZoom({
+            src: block.url,
+            alt: block.alt,
+            caption: block.caption,
+            badge: block.badge,
+          })
+        }
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openZoom({
+              src: block.url,
+              alt: block.alt,
+              caption: block.caption,
+              badge: block.badge,
+            });
+          }
+        }}
+        className="group relative w-full rounded-2xl overflow-hidden skeuo-card-light border border-slate-200 shadow-lg bg-slate-900/5 backdrop-blur-sm cursor-zoom-in focus:outline-hidden focus:ring-2 focus:ring-[#FFB020]"
+      >
         {/* GIF Media */}
         <div className="relative w-full flex items-center justify-center p-1 sm:p-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -425,7 +434,7 @@ function GifBlockView({
             alt={block.alt}
             loading="lazy"
             decoding="async"
-            className="w-full h-auto rounded-xl object-contain shadow-sm"
+            className="w-full h-auto rounded-xl object-contain shadow-sm group-hover:scale-[1.015] transition-transform duration-200 ease-out"
           />
         </div>
 
@@ -436,6 +445,14 @@ function GifBlockView({
             {block.badge}
           </div>
         )}
+
+        {/* Hover Zoom pill */}
+        <div className="absolute bottom-3 right-14 z-20 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-y-1 group-hover:translate-y-0 pointer-events-none">
+          <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#060B22]/90 text-[#FFB020] border border-[#FFB020]/40 text-[10px] font-black uppercase tracking-wider backdrop-blur-md shadow-xl">
+            <ZoomIn className="w-3 h-3" />
+            <span>Zoom</span>
+          </div>
+        </div>
 
         {/* Subtle GIF tag */}
         <div className="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-black/60 backdrop-blur-md text-[10px] font-bold text-white/90 tracking-widest uppercase pointer-events-none">
@@ -704,6 +721,7 @@ function CarouselBlockView({
 }: {
   block: Extract<BlogContentBlock, { type: "carousel" }>;
 }) {
+  const { openZoom } = useImageZoom();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(block.autoplay ?? false);
   const touchStartX = useRef<number | null>(null);
@@ -846,8 +864,31 @@ function CarouselBlockView({
             }}
           />
 
-          {/* Main Slide Image: object-contain ensures ZERO cut-out for any aspect ratio */}
-          <div className="relative z-10 w-full h-full flex items-center justify-center">
+          {/* Main Slide Image: object-contain ensures ZERO cut-out for any aspect ratio (with One-Click Zoom) */}
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={() =>
+              openZoom({
+                src: activeItem.image,
+                alt: activeItem.alt || activeItem.title,
+                caption: activeItem.description,
+                badge: activeItem.badge,
+              })
+            }
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                openZoom({
+                  src: activeItem.image,
+                  alt: activeItem.alt || activeItem.title,
+                  caption: activeItem.description,
+                  badge: activeItem.badge,
+                });
+              }
+            }}
+            className="relative z-10 w-full h-full flex items-center justify-center cursor-zoom-in group/slide focus:outline-hidden"
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               key={`${currentIndex}-${activeItem.image}`}
@@ -855,8 +896,16 @@ function CarouselBlockView({
               alt={activeItem.alt || activeItem.title || "Carousel slide image"}
               loading="lazy"
               decoding="async"
-              className="max-h-[520px] w-auto max-w-full rounded-2xl object-contain shadow-2xl transition-transform duration-500 ease-out group-hover:scale-[1.01]"
+              className="max-h-[520px] w-auto max-w-full rounded-2xl object-contain shadow-2xl transition-transform duration-500 ease-out group-hover/slide:scale-[1.015]"
             />
+
+            {/* Hover expand badge */}
+            <div className="absolute bottom-3 right-3 z-30 opacity-0 group-hover/slide:opacity-100 transition-all duration-200 translate-y-1 group-hover/slide:translate-y-0 pointer-events-none">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#060B22]/90 text-[#FFB020] border border-[#FFB020]/40 text-xs font-black uppercase tracking-wider backdrop-blur-md shadow-xl">
+                <ZoomIn className="w-3.5 h-3.5" />
+                <span>Zoom</span>
+              </div>
+            </div>
           </div>
 
           {/* Top Left Slide Badge */}
