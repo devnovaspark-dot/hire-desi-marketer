@@ -439,6 +439,12 @@ export const blockContent = defineType({
       type: 'object',
       name: 'carousel',
       title: '🎠 Interactive Carousel / Slider',
+      options: {
+        modal: {
+          type: 'dialog',
+          width: 2,
+        },
+      },
       fields: [
         defineField({
           name: 'title',
@@ -484,6 +490,12 @@ export const blockContent = defineType({
           type: 'array',
           title: 'Slides / Carousel Items',
           description: 'Add, upload, and reorder slides for this carousel slider.',
+          options: {
+            modal: {
+              type: 'dialog',
+              width: 2,
+            },
+          },
           validation: (Rule) => Rule.required().min(1),
           of: [
             defineArrayMember({
@@ -493,6 +505,10 @@ export const blockContent = defineType({
               options: {
                 hotspot: true,
                 accept: 'image/webp,image/png,image/jpeg,image/gif',
+                modal: {
+                  type: 'dialog',
+                  width: 2,
+                },
               },
               fields: [
                 defineField({
@@ -501,27 +517,18 @@ export const blockContent = defineType({
                   title: 'Alternative Text',
                   description: 'Crucial for SEO and accessibility (describe what appears in this slide).',
                   placeholder: 'e.g. Screenshot of high-converting Meta Ad creative',
-                  options: {
-                    isHighlighted: true,
-                  },
                 }),
                 defineField({
                   name: 'badge',
                   type: 'string',
                   title: 'Badge Label (Optional)',
                   placeholder: 'e.g. ROAS +420%, Step 01, Case Study, Meta Ads',
-                  options: {
-                    isHighlighted: true,
-                  },
                 }),
                 defineField({
                   name: 'title',
                   type: 'string',
                   title: 'Slide Title (Optional)',
                   placeholder: 'e.g. Dynamic Product Ads for Luxury Apparel',
-                  options: {
-                    isHighlighted: true,
-                  },
                 }),
                 defineField({
                   name: 'description',
@@ -529,9 +536,6 @@ export const blockContent = defineType({
                   rows: 2,
                   title: 'Slide Description / Caption (Optional)',
                   placeholder: 'e.g. Generated $140k in 30 days using UGC video overlays.',
-                  options: {
-                    isHighlighted: true,
-                  },
                 }),
                 defineField({
                   name: 'ctaText',
@@ -548,20 +552,14 @@ export const blockContent = defineType({
               ],
               preview: {
                 select: {
-                  title: 'title',
-                  alt: 'alt',
                   media: 'asset',
+                  title: 'title',
                 },
-                prepare(selection: Record<string, unknown>) {
-                  const { title, alt, media } = selection as {
-                    title?: string;
-                    alt?: string;
-                    media?: unknown;
-                  };
+                prepare({ media, title }: any) {
                   return {
-                    title: title || alt || 'Slide Image',
-                    subtitle: alt ? `Alt: ${alt}` : 'Carousel slide',
-                    media: media as any,
+                    title: title || 'Slide Image',
+                    subtitle: 'Carousel slide item',
+                    media,
                   };
                 },
               },
@@ -572,16 +570,11 @@ export const blockContent = defineType({
       preview: {
         select: {
           title: 'title',
-          subtitle: 'subtitle',
         },
-        prepare(selection: Record<string, unknown>) {
-          const { title, subtitle } = selection as {
-            title?: string;
-            subtitle?: string;
-          };
+        prepare({ title }: any) {
           return {
             title: title || 'Carousel Slider',
-            subtitle: subtitle ? `Carousel Slider — ${subtitle}` : 'Interactive image & graphic carousel',
+            subtitle: 'Interactive image & graphic carousel',
           };
         },
       },
@@ -592,6 +585,12 @@ export const blockContent = defineType({
       type: 'object',
       name: 'gifBlock',
       title: '🎬 Animated GIF / Meme',
+      options: {
+        modal: {
+          type: 'dialog',
+          width: 2,
+        },
+      },
       fields: [
         defineField({
           name: 'sourceType',
@@ -623,7 +622,7 @@ export const blockContent = defineType({
           title: 'Or Paste External GIF URL (Giphy / Tenor / Web)',
           description: 'Direct GIF link from Giphy, Tenor, Imgur, etc. (e.g., https://media.giphy.com/media/.../giphy.gif).',
           placeholder: 'https://media.giphy.com/media/.../giphy.gif',
-          hidden: ({ parent }: any) => parent?.sourceType === 'file',
+          hidden: ({ parent }: any) => parent?.sourceType !== 'url',
         }),
         defineField({
           name: 'alt',
@@ -661,23 +660,13 @@ export const blockContent = defineType({
       ],
       preview: {
         select: {
-          title: 'caption',
-          alt: 'alt',
           media: 'gifFile',
-          gifUrl: 'gifUrl',
-          sourceType: 'sourceType',
         },
-        prepare(selection: Record<string, unknown>) {
-          const { title, alt, media, gifUrl } = selection as {
-            title?: string;
-            alt?: string;
-            media?: unknown;
-            gifUrl?: string;
-          };
+        prepare({ media }: any) {
           return {
-            title: title || alt || (gifUrl ? 'External GIF' : 'Animated GIF'),
-            subtitle: gifUrl ? `🎬 GIF (${gifUrl.slice(0, 45)}...)` : '🎬 Animated GIF / Meme',
-            media: media as any,
+            title: '🎬 Animated GIF / Meme',
+            subtitle: 'Embedded animated GIF block',
+            media,
           };
         },
       },
