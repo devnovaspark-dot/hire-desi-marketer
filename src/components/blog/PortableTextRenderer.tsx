@@ -420,6 +420,7 @@ function GifBlockView({
         <div className="relative w-full flex items-center justify-center p-1 sm:p-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
+            key={block.url}
             src={block.url}
             alt={block.alt}
             loading="lazy"
@@ -832,20 +833,35 @@ function CarouselBlockView({
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="relative overflow-hidden group select-none"
+        className="relative overflow-hidden group select-none bg-[#020512]"
       >
-        <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full bg-slate-950">
-          <Image
-            src={activeItem.image}
-            alt={activeItem.alt || activeItem.title || "Slide image"}
-            fill
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.01]"
-            sizes="(max-width: 768px) 100vw, 900px"
+        <div className="relative w-full min-h-[340px] sm:min-h-[460px] md:min-h-[520px] flex items-center justify-center p-3 sm:p-6 overflow-hidden">
+          {/* Ambient blurred backdrop matching the image colors */}
+          <div
+            className="absolute inset-0 opacity-20 filter blur-3xl scale-125 pointer-events-none transition-all duration-700 ease-out"
+            style={{
+              backgroundImage: `url(${activeItem.image})`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
           />
+
+          {/* Main Slide Image: object-contain ensures ZERO cut-out for any aspect ratio */}
+          <div className="relative z-10 w-full h-full flex items-center justify-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              key={`${currentIndex}-${activeItem.image}`}
+              src={activeItem.image}
+              alt={activeItem.alt || activeItem.title || "Carousel slide image"}
+              loading="lazy"
+              decoding="async"
+              className="max-h-[520px] w-auto max-w-full rounded-2xl object-contain shadow-2xl transition-transform duration-500 ease-out group-hover:scale-[1.01]"
+            />
+          </div>
 
           {/* Top Left Slide Badge */}
           {activeItem.badge && (
-            <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-[#060B22]/90 backdrop-blur-md border border-[#FFB020]/40 text-[#FFB020] text-xs font-black uppercase tracking-wider shadow-lg flex items-center gap-1.5">
+            <div className="absolute top-4 left-4 z-20 px-3 py-1 rounded-full bg-[#060B22]/90 backdrop-blur-md border border-[#FFB020]/40 text-[#FFB020] text-xs font-black uppercase tracking-wider shadow-lg flex items-center gap-1.5">
               <Sparkles className="w-3 h-3 text-[#FFB020]" />
               <span>{activeItem.badge}</span>
             </div>
@@ -856,7 +872,7 @@ function CarouselBlockView({
             type="button"
             onClick={prevSlide}
             aria-label="Previous slide"
-            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-[#060B22]/80 hover:bg-[#FFB020] hover:text-[#060B22] text-white border border-white/20 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer shadow-lg"
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#060B22]/85 hover:bg-[#FFB020] hover:text-[#060B22] text-white border border-white/20 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer shadow-xl"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -864,42 +880,42 @@ function CarouselBlockView({
             type="button"
             onClick={nextSlide}
             aria-label="Next slide"
-            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-[#060B22]/80 hover:bg-[#FFB020] hover:text-[#060B22] text-white border border-white/20 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer shadow-lg"
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#060B22]/85 hover:bg-[#FFB020] hover:text-[#060B22] text-white border border-white/20 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer shadow-xl"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
-
-          {/* Bottom Gradient Overlay with Slide Title, Description & CTA */}
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#040716] via-[#040716]/85 to-transparent pt-14 pb-5 px-5 sm:px-7 z-10">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-              <div className="space-y-1 max-w-xl">
-                {activeItem.title && (
-                  <h4 className="font-display font-bold text-lg sm:text-xl text-white tracking-tight leading-snug drop-shadow-md">
-                    {activeItem.title}
-                  </h4>
-                )}
-                {activeItem.description && (
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-2 drop-shadow-sm">
-                    {activeItem.description}
-                  </p>
-                )}
-              </div>
-
-              {activeItem.ctaText && activeItem.ctaLink && (
-                <div className="shrink-0 pt-1 sm:pt-0">
-                  <Link
-                    href={activeItem.ctaLink}
-                    className="btn-luxury-gold px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-1.5 shadow-md hover:scale-105 transition-transform"
-                  >
-                    <span>{activeItem.ctaText}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div>
         </div>
       </div>
+
+      {/* Slide Details Panel (Title, Description, CTA) - Displayed below image, NEVER covering or cutting the image! */}
+      {(activeItem.title || activeItem.description || (activeItem.ctaText && activeItem.ctaLink)) && (
+        <div className="p-5 sm:p-7 bg-gradient-to-r from-[#060B24] to-[#040716] border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1.5 max-w-2xl">
+            {activeItem.title && (
+              <h4 className="font-display font-bold text-lg sm:text-xl text-white tracking-tight leading-snug">
+                {activeItem.title}
+              </h4>
+            )}
+            {activeItem.description && (
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                {activeItem.description}
+              </p>
+            )}
+          </div>
+
+          {activeItem.ctaText && activeItem.ctaLink && (
+            <div className="shrink-0 pt-1 sm:pt-0">
+              <Link
+                href={activeItem.ctaLink}
+                className="btn-luxury-gold px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
+              >
+                <span>{activeItem.ctaText}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Bottom Dot Track Navigation */}
       <div className="p-3 sm:p-4 bg-[#030614] border-t border-white/10 flex items-center justify-between gap-4">

@@ -48,11 +48,13 @@ export async function sanityFetch<T>({
   const url = `https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}?${searchParams.toString()}`;
 
   try {
+    const isDev = process.env.NODE_ENV === "development";
     const res = await fetch(url, {
       next: {
-        revalidate: revalidate === false ? undefined : revalidate,
+        revalidate: isDev ? 0 : revalidate === false ? undefined : revalidate,
         tags,
       },
+      cache: isDev ? "no-store" : undefined,
     });
 
     if (!res.ok) {

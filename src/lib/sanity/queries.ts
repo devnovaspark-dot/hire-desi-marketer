@@ -79,17 +79,30 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
     },
     _type == "gifBlock" => {
       ...,
-      "uploadedUrl": gifFile.asset->url
+      "uploadedUrl": gifFile.asset->url,
+      "fileUrl": gifFile.asset->url
     },
     _type == "carousel" => {
       ...,
       items[]{
         ...,
         "image": coalesce(
-          asset->url + "?auto=format&fit=max&fm=webp",
-          image.asset->url + "?auto=format&fit=max&fm=webp",
+          select(
+            image.asset->extension == "gif" => image.asset->url,
+            asset->extension == "gif" => asset->url,
+            image.asset->url != null => image.asset->url + "?auto=format&fit=max&fm=webp",
+            asset->url != null => asset->url + "?auto=format&fit=max&fm=webp"
+          ),
+          image.asset->url,
+          asset->url,
           image.url,
           url
+        ),
+        "alt": coalesce(alt, image.alt, title, "Carousel slide"),
+        "isGif": coalesce(
+          image.asset->extension == "gif",
+          asset->extension == "gif",
+          false
         )
       }
     }

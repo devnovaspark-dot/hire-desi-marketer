@@ -1,4 +1,4 @@
-import { defineType, defineArrayMember } from 'sanity';
+import { defineType, defineArrayMember, defineField } from 'sanity';
 
 /**
  * Portable Text Schema with Custom "Lego Blocks" for Writers.
@@ -440,19 +440,19 @@ export const blockContent = defineType({
       name: 'carousel',
       title: '🎠 Interactive Carousel / Slider',
       fields: [
-        {
+        defineField({
           name: 'title',
           type: 'string',
           title: 'Carousel Title (Optional)',
           placeholder: 'e.g. Campaign Creative Gallery or Performance Highlights',
-        },
-        {
+        }),
+        defineField({
           name: 'subtitle',
           type: 'string',
           title: 'Carousel Subtitle (Optional)',
           placeholder: 'e.g. Swipe through our high-converting ad variations and case snapshots',
-        },
-        {
+        }),
+        defineField({
           name: 'displayMode',
           type: 'string',
           title: 'Display Style',
@@ -465,77 +465,85 @@ export const blockContent = defineType({
             layout: 'radio',
           },
           initialValue: 'card',
-        },
-        {
+        }),
+        defineField({
           name: 'autoplay',
           type: 'boolean',
           title: 'Auto-advance Slides',
           description: 'Automatically rotate through slides every few seconds.',
           initialValue: false,
-        },
-        {
+        }),
+        defineField({
           name: 'autoplayInterval',
           type: 'number',
           title: 'Autoplay Interval (in seconds)',
           initialValue: 5,
-        },
-        {
+        }),
+        defineField({
           name: 'items',
           type: 'array',
           title: 'Slides / Carousel Items',
           description: 'Add, upload, and reorder slides for this carousel slider.',
-          options: {
-            layout: 'grid',
-          },
           validation: (Rule) => Rule.required().min(1),
           of: [
             defineArrayMember({
+              type: 'carouselSlide',
+            }),
+            defineArrayMember({
               type: 'image',
               name: 'slide',
-              title: 'Slide',
+              title: 'Direct Image Slide (Legacy)',
               options: {
                 hotspot: true,
                 accept: 'image/webp,image/png,image/jpeg,image/gif',
               },
               fields: [
-                {
+                defineField({
                   name: 'alt',
                   type: 'string',
                   title: 'Alternative Text',
                   description: 'Crucial for SEO and accessibility.',
-                  validation: (Rule) => Rule.required(),
-                },
-                {
+                  options: {
+                    isHighlighted: true,
+                  },
+                }),
+                defineField({
                   name: 'badge',
                   type: 'string',
                   title: 'Badge Label (Optional)',
                   placeholder: 'e.g. ROAS +420%, Step 01, Case Study, Meta Ads',
-                },
-                {
+                  options: {
+                    isHighlighted: true,
+                  },
+                }),
+                defineField({
                   name: 'title',
                   type: 'string',
                   title: 'Slide Title (Optional)',
                   placeholder: 'e.g. Dynamic Product Ads for Luxury Apparel',
-                },
-                {
+                  options: {
+                    isHighlighted: true,
+                  },
+                }),
+                defineField({
                   name: 'description',
                   type: 'text',
                   rows: 2,
                   title: 'Slide Description / Caption (Optional)',
                   placeholder: 'e.g. Generated $140k in 30 days using UGC video overlays.',
-                },
-                {
+                }),
+                defineField({
                   name: 'ctaText',
                   type: 'string',
                   title: 'CTA Button Label (Optional)',
                   placeholder: 'e.g. View Live Strategy',
-                },
-                {
+                }),
+                defineField({
                   name: 'ctaLink',
                   type: 'string',
                   title: 'CTA Button Link (Optional)',
                   placeholder: 'e.g. /get-a-quote or https://...',
-                },
+                }),
               ],
               preview: {
                 select: {
@@ -558,24 +566,21 @@ export const blockContent = defineType({
               },
             }),
           ],
-        },
+        }),
       ],
       preview: {
         select: {
           title: 'title',
           subtitle: 'subtitle',
-          items: 'items',
         },
         prepare(selection: Record<string, unknown>) {
-          const { title, subtitle, items } = selection as {
+          const { title, subtitle } = selection as {
             title?: string;
             subtitle?: string;
-            items?: unknown[];
           };
-          const count = Array.isArray(items) ? items.length : 0;
           return {
             title: title || 'Carousel Slider',
-            subtitle: `${count} slide${count === 1 ? '' : 's'}${subtitle ? ` — ${subtitle}` : ''}`,
+            subtitle: subtitle ? `Carousel Slider — ${subtitle}` : 'Interactive image & graphic carousel',
           };
         },
       },
@@ -587,43 +592,58 @@ export const blockContent = defineType({
       name: 'gifBlock',
       title: '🎬 Animated GIF / Meme',
       fields: [
-        {
+        defineField({
+          name: 'sourceType',
+          type: 'string',
+          title: 'GIF Source',
+          description: 'Choose whether you want to upload a GIF file or paste an external link.',
+          options: {
+            list: [
+              { title: 'Upload GIF File (from computer)', value: 'file' },
+              { title: 'Paste External GIF URL (Giphy / Tenor / Direct link)', value: 'url' },
+            ],
+            layout: 'radio',
+          },
+          initialValue: 'file',
+        }),
+        defineField({
           name: 'gifFile',
           type: 'image',
           title: 'Upload GIF File',
-          description: 'Upload an animated .gif file (drag & drop from your computer).',
+          description: 'Upload an animated .gif or .webp file.',
           options: {
             accept: 'image/gif,image/webp',
           },
-        },
-        {
+          hidden: ({ parent }: any) => parent?.sourceType === 'url',
+        }),
+        defineField({
           name: 'gifUrl',
           type: 'url',
           title: 'Or Paste External GIF URL (Giphy / Tenor / Web)',
-          description: 'Or paste a direct GIF link from Giphy, Tenor, Imgur, etc. (e.g., https://media.giphy.com/media/.../giphy.gif).',
+          description: 'Direct GIF link from Giphy, Tenor, Imgur, etc. (e.g., https://media.giphy.com/media/.../giphy.gif).',
           placeholder: 'https://media.giphy.com/media/.../giphy.gif',
-        },
-        {
+          hidden: ({ parent }: any) => parent?.sourceType === 'file',
+        }),
+        defineField({
           name: 'alt',
           type: 'string',
           title: 'Alternative Text (Alt Text)',
           description: 'Crucial for SEO and screen readers. Briefly describe what happens in the GIF.',
           placeholder: 'e.g. Marketing manager celebrating positive ROAS results',
-          validation: (Rule) => Rule.required(),
-        },
-        {
+        }),
+        defineField({
           name: 'caption',
           type: 'string',
           title: 'Caption (Optional)',
           placeholder: 'e.g. Actual footage of our squad after cutting CPL by 40% in week 2.',
-        },
-        {
+        }),
+        defineField({
           name: 'badge',
           type: 'string',
           title: 'Badge Label (Optional)',
           placeholder: 'e.g. MEME, REACTION, QUICK DEMO, 2026 TREND',
-        },
-        {
+        }),
+        defineField({
           name: 'size',
           type: 'string',
           title: 'Display Width',
@@ -636,23 +656,26 @@ export const blockContent = defineType({
             layout: 'radio',
           },
           initialValue: 'standard',
-        },
+        }),
       ],
       preview: {
         select: {
           title: 'caption',
           alt: 'alt',
           media: 'gifFile',
+          gifUrl: 'gifUrl',
+          sourceType: 'sourceType',
         },
         prepare(selection: Record<string, unknown>) {
-          const { title, alt, media } = selection as {
+          const { title, alt, media, gifUrl } = selection as {
             title?: string;
             alt?: string;
             media?: unknown;
+            gifUrl?: string;
           };
           return {
-            title: title || alt || 'Animated GIF',
-            subtitle: '🎬 Animated GIF / Meme',
+            title: title || alt || (gifUrl ? 'External GIF' : 'Animated GIF'),
+            subtitle: gifUrl ? `🎬 GIF (${gifUrl.slice(0, 45)}...)` : '🎬 Animated GIF / Meme',
             media: media as any,
           };
         },

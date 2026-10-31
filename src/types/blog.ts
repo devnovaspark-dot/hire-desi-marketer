@@ -105,6 +105,7 @@ export interface GifBlock {
   caption?: string;
   badge?: string;
   size?: "standard" | "wide" | "compact";
+  sourceType?: "file" | "url";
 }
 
 export interface TableBlock {
@@ -151,6 +152,7 @@ export interface TakeawayBoxBlock {
 
 export interface CarouselSlide {
   image: string;
+  isGif?: boolean;
   alt?: string;
   title?: string;
   description?: string;

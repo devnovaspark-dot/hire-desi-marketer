@@ -201,12 +201,28 @@ function transformSanityBody(rawBody: any[]): {
 
     // 10. Animated GIF / Meme Block
     if (block._type === "gifBlock") {
-      const gifUrl =
-        block.uploadedUrl ||
-        block.gifFile?.asset?.url ||
-        block.gifFile?.url ||
-        block.gifUrl ||
-        "";
+      let gifUrl = "";
+      if (block.sourceType === "url" && block.gifUrl) {
+        gifUrl = block.gifUrl.trim();
+      } else if (block.sourceType === "file") {
+        gifUrl =
+          block.uploadedUrl ||
+          block.fileUrl ||
+          block.gifFile?.asset?.url ||
+          block.gifFile?.url ||
+          block.gifUrl ||
+          "";
+      } else {
+        // Fallback for legacy blocks without explicit sourceType:
+        // prioritize gifUrl if present and non-empty, otherwise use uploaded file URL
+        gifUrl =
+          (block.gifUrl ? block.gifUrl.trim() : "") ||
+          block.uploadedUrl ||
+          block.fileUrl ||
+          block.gifFile?.asset?.url ||
+          block.gifFile?.url ||
+          "";
+      }
 
       if (gifUrl) {
         content.push({
@@ -216,6 +232,7 @@ function transformSanityBody(rawBody: any[]): {
           caption: block.caption,
           badge: block.badge,
           size: block.size || "standard",
+          sourceType: block.sourceType || (block.gifUrl ? "url" : "file"),
         });
       }
       continue;
@@ -224,22 +241,34 @@ function transformSanityBody(rawBody: any[]): {
     // 11. Interactive Carousel / Slider
     if (block._type === "carousel") {
       const items: CarouselSlide[] = Array.isArray(block.items)
-        ? block.items.map((item: any) => ({
-            image:
+        ? block.items.map((item: any) => {
+            const rawUrl =
               item.image?.asset?.url ||
               item.asset?.url ||
               item.image?.url ||
               item.url ||
               (typeof item.image === "string" ? item.image : "") ||
               (typeof item.asset === "string" ? item.asset : "") ||
-              "/images/Thumbnail.webp",
-            alt: item.alt || item.image?.alt || item.title || "Carousel slide image",
-            title: item.title,
-            description: item.description,
-            badge: item.badge,
-            ctaText: item.ctaText,
-            ctaLink: item.ctaLink,
-          }))
+              "/images/Thumbnail.webp";
+
+            const isGif =
+              item.isGif === true ||
+              rawUrl.toLowerCase().includes(".gif") ||
+              rawUrl.toLowerCase().endsWith(".gif") ||
+              item.image?.asset?.extension === "gif" ||
+              item.asset?.extension === "gif";
+
+            return {
+              image: rawUrl,
+              isGif,
+              alt: item.alt || item.image?.alt || item.title || "Carousel slide image",
+              title: item.title,
+              description: item.description,
+              badge: item.badge,
+              ctaText: item.ctaText,
+              ctaLink: item.ctaLink,
+            };
+          })
         : [];
 
       if (items.length > 0) {

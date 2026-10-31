@@ -5,6 +5,15 @@ import { visionTool } from '@sanity/vision';
 import { schemaTypes } from './schemas';
 import { StudioAnalytics } from './components/Analytics';
 
+function StudioLayout(props: any) {
+  return (
+    <>
+      <StudioAnalytics />
+      {props.renderDefault(props)}
+    </>
+  );
+}
+
 export default defineConfig({
   name: 'default',
   title: 'Hire Desi Marketer Studio',
@@ -20,13 +29,7 @@ export default defineConfig({
 
   studio: {
     components: {
-      layout: (props) => (
-        <>
-          <StudioAnalytics />
-          {props.renderDefault(props)}
-        </>
-      ),
+      layout: StudioLayout,
     },
   },
 });
-
