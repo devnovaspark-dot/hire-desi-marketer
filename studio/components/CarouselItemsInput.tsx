@@ -536,3 +536,4 @@ export function CarouselItemsInput(props: ArrayOfObjectsInputProps) {
     </Stack>
   );
 }
+

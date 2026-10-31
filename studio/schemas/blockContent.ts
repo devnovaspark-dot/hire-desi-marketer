@@ -1,5 +1,6 @@
 import { defineType, defineArrayMember, defineField } from 'sanity';
 import { CarouselItemsInput } from '../components/CarouselItemsInput';
+import { GifBlockInput } from '../components/GifBlockInput';
 
 /**
  * Portable Text Schema with Custom "Lego Blocks" for Writers.
@@ -583,6 +584,9 @@ export const blockContent = defineType({
       type: 'object',
       name: 'gifBlock',
       title: '🎬 Animated GIF / Meme',
+      components: {
+        input: GifBlockInput,
+      },
       options: {
         modal: {
           type: 'dialog',
