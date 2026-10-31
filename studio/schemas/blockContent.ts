@@ -487,12 +487,9 @@ export const blockContent = defineType({
           validation: (Rule) => Rule.required().min(1),
           of: [
             defineArrayMember({
-              type: 'carouselSlide',
-            }),
-            defineArrayMember({
               type: 'image',
               name: 'slide',
-              title: 'Direct Image Slide (Legacy)',
+              title: 'Slide',
               options: {
                 hotspot: true,
                 accept: 'image/webp,image/png,image/jpeg,image/gif',
@@ -502,7 +499,8 @@ export const blockContent = defineType({
                   name: 'alt',
                   type: 'string',
                   title: 'Alternative Text',
-                  description: 'Crucial for SEO and accessibility.',
+                  description: 'Crucial for SEO and accessibility (describe what appears in this slide).',
+                  placeholder: 'e.g. Screenshot of high-converting Meta Ad creative',
                   options: {
                     isHighlighted: true,
                   },
@@ -531,6 +529,9 @@ export const blockContent = defineType({
                   rows: 2,
                   title: 'Slide Description / Caption (Optional)',
                   placeholder: 'e.g. Generated $140k in 30 days using UGC video overlays.',
+                  options: {
+                    isHighlighted: true,
+                  },
                 }),
                 defineField({
                   name: 'ctaText',
@@ -548,18 +549,18 @@ export const blockContent = defineType({
               preview: {
                 select: {
                   title: 'title',
-                  subtitle: 'description',
+                  alt: 'alt',
                   media: 'asset',
                 },
                 prepare(selection: Record<string, unknown>) {
-                  const { title, subtitle, media } = selection as {
+                  const { title, alt, media } = selection as {
                     title?: string;
-                    subtitle?: string;
+                    alt?: string;
                     media?: unknown;
                   };
                   return {
-                    title: title || 'Slide Image',
-                    subtitle: subtitle || 'Carousel Slide',
+                    title: title || alt || 'Slide Image',
+                    subtitle: alt ? `Alt: ${alt}` : 'Carousel slide',
                     media: media as any,
                   };
                 },
