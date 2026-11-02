@@ -148,7 +148,7 @@ export function BlogArticleSidebar({
   };
 
   return (
-    <aside className="space-y-6 sticky top-28 self-start w-full">
+    <aside className="space-y-6 sticky top-28 w-full">
       {/* 1. On This Page (Exact Reference Structure) */}
       {toc && toc.length > 0 && (
         <div className="p-5 sm:p-6 rounded-3xl skeuo-card-light no-lift flex flex-col border border-[#E2DBD0] max-h-[380px] sm:max-h-[420px] shadow-sm">
