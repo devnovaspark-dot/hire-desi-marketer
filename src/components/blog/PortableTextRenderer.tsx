@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Lightbulb,
   AlertTriangle,
@@ -768,41 +769,44 @@ function FaqBlockView({
   );
 }
 
-// 12. Minimalist Interactive Multi-Slide Carousel Block
+// 12. Pure Smooth Auto-Sliding Image Carousel (No box card, only images)
 function CarouselBlockView({
   block,
 }: {
   block: Extract<BlogContentBlock, { type: "carousel" }>;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(block.autoplay ?? false);
+  const [direction, setDirection] = useState(1);
+  const [isHovered, setIsHovered] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
   const { openZoom } = useImageZoom();
 
   const total = block.items?.length || 0;
-  const intervalSeconds = block.autoplayInterval || 5;
+  const intervalSeconds = block.autoplayInterval || 4;
 
   const nextSlide = useCallback(() => {
-    if (total === 0) return;
+    if (total <= 1) return;
+    setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % total);
   }, [total]);
 
   const prevSlide = useCallback(() => {
-    if (total === 0) return;
+    if (total <= 1) return;
+    setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + total) % total);
   }, [total]);
 
-  // Autoplay timer
+  // Smooth Auto-sliding timer
   useEffect(() => {
-    if (!isPlaying || total <= 1) return;
+    if (total <= 1 || isHovered) return;
     const timer = setInterval(() => {
       nextSlide();
     }, intervalSeconds * 1000);
     return () => clearInterval(timer);
-  }, [isPlaying, intervalSeconds, nextSlide, total]);
+  }, [isHovered, intervalSeconds, nextSlide, total]);
 
-  // Touch Swipe Handlers for mobile users
+  // Touch Swipe Handlers for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.targetTouches[0].clientX;
   };
@@ -832,206 +836,107 @@ function CarouselBlockView({
     <div
       role="region"
       aria-roledescription="carousel"
-      aria-label={block.title || "Interactive Slide Carousel"}
-      onMouseEnter={() => block.autoplay && setIsPlaying(false)}
-      onMouseLeave={() => block.autoplay && setIsPlaying(true)}
-      className="my-10 rounded-3xl bg-white border border-[#E2DBD0] shadow-[0_4px_24px_rgba(11,27,58,0.06)] overflow-hidden relative"
+      aria-label="Image Carousel"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="my-10 mx-auto w-full max-w-2xl relative select-none group"
     >
-      {/* Minimalist Editorial Header */}
-      <div className="p-4 sm:p-6 border-b border-slate-100 flex flex-wrap items-center justify-between gap-3 bg-white">
-        <div className="space-y-0.5 max-w-lg min-w-0">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FFB020]/15 text-[#B87A00] text-[11px] font-black uppercase tracking-wider">
-            <Layers className="w-3 h-3 text-[#FFB020]" />
-            <span>Interactive Deck</span>
-          </div>
-          {block.title && (
-            <h3 className="font-display font-bold text-lg sm:text-xl text-[#0B1B3A] tracking-tight">
-              {block.title}
-            </h3>
-          )}
-          {block.subtitle && (
-            <p className="text-xs sm:text-sm text-slate-500">
-              {block.subtitle}
-            </p>
-          )}
-        </div>
-
-        {/* Minimalist Counter & Navigation Arrows */}
-        <div className="flex items-center gap-2">
-          <div className="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/80 text-xs font-mono font-bold text-[#0B1B3A]">
-            <span className="text-[#B87A00] font-black">
-              {String(currentIndex + 1).padStart(2, "0")}
-            </span>
-            <span className="text-slate-400 mx-1">/</span>
-            <span className="text-slate-500">{String(total).padStart(2, "0")}</span>
-          </div>
-
-          {block.autoplay && (
-            <button
-              type="button"
-              onClick={() => setIsPlaying(!isPlaying)}
-              className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer border border-slate-200"
-              title={isPlaying ? "Pause autoplay" : "Start autoplay"}
-              aria-label={isPlaying ? "Pause autoplay" : "Start autoplay"}
-            >
-              {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 ml-0.5" />}
-            </button>
-          )}
-
-          <div className="flex items-center gap-1">
-            <button
-              type="button"
-              onClick={prevSlide}
-              aria-label="Previous slide"
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-[#0B1B3A] hover:text-white text-slate-700 border border-slate-200 flex items-center justify-center transition-all cursor-pointer shadow-2xs group"
-            >
-              <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-            </button>
-            <button
-              type="button"
-              onClick={nextSlide}
-              aria-label="Next slide"
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-[#0B1B3A] hover:text-white text-slate-700 border border-slate-200 flex items-center justify-center transition-all cursor-pointer shadow-2xs group"
-            >
-              <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Viewport & Touch Area */}
+      {/* Slide Image Container: Zero box card, only the image */}
       <div
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="relative overflow-hidden group select-none bg-[#FAF8F5] flex items-center justify-center p-3 sm:p-6"
+        className="relative w-full flex items-center justify-center overflow-hidden rounded-2xl"
       >
-        {/* Slide Image Container */}
-        <div
-          role="button"
-          tabIndex={0}
-          onClick={() =>
-            openZoom({
-              src: activeItem.image,
-              alt: activeItem.alt || activeItem.title || "Carousel slide image",
-              caption: activeItem.description || activeItem.title,
-              badge: activeItem.badge,
-            })
-          }
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              openZoom({
-                src: activeItem.image,
-                alt: activeItem.alt || activeItem.title || "Carousel slide image",
-                caption: activeItem.description || activeItem.title,
-                badge: activeItem.badge,
-              });
-            }
-          }}
-          className="relative max-h-[520px] max-w-full flex items-center justify-center cursor-zoom-in group/img"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            key={`${currentIndex}-${activeItem.image}`}
-            src={activeItem.image}
-            alt={activeItem.alt || activeItem.title || "Carousel slide image"}
-            loading="lazy"
-            decoding="async"
-            className="max-h-[500px] w-auto max-w-full rounded-2xl object-contain shadow-md transition-transform duration-300 ease-out group-hover/img:scale-[1.01]"
-          />
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, x: direction > 0 ? 35 : -35 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: direction > 0 ? -35 : 35 }}
+            transition={{ duration: 0.45, ease: "easeInOut" }}
+            className="w-full flex items-center justify-center"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={activeItem.image}
+              alt={activeItem.alt || activeItem.title || "Slide graphic"}
+              loading="lazy"
+              decoding="async"
+              onClick={() =>
+                openZoom({
+                  src: activeItem.image,
+                  alt: activeItem.alt || activeItem.title || "Slide graphic",
+                  caption: activeItem.description || activeItem.title,
+                  badge: activeItem.badge,
+                })
+              }
+              className="w-full h-auto max-h-[640px] rounded-2xl object-contain shadow-md cursor-zoom-in transition-transform duration-300 hover:scale-[1.01]"
+            />
+          </motion.div>
+        </AnimatePresence>
 
-          {/* Top Left Slide Badge */}
-          {activeItem.badge && (
-            <div className="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-[#060B22]/90 backdrop-blur-md border border-[#FFB020]/40 text-[#FFB020] text-xs font-black uppercase tracking-wider shadow-md flex items-center gap-1.5">
-              <Sparkles className="w-3 h-3 text-[#FFB020]" />
-              <span>{activeItem.badge}</span>
-            </div>
-          )}
+        {/* Hover Prev/Next arrow buttons directly on the image */}
+        {total > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                prevSlide();
+              }}
+              aria-label="Previous slide"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer shadow-lg hover:scale-105"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                nextSlide();
+              }}
+              aria-label="Next slide"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer shadow-lg hover:scale-105"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </>
+        )}
 
-          {/* Hover Zoom pill affordance */}
-          <div className="absolute bottom-3 right-3 z-10 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-bold flex items-center gap-1.5 opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 shadow-lg pointer-events-none border border-white/20">
-            <ZoomIn className="w-3 h-3 text-[#FFB020]" />
-            <span>Click to Zoom</span>
+        {/* Top-Right subtle slide counter badge directly on image */}
+        {total > 1 && (
+          <div className="absolute top-3 right-3 z-10 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-mono font-bold border border-white/20 pointer-events-none shadow-md">
+            <span className="text-[#FFB020]">{currentIndex + 1}</span> / {total}
           </div>
-        </div>
-
-        {/* Floating Prev/Next buttons on edge hover */}
-        <button
-          type="button"
-          onClick={prevSlide}
-          aria-label="Previous slide"
-          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-[#0B1B3A] hover:text-white text-slate-700 border border-slate-200 shadow-lg backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
-        >
-          <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-        </button>
-        <button
-          type="button"
-          onClick={nextSlide}
-          aria-label="Next slide"
-          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-[#0B1B3A] hover:text-white text-slate-700 border border-slate-200 shadow-lg backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
-        >
-          <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
-        </button>
+        )}
       </div>
 
-      {/* Slide Details Panel (Title, Description, CTA) - Clean White Editorial Theme */}
-      {(activeItem.title || activeItem.description || (activeItem.ctaText && activeItem.ctaLink)) && (
-        <div className="p-4 sm:p-6 bg-white border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="space-y-1 max-w-2xl">
-            {activeItem.title && (
-              <h4 className="font-display font-bold text-base sm:text-lg text-[#0B1B3A] tracking-tight leading-snug">
-                {activeItem.title}
-              </h4>
-            )}
-            {activeItem.description && (
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                {activeItem.description}
-              </p>
-            )}
-          </div>
-
-          {activeItem.ctaText && activeItem.ctaLink && (
-            <div className="shrink-0 pt-1 sm:pt-0">
-              <Link
-                href={activeItem.ctaLink}
-                className="btn-luxury-gold px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-1.5 shadow-sm hover:scale-102 transition-transform"
-              >
-                <span>{activeItem.ctaText}</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Bottom Dot Track Navigation */}
-      <div className="p-3 sm:p-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-1.5 overflow-x-auto py-1">
+      {/* Sleek Minimalist Dots directly below the image */}
+      {total > 1 && (
+        <div className="flex items-center justify-center gap-1.5 mt-3 py-1">
           {block.items.map((_, idx) => {
             const isActive = idx === currentIndex;
             return (
               <button
                 key={idx}
                 type="button"
-                onClick={() => setCurrentIndex(idx)}
+                onClick={() => {
+                  setDirection(idx > currentIndex ? 1 : -1);
+                  setCurrentIndex(idx);
+                }}
                 aria-label={`Go to slide ${idx + 1}`}
                 className={cn(
                   "h-1.5 rounded-full transition-all duration-300 cursor-pointer",
                   isActive
-                    ? "w-8 bg-[#FFB020] shadow-xs"
-                    : "w-2 bg-slate-300 hover:bg-slate-400"
+                    ? "w-6 bg-[#FFB020] shadow-xs"
+                    : "w-1.5 bg-slate-300 hover:bg-slate-400"
                 )}
               />
             );
           })}
         </div>
-
-        {/* Mobile Swipe Hint */}
-        <span className="text-[11px] text-slate-400 font-medium sm:hidden">
-          Swipe left/right
-        </span>
-      </div>
+      )}
     </div>
   );
 }
