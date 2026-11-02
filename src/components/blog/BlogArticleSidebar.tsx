@@ -56,20 +56,11 @@ export function BlogArticleSidebar({
   const [copied, setCopied] = useState<boolean>(false);
   const tocNavRef = useRef<HTMLElement | null>(null);
 
-  // Track active heading on page scroll with bottom-of-page awareness
+  // Track active heading on page scroll with stable viewport offset
   useEffect(() => {
     if (!toc || toc.length === 0) return;
 
     const handleScroll = () => {
-      // If near bottom of the page, activate the last heading
-      if (
-        window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - 70
-      ) {
-        setActiveId(toc[toc.length - 1].id);
-        return;
-      }
-
       // Viewport offset line below floating navbar
       const activationOffset = 160;
       let current = "";
@@ -91,7 +82,9 @@ export function BlogArticleSidebar({
         current = toc[0].id;
       }
 
-      setActiveId(current);
+      if (current) {
+        setActiveId(current);
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -99,39 +92,20 @@ export function BlogArticleSidebar({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [toc]);
 
-  // Smoothly scroll the TOC container so the active item stays visible
+  // Smoothly scroll the TOC container only if active item is outside visible bounds
   useEffect(() => {
     if (!activeId || !tocNavRef.current) return;
     const container = tocNavRef.current;
     const activeEl = container.querySelector<HTMLElement>(`[data-toc-id="${activeId}"]`);
     if (!activeEl) return;
 
-    // If at the very first item, scroll container to top
-    if (toc.length > 0 && activeId === toc[0].id) {
-      container.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-
     const containerRect = container.getBoundingClientRect();
     const activeRect = activeEl.getBoundingClientRect();
-    const buffer = 40;
 
-    if (activeRect.top < containerRect.top + buffer) {
-      // Active element is near or above top boundary -> scroll up so it sits nicely in view
-      const scrollDiff = activeRect.top - containerRect.top - containerRect.height * 0.3;
-      container.scrollBy({
-        top: scrollDiff,
-        behavior: "smooth",
-      });
-    } else if (activeRect.bottom > containerRect.bottom - buffer) {
-      // Active element is near or below bottom boundary -> scroll down to bring it into comfortable view
-      const scrollDiff = activeRect.bottom - containerRect.bottom + containerRect.height * 0.3;
-      container.scrollBy({
-        top: scrollDiff,
-        behavior: "smooth",
-      });
+    if (activeRect.top < containerRect.top || activeRect.bottom > containerRect.bottom) {
+      activeEl.scrollIntoView({ block: "nearest", behavior: "smooth" });
     }
-  }, [activeId, toc]);
+  }, [activeId]);
 
   const handleTocClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -174,10 +148,10 @@ export function BlogArticleSidebar({
   };
 
   return (
-    <aside className="space-y-6 sticky top-28">
+    <aside className="space-y-6 sticky top-28 self-start w-full">
       {/* 1. On This Page (Exact Reference Structure) */}
       {toc && toc.length > 0 && (
-        <div className="p-5 sm:p-6 rounded-3xl skeuo-card-light no-lift flex flex-col border border-[#E2DBD0] max-h-[calc(100vh-8.5rem)] shadow-sm">
+        <div className="p-5 sm:p-6 rounded-3xl skeuo-card-light no-lift flex flex-col border border-[#E2DBD0] max-h-[380px] sm:max-h-[420px] shadow-sm">
           <div className="flex items-center justify-between border-b border-slate-100 pb-3 shrink-0">
             <div className="flex items-center gap-2 text-sm font-bold text-[#0B1B3A]">
               <span className="w-2 h-2 rounded-full bg-[#0B1B3A]" />

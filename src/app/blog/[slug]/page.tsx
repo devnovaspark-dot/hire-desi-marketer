@@ -274,7 +274,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* ========================================================== */}
           {/* Main 2-Column Content Layout (Article + Sticky Sidebar)     */}
           {/* ========================================================== */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Main Article Body (8 cols) */}
             <article className="lg:col-span-8 space-y-10 min-w-0">
               {/* Custom Blocks Renderer */}
@@ -413,7 +413,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </article>
 
             {/* Sidebar (4 cols) */}
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-4 self-start">
               <BlogArticleSidebar
                 toc={post.tableOfContents}
                 title={post.title}
