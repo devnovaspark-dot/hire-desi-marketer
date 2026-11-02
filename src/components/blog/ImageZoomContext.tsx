@@ -9,14 +9,7 @@ import React, {
   useRef,
 } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  X,
-  ZoomIn,
-  ZoomOut,
-  ExternalLink,
-  RotateCcw,
-  Sparkles,
-} from "lucide-react";
+import { X, ZoomIn } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ZoomImagePayload {
@@ -170,162 +163,64 @@ export function ImageZoomProvider({ children }: { children: React.ReactNode }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[9999] bg-[#030614]/92 backdrop-blur-xl flex flex-col justify-between select-none p-3 sm:p-6"
+            transition={{ duration: 0.18 }}
+            className="fixed inset-0 z-[9999] bg-[#030614]/92 backdrop-blur-xl flex items-center justify-center select-none p-4 sm:p-8"
             onClick={(e) => {
-              // Click on dark backdrop closes (only if not clicking image or controls)
+              // Click on dark backdrop closes
               if (e.target === e.currentTarget && !isZoomed2x) {
                 closeZoom();
               }
             }}
           >
-            {/* Top Toolbar */}
-            <div className="relative z-30 flex items-center justify-between gap-4 w-full max-w-7xl mx-auto py-2 px-3 sm:px-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 text-white shadow-2xl">
-              {/* Image Title / Info */}
-              <div className="flex items-center gap-3 min-w-0 pr-4">
-                {activeImage.badge ? (
-                  <span className="shrink-0 px-2.5 py-0.5 rounded-full bg-[#FFB020] text-[#060B22] text-[10px] sm:text-xs font-black uppercase tracking-wider flex items-center gap-1 shadow-sm">
-                    <Sparkles className="w-3 h-3" />
-                    <span>{activeImage.badge}</span>
-                  </span>
-                ) : (
-                  <span className="shrink-0 px-2.5 py-0.5 rounded-full bg-white/15 text-[#FFB020] text-[10px] sm:text-xs font-black uppercase tracking-wider">
-                    High Resolution
-                  </span>
-                )}
-                <span className="text-xs sm:text-sm font-medium text-slate-200 truncate">
-                  {activeImage.alt || activeImage.caption || "Image Preview"}
-                </span>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-                {/* 1x / 2x Zoom Toggle Button */}
-                <button
-                  type="button"
-                  onClick={toggle2x}
-                  title={isZoomed2x ? "Zoom out (1x)" : "Zoom in (2x detail)"}
-                  aria-label={isZoomed2x ? "Zoom out" : "Zoom in"}
-                  className={cn(
-                    "px-3 py-1.5 rounded-xl border text-xs font-bold inline-flex items-center gap-1.5 transition-all cursor-pointer",
-                    isZoomed2x
-                      ? "bg-[#FFB020] text-[#060B22] border-[#FFB020] shadow-md"
-                      : "bg-white/10 hover:bg-white/20 text-white border-white/20"
-                  )}
-                >
-                  {isZoomed2x ? (
-                    <>
-                      <ZoomOut className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">1x</span>
-                    </>
-                  ) : (
-                    <>
-                      <ZoomIn className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">2x Zoom</span>
-                    </>
-                  )}
-                </button>
-
-                {/* Reset position if dragged */}
-                {isZoomed2x && (panOffset.x !== 0 || panOffset.y !== 0) && (
-                  <button
-                    type="button"
-                    onClick={() => setPanOffset({ x: 0, y: 0 })}
-                    title="Reset position"
-                    aria-label="Reset position"
-                    className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all cursor-pointer"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5" />
-                  </button>
-                )}
-
-                {/* Open Original in New Tab */}
-                <a
-                  href={activeImage.src}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="Open original high-res image"
-                  className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all cursor-pointer hidden sm:flex items-center justify-center"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-
-                {/* Close Button */}
-                <button
-                  type="button"
-                  onClick={closeZoom}
-                  title="Close (Esc)"
-                  aria-label="Close lightbox"
-                  className="px-3 py-1.5 rounded-xl bg-white/15 hover:bg-red-500 hover:text-white text-white border border-white/25 transition-all cursor-pointer flex items-center gap-1.5 group"
-                >
-                  <X className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                  <span className="text-xs font-bold hidden sm:inline">Esc</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Central Stage */}
-            <div
-              className={cn(
-                "relative flex-1 w-full flex items-center justify-center overflow-hidden my-2",
-                isZoomed2x ? "cursor-grab active:cursor-grabbing" : "cursor-zoom-out"
-              )}
+            {/* Centered Image Container with the Close Cross positioned just right above the corner of the image */}
+            <motion.div
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{
+                scale: isZoomed2x ? 1.85 : 1,
+                x: panOffset.x,
+                y: panOffset.y,
+                opacity: 1,
+              }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 280 }}
+              className="relative max-h-[90vh] max-w-[92vw] flex items-center justify-center"
+              onDoubleClick={toggle2x}
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
-              onClick={(e) => {
-                if (e.target === e.currentTarget) {
-                  closeZoom();
-                }
-              }}
             >
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{
-                  scale: isZoomed2x ? 1.9 : 1,
-                  x: panOffset.x,
-                  y: panOffset.y,
-                  opacity: 1,
+              {/* Close cross: positioned just right above the corner of the image */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeZoom();
                 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                transition={{ type: "spring", damping: 25, stiffness: 280 }}
-                className="relative max-h-[82vh] max-w-[92vw] flex items-center justify-center"
-                onDoubleClick={toggle2x}
+                title="Close"
+                aria-label="Close"
+                className="absolute -top-3.5 -right-3.5 sm:-top-4 sm:-right-4 z-50 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#060B22]/90 hover:bg-[#0B1B3A] text-white border border-white/30 backdrop-blur-md flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.6)] transition-all hover:scale-110 cursor-pointer group"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={activeImage.src}
-                  alt={activeImage.alt || "Enlarged view"}
-                  decoding="async"
-                  className={cn(
-                    "max-h-[82vh] max-w-[92vw] w-auto h-auto rounded-2xl object-contain shadow-2xl transition-shadow",
-                    isZoomed2x
-                      ? "shadow-[0_25px_60px_rgba(0,0,0,0.8)]"
-                      : "cursor-zoom-in"
-                  )}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (!isZoomed2x) {
-                      toggle2x();
-                    }
-                  }}
-                />
-              </motion.div>
-            </div>
+                <X className="w-5 h-5 text-white group-hover:rotate-90 transition-transform duration-200" />
+              </button>
 
-            {/* Bottom Caption & Helper Bar */}
-            <div className="relative z-30 text-center max-w-2xl mx-auto space-y-1">
-              {activeImage.caption && (
-                <p className="text-xs sm:text-sm text-slate-200 bg-black/60 px-4 py-1.5 rounded-full inline-block backdrop-blur-md border border-white/10 shadow-lg font-medium">
-                  {activeImage.caption}
-                </p>
-              )}
-              <div className="text-[11px] text-slate-400 font-medium">
-                {isZoomed2x
-                  ? "Drag to pan • Click image to zoom out • ESC to close"
-                  : "Click image to zoom 2x • Click backdrop or ESC to close"}
-              </div>
-            </div>
+              {/* The Image */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={activeImage.src}
+                alt={activeImage.alt || "Enlarged view"}
+                decoding="async"
+                className={cn(
+                  "max-h-[88vh] max-w-[92vw] w-auto h-auto rounded-2xl object-contain shadow-[0_20px_60px_rgba(0,0,0,0.7)] transition-shadow",
+                  isZoomed2x
+                    ? "cursor-grab active:cursor-grabbing shadow-[0_25px_80px_rgba(0,0,0,0.95)]"
+                    : "cursor-zoom-in"
+                )}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggle2x();
+                }}
+              />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
