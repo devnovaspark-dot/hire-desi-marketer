@@ -16,7 +16,7 @@ export function ArticleFaqAccordion({
   title = "Frequently Asked Questions",
   subtitle = "Quick answers to help you evaluate and execute this growth strategy.",
 }: ArticleFaqAccordionProps) {
-  const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   if (!faqs || faqs.length === 0) return null;
 

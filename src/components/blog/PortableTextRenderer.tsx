@@ -23,9 +23,11 @@ import {
   Play,
   Pause,
   Layers,
+  ZoomIn,
 } from "lucide-react";
 import { BlogContentBlock } from "@/types/blog";
 import { cn } from "@/lib/utils";
+import { useImageZoom } from "./ImageZoomContext";
 
 interface PortableTextRendererProps {
   blocks: BlogContentBlock[];
@@ -84,6 +86,9 @@ export function PortableTextRenderer({ blocks, className }: PortableTextRenderer
 
           case "carousel":
             return <CarouselBlockView key={index} block={block} />;
+
+          case "youtube":
+            return <YouTubeBlockView key={index} block={block} />;
 
           default:
             return null;
@@ -366,32 +371,67 @@ function CodeBlockView({
   );
 }
 
-// 7. Responsive High-Def Image with Caption & Badge
+// 7. Responsive High-Def Image with Caption, Badge & Click-to-Zoom
 function ImageView({
   block,
 }: {
   block: Extract<BlogContentBlock, { type: "image" }>;
 }) {
-  const isGif = block.url?.toLowerCase().includes(".gif");
+  const { openZoom } = useImageZoom();
+
   return (
     <figure className="my-10 space-y-3">
-      <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden skeuo-card-light border border-slate-200 shadow-md">
-        <Image
-          src={block.url}
-          alt={block.alt}
-          fill
-          unoptimized={isGif}
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 800px"
-        />
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={() =>
+          openZoom({
+            src: block.url,
+            alt: block.alt || "Article illustration",
+            caption: block.caption,
+            badge: block.badge,
+          })
+        }
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openZoom({
+              src: block.url,
+              alt: block.alt || "Article illustration",
+              caption: block.caption,
+              badge: block.badge,
+            });
+          }
+        }}
+        className="relative w-full rounded-2xl overflow-hidden bg-white border border-[#E2DBD0] shadow-md group cursor-zoom-in transition-all duration-200"
+      >
+        <div className="relative w-full flex items-center justify-center p-1 sm:p-2 bg-slate-50/50">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={block.url}
+            alt={block.alt || "Article illustration"}
+            loading="lazy"
+            decoding="async"
+            className="w-full max-h-[600px] h-auto object-contain rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
+          />
+        </div>
+
+        {/* Optional Badge */}
         {block.badge && (
           <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#060B22]/90 backdrop-blur-md border border-[#FFB020]/40 text-[#FFB020] text-xs font-black uppercase tracking-wider shadow-lg">
             {block.badge}
           </div>
         )}
+
+        {/* Hover zoom affordance */}
+        <div className="absolute bottom-3 right-3 z-10 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-bold flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg pointer-events-none border border-white/20">
+          <ZoomIn className="w-3 h-3 text-[#FFB020]" />
+          <span>Click to Zoom</span>
+        </div>
       </div>
+
       {block.caption && (
-        <figcaption className="text-center text-xs text-slate-500 font-medium">
+        <figcaption className="text-center text-xs sm:text-sm text-slate-500 font-medium">
           {block.caption}
         </figcaption>
       )}
@@ -399,12 +439,13 @@ function ImageView({
   );
 }
 
-// 7b. Animated GIF / Meme Block
+// 7b. Animated GIF / Meme Block with Click-to-Zoom
 function GifBlockView({
   block,
 }: {
   block: Extract<BlogContentBlock, { type: "gif" }>;
 }) {
+  const { openZoom } = useImageZoom();
   const widthClasses = {
     compact: "max-w-md",
     standard: "max-w-2xl",
@@ -415,7 +456,30 @@ function GifBlockView({
 
   return (
     <figure className={cn("my-10 mx-auto space-y-3", containerWidth)}>
-      <div className="relative w-full rounded-2xl overflow-hidden skeuo-card-light border border-slate-200 shadow-lg bg-slate-900/5 backdrop-blur-sm">
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={() =>
+          openZoom({
+            src: block.url,
+            alt: block.alt || "Animated GIF",
+            caption: block.caption,
+            badge: block.badge || "GIF",
+          })
+        }
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openZoom({
+              src: block.url,
+              alt: block.alt || "Animated GIF",
+              caption: block.caption,
+              badge: block.badge || "GIF",
+            });
+          }
+        }}
+        className="relative w-full rounded-2xl overflow-hidden skeuo-card-light border border-slate-200 shadow-lg bg-slate-900/5 backdrop-blur-sm group cursor-zoom-in"
+      >
         {/* GIF Media */}
         <div className="relative w-full flex items-center justify-center p-1 sm:p-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -425,7 +489,7 @@ function GifBlockView({
             alt={block.alt}
             loading="lazy"
             decoding="async"
-            className="w-full h-auto rounded-xl object-contain shadow-sm"
+            className="w-full h-auto rounded-xl object-contain shadow-sm transition-transform duration-300 group-hover:scale-[1.01]"
           />
         </div>
 
@@ -438,8 +502,14 @@ function GifBlockView({
         )}
 
         {/* Subtle GIF tag */}
-        <div className="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-black/60 backdrop-blur-md text-[10px] font-bold text-white/90 tracking-widest uppercase pointer-events-none">
+        <div className="absolute bottom-3 left-3 px-2 py-0.5 rounded bg-black/60 backdrop-blur-md text-[10px] font-bold text-white/90 tracking-widest uppercase pointer-events-none">
           GIF
+        </div>
+
+        {/* Hover zoom affordance */}
+        <div className="absolute bottom-3 right-3 z-10 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-bold flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg pointer-events-none border border-white/20">
+          <ZoomIn className="w-3 h-3 text-[#FFB020]" />
+          <span>Click to Zoom</span>
         </div>
       </div>
 
@@ -641,7 +711,7 @@ function FaqBlockView({
 }: {
   block: Extract<BlogContentBlock, { type: "faq" }>;
 }) {
-  const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   const toggle = (idx: number) => {
     setOpenIdx(openIdx === idx ? null : idx);
@@ -698,7 +768,7 @@ function FaqBlockView({
   );
 }
 
-// 12. Interactive Multi-Slide Carousel Block
+// 12. Minimalist Interactive Multi-Slide Carousel Block
 function CarouselBlockView({
   block,
 }: {
@@ -708,6 +778,7 @@ function CarouselBlockView({
   const [isPlaying, setIsPlaying] = useState(block.autoplay ?? false);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
+  const { openZoom } = useImageZoom();
 
   const total = block.items?.length || 0;
   const intervalSeconds = block.autoplayInterval || 5;
@@ -761,45 +832,45 @@ function CarouselBlockView({
     <div
       role="region"
       aria-roledescription="carousel"
-      aria-label={block.title || "Image Carousel"}
+      aria-label={block.title || "Interactive Slide Carousel"}
       onMouseEnter={() => block.autoplay && setIsPlaying(false)}
       onMouseLeave={() => block.autoplay && setIsPlaying(true)}
-      className="my-12 rounded-3xl bg-gradient-to-b from-[#060B24] to-[#040716] border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.4)] text-white overflow-hidden relative"
+      className="my-10 rounded-3xl bg-white border border-[#E2DBD0] shadow-[0_4px_24px_rgba(11,27,58,0.06)] overflow-hidden relative"
     >
-      {/* Top Header with title, slide counter, and action controls */}
-      <div className="p-5 sm:p-7 border-b border-white/10 flex flex-wrap items-center justify-between gap-4">
-        <div className="space-y-1 max-w-lg">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FFB020]/20 border border-[#FFB020]/40 text-[#FFB020] text-[11px] font-black uppercase tracking-wider">
-            <Layers className="w-3 h-3" />
-            <span>Interactive Gallery</span>
+      {/* Minimalist Editorial Header */}
+      <div className="p-4 sm:p-6 border-b border-slate-100 flex flex-wrap items-center justify-between gap-3 bg-white">
+        <div className="space-y-0.5 max-w-lg min-w-0">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FFB020]/15 text-[#B87A00] text-[11px] font-black uppercase tracking-wider">
+            <Layers className="w-3 h-3 text-[#FFB020]" />
+            <span>Interactive Deck</span>
           </div>
           {block.title && (
-            <h3 className="font-display font-black text-xl sm:text-2xl text-white tracking-tight">
+            <h3 className="font-display font-bold text-lg sm:text-xl text-[#0B1B3A] tracking-tight">
               {block.title}
             </h3>
           )}
           {block.subtitle && (
-            <p className="text-xs sm:text-sm text-slate-300">
+            <p className="text-xs sm:text-sm text-slate-500">
               {block.subtitle}
             </p>
           )}
         </div>
 
-        {/* Counter & Prev/Next Arrow buttons */}
-        <div className="flex items-center gap-3">
-          <div className="px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs font-mono font-bold text-slate-200">
-            <span className="text-[#FFB020] font-black">
+        {/* Minimalist Counter & Navigation Arrows */}
+        <div className="flex items-center gap-2">
+          <div className="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/80 text-xs font-mono font-bold text-[#0B1B3A]">
+            <span className="text-[#B87A00] font-black">
               {String(currentIndex + 1).padStart(2, "0")}
             </span>
-            <span className="text-slate-500 mx-1">/</span>
-            <span>{String(total).padStart(2, "0")}</span>
+            <span className="text-slate-400 mx-1">/</span>
+            <span className="text-slate-500">{String(total).padStart(2, "0")}</span>
           </div>
 
           {block.autoplay && (
             <button
               type="button"
               onClick={() => setIsPlaying(!isPlaying)}
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center text-slate-200 hover:text-white transition-colors cursor-pointer"
+              className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer border border-slate-200"
               title={isPlaying ? "Pause autoplay" : "Start autoplay"}
               aria-label={isPlaying ? "Pause autoplay" : "Start autoplay"}
             >
@@ -812,7 +883,7 @@ function CarouselBlockView({
               type="button"
               onClick={prevSlide}
               aria-label="Previous slide"
-              className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FFB020] hover:text-[#060B22] border border-white/15 flex items-center justify-center text-white transition-all cursor-pointer group"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-[#0B1B3A] hover:text-white text-slate-700 border border-slate-200 flex items-center justify-center transition-all cursor-pointer shadow-2xs group"
             >
               <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
             </button>
@@ -820,7 +891,7 @@ function CarouselBlockView({
               type="button"
               onClick={nextSlide}
               aria-label="Next slide"
-              className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FFB020] hover:text-[#060B22] border border-white/15 flex items-center justify-center text-white transition-all cursor-pointer group"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-[#0B1B3A] hover:text-white text-slate-700 border border-slate-200 flex items-center justify-center transition-all cursor-pointer shadow-2xs group"
             >
               <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </button>
@@ -833,71 +904,88 @@ function CarouselBlockView({
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="relative overflow-hidden group select-none bg-[#020512]"
+        className="relative overflow-hidden group select-none bg-[#FAF8F5] flex items-center justify-center p-3 sm:p-6"
       >
-        <div className="relative w-full min-h-[340px] sm:min-h-[460px] md:min-h-[520px] flex items-center justify-center p-3 sm:p-6 overflow-hidden">
-          {/* Ambient blurred backdrop matching the image colors */}
-          <div
-            className="absolute inset-0 opacity-20 filter blur-3xl scale-125 pointer-events-none transition-all duration-700 ease-out"
-            style={{
-              backgroundImage: `url(${activeItem.image})`,
-              backgroundPosition: "center",
-              backgroundSize: "cover",
-            }}
+        {/* Slide Image Container */}
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() =>
+            openZoom({
+              src: activeItem.image,
+              alt: activeItem.alt || activeItem.title || "Carousel slide image",
+              caption: activeItem.description || activeItem.title,
+              badge: activeItem.badge,
+            })
+          }
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              openZoom({
+                src: activeItem.image,
+                alt: activeItem.alt || activeItem.title || "Carousel slide image",
+                caption: activeItem.description || activeItem.title,
+                badge: activeItem.badge,
+              });
+            }
+          }}
+          className="relative max-h-[520px] max-w-full flex items-center justify-center cursor-zoom-in group/img"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            key={`${currentIndex}-${activeItem.image}`}
+            src={activeItem.image}
+            alt={activeItem.alt || activeItem.title || "Carousel slide image"}
+            loading="lazy"
+            decoding="async"
+            className="max-h-[500px] w-auto max-w-full rounded-2xl object-contain shadow-md transition-transform duration-300 ease-out group-hover/img:scale-[1.01]"
           />
-
-          {/* Main Slide Image: object-contain ensures ZERO cut-out for any aspect ratio */}
-          <div className="relative z-10 w-full h-full flex items-center justify-center">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              key={`${currentIndex}-${activeItem.image}`}
-              src={activeItem.image}
-              alt={activeItem.alt || activeItem.title || "Carousel slide image"}
-              loading="lazy"
-              decoding="async"
-              className="max-h-[520px] w-auto max-w-full rounded-2xl object-contain shadow-2xl transition-transform duration-500 ease-out group-hover:scale-[1.01]"
-            />
-          </div>
 
           {/* Top Left Slide Badge */}
           {activeItem.badge && (
-            <div className="absolute top-4 left-4 z-20 px-3 py-1 rounded-full bg-[#060B22]/90 backdrop-blur-md border border-[#FFB020]/40 text-[#FFB020] text-xs font-black uppercase tracking-wider shadow-lg flex items-center gap-1.5">
+            <div className="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-[#060B22]/90 backdrop-blur-md border border-[#FFB020]/40 text-[#FFB020] text-xs font-black uppercase tracking-wider shadow-md flex items-center gap-1.5">
               <Sparkles className="w-3 h-3 text-[#FFB020]" />
               <span>{activeItem.badge}</span>
             </div>
           )}
 
-          {/* Floating Next/Prev on Image Hover */}
-          <button
-            type="button"
-            onClick={prevSlide}
-            aria-label="Previous slide"
-            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#060B22]/85 hover:bg-[#FFB020] hover:text-[#060B22] text-white border border-white/20 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer shadow-xl"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
-            type="button"
-            onClick={nextSlide}
-            aria-label="Next slide"
-            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#060B22]/85 hover:bg-[#FFB020] hover:text-[#060B22] text-white border border-white/20 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer shadow-xl"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
+          {/* Hover Zoom pill affordance */}
+          <div className="absolute bottom-3 right-3 z-10 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-bold flex items-center gap-1.5 opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 shadow-lg pointer-events-none border border-white/20">
+            <ZoomIn className="w-3 h-3 text-[#FFB020]" />
+            <span>Click to Zoom</span>
+          </div>
         </div>
+
+        {/* Floating Prev/Next buttons on edge hover */}
+        <button
+          type="button"
+          onClick={prevSlide}
+          aria-label="Previous slide"
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-[#0B1B3A] hover:text-white text-slate-700 border border-slate-200 shadow-lg backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
+        >
+          <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+        </button>
+        <button
+          type="button"
+          onClick={nextSlide}
+          aria-label="Next slide"
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-[#0B1B3A] hover:text-white text-slate-700 border border-slate-200 shadow-lg backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
+        >
+          <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+        </button>
       </div>
 
-      {/* Slide Details Panel (Title, Description, CTA) - Displayed below image, NEVER covering or cutting the image! */}
+      {/* Slide Details Panel (Title, Description, CTA) - Clean White Editorial Theme */}
       {(activeItem.title || activeItem.description || (activeItem.ctaText && activeItem.ctaLink)) && (
-        <div className="p-5 sm:p-7 bg-gradient-to-r from-[#060B24] to-[#040716] border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="space-y-1.5 max-w-2xl">
+        <div className="p-4 sm:p-6 bg-white border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1 max-w-2xl">
             {activeItem.title && (
-              <h4 className="font-display font-bold text-lg sm:text-xl text-white tracking-tight leading-snug">
+              <h4 className="font-display font-bold text-base sm:text-lg text-[#0B1B3A] tracking-tight leading-snug">
                 {activeItem.title}
               </h4>
             )}
             {activeItem.description && (
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 {activeItem.description}
               </p>
             )}
@@ -907,7 +995,7 @@ function CarouselBlockView({
             <div className="shrink-0 pt-1 sm:pt-0">
               <Link
                 href={activeItem.ctaLink}
-                className="btn-luxury-gold px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
+                className="btn-luxury-gold px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-1.5 shadow-sm hover:scale-102 transition-transform"
               >
                 <span>{activeItem.ctaText}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -918,8 +1006,8 @@ function CarouselBlockView({
       )}
 
       {/* Bottom Dot Track Navigation */}
-      <div className="p-3 sm:p-4 bg-[#030614] border-t border-white/10 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2 overflow-x-auto py-1">
+      <div className="p-3 sm:p-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-1.5 overflow-x-auto py-1">
           {block.items.map((_, idx) => {
             const isActive = idx === currentIndex;
             return (
@@ -929,21 +1017,127 @@ function CarouselBlockView({
                 onClick={() => setCurrentIndex(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
                 className={cn(
-                  "h-2 rounded-full transition-all duration-300 cursor-pointer",
+                  "h-1.5 rounded-full transition-all duration-300 cursor-pointer",
                   isActive
-                    ? "w-8 bg-[#FFB020] shadow-[0_0_10px_rgba(255,176,32,0.6)]"
-                    : "w-2 bg-white/20 hover:bg-white/50"
+                    ? "w-8 bg-[#FFB020] shadow-xs"
+                    : "w-2 bg-slate-300 hover:bg-slate-400"
                 )}
               />
             );
           })}
         </div>
 
-        {/* Swipe Hint on Mobile */}
+        {/* Mobile Swipe Hint */}
         <span className="text-[11px] text-slate-400 font-medium sm:hidden">
           Swipe left/right
         </span>
       </div>
     </div>
+  );
+}
+
+// 13. High-Performance Lite YouTube Video Embed Block with Red Play Button
+function YouTubeBlockView({
+  block,
+}: {
+  block: Extract<BlogContentBlock, { type: "youtube" }>;
+}) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [thumbSrc, setThumbSrc] = useState<string>(
+    block.videoId
+      ? `https://img.youtube.com/vi/${block.videoId}/maxresdefault.jpg`
+      : ""
+  );
+
+  if (!block.videoId && !block.url) return null;
+
+  return (
+    <figure className="my-10 space-y-3">
+      <div className="relative aspect-video w-full rounded-3xl overflow-hidden border border-[#E2DBD0] bg-slate-950 shadow-xl group select-none">
+        {isPlaying && block.videoId ? (
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${block.videoId}?autoplay=1&rel=0&modestbranding=1`}
+            title={block.title || "YouTube Video"}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="w-full h-full border-0"
+          />
+        ) : (
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={() => setIsPlaying(true)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setIsPlaying(true);
+              }
+            }}
+            className="relative w-full h-full cursor-pointer overflow-hidden flex items-center justify-center"
+            aria-label={`Play YouTube video: ${block.title || "Video"}`}
+          >
+            {/* High-res Thumbnail */}
+            {thumbSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={thumbSrc}
+                alt={block.title || "YouTube video thumbnail"}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onError={() => {
+                  if (block.videoId && thumbSrc.includes("maxresdefault")) {
+                    setThumbSrc(
+                      `https://img.youtube.com/vi/${block.videoId}/hqdefault.jpg`
+                    );
+                  }
+                }}
+              />
+            ) : (
+              <div className="w-full h-full bg-slate-900 flex items-center justify-center">
+                <span className="text-slate-400 text-sm">YouTube Video</span>
+              </div>
+            )}
+
+            {/* Subtle Gradient Overlays for contrast */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none" />
+
+            {/* Top Video Title Header */}
+            {block.title && (
+              <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between gap-3 pointer-events-none">
+                <span className="font-display font-bold text-sm sm:text-base text-white truncate drop-shadow-md">
+                  {block.title}
+                </span>
+                <span className="shrink-0 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-[#FFB020] text-[10px] font-black uppercase tracking-wider">
+                  YouTube
+                </span>
+              </div>
+            )}
+
+            {/* Authentic Red YouTube Play Button */}
+            <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 rounded-2xl bg-[#FF0000] flex items-center justify-center shadow-[0_10px_30px_rgba(255,0,0,0.45)] group-hover:scale-115 group-hover:bg-[#E60000] group-hover:shadow-[0_15px_40px_rgba(255,0,0,0.65)] transition-all duration-300">
+              {/* YouTube Play Triangle Icon */}
+              <svg
+                viewBox="0 0 24 24"
+                className="w-6 h-6 sm:w-7 sm:h-7 text-white fill-current ml-1"
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+
+            {/* Bottom Play Label Hint */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 px-3.5 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-white text-xs font-semibold flex items-center gap-2 opacity-90 group-hover:opacity-100 transition-opacity">
+              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+              <span>Watch Video</span>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Video Caption */}
+      {block.caption && (
+        <figcaption className="text-center text-xs sm:text-sm text-slate-500 font-medium italic">
+          {block.caption}
+        </figcaption>
+      )}
+    </figure>
   );
 }

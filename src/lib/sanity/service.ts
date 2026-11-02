@@ -17,6 +17,86 @@ function slugify(text: string): string {
 }
 
 /**
+ * Extracts a YouTube 11-character video ID from various YouTube URL formats:
+ * - https://www.youtube.com/watch?v=dQw4w9WgXcQ
+ * - https://youtu.be/dQw4w9WgXcQ
+ * - https://www.youtube.com/embed/dQw4w9WgXcQ
+ * - https://www.youtube.com/shorts/dQw4w9WgXcQ
+ */
+export function extractYouTubeVideoId(url: string): string | null {
+  if (!url || typeof url !== "string") return null;
+  const trimmed = url.trim();
+  const match = trimmed.match(
+    /(?:youtube\.com\/(?:watch\?.*v=|embed\/|shorts\/|v\/)|youtu\.be\/|youtube-nocookie\.com\/embed\/)([a-zA-Z0-9_-]{11})/
+  );
+  return match ? match[1] : null;
+}
+
+/**
+ * Escapes raw HTML text to avoid unwanted injection while preserving clean rendering.
+ */
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+/**
+ * Renders Portable Text children spans into HTML, supporting:
+ * - strong, em, code, underline decorators
+ * - link annotations with target="_blank" and preview data attributes
+ */
+function renderPortableTextSpans(children: any[], markDefs: any[] = []): string {
+  if (!Array.isArray(children)) return "";
+
+  const markDefMap = new Map<string, any>();
+  if (Array.isArray(markDefs)) {
+    for (const def of markDefs) {
+      if (def && def._key) {
+        markDefMap.set(def._key, def);
+      }
+    }
+  }
+
+  return children
+    .map((child: any) => {
+      if (!child || typeof child.text !== "string") return "";
+      let html = escapeHtml(child.text);
+      if (!Array.isArray(child.marks) || child.marks.length === 0) {
+        return html;
+      }
+
+      for (const mark of child.marks) {
+        if (mark === "strong") {
+          html = `<strong class="font-bold text-[#0B1B3A]">${html}</strong>`;
+        } else if (mark === "em") {
+          html = `<em>${html}</em>`;
+        } else if (mark === "code") {
+          html = `<code class="px-1.5 py-0.5 rounded bg-slate-100 text-[#0B1B3A] text-xs font-mono font-medium">${html}</code>`;
+        } else if (mark === "underline") {
+          html = `<u>${html}</u>`;
+        } else if (markDefMap.has(mark)) {
+          const def = markDefMap.get(mark);
+          if (def && (def._type === "link" || def.href)) {
+            const href = def.href || "#";
+            const isExternal = /^https?:\/\//i.test(href);
+            if (isExternal) {
+              html = `<a href="${href}" target="_blank" rel="noopener noreferrer" class="blog-external-link inline-flex items-center gap-1 font-semibold text-[#B87A00] underline decoration-[#FFB020]/60 underline-offset-4 hover:text-[#0B1B3A] hover:decoration-[#0B1B3A] transition-colors" data-href="${href}">${html}</a>`;
+            } else {
+              html = `<a href="${href}" class="font-semibold text-[#B87A00] underline decoration-[#FFB020]/60 underline-offset-4 hover:text-[#0B1B3A] hover:decoration-[#0B1B3A] transition-colors">${html}</a>`;
+            }
+          }
+        }
+      }
+      return html;
+    })
+    .join("");
+}
+
+/**
  * Transforms raw Sanity Portable Text body into our typed BlogContentBlock[]
  * and extracts TOC items from H2 and H3 blocks.
  */
@@ -50,27 +130,36 @@ function transformSanityBody(rawBody: any[]): {
     // Standard Portable Text Block
     if (block._type === "block") {
       const style = block.style || "normal";
-      const text = block.children?.map((c: any) => c.text).join("") || "";
+      const rawText = block.children?.map((c: any) => c.text || "").join("") || "";
+      const renderedHtml = renderPortableTextSpans(block.children, block.markDefs);
 
-      if (style === "h2") {
-        const id = slugify(text) || `section-${tableOfContents.length + 1}`;
-        tableOfContents.push({ id, title: text, level: 2 });
+      if (block.listItem === "bullet") {
         currentHtmlBuffer.push(
-          `<h2 id="${id}" class="text-2xl sm:text-3xl font-display font-bold text-[#0B1B3A] mt-10 mb-4 tracking-tight">${text}</h2>`
+          `<li class="ml-4 list-disc text-slate-700 leading-relaxed">${renderedHtml}</li>`
+        );
+      } else if (block.listItem === "number") {
+        currentHtmlBuffer.push(
+          `<li class="ml-4 list-decimal text-slate-700 leading-relaxed">${renderedHtml}</li>`
+        );
+      } else if (style === "h2") {
+        const id = slugify(rawText) || `section-${tableOfContents.length + 1}`;
+        tableOfContents.push({ id, title: rawText, level: 2 });
+        currentHtmlBuffer.push(
+          `<h2 id="${id}" class="text-2xl sm:text-3xl font-display font-bold text-[#0B1B3A] mt-10 mb-4 tracking-tight">${renderedHtml}</h2>`
         );
       } else if (style === "h3") {
-        const id = slugify(text) || `subheading-${tableOfContents.length + 1}`;
-        tableOfContents.push({ id, title: text, level: 3 });
+        const id = slugify(rawText) || `subheading-${tableOfContents.length + 1}`;
+        tableOfContents.push({ id, title: rawText, level: 3 });
         currentHtmlBuffer.push(
-          `<h3 id="${id}" class="text-xl sm:text-2xl font-display font-bold text-[#0B1B3A] mt-8 mb-3 tracking-tight">${text}</h3>`
+          `<h3 id="${id}" class="text-xl sm:text-2xl font-display font-bold text-[#0B1B3A] mt-8 mb-3 tracking-tight">${renderedHtml}</h3>`
         );
       } else if (style === "blockquote") {
         currentHtmlBuffer.push(
-          `<blockquote class="p-4 my-4 border-l-4 border-[#FFB020] bg-white rounded-r-xl italic text-slate-700">${text}</blockquote>`
+          `<blockquote class="p-4 my-4 border-l-4 border-[#FFB020] bg-white rounded-r-xl italic text-slate-700">${renderedHtml}</blockquote>`
         );
       } else {
         currentHtmlBuffer.push(
-          `<p class="text-slate-700 leading-relaxed font-sans mb-4">${text}</p>`
+          `<p class="text-slate-700 leading-relaxed font-sans mb-4">${renderedHtml}</p>`
         );
       }
       continue;
@@ -282,6 +371,20 @@ function transformSanityBody(rawBody: any[]): {
           items,
         });
       }
+      continue;
+    }
+
+    // 12. YouTube Video Embed Block
+    if (block._type === "youtube" || block._type === "youtubeVideo") {
+      const rawUrl = block.url ? String(block.url).trim() : "";
+      const videoId = extractYouTubeVideoId(rawUrl) || undefined;
+      content.push({
+        type: "youtube",
+        url: rawUrl,
+        videoId,
+        title: block.title,
+        caption: block.caption,
+      });
       continue;
     }
   }

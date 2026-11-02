@@ -25,11 +25,13 @@ export type CustomBlockType =
   | "quote"
   | "code"
   | "image"
+  | "gif"
   | "table"
   | "infographic"
   | "faq"
   | "takeawayBox"
-  | "carousel";
+  | "carousel"
+  | "youtube";
 
 export interface RichTextBlock {
   type: "richText";
@@ -171,6 +173,14 @@ export interface CarouselBlock {
   items: CarouselSlide[];
 }
 
+export interface YoutubeBlock {
+  type: "youtube";
+  url: string;
+  videoId?: string;
+  title?: string;
+  caption?: string;
+}
+
 export type BlogContentBlock =
   | RichTextBlock
   | CalloutBlock
@@ -185,7 +195,8 @@ export type BlogContentBlock =
   | InfographicBlock
   | FaqBlock
   | TakeawayBoxBlock
-  | CarouselBlock;
+  | CarouselBlock
+  | YoutubeBlock;
 
 export interface TocItem {
   id: string;

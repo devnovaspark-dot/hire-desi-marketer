@@ -673,5 +673,48 @@ export const blockContent = defineType({
         },
       },
     }),
+
+    // 13. YouTube Video Embed Block
+    defineArrayMember({
+      type: 'object',
+      name: 'youtube',
+      title: 'YouTube Video Embed',
+      fields: [
+        defineField({
+          name: 'url',
+          type: 'url',
+          title: 'YouTube Video URL',
+          description: 'Paste standard YouTube URL (e.g., https://www.youtube.com/watch?v=... or https://youtu.be/... or https://youtube.com/shorts/...)',
+          validation: (Rule) =>
+            Rule.required().uri({
+              scheme: ['http', 'https'],
+            }),
+        }),
+        defineField({
+          name: 'title',
+          type: 'string',
+          title: 'Video Title (Optional)',
+          placeholder: 'e.g. How to Hire High-Performing Growth Marketers in India',
+        }),
+        defineField({
+          name: 'caption',
+          type: 'string',
+          title: 'Video Caption / Key Context (Optional)',
+          placeholder: 'e.g. Watch this real-world breakdown of offshore marketing squad economics.',
+        }),
+      ],
+      preview: {
+        select: {
+          url: 'url',
+          title: 'title',
+        },
+        prepare({ url, title }: any) {
+          return {
+            title: title ? `▶️ ${title}` : '▶️ YouTube Video',
+            subtitle: url || 'Paste YouTube link',
+          };
+        },
+      },
+    }),
   ],
 });
