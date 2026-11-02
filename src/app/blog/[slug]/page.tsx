@@ -276,7 +276,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* ========================================================== */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
             {/* Main Article Body (8 cols) */}
-            <article className="lg:col-span-8 space-y-10 min-w-0">
+            <article className="lg:col-span-8 space-y-10 min-w-0 pb-16 lg:pb-36">
               {/* Custom Blocks Renderer */}
               <PortableTextRenderer blocks={post.content} />
 
@@ -429,7 +429,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* 5. Related Articles Section                                */}
           {/* ========================================================== */}
           {relatedPosts.length > 0 && (
-            <section className="mt-20 pt-16 border-t border-[#E2DBD0] space-y-8">
+            <section className="mt-8 lg:mt-12 pt-16 border-t border-[#E2DBD0] space-y-8">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-xs font-extrabold uppercase tracking-wider text-[#FFB020] mb-1">
