@@ -769,14 +769,13 @@ function FaqBlockView({
   );
 }
 
-// 12. Pure Smooth Auto-Sliding Image Carousel (No box card, only images)
+// 12. Pure Smooth Auto-Sliding Image Carousel (No box card, zero flicker/shift sliding track)
 function CarouselBlockView({
   block,
 }: {
   block: Extract<BlogContentBlock, { type: "carousel" }>;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(1);
   const [isHovered, setIsHovered] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
@@ -787,17 +786,15 @@ function CarouselBlockView({
 
   const nextSlide = useCallback(() => {
     if (total <= 1) return;
-    setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % total);
   }, [total]);
 
   const prevSlide = useCallback(() => {
     if (total <= 1) return;
-    setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + total) % total);
   }, [total]);
 
-  // Smooth Auto-sliding timer
+  // Smooth Auto-sliding: pauses on hover
   useEffect(() => {
     if (total <= 1 || isHovered) return;
     const timer = setInterval(() => {
@@ -829,54 +826,53 @@ function CarouselBlockView({
 
   if (total === 0) return null;
 
-  const activeItem = block.items[currentIndex];
-  if (!activeItem) return null;
-
   return (
     <div
       role="region"
       aria-roledescription="carousel"
-      aria-label="Image Carousel"
+      aria-label="Image Slideshow"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="my-10 mx-auto w-full max-w-2xl relative select-none group"
+      className="my-10 mx-auto w-full max-w-[560px] select-none group"
     >
-      {/* Slide Image Container: Zero box card, only the image */}
+      {/* Stable Viewport: aspect-square prevents any height shifting/jumping */}
       <div
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="relative w-full flex items-center justify-center overflow-hidden rounded-2xl"
+        className="relative w-full aspect-square overflow-hidden rounded-2xl shadow-md bg-slate-50"
       >
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={currentIndex}
-            initial={{ opacity: 0, x: direction > 0 ? 35 : -35 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: direction > 0 ? -35 : 35 }}
-            transition={{ duration: 0.45, ease: "easeInOut" }}
-            className="w-full flex items-center justify-center"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={activeItem.image}
-              alt={activeItem.alt || activeItem.title || "Slide graphic"}
-              loading="lazy"
-              decoding="async"
+        {/* Continuous Horizontal Sliding Track: Zero flicker, zero layout shifts */}
+        <div
+          className="flex w-full h-full transition-transform duration-500 ease-out will-change-transform"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {block.items.map((item, idx) => (
+            <div
+              key={idx}
+              className="min-w-full w-full h-full shrink-0 flex items-center justify-center relative cursor-zoom-in"
               onClick={() =>
                 openZoom({
-                  src: activeItem.image,
-                  alt: activeItem.alt || activeItem.title || "Slide graphic",
-                  caption: activeItem.description || activeItem.title,
-                  badge: activeItem.badge,
+                  src: item.image,
+                  alt: item.alt || item.title || "Slide graphic",
+                  caption: item.description || item.title,
+                  badge: item.badge,
                 })
               }
-              className="w-full h-auto max-h-[640px] rounded-2xl object-contain shadow-md cursor-zoom-in transition-transform duration-300 hover:scale-[1.01]"
-            />
-          </motion.div>
-        </AnimatePresence>
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={item.image}
+                alt={item.alt || item.title || `Slide ${idx + 1}`}
+                loading={idx === 0 ? "eager" : "lazy"}
+                decoding="async"
+                className="w-full h-full object-contain rounded-2xl select-none pointer-events-none"
+              />
+            </div>
+          ))}
+        </div>
 
-        {/* Hover Prev/Next arrow buttons directly on the image */}
+        {/* Hover Navigation Arrows (Smoothly fade in on mouse hover) */}
         {total > 1 && (
           <>
             <button
@@ -903,16 +899,9 @@ function CarouselBlockView({
             </button>
           </>
         )}
-
-        {/* Top-Right subtle slide counter badge directly on image */}
-        {total > 1 && (
-          <div className="absolute top-3 right-3 z-10 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-mono font-bold border border-white/20 pointer-events-none shadow-md">
-            <span className="text-[#FFB020]">{currentIndex + 1}</span> / {total}
-          </div>
-        )}
       </div>
 
-      {/* Sleek Minimalist Dots directly below the image */}
+      {/* Minimalist Slide Dots directly beneath the image */}
       {total > 1 && (
         <div className="flex items-center justify-center gap-1.5 mt-3 py-1">
           {block.items.map((_, idx) => {
@@ -921,10 +910,7 @@ function CarouselBlockView({
               <button
                 key={idx}
                 type="button"
-                onClick={() => {
-                  setDirection(idx > currentIndex ? 1 : -1);
-                  setCurrentIndex(idx);
-                }}
+                onClick={() => setCurrentIndex(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
                 className={cn(
                   "h-1.5 rounded-full transition-all duration-300 cursor-pointer",
