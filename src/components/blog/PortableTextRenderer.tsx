@@ -372,7 +372,7 @@ function CodeBlockView({
   );
 }
 
-// 7. Responsive High-Def Image with Caption, Badge & Click-to-Zoom
+// 7. Responsive High-Def Image with Click-to-Zoom (Zero text on image)
 function ImageView({
   block,
 }: {
@@ -390,7 +390,6 @@ function ImageView({
             src: block.url,
             alt: block.alt || "Article illustration",
             caption: block.caption,
-            badge: block.badge,
           })
         }
         onKeyDown={(e) => {
@@ -400,7 +399,6 @@ function ImageView({
               src: block.url,
               alt: block.alt || "Article illustration",
               caption: block.caption,
-              badge: block.badge,
             });
           }
         }}
@@ -416,19 +414,6 @@ function ImageView({
             className="w-full max-h-[600px] h-auto object-contain rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
           />
         </div>
-
-        {/* Optional Badge */}
-        {block.badge && (
-          <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#060B22]/90 backdrop-blur-md border border-[#FFB020]/40 text-[#FFB020] text-xs font-black uppercase tracking-wider shadow-lg">
-            {block.badge}
-          </div>
-        )}
-
-        {/* Hover zoom affordance */}
-        <div className="absolute bottom-3 right-3 z-10 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-bold flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg pointer-events-none border border-white/20">
-          <ZoomIn className="w-3 h-3 text-[#FFB020]" />
-          <span>Click to Zoom</span>
-        </div>
       </div>
 
       {block.caption && (
@@ -440,7 +425,7 @@ function ImageView({
   );
 }
 
-// 7b. Animated GIF / Meme Block with Click-to-Zoom
+// 7b. Animated GIF / Meme Block with Click-to-Zoom (Zero text on image)
 function GifBlockView({
   block,
 }: {
@@ -465,7 +450,6 @@ function GifBlockView({
             src: block.url,
             alt: block.alt || "Animated GIF",
             caption: block.caption,
-            badge: block.badge || "GIF",
           })
         }
         onKeyDown={(e) => {
@@ -475,7 +459,6 @@ function GifBlockView({
               src: block.url,
               alt: block.alt || "Animated GIF",
               caption: block.caption,
-              badge: block.badge || "GIF",
             });
           }
         }}
@@ -492,25 +475,6 @@ function GifBlockView({
             decoding="async"
             className="w-full h-auto rounded-xl object-contain shadow-sm transition-transform duration-300 group-hover:scale-[1.01]"
           />
-        </div>
-
-        {/* Optional Badge */}
-        {block.badge && (
-          <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#060B22]/90 backdrop-blur-md border border-[#FFB020]/40 text-[#FFB020] text-xs font-black uppercase tracking-wider shadow-lg flex items-center gap-1.5">
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#FFB020] animate-pulse" />
-            {block.badge}
-          </div>
-        )}
-
-        {/* Subtle GIF tag */}
-        <div className="absolute bottom-3 left-3 px-2 py-0.5 rounded bg-black/60 backdrop-blur-md text-[10px] font-bold text-white/90 tracking-widest uppercase pointer-events-none">
-          GIF
-        </div>
-
-        {/* Hover zoom affordance */}
-        <div className="absolute bottom-3 right-3 z-10 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-bold flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg pointer-events-none border border-white/20">
-          <ZoomIn className="w-3 h-3 text-[#FFB020]" />
-          <span>Click to Zoom</span>
         </div>
       </div>
 
@@ -988,20 +952,8 @@ function YouTubeBlockView({
               </div>
             )}
 
-            {/* Subtle Gradient Overlays for contrast */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none" />
-
-            {/* Top Video Title Header */}
-            {block.title && (
-              <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between gap-3 pointer-events-none">
-                <span className="font-display font-bold text-sm sm:text-base text-white truncate drop-shadow-md">
-                  {block.title}
-                </span>
-                <span className="shrink-0 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-[#FFB020] text-[10px] font-black uppercase tracking-wider">
-                  YouTube
-                </span>
-              </div>
-            )}
+            {/* Subtle Gradient Overlay */}
+            <div className="absolute inset-0 bg-black/15 pointer-events-none" />
 
             {/* Authentic Red YouTube Play Button */}
             <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 rounded-2xl bg-[#FF0000] flex items-center justify-center shadow-[0_10px_30px_rgba(255,0,0,0.45)] group-hover:scale-115 group-hover:bg-[#E60000] group-hover:shadow-[0_15px_40px_rgba(255,0,0,0.65)] transition-all duration-300">
@@ -1012,12 +964,6 @@ function YouTubeBlockView({
               >
                 <path d="M8 5v14l11-7z" />
               </svg>
-            </div>
-
-            {/* Bottom Play Label Hint */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 px-3.5 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-white text-xs font-semibold flex items-center gap-2 opacity-90 group-hover:opacity-100 transition-opacity">
-              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-              <span>Watch Video</span>
             </div>
           </div>
         )}

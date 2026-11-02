@@ -290,12 +290,6 @@ export function ZoomableImage({
           )}
         />
       )}
-
-      {/* Hover Zoom pill affordance */}
-      <div className="absolute bottom-3 right-3 z-10 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-bold flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg pointer-events-none border border-white/20">
-        <ZoomIn className="w-3 h-3 text-[#FFB020]" />
-        <span>Click to Zoom</span>
-      </div>
     </div>
   );
 }

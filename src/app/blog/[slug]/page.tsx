@@ -255,7 +255,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <ZoomableImage
                   src={post.coverImage}
                   alt={post.coverImageAlt}
-                  badge={post.coverBadge || "Verified Strategic Guide"}
                   className="rounded-3xl border border-[#E2DBD0] shadow-xl"
                 >
                   <div className="relative aspect-[16/11] w-full rounded-3xl overflow-hidden skeuo-card-light group cursor-zoom-in">
@@ -267,11 +266,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                       className="object-cover group-hover:scale-102 transition-transform duration-300"
                       sizes="(max-width: 1024px) 100vw, 520px"
                     />
-                    {/* Visual Badge overlay matching reference screenshot */}
-                    <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-[#060B22]/90 backdrop-blur-md border border-[#FFB020]/40 text-[#FFB020] text-xs font-black uppercase tracking-wider shadow-lg flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
-                      <span>{post.coverBadge || "Verified Strategic Guide"}</span>
-                    </div>
                   </div>
                 </ZoomableImage>
               </div>
