@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import {
   Palette,
   RefreshCw,
@@ -43,10 +44,23 @@ export function WebDesignServicesGrid() {
             key={service.id}
             className="rounded-3xl p-6 sm:p-7 bg-white border border-[#E2DBD0] hover:border-[#FFB020]/70 shadow-[0_4px_18px_-4px_rgba(6,11,34,0.04)] hover:shadow-[0_14px_30px_-6px_rgba(6,11,34,0.09)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
           >
-            {/* Top Subtle Hover Accent */}
-            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-transparent to-transparent group-hover:via-[#FFB020] transition-all duration-300" />
+            {/* Relevant Background Mockup Image with Luxury Overlay */}
+            {service.bgImage && (
+              <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none">
+                <Image
+                  src={service.bgImage}
+                  alt={service.title}
+                  fill
+                  className="object-cover object-top opacity-10 group-hover:opacity-20 group-hover:scale-105 transition-all duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/94 to-white/75 group-hover:from-white/92 group-hover:via-white/85 group-hover:to-white/60 transition-colors duration-300" />
+              </div>
+            )}
 
-            <div className="space-y-4">
+            {/* Top Subtle Hover Accent */}
+            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-transparent to-transparent group-hover:via-[#FFB020] transition-all duration-300 z-10" />
+
+            <div className="space-y-4 relative z-10">
               {/* Header Icon & Solution Number */}
               <div className="flex items-center justify-between">
                 <div className="w-12 h-12 rounded-2xl bg-[#060B22] text-[#FFB020] flex items-center justify-center shadow-xs group-hover:scale-105 group-hover:bg-[#FFB020] group-hover:text-[#060B22] transition-all duration-300">
@@ -84,7 +98,7 @@ export function WebDesignServicesGrid() {
             </div>
 
             {/* Clean Bottom Action */}
-            <div className="pt-4 border-t border-slate-100 mt-5">
+            <div className="pt-4 border-t border-slate-100 mt-5 relative z-10">
               <a
                 href="#lead-form"
                 className="text-xs font-bold text-[#0B1B3A] group-hover:text-[#B87A00] inline-flex items-center gap-1.5 transition-colors cursor-pointer"

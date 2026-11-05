@@ -133,28 +133,32 @@ export default function WebDesignServicesPage() {
 
       <main className="flex-1 pt-20 sm:pt-24 pb-16">
         {/* ================================================================ */}
-        {/* 1. HERO SECTION – FITS IN A SINGLE WINDOW ABOVE THE FOLD         */}
+        {/* 1. HERO SECTION – HIGH-CONVERTING BESPOKE AGENCY ARCHITECTURE     */}
         {/* ================================================================ */}
         <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center py-4 sm:py-6 lg:py-8 bg-[#F6F4EE]">
           {/* Subtle Authentic Hero Background Layer - Smooth, Warm & Without Harsh Shadows */}
           <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            {/* Blueprint Dot Matrix Pattern */}
+            <div className="absolute inset-0 bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] [background-size:24px_24px] opacity-40" />
+            {/* Luminous Warm Ambient Glows */}
+            <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-gradient-to-b from-[#FFB020]/15 via-[#FFB020]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-[450px] h-[450px] bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+            {/* Subtle Watermark Imagery */}
             <Image
               src="/images/web-dev-hero-bg.jpg"
               alt="Hire Desi Marketer Web Design and Development Studio"
               fill
               priority
-              className="object-cover object-center opacity-[0.06] mix-blend-multiply"
+              className="object-cover object-right-top opacity-[0.05] mix-blend-multiply"
             />
-            {/* Luminous Warm Luxury Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#F6F4EE]/85 via-[#F6F4EE]/95 to-[#F6F4EE]" />
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
-              {/* Left Column (7 cols): Target Markets, Headline, Subtitle, 5 Key Selling Points, CTAs, Social Proof */}
+              {/* Left Column (7 cols): Target Markets, Headline, Subtitle, 4 High-Impact Badges, CTAs, Social Proof */}
               <div className="lg:col-span-7 space-y-4 sm:space-y-5 text-left">
-                {/* Target Markets Banner */}
-                <div className="inline-flex flex-wrap items-center gap-2 px-3.5 py-1 rounded-full bg-[#060B22] text-white text-[11px] font-bold border border-white/10 shadow-sm">
+                {/* Target Markets Banner with Live Timezone Status */}
+                <div className="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#060B22] text-white text-[11px] font-bold border border-white/10 shadow-md">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <span className="text-[#FFB020] font-black uppercase tracking-wider text-[10px]">
                     Target Markets:
@@ -162,51 +166,66 @@ export default function WebDesignServicesPage() {
                   <span className="text-slate-200">
                     🇺🇸 USA · 🇨🇦 Canada · 🇬🇧 UK · 🇦🇺 Australia
                   </span>
+                  <span className="hidden sm:inline text-white/30">|</span>
+                  <span className="hidden sm:inline-flex items-center gap-1 text-emerald-400 font-semibold text-[10px]">
+                    Live Timezone Overlap
+                  </span>
                 </div>
 
-                {/* Main Headline */}
+                {/* Main Headline with Luxury Gradient Highlights */}
                 <div className="space-y-2">
                   <h1 className="font-display font-black text-2xl sm:text-4xl lg:text-[40px] xl:text-[44px] text-[#0B1B3A] tracking-tight leading-[1.12]">
-                    Professional Website Design &amp; Development Services for{" "}
-                    <span className="text-[#FFB020] bg-gradient-to-r from-[#B87A00] to-[#E68A00] bg-clip-text text-transparent">
-                      Growing Businesses
+                    Professional Website Design &amp; Development for{" "}
+                    <span className="relative inline-block">
+                      <span className="relative z-10 bg-gradient-to-r from-[#B87A00] via-[#E68A00] to-[#FFB020] bg-clip-text text-transparent">
+                        Growing Businesses
+                      </span>
+                      <span className="absolute bottom-1 left-0 right-0 h-2.5 bg-[#FFB020]/20 -rotate-1 rounded-sm -z-0" />
                     </span>
                   </h1>
 
                   {/* Subheading */}
                   <p className="text-xs sm:text-sm lg:text-base text-slate-700 leading-relaxed max-w-2xl font-medium">
-                    Whether you need a brand-new website, a complete redesign, or
-                    improvements to your existing website, our team delivers
-                    scalable, high-performing digital experiences tailored to your
-                    business goals.
+                    Whether you need a brand-new website, a complete modern redesign, or continuous dedicated development, our engineers deliver scalable, high-converting digital platforms tailored to your revenue goals.
                   </p>
                 </div>
 
-                {/* Key Selling Points (Compact Inline Grid) */}
-                <div className="space-y-1.5 pt-1">
-                  <div className="text-[10px] font-black uppercase tracking-wider text-slate-500">
-                    Key Value Capabilities:
+                {/* Key Selling Points (4 High-Impact Visual Badges in 2x2 grid) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-xs">
+                  <div className="flex items-center gap-2.5 p-2 px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
+                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0">
+                      <Palette className="w-3.5 h-3.5 text-[#B87A00]" />
+                    </div>
+                    <div>
+                      <span className="font-bold text-slate-800 block leading-tight">Custom UI/UX &amp; Development</span>
+                      <span className="text-[10px] text-slate-500">Bespoke Figma wireframes &amp; clean code</span>
+                    </div>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-bold text-slate-800">
-                    <div className="flex items-center gap-2 p-1.5 px-2.5 rounded-xl bg-white/90 border border-[#E2DBD0] shadow-2xs backdrop-blur-xs">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
-                      <span className="truncate">Custom Website Design &amp; Development</span>
+                  <div className="flex items-center gap-2.5 p-2 px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
+                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0">
+                      <RefreshCw className="w-3.5 h-3.5 text-[#B87A00]" />
                     </div>
-                    <div className="flex items-center gap-2 p-1.5 px-2.5 rounded-xl bg-white/90 border border-[#E2DBD0] shadow-2xs backdrop-blur-xs">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
-                      <span className="truncate">Website Redesign &amp; Modernization</span>
+                    <div>
+                      <span className="font-bold text-slate-800 block leading-tight">Website Redesign &amp; Speed</span>
+                      <span className="text-[10px] text-slate-500">Core Web Vitals 90+ &amp; SEO migration</span>
                     </div>
-                    <div className="flex items-center gap-2 p-1.5 px-2.5 rounded-xl bg-white/90 border border-[#E2DBD0] shadow-2xs backdrop-blur-xs">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
-                      <span className="truncate">CMS &amp; E-commerce Development</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 p-2 px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
+                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0">
+                      <ShoppingBag className="w-3.5 h-3.5 text-[#B87A00]" />
                     </div>
-                    <div className="flex items-center gap-2 p-1.5 px-2.5 rounded-xl bg-white/90 border border-[#E2DBD0] shadow-2xs backdrop-blur-xs">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
-                      <span className="truncate">Performance, Speed &amp; Mobile Optimization</span>
+                    <div>
+                      <span className="font-bold text-slate-800 block leading-tight">CMS &amp; E-Commerce Engines</span>
+                      <span className="text-[10px] text-slate-500">Shopify, WordPress, Webflow &amp; Headless</span>
                     </div>
-                    <div className="sm:col-span-2 flex items-center gap-2 p-1.5 px-2.5 rounded-xl bg-white/90 border border-[#E2DBD0] shadow-2xs backdrop-blur-xs">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
-                      <span className="truncate">Dedicated Developers &amp; Flexible Engagement Models</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 p-2 px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
+                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0">
+                      <Users className="w-3.5 h-3.5 text-[#B87A00]" />
+                    </div>
+                    <div>
+                      <span className="font-bold text-slate-800 block leading-tight">Dedicated Developers &amp; Support</span>
+                      <span className="text-[10px] text-slate-500">Fixed milestones &amp; zero agency lock-in</span>
                     </div>
                   </div>
                 </div>
@@ -392,27 +411,34 @@ export default function WebDesignServicesPage() {
               </p>
             </div>
 
-            {/* 3 Pricing Models Grid with Elevated Luxury Card UI */}
+            {/* 3 Pricing Models Grid with Pixel-Perfect Alignment */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
               {PRICING_MODELS.map((model) => (
                 <div
                   key={model.id}
-                  className={`rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 relative ${
+                  className={`rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 relative h-full ${
                     model.isPopular
-                      ? "skeuo-card-dark text-white border-2 border-[#FFB020] shadow-2xl scale-102"
-                      : "bg-gradient-to-b from-white via-white to-[#FDFCFB] text-[#0B1B3A] border border-[#E2DBD0] hover:border-[#FFB020]/60 shadow-[0_4px_20px_-4px_rgba(6,11,34,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(6,11,34,0.12)] hover:-translate-y-1"
+                      ? "skeuo-card-dark text-white border-2 border-[#FFB020] shadow-xl ring-4 ring-[#FFB020]/15"
+                      : "bg-white text-[#0B1B3A] border border-[#E2DBD0] hover:border-[#FFB020]/60 shadow-[0_4px_20px_-4px_rgba(6,11,34,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(6,11,34,0.12)] hover:-translate-y-1"
                   }`}
                 >
-                  {model.isPopular && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                      <span className="px-4 py-1 rounded-full bg-[#FFB020] text-[#060B22] text-[10px] font-black uppercase tracking-wider shadow-md">
+                  {/* Top Badge Row - Equal Height for all 3 cards */}
+                  <div className="h-7 mb-3 flex items-center">
+                    {model.isPopular ? (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020] text-[#060B22] text-[10px] font-black uppercase tracking-wider shadow-sm">
+                        <Sparkles className="w-3 h-3" />
+                        <span>{model.badge}</span>
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider border border-slate-200">
                         {model.badge}
                       </span>
-                    </div>
-                  )}
+                    )}
+                  </div>
 
-                  <div className="space-y-6">
-                    <div className="space-y-1.5 text-left">
+                  <div className="space-y-5 flex-1 flex flex-col">
+                    {/* Header: Subtitle, Title, Price with matching min-height */}
+                    <div className="space-y-1 text-left min-h-[110px] flex flex-col justify-between">
                       <div
                         className={`text-xs font-black uppercase tracking-wider ${
                           model.isPopular ? "text-[#FFB020]" : "text-[#B87A00]"
@@ -421,14 +447,14 @@ export default function WebDesignServicesPage() {
                         {model.subtitle}
                       </div>
                       <h3
-                        className={`font-display font-black text-2xl tracking-tight ${
+                        className={`font-display font-black text-2xl tracking-tight leading-snug line-clamp-2 min-h-[3.5rem] flex items-center ${
                           model.isPopular ? "text-white" : "text-[#0B1B3A]"
                         }`}
                       >
                         {model.title}
                       </h3>
                       <div
-                        className={`font-display font-black text-2xl sm:text-3xl pt-2 ${
+                        className={`font-display font-black text-2xl sm:text-3xl pt-1 ${
                           model.isPopular ? "text-[#FFB020]" : "text-[#0B1B3A]"
                         }`}
                       >
@@ -436,26 +462,33 @@ export default function WebDesignServicesPage() {
                       </div>
                     </div>
 
-                    <p
-                      className={`text-xs leading-relaxed ${
-                        model.isPopular ? "text-slate-300" : "text-slate-600"
-                      }`}
-                    >
-                      {model.description}
-                    </p>
+                    {/* Description with matching min-height */}
+                    <div className="min-h-[52px] flex items-start">
+                      <p
+                        className={`text-xs leading-relaxed ${
+                          model.isPopular ? "text-slate-300" : "text-slate-600"
+                        }`}
+                      >
+                        {model.description}
+                      </p>
+                    </div>
 
+                    {/* Best for box with matching min-height */}
                     <div
-                      className={`p-3 rounded-xl text-xs font-bold ${
+                      className={`p-3 rounded-xl text-xs font-bold min-h-[58px] flex items-center ${
                         model.isPopular
                           ? "bg-white/10 text-white"
                           : "bg-slate-50 text-slate-800 border border-[#E2DBD0]"
                       }`}
                     >
-                      <span>Best for: </span>
-                      <span className="font-normal">{model.idealFor}</span>
+                      <div>
+                        <span>Best for: </span>
+                        <span className="font-normal">{model.idealFor}</span>
+                      </div>
                     </div>
 
-                    <div className="space-y-2.5 pt-2">
+                    {/* Features list fills remaining height */}
+                    <div className="space-y-2.5 pt-2 flex-1 flex flex-col">
                       <div
                         className={`text-xs font-black uppercase tracking-wider ${
                           model.isPopular ? "text-slate-300" : "text-slate-700"
@@ -463,7 +496,7 @@ export default function WebDesignServicesPage() {
                       >
                         What's Included:
                       </div>
-                      <ul className="space-y-2 text-xs">
+                      <ul className="space-y-2 text-xs flex-1">
                         {model.features.map((feat, i) => (
                           <li
                             key={i}
@@ -483,7 +516,8 @@ export default function WebDesignServicesPage() {
                     </div>
                   </div>
 
-                  <div className="pt-8">
+                  {/* Bottom Button pinned identically on horizontal baseline */}
+                  <div className="pt-6 mt-auto">
                     <a
                       href={model.ctaHref}
                       className={`w-full py-3.5 px-6 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer ${

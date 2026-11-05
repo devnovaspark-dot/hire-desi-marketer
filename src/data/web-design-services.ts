@@ -5,6 +5,7 @@ export interface WebServiceItem {
   description: string;
   deliverables: string[];
   icon: string;
+  bgImage?: string;
 }
 
 export interface WebTechItem {
@@ -83,6 +84,7 @@ export const WEB_SERVICES: WebServiceItem[] = [
       "Fast Core Web Vitals score (90+ on mobile & desktop)",
     ],
     icon: "palette",
+    bgImage: "/images/web-dev-hero-bg.jpg",
   },
   {
     id: "website-redesign",
@@ -98,6 +100,7 @@ export const WEB_SERVICES: WebServiceItem[] = [
       "Mobile-first navigation and layout refactoring",
     ],
     icon: "refresh",
+    bgImage: "/images/case-study-aesthetic.webp",
   },
   {
     id: "ecommerce-development",
@@ -113,6 +116,7 @@ export const WEB_SERVICES: WebServiceItem[] = [
       "Upsell, cross-sell & cart abandonment sequence setup",
     ],
     icon: "shopping-bag",
+    bgImage: "/images/case-study-cafe.webp",
   },
   {
     id: "cms-development",
@@ -128,6 +132,7 @@ export const WEB_SERVICES: WebServiceItem[] = [
       "Staff onboarding video documentation and handoff training",
     ],
     icon: "layout",
+    bgImage: "/images/blog-hero-bg.webp",
   },
   {
     id: "maintenance-enhancement",
@@ -143,6 +148,7 @@ export const WEB_SERVICES: WebServiceItem[] = [
       "Dedicated Slack / Teams communication channel",
     ],
     icon: "shield",
+    bgImage: "/images/journal-desk-hero.webp",
   },
   {
     id: "speed-optimization",
@@ -158,6 +164,7 @@ export const WEB_SERVICES: WebServiceItem[] = [
       "Before & after benchmark audit performance report",
     ],
     icon: "zap",
+    bgImage: "/images/case-study-roofing.webp",
   },
   {
     id: "custom-web-app",
@@ -173,6 +180,7 @@ export const WEB_SERVICES: WebServiceItem[] = [
       "Role-based access control (RBAC) & admin dashboards",
     ],
     icon: "code",
+    bgImage: "/images/case-study-dental.webp",
   },
   {
     id: "uiux-conversion",
@@ -188,6 +196,7 @@ export const WEB_SERVICES: WebServiceItem[] = [
       "Frictionless forms, sticky CTAs & clear value propositions",
     ],
     icon: "sparkles",
+    bgImage: "/images/1200_1000px.webp",
   },
 ];
 
