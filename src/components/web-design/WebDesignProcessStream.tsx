@@ -1,13 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   CheckCircle2,
   ArrowRight,
   ArrowLeft,
   Sparkles,
-  ShieldCheck,
-  Clock,
   Layers,
   Code2,
   FileCheck,
@@ -15,6 +13,8 @@ import {
   Wrench,
   Search,
   PenTool,
+  Pause,
+  Play,
 } from "lucide-react";
 import { PROCESS_STEPS, WebProcessStep } from "@/data/web-design-services";
 import { cn } from "@/lib/utils";
@@ -29,29 +29,108 @@ const STEP_ICONS = [
   <Wrench key={7} className="w-5 h-5" />,
 ];
 
+const PHASE_DURATIONS: Record<number, string> = {
+  1: "1–2 Days",
+  2: "2–3 Days",
+  3: "4–6 Days",
+  4: "1–2 Weeks",
+  5: "3–4 Days",
+  6: "1 Day",
+  7: "Ongoing",
+};
+
 export function WebDesignProcessStream() {
   const [activeStepIdx, setActiveStepIdx] = useState<number>(0);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [progressPercent, setProgressPercent] = useState<number>(0);
 
   const activeStep = PROCESS_STEPS[activeStepIdx];
 
+  // Auto-slide effect to cycle smoothly through the 7 phases
+  useEffect(() => {
+    if (isPaused) return;
+
+    const intervalStep = 50; // Update progress bar every 50ms
+    const totalDuration = 4000; // 4 seconds per phase
+    const increment = (intervalStep / totalDuration) * 100;
+
+    const timer = setInterval(() => {
+      setProgressPercent((prev) => {
+        if (prev >= 100) {
+          setActiveStepIdx((current) =>
+            current < PROCESS_STEPS.length - 1 ? current + 1 : 0
+          );
+          return 0;
+        }
+        return prev + increment;
+      });
+    }, intervalStep);
+
+    return () => clearInterval(timer);
+  }, [isPaused, activeStepIdx]);
+
+  const handleStepSelect = (idx: number) => {
+    setActiveStepIdx(idx);
+    setProgressPercent(0);
+  };
+
   const handlePrev = () => {
     setActiveStepIdx((prev) => (prev > 0 ? prev - 1 : PROCESS_STEPS.length - 1));
+    setProgressPercent(0);
   };
 
   const handleNext = () => {
     setActiveStepIdx((prev) => (prev < PROCESS_STEPS.length - 1 ? prev + 1 : 0));
+    setProgressPercent(0);
   };
 
   return (
-    <div className="space-y-8 max-w-5xl mx-auto">
-      {/* 1. Interactive Step Progress Ribbon (Desktop) */}
+    <div
+      className="space-y-8 max-w-5xl mx-auto"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {/* 1. Status Indicator & Auto-Play Controls */}
+      <div className="flex items-center justify-between text-xs text-slate-500 px-2">
+        <div className="flex items-center gap-2">
+          <span
+            className={cn(
+              "w-2 h-2 rounded-full",
+              isPaused ? "bg-amber-400" : "bg-emerald-400 animate-pulse"
+            )}
+          />
+          <span className="font-semibold text-slate-600">
+            {isPaused ? "Auto-slide Paused (Hovered)" : "Auto-Advancing Phases"}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setIsPaused(!isPaused)}
+          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition-colors cursor-pointer select-none"
+        >
+          {isPaused ? (
+            <>
+              <Play className="w-3 h-3 text-[#B87A00]" />
+              <span>Resume Auto-Slide</span>
+            </>
+          ) : (
+            <>
+              <Pause className="w-3 h-3 text-slate-600" />
+              <span>Pause</span>
+            </>
+          )}
+        </button>
+      </div>
+
+      {/* 2. Interactive Step Progress Ribbon (Desktop) */}
       <div className="hidden lg:block relative pb-4">
         {/* Background Track Line */}
         <div className="absolute top-6 left-6 right-6 h-1 bg-[#E2DBD0] rounded-full z-0" />
-        
+
         {/* Active Progress Fill */}
         <div
-          className="absolute top-6 left-6 h-1 bg-gradient-to-r from-[#060B22] via-[#FFB020] to-[#E68A00] rounded-full z-0 transition-all duration-500 ease-out"
+          className="absolute top-6 left-6 h-1 bg-gradient-to-r from-[#060B22] via-[#FFB020] to-[#E68A00] rounded-full z-0 transition-all duration-300 ease-out"
           style={{
             width: `${(activeStepIdx / (PROCESS_STEPS.length - 1)) * 92}%`,
           }}
@@ -66,16 +145,16 @@ export function WebDesignProcessStream() {
               <button
                 key={step.step}
                 type="button"
-                onClick={() => setActiveStepIdx(idx)}
+                onClick={() => handleStepSelect(idx)}
                 className="group flex flex-col items-center focus:outline-none cursor-pointer"
               >
                 <div
                   className={cn(
-                    "w-12 h-12 rounded-2xl flex items-center justify-center font-black text-sm transition-all duration-300 select-none shadow-md",
+                    "w-12 h-12 rounded-2xl flex items-center justify-center font-black text-sm transition-all duration-300 select-none shadow-sm relative overflow-hidden",
                     isActive
                       ? "bg-[#060B22] text-[#FFB020] scale-110 ring-4 ring-[#FFB020]/30 border-2 border-[#FFB020]"
                       : isCompleted
-                      ? "bg-emerald-500 text-white border-2 border-emerald-400"
+                      ? "bg-emerald-600 text-white border-2 border-emerald-500"
                       : "bg-white text-slate-500 border border-[#E2DBD0] group-hover:border-slate-400 group-hover:text-[#0B1B3A]"
                   )}
                 >
@@ -104,7 +183,7 @@ export function WebDesignProcessStream() {
         </div>
       </div>
 
-      {/* 2. Mobile Step Selector Pill Bar */}
+      {/* 3. Mobile Step Selector Pill Bar */}
       <div className="lg:hidden flex items-center justify-between overflow-x-auto gap-2 pb-2 scrollbar-none">
         {PROCESS_STEPS.map((step, idx) => {
           const isActive = activeStepIdx === idx;
@@ -112,7 +191,7 @@ export function WebDesignProcessStream() {
             <button
               key={step.step}
               type="button"
-              onClick={() => setActiveStepIdx(idx)}
+              onClick={() => handleStepSelect(idx)}
               className={cn(
                 "px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer",
                 isActive
@@ -126,10 +205,15 @@ export function WebDesignProcessStream() {
         })}
       </div>
 
-      {/* 3. Active Step Command Center (Card-Free Fluid Architecture) */}
-      <div className="rounded-3xl bg-white border border-[#E2DBD0] shadow-xl overflow-hidden relative">
-        {/* Top Accent Status Bar */}
-        <div className="h-1.5 w-full bg-gradient-to-r from-[#060B22] via-[#FFB020] to-[#E68A00]" />
+      {/* 4. Active Step Command Center (With Auto-Slide Progress Bar) */}
+      <div className="rounded-3xl bg-white border border-[#E2DBD0] shadow-sm overflow-hidden relative transition-all duration-300">
+        {/* Animated Timer Progress Bar for Active Phase */}
+        <div className="h-1 w-full bg-slate-100 relative overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-[#FFB020] to-[#E68A00] transition-all duration-75 ease-linear"
+            style={{ width: `${progressPercent}%` }}
+          />
+        </div>
 
         <div className="p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Details (7 cols) */}
@@ -140,6 +224,9 @@ export function WebDesignProcessStream() {
               </span>
               <span className="text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full bg-[#FFB020]/20 text-[#B87A00] border border-[#FFB020]/30">
                 Phase 0{activeStep.step} · {activeStep.tag}
+              </span>
+              <span className="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
+                Est. Duration: {PHASE_DURATIONS[activeStep.step] || "1–3 Days"}
               </span>
             </div>
 
@@ -171,18 +258,18 @@ export function WebDesignProcessStream() {
                 <span>
                   Next Phase (0{activeStepIdx < 6 ? activeStepIdx + 2 : 1})
                 </span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 text-[#FFB020]" />
               </button>
             </div>
           </div>
 
           {/* Right Verified Deliverables Panel (5 cols) */}
-          <div className="lg:col-span-5 rounded-2xl bg-[#060B22] text-white p-6 sm:p-7 space-y-4 shadow-xl border border-white/10">
+          <div className="lg:col-span-5 rounded-2xl bg-[#060B22] text-white p-6 sm:p-7 space-y-4 shadow-md border border-white/10">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-[#FFB020]" />
                 <span className="text-xs font-black uppercase tracking-wider text-[#FFB020]">
-                  Verified Deliverables
+                  Phase Deliverables
                 </span>
               </div>
               <span className="text-[10px] text-slate-400 font-semibold">

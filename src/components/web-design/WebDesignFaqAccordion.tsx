@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown, HelpCircle } from "lucide-react";
+import { ChevronDown, HelpCircle, Plus, Minus, ArrowRight } from "lucide-react";
 import { WebFaqItem } from "@/data/web-design-services";
 import { cn } from "@/lib/utils";
 
@@ -16,14 +16,16 @@ export function WebDesignFaqAccordion({
   title = "Frequently Asked Questions",
   subtitle = "Everything you need to know about our web design, development, pricing, and execution models.",
 }: WebDesignFaqAccordionProps) {
-  const [openIdx, setOpenIdx] = useState<number | null>(0); // First FAQ opened by default for immediate preview
+  // All FAQs closed by default as requested by user
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   const toggle = (idx: number) => {
     setOpenIdx(openIdx === idx ? null : idx);
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10 max-w-4xl mx-auto">
+      {/* Section Header */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
           <HelpCircle className="w-3.5 h-3.5 text-[#FFB020]" />
@@ -39,38 +41,76 @@ export function WebDesignFaqAccordion({
         )}
       </div>
 
-      <div className="max-w-4xl mx-auto divide-y divide-[#E2DBD0] bg-white rounded-3xl p-6 sm:p-10 border border-[#E2DBD0] shadow-sm">
+      {/* Modern Individual Accordion Cards (Elevated Luxury Style) */}
+      <div className="space-y-3.5">
         {faqs.map((faq, idx) => {
           const isOpen = openIdx === idx;
           return (
-            <div key={idx} className="py-4 sm:py-5 first:pt-0 last:pb-0">
+            <div
+              key={idx}
+              className={cn(
+                "rounded-2xl transition-all duration-300 overflow-hidden border",
+                isOpen
+                  ? "bg-white border-[#FFB020] shadow-md ring-2 ring-[#FFB020]/20"
+                  : "bg-white/90 border-[#E2DBD0] hover:border-[#FFB020]/50 hover:bg-white shadow-2xs hover:shadow-xs"
+              )}
+            >
               <button
                 type="button"
                 onClick={() => toggle(idx)}
-                className="w-full flex items-center justify-between gap-4 text-left font-display font-bold text-base sm:text-lg text-[#0B1B3A] hover:text-[#B87A00] transition-colors cursor-pointer select-none group"
+                className="w-full p-5 sm:p-6 flex items-center justify-between gap-4 text-left font-display font-bold text-base sm:text-lg text-[#0B1B3A] hover:text-[#B87A00] transition-colors cursor-pointer select-none group"
+                aria-expanded={isOpen}
               >
-                <span className="leading-snug">{faq.question}</span>
+                <div className="flex items-center gap-3.5">
+                  <span
+                    className={cn(
+                      "w-7 h-7 rounded-lg text-xs font-black flex items-center justify-center transition-colors shrink-0",
+                      isOpen
+                        ? "bg-[#060B22] text-[#FFB020]"
+                        : "bg-slate-100 text-slate-500 group-hover:bg-[#FFB020]/15 group-hover:text-[#B87A00]"
+                    )}
+                  >
+                    {String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <span className="leading-snug">{faq.question}</span>
+                </div>
+
                 <span
                   className={cn(
-                    "w-8 h-8 rounded-full flex items-center justify-center shrink-0 border transition-all duration-200",
+                    "w-8 h-8 rounded-full flex items-center justify-center shrink-0 border transition-all duration-300",
                     isOpen
-                      ? "bg-[#060B22] text-[#FFB020] border-[#060B22] rotate-180 shadow-sm"
-                      : "bg-slate-50 text-slate-500 border-[#E2DBD0] group-hover:bg-slate-100"
+                      ? "bg-[#060B22] text-[#FFB020] border-[#060B22] rotate-180 shadow-xs"
+                      : "bg-slate-50 text-slate-500 border-[#E2DBD0] group-hover:bg-[#FFB020]/20 group-hover:text-[#060B22] group-hover:border-[#FFB020]/40"
                   )}
                 >
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-4 h-4 transition-transform duration-300" />
                 </span>
               </button>
+
               {isOpen && (
-                <div className="mt-3.5 text-slate-600 text-xs sm:text-sm leading-relaxed pr-6 animate-in fade-in duration-200">
-                  <p>{faq.answer}</p>
+                <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 animate-fadeIn">
+                  <div className="bg-[#FAF8F5] rounded-xl p-4 sm:p-5 border border-[#E2DBD0]/60 text-slate-700 leading-relaxed">
+                    {faq.answer}
+                  </div>
                 </div>
               )}
             </div>
           );
         })}
       </div>
+
+      {/* Helpful Bottom Prompt */}
+      <div className="text-center pt-2">
+        <p className="text-xs text-slate-500">
+          Have a question that isn&apos;t answered here?{" "}
+          <a
+            href="#lead-form"
+            className="font-bold text-[#0B1B3A] hover:text-[#B87A00] underline underline-offset-4 transition-colors"
+          >
+            Ask our lead architects directly &rarr;
+          </a>
+        </p>
+      </div>
     </div>
   );
 }
-

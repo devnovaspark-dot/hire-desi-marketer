@@ -135,20 +135,18 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 1. HERO SECTION – FITS IN A SINGLE WINDOW ABOVE THE FOLD         */}
         {/* ================================================================ */}
-        <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center py-4 sm:py-6 lg:py-8">
-          {/* Authentic Page Background Image Layer */}
+        <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center py-4 sm:py-6 lg:py-8 bg-[#F6F4EE]">
+          {/* Subtle Authentic Hero Background Layer - Smooth, Warm & Without Harsh Shadows */}
           <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
             <Image
               src="/images/web-dev-hero-bg.jpg"
               alt="Hire Desi Marketer Web Design and Development Studio"
               fill
               priority
-              className="object-cover object-center opacity-25"
+              className="object-cover object-center opacity-[0.06] mix-blend-multiply"
             />
-            {/* Soft Warm Luxury Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#F6F4EE] via-[#F6F4EE]/90 to-[#F6F4EE]/75" />
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FFB020]/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+            {/* Luminous Warm Luxury Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#F6F4EE]/85 via-[#F6F4EE]/95 to-[#F6F4EE]" />
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
@@ -556,10 +554,18 @@ export default function WebDesignServicesPage() {
               {DIFFERENTIATORS.map((diff, i) => (
                 <div
                   key={i}
-                  className="p-6 rounded-3xl bg-gradient-to-b from-white via-white to-[#FDFCFB] border border-[#E2DBD0] hover:border-[#FFB020]/60 shadow-[0_4px_18px_-4px_rgba(6,11,34,0.05)] hover:shadow-[0_12px_28px_-6px_rgba(6,11,34,0.1)] hover:-translate-y-1 transition-all duration-300 space-y-3.5 flex flex-col justify-between group"
+                  className="p-6 rounded-3xl bg-white border border-[#E2DBD0] hover:border-[#FFB020] shadow-[0_4px_18px_-4px_rgba(6,11,34,0.04)] hover:shadow-[0_14px_30px_-6px_rgba(255,176,32,0.12)] hover:-translate-y-1 transition-all duration-300 space-y-4 flex flex-col justify-between group relative overflow-hidden"
                 >
-                  <div className="space-y-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#060B22] text-[#FFB020] flex items-center justify-center shadow-xs group-hover:scale-105 group-hover:bg-[#FFB020] group-hover:text-[#060B22] transition-all duration-300">
+                  {/* Decorative Number Watermark in Background Corner */}
+                  <span className="absolute top-3 right-4 font-display font-black text-3xl text-slate-100 group-hover:text-[#FFB020]/15 transition-colors select-none pointer-events-none">
+                    0{i + 1}
+                  </span>
+
+                  {/* Top Glow Accent Bar */}
+                  <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-transparent to-transparent group-hover:via-[#FFB020] transition-all duration-300" />
+
+                  <div className="space-y-3 relative z-10">
+                    <div className="w-12 h-12 rounded-2xl bg-[#060B22] text-[#FFB020] border border-[#FFB020]/25 flex items-center justify-center shadow-xs group-hover:scale-105 group-hover:bg-[#FFB020] group-hover:text-[#060B22] transition-all duration-300">
                       {differentiatorIcons[diff.icon] || <CheckCircle2 className="w-5 h-5" />}
                     </div>
 
@@ -572,8 +578,13 @@ export default function WebDesignServicesPage() {
                     </p>
                   </div>
 
-                  <div className="pt-2 border-t border-[#E2DBD0] text-[11px] font-black uppercase tracking-wider text-[#B87A00]">
-                    {diff.metric}
+                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between relative z-10">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
+                      Verified Standard
+                    </span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#FFB020]/15 text-[#B87A00] font-black text-[11px] border border-[#FFB020]/25">
+                      {diff.metric}
+                    </span>
                   </div>
                 </div>
               ))}

@@ -112,7 +112,7 @@ export function WebDesignLeadForm({
         compact ? "p-4 sm:p-5 lg:p-6" : "p-6 sm:p-8",
         isDark
           ? "skeuo-card-dark text-white border border-white/15 shadow-2xl"
-          : "skeuo-card-light text-[#0B1B3A] border border-[#E2DBD0] shadow-xl bg-white/95 backdrop-blur-md",
+          : "text-[#0B1B3A] border border-[#E2DBD0] shadow-[0_4px_24px_-4px_rgba(6,11,34,0.06)] bg-white/95 backdrop-blur-md",
         className
       )}
     >
