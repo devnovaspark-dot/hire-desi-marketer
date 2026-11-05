@@ -136,23 +136,6 @@ export default function WebDesignServicesPage() {
         {/* 1. HERO SECTION – HIGH-CONVERTING BESPOKE AGENCY ARCHITECTURE     */}
         {/* ================================================================ */}
         <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center py-4 sm:py-6 lg:py-8 bg-[#F6F4EE]">
-          {/* Subtle Authentic Hero Background Layer - Smooth, Warm & Without Harsh Shadows */}
-          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            {/* Blueprint Dot Matrix Pattern */}
-            <div className="absolute inset-0 bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] [background-size:24px_24px] opacity-40" />
-            {/* Luminous Warm Ambient Glows */}
-            <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-gradient-to-b from-[#FFB020]/15 via-[#FFB020]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-20 -left-20 w-[450px] h-[450px] bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-            {/* Subtle Watermark Imagery */}
-            <Image
-              src="/images/web-dev-hero-bg.jpg"
-              alt="Hire Desi Marketer Web Design and Development Studio"
-              fill
-              priority
-              className="object-cover object-right-top opacity-[0.05] mix-blend-multiply"
-            />
-          </div>
-
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
               {/* Left Column (7 cols): Target Markets, Headline, Subtitle, 4 High-Impact Badges, CTAs, Social Proof */}

@@ -112,17 +112,14 @@ export function WebDesignLeadForm({
         compact ? "p-4 sm:p-5 lg:p-6" : "p-6 sm:p-8",
         isDark
           ? "skeuo-card-dark text-white border border-white/15 shadow-2xl"
-          : "text-[#0B1B3A] border border-[#E2DBD0] shadow-[0_4px_24px_-4px_rgba(6,11,34,0.06)] bg-white/95 backdrop-blur-md",
+          : "bg-white text-[#0B1B3A] border border-[#E2DBD0] shadow-sm",
         className
       )}
     >
-      {/* Decorative Accent Glow */}
-      <div
-        className={cn(
-          "absolute -top-24 -right-24 w-48 h-48 rounded-full blur-3xl pointer-events-none opacity-40",
-          isDark ? "bg-[#FFB020]/20" : "bg-[#FFB020]/30"
-        )}
-      />
+      {/* Decorative Accent Glow (Dark Mode Only) */}
+      {isDark && (
+        <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full blur-3xl pointer-events-none opacity-40 bg-[#FFB020]/20" />
+      )}
 
       {submitted ? (
         <div className="py-8 text-center space-y-5 animate-in fade-in duration-300">
