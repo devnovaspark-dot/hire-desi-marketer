@@ -724,3 +724,4 @@ export const WEB_FAQS: WebFaqItem[] = [
       "Yes, over 95% of our clients are based in the USA, Canada, United Kingdom, and Australia. Our management and senior developers work in dedicated Western shifts (EST, PST, GMT, and AEST overlap). We communicate clearly in fluent English through Slack, email, WhatsApp, and live Zoom / Google Meet calls.",
   },
 ];
+

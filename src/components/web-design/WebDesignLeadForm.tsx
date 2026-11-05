@@ -24,6 +24,7 @@ interface WebDesignLeadFormProps {
   title?: string;
   subtitle?: string;
   variant?: "light" | "dark";
+  compact?: boolean;
   className?: string;
 }
 
@@ -33,6 +34,7 @@ export function WebDesignLeadForm({
   title = "Get a Free Website Consultation",
   subtitle = "Tell us about your project & receive a custom proposal within 24 hours.",
   variant = "light",
+  compact = false,
   className,
 }: WebDesignLeadFormProps) {
   const [fullName, setFullName] = useState("");
@@ -106,7 +108,8 @@ export function WebDesignLeadForm({
     <div
       id={formId}
       className={cn(
-        "rounded-3xl p-6 sm:p-8 transition-all relative overflow-hidden",
+        "rounded-3xl transition-all relative overflow-hidden",
+        compact ? "p-4 sm:p-5 lg:p-6" : "p-6 sm:p-8",
         isDark
           ? "skeuo-card-dark text-white border border-white/15 shadow-2xl"
           : "skeuo-card-light text-[#0B1B3A] border border-[#E2DBD0] shadow-xl bg-white/95 backdrop-blur-md",
@@ -198,15 +201,16 @@ export function WebDesignLeadForm({
           </div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-1.5 text-left border-b pb-3.5 border-slate-200/50">
+        <form onSubmit={handleSubmit} className={cn(compact ? "space-y-3" : "space-y-4")}>
+          <div className={cn("space-y-1 text-left border-b border-slate-200/50", compact ? "pb-2.5" : "pb-3.5")}>
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FFB020]/20 text-[#B87A00] dark:text-[#FFB020] text-[10px] font-black uppercase tracking-wider border border-[#FFB020]/30">
               <Sparkles className="w-3 h-3 text-[#FFB020]" />
               <span>Fast 24-Hour Estimate</span>
             </div>
             <h3
               className={cn(
-                "font-display font-black text-xl sm:text-2xl tracking-tight leading-snug",
+                "font-display font-black tracking-tight leading-snug",
+                compact ? "text-lg sm:text-xl" : "text-xl sm:text-2xl",
                 isDark ? "text-white" : "text-[#0B1B3A]"
               )}
             >
@@ -214,7 +218,7 @@ export function WebDesignLeadForm({
             </h3>
             <p
               className={cn(
-                "text-xs leading-relaxed",
+                "text-[11px] sm:text-xs leading-relaxed",
                 isDark ? "text-slate-300" : "text-slate-600"
               )}
             >
@@ -223,26 +227,26 @@ export function WebDesignLeadForm({
           </div>
 
           {error && (
-            <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs flex items-center gap-2">
+            <div className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs flex items-center gap-2">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
           {/* Row 1: Full Name & Business Email */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div className={cn("grid grid-cols-1 sm:grid-cols-2", compact ? "gap-2.5" : "gap-3.5")}>
             <div className="space-y-1 text-left">
               <label
                 htmlFor={`${formId}-name`}
                 className={cn(
-                  "block text-[11px] font-bold uppercase tracking-wider",
+                  "block text-[10px] font-bold uppercase tracking-wider",
                   isDark ? "text-slate-300" : "text-slate-700"
                 )}
               >
                 Full Name <span className="text-amber-500">*</span>
               </label>
               <div className="relative">
-                <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <User className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   id={`${formId}-name`}
                   type="text"
@@ -251,7 +255,8 @@ export function WebDesignLeadForm({
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   className={cn(
-                    "w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all",
+                    "w-full pl-8 pr-3 text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all",
+                    compact ? "py-2" : "py-2.5",
                     isDark
                       ? "bg-white/10 border-white/20 text-white placeholder-slate-400"
                       : "bg-slate-50/80 border-[#E2DBD0] text-[#0B1B3A] placeholder-slate-400"
@@ -264,14 +269,14 @@ export function WebDesignLeadForm({
               <label
                 htmlFor={`${formId}-email`}
                 className={cn(
-                  "block text-[11px] font-bold uppercase tracking-wider",
+                  "block text-[10px] font-bold uppercase tracking-wider",
                   isDark ? "text-slate-300" : "text-slate-700"
                 )}
               >
                 Business Email <span className="text-amber-500">*</span>
               </label>
               <div className="relative">
-                <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Mail className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   id={`${formId}-email`}
                   type="email"
@@ -280,7 +285,8 @@ export function WebDesignLeadForm({
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className={cn(
-                    "w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all",
+                    "w-full pl-8 pr-3 text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all",
+                    compact ? "py-2" : "py-2.5",
                     isDark
                       ? "bg-white/10 border-white/20 text-white placeholder-slate-400"
                       : "bg-slate-50/80 border-[#E2DBD0] text-[#0B1B3A] placeholder-slate-400"
@@ -291,19 +297,19 @@ export function WebDesignLeadForm({
           </div>
 
           {/* Row 2: Company Name & Website URL */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div className={cn("grid grid-cols-1 sm:grid-cols-2", compact ? "gap-2.5" : "gap-3.5")}>
             <div className="space-y-1 text-left">
               <label
                 htmlFor={`${formId}-company`}
                 className={cn(
-                  "block text-[11px] font-bold uppercase tracking-wider",
+                  "block text-[10px] font-bold uppercase tracking-wider",
                   isDark ? "text-slate-300" : "text-slate-700"
                 )}
               >
                 Company Name <span className="text-amber-500">*</span>
               </label>
               <div className="relative">
-                <Building className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Building className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   id={`${formId}-company`}
                   type="text"
@@ -312,7 +318,8 @@ export function WebDesignLeadForm({
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
                   className={cn(
-                    "w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all",
+                    "w-full pl-8 pr-3 text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all",
+                    compact ? "py-2" : "py-2.5",
                     isDark
                       ? "bg-white/10 border-white/20 text-white placeholder-slate-400"
                       : "bg-slate-50/80 border-[#E2DBD0] text-[#0B1B3A] placeholder-slate-400"
@@ -325,14 +332,14 @@ export function WebDesignLeadForm({
               <label
                 htmlFor={`${formId}-url`}
                 className={cn(
-                  "block text-[11px] font-bold uppercase tracking-wider",
+                  "block text-[10px] font-bold uppercase tracking-wider",
                   isDark ? "text-slate-300" : "text-slate-700"
                 )}
               >
-                Website URL <span className="text-slate-400 text-[10px] font-normal">(Optional)</span>
+                Website URL <span className="text-slate-400 font-normal">(Optional)</span>
               </label>
               <div className="relative">
-                <Globe className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Globe className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   id={`${formId}-url`}
                   type="url"
@@ -340,7 +347,8 @@ export function WebDesignLeadForm({
                   value={websiteUrl}
                   onChange={(e) => setWebsiteUrl(e.target.value)}
                   className={cn(
-                    "w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all",
+                    "w-full pl-8 pr-3 text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all",
+                    compact ? "py-2" : "py-2.5",
                     isDark
                       ? "bg-white/10 border-white/20 text-white placeholder-slate-400"
                       : "bg-slate-50/80 border-[#E2DBD0] text-[#0B1B3A] placeholder-slate-400"
@@ -351,12 +359,12 @@ export function WebDesignLeadForm({
           </div>
 
           {/* Row 3: Service Required & Project Budget */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div className={cn("grid grid-cols-1 sm:grid-cols-2", compact ? "gap-2.5" : "gap-3.5")}>
             <div className="space-y-1 text-left">
               <label
                 htmlFor={`${formId}-service`}
                 className={cn(
-                  "block text-[11px] font-bold uppercase tracking-wider",
+                  "block text-[10px] font-bold uppercase tracking-wider",
                   isDark ? "text-slate-300" : "text-slate-700"
                 )}
               >
@@ -367,7 +375,8 @@ export function WebDesignLeadForm({
                 value={serviceRequired}
                 onChange={(e) => setServiceRequired(e.target.value)}
                 className={cn(
-                  "w-full px-3 py-2.5 text-xs sm:text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all cursor-pointer font-medium",
+                  "w-full px-2.5 text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all cursor-pointer font-medium",
+                  compact ? "py-2" : "py-2.5",
                   isDark
                     ? "bg-[#0B132B] border-white/20 text-white"
                     : "bg-slate-50/80 border-[#E2DBD0] text-[#0B1B3A]"
@@ -388,20 +397,21 @@ export function WebDesignLeadForm({
               <label
                 htmlFor={`${formId}-budget`}
                 className={cn(
-                  "block text-[11px] font-bold uppercase tracking-wider",
+                  "block text-[10px] font-bold uppercase tracking-wider",
                   isDark ? "text-slate-300" : "text-slate-700"
                 )}
               >
                 Project Budget
               </label>
               <div className="relative">
-                <DollarSign className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <DollarSign className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <select
                   id={`${formId}-budget`}
                   value={projectBudget}
                   onChange={(e) => setProjectBudget(e.target.value)}
                   className={cn(
-                    "w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all cursor-pointer font-medium",
+                    "w-full pl-8 pr-2.5 text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all cursor-pointer font-medium",
+                    compact ? "py-2" : "py-2.5",
                     isDark
                       ? "bg-[#0B132B] border-white/20 text-white"
                       : "bg-slate-50/80 border-[#E2DBD0] text-[#0B1B3A]"
@@ -422,7 +432,7 @@ export function WebDesignLeadForm({
             <label
               htmlFor={`${formId}-desc`}
               className={cn(
-                "block text-[11px] font-bold uppercase tracking-wider",
+                "block text-[10px] font-bold uppercase tracking-wider",
                 isDark ? "text-slate-300" : "text-slate-700"
               )}
             >
@@ -430,12 +440,12 @@ export function WebDesignLeadForm({
             </label>
             <textarea
               id={`${formId}-desc`}
-              rows={3}
+              rows={compact ? 2 : 3}
               placeholder="Tell us briefly about your goals, current website issues, target launch date, or reference websites you admire..."
               value={projectDescription}
               onChange={(e) => setProjectDescription(e.target.value)}
               className={cn(
-                "w-full p-3 text-xs sm:text-sm rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all leading-relaxed",
+                "w-full p-2.5 text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all leading-relaxed",
                 isDark
                   ? "bg-white/10 border-white/20 text-white placeholder-slate-400"
                   : "bg-slate-50/80 border-[#E2DBD0] text-[#0B1B3A] placeholder-slate-400"
@@ -447,7 +457,10 @@ export function WebDesignLeadForm({
           <button
             type="submit"
             disabled={loading}
-            className="btn-luxury-gold btn-shimmer w-full py-3 px-6 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-lg disabled:opacity-70 transition-all"
+            className={cn(
+              "btn-luxury-gold btn-shimmer w-full rounded-xl font-black uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-lg disabled:opacity-70 transition-all",
+              compact ? "py-2.5 px-4 text-xs" : "py-3 px-6 text-xs sm:text-sm"
+            )}
           >
             {loading ? (
               <>
@@ -457,13 +470,13 @@ export function WebDesignLeadForm({
             ) : (
               <>
                 <span>Get Free Consultation &amp; Estimate</span>
-                <Send className="w-4 h-4" />
+                <Send className="w-3.5 h-3.5" />
               </>
             )}
           </button>
 
           {/* Security & Privacy Reassurance */}
-          <div className="flex items-center justify-center gap-4 text-[10px] text-slate-500 pt-1">
+          <div className="flex items-center justify-center gap-3 text-[10px] text-slate-500 pt-0.5">
             <span className="flex items-center gap-1">
               <Lock className="w-3 h-3 text-[#FFB020]" />
               <span>100% Confidential · Strict NDA</span>
@@ -479,3 +492,4 @@ export function WebDesignLeadForm({
     </div>
   );
 }
+

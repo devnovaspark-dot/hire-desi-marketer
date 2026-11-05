@@ -35,13 +35,15 @@ import {
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WebDesignLeadForm } from "@/components/web-design/WebDesignLeadForm";
+import { WebDesignServicesGrid } from "@/components/web-design/WebDesignServicesGrid";
 import { WebDesignTechStack } from "@/components/web-design/WebDesignTechStack";
+import { WebDesignIndustriesGrid } from "@/components/web-design/WebDesignIndustriesGrid";
+import { WebDesignProcessStream } from "@/components/web-design/WebDesignProcessStream";
 import { WebDesignCaseStudies } from "@/components/web-design/WebDesignCaseStudies";
 import { WebDesignFaqAccordion } from "@/components/web-design/WebDesignFaqAccordion";
 import {
   WEB_SERVICES,
   WEB_INDUSTRIES,
-  PROCESS_STEPS,
   PRICING_MODELS,
   DIFFERENTIATORS,
   WEB_FAQS,
@@ -76,17 +78,6 @@ export const metadata: Metadata = {
   },
 };
 
-const serviceIcons: Record<string, React.ReactNode> = {
-  palette: <Palette className="w-5 h-5" />,
-  refresh: <RefreshCw className="w-5 h-5" />,
-  "shopping-bag": <ShoppingBag className="w-5 h-5" />,
-  layout: <Layout className="w-5 h-5" />,
-  shield: <ShieldCheck className="w-5 h-5" />,
-  zap: <Zap className="w-5 h-5" />,
-  code: <Code2 className="w-5 h-5" />,
-  sparkles: <Sparkles className="w-5 h-5" />,
-};
-
 const differentiatorIcons: Record<string, React.ReactNode> = {
   users: <Users className="w-5 h-5" />,
   layers: <Layers className="w-5 h-5" />,
@@ -119,7 +110,7 @@ export default function WebDesignServicesPage() {
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Website Solutions",
-      itemListElement: WEB_SERVICES.map((s, idx) => ({
+      itemListElement: WEB_SERVICES.map((s) => ({
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
@@ -140,22 +131,34 @@ export default function WebDesignServicesPage() {
 
       <Header />
 
-      <main className="flex-1 pt-24 sm:pt-28 pb-16">
+      <main className="flex-1 pt-20 sm:pt-24 pb-16">
         {/* ================================================================ */}
-        {/* 1. HERO SECTION – ABOVE THE FOLD                                 */}
+        {/* 1. HERO SECTION – FITS IN A SINGLE WINDOW ABOVE THE FOLD         */}
         {/* ================================================================ */}
-        <section className="relative overflow-hidden pb-16 pt-6 sm:pb-24 sm:pt-10">
-          {/* Subtle Ambient Background Mesh */}
-          <div className="absolute top-0 inset-x-0 h-96 bg-gradient-to-b from-[#060B22]/5 via-transparent to-transparent pointer-events-none" />
+        <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center py-4 sm:py-6 lg:py-8">
+          {/* Authentic Page Background Image Layer */}
+          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <Image
+              src="/images/web-dev-hero-bg.jpg"
+              alt="Hire Desi Marketer Web Design and Development Studio"
+              fill
+              priority
+              className="object-cover object-center opacity-25"
+            />
+            {/* Soft Warm Luxury Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#F6F4EE] via-[#F6F4EE]/90 to-[#F6F4EE]/75" />
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FFB020]/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+          </div>
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-              {/* Left Column (7 cols): Kicker, Headline, Subtitle, Bullet Points, CTAs, Proof */}
-              <div className="lg:col-span-7 space-y-6 sm:space-y-8 text-left">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+              {/* Left Column (7 cols): Target Markets, Headline, Subtitle, 5 Key Selling Points, CTAs, Social Proof */}
+              <div className="lg:col-span-7 space-y-4 sm:space-y-5 text-left">
                 {/* Target Markets Banner */}
-                <div className="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#060B22] text-white text-xs font-bold border border-white/10 shadow-sm">
+                <div className="inline-flex flex-wrap items-center gap-2 px-3.5 py-1 rounded-full bg-[#060B22] text-white text-[11px] font-bold border border-white/10 shadow-sm">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-[#FFB020] font-black uppercase tracking-wider text-[11px]">
+                  <span className="text-[#FFB020] font-black uppercase tracking-wider text-[10px]">
                     Target Markets:
                   </span>
                   <span className="text-slate-200">
@@ -164,8 +167,8 @@ export default function WebDesignServicesPage() {
                 </div>
 
                 {/* Main Headline */}
-                <div className="space-y-4">
-                  <h1 className="font-display font-black text-3xl sm:text-5xl lg:text-[52px] text-[#0B1B3A] tracking-tight leading-[1.08]">
+                <div className="space-y-2">
+                  <h1 className="font-display font-black text-2xl sm:text-4xl lg:text-[40px] xl:text-[44px] text-[#0B1B3A] tracking-tight leading-[1.12]">
                     Professional Website Design &amp; Development Services for{" "}
                     <span className="text-[#FFB020] bg-gradient-to-r from-[#B87A00] to-[#E68A00] bg-clip-text text-transparent">
                       Growing Businesses
@@ -173,7 +176,7 @@ export default function WebDesignServicesPage() {
                   </h1>
 
                   {/* Subheading */}
-                  <p className="text-base sm:text-lg text-slate-700 leading-relaxed max-w-2xl">
+                  <p className="text-xs sm:text-sm lg:text-base text-slate-700 leading-relaxed max-w-2xl font-medium">
                     Whether you need a brand-new website, a complete redesign, or
                     improvements to your existing website, our team delivers
                     scalable, high-performing digital experiences tailored to your
@@ -181,40 +184,40 @@ export default function WebDesignServicesPage() {
                   </p>
                 </div>
 
-                {/* Key Selling Points (The 5 requested points) */}
-                <div className="space-y-2.5 pt-2">
-                  <div className="text-xs font-black uppercase tracking-wider text-slate-500">
-                    Why Businesses Choose Us:
+                {/* Key Selling Points (Compact Inline Grid) */}
+                <div className="space-y-1.5 pt-1">
+                  <div className="text-[10px] font-black uppercase tracking-wider text-slate-500">
+                    Key Value Capabilities:
                   </div>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm font-bold text-slate-800">
-                    <li className="flex items-center gap-2.5 p-2 rounded-xl bg-white border border-[#E2DBD0] shadow-2xs">
-                      <CheckCircle2 className="w-4 h-4 text-[#FFB020] shrink-0" />
-                      <span>Custom Website Design &amp; Development</span>
-                    </li>
-                    <li className="flex items-center gap-2.5 p-2 rounded-xl bg-white border border-[#E2DBD0] shadow-2xs">
-                      <CheckCircle2 className="w-4 h-4 text-[#FFB020] shrink-0" />
-                      <span>Website Redesign &amp; Modernization</span>
-                    </li>
-                    <li className="flex items-center gap-2.5 p-2 rounded-xl bg-white border border-[#E2DBD0] shadow-2xs">
-                      <CheckCircle2 className="w-4 h-4 text-[#FFB020] shrink-0" />
-                      <span>CMS &amp; E-commerce Development</span>
-                    </li>
-                    <li className="flex items-center gap-2.5 p-2 rounded-xl bg-white border border-[#E2DBD0] shadow-2xs">
-                      <CheckCircle2 className="w-4 h-4 text-[#FFB020] shrink-0" />
-                      <span>Performance, Speed &amp; Mobile Optimization</span>
-                    </li>
-                    <li className="sm:col-span-2 flex items-center gap-2.5 p-2 rounded-xl bg-white border border-[#E2DBD0] shadow-2xs">
-                      <CheckCircle2 className="w-4 h-4 text-[#FFB020] shrink-0" />
-                      <span>Dedicated Developers &amp; Flexible Engagement Models</span>
-                    </li>
-                  </ul>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-bold text-slate-800">
+                    <div className="flex items-center gap-2 p-1.5 px-2.5 rounded-xl bg-white/90 border border-[#E2DBD0] shadow-2xs backdrop-blur-xs">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
+                      <span className="truncate">Custom Website Design &amp; Development</span>
+                    </div>
+                    <div className="flex items-center gap-2 p-1.5 px-2.5 rounded-xl bg-white/90 border border-[#E2DBD0] shadow-2xs backdrop-blur-xs">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
+                      <span className="truncate">Website Redesign &amp; Modernization</span>
+                    </div>
+                    <div className="flex items-center gap-2 p-1.5 px-2.5 rounded-xl bg-white/90 border border-[#E2DBD0] shadow-2xs backdrop-blur-xs">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
+                      <span className="truncate">CMS &amp; E-commerce Development</span>
+                    </div>
+                    <div className="flex items-center gap-2 p-1.5 px-2.5 rounded-xl bg-white/90 border border-[#E2DBD0] shadow-2xs backdrop-blur-xs">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
+                      <span className="truncate">Performance, Speed &amp; Mobile Optimization</span>
+                    </div>
+                    <div className="sm:col-span-2 flex items-center gap-2 p-1.5 px-2.5 rounded-xl bg-white/90 border border-[#E2DBD0] shadow-2xs backdrop-blur-xs">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
+                      <span className="truncate">Dedicated Developers &amp; Flexible Engagement Models</span>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Primary & Secondary CTAs */}
-                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                   <a
                     href="#lead-form"
-                    className="btn-luxury-gold btn-shimmer py-3.5 px-7 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg"
+                    className="btn-luxury-gold btn-shimmer py-3 px-6 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg"
                   >
                     <span>Get a Free Website Consultation</span>
                     <ArrowRight className="w-4 h-4" />
@@ -222,43 +225,44 @@ export default function WebDesignServicesPage() {
 
                   <a
                     href="#pricing-models"
-                    className="btn-luxury-navy py-3.5 px-6 rounded-2xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-sm border border-slate-700"
+                    className="btn-luxury-navy py-3 px-5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-sm border border-slate-700"
                   >
                     <span>Request a Project Estimate</span>
                   </a>
                 </div>
 
                 {/* Social Proof & Trust Badges */}
-                <div className="pt-4 border-t border-[#E2DBD0] flex flex-wrap items-center gap-6 text-xs text-slate-600">
-                  <div className="flex items-center gap-2">
+                <div className="pt-3 border-t border-[#E2DBD0] flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-slate-600">
+                  <div className="flex items-center gap-1.5">
                     <div className="flex text-amber-400">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                        <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                       ))}
                     </div>
                     <span className="font-bold text-[#0B1B3A]">4.9 / 5.0 Rating</span>
                   </div>
-                  <span>•</span>
+                  <span className="text-slate-300 hidden sm:inline">•</span>
                   <div className="flex items-center gap-1.5 font-semibold">
-                    <Clock className="w-4 h-4 text-[#FFB020]" />
-                    <span>Realtime US / UK / AU Timezone Shifts</span>
+                    <Clock className="w-3.5 h-3.5 text-[#FFB020]" />
+                    <span>Realtime US/UK/AU Timezone Shifts</span>
                   </div>
-                  <span>•</span>
+                  <span className="text-slate-300 hidden sm:inline">•</span>
                   <div className="flex items-center gap-1.5 font-semibold">
-                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                     <span>100% Code Ownership</span>
                   </div>
                 </div>
               </div>
 
-              {/* Right Column (5 cols): High-Converting Lead Form */}
-              <div className="lg:col-span-5 sticky top-24">
+              {/* Right Column (5 cols): Compact High-Converting Lead Form */}
+              <div className="lg:col-span-5">
                 <WebDesignLeadForm
                   formId="lead-form"
                   sourceTag="Web Design Landing Page - Hero Form"
                   title="Get a Free Website Consultation"
-                  subtitle="Fill in your project requirements below for a detailed quote & roadmap."
+                  subtitle="Fill in your project scope below for an actionable roadmap."
                   variant="light"
+                  compact={true}
                 />
               </div>
             </div>
@@ -286,56 +290,8 @@ export default function WebDesignServicesPage() {
               </p>
             </div>
 
-            {/* 8 Services Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
-              {WEB_SERVICES.map((service, idx) => (
-                <div
-                  key={service.id}
-                  className="rounded-3xl p-6 bg-[#F6F4EE] border border-[#E2DBD0] skeuo-card-light space-y-4 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg"
-                >
-                  <div className="space-y-3.5">
-                    <div className="w-12 h-12 rounded-2xl bg-[#060B22] text-[#FFB020] flex items-center justify-center shadow-md">
-                      {serviceIcons[service.icon] || <Code2 className="w-5 h-5" />}
-                    </div>
-
-                    <div className="space-y-1">
-                      <div className="text-[10px] font-black uppercase tracking-wider text-[#B87A00]">
-                        {service.kicker}
-                      </div>
-                      <h3 className="font-display font-black text-lg text-[#0B1B3A] leading-snug">
-                        {service.title}
-                      </h3>
-                    </div>
-
-                    <p className="text-xs text-slate-600 leading-relaxed">
-                      {service.description}
-                    </p>
-
-                    <div className="pt-2 border-t border-[#E2DBD0] space-y-2">
-                      <div className="text-[11px] font-bold text-slate-700">
-                        Key Deliverables:
-                      </div>
-                      <ul className="space-y-1.5 text-[11px] text-slate-600">
-                        {service.deliverables.slice(0, 3).map((d, i) => (
-                          <li key={i} className="flex items-start gap-1.5">
-                            <Check className="w-3.5 h-3.5 text-[#FFB020] mt-0.5 shrink-0" />
-                            <span>{d}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  <a
-                    href="#lead-form"
-                    className="pt-3 text-xs font-bold text-[#0B1B3A] hover:text-[#B87A00] inline-flex items-center gap-1.5 transition-colors cursor-pointer border-t border-[#E2DBD0]"
-                  >
-                    <span>Discuss This Solution</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              ))}
-            </div>
+            {/* Dynamic Services Grid with View More/Less Toggle & Visual Snippets */}
+            <WebDesignServicesGrid />
           </div>
         </section>
 
@@ -359,6 +315,7 @@ export default function WebDesignServicesPage() {
               </p>
             </div>
 
+            {/* Interactive Architecture & Ecosystem Studio (NO CARDS) */}
             <WebDesignTechStack />
           </div>
         </section>
@@ -384,45 +341,8 @@ export default function WebDesignServicesPage() {
               </p>
             </div>
 
-            {/* 12 Industries Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-              {WEB_INDUSTRIES.map((ind, idx) => (
-                <div
-                  key={ind.id}
-                  className="p-5 rounded-2xl bg-[#F6F4EE] border border-[#E2DBD0] skeuo-card-light space-y-3 transition-all duration-200 hover:-translate-y-1 hover:border-slate-400 hover:shadow-md"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="w-8 h-8 rounded-xl bg-[#060B22] text-[#FFB020] flex items-center justify-center font-bold text-xs shadow-xs">
-                      {idx + 1}
-                    </span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
-                      Industry Solution
-                    </span>
-                  </div>
-
-                  <div>
-                    <h3 className="font-display font-black text-base text-[#0B1B3A]">
-                      {ind.name}
-                    </h3>
-                    <p className="text-xs text-slate-600 leading-relaxed mt-1">
-                      {ind.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-2 border-t border-[#E2DBD0] space-y-1">
-                    {ind.popularSolutions.map((sol, i) => (
-                      <div
-                        key={i}
-                        className="flex items-center gap-1.5 text-[11px] text-slate-700 font-medium"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#FFB020]" />
-                        <span>{sol}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+            {/* Dynamic Industries Grid with View More/Less Toggle */}
+            <WebDesignIndustriesGrid />
           </div>
         </section>
 
@@ -446,38 +366,8 @@ export default function WebDesignServicesPage() {
               </p>
             </div>
 
-            {/* 7 Steps Horizontal Roadmap */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-4 lg:gap-3">
-              {PROCESS_STEPS.map((step) => (
-                <div
-                  key={step.step}
-                  className="rounded-2xl bg-white border border-[#E2DBD0] p-5 skeuo-card-light space-y-3 flex flex-col justify-between relative transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
-                >
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="w-8 h-8 rounded-xl bg-[#FFB020] text-[#060B22] font-black text-sm flex items-center justify-center shadow-xs">
-                        0{step.step}
-                      </span>
-                      <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
-                        Phase {step.step}
-                      </span>
-                    </div>
-
-                    <h3 className="font-display font-bold text-sm text-[#0B1B3A] leading-snug">
-                      {step.title.replace(/^Step \d+:\s*/, "")}
-                    </h3>
-
-                    <p className="text-[11px] text-slate-600 leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-2 border-t border-slate-100 text-[10px] text-slate-500 font-semibold">
-                    <span>{step.tag}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {/* Interactive Milestone Progression Pipeline (NO CARDS) */}
+            <WebDesignProcessStream />
           </div>
         </section>
 
@@ -504,7 +394,7 @@ export default function WebDesignServicesPage() {
               </p>
             </div>
 
-            {/* 3 Pricing Models Grid */}
+            {/* 3 Pricing Models Grid with Elevated Luxury Card UI */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
               {PRICING_MODELS.map((model) => (
                 <div
@@ -512,7 +402,7 @@ export default function WebDesignServicesPage() {
                   className={`rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 relative ${
                     model.isPopular
                       ? "skeuo-card-dark text-white border-2 border-[#FFB020] shadow-2xl scale-102"
-                      : "skeuo-card-light bg-[#F6F4EE] text-[#0B1B3A] border border-[#E2DBD0] shadow-md"
+                      : "bg-gradient-to-b from-white via-white to-[#FDFCFB] text-[#0B1B3A] border border-[#E2DBD0] hover:border-[#FFB020]/60 shadow-[0_4px_20px_-4px_rgba(6,11,34,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(6,11,34,0.12)] hover:-translate-y-1"
                   }`}
                 >
                   {model.isPopular && (
@@ -560,7 +450,7 @@ export default function WebDesignServicesPage() {
                       className={`p-3 rounded-xl text-xs font-bold ${
                         model.isPopular
                           ? "bg-white/10 text-white"
-                          : "bg-white text-slate-800 border border-[#E2DBD0]"
+                          : "bg-slate-50 text-slate-800 border border-[#E2DBD0]"
                       }`}
                     >
                       <span>Best for: </span>
@@ -661,19 +551,19 @@ export default function WebDesignServicesPage() {
               </p>
             </div>
 
-            {/* 8 Differentiators Grid */}
+            {/* 8 Differentiators Grid with Elevated Card UI */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {DIFFERENTIATORS.map((diff, i) => (
                 <div
                   key={i}
-                  className="p-6 rounded-3xl bg-[#F6F4EE] border border-[#E2DBD0] skeuo-card-light space-y-3.5 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
+                  className="p-6 rounded-3xl bg-gradient-to-b from-white via-white to-[#FDFCFB] border border-[#E2DBD0] hover:border-[#FFB020]/60 shadow-[0_4px_18px_-4px_rgba(6,11,34,0.05)] hover:shadow-[0_12px_28px_-6px_rgba(6,11,34,0.1)] hover:-translate-y-1 transition-all duration-300 space-y-3.5 flex flex-col justify-between group"
                 >
                   <div className="space-y-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#060B22] text-[#FFB020] flex items-center justify-center shadow-xs">
+                    <div className="w-10 h-10 rounded-xl bg-[#060B22] text-[#FFB020] flex items-center justify-center shadow-xs group-hover:scale-105 group-hover:bg-[#FFB020] group-hover:text-[#060B22] transition-all duration-300">
                       {differentiatorIcons[diff.icon] || <CheckCircle2 className="w-5 h-5" />}
                     </div>
 
-                    <h3 className="font-display font-black text-base text-[#0B1B3A] leading-snug">
+                    <h3 className="font-display font-black text-base text-[#0B1B3A] leading-snug group-hover:text-[#B87A00] transition-colors">
                       {diff.title}
                     </h3>
 
