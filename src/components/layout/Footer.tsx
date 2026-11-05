@@ -425,6 +425,15 @@ export function Footer() {
                 </a>
               </li>
               <li>
+                <Link
+                  href="/web-design-and-development-services"
+                  className="hover:text-white transition-colors flex items-center gap-1.5 group"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FFB020] shadow-[0_0_6px_#FFB020]" />
+                  <span className="text-[#FFB020] font-bold">Web Design &amp; Development</span>
+                </Link>
+              </li>
+              <li>
                 <a
                   href="#teams"
                   onClick={(e) => handleSmoothNav(e, "#teams")}

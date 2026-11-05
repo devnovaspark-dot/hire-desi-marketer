@@ -6,6 +6,8 @@ interface QuotePayload {
   company?: string;
   country?: string;
   serviceInterest?: string;
+  websiteUrl?: string;
+  budget?: string;
   message?: string;
   source?: string;
 }
@@ -17,7 +19,17 @@ export async function POST(req: NextRequest) {
   try {
     const body: QuotePayload = await req.json();
 
-    const { fullName, email, company, country, serviceInterest, message, source } = body;
+    const {
+      fullName,
+      email,
+      company,
+      country,
+      serviceInterest,
+      websiteUrl,
+      budget,
+      message,
+      source,
+    } = body;
 
     // Validate email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -41,10 +53,12 @@ export async function POST(req: NextRequest) {
 
     const cleanCountry = country?.trim() || "Not specified";
     const cleanService =
-      serviceInterest?.trim() || "Free Marketing Plan Consultation";
+      serviceInterest?.trim() || "Web Design & Development / Marketing";
     const cleanCompany = company?.trim() || "Not provided";
+    const cleanWebsite = websiteUrl?.trim() || "N/A";
+    const cleanBudget = budget?.trim() || "Not specified";
     const cleanMessage = message?.trim() || "No additional message provided";
-    const cleanSource = source?.trim() || "Quote Form / Hero Banner";
+    const cleanSource = source?.trim() || "Quote Form / Landing Page";
 
     // Extract headers for FormSubmit verification
     const origin =
@@ -63,6 +77,8 @@ export async function POST(req: NextRequest) {
       "Full Name": cleanName || "N/A",
       "Work Email": email.trim(),
       "Company": cleanCompany,
+      "Website URL": cleanWebsite,
+      "Project Budget": cleanBudget,
       "Country / Region": cleanCountry,
       "Service Interest / Plan": cleanService,
       "Requirements / Notes": cleanMessage,
