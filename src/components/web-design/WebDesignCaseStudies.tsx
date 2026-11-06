@@ -2,17 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import {
-  ExternalLink,
-  Sparkles,
-  ArrowRight,
-  CheckCircle2,
-  Lock,
-  Star,
-  Activity,
-  Layers,
-  Zap,
-} from "lucide-react";
+import { ExternalLink, ArrowRight } from "lucide-react";
 import { WEB_CASE_STUDIES, WebCaseStudy } from "@/data/web-design-services";
 import { cn } from "@/lib/utils";
 
@@ -65,49 +55,15 @@ export function WebDesignCaseStudies() {
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#FFB020]/0 to-transparent group-hover:via-[#FFB020] transition-all duration-300 z-30" />
 
             <div>
-              {/* Realistic Browser Frame with Real Screenshot Image */}
-              <div className="border-b border-[#E2DBD0] bg-slate-900 relative overflow-hidden">
-                {/* Browser Control Title Bar */}
-                <div className="h-7 sm:h-8 bg-[#060B22] border-b border-white/10 px-3 flex items-center justify-between shrink-0 z-20 relative">
-                  <div className="flex items-center gap-1.5 shrink-0">
-                    <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                  </div>
-
-                  {/* Clean Simulated URL Bar */}
-                  <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/10 border border-white/10 text-[9.5px] font-mono text-slate-300 max-w-[190px] sm:max-w-[260px] truncate">
-                    <Lock className="w-2.5 h-2.5 text-emerald-400 shrink-0" />
-                    <span className="truncate">
-                      {study.liveUrl ? study.liveUrl.replace(/^https?:\/\//, "") : "website.com"}
-                    </span>
-                  </div>
-
-                  {study.liveUrl && (
-                    <a
-                      href={study.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-slate-400 hover:text-[#FFB020] transition-colors p-0.5 shrink-0"
-                      title="Open live website in new tab"
-                    >
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  )}
-                </div>
-
-                {/* Real High-Resolution Website Preview Screenshot */}
-                <div className="relative aspect-[16/10] sm:aspect-[16/9.5] w-full bg-slate-950 overflow-hidden">
-                  <Image
-                    src={study.image}
-                    alt={study.imageAlt}
-                    fill
-                    className="object-cover object-top group-hover:scale-103 transition-transform duration-700 ease-out"
-                    sizes="(max-width: 768px) 100vw, 600px"
-                  />
-                  {/* Subtle Vignette Overlay for Depth */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                </div>
+              {/* Clean Website Preview Image (Zero Fake Browser Bar Clutter) */}
+              <div className="relative aspect-[16/10] sm:aspect-[16/9.5] w-full bg-slate-100 overflow-hidden border-b border-[#E2DBD0]">
+                <Image
+                  src={study.image}
+                  alt={study.imageAlt}
+                  fill
+                  className="object-cover object-top group-hover:scale-103 transition-transform duration-700 ease-out"
+                  sizes="(max-width: 768px) 100vw, 600px"
+                />
               </div>
 
               {/* Card Body with Editorial Hierarchy */}
