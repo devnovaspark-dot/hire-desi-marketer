@@ -47,8 +47,8 @@ const ARCHITECTURE_PILLARS: ArchitecturePillar[] = [
 
 export function WebDesignHero() {
   return (
-    <section className="relative overflow-hidden py-3 sm:py-5 lg:py-6 bg-[#F6F4EE] border-b border-[#E2DBD0]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+    <section className="relative overflow-hidden w-full min-h-[calc(100svh-4.5rem)] lg:min-h-[calc(100vh-4.5rem)] flex flex-col justify-center py-2 sm:py-4 lg:py-4 bg-[#F6F4EE] border-b border-[#E2DBD0]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
           {/* Left Column (7 cols): Snug, High-Impact Editorial Layout */}
           <div className="lg:col-span-7 space-y-3 sm:space-y-4 text-left">
