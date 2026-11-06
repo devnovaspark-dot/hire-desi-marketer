@@ -555,7 +555,7 @@ export const WEB_CASE_STUDIES: WebCaseStudy[] = [
       { label: "Core UX", value: "1-Tap Booking" },
       { label: "Compliance", value: "HIPAA Grade" },
     ],
-    image: "/images/case-study-aesthetic.webp",
+    image: "/images/ref-onemedical.jpg",
     imageAlt: "One Medical healthcare and telehealth website reference preview",
   },
   {
@@ -582,7 +582,7 @@ export const WEB_CASE_STUDIES: WebCaseStudy[] = [
       { label: "Checkout", value: "Frictionless" },
       { label: "Mobile UX", value: "App-Like" },
     ],
-    image: "/images/case-study-cafe.webp",
+    image: "/images/ref-allbirds.jpg",
     imageAlt: "Allbirds direct-to-consumer e-commerce reference preview",
   },
   {
@@ -609,7 +609,7 @@ export const WEB_CASE_STUDIES: WebCaseStudy[] = [
       { label: "Performance", value: "100/100 Vitals" },
       { label: "Interaction", value: "Fluid Micro-UI" },
     ],
-    image: "/images/services-ui-design-showcase.jpg",
+    image: "/images/ref-linear.jpg",
     imageAlt: "Linear SaaS web application and modern software landing page reference",
   },
   {
@@ -636,7 +636,7 @@ export const WEB_CASE_STUDIES: WebCaseStudy[] = [
       { label: "Typography", value: "Editorial High-End" },
       { label: "Reach", value: "Global Scale" },
     ],
-    image: "/images/journal-desk-hero.webp",
+    image: "/images/ref-mckinsey.jpg",
     imageAlt: "McKinsey & Company corporate consulting website reference preview",
   },
 ];
