@@ -392,22 +392,22 @@ export function WebDesignTechStack() {
                 >
                   <div
                     className={cn(
-                      "w-5 h-5 rounded-md flex items-center justify-center p-0.5 shrink-0 transition-colors",
+                      "w-6 h-6 rounded-lg flex items-center justify-center p-1 shrink-0 transition-colors bg-white border",
                       isSelected
-                        ? "bg-[#FFB020] text-[#060B22]"
-                        : "bg-slate-100 text-slate-700"
+                        ? "border-[#FFB020] shadow-xs"
+                        : "border-slate-200"
                     )}
                   >
                     {tech.icon ? (
                       <Image
                         src={tech.icon}
                         alt={tech.name}
-                        width={14}
-                        height={14}
+                        width={16}
+                        height={16}
                         className="object-contain"
                       />
                     ) : (
-                      <Code2 className="w-3.5 h-3.5" />
+                      <Code2 className="w-3.5 h-3.5 text-slate-700" />
                     )}
                   </div>
                   <span>{tech.name}</span>
@@ -451,22 +451,22 @@ export function WebDesignTechStack() {
                     <div className="flex items-center gap-3 min-w-0">
                       <div
                         className={cn(
-                          "w-8 h-8 rounded-xl flex items-center justify-center p-1.5 shrink-0 transition-colors",
+                          "w-9 h-9 rounded-xl flex items-center justify-center p-1.5 shrink-0 transition-colors bg-white border",
                           isSelected
-                            ? "bg-[#FFB020] text-[#060B22]"
-                            : "bg-white border border-slate-200 text-slate-700"
+                            ? "border-[#FFB020] shadow-xs"
+                            : "border-slate-200"
                         )}
                       >
                         {tech.icon ? (
                           <Image
                             src={tech.icon}
                             alt={tech.name}
-                            width={16}
-                            height={16}
+                            width={20}
+                            height={20}
                             className="object-contain"
                           />
                         ) : (
-                          <Code2 className="w-4 h-4" />
+                          <Code2 className="w-4 h-4 text-slate-700" />
                         )}
                       </div>
 
@@ -514,18 +514,18 @@ export function WebDesignTechStack() {
                   <span>{currentInfo.categoryLabel}</span>
                 </div>
 
-                <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-[#060B22] text-[#FFB020] border border-[#FFB020]/30 flex items-center justify-center p-1.5 shrink-0 shadow-xs">
+                <div className="flex items-center gap-2.5 sm:gap-3">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border border-[#E2DBD0] flex items-center justify-center p-2 shrink-0 shadow-xs">
                     {currentTechItem?.icon ? (
                       <Image
                         src={currentTechItem.icon}
                         alt={currentInfo.name}
-                        width={22}
-                        height={22}
+                        width={28}
+                        height={28}
                         className="object-contain"
                       />
                     ) : (
-                      <Code2 className="w-5 h-5" />
+                      <Code2 className="w-6 h-6 text-slate-700" />
                     )}
                   </div>
                   <h3 className="font-display font-black text-2xl sm:text-3xl text-[#0B1B3A] tracking-tight leading-tight">
@@ -626,9 +626,19 @@ export function WebDesignTechStack() {
                 setActiveCategory(isModern ? "modern" : "cms");
                 setSelectedTech(tech.name);
               }}
-              className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white border border-[#E2DBD0] text-slate-700 hover:text-[#060B22] hover:border-[#FFB020] transition-all duration-200 cursor-pointer shadow-2xs group shrink-0"
+              className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white border border-[#E2DBD0] text-slate-700 hover:text-[#060B22] hover:border-[#FFB020] transition-all duration-200 cursor-pointer shadow-2xs group shrink-0"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FFB020] group-hover:scale-125 transition-transform" />
+              {tech.icon ? (
+                <Image
+                  src={tech.icon}
+                  alt={tech.name}
+                  width={14}
+                  height={14}
+                  className="object-contain shrink-0"
+                />
+              ) : (
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FFB020] group-hover:scale-125 transition-transform" />
+              )}
               <span className="text-[11px] sm:text-xs font-bold">{tech.name}</span>
               <span className="text-[9px] sm:text-[10px] text-slate-400">({tech.tag})</span>
             </button>
