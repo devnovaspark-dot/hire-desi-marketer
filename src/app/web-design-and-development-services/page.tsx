@@ -142,17 +142,17 @@ export default function WebDesignServicesPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
               {/* Left Column (7 cols): Target Markets, Headline, Subtitle, 4 High-Impact Badges, CTAs, Social Proof */}
               <div className="lg:col-span-7 space-y-4 sm:space-y-5 text-left">
-                {/* Target Markets Banner with Live Timezone Status */}
-                <div className="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#060B22] text-white text-[11px] font-bold border border-white/10 shadow-md">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-[#FFB020] font-black uppercase tracking-wider text-[10px]">
+                {/* Target Markets (Clean Simple Text instead of Eyebrow Badge) */}
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-medium text-slate-700">
+                  <span className="text-[#B87A00] font-black uppercase tracking-wider text-[11px] sm:text-xs">
                     Target Markets:
                   </span>
-                  <span className="text-slate-200">
+                  <span className="font-semibold text-[#0B1B3A]">
                     🇺🇸 USA · 🇨🇦 Canada · 🇬🇧 UK · 🇦🇺 Australia
                   </span>
-                  <span className="hidden sm:inline text-white/30">|</span>
-                  <span className="hidden sm:inline-flex items-center gap-1 text-emerald-400 font-semibold text-[10px]">
+                  <span className="text-slate-300 hidden sm:inline">|</span>
+                  <span className="inline-flex items-center gap-1.5 text-emerald-700 font-semibold text-[11px] sm:text-xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                     Live Timezone Overlap
                   </span>
                 </div>
