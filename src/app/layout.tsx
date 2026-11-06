@@ -117,7 +117,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${bricolage.variable} ${manrope.variable} scroll-smooth`}>
+    <html lang="en" suppressHydrationWarning className={`${bricolage.variable} ${manrope.variable} scroll-smooth`}>
       <head>
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <script
@@ -125,7 +125,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className="min-h-screen bg-[#F6F4EE] text-[#0B1B3A] antialiased selection:bg-[#FFB020] selection:text-[#060B22]">
+      <body suppressHydrationWarning className="min-h-screen bg-[#F6F4EE] text-[#0B1B3A] antialiased selection:bg-[#FFB020] selection:text-[#060B22]">
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe

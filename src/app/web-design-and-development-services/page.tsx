@@ -37,6 +37,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WebDesignLeadForm } from "@/components/web-design/WebDesignLeadForm";
 import { WebDesignServicesGrid } from "@/components/web-design/WebDesignServicesGrid";
+import { WebDesignMarketingAlignment } from "@/components/web-design/WebDesignMarketingAlignment";
 import { WebDesignTechStack } from "@/components/web-design/WebDesignTechStack";
 import { WebDesignIndustriesGrid } from "@/components/web-design/WebDesignIndustriesGrid";
 import { WebDesignProcessStream } from "@/components/web-design/WebDesignProcessStream";
@@ -72,7 +73,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Professional Web Design & Development Services | Hire Desi Marketer",
     description:
-      "Scalable, high-performing websites and digital experiences tailored to your business goals. Serving USA, Canada, UK & Australia.",
+      "Scalable, high-performing websites and digital experiences tailored to your business goals and industry requirements.",
     url: "https://www.hiredesimarketer.com/web-design-and-development-services",
     siteName: "Hire Desi Marketer",
     locale: "en_US",
@@ -124,7 +125,7 @@ export default function WebDesignServicesPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F6F4EE] text-[#0B1B3A] w-full max-w-full overflow-x-clip">
+    <div suppressHydrationWarning className="flex flex-col min-h-screen bg-[#F6F4EE] text-[#0B1B3A] w-full max-w-full overflow-x-clip">
       {/* Schema.org Structured Data */}
       <script
         type="application/ld+json"
@@ -140,30 +141,30 @@ export default function WebDesignServicesPage() {
         <section className="relative overflow-hidden py-4 sm:py-8 lg:py-10 bg-[#F6F4EE]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
-              {/* Left Column (7 cols): Target Markets, Headline, Subtitle, 4 High-Impact Badges, CTAs, Social Proof */}
+              {/* Left Column (7 cols): Industry Focus, Headline, Subtitle, 4 High-Impact Badges, CTAs, Social Proof */}
               <div className="lg:col-span-7 space-y-4 sm:space-y-5 text-left">
-                {/* Target Markets (Clean Simple Text instead of Eyebrow Badge) */}
+                {/* Industry-Focused Kicker (Clean Simple Text) */}
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-medium text-slate-700">
                   <span className="text-[#B87A00] font-black uppercase tracking-wider text-[11px] sm:text-xs">
-                    Target Markets:
+                    Industry-Tailored Engineering:
                   </span>
                   <span className="font-semibold text-[#0B1B3A]">
-                    🇺🇸 USA · 🇨🇦 Canada · 🇬🇧 UK · 🇦🇺 Australia
+                    Bespoke Website Architecture &amp; Development
                   </span>
                   <span className="text-slate-300 hidden sm:inline">|</span>
                   <span className="inline-flex items-center gap-1.5 text-emerald-700 font-semibold text-[11px] sm:text-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    Live Timezone Overlap
+                    Dedicated Global Timezone Alignment
                   </span>
                 </div>
 
                 {/* Main Headline with Luxury Gradient Highlights */}
                 <div className="space-y-2">
                   <h1 className="font-display font-black text-2xl sm:text-4xl lg:text-[40px] xl:text-[44px] text-[#0B1B3A] tracking-tight leading-[1.12]">
-                    Professional Website Design &amp; Development for{" "}
+                    The Right Design &amp; Development Talent for{" "}
                     <span className="relative inline-block">
                       <span className="relative z-10 bg-gradient-to-r from-[#B87A00] via-[#E68A00] to-[#FFB020] bg-clip-text text-transparent">
-                        Growing Businesses
+                        Your Industry and Website
                       </span>
                       <span className="absolute bottom-1 left-0 right-0 h-2.5 bg-[#FFB020]/20 -rotate-1 rounded-sm -z-0" />
                     </span>
@@ -171,7 +172,7 @@ export default function WebDesignServicesPage() {
 
                   {/* Subheading */}
                   <p className="text-xs sm:text-sm lg:text-base text-slate-700 leading-relaxed max-w-2xl font-medium">
-                    Whether you need a brand-new website, a complete modern redesign, or continuous dedicated development, our engineers deliver scalable, high-converting digital platforms tailored to your revenue goals.
+                    We bring together the right design and development expertise to build high-performing websites tailored to your industry, business goals, and audience — helping your business grow online.
                   </p>
                 </div>
 
@@ -226,10 +227,10 @@ export default function WebDesignServicesPage() {
                   </a>
 
                   <a
-                    href="#pricing-models"
+                    href="#engagement-models"
                     className="btn-luxury-navy py-3 px-5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-sm border border-slate-700"
                   >
-                    <span>Request a Project Estimate</span>
+                    <span>Explore Engagement Models</span>
                   </a>
                 </div>
 
@@ -246,7 +247,7 @@ export default function WebDesignServicesPage() {
                   <span className="text-slate-300 hidden sm:inline">•</span>
                   <div className="flex items-center gap-1.5 font-semibold">
                     <Clock className="w-3.5 h-3.5 text-[#FFB020]" />
-                    <span>Realtime US/UK/AU Timezone Shifts</span>
+                    <span>Dedicated Global Timezone Alignment</span>
                   </div>
                   <span className="text-slate-300 hidden sm:inline">•</span>
                   <div className="flex items-center gap-1.5 font-semibold">
@@ -298,7 +299,16 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 3. TECHNOLOGIES & PLATFORMS WE WORK WITH                          */}
+        {/* 3. WHY YOUR MARKETING NEEDS A GREAT WEBSITE                      */}
+        {/* ================================================================ */}
+        <section id="marketing-alignment" className="py-10 sm:py-14 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <WebDesignMarketingAlignment />
+          </div>
+        </section>
+
+        {/* ================================================================ */}
+        {/* 4. TECHNOLOGIES & PLATFORMS WE WORK WITH                          */}
         {/* ================================================================ */}
         <section id="tech-stack" className="py-10 sm:py-14 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
@@ -374,170 +384,182 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 6. FLEXIBLE PRICING & ENGAGEMENT MODELS                           */}
+        {/* 6. FLEXIBLE ENGAGEMENT MODELS (ZERO PRICING)                     */}
         {/* ================================================================ */}
         <section
-          id="pricing-models"
-          className="py-10 sm:py-14 lg:py-16 bg-white border-y border-[#E2DBD0]"
+          id="engagement-models"
+          className="py-10 sm:py-14 lg:py-16 bg-white border-y border-[#E2DBD0] scroll-mt-24 sm:scroll-mt-28"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
             <div className="text-center max-w-3xl mx-auto space-y-3">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
-                <DollarSign className="w-3.5 h-3.5 text-[#FFB020]" />
-                <span>Zero Lock-Ins · Transparent Pricing</span>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+                <Layers className="w-3.5 h-3.5 text-[#FFB020]" />
+                <span>Flexible Collaboration · Zero Lock-Ins</span>
               </div>
               <h2 className="font-display font-black text-2xl sm:text-4xl text-[#0B1B3A] tracking-tight">
-                Flexible Hiring &amp; Pricing Models to Fit Your Budget
+                Flexible Engagement Models Built for Your Business Needs
               </h2>
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                Every website project is different. That's why we offer flexible
-                engagement models depending on your project scope, timeline, and
-                development requirements.
+                Every website project has distinct requirements. Choose the collaboration structure that best fits your goals, bandwidth, and development roadmap.
               </p>
             </div>
 
-            {/* 3 Pricing Models Grid with Pixel-Perfect Alignment */}
+            {/* 3 Engagement Cards Grid with Zero Pricing */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-              {PRICING_MODELS.map((model) => (
-                <div
-                  key={model.id}
-                  className={`rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col justify-between transition-all duration-300 relative h-full ${
-                    model.isPopular
-                      ? "skeuo-card-dark text-white border-2 border-[#FFB020] shadow-xl ring-4 ring-[#FFB020]/15"
-                      : "bg-white text-[#0B1B3A] border border-[#E2DBD0] hover:border-[#FFB020]/60 shadow-[0_4px_20px_-4px_rgba(6,11,34,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(6,11,34,0.12)] hover:-translate-y-1"
-                  }`}
-                >
-                  {/* Top Badge Row */}
-                  <div className="h-7 mb-3 flex items-center">
-                    {model.isPopular ? (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020] text-[#060B22] text-[10px] font-black uppercase tracking-wider shadow-sm">
-                        <Sparkles className="w-3 h-3" />
-                        <span>{model.badge}</span>
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider border border-slate-200">
-                        {model.badge}
-                      </span>
-                    )}
-                  </div>
+              {PRICING_MODELS.map((model) => {
+                const modelIcon =
+                  model.id === "hourly" ? (
+                    <Clock className="w-5 h-5" />
+                  ) : model.id === "monthly-dedicated" ? (
+                    <Users className="w-5 h-5" />
+                  ) : (
+                    <Briefcase className="w-5 h-5" />
+                  );
 
-                  <div className="space-y-5 flex-1 flex flex-col">
-                    {/* Header */}
-                    <div className="space-y-1 text-left min-h-[110px] flex flex-col justify-between">
+                return (
+                  <div
+                    key={model.id}
+                    className={`rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col justify-between transition-all duration-300 relative h-full group ${
+                      model.isPopular
+                        ? "skeuo-card-dark text-white border-2 border-[#FFB020] shadow-xl ring-4 ring-[#FFB020]/15"
+                        : "bg-white text-[#0B1B3A] border border-[#E2DBD0] hover:border-[#FFB020]/60 shadow-[0_4px_20px_-4px_rgba(6,11,34,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(6,11,34,0.12)] hover:-translate-y-1"
+                    }`}
+                  >
+                    {/* Top Row: Badge & Model Icon */}
+                    <div className="flex items-center justify-between h-8 mb-3">
+                      {model.isPopular ? (
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020] text-[#060B22] text-[10px] font-black uppercase tracking-wider shadow-sm">
+                          <Sparkles className="w-3 h-3" />
+                          <span>{model.badge}</span>
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider border border-slate-200">
+                          {model.badge}
+                        </span>
+                      )}
+
                       <div
-                        className={`text-xs font-black uppercase tracking-wider ${
-                          model.isPopular ? "text-[#FFB020]" : "text-[#B87A00]"
+                        className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors ${
+                          model.isPopular
+                            ? "bg-white/10 text-[#FFB020] border border-white/15"
+                            : "bg-[#060B22]/5 text-[#0B1B3A] border border-[#E2DBD0] group-hover:bg-[#FFB020]/20 group-hover:text-[#B87A00]"
                         }`}
                       >
-                        {model.subtitle}
-                      </div>
-                      <h3
-                        className={`font-display font-black text-2xl tracking-tight leading-snug line-clamp-2 min-h-[3.5rem] flex items-center ${
-                          model.isPopular ? "text-white" : "text-[#0B1B3A]"
-                        }`}
-                      >
-                        {model.title}
-                      </h3>
-                      <div
-                        className={`font-display font-black text-2xl sm:text-3xl pt-1 ${
-                          model.isPopular ? "text-[#FFB020]" : "text-[#0B1B3A]"
-                        }`}
-                      >
-                        {model.priceTag}
+                        {modelIcon}
                       </div>
                     </div>
 
-                    {/* Description */}
-                    <div className="min-h-[52px] flex items-start">
-                      <p
-                        className={`text-xs leading-relaxed ${
-                          model.isPopular ? "text-slate-300" : "text-slate-600"
-                        }`}
-                      >
-                        {model.description}
-                      </p>
-                    </div>
+                    <div className="space-y-4 flex-1 flex flex-col">
+                      {/* Header */}
+                      <div className="space-y-1.5 text-left">
+                        <div
+                          className={`text-xs font-black uppercase tracking-wider ${
+                            model.isPopular ? "text-[#FFB020]" : "text-[#B87A00]"
+                          }`}
+                        >
+                          {model.subtitle}
+                        </div>
+                        <h3
+                          className={`font-display font-black text-2xl tracking-tight leading-snug ${
+                            model.isPopular ? "text-white" : "text-[#0B1B3A]"
+                          }`}
+                        >
+                          {model.title}
+                        </h3>
+                      </div>
 
-                    {/* Best for box */}
-                    <div
-                      className={`p-3 rounded-xl text-xs font-bold min-h-[58px] flex items-center ${
-                        model.isPopular
-                          ? "bg-white/10 text-white"
-                          : "bg-slate-50 text-slate-800 border border-[#E2DBD0]"
-                      }`}
-                    >
+                      {/* Description */}
                       <div>
-                        <span>Best for: </span>
-                        <span className="font-normal">{model.idealFor}</span>
+                        <p
+                          className={`text-xs sm:text-sm leading-relaxed ${
+                            model.isPopular ? "text-slate-300" : "text-slate-600"
+                          }`}
+                        >
+                          {model.description}
+                        </p>
                       </div>
-                    </div>
 
-                    {/* Features list */}
-                    <div className="space-y-2.5 pt-2 flex-1 flex flex-col">
+                      {/* Best for box */}
                       <div
-                        className={`text-xs font-black uppercase tracking-wider ${
-                          model.isPopular ? "text-slate-300" : "text-slate-700"
+                        className={`p-3.5 rounded-xl text-xs font-bold ${
+                          model.isPopular
+                            ? "bg-white/10 text-white"
+                            : "bg-slate-50 text-slate-800 border border-[#E2DBD0]"
                         }`}
                       >
-                        What's Included:
+                        <div>
+                          <span className="text-[#B87A00] font-black uppercase tracking-wider block text-[10px] mb-0.5">
+                            Best suited for:
+                          </span>
+                          <span className="font-medium">{model.idealFor}</span>
+                        </div>
                       </div>
-                      <ul className="space-y-2 text-xs flex-1">
-                        {model.features.map((feat, i) => (
-                          <li
-                            key={i}
-                            className={`flex items-start gap-2 leading-snug ${
-                              model.isPopular ? "text-slate-200" : "text-slate-700"
-                            }`}
-                          >
-                            <CheckCircle2
-                              className={`w-4 h-4 shrink-0 mt-0.5 ${
-                                model.isPopular ? "text-[#FFB020]" : "text-[#B87A00]"
+
+                      {/* Features list */}
+                      <div className="space-y-2.5 pt-2 flex-1 flex flex-col">
+                        <div
+                          className={`text-xs font-black uppercase tracking-wider ${
+                            model.isPopular ? "text-slate-300" : "text-slate-700"
+                          }`}
+                        >
+                          Key Benefits &amp; Delivery:
+                        </div>
+                        <ul className="space-y-2 text-xs flex-1">
+                          {model.features.map((feat, i) => (
+                            <li
+                              key={i}
+                              className={`flex items-start gap-2 leading-snug ${
+                                model.isPopular ? "text-slate-200" : "text-slate-700"
                               }`}
-                            />
-                            <span>{feat}</span>
-                          </li>
-                        ))}
-                      </ul>
+                            >
+                              <CheckCircle2
+                                className={`w-4 h-4 shrink-0 mt-0.5 ${
+                                  model.isPopular ? "text-[#FFB020]" : "text-[#B87A00]"
+                                }`}
+                              />
+                              <span>{feat}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Bottom Button */}
+                    <div className="pt-6 mt-auto">
+                      <a
+                        href={model.ctaHref}
+                        className={`w-full py-3.5 px-6 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer ${
+                          model.isPopular
+                            ? "btn-luxury-gold btn-shimmer"
+                            : "btn-luxury-navy"
+                        }`}
+                      >
+                        <span>Discuss Your Project</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
                     </div>
                   </div>
-
-                  {/* Bottom Button */}
-                  <div className="pt-6 mt-auto">
-                    <a
-                      href={model.ctaHref}
-                      className={`w-full py-3.5 px-6 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer ${
-                        model.isPopular
-                          ? "btn-luxury-gold btn-shimmer"
-                          : "btn-luxury-navy"
-                      }`}
-                    >
-                      <span>{model.ctaText}</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* ================================================================ */}
-        {/* 7. OUR WORK / CASE STUDIES (DUAL-DEVICE RESPONSIVE SHOWCASE)      */}
+        {/* 7. WEBSITE INSPIRATION & LIVE DESIGN REFERENCES                  */}
         {/* ================================================================ */}
-        <section id="work" className="py-10 sm:py-14 lg:py-16">
+        <section id="work" className="py-10 sm:py-14 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Laptop className="w-3.5 h-3.5 text-[#FFB020]" />
-                <span>Verified Client Outcomes</span>
+                <span>Website Inspiration &amp; Design References</span>
               </div>
               <h2 className="font-display font-black text-2xl sm:text-4xl text-[#0B1B3A] tracking-tight">
-                Websites We've Designed &amp; Developed
+                Website Inspirations &amp; Live Design References
               </h2>
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                Explore how we help businesses transform their digital presence
-                through strategic design, modern development, and performance-focused
-                website solutions.
+                Explore realistic digital benchmarks and design patterns across healthcare, e-commerce, high-growth SaaS, and enterprise consulting that inspire our engineering standards.
               </p>
             </div>
 

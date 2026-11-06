@@ -313,6 +313,7 @@ export function WebDesignTechStack() {
       {/* 1. Category Switcher Pills */}
       <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5">
         <button
+          suppressHydrationWarning
           type="button"
           onClick={() => {
             setActiveCategory("all");
@@ -329,6 +330,7 @@ export function WebDesignTechStack() {
           <span className="hidden sm:inline">All 16 Web Technologies</span>
         </button>
         <button
+          suppressHydrationWarning
           type="button"
           onClick={() => {
             setActiveCategory("modern");
@@ -345,6 +347,7 @@ export function WebDesignTechStack() {
           <span className="hidden sm:inline">Modern Frameworks ({MODERN_TECH.length})</span>
         </button>
         <button
+          suppressHydrationWarning
           type="button"
           onClick={() => {
             setActiveCategory("cms");
@@ -380,6 +383,7 @@ export function WebDesignTechStack() {
               const isSelected = tech.name === selectedTech;
               return (
                 <button
+                  suppressHydrationWarning
                   key={tech.name}
                   type="button"
                   onClick={() => setSelectedTech(tech.name)}
@@ -438,6 +442,7 @@ export function WebDesignTechStack() {
                 const isSelected = tech.name === selectedTech;
                 return (
                   <button
+                    suppressHydrationWarning
                     key={tech.name}
                     type="button"
                     onClick={() => setSelectedTech(tech.name)}
@@ -619,6 +624,7 @@ export function WebDesignTechStack() {
         <div className="flex items-center gap-4 sm:gap-8 animate-marquee whitespace-nowrap">
           {[...MODERN_TECH, ...CMS_PLATFORMS, ...MODERN_TECH, ...CMS_PLATFORMS].map((tech, idx) => (
             <button
+              suppressHydrationWarning
               key={`${tech.name}-${idx}`}
               type="button"
               onClick={() => {

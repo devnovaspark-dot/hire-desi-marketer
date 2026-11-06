@@ -56,6 +56,7 @@ export function WebDesignFaqAccordion({
               )}
             >
               <button
+                suppressHydrationWarning
                 type="button"
                 onClick={() => toggle(idx)}
                 className="w-full p-3.5 sm:p-6 flex items-center justify-between gap-3 sm:gap-4 text-left font-display font-bold text-xs sm:text-base lg:text-lg text-[#0B1B3A] hover:text-[#B87A00] transition-colors cursor-pointer select-none group"

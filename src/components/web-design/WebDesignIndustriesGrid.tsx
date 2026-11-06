@@ -188,6 +188,7 @@ export function WebDesignIndustriesGrid() {
       {/* View More / View Less Toggle */}
       <div className="flex items-center justify-center pt-2">
         <button
+          suppressHydrationWarning
           type="button"
           onClick={() => setShowAll(!showAll)}
           className="btn-luxury-navy px-8 py-3.5 rounded-full text-xs font-black uppercase tracking-wider inline-flex items-center gap-2.5 shadow-md hover:shadow-lg transition-all cursor-pointer group"

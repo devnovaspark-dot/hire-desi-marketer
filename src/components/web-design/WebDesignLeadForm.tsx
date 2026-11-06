@@ -10,7 +10,7 @@ import {
   ShieldCheck,
   Lock,
   Globe,
-  DollarSign,
+  Briefcase,
   Building,
   User,
   Mail,
@@ -54,7 +54,7 @@ export function WebDesignLeadForm({
   const [serviceRequired, setServiceRequired] = useState(
     "Custom Website Design & Development"
   );
-  const [projectBudget, setProjectBudget] = useState("$1,000 - $3,000");
+  const [projectBudget, setProjectBudget] = useState("Fixed-Cost Project");
   const [projectDescription, setProjectDescription] = useState("");
 
   const [loading, setLoading] = useState(false);
@@ -208,7 +208,7 @@ export function WebDesignLeadForm({
           </div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-2.5 sm:space-y-3">
+        <form suppressHydrationWarning onSubmit={handleSubmit} className="space-y-2.5 sm:space-y-3">
           <div className="space-y-1 text-left border-b border-slate-200/50 pb-2 sm:pb-2.5">
             <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#FFB020]/20 text-[#B87A00] dark:text-[#FFB020] text-[9px] sm:text-[10px] font-black uppercase tracking-wider border border-[#FFB020]/30">
               <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#FFB020]" />
@@ -403,10 +403,10 @@ export function WebDesignLeadForm({
                   isDark ? "text-slate-300" : "text-slate-700"
                 )}
               >
-                Project Budget
+                Engagement Model
               </label>
               <div className="relative">
-                <DollarSign className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Briefcase className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <select
                   id={`${formId}-budget`}
                   value={projectBudget}
@@ -418,11 +418,10 @@ export function WebDesignLeadForm({
                       : "bg-slate-50/80 border-[#E2DBD0] text-[#0B1B3A]"
                   )}
                 >
-                  <option value="Under $1,000">&lt; $1,000</option>
-                  <option value="$1,000 - $3,000">$1,000 - $3,000</option>
-                  <option value="$3,000 - $5,000">$3,000 - $5,000</option>
-                  <option value="$5,000 - $10,000">$5,000 - $10,000</option>
-                  <option value="$10,000+">$10,000+</option>
+                  <option value="Fixed-Cost Project">Fixed-Cost Project</option>
+                  <option value="Monthly Dedicated Engagement">Monthly Dedicated</option>
+                  <option value="Hourly On-Demand Support">Hourly On-Demand</option>
+                  <option value="Open to Recommendation">Open to Guidance</option>
                 </select>
               </div>
             </div>

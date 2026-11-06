@@ -105,6 +105,7 @@ export function WebDesignProcessStream() {
         </div>
 
         <button
+          suppressHydrationWarning
           type="button"
           onClick={() => setIsPaused(!isPaused)}
           className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition-colors cursor-pointer select-none"
@@ -143,6 +144,7 @@ export function WebDesignProcessStream() {
 
             return (
               <button
+                suppressHydrationWarning
                 key={step.step}
                 type="button"
                 onClick={() => handleStepSelect(idx)}
@@ -192,6 +194,7 @@ export function WebDesignProcessStream() {
 
             return (
               <button
+                suppressHydrationWarning
                 key={step.step}
                 type="button"
                 onClick={() => handleStepSelect(idx)}
@@ -266,6 +269,7 @@ export function WebDesignProcessStream() {
             {/* Stepper Navigation Buttons */}
             <div className="pt-2 flex items-center gap-3">
               <button
+                suppressHydrationWarning
                 type="button"
                 onClick={handlePrev}
                 className="px-4 py-2 rounded-xl border border-[#E2DBD0] hover:border-slate-400 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-bold transition-colors inline-flex items-center gap-1.5 cursor-pointer"
@@ -275,6 +279,7 @@ export function WebDesignProcessStream() {
               </button>
 
               <button
+                suppressHydrationWarning
                 type="button"
                 onClick={handleNext}
                 className="btn-luxury-navy px-5 py-2 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-1.5 shadow-sm cursor-pointer"
