@@ -303,6 +303,11 @@ export function WebDesignTechStack() {
   const currentInfo =
     TECH_BENEFITS[selectedTech] || TECH_BENEFITS["Next.js"];
 
+  const currentTechItem =
+    items.find((t) => t.name === selectedTech) ||
+    MODERN_TECH.find((t) => t.name === selectedTech) ||
+    CMS_PLATFORMS.find((t) => t.name === selectedTech);
+
   return (
     <div className="space-y-6 sm:space-y-8">
       {/* 1. Category Switcher Pills */}
@@ -314,13 +319,14 @@ export function WebDesignTechStack() {
             setSelectedTech("Next.js");
           }}
           className={cn(
-            "px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer select-none",
+            "px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer select-none",
             activeCategory === "all"
               ? "bg-[#060B22] text-[#FFB020] border border-[#FFB020]/40 shadow-sm"
               : "bg-white text-slate-700 border border-[#E2DBD0] hover:border-slate-400 hover:text-[#0B1B3A]"
           )}
         >
-          All 16 Web Technologies
+          <span className="sm:hidden">All (16)</span>
+          <span className="hidden sm:inline">All 16 Web Technologies</span>
         </button>
         <button
           type="button"
@@ -329,13 +335,14 @@ export function WebDesignTechStack() {
             setSelectedTech("Next.js");
           }}
           className={cn(
-            "px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer select-none",
+            "px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer select-none",
             activeCategory === "modern"
               ? "bg-[#060B22] text-[#FFB020] border border-[#FFB020]/40 shadow-sm"
               : "bg-white text-slate-700 border border-[#E2DBD0] hover:border-slate-400 hover:text-[#0B1B3A]"
           )}
         >
-          Modern Frameworks ({MODERN_TECH.length})
+          <span className="sm:hidden">Modern ({MODERN_TECH.length})</span>
+          <span className="hidden sm:inline">Modern Frameworks ({MODERN_TECH.length})</span>
         </button>
         <button
           type="button"
@@ -344,21 +351,78 @@ export function WebDesignTechStack() {
             setSelectedTech("WordPress");
           }}
           className={cn(
-            "px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer select-none",
+            "px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer select-none",
             activeCategory === "cms"
               ? "bg-[#060B22] text-[#FFB020] border border-[#FFB020]/40 shadow-sm"
               : "bg-white text-slate-700 border border-[#E2DBD0] hover:border-slate-400 hover:text-[#0B1B3A]"
           )}
         >
-          CMS &amp; E-commerce ({CMS_PLATFORMS.length})
+          <span>CMS &amp; E-commerce ({CMS_PLATFORMS.length})</span>
         </button>
       </div>
 
       {/* 2. Interactive Ecosystem Showcase (Unified Zero-Shift Studio) */}
-      <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#E2DBD0] shadow-sm p-4 sm:p-8 lg:p-10 relative overflow-hidden">
+      <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#E2DBD0] shadow-sm p-3.5 sm:p-8 lg:p-10 relative overflow-hidden">
+        {/* Mobile-Only Horizontal Swipeable Technology Ribbon */}
+        <div className="lg:hidden space-y-2 mb-4">
+          <div className="flex items-center justify-between text-xs text-slate-600 px-0.5">
+            <span className="font-bold text-[#0B1B3A] flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
+              <span>Select Platform:</span>
+            </span>
+            <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200">
+              Swipe horizontally →
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 pt-0.5 no-scrollbar scroll-smooth -mx-1 px-1">
+            {items.map((tech) => {
+              const isSelected = tech.name === selectedTech;
+              return (
+                <button
+                  key={tech.name}
+                  type="button"
+                  onClick={() => setSelectedTech(tech.name)}
+                  className={cn(
+                    "shrink-0 inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer select-none border shadow-2xs",
+                    isSelected
+                      ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] shadow-sm ring-2 ring-[#FFB020]/25 scale-102"
+                      : "bg-white text-slate-700 border-[#E2DBD0] hover:border-[#FFB020]/60 hover:text-[#0B1B3A]"
+                  )}
+                >
+                  <div
+                    className={cn(
+                      "w-5 h-5 rounded-md flex items-center justify-center p-0.5 shrink-0 transition-colors",
+                      isSelected
+                        ? "bg-[#FFB020] text-[#060B22]"
+                        : "bg-slate-100 text-slate-700"
+                    )}
+                  >
+                    {tech.icon ? (
+                      <Image
+                        src={tech.icon}
+                        alt={tech.name}
+                        width={14}
+                        height={14}
+                        className="object-contain"
+                      />
+                    ) : (
+                      <Code2 className="w-3.5 h-3.5" />
+                    )}
+                  </div>
+                  <span>{tech.name}</span>
+                  {isSelected && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-          {/* Left Column (5 cols): Interactive Technology Rail (2-cols on mobile, rail on desktop) */}
-          <div className="lg:col-span-5 flex flex-col space-y-3 h-full">
+          {/* Left Column (5 cols): Desktop Vertical Rail (Hidden on mobile) */}
+          <div className="hidden lg:flex lg:flex-col lg:col-span-5 space-y-3 h-full">
             <div className="flex items-center justify-between pb-2 border-b border-slate-100 shrink-0">
               <span className="text-xs font-black uppercase tracking-wider text-slate-500">
                 Select Platform to Inspect
@@ -368,8 +432,8 @@ export function WebDesignTechStack() {
               </span>
             </div>
 
-            {/* Responsive Clean Items: 2 cols on mobile, vertical rail on desktop */}
-            <div className="grid grid-cols-2 lg:flex lg:flex-col gap-1.5 sm:gap-2 max-h-[260px] lg:max-h-[520px] overflow-y-auto pr-1 sm:pr-2 custom-scrollbar [scrollbar-gutter:stable]">
+            {/* Desktop Clean Vertical List Items with Reserved Scrollbar */}
+            <div className="flex flex-col gap-2 max-h-[520px] overflow-y-auto pr-2 custom-scrollbar [scrollbar-gutter:stable]">
               {items.map((tech) => {
                 const isSelected = tech.name === selectedTech;
                 return (
@@ -378,16 +442,16 @@ export function WebDesignTechStack() {
                     type="button"
                     onClick={() => setSelectedTech(tech.name)}
                     className={cn(
-                      "w-full text-left p-2 sm:p-3 rounded-xl sm:rounded-2xl transition-all duration-200 flex items-center justify-between cursor-pointer border",
+                      "w-full text-left p-3 rounded-2xl transition-all duration-200 flex items-center justify-between cursor-pointer border",
                       isSelected
                         ? "bg-[#060B22] text-white border-[#060B22] shadow-sm"
                         : "bg-slate-50/80 text-slate-700 border-slate-200/70 hover:bg-white hover:border-[#FFB020]/50 hover:text-[#0B1B3A]"
                     )}
                   >
-                    <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                    <div className="flex items-center gap-3 min-w-0">
                       <div
                         className={cn(
-                          "w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl flex items-center justify-center p-1 sm:p-1.5 shrink-0 transition-colors",
+                          "w-8 h-8 rounded-xl flex items-center justify-center p-1.5 shrink-0 transition-colors",
                           isSelected
                             ? "bg-[#FFB020] text-[#060B22]"
                             : "bg-white border border-slate-200 text-slate-700"
@@ -402,20 +466,20 @@ export function WebDesignTechStack() {
                             className="object-contain"
                           />
                         ) : (
-                          <Code2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                          <Code2 className="w-4 h-4" />
                         )}
                       </div>
 
                       <div className="min-w-0">
-                        <div className="font-bold text-xs sm:text-sm tracking-tight flex items-center gap-1.5 truncate">
+                        <div className="font-bold text-sm tracking-tight flex items-center gap-1.5 truncate">
                           <span className="truncate">{tech.name}</span>
                           {isSelected && (
-                            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
                           )}
                         </div>
                         <div
                           className={cn(
-                            "text-[9px] sm:text-[10px] font-medium truncate",
+                            "text-[10px] font-medium truncate",
                             isSelected ? "text-slate-300" : "text-slate-500"
                           )}
                         >
@@ -424,7 +488,7 @@ export function WebDesignTechStack() {
                       </div>
                     </div>
 
-                    <div className="hidden sm:flex items-center gap-1.5 shrink-0">
+                    <div className="flex items-center gap-1.5 shrink-0">
                       <ChevronRight
                         className={cn(
                           "w-4 h-4 transition-transform duration-200",
@@ -441,63 +505,80 @@ export function WebDesignTechStack() {
           </div>
 
           {/* Right Column (7 cols): Stable Zero-Shift Business Capability Spotlight */}
-          <div className="lg:col-span-7 bg-[#FAF8F5] rounded-xl sm:rounded-2xl p-4 sm:p-8 border border-[#E2DBD0] flex flex-col justify-between space-y-4 sm:space-y-6 min-h-auto lg:min-h-[580px] lg:h-full">
-            <div className="space-y-5 flex-1 flex flex-col">
-              {/* Header: Tech Name & Category with Stable Height */}
-              <div className="space-y-1.5 border-b border-[#E2DBD0] pb-4">
+          <div className="lg:col-span-7 bg-[#FAF8F5] rounded-xl sm:rounded-2xl p-4 sm:p-7 border border-[#E2DBD0] flex flex-col justify-between space-y-4 sm:space-y-6 min-h-auto lg:min-h-[580px] lg:h-full">
+            <div className="space-y-4 sm:space-y-5 flex-1 flex flex-col">
+              {/* Header: Tech Name & Category with Stable Height and Platform Icon */}
+              <div className="space-y-2 border-b border-[#E2DBD0] pb-3 sm:pb-4">
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-[10px] font-black uppercase tracking-wider border border-[#FFB020]/30">
                   <Sparkles className="w-3 h-3 text-[#FFB020]" />
                   <span>{currentInfo.categoryLabel}</span>
                 </div>
-                <h3 className="font-display font-black text-2xl sm:text-3xl text-[#0B1B3A] tracking-tight">
-                  {currentInfo.name}
-                </h3>
-                <div className="min-h-[2.5rem] flex items-center">
-                  <p className="text-sm font-bold text-slate-700 leading-snug">
+
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-[#060B22] text-[#FFB020] border border-[#FFB020]/30 flex items-center justify-center p-1.5 shrink-0 shadow-xs">
+                    {currentTechItem?.icon ? (
+                      <Image
+                        src={currentTechItem.icon}
+                        alt={currentInfo.name}
+                        width={22}
+                        height={22}
+                        className="object-contain"
+                      />
+                    ) : (
+                      <Code2 className="w-5 h-5" />
+                    )}
+                  </div>
+                  <h3 className="font-display font-black text-2xl sm:text-3xl text-[#0B1B3A] tracking-tight leading-tight">
+                    {currentInfo.name}
+                  </h3>
+                </div>
+
+                <div className="min-h-auto lg:min-h-[2.5rem] flex items-center pt-0.5">
+                  <p className="text-xs sm:text-sm font-bold text-slate-700 leading-snug">
                     {currentInfo.headline}
                   </p>
                 </div>
               </div>
 
-              {/* 3 Clear Business Benefit Badges with Fixed Heights */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                <div className="p-3 rounded-xl bg-white border border-[#E2DBD0] min-h-[64px] flex flex-col justify-between text-center sm:text-left">
-                  <div className="text-[10px] uppercase font-black text-slate-400 tracking-wider">
-                    Performance
+              {/* 3 Clear Business Benefit Badges with Fixed Heights (3-cols on mobile & desktop) */}
+              <div className="grid grid-cols-3 gap-1.5 sm:gap-2.5">
+                <div className="p-2 sm:p-3 rounded-xl bg-white border border-[#E2DBD0] min-h-[56px] sm:min-h-[64px] flex flex-col justify-between text-center sm:text-left">
+                  <div className="text-[9px] sm:text-[10px] uppercase font-black text-slate-400 tracking-wider truncate">
+                    Speed
                   </div>
-                  <div className="text-xs font-black text-[#0B1B3A] flex items-center justify-center sm:justify-start gap-1">
-                    <Zap className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
-                    <span className="line-clamp-1">{currentInfo.speedBadge}</span>
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-xl bg-white border border-[#E2DBD0] min-h-[64px] flex flex-col justify-between text-center sm:text-left">
-                  <div className="text-[10px] uppercase font-black text-slate-400 tracking-wider">
-                    Search &amp; Visibility
-                  </div>
-                  <div className="text-xs font-black text-[#0B1B3A] flex items-center justify-center sm:justify-start gap-1">
-                    <Globe className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                    <span className="line-clamp-1">{currentInfo.seoBadge}</span>
+                  <div className="text-[11px] sm:text-xs font-black text-[#0B1B3A] flex items-center justify-center sm:justify-start gap-1 truncate">
+                    <Zap className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFB020] shrink-0" />
+                    <span className="truncate">{currentInfo.speedBadge}</span>
                   </div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-white border border-[#E2DBD0] min-h-[64px] flex flex-col justify-between text-center sm:text-left">
-                  <div className="text-[10px] uppercase font-black text-slate-400 tracking-wider">
-                    Reliability
+                <div className="p-2 sm:p-3 rounded-xl bg-white border border-[#E2DBD0] min-h-[56px] sm:min-h-[64px] flex flex-col justify-between text-center sm:text-left">
+                  <div className="text-[9px] sm:text-[10px] uppercase font-black text-slate-400 tracking-wider truncate">
+                    Search &amp; SEO
                   </div>
-                  <div className="text-xs font-black text-[#0B1B3A] flex items-center justify-center sm:justify-start gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span className="line-clamp-1">{currentInfo.scaleBadge}</span>
+                  <div className="text-[11px] sm:text-xs font-black text-[#0B1B3A] flex items-center justify-center sm:justify-start gap-1 truncate">
+                    <Globe className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-blue-500 shrink-0" />
+                    <span className="truncate">{currentInfo.seoBadge}</span>
+                  </div>
+                </div>
+
+                <div className="p-2 sm:p-3 rounded-xl bg-white border border-[#E2DBD0] min-h-[56px] sm:min-h-[64px] flex flex-col justify-between text-center sm:text-left">
+                  <div className="text-[9px] sm:text-[10px] uppercase font-black text-slate-400 tracking-wider truncate">
+                    Scale
+                  </div>
+                  <div className="text-[11px] sm:text-xs font-black text-[#0B1B3A] flex items-center justify-center sm:justify-start gap-1 truncate">
+                    <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-600 shrink-0" />
+                    <span className="truncate">{currentInfo.scaleBadge}</span>
                   </div>
                 </div>
               </div>
 
-              {/* Business Value Paragraph with Minimum Height */}
-              <div className="text-xs sm:text-sm text-slate-600 leading-relaxed bg-white p-4 rounded-xl border border-[#E2DBD0] min-h-[88px] flex items-start">
+              {/* Business Value Paragraph */}
+              <div className="text-xs sm:text-sm text-slate-600 leading-relaxed bg-white p-3.5 sm:p-4 rounded-xl border border-[#E2DBD0] min-h-auto lg:min-h-[88px] flex items-start">
                 <p>{currentInfo.businessValue}</p>
               </div>
 
-              {/* Verified Capabilities Checklist with Stable Item Heights */}
+              {/* Verified Capabilities Checklist */}
               <div className="space-y-2 pt-1 flex-1">
                 <div className="text-xs font-black uppercase tracking-wider text-slate-700">
                   What Our Developers Deliver with {currentInfo.name}:
@@ -506,7 +587,7 @@ export function WebDesignTechStack() {
                   {currentInfo.capabilities.map((cap, i) => (
                     <div
                       key={i}
-                      className="flex items-start gap-2 text-slate-700 leading-snug p-2.5 rounded-lg bg-white border border-[#E2DBD0]/60 min-h-[46px]"
+                      className="flex items-start gap-2 text-slate-700 leading-snug p-2 sm:p-2.5 rounded-lg bg-white border border-[#E2DBD0]/60 min-h-auto sm:min-h-[46px]"
                     >
                       <Check className="w-3.5 h-3.5 text-[#FFB020] shrink-0 mt-0.5" />
                       <span className="line-clamp-2">{cap}</span>
@@ -517,13 +598,13 @@ export function WebDesignTechStack() {
             </div>
 
             {/* Direct Action Link - Pinned to baseline */}
-            <div className="pt-4 border-t border-[#E2DBD0] flex flex-col sm:flex-row items-center justify-between gap-3 mt-auto">
+            <div className="pt-3.5 sm:pt-4 border-t border-[#E2DBD0] flex flex-col sm:flex-row items-center justify-between gap-3 mt-auto">
               <span className="text-xs text-slate-500 text-center sm:text-left">
                 Ready to build or upgrade using {currentInfo.name}?
               </span>
               <a
                 href="#lead-form"
-                className="btn-luxury-navy px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-1.5 shadow-sm cursor-pointer shrink-0"
+                className="btn-luxury-navy px-5 sm:px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-1.5 shadow-sm cursor-pointer shrink-0 w-full sm:w-auto"
               >
                 <span>Hire {currentInfo.name} Developers</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#FFB020]" />

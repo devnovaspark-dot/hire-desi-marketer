@@ -300,7 +300,7 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 3. TECHNOLOGIES & PLATFORMS WE WORK WITH                          */}
         {/* ================================================================ */}
-        <section id="tech-stack" className="py-10 sm:py-14 lg:py-16">
+        <section id="tech-stack" className="py-10 sm:py-14 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
