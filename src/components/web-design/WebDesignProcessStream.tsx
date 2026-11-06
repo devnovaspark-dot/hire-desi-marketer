@@ -86,7 +86,7 @@ export function WebDesignProcessStream() {
 
   return (
     <div
-      className="space-y-8 max-w-5xl mx-auto"
+      className="space-y-5 sm:space-y-6 max-w-5xl mx-auto"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -183,26 +183,50 @@ export function WebDesignProcessStream() {
         </div>
       </div>
 
-      {/* 3. Mobile Step Selector Pill Bar */}
-      <div className="lg:hidden flex items-center justify-between overflow-x-auto gap-2 pb-2 scrollbar-none">
-        {PROCESS_STEPS.map((step, idx) => {
-          const isActive = activeStepIdx === idx;
-          return (
-            <button
-              key={step.step}
-              type="button"
-              onClick={() => handleStepSelect(idx)}
-              className={cn(
-                "px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer",
-                isActive
-                  ? "bg-[#060B22] text-[#FFB020] border border-[#FFB020]/40 shadow-sm"
-                  : "bg-white text-slate-600 border border-[#E2DBD0]"
-              )}
-            >
-              Phase 0{step.step}
-            </button>
-          );
-        })}
+      {/* 3. Mobile Step Stepper (Zero Cropping, Fully Responsive Across All Phones) */}
+      <div className="lg:hidden space-y-2">
+        <div className="grid grid-cols-7 gap-1 sm:gap-1.5">
+          {PROCESS_STEPS.map((step, idx) => {
+            const isActive = activeStepIdx === idx;
+            const isCompleted = activeStepIdx > idx;
+
+            return (
+              <button
+                key={step.step}
+                type="button"
+                onClick={() => handleStepSelect(idx)}
+                className={cn(
+                  "py-2 px-0.5 rounded-xl text-xs font-black transition-all duration-200 flex flex-col items-center justify-center cursor-pointer select-none",
+                  isActive
+                    ? "bg-[#060B22] text-[#FFB020] border-2 border-[#FFB020] shadow-sm scale-105"
+                    : isCompleted
+                    ? "bg-emerald-600 text-white border border-emerald-500"
+                    : "bg-white text-slate-500 border border-[#E2DBD0] hover:border-slate-400"
+                )}
+                title={`Phase 0${step.step}: ${step.title}`}
+              >
+                {isCompleted ? (
+                  <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+                ) : (
+                  <span>0{step.step}</span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Active Phase Label on Mobile */}
+        <div className="flex items-center justify-between text-xs px-1 text-slate-600">
+          <div className="flex items-center gap-1.5 font-bold text-[#0B1B3A] truncate max-w-[260px]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FFB020] shrink-0" />
+            <span className="truncate">
+              Phase 0{activeStep.step}: {activeStep.title.replace(/^Step \d+:\s*/, "").split("&")[0].trim()}
+            </span>
+          </div>
+          <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200 shrink-0">
+            {activeStepIdx + 1} of {PROCESS_STEPS.length}
+          </span>
+        </div>
       </div>
 
       {/* 4. Active Step Command Center (With Auto-Slide Progress Bar) */}

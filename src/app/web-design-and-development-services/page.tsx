@@ -31,6 +31,7 @@ import {
   Building,
   Briefcase,
   PhoneCall,
+  Lock,
 } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -40,6 +41,7 @@ import { WebDesignTechStack } from "@/components/web-design/WebDesignTechStack";
 import { WebDesignIndustriesGrid } from "@/components/web-design/WebDesignIndustriesGrid";
 import { WebDesignProcessStream } from "@/components/web-design/WebDesignProcessStream";
 import { WebDesignCaseStudies } from "@/components/web-design/WebDesignCaseStudies";
+import { WebDesignTeamShowcase } from "@/components/web-design/WebDesignTeamShowcase";
 import { WebDesignFaqAccordion } from "@/components/web-design/WebDesignFaqAccordion";
 import {
   WEB_SERVICES,
@@ -122,7 +124,7 @@ export default function WebDesignServicesPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F6F4EE] text-[#0B1B3A]">
+    <div className="flex flex-col min-h-screen bg-[#F6F4EE] text-[#0B1B3A] w-full max-w-full overflow-x-clip">
       {/* Schema.org Structured Data */}
       <script
         type="application/ld+json"
@@ -131,11 +133,11 @@ export default function WebDesignServicesPage() {
 
       <Header />
 
-      <main className="flex-1 pt-20 sm:pt-24 pb-16">
+      <main className="flex-1 pt-18 sm:pt-22 pb-12 w-full max-w-full overflow-x-clip">
         {/* ================================================================ */}
         {/* 1. HERO SECTION – HIGH-CONVERTING BESPOKE AGENCY ARCHITECTURE     */}
         {/* ================================================================ */}
-        <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center py-4 sm:py-6 lg:py-8 bg-[#F6F4EE]">
+        <section className="relative overflow-hidden py-4 sm:py-8 lg:py-10 bg-[#F6F4EE]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
               {/* Left Column (7 cols): Target Markets, Headline, Subtitle, 4 High-Impact Badges, CTAs, Social Proof */}
@@ -174,41 +176,41 @@ export default function WebDesignServicesPage() {
                 </div>
 
                 {/* Key Selling Points (4 High-Impact Visual Badges in 2x2 grid) */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-xs">
-                  <div className="flex items-center gap-2.5 p-2 px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
-                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0">
+                <div className="grid grid-cols-2 gap-2 pt-1 text-xs">
+                  <div className="flex items-start sm:items-center gap-2 sm:gap-2.5 p-2 sm:px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
+                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
                       <Palette className="w-3.5 h-3.5 text-[#B87A00]" />
                     </div>
-                    <div>
-                      <span className="font-bold text-slate-800 block leading-tight">Custom UI/UX &amp; Development</span>
-                      <span className="text-[10px] text-slate-500">Bespoke Figma wireframes &amp; clean code</span>
+                    <div className="min-w-0">
+                      <span className="font-bold text-slate-800 block text-[11px] sm:text-xs leading-tight truncate">Custom UI/UX &amp; Dev</span>
+                      <span className="text-[9px] sm:text-[10px] text-slate-500 block truncate">Bespoke wireframes</span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2.5 p-2 px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
-                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0">
+                  <div className="flex items-start sm:items-center gap-2 sm:gap-2.5 p-2 sm:px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
+                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
                       <RefreshCw className="w-3.5 h-3.5 text-[#B87A00]" />
                     </div>
-                    <div>
-                      <span className="font-bold text-slate-800 block leading-tight">Website Redesign &amp; Speed</span>
-                      <span className="text-[10px] text-slate-500">Core Web Vitals 90+ &amp; SEO migration</span>
+                    <div className="min-w-0">
+                      <span className="font-bold text-slate-800 block text-[11px] sm:text-xs leading-tight truncate">Redesign &amp; Speed</span>
+                      <span className="text-[9px] sm:text-[10px] text-slate-500 block truncate">Core Web Vitals 90+</span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2.5 p-2 px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
-                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0">
+                  <div className="flex items-start sm:items-center gap-2 sm:gap-2.5 p-2 sm:px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
+                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
                       <ShoppingBag className="w-3.5 h-3.5 text-[#B87A00]" />
                     </div>
-                    <div>
-                      <span className="font-bold text-slate-800 block leading-tight">CMS &amp; E-Commerce Engines</span>
-                      <span className="text-[10px] text-slate-500">Shopify, WordPress, Webflow &amp; Headless</span>
+                    <div className="min-w-0">
+                      <span className="font-bold text-slate-800 block text-[11px] sm:text-xs leading-tight truncate">CMS &amp; E-Commerce</span>
+                      <span className="text-[9px] sm:text-[10px] text-slate-500 block truncate">Shopify, WP &amp; Headless</span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2.5 p-2 px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
-                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0">
+                  <div className="flex items-start sm:items-center gap-2 sm:gap-2.5 p-2 sm:px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
+                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
                       <Users className="w-3.5 h-3.5 text-[#B87A00]" />
                     </div>
-                    <div>
-                      <span className="font-bold text-slate-800 block leading-tight">Dedicated Developers &amp; Support</span>
-                      <span className="text-[10px] text-slate-500">Fixed milestones &amp; zero agency lock-in</span>
+                    <div className="min-w-0">
+                      <span className="font-bold text-slate-800 block text-[11px] sm:text-xs leading-tight truncate">Dedicated Dev Squad</span>
+                      <span className="text-[9px] sm:text-[10px] text-slate-500 block truncate">Fixed milestones</span>
                     </div>
                   </div>
                 </div>
@@ -272,9 +274,9 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 2. COMPLETE WEBSITE DESIGN & DEVELOPMENT SERVICES               */}
         {/* ================================================================ */}
-        <section id="services" className="py-20 bg-white border-y border-[#E2DBD0]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="text-center max-w-3xl mx-auto space-y-4">
+        <section id="services" className="py-10 sm:py-14 lg:py-16 bg-white border-y border-[#E2DBD0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>Full-Spectrum Solutions</span>
@@ -290,7 +292,7 @@ export default function WebDesignServicesPage() {
               </p>
             </div>
 
-            {/* Dynamic Services Grid with View More/Less Toggle & Visual Snippets */}
+            {/* Dynamic Services Grid with Dedicated Browser Preview Windows */}
             <WebDesignServicesGrid />
           </div>
         </section>
@@ -298,9 +300,9 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 3. TECHNOLOGIES & PLATFORMS WE WORK WITH                          */}
         {/* ================================================================ */}
-        <section id="tech-stack" className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="text-center max-w-3xl mx-auto space-y-4">
+        <section id="tech-stack" className="py-10 sm:py-14 lg:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Code2 className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>Modern Engineering &amp; Platforms</span>
@@ -315,7 +317,7 @@ export default function WebDesignServicesPage() {
               </p>
             </div>
 
-            {/* Interactive Architecture & Ecosystem Studio (NO CARDS) */}
+            {/* Interactive Architecture & Ecosystem Studio */}
             <WebDesignTechStack />
           </div>
         </section>
@@ -323,9 +325,9 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 4. INDUSTRIES WE SERVE                                            */}
         {/* ================================================================ */}
-        <section id="industries" className="py-20 bg-white border-y border-[#E2DBD0]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="text-center max-w-3xl mx-auto space-y-4">
+        <section id="industries" className="py-10 sm:py-14 lg:py-16 bg-white border-y border-[#E2DBD0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Building className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>Specialized Domain Experience</span>
@@ -341,7 +343,7 @@ export default function WebDesignServicesPage() {
               </p>
             </div>
 
-            {/* Dynamic Industries Grid with View More/Less Toggle */}
+            {/* Dynamic Industries Grid with Sector Website Mockup Thumbnails */}
             <WebDesignIndustriesGrid />
           </div>
         </section>
@@ -349,9 +351,9 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 5. OUR WEBSITE DESIGN & DEVELOPMENT PROCESS                       */}
         {/* ================================================================ */}
-        <section id="process" className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
-            <div className="text-center max-w-3xl mx-auto space-y-4">
+        <section id="process" className="py-10 sm:py-14 lg:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>Agile &amp; Transparent Delivery</span>
@@ -366,7 +368,7 @@ export default function WebDesignServicesPage() {
               </p>
             </div>
 
-            {/* Interactive Milestone Progression Pipeline (NO CARDS) */}
+            {/* Interactive Milestone Progression Pipeline */}
             <WebDesignProcessStream />
           </div>
         </section>
@@ -376,10 +378,10 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         <section
           id="pricing-models"
-          className="py-20 bg-white border-y border-[#E2DBD0]"
+          className="py-10 sm:py-14 lg:py-16 bg-white border-y border-[#E2DBD0]"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="text-center max-w-3xl mx-auto space-y-4">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <DollarSign className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>Zero Lock-Ins · Transparent Pricing</span>
@@ -395,17 +397,17 @@ export default function WebDesignServicesPage() {
             </div>
 
             {/* 3 Pricing Models Grid with Pixel-Perfect Alignment */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
               {PRICING_MODELS.map((model) => (
                 <div
                   key={model.id}
-                  className={`rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 relative h-full ${
+                  className={`rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col justify-between transition-all duration-300 relative h-full ${
                     model.isPopular
                       ? "skeuo-card-dark text-white border-2 border-[#FFB020] shadow-xl ring-4 ring-[#FFB020]/15"
                       : "bg-white text-[#0B1B3A] border border-[#E2DBD0] hover:border-[#FFB020]/60 shadow-[0_4px_20px_-4px_rgba(6,11,34,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(6,11,34,0.12)] hover:-translate-y-1"
                   }`}
                 >
-                  {/* Top Badge Row - Equal Height for all 3 cards */}
+                  {/* Top Badge Row */}
                   <div className="h-7 mb-3 flex items-center">
                     {model.isPopular ? (
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020] text-[#060B22] text-[10px] font-black uppercase tracking-wider shadow-sm">
@@ -420,7 +422,7 @@ export default function WebDesignServicesPage() {
                   </div>
 
                   <div className="space-y-5 flex-1 flex flex-col">
-                    {/* Header: Subtitle, Title, Price with matching min-height */}
+                    {/* Header */}
                     <div className="space-y-1 text-left min-h-[110px] flex flex-col justify-between">
                       <div
                         className={`text-xs font-black uppercase tracking-wider ${
@@ -445,7 +447,7 @@ export default function WebDesignServicesPage() {
                       </div>
                     </div>
 
-                    {/* Description with matching min-height */}
+                    {/* Description */}
                     <div className="min-h-[52px] flex items-start">
                       <p
                         className={`text-xs leading-relaxed ${
@@ -456,7 +458,7 @@ export default function WebDesignServicesPage() {
                       </p>
                     </div>
 
-                    {/* Best for box with matching min-height */}
+                    {/* Best for box */}
                     <div
                       className={`p-3 rounded-xl text-xs font-bold min-h-[58px] flex items-center ${
                         model.isPopular
@@ -470,7 +472,7 @@ export default function WebDesignServicesPage() {
                       </div>
                     </div>
 
-                    {/* Features list fills remaining height */}
+                    {/* Features list */}
                     <div className="space-y-2.5 pt-2 flex-1 flex flex-col">
                       <div
                         className={`text-xs font-black uppercase tracking-wider ${
@@ -499,7 +501,7 @@ export default function WebDesignServicesPage() {
                     </div>
                   </div>
 
-                  {/* Bottom Button pinned identically on horizontal baseline */}
+                  {/* Bottom Button */}
                   <div className="pt-6 mt-auto">
                     <a
                       href={model.ctaHref}
@@ -520,11 +522,11 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 7. OUR WORK / CASE STUDIES                                        */}
+        {/* 7. OUR WORK / CASE STUDIES (DUAL-DEVICE RESPONSIVE SHOWCASE)      */}
         {/* ================================================================ */}
-        <section id="work" className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="text-center max-w-3xl mx-auto space-y-4">
+        <section id="work" className="py-10 sm:py-14 lg:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Laptop className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>Verified Client Outcomes</span>
@@ -544,17 +546,17 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 8. WHY CHOOSE HIRE DESI MARKETER?                                 */}
+        {/* 8. WHY CHOOSE HIRE DESI MARKETER? (CAMPUS & TEAM SHOWCASE)        */}
         {/* ================================================================ */}
         <section
           id="why-choose-us"
-          className="py-20 bg-white border-y border-[#E2DBD0]"
+          className="py-10 sm:py-14 lg:py-16 bg-white border-y border-[#E2DBD0]"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="text-center max-w-3xl mx-auto space-y-4">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#FFB020]" />
-                <span>Key Differentiators</span>
+                <span>Key Differentiators &amp; Verified Infrastructure</span>
               </div>
               <h2 className="font-display font-black text-2xl sm:text-4xl text-[#0B1B3A] tracking-tight">
                 Your Reliable Partner for Website Design &amp; Development
@@ -566,40 +568,43 @@ export default function WebDesignServicesPage() {
               </p>
             </div>
 
-            {/* 8 Differentiators Grid with Elevated Card UI */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Authentic Engineering Campus Photo & Leadership Team Showcase */}
+            <WebDesignTeamShowcase />
+
+            {/* 8 Differentiators Grid with Elevated Card UI (Compact 2-col on mobile) */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6 pt-2 sm:pt-4">
               {DIFFERENTIATORS.map((diff, i) => (
                 <div
                   key={i}
-                  className="p-6 rounded-3xl bg-white border border-[#E2DBD0] hover:border-[#FFB020] shadow-[0_4px_18px_-4px_rgba(6,11,34,0.04)] hover:shadow-[0_14px_30px_-6px_rgba(255,176,32,0.12)] hover:-translate-y-1 transition-all duration-300 space-y-4 flex flex-col justify-between group relative overflow-hidden"
+                  className="p-3.5 sm:p-6 rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] hover:border-[#FFB020] shadow-[0_4px_18px_-4px_rgba(6,11,34,0.04)] hover:shadow-[0_14px_30px_-6px_rgba(255,176,32,0.12)] hover:-translate-y-1 transition-all duration-300 space-y-3 sm:space-y-4 flex flex-col justify-between group relative overflow-hidden text-left"
                 >
                   {/* Decorative Number Watermark in Background Corner */}
-                  <span className="absolute top-3 right-4 font-display font-black text-3xl text-slate-100 group-hover:text-[#FFB020]/15 transition-colors select-none pointer-events-none">
+                  <span className="absolute top-2 right-2.5 sm:top-3 sm:right-4 font-display font-black text-xl sm:text-3xl text-slate-100 group-hover:text-[#FFB020]/15 transition-colors select-none pointer-events-none">
                     0{i + 1}
                   </span>
 
                   {/* Top Glow Accent Bar */}
                   <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-transparent to-transparent group-hover:via-[#FFB020] transition-all duration-300" />
 
-                  <div className="space-y-3 relative z-10">
-                    <div className="w-12 h-12 rounded-2xl bg-[#060B22] text-[#FFB020] border border-[#FFB020]/25 flex items-center justify-center shadow-xs group-hover:scale-105 group-hover:bg-[#FFB020] group-hover:text-[#060B22] transition-all duration-300">
-                      {differentiatorIcons[diff.icon] || <CheckCircle2 className="w-5 h-5" />}
+                  <div className="space-y-2 sm:space-y-3 relative z-10">
+                    <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#060B22] text-[#FFB020] border border-[#FFB020]/25 flex items-center justify-center shadow-xs group-hover:scale-105 group-hover:bg-[#FFB020] group-hover:text-[#060B22] transition-all duration-300">
+                      {differentiatorIcons[diff.icon] || <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" />}
                     </div>
 
-                    <h3 className="font-display font-black text-base text-[#0B1B3A] leading-snug group-hover:text-[#B87A00] transition-colors">
+                    <h3 className="font-display font-black text-xs sm:text-base text-[#0B1B3A] leading-snug group-hover:text-[#B87A00] transition-colors line-clamp-2">
                       {diff.title}
                     </h3>
 
-                    <p className="text-xs text-slate-600 leading-relaxed">
+                    <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed line-clamp-3 sm:line-clamp-none">
                       {diff.description}
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between relative z-10">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
+                  <div className="pt-2 sm:pt-3 border-t border-slate-100 flex items-center justify-between relative z-10">
+                    <span className="hidden sm:inline text-[10px] font-black uppercase tracking-wider text-slate-400">
                       Verified Standard
                     </span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-[#FFB020]/15 text-[#B87A00] font-black text-[11px] border border-[#FFB020]/25">
+                    <span className="px-1.5 sm:px-2.5 py-0.5 rounded-full bg-[#FFB020]/15 text-[#B87A00] font-black text-[9px] sm:text-[11px] border border-[#FFB020]/25 truncate">
                       {diff.metric}
                     </span>
                   </div>
@@ -610,72 +615,99 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 9. FINAL CTA SECTION WITH LEAD FORM                               */}
+        {/* 9. FINAL CTA SECTION WITH LEAD FORM & TEAM ASSURANCE             */}
         {/* ================================================================ */}
-        <section id="final-cta" className="py-20 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl skeuo-card-dark text-white p-8 sm:p-14 border border-white/15 shadow-2xl relative overflow-hidden">
+        <section id="final-cta" className="py-8 sm:py-14 lg:py-16 relative overflow-hidden scroll-mt-24 sm:scroll-mt-28">
+          <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+            <div className="rounded-2xl sm:rounded-3xl skeuo-card-dark text-white p-3.5 sm:p-8 lg:p-12 border border-white/15 shadow-2xl relative overflow-hidden">
               {/* Background Ambient Glows */}
               <div className="absolute top-0 right-0 w-96 h-96 bg-[#FFB020]/15 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center relative z-10">
-                {/* Left Column: Headline, Subheading, Supporting Text */}
-                <div className="lg:col-span-6 space-y-6 text-left">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-slate-200 text-xs font-black uppercase tracking-wider border border-white/15 shadow-xs">
-                    <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-14 items-center relative z-10">
+                {/* Left Column: Headline, Subheading, Team Avatar Stack */}
+                <div className="lg:col-span-6 space-y-3.5 sm:space-y-6 text-left">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white/10 text-slate-200 text-[10px] sm:text-xs font-black uppercase tracking-wider border border-white/15 shadow-xs">
+                    <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFB020]" />
                     <span>Get Started Today</span>
                   </div>
 
-                  <h2 className="font-display font-black text-3xl sm:text-5xl text-white tracking-tight leading-[1.1]">
+                  <h2 className="font-display font-black text-xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-[1.15]">
                     Ready to Build, Redesign or Upgrade Your Website?
                   </h2>
 
-                  <p className="text-base text-slate-300 leading-relaxed">
+                  <p className="text-xs sm:text-base text-slate-300 leading-relaxed">
                     Let's turn your website ideas into reality. Whether you're
                     starting from scratch, improving an existing website, or
                     looking for dedicated development support, our team is ready to
                     help.
                   </p>
 
-                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
-                    <div className="text-xs font-bold text-[#FFB020] uppercase tracking-wider">
-                      What Happens Next?
+                  {/* Team Avatars & Direct Architect Access */}
+                  <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 sm:gap-4">
+                    <div className="flex -space-x-2.5 sm:-space-x-3 overflow-hidden shrink-0">
+                      <div className="inline-block h-8 w-8 sm:h-10 sm:w-10 rounded-full ring-2 ring-[#060B22] overflow-hidden relative">
+                        <Image
+                          src="/images/team-sankarsan.webp"
+                          alt="Sankarsan Nayak"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="inline-block h-8 w-8 sm:h-10 sm:w-10 rounded-full ring-2 ring-[#060B22] overflow-hidden relative">
+                        <Image
+                          src="/images/team-pranjal.webp"
+                          alt="Pranjal Sharma"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="inline-block h-8 w-8 sm:h-10 sm:w-10 rounded-full ring-2 ring-[#060B22] overflow-hidden relative">
+                        <Image
+                          src="/images/team-bikram.webp"
+                          alt="Bikram Keshari Sahu"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
-                    <p className="text-xs text-slate-300 leading-relaxed">
-                      Tell us about your project, and our team will get back to you
-                      to discuss the right solution, provide a live wireframe
-                      preview, and deliver a transparent fixed-cost or hourly
-                      estimate.
-                    </p>
+                    <div>
+                      <div className="text-[11px] sm:text-xs font-bold text-white leading-tight">
+                        Direct Access to Senior Web Architects
+                      </div>
+                      <div className="text-[10px] sm:text-[11px] text-[#FFB020] font-semibold mt-0.5">
+                        Free scoping roadmap &amp; fixed milestone quotation
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-slate-300">
+                  <div className="flex flex-wrap items-center gap-2.5 sm:gap-4 pt-1 text-[11px] sm:text-xs text-slate-300">
                     <div className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                      <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
                       <span>Response in &lt; 24h</span>
                     </div>
                     <span>•</span>
                     <div className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                      <span>Zero Obligation Consultation</span>
+                      <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
+                      <span>Zero Obligation</span>
                     </div>
                     <span>•</span>
                     <div className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                      <span>NDA Confidentiality</span>
+                      <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
+                      <span>Strict NDA</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Right Column: Final Lead Form */}
-                <div className="lg:col-span-6">
+                {/* Right Column: Final Lead Form (Compact, 2-Col Mobile, Zero Crop) */}
+                <div className="lg:col-span-6 scroll-mt-24 sm:scroll-mt-28">
                   <WebDesignLeadForm
                     formId="final-lead-form"
                     sourceTag="Web Design Landing Page - Final CTA Form"
-                    title="Start Your Free Website Consultation"
+                    title="Start Your Free Consultation"
                     subtitle="Share your requirements & our technical architects will prepare your scope."
                     variant="light"
+                    compact={true}
                   />
                 </div>
               </div>
@@ -686,7 +718,7 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 10. FAQ SECTION                                                   */}
         {/* ================================================================ */}
-        <section id="faq" className="py-20 bg-white border-t border-[#E2DBD0]">
+        <section id="faq" className="py-10 sm:py-14 lg:py-16 bg-white border-t border-[#E2DBD0]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <WebDesignFaqAccordion faqs={WEB_FAQS} />
           </div>

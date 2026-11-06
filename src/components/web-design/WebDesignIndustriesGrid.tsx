@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import {
   Building,
   ChevronDown,
@@ -8,9 +9,76 @@ import {
   ArrowRight,
   Sparkles,
   CheckCircle2,
+  Lock,
 } from "lucide-react";
 import { WEB_INDUSTRIES, WebIndustryItem } from "@/data/web-design-services";
 import { cn } from "@/lib/utils";
+
+const INDUSTRY_IMAGES: Record<
+  string,
+  { image: string; tag: string; metric: string }
+> = {
+  healthcare: {
+    image: "/images/case-study-dental.webp",
+    tag: "HIPAA Compliant",
+    metric: "140+ Patient Calls/Mo",
+  },
+  realestate: {
+    image: "/images/journal-desk-hero.webp",
+    tag: "MLS / IDX Integration",
+    metric: "Instant Property Sync",
+  },
+  ecommerce: {
+    image: "/images/case-study-cafe.webp",
+    tag: "Shopify Plus / DTC",
+    metric: "4.6% Avg. Checkout Conv.",
+  },
+  education: {
+    image: "/images/blog-hero-bg.webp",
+    tag: "LMS & Video Streaming",
+    metric: "Gated Student Portals",
+  },
+  finance: {
+    image: "/images/1200_1000px.webp",
+    tag: "Bank-Grade Security",
+    metric: "Encrypted Lead Routing",
+  },
+  travel: {
+    image: "/images/case-study-aesthetic.webp",
+    tag: "Direct Booking Engine",
+    metric: "Zero Booking Commission",
+  },
+  "professional-services": {
+    image: "/images/services-ui-design-showcase.jpg",
+    tag: "Authority Positioning",
+    metric: "+180% Qualified RFPs",
+  },
+  saas: {
+    image: "/images/hero-devices-mockup.jpg",
+    tag: "High-Converting Landers",
+    metric: "Sub-Second Edge Speeds",
+  },
+  manufacturing: {
+    image: "/images/case-study-roofing.webp",
+    tag: "B2B Spec Catalogs",
+    metric: "Bulk RFQ Generator",
+  },
+  automotive: {
+    image: "/images/web-dev-hero-bg.jpg",
+    tag: "Live Fleet & Stock",
+    metric: "Instant Schedule Booking",
+  },
+  homeservices: {
+    image: "/images/case-study-roofing.webp",
+    tag: "Instant Quote Estimator",
+    metric: "85+ Commercial Quotes",
+  },
+  legal: {
+    image: "/images/journal-desk-hero.webp",
+    tag: "Case Intake Portals",
+    metric: "24/7 Lead Verification",
+  },
+};
 
 export function WebDesignIndustriesGrid() {
   const [showAll, setShowAll] = useState<boolean>(false);
@@ -20,63 +88,101 @@ export function WebDesignIndustriesGrid() {
     : WEB_INDUSTRIES.slice(0, 6);
 
   return (
-    <div className="space-y-10">
-      {/* Industries Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {displayedIndustries.map((ind, idx) => (
-          <div
-            key={ind.id}
-            className="p-6 rounded-3xl bg-gradient-to-b from-white via-white to-[#FAF8F5] border border-[#E2DBD0] hover:border-[#FFB020]/60 shadow-[0_4px_18px_-4px_rgba(6,11,34,0.05)] hover:shadow-[0_12px_28px_-6px_rgba(6,11,34,0.1)] hover:-translate-y-1 transition-all duration-300 space-y-4 flex flex-col justify-between group relative overflow-hidden"
-          >
-            {/* Ambient Corner Glow on Hover */}
-            <div className="absolute top-0 right-0 w-24 h-24 bg-[#FFB020]/5 rounded-bl-full pointer-events-none group-hover:bg-[#FFB020]/15 transition-colors duration-300" />
+    <div className="space-y-6 sm:space-y-8">
+      {/* Industries Grid with Rich Sector Website Thumbnails (Compact 2-col on mobile) */}
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6">
+        {displayedIndustries.map((ind, idx) => {
+          const visual = INDUSTRY_IMAGES[ind.id] || {
+            image: "/images/case-study-aesthetic.webp",
+            tag: "Custom Architecture",
+            metric: "Tailored Growth Model",
+          };
 
-            <div className="space-y-3 relative z-10">
-              <div className="flex items-center justify-between">
-                <span className="w-9 h-9 rounded-xl bg-[#060B22] text-[#FFB020] flex items-center justify-center font-black text-xs shadow-xs group-hover:scale-105 group-hover:bg-[#FFB020] group-hover:text-[#060B22] transition-all duration-300">
-                  {String(idx + 1).padStart(2, "0")}
-                </span>
-                <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">
-                  Sector Experience
-                </span>
-              </div>
-
+          return (
+            <div
+              key={ind.id}
+              className="rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] hover:border-[#FFB020] shadow-[0_4px_18px_-4px_rgba(6,11,34,0.05)] hover:shadow-[0_16px_36px_-6px_rgba(255,176,32,0.15)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden"
+            >
               <div>
-                <h3 className="font-display font-black text-lg text-[#0B1B3A] group-hover:text-[#B87A00] transition-colors">
-                  {ind.name}
-                </h3>
-                <p className="text-xs text-slate-600 leading-relaxed mt-1.5">
-                  {ind.description}
-                </p>
-              </div>
+                {/* Sector Preview Window */}
+                <div className="relative aspect-[16/10] bg-slate-950 overflow-hidden border-b border-[#E2DBD0]">
+                  <div className="absolute top-0 inset-x-0 h-5 sm:h-6 bg-[#060B22]/95 backdrop-blur-md z-20 flex items-center justify-between px-1.5 sm:px-2.5 text-[8px] sm:text-[9px] text-slate-300 border-b border-white/10">
+                    <div className="flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-rose-500/80" />
+                      <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-500/80" />
+                      <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500/80" />
+                    </div>
 
-              <div className="pt-3 border-t border-[#E2DBD0] space-y-1.5">
-                <div className="text-[11px] font-bold text-slate-700">
-                  Popular Deliverables:
-                </div>
-                {ind.popularSolutions.map((sol, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-2 text-[11px] text-slate-700 font-medium"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#FFB020] shrink-0" />
-                    <span>{sol}</span>
+                    <span className="hidden sm:inline text-[8px] font-mono text-slate-400">
+                      sector-solutions/{ind.id}
+                    </span>
+
+                    <span className="text-[8px] sm:text-[9px] font-bold text-[#FFB020]">
+                      0{idx + 1}
+                    </span>
                   </div>
-                ))}
+
+                  <Image
+                    src={visual.image}
+                    alt={`${ind.name} website design example`}
+                    fill
+                    className="object-cover object-top pt-5 sm:pt-6 group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 360px"
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+
+                  {/* Floating Sector Tag & Metric */}
+                  <div className="absolute bottom-1.5 left-1.5 right-1.5 sm:bottom-2 sm:left-2.5 sm:right-2.5 flex items-center justify-between pointer-events-none z-10 gap-1">
+                    <span className="px-1.5 py-0.5 rounded bg-[#060B22]/90 backdrop-blur-md border border-white/20 text-white text-[8px] sm:text-[9px] font-bold truncate">
+                      {visual.tag}
+                    </span>
+                    <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 backdrop-blur-md border border-emerald-500/30 text-emerald-300 text-[8px] sm:text-[9px] font-bold truncate">
+                      {visual.metric}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Details */}
+                <div className="p-3 sm:p-6 space-y-2.5 sm:space-y-4 text-left">
+                  <div>
+                    <h3 className="font-display font-black text-xs sm:text-lg text-[#0B1B3A] group-hover:text-[#B87A00] transition-colors leading-snug line-clamp-1">
+                      {ind.name}
+                    </h3>
+                    <p className="hidden sm:block text-xs text-slate-600 leading-relaxed mt-1.5 line-clamp-2">
+                      {ind.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-2 sm:pt-3 border-t border-[#E2DBD0] space-y-1 sm:space-y-1.5">
+                    <div className="text-[9px] sm:text-[10px] font-black text-slate-700 uppercase tracking-wider">
+                      Popular Deliverables:
+                    </div>
+                    {ind.popularSolutions.slice(0, 2).map((sol, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center gap-1.5 text-[10px] sm:text-[11px] text-slate-700 font-medium truncate"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#FFB020] shrink-0" />
+                        <span className="truncate">{sol}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-3 pt-0 sm:p-6 sm:pt-0">
+                <a
+                  href="#lead-form"
+                  className="w-full py-1.5 sm:py-2.5 px-2.5 sm:px-4 rounded-lg sm:rounded-xl bg-slate-50 hover:bg-[#060B22] text-slate-800 hover:text-white border border-[#E2DBD0] hover:border-[#060B22] text-[10px] sm:text-xs font-bold inline-flex items-center justify-between transition-all cursor-pointer group/btn"
+                >
+                  <span className="truncate">Blueprint Scope</span>
+                  <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFB020] group-hover/btn:translate-x-1 transition-transform shrink-0" />
+                </a>
               </div>
             </div>
-
-            <div className="pt-3 border-t border-[#E2DBD0] relative z-10">
-              <a
-                href="#lead-form"
-                className="text-xs font-bold text-[#0B1B3A] group-hover:text-[#B87A00] inline-flex items-center gap-1.5 transition-colors cursor-pointer"
-              >
-                <span>Request {ind.name} Blueprint</span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-              </a>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* View More / View Less Toggle */}
@@ -101,4 +207,3 @@ export function WebDesignIndustriesGrid() {
     </div>
   );
 }
-
