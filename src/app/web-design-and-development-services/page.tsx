@@ -35,9 +35,9 @@ import {
 } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { WebDesignHero } from "@/components/web-design/WebDesignHero";
 import { WebDesignLeadForm } from "@/components/web-design/WebDesignLeadForm";
 import { WebDesignServicesGrid } from "@/components/web-design/WebDesignServicesGrid";
-import { WebDesignMarketingAlignment } from "@/components/web-design/WebDesignMarketingAlignment";
 import { WebDesignTechStack } from "@/components/web-design/WebDesignTechStack";
 import { WebDesignIndustriesGrid } from "@/components/web-design/WebDesignIndustriesGrid";
 import { WebDesignProcessStream } from "@/components/web-design/WebDesignProcessStream";
@@ -138,139 +138,7 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 1. HERO SECTION – HIGH-CONVERTING BESPOKE AGENCY ARCHITECTURE     */}
         {/* ================================================================ */}
-        <section className="relative overflow-hidden py-4 sm:py-8 lg:py-10 bg-[#F6F4EE]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
-              {/* Left Column (7 cols): Industry Focus, Headline, Subtitle, 4 High-Impact Badges, CTAs, Social Proof */}
-              <div className="lg:col-span-7 space-y-4 sm:space-y-5 text-left">
-                {/* Industry-Focused Kicker (Clean Simple Text) */}
-                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-medium text-slate-700">
-                  <span className="text-[#B87A00] font-black uppercase tracking-wider text-[11px] sm:text-xs">
-                    Industry-Tailored Engineering:
-                  </span>
-                  <span className="font-semibold text-[#0B1B3A]">
-                    Bespoke Website Architecture &amp; Development
-                  </span>
-                  <span className="text-slate-300 hidden sm:inline">|</span>
-                  <span className="inline-flex items-center gap-1.5 text-emerald-700 font-semibold text-[11px] sm:text-xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    Dedicated Global Timezone Alignment
-                  </span>
-                </div>
-
-                {/* Main Headline with Luxury Gradient Highlights */}
-                <div className="space-y-2">
-                  <h1 className="font-display font-black text-2xl sm:text-4xl lg:text-[40px] xl:text-[44px] text-[#0B1B3A] tracking-tight leading-[1.12]">
-                    The Right Design &amp; Development Talent for{" "}
-                    <span className="relative inline-block">
-                      <span className="relative z-10 bg-gradient-to-r from-[#B87A00] via-[#E68A00] to-[#FFB020] bg-clip-text text-transparent">
-                        Your Industry and Website
-                      </span>
-                      <span className="absolute bottom-1 left-0 right-0 h-2.5 bg-[#FFB020]/20 -rotate-1 rounded-sm -z-0" />
-                    </span>
-                  </h1>
-
-                  {/* Subheading */}
-                  <p className="text-xs sm:text-sm lg:text-base text-slate-700 leading-relaxed max-w-2xl font-medium">
-                    We bring together the right design and development expertise to build high-performing websites tailored to your industry, business goals, and audience — helping your business grow online.
-                  </p>
-                </div>
-
-                {/* Key Selling Points (4 High-Impact Visual Badges in 2x2 grid) */}
-                <div className="grid grid-cols-2 gap-2 pt-1 text-xs">
-                  <div className="flex items-start sm:items-center gap-2 sm:gap-2.5 p-2 sm:px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
-                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
-                      <Palette className="w-3.5 h-3.5 text-[#B87A00]" />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="font-bold text-slate-800 block text-[11px] sm:text-xs leading-tight truncate">Custom UI/UX &amp; Dev</span>
-                      <span className="text-[9px] sm:text-[10px] text-slate-500 block truncate">Bespoke wireframes</span>
-                    </div>
-                  </div>
-                  <div className="flex items-start sm:items-center gap-2 sm:gap-2.5 p-2 sm:px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
-                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
-                      <RefreshCw className="w-3.5 h-3.5 text-[#B87A00]" />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="font-bold text-slate-800 block text-[11px] sm:text-xs leading-tight truncate">Redesign &amp; Speed</span>
-                      <span className="text-[9px] sm:text-[10px] text-slate-500 block truncate">Core Web Vitals 90+</span>
-                    </div>
-                  </div>
-                  <div className="flex items-start sm:items-center gap-2 sm:gap-2.5 p-2 sm:px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
-                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
-                      <ShoppingBag className="w-3.5 h-3.5 text-[#B87A00]" />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="font-bold text-slate-800 block text-[11px] sm:text-xs leading-tight truncate">CMS &amp; E-Commerce</span>
-                      <span className="text-[9px] sm:text-[10px] text-slate-500 block truncate">Shopify, WP &amp; Headless</span>
-                    </div>
-                  </div>
-                  <div className="flex items-start sm:items-center gap-2 sm:gap-2.5 p-2 sm:px-3 rounded-xl bg-white/95 border border-[#E2DBD0] shadow-2xs hover:border-[#FFB020]/50 transition-colors">
-                    <div className="w-6 h-6 rounded-lg bg-[#FFB020]/20 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
-                      <Users className="w-3.5 h-3.5 text-[#B87A00]" />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="font-bold text-slate-800 block text-[11px] sm:text-xs leading-tight truncate">Dedicated Dev Squad</span>
-                      <span className="text-[9px] sm:text-[10px] text-slate-500 block truncate">Fixed milestones</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Primary & Secondary CTAs */}
-                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                  <a
-                    href="#lead-form"
-                    className="btn-luxury-gold btn-shimmer py-3 px-6 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg"
-                  >
-                    <span>Get a Free Website Consultation</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-
-                  <a
-                    href="#engagement-models"
-                    className="btn-luxury-navy py-3 px-5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-sm border border-slate-700"
-                  >
-                    <span>Explore Engagement Models</span>
-                  </a>
-                </div>
-
-                {/* Social Proof & Trust Badges */}
-                <div className="pt-3 border-t border-[#E2DBD0] flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-slate-600">
-                  <div className="flex items-center gap-1.5">
-                    <div className="flex text-amber-400">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                    <span className="font-bold text-[#0B1B3A]">4.9 / 5.0 Rating</span>
-                  </div>
-                  <span className="text-slate-300 hidden sm:inline">•</span>
-                  <div className="flex items-center gap-1.5 font-semibold">
-                    <Clock className="w-3.5 h-3.5 text-[#FFB020]" />
-                    <span>Dedicated Global Timezone Alignment</span>
-                  </div>
-                  <span className="text-slate-300 hidden sm:inline">•</span>
-                  <div className="flex items-center gap-1.5 font-semibold">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>100% Code Ownership</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column (5 cols): Compact High-Converting Lead Form */}
-              <div className="lg:col-span-5">
-                <WebDesignLeadForm
-                  formId="lead-form"
-                  sourceTag="Web Design Landing Page - Hero Form"
-                  title="Get a Free Website Consultation"
-                  subtitle="Fill in your project scope below for an actionable roadmap."
-                  variant="light"
-                  compact={true}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
+        <WebDesignHero />
 
         {/* ================================================================ */}
         {/* 2. COMPLETE WEBSITE DESIGN & DEVELOPMENT SERVICES               */}
@@ -299,16 +167,7 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 3. WHY YOUR MARKETING NEEDS A GREAT WEBSITE                      */}
-        {/* ================================================================ */}
-        <section id="marketing-alignment" className="py-10 sm:py-14 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <WebDesignMarketingAlignment />
-          </div>
-        </section>
-
-        {/* ================================================================ */}
-        {/* 4. TECHNOLOGIES & PLATFORMS WE WORK WITH                          */}
+        {/* 3. TECHNOLOGIES & PLATFORMS WE WORK WITH                          */}
         {/* ================================================================ */}
         <section id="tech-stack" className="py-10 sm:py-14 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
