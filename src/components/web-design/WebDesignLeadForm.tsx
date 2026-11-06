@@ -119,7 +119,7 @@ export function WebDesignLeadForm({
       id={formId}
       className={cn(
         "rounded-2xl sm:rounded-3xl transition-all relative overflow-hidden scroll-mt-24 sm:scroll-mt-28",
-        compact ? "p-3.5 sm:p-5 lg:p-6" : "p-4 sm:p-7 lg:p-8",
+        compact ? "p-3 sm:p-4 lg:p-4.5" : "p-4 sm:p-7 lg:p-8",
         isDark
           ? "skeuo-card-dark text-white border border-white/15 shadow-2xl"
           : "bg-white text-[#0B1B3A] border border-[#E2DBD0] shadow-sm",
@@ -208,16 +208,16 @@ export function WebDesignLeadForm({
           </div>
         </div>
       ) : (
-        <form suppressHydrationWarning onSubmit={handleSubmit} className="space-y-2.5 sm:space-y-3">
-          <div className="space-y-1 text-left border-b border-slate-200/50 pb-2 sm:pb-2.5">
-            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#FFB020]/20 text-[#B87A00] dark:text-[#FFB020] text-[9px] sm:text-[10px] font-black uppercase tracking-wider border border-[#FFB020]/30">
-              <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#FFB020]" />
-              <span>Fast 24-Hour Estimate</span>
+        <form suppressHydrationWarning onSubmit={handleSubmit} className="space-y-2 sm:space-y-2.5">
+          <div className="space-y-0.5 text-left border-b border-slate-200/60 pb-1.5 sm:pb-2">
+            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#FFB020]/20 text-[#B87A00] dark:text-[#FFB020] text-[9px] font-black uppercase tracking-wider border border-[#FFB020]/30">
+              <Sparkles className="w-2.5 h-2.5 text-[#FFB020]" />
+              <span>Fast 24-Hour Scope</span>
             </div>
             <h3
               className={cn(
                 "font-display font-black tracking-tight leading-snug",
-                compact ? "text-base sm:text-xl" : "text-lg sm:text-2xl",
+                compact ? "text-sm sm:text-base lg:text-lg" : "text-lg sm:text-2xl",
                 isDark ? "text-white" : "text-[#0B1B3A]"
               )}
             >
@@ -225,7 +225,7 @@ export function WebDesignLeadForm({
             </h3>
             <p
               className={cn(
-                "text-[10px] sm:text-xs leading-relaxed line-clamp-2",
+                "text-[9.5px] sm:text-[10.5px] leading-relaxed line-clamp-1",
                 isDark ? "text-slate-300" : "text-slate-600"
               )}
             >
@@ -457,7 +457,7 @@ export function WebDesignLeadForm({
           <button
             type="submit"
             disabled={loading}
-            className="btn-luxury-gold btn-shimmer w-full py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-lg disabled:opacity-70 transition-all"
+            className="btn-luxury-gold btn-shimmer w-full py-2 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-md disabled:opacity-70 transition-all"
           >
             {loading ? (
               <>
