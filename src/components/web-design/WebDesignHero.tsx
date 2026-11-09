@@ -31,15 +31,15 @@ interface WebsitePreviewState {
 
 const PREVIEW_DATA: WebsitePreviewState[] = [
   {
-    id: "saas",
-    name: "Linear",
-    category: "Next-Gen SaaS & Product",
-    desktopImage: "/images/ref-linear.jpg",
-    mobileImage: "/images/ref-linear.jpg",
-    url: "linear.app",
-    tagline: "Sub-second developer workflow & keyboard-first navigation",
+    id: "healthcare",
+    name: "One Medical",
+    category: "Healthcare & Life Sciences",
+    desktopImage: "/images/ref-onemedical.jpg",
+    mobileImage: "/images/ref-onemedical.jpg",
+    url: "onemedical.com",
+    tagline: "Frictionless 1-tap mobile booking & HIPAA-grade patient UX",
     metric: "100/100 Core Web Vitals",
-    techBadge: "Next.js 16 + React 19",
+    techBadge: "React 19 + Next.js",
   },
   {
     id: "ecommerce",
@@ -53,15 +53,15 @@ const PREVIEW_DATA: WebsitePreviewState[] = [
     techBadge: "Shopify Plus & Stripe",
   },
   {
-    id: "healthcare",
-    name: "One Medical",
-    category: "Telehealth & Clinic Portal",
-    desktopImage: "/images/ref-onemedical.jpg",
-    mobileImage: "/images/ref-onemedical.jpg",
-    url: "onemedical.com",
-    tagline: "Frictionless 1-tap mobile booking & HIPAA-grade patient UX",
-    metric: "< 0.8s LCP Load Time",
-    techBadge: "Custom UI/UX & React",
+    id: "saas",
+    name: "Next-Gen SaaS",
+    category: "Modern Enterprise Web App",
+    desktopImage: "/images/hero-devices-mockup.jpg",
+    mobileImage: "/images/hero-devices-mockup.jpg",
+    url: "linear.app/craft",
+    tagline: "High-velocity keyboard workflow & responsive cloud architecture",
+    metric: "< 0.8s LCP Benchmark",
+    techBadge: "Next.js 16 + Tailwind",
   },
   {
     id: "corporate",
@@ -71,16 +71,29 @@ const PREVIEW_DATA: WebsitePreviewState[] = [
     mobileImage: "/images/ref-mckinsey.jpg",
     url: "mckinsey.com",
     tagline: "Authoritative editorial portal & executive lead routing",
-    metric: "Multi-Language CDN",
+    metric: "Global CDN Scale",
     techBadge: "Enterprise Headless CMS",
   },
 ];
 
 export function WebDesignHero() {
-  const [activePreviewId, setActivePreviewId] = useState<string>("saas");
+  const [activePreviewId, setActivePreviewId] = useState<string>("healthcare");
   const [activeDevice, setActiveDevice] = useState<"desktop" | "mobile">("desktop");
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [cycleProgress, setCycleProgress] = useState<number>(0);
+
+  const scrollToLeadForm = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const target =
+      document.getElementById("lead-form") ||
+      document.getElementById("final-cta");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, "", "#lead-form");
+    } else {
+      window.location.href = "#lead-form";
+    }
+  };
 
   // Smooth auto-cycle between website showcases with pause on hover
   useEffect(() => {
@@ -187,7 +200,8 @@ export function WebDesignHero() {
             {/* 4. Action CTAs */}
             <div className="pt-0.5 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
               <a
-                href="#final-cta"
+                href="#lead-form"
+                onClick={scrollToLeadForm}
                 className="btn-luxury-gold btn-shimmer py-3 px-6 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:shadow-[0_0_25px_rgba(255,176,32,0.4)] transition-all cursor-pointer text-center group"
               >
                 <span>Let's Build Your Website</span>
@@ -195,7 +209,7 @@ export function WebDesignHero() {
               </a>
 
               <a
-                href="#services"
+                href="#work"
                 className="btn-luxury-navy py-3 px-5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-2xs border border-slate-700 hover:border-[#FFB020] transition-colors cursor-pointer text-center"
               >
                 <span>Explore Our Work</span>
@@ -208,7 +222,8 @@ export function WebDesignHero() {
               <span>
                 Need a tailored proposal &amp; roadmap within 24 hours?{" "}
                 <a
-                  href="#final-cta"
+                  href="#lead-form"
+                  onClick={scrollToLeadForm}
                   className="font-bold text-[#060B22] hover:text-[#B87A00] underline underline-offset-2 transition-colors cursor-pointer"
                 >
                   Request a Free Consultation →

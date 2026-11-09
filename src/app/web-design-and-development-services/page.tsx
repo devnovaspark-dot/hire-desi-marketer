@@ -500,9 +500,10 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 9. FINAL CTA SECTION WITH LEAD FORM & TEAM ASSURANCE             */}
+        {/* 9. FINAL CTA SECTION WITH DUAL PANE LEAD FORM & TEAM ASSURANCE   */}
         {/* ================================================================ */}
-        <section id="final-cta" className="py-8 sm:py-14 lg:py-16 relative overflow-hidden scroll-mt-24 sm:scroll-mt-28">
+        <section id="lead-form" className="py-8 sm:py-14 lg:py-16 relative overflow-hidden scroll-mt-20 sm:scroll-mt-24">
+          <div id="final-cta" className="sr-only" />
           <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
             <div className="rounded-2xl sm:rounded-3xl skeuo-card-dark text-white p-3.5 sm:p-8 lg:p-12 border border-white/15 shadow-2xl relative overflow-hidden">
               {/* Background Ambient Glows */}
