@@ -38,6 +38,7 @@ import { Footer } from "@/components/layout/Footer";
 import { WebDesignHero } from "@/components/web-design/WebDesignHero";
 import { WebDesignLeadForm } from "@/components/web-design/WebDesignLeadForm";
 import { WebDesignServicesGrid } from "@/components/web-design/WebDesignServicesGrid";
+import { MarketingWebsiteSynergy } from "@/components/web-design/MarketingWebsiteSynergy";
 import { WebDesignTechStack } from "@/components/web-design/WebDesignTechStack";
 import { WebDesignIndustriesGrid } from "@/components/web-design/WebDesignIndustriesGrid";
 import { WebDesignProcessStream } from "@/components/web-design/WebDesignProcessStream";
@@ -55,7 +56,7 @@ import {
 export const metadata: Metadata = {
   title: "Professional Web Design & Development Services | Hire Desi Marketer",
   description:
-    "Professional website design and development services for growing businesses in USA, Canada, UK & Australia. Custom websites, redesigns, e-commerce, and dedicated developers.",
+    "Professional website design and development services for growing businesses worldwide across key industries. Custom websites, redesigns, e-commerce, and dedicated developers.",
   keywords: [
     "web design and development services",
     "hire web developers india",
@@ -167,7 +168,12 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 3. TECHNOLOGIES & PLATFORMS WE WORK WITH                          */}
+        {/* 3. THE MARKETING + WEBSITE RELATIONSHIP                           */}
+        {/* ================================================================ */}
+        <MarketingWebsiteSynergy />
+
+        {/* ================================================================ */}
+        {/* 4. TECHNOLOGIES & PLATFORMS WE WORK WITH                          */}
         {/* ================================================================ */}
         <section id="tech-stack" className="py-10 sm:py-14 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">

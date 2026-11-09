@@ -15,7 +15,6 @@ import {
   ArrowRight,
   ChevronDown,
   ChevronUp,
-  Lock,
 } from "lucide-react";
 import { WEB_SERVICES, WebServiceItem } from "@/data/web-design-services";
 import { cn } from "@/lib/utils";
@@ -99,46 +98,30 @@ export function WebDesignServicesGrid() {
               className="rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] hover:border-[#FFB020] shadow-[0_4px_20px_-4px_rgba(6,11,34,0.05)] hover:shadow-[0_16px_36px_-6px_rgba(255,176,32,0.16)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden"
             >
               <div>
-                {/* Top Browser Preview Frame */}
-                <div className="relative aspect-[16/10] bg-slate-950 overflow-hidden border-b border-[#E2DBD0]">
-                  {/* Browser Window Header */}
-                  <div className="absolute top-0 inset-x-0 h-5 sm:h-6 bg-[#060B22]/95 backdrop-blur-md z-20 flex items-center justify-between px-1.5 sm:px-2.5 text-[8px] sm:text-[9px] text-slate-300 border-b border-white/10">
-                    <div className="flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-rose-500/80" />
-                      <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-500/80" />
-                      <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500/80" />
-                    </div>
-
-                    <div className="hidden sm:flex items-center gap-1 text-[8px] font-mono text-slate-400 max-w-[130px] truncate">
-                      <Lock className="w-2 h-2 text-emerald-400 shrink-0" />
-                      <span className="truncate">{visual.urlLabel}</span>
-                    </div>
-
-                    <span className="text-[8px] sm:text-[9px] font-bold text-[#FFB020]">
-                      0{WEB_SERVICES.indexOf(service) + 1}
-                    </span>
-                  </div>
-
-                  {/* Screenshot Mockup Image */}
+                {/* Clean Edge-to-Edge Website Architecture Preview */}
+                <div className="relative aspect-[16/10] bg-slate-900 overflow-hidden border-b border-[#E2DBD0]">
+                  {/* Screenshot Mockup Image with Smooth Scale on Hover */}
                   <Image
                     src={visual.image}
                     alt={`${service.title} visual illustration`}
                     fill
-                    className="object-cover object-top pt-5 sm:pt-6 group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 300px"
                   />
 
-                  {/* Vignette Gradient */}
+                  {/* Vignette Gradient for Readability */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
 
                   {/* Floating Highlight Badge */}
                   <div className="absolute bottom-1.5 left-1.5 right-1.5 sm:bottom-2 sm:left-2 sm:right-2 flex items-center justify-between pointer-events-none z-10">
-                    <span className="px-1.5 sm:px-2 py-0.5 rounded bg-[#060B22]/90 backdrop-blur-md border border-white/20 text-[#FFB020] text-[8px] sm:text-[9px] font-bold tracking-wider shadow-sm flex items-center gap-1 truncate max-w-[90%]">
+                    <span className="px-1.5 sm:px-2 py-0.5 rounded-full bg-[#060B22]/90 backdrop-blur-md border border-white/20 text-[#FFB020] text-[8px] sm:text-[9px] font-bold tracking-wider shadow-sm flex items-center gap-1 truncate max-w-[90%]">
                       <Sparkles className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#FFB020] shrink-0" />
                       <span className="truncate">{visual.badge}</span>
                     </span>
 
-                    <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse shrink-0 hidden xs:block" />
+                    <span className="px-1.5 py-0.5 rounded-full bg-white/20 backdrop-blur-md text-[8px] sm:text-[9px] font-black text-white shrink-0">
+                      0{WEB_SERVICES.indexOf(service) + 1}
+                    </span>
                   </div>
                 </div>
 

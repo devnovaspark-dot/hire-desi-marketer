@@ -511,7 +511,7 @@ export function WebDesignTechStack() {
 
           {/* Right Column (7 cols): Stable Zero-Shift Business Capability Spotlight */}
           <div className="lg:col-span-7 bg-[#FAF8F5] rounded-xl sm:rounded-2xl p-4 sm:p-7 border border-[#E2DBD0] flex flex-col justify-between space-y-4 sm:space-y-6 min-h-auto lg:min-h-[580px] lg:h-full">
-            <div className="space-y-4 sm:space-y-5 flex-1 flex flex-col">
+            <div key={selectedTech} className="animate-content-fade space-y-4 sm:space-y-5 flex-1 flex flex-col">
               {/* Header: Tech Name & Category with Stable Height and Platform Icon */}
               <div className="space-y-2 border-b border-[#E2DBD0] pb-3 sm:pb-4">
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-[10px] font-black uppercase tracking-wider border border-[#FFB020]/30">

@@ -9,7 +9,6 @@ import {
   ArrowRight,
   Sparkles,
   CheckCircle2,
-  Lock,
 } from "lucide-react";
 import { WEB_INDUSTRIES, WebIndustryItem } from "@/data/web-design-services";
 import { cn } from "@/lib/utils";
@@ -104,29 +103,13 @@ export function WebDesignIndustriesGrid() {
               className="rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] hover:border-[#FFB020] shadow-[0_4px_18px_-4px_rgba(6,11,34,0.05)] hover:shadow-[0_16px_36px_-6px_rgba(255,176,32,0.15)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden"
             >
               <div>
-                {/* Sector Preview Window */}
-                <div className="relative aspect-[16/10] bg-slate-950 overflow-hidden border-b border-[#E2DBD0]">
-                  <div className="absolute top-0 inset-x-0 h-5 sm:h-6 bg-[#060B22]/95 backdrop-blur-md z-20 flex items-center justify-between px-1.5 sm:px-2.5 text-[8px] sm:text-[9px] text-slate-300 border-b border-white/10">
-                    <div className="flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-rose-500/80" />
-                      <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-500/80" />
-                      <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500/80" />
-                    </div>
-
-                    <span className="hidden sm:inline text-[8px] font-mono text-slate-400">
-                      sector-solutions/{ind.id}
-                    </span>
-
-                    <span className="text-[8px] sm:text-[9px] font-bold text-[#FFB020]">
-                      0{idx + 1}
-                    </span>
-                  </div>
-
+                {/* Clean Edge-to-Edge Sector Preview */}
+                <div className="relative aspect-[16/10] bg-slate-900 overflow-hidden border-b border-[#E2DBD0]">
                   <Image
                     src={visual.image}
                     alt={`${ind.name} website design example`}
                     fill
-                    className="object-cover object-top pt-5 sm:pt-6 group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 360px"
                   />
 
@@ -134,10 +117,10 @@ export function WebDesignIndustriesGrid() {
 
                   {/* Floating Sector Tag & Metric */}
                   <div className="absolute bottom-1.5 left-1.5 right-1.5 sm:bottom-2 sm:left-2.5 sm:right-2.5 flex items-center justify-between pointer-events-none z-10 gap-1">
-                    <span className="px-1.5 py-0.5 rounded bg-[#060B22]/90 backdrop-blur-md border border-white/20 text-white text-[8px] sm:text-[9px] font-bold truncate">
+                    <span className="px-1.5 py-0.5 rounded-full bg-[#060B22]/90 backdrop-blur-md border border-white/20 text-white text-[8px] sm:text-[9px] font-bold truncate">
                       {visual.tag}
                     </span>
-                    <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 backdrop-blur-md border border-emerald-500/30 text-emerald-300 text-[8px] sm:text-[9px] font-bold truncate">
+                    <span className="px-1.5 py-0.5 rounded-full bg-emerald-500/25 backdrop-blur-md border border-emerald-500/40 text-emerald-300 text-[8px] sm:text-[9px] font-bold truncate">
                       {visual.metric}
                     </span>
                   </div>

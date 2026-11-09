@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import {
   Sparkles,
@@ -13,41 +13,60 @@ import {
   ShieldCheck,
   Clock,
   CheckCircle2,
+  Activity,
+  Code2,
 } from "lucide-react";
 import { WebDesignLeadForm } from "./WebDesignLeadForm";
+import { cn } from "@/lib/utils";
 
 interface ArchitecturePillar {
+  id: string;
   icon: React.ReactNode;
   title: string;
   subtitle: string;
+  metric: string;
 }
 
 const ARCHITECTURE_PILLARS: ArchitecturePillar[] = [
   {
-    icon: <Palette className="w-3.5 h-3.5 text-[#B87A00]" />,
+    id: "bespoke",
+    icon: <Palette className="w-3.5 h-3.5 text-[#FFB020]" />,
     title: "Bespoke UI/UX & Code",
     subtitle: "Custom Figma wireframes to clean code",
+    metric: "100% Tailored",
   },
   {
-    icon: <Zap className="w-3.5 h-3.5 text-[#B87A00]" />,
+    id: "speed",
+    icon: <Zap className="w-3.5 h-3.5 text-[#FFB020]" />,
     title: "Sub-Second Performance",
     subtitle: "Core Web Vitals 95+ speed guaranteed",
+    metric: "< 0.8s LCP",
   },
   {
-    icon: <ShoppingBag className="w-3.5 h-3.5 text-[#B87A00]" />,
+    id: "commerce",
+    icon: <ShoppingBag className="w-3.5 h-3.5 text-[#FFB020]" />,
     title: "CMS & Modern Commerce",
     subtitle: "Shopify Plus, Webflow & custom WordPress",
+    metric: "Headless & Native",
   },
   {
-    icon: <Users className="w-3.5 h-3.5 text-[#B87A00]" />,
+    id: "squad",
+    icon: <Users className="w-3.5 h-3.5 text-[#FFB020]" />,
     title: "Dedicated Dev Squad",
     subtitle: "Direct timezone overlap & fixed milestones",
+    metric: "Realtime Sync",
   },
 ];
 
 export function WebDesignHero() {
+  const [activeMetric, setActiveMetric] = useState<string>("speed");
+
   return (
     <section className="relative overflow-hidden w-full min-h-[calc(100svh-4.5rem)] lg:min-h-[calc(100vh-4.5rem)] flex flex-col justify-center py-2 sm:py-4 lg:py-4 bg-[#F6F4EE] border-b border-[#E2DBD0]">
+      {/* Subtle Animated Background Gradients for Depth */}
+      <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#FFB020]/10 rounded-full blur-3xl pointer-events-none animate-pulse duration-1000" />
+      <div className="absolute bottom-10 right-1/3 w-80 h-80 bg-[#060B22]/5 rounded-full blur-3xl pointer-events-none" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
           {/* Left Column (7 cols): Snug, High-Impact Editorial Layout */}
@@ -78,47 +97,94 @@ export function WebDesignHero() {
 
               {/* Subheading: Compact, Clear, Confident */}
               <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal max-w-xl">
-                We engineer bespoke, conversion-focused websites and scalable digital platforms tailored to your business goals. From brand-new digital flagships to ongoing dedicated development, get senior engineering talent with real-time timezone alignment and zero agency bloat.
+                We bring together the right design and development expertise to build high-performing websites tailored to your industry, business goals, and audience — helping your business grow online.
               </p>
             </div>
 
-            {/* 3. Four Architecture Pillars (Unified Luxury Styling, Compact) */}
+            {/* 3. Four Architecture Pillars with Interactive Micro-States */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 pt-0.5">
-              {ARCHITECTURE_PILLARS.map((pillar, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-2.5 p-2 sm:p-2.5 rounded-xl bg-white border border-[#E2DBD0] hover:border-[#FFB020] hover:shadow-2xs transition-all duration-200 text-left group"
-                >
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#060B22] text-[#FFB020] border border-[#FFB020]/30 flex items-center justify-center shrink-0 group-hover:bg-[#FFB020] group-hover:text-[#060B22] transition-colors duration-200">
-                    {pillar.icon}
-                  </div>
-                  <div className="min-w-0">
-                    <span className="font-bold text-[11px] sm:text-xs text-[#060B22] block truncate">
-                      {pillar.title}
+              {ARCHITECTURE_PILLARS.map((pillar) => {
+                const isSelected = activeMetric === pillar.id;
+
+                return (
+                  <div
+                    key={pillar.id}
+                    onClick={() => setActiveMetric(pillar.id)}
+                    className={cn(
+                      "flex items-center justify-between gap-2.5 p-2 sm:p-2.5 rounded-xl border transition-all duration-200 text-left cursor-pointer group select-none",
+                      isSelected
+                        ? "bg-[#060B22] text-white border-[#FFB020] shadow-sm ring-2 ring-[#FFB020]/20"
+                        : "bg-white text-[#060B22] border-[#E2DBD0] hover:border-[#FFB020]/60 hover:shadow-2xs"
+                    )}
+                  >
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div
+                        className={cn(
+                          "w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors duration-200",
+                          isSelected
+                            ? "bg-white/10 text-[#FFB020] border border-white/15"
+                            : "bg-[#060B22] text-[#FFB020] border border-[#FFB020]/30 group-hover:bg-[#FFB020] group-hover:text-[#060B22]"
+                        )}
+                      >
+                        {pillar.icon}
+                      </div>
+                      <div className="min-w-0">
+                        <span
+                          className={cn(
+                            "font-bold text-[11px] sm:text-xs block truncate",
+                            isSelected ? "text-white" : "text-[#060B22]"
+                          )}
+                        >
+                          {pillar.title}
+                        </span>
+                        <span
+                          className={cn(
+                            "text-[9.5px] sm:text-[10px] block truncate",
+                            isSelected ? "text-slate-300" : "text-slate-500"
+                          )}
+                        >
+                          {pillar.subtitle}
+                        </span>
+                      </div>
+                    </div>
+
+                    <span
+                      className={cn(
+                        "text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0 border",
+                        isSelected
+                          ? "bg-[#FFB020] text-[#060B22] border-[#FFB020]"
+                          : "bg-slate-50 text-slate-600 border-slate-200 group-hover:border-[#FFB020]/40"
+                      )}
+                    >
+                      {pillar.metric}
                     </span>
-                    <span className="text-[9.5px] sm:text-[10px] text-slate-500 block truncate">
-                      {pillar.subtitle}
-                    </span>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
-            {/* 4. Strategic Secondary Actions */}
+            {/* 4. Prominent Primary & Secondary CTAs */}
             <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
               <a
-                href="#services"
-                className="btn-luxury-navy py-2 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-2xs border border-slate-700 hover:border-[#FFB020] transition-colors cursor-pointer"
+                href="#lead-form"
+                className="btn-luxury-gold btn-shimmer py-2.5 px-5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:shadow-[0_0_25px_rgba(255,176,32,0.35)] transition-all cursor-pointer"
               >
-                <span>Explore Full-Spectrum Solutions</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#FFB020]" />
+                <span>Get a Free Consultation &amp; Estimate</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+
+              <a
+                href="#services"
+                className="btn-luxury-navy py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-2xs border border-slate-700 hover:border-[#FFB020] transition-colors cursor-pointer"
+              >
+                <span>Explore Website Solutions</span>
               </a>
 
               <a
                 href="#engagement-models"
-                className="py-2 px-4 rounded-xl text-xs font-bold text-slate-700 hover:text-[#060B22] bg-white border border-[#E2DBD0] hover:border-[#FFB020] flex items-center justify-center gap-2 shadow-2xs transition-all cursor-pointer"
+                className="py-2.5 px-3.5 rounded-xl text-xs font-bold text-slate-700 hover:text-[#060B22] bg-white border border-[#E2DBD0] hover:border-[#FFB020] flex items-center justify-center gap-1.5 shadow-2xs transition-all cursor-pointer"
               >
-                <span>View Engagement Models</span>
+                <span>Engagement Models</span>
               </a>
             </div>
 

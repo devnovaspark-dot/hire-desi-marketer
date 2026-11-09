@@ -413,7 +413,7 @@ export const PROCESS_STEPS: WebProcessStep[] = [
     title: "Discovery & Requirement Analysis",
     tag: "Foundation & Scope",
     description:
-      "We dive deep into your business goals, target audience (USA, Canada, UK, Australia), competitors, and exact functional requirements to define clear deliverables.",
+      "We dive deep into your business goals, target audience, industry standards, competitors, and exact functional requirements to define clear deliverables.",
     deliverables: ["Kickoff alignment meeting", "Technical requirements document", "Sitemap & architecture wireframe", "Fixed milestones & timeline"],
   },
   {
@@ -664,18 +664,18 @@ export const DIFFERENTIATORS = [
     metric: "100% Custom Tailored",
   },
   {
-    title: "Flexible Hiring & Pricing Models",
+    title: "Flexible Collaboration & Engagement Models",
     description:
-      "Choose fixed-cost projects, flexible hourly blocks, or dedicated full-time monthly developers to fit your budget.",
-    icon: "dollar-sign",
-    metric: "Fixed, Hourly & Monthly",
+      "Choose fixed-cost projects, flexible hourly blocks, or dedicated full-time monthly developers to fit your roadmap.",
+    icon: "layers",
+    metric: "Hourly, Monthly & Fixed",
   },
   {
-    title: "Transparent Communication & Live Shifts",
+    title: "Global Timezone Overlap & Fast Communication",
     description:
-      "We sync live during US (EST/PST), Canadian, UK (GMT), and Australian (AEST) hours with daily Slack updates and video check-ins.",
+      "We sync live across your local business hours (EST, PST, GMT, and AEST) with daily Slack updates and video check-ins.",
     icon: "clock",
-    metric: "Realtime Western Overlap",
+    metric: "Realtime Working Overlap",
   },
   {
     title: "Scalable Development Solutions",
@@ -702,9 +702,9 @@ export const DIFFERENTIATORS = [
 
 export const WEB_FAQS: WebFaqItem[] = [
   {
-    question: "1. How much does it cost to design and develop a website?",
+    question: "1. How is the cost of website design and development determined?",
     answer:
-      "The cost depends on your scope, features, and platform. A focused 5-to-8 page business website typically ranges from $999 to $2,500 on a fixed-cost basis. Custom e-commerce stores with extensive product catalogs and custom integrations generally range from $2,000 to $5,000. For ongoing tasks or specific fixes, we offer flexible hourly development at $12-$20/hr, or full-time monthly dedicated developers from $1,299/mo. Contact us for a detailed, transparent proposal with zero hidden fees.",
+      "Website investment depends entirely on your specific scope, features, and chosen platform. We offer three transparent engagement structures: Fixed-Cost Projects for well-defined scope and deliverables, Hourly Support for flexible ad-hoc tasks, and Monthly Dedicated Developers for continuous roadmap execution. Contact us for a tailored, milestone-based proposal with zero hidden fees.",
   },
   {
     question: "2. How long does it take to develop a business website?",
@@ -747,9 +747,9 @@ export const WEB_FAQS: WebFaqItem[] = [
       "Yes. We integrate CRMs (HubSpot, Salesforce, Zoho), email marketing tools (Klaviyo, Mailchimp, ActiveCampaign), payment gateways (Stripe, PayPal, Apple Pay, Authorize.net), booking systems (Calendly, Acuity, OpenTable), analytics (Google Tag Manager, GA4, Meta Pixel), and custom REST/GraphQL APIs.",
   },
   {
-    question: "10. Do you work with clients in the USA, Canada, UK, and Australia?",
+    question: "10. Do you work with international clients across different timezones?",
     answer:
-      "Yes, over 95% of our clients are based in the USA, Canada, United Kingdom, and Australia. Our management and senior developers work in dedicated Western shifts (EST, PST, GMT, and AEST overlap). We communicate clearly in fluent English through Slack, email, WhatsApp, and live Zoom / Google Meet calls.",
+      "Yes, our team supports clients globally across North America, the UK, Europe, Australia, and the Middle East. Our management and senior developers work in dedicated shifts ensuring real-time business hour overlap (EST, PST, GMT, and AEST). We communicate clearly in fluent English through Slack, email, WhatsApp, and live Zoom / Google Meet calls.",
   },
 ];
 
