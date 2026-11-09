@@ -446,12 +446,10 @@ export default function WebDesignServicesPage() {
                 <span>Key Differentiators &amp; Verified Infrastructure</span>
               </div>
               <h2 className="font-display font-black text-2xl sm:text-4xl text-[#0B1B3A] tracking-tight">
-                Your Reliable Partner for Website Design &amp; Development
+                Why Choose Hire Desi Marketer for Web Design and Development Services?
               </h2>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                We combine top-tier Indian engineering talent with strict Western
-                accountability, delivering high-performance websites at a fraction
-                of local agency costs.
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
+                Choosing the right website development partner is important for creating a website that supports your business goals. At Hire Desi Marketer, we combine experienced design and development professionals, modern technologies and transparent project management to deliver tailored website solutions.
               </p>
             </div>
 

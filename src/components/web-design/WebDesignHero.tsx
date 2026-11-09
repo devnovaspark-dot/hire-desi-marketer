@@ -88,17 +88,22 @@ export function WebDesignHero() {
 
             {/* 2. Authority Headline with Pure Luxury Contrast */}
             <div className="space-y-2">
-              <h1 className="font-display font-black text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] text-[#060B22] tracking-tight leading-[1.14]">
-                The Right Design &amp; Development Talent for{" "}
+              <h1 className="font-display font-black text-2xl sm:text-3xl lg:text-[32px] xl:text-[36px] text-[#060B22] tracking-tight leading-[1.15]">
+                Professional Web Design and Development Services for{" "}
                 <span className="bg-gradient-to-r from-[#060B22] via-[#B87A00] to-[#E68A00] bg-clip-text text-transparent">
-                  Your Industry &amp; Website.
+                  Growing Businesses.
                 </span>
               </h1>
 
-              {/* Subheading: Compact, Clear, Confident */}
-              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal max-w-xl">
-                We bring together the right design and development expertise to build high-performing websites tailored to your industry, business goals, and audience — helping your business grow online.
-              </p>
+              {/* Subheading: Accurate & Clear Agency Messaging */}
+              <div className="space-y-1.5 text-xs sm:text-[13px] text-slate-700 leading-relaxed font-normal max-w-xl">
+                <p>
+                  If you are searching for web design and development services to build or upgrade your business website, Hire Desi Marketer offers web design and development services that blend simple design ideas, up-to-date development tools and user-friendly experiences to make websites that fit your business goals.
+                </p>
+                <p>
+                  From custom website design and website redesign services to ecommerce website development and CMS development, our team offers scalable and user-friendly website solutions. Whether you need a website or want to hire experienced web developers in India, we help turn your requirements into a good digital experience.
+                </p>
+              </div>
             </div>
 
             {/* 3. Four Architecture Pillars with Interactive Micro-States */}
