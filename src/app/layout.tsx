@@ -129,7 +129,7 @@ export default function RootLayout({
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PLRQLGVP"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-5RS9F324"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
@@ -139,7 +139,7 @@ export default function RootLayout({
         {/* Google Tag Manager (GTM) */}
         <Script
           id="gtm-script"
-          src="https://www.googletagmanager.com/gtm.js?id=GTM-PLRQLGVP"
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-5RS9F324"
           strategy="afterInteractive"
         />
 
