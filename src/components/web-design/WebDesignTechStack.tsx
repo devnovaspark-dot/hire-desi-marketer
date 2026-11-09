@@ -608,7 +608,7 @@ export function WebDesignTechStack() {
                 Ready to build or upgrade using {currentInfo.name}?
               </span>
               <a
-                href="#lead-form"
+                href="/get-a-quote"
                 className="btn-luxury-navy px-5 sm:px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-1.5 shadow-sm cursor-pointer shrink-0 w-full sm:w-auto"
               >
                 <span>Hire {currentInfo.name} Developers</span>
@@ -672,7 +672,7 @@ export function WebDesignTechStack() {
           </div>
 
           <a
-            href="#lead-form"
+            href="/get-a-quote"
             className="btn-luxury-gold btn-shimmer px-6 py-3 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shrink-0 shadow-lg cursor-pointer"
           >
             <span>Audit My Existing Website</span>

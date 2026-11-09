@@ -7,14 +7,15 @@ import {
   CheckCircle2,
   Clock,
   ShieldCheck,
-  AlertCircle,
   Sparkles,
   ArrowRight,
+  Building2,
+  User,
+  Mail,
+  Globe,
+  Layers,
+  Send,
   Lock,
-  Globe2,
-  MessageSquare,
-  TrendingUp,
-  Users,
 } from "lucide-react";
 
 export function QuoteFormPageClient() {
@@ -23,9 +24,10 @@ export function QuoteFormPageClient() {
     fullName: "",
     email: "",
     company: "",
-    country: "United States",
-    serviceInterest: "Dedicated team — request a quote (3/5/7)",
-    message: "",
+    websiteUrl: "",
+    serviceNeeded: "Custom Website Design & Bespoke Dev",
+    engagementModel: "Fixed-Cost Project (Milestone-based)",
+    projectScope: "",
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -35,26 +37,19 @@ export function QuoteFormPageClient() {
     router.prefetch("/thank-you-get-a-quote");
   }, [router]);
 
-  const countries = [
-    "United States",
-    "Canada",
-    "United Kingdom",
-    "Australia",
-    "Germany / Europe",
-    "UAE / Middle East",
-    "Singapore / Hong Kong",
-    "India",
-    "Other",
+  const serviceOptions = [
+    "Custom Website Design & Bespoke Dev",
+    "Website Redesign & Modernization",
+    "E-Commerce Storefront (Shopify Plus & Stripe)",
+    "Modern CMS Platform (WordPress & Webflow)",
+    "Full-Service Digital Marketing & SEO",
+    "Dedicated Full-Stack Dev Squad",
   ];
 
-  const models = [
-    "Dedicated team — request a quote (3/5/7)",
-    "Hourly Dedicated Specialist ($8/hr)",
-    "Growth Bundle ($999/mo) — Full Turnkey Marketing",
-    "SEO & Content Marketing Squad",
-    "Paid Media & Performance Ads (Google, Meta, TikTok)",
-    "Social Media & Short-Form Video Production",
-    "Custom Hybrid Marketing Team",
+  const engagementOptions = [
+    "Fixed-Cost Project (Milestone-based)",
+    "Monthly Dedicated Dev Squad",
+    "Hourly Dedicated Support",
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -78,8 +73,13 @@ export function QuoteFormPageClient() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...formData,
-          source: "Dedicated Quote Form Page (/get-a-quote)",
+          fullName: formData.fullName,
+          email: formData.email,
+          company: formData.company,
+          websiteUrl: formData.websiteUrl,
+          serviceInterest: `${formData.serviceNeeded} (${formData.engagementModel})`,
+          message: formData.projectScope || "Requested via Dedicated Quote Form",
+          source: "Dedicated Dual-Pane Quote Page (/get-a-quote)",
         }),
       });
 
@@ -96,16 +96,17 @@ export function QuoteFormPageClient() {
               Accept: "application/json",
             },
             body: JSON.stringify({
-              _subject: `New Lead (/get-a-quote): ${formData.fullName} - ${formData.serviceInterest}`,
+              _subject: `New Lead (/get-a-quote): ${formData.fullName} - ${formData.serviceNeeded}`,
               _template: "table",
               _captcha: "false",
               "Full Name": formData.fullName,
               "Work Email": formData.email,
               "Company": formData.company || "Not provided",
-              "Country / Region": formData.country,
-              "Service Model": formData.serviceInterest,
-              "Message / Goals": formData.message || "Not specified",
-              "Source": "Dedicated Quote Form Page (/get-a-quote)",
+              "Website URL": formData.websiteUrl || "Not provided",
+              "Service Needed": formData.serviceNeeded,
+              "Engagement Model": formData.engagementModel,
+              "Project Scope / Notes": formData.projectScope || "Not specified",
+              "Source": "Dedicated Dual-Pane Quote Page (/get-a-quote)",
               "Submitted At": new Date().toISOString(),
             }),
           }
@@ -130,293 +131,288 @@ export function QuoteFormPageClient() {
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      {/* Symmetrical Dual-Panel Stage */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-stretch">
-        
-        {/* =========================================================================
-            LEFT PANEL: THE VISUAL PANEL (HIGH-RES TEAM IMAGE + VALUE PROPOSITION)
-            ========================================================================= */}
-        <div className="lg:col-span-6 rounded-3xl overflow-hidden relative border-2 border-[#D8D0C0] shadow-2xl bg-[#060B24] flex flex-col justify-between p-6 sm:p-8 lg:p-9 min-h-[520px] lg:min-h-[580px] group">
-          {/* Background Image: Real Team at Bhubaneswar HQ */}
-          <div className="absolute inset-0 z-0">
-            <Image
-              src="/images/1200_1000px.webp"
-              alt="Hire Desi Marketer Dedicated In-House Team at Bhubaneswar Campus"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 620px"
-              className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-700"
-            />
-            {/* Rich Luxury Vignette Gradients for Text Contrast */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#040716] via-[#040716]/65 to-[#040716]/80 pointer-events-none" />
-          </div>
+      {/* Symmetrical Luxury Dual-Pane Stage */}
+      <div className="rounded-3xl skeuo-card-dark text-white p-4 sm:p-8 lg:p-12 border-2 border-white/15 shadow-2xl relative overflow-hidden">
+        {/* Background Ambient Glows */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#FFB020]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
-          {/* Top Content Layer */}
-          <div className="relative z-10 flex flex-col gap-3.5 sm:gap-4 text-left">
-            <div className="flex items-center justify-between gap-2">
-              <span className="skeuo-badge-gold px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider inline-flex items-center gap-1.5 w-fit shadow-md">
-                <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
-                <span>Free 90-Day Plan &amp; Audit</span>
-              </span>
-
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B24]/90 backdrop-blur-md border border-white/20 text-[11px] text-white font-bold shadow-md">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>100% In-House Team</span>
-              </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+          {/* =========================================================================
+              LEFT PANE (6 cols): Dark Luxury Authority, Team Avatars & Trust
+              ========================================================================= */}
+          <div className="lg:col-span-6 space-y-4 sm:space-y-6 text-left">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-slate-200 text-xs font-black uppercase tracking-wider border border-white/15 shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
+              <span>Get Started Today</span>
             </div>
 
-            <h1 className="font-display text-3xl sm:text-4xl lg:text-[2.65rem] font-black text-white tracking-tight leading-[1.08] drop-shadow-md">
-              Stop overpaying for marketing.{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFB020] via-[#FFD166] to-[#FFE28A] block">
-                Hire Desi.
-              </span>
+            <h1 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-[1.14]">
+              Ready to Build, Redesign or Upgrade Your Website?
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-200 leading-relaxed max-w-lg drop-shadow-sm">
-              Tell us about your brand and growth goals. We will prepare an in-depth audit,
-              a custom 90-day execution roadmap, and a transparent quote tailored to your budget.
+            <p className="text-xs sm:text-base text-slate-300 leading-relaxed font-normal">
+              Let&apos;s turn your website ideas into reality. Whether you&apos;re
+              starting from scratch, improving an existing website, or
+              looking for dedicated development support, our team is ready to
+              help.
             </p>
-          </div>
 
-          {/* Bottom Content Layer: Trust Checkmarks + Live Campus Pill */}
-          <div className="relative z-10 flex flex-col gap-4 pt-6">
-            {/* 3 Reassurance Checkmarks */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-              <div className="p-2.5 rounded-xl bg-[#060B24]/90 backdrop-blur-md border border-white/15 flex flex-col gap-0.5 text-left shadow-lg">
-                <div className="flex items-center gap-1.5 text-emerald-400 font-extrabold text-xs">
-                  <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-                  <span>24h Turnaround</span>
+            {/* Team Avatars & Direct Architect Access */}
+            <div className="p-3 sm:p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3 sm:gap-4 shadow-inner">
+              <div className="flex -space-x-2.5 sm:-space-x-3 overflow-hidden shrink-0">
+                <div className="inline-block h-9 w-9 sm:h-11 sm:w-11 rounded-full ring-2 ring-[#060B22] overflow-hidden relative">
+                  <Image
+                    src="/images/team-sankarsan.webp"
+                    alt="Sankarsan Nayak - Founder & CEO"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-                <span className="text-[11px] text-slate-300 leading-tight">
-                  Guaranteed custom roadmap
-                </span>
+                <div className="inline-block h-9 w-9 sm:h-11 sm:w-11 rounded-full ring-2 ring-[#060B22] overflow-hidden relative">
+                  <Image
+                    src="/images/team-pranjal.webp"
+                    alt="Pranjal Sharma - COO"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="inline-block h-9 w-9 sm:h-11 sm:w-11 rounded-full ring-2 ring-[#060B22] overflow-hidden relative">
+                  <Image
+                    src="/images/team-bikram.webp"
+                    alt="Bikram Keshari Sahu - Operations"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               </div>
-
-              <div className="p-2.5 rounded-xl bg-[#060B24]/90 backdrop-blur-md border border-white/15 flex flex-col gap-0.5 text-left shadow-lg">
-                <div className="flex items-center gap-1.5 text-blue-400 font-extrabold text-xs">
-                  <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
-                  <span>Mutual NDA</span>
+              <div>
+                <div className="text-xs sm:text-[13px] font-bold text-white leading-tight">
+                  Direct Access to Senior Web Architects
                 </div>
-                <span className="text-[11px] text-slate-300 leading-tight">
-                  Strict IP protection on request
-                </span>
-              </div>
-
-              <div className="p-2.5 rounded-xl bg-[#060B24]/90 backdrop-blur-md border border-white/15 flex flex-col gap-0.5 text-left shadow-lg">
-                <div className="flex items-center gap-1.5 text-[#FFB020] font-extrabold text-xs">
-                  <Clock className="w-3.5 h-3.5 shrink-0" />
-                  <span>Zero Lock-In</span>
+                <div className="text-[10.5px] sm:text-xs text-[#FFB020] font-semibold mt-0.5">
+                  Free scoping roadmap &amp; fixed milestone quotation
                 </div>
-                <span className="text-[11px] text-slate-300 leading-tight">
-                  Cancel anytime flexibility
-                </span>
               </div>
             </div>
 
-            {/* Bottom Live Telemetry Bar */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 p-3 rounded-2xl bg-[#060B24]/95 backdrop-blur-xl border border-white/20 text-xs text-white shadow-xl">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                <span className="font-bold text-slate-200">
-                  Bhubaneswar HQ Campus Live · Western Shifts Active
-                </span>
+            {/* Reassurance Checks */}
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1 text-xs text-slate-300">
+              <div className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <span>Response in &lt; 24h</span>
               </div>
-              <div className="flex items-center gap-1 text-[#FFB020] font-black uppercase tracking-wider text-[11px]">
-                <Globe2 className="w-3.5 h-3.5" />
-                <span>EST · PST · GMT Overlap</span>
+              <span className="text-slate-600">•</span>
+              <div className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <span>Zero Obligation</span>
+              </div>
+              <span className="text-slate-600">•</span>
+              <div className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <span>Strict NDA</span>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* =========================================================================
-            RIGHT PANEL: THE CONVERSION FORM (LUXURY DARK CARD FORM)
-            ========================================================================= */}
-        <div className="lg:col-span-6 flex flex-col justify-center">
-          <div className="skeuo-card-dark specular-shine rounded-3xl p-6 sm:p-8 lg:p-9 shadow-2xl relative border-2 border-white/20 h-full flex flex-col justify-between">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3.5 sm:gap-4 my-auto">
-                {/* Form Header */}
-                <div className="flex items-center justify-between pb-3 border-b border-white/10">
+          {/* =========================================================================
+              RIGHT PANE (6 cols): Clean White Conversion Form
+              ========================================================================= */}
+          <div className="lg:col-span-6">
+            <div className="bg-white text-slate-900 rounded-2xl sm:rounded-3xl p-5 sm:p-7 lg:p-8 shadow-2xl border border-white/20 text-left">
+              {/* Form Header */}
+              <div className="mb-4 sm:mb-5 pb-3 border-b border-slate-100">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FFB020]/15 text-[#B87A00] text-[10px] font-black uppercase tracking-wider mb-1.5">
+                  <Sparkles className="w-3 h-3 text-[#FFB020]" />
+                  <span>Fast 24-Hour Scope</span>
+                </div>
+                <h2 className="font-display font-black text-xl sm:text-2xl text-[#0B1B3A] tracking-tight">
+                  Start Your Free Consultation
+                </h2>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Share your requirements &amp; our technical architects will prepare your scope.
+                </p>
+              </div>
+
+              {errorMsg && (
+                <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold">
+                  {errorMsg}
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-3.5">
+                {/* Row 1: Name and Email */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <h2 className="font-display font-black text-xl sm:text-2xl text-white tracking-tight">
-                      Request Your Free Marketing Plan
-                    </h2>
-                    <p className="text-xs text-slate-300 mt-0.5">
-                      Delivered within 24 hours to your email · No commitment required
-                    </p>
-                  </div>
-                  <span className="skeuo-badge-gold px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase shrink-0">
-                    100% Free
-                  </span>
-                </div>
-
-                {errorMsg && (
-                  <div className="p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-xs text-rose-200 flex items-center gap-2">
-                    <AlertCircle className="w-4 h-4 shrink-0 text-rose-300" />
-                    <span>{errorMsg}</span>
-                  </div>
-                )}
-
-                {/* Row 1: Full Name & Work Email */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
-                  <div className="flex flex-col gap-1 text-left">
-                    <label
-                      htmlFor="form-page-name"
-                      className="text-[11px] font-bold uppercase tracking-wider text-slate-300"
-                    >
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
                       Full Name *
                     </label>
-                    <input
-                      id="form-page-name"
-                      name="fullName"
-                      type="text"
-                      required
-                      placeholder="e.g. Alex Morgan"
-                      value={formData.fullName}
-                      onChange={(e) =>
-                        setFormData({ ...formData, fullName: e.target.value })
-                      }
-                      className="skeuo-recessed-dark h-[40px] px-3.5 rounded-xl text-white placeholder:text-slate-500 text-sm focus:outline-none focus:border-[#FFB020] transition-colors border border-white/10"
-                    />
+                    <div className="relative">
+                      <User className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="text"
+                        required
+                        value={formData.fullName}
+                        onChange={(e) =>
+                          setFormData({ ...formData, fullName: e.target.value })
+                        }
+                        placeholder="e.g. Alex Morgan"
+                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-[#FFB020] focus:ring-2 focus:ring-[#FFB020]/20 outline-none transition-all"
+                      />
+                    </div>
                   </div>
 
-                  <div className="flex flex-col gap-1 text-left">
-                    <label
-                      htmlFor="form-page-email"
-                      className="text-[11px] font-bold uppercase tracking-wider text-slate-300"
-                    >
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
                       Work Email *
                     </label>
-                    <input
-                      id="form-page-email"
-                      name="email"
-                      type="email"
-                      required
-                      placeholder="alex@company.com"
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                      className="skeuo-recessed-dark h-[40px] px-3.5 rounded-xl text-white placeholder:text-slate-500 text-sm focus:outline-none focus:border-[#FFB020] transition-colors border border-white/10"
-                    />
+                    <div className="relative">
+                      <Mail className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
+                        placeholder="alex@company.com"
+                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-[#FFB020] focus:ring-2 focus:ring-[#FFB020]/20 outline-none transition-all"
+                      />
+                    </div>
                   </div>
                 </div>
 
-                {/* Row 2: Company & Country */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
-                  <div className="flex flex-col gap-1 text-left">
-                    <label
-                      htmlFor="form-page-company"
-                      className="text-[11px] font-bold uppercase tracking-wider text-slate-300"
-                    >
-                      Company or Website
+                {/* Row 2: Company and Website */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
+                      Company
                     </label>
-                    <input
-                      id="form-page-company"
-                      name="company"
-                      type="text"
-                      placeholder="e.g. Acme Corp / acme.com"
-                      value={formData.company}
-                      onChange={(e) =>
-                        setFormData({ ...formData, company: e.target.value })
-                      }
-                      className="skeuo-recessed-dark h-[40px] px-3.5 rounded-xl text-white placeholder:text-slate-500 text-sm focus:outline-none focus:border-[#FFB020] transition-colors border border-white/10"
-                    />
+                    <div className="relative">
+                      <Building2 className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="text"
+                        value={formData.company}
+                        onChange={(e) =>
+                          setFormData({ ...formData, company: e.target.value })
+                        }
+                        placeholder="Company / brand name"
+                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-[#FFB020] focus:ring-2 focus:ring-[#FFB020]/20 outline-none transition-all"
+                      />
+                    </div>
                   </div>
 
-                  <div className="flex flex-col gap-1 text-left">
-                    <label
-                      htmlFor="form-page-country"
-                      className="text-[11px] font-bold uppercase tracking-wider text-slate-300"
-                    >
-                      Country / Time Zone *
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
+                      Website URL
                     </label>
-                    <select
-                      id="form-page-country"
-                      name="country"
-                      value={formData.country}
-                      onChange={(e) =>
-                        setFormData({ ...formData, country: e.target.value })
-                      }
-                      className="skeuo-recessed-dark h-[40px] px-3.5 rounded-xl text-white text-sm focus:outline-none focus:border-[#FFB020] transition-colors cursor-pointer border border-white/10"
-                    >
-                      {countries.map((c) => (
-                        <option key={c} value={c} className="bg-[#0B132B] text-white">
-                          {c}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="relative">
+                      <Globe className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="text"
+                        value={formData.websiteUrl}
+                        onChange={(e) =>
+                          setFormData({ ...formData, websiteUrl: e.target.value })
+                        }
+                        placeholder="https://yourwebsite.com"
+                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-[#FFB020] focus:ring-2 focus:ring-[#FFB020]/20 outline-none transition-all"
+                      />
+                    </div>
                   </div>
                 </div>
 
-                {/* Row 3: Interested Model */}
-                <div className="flex flex-col gap-1 text-left">
-                  <label
-                    htmlFor="form-page-model"
-                    className="text-[11px] font-bold uppercase tracking-wider text-slate-300"
-                  >
-                    I&apos;m Interested In *
-                  </label>
-                  <select
-                    id="form-page-model"
-                    name="serviceInterest"
-                    value={formData.serviceInterest}
-                    onChange={(e) =>
-                      setFormData({ ...formData, serviceInterest: e.target.value })
-                    }
-                    className="skeuo-recessed-dark h-[40px] px-3.5 rounded-xl text-white text-sm focus:outline-none focus:border-[#FFB020] transition-colors cursor-pointer border border-white/10"
-                  >
-                    {models.map((m) => (
-                      <option key={m} value={m} className="bg-[#0B132B] text-white">
-                        {m}
-                      </option>
-                    ))}
-                  </select>
+                {/* Row 3: Service and Model */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
+                      Service Needed
+                    </label>
+                    <div className="relative">
+                      <Layers className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <select
+                        value={formData.serviceNeeded}
+                        onChange={(e) =>
+                          setFormData({ ...formData, serviceNeeded: e.target.value })
+                        }
+                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:bg-white focus:border-[#FFB020] focus:ring-2 focus:ring-[#FFB020]/20 outline-none transition-all cursor-pointer"
+                      >
+                        {serviceOptions.map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
+                      Engagement Model
+                    </label>
+                    <div className="relative">
+                      <Clock className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <select
+                        value={formData.engagementModel}
+                        onChange={(e) =>
+                          setFormData({ ...formData, engagementModel: e.target.value })
+                        }
+                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:bg-white focus:border-[#FFB020] focus:ring-2 focus:ring-[#FFB020]/20 outline-none transition-all cursor-pointer"
+                      >
+                        {engagementOptions.map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Row 4: Goals / Message */}
-                <div className="flex flex-col gap-1 text-left">
-                  <label
-                    htmlFor="form-page-message"
-                    className="text-[11px] font-bold uppercase tracking-wider text-slate-300"
-                  >
-                    Current Goals (Optional)
+                {/* Project Scope / Notes */}
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    Project Scope / Notes
                   </label>
                   <textarea
-                    id="form-page-message"
-                    name="message"
-                    rows={2}
-                    placeholder="e.g. Scaling search ads, increasing local SEO ranking, or building a dedicated marketing squad..."
-                    value={formData.message}
+                    rows={3}
+                    value={formData.projectScope}
                     onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
+                      setFormData({ ...formData, projectScope: e.target.value })
                     }
-                    className="skeuo-recessed-dark h-[56px] px-3.5 py-2 rounded-xl text-white placeholder:text-slate-500 text-sm focus:outline-none focus:border-[#FFB020] transition-colors resize-none border border-white/10"
+                    placeholder="Briefly describe your project scope, target timeline, or reference links..."
+                    className="w-full p-3 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-[#FFB020] focus:ring-2 focus:ring-[#FFB020]/20 outline-none transition-all resize-none"
                   />
                 </div>
 
-                {/* Big 3D Luxury Gold Button */}
+                {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="btn-luxury-gold btn-shimmer h-[48px] px-5 rounded-xl text-center text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 group cursor-pointer shadow-lg mt-1 disabled:opacity-50"
+                  className="w-full btn-luxury-gold btn-shimmer py-3.5 px-6 rounded-xl font-display font-black text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg hover:shadow-[0_0_25px_rgba(255,176,32,0.4)] transition-all cursor-pointer disabled:opacity-60"
                 >
-                  <span>
-                    {isLoading ? "Submitting Plan Request..." : "Get My Free Plan & Quote"}
-                  </span>
-                  {!isLoading && (
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform stroke-[2.5]" />
+                  {isLoading ? (
+                    <span>Submitting Your Scope...</span>
+                  ) : (
+                    <>
+                      <span>Get Free Consultation &amp; Estimate</span>
+                      <Send className="w-4 h-4" />
+                    </>
                   )}
                 </button>
 
-                <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-400 text-center">
-                  <Lock className="w-3 h-3 text-emerald-400" />
-                  <span>Your data is strictly confidential. Mutual NDA guaranteed. Zero spam.</span>
+                {/* Trust Footer */}
+                <div className="pt-1 flex items-center justify-center gap-3 text-[10px] text-slate-500 font-semibold text-center">
+                  <span className="flex items-center gap-1">
+                    <Lock className="w-3 h-3 text-emerald-600" />
+                    100% Confidential • Strict NDA
+                  </span>
+                  <span>•</span>
+                  <span>No Obligation Proposal</span>
                 </div>
               </form>
+            </div>
           </div>
         </div>
-
       </div>
     </div>
   );

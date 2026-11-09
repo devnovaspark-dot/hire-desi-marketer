@@ -185,7 +185,7 @@ export function WebDesignIndustriesGrid() {
             {/* Blueprint CTA Button */}
             <div className="pt-3 border-t border-slate-100 mt-auto">
               <a
-                href="#lead-form"
+                href="/get-a-quote"
                 className="btn-luxury-navy w-full py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs cursor-pointer"
               >
                 <span>Discuss {activeInd.name} Website Blueprint</span>

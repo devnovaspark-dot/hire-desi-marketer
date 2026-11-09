@@ -155,7 +155,7 @@ export function WebDesignServicesGrid() {
                 Tailored from bespoke Figma prototypes to live production
               </span>
               <a
-                href="#lead-form"
+                href="/get-a-quote"
                 className="btn-luxury-navy py-2 px-4 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-1.5 shadow-xs cursor-pointer ml-auto"
               >
                 <span>Discuss Custom Build</span>
@@ -215,7 +215,7 @@ export function WebDesignServicesGrid() {
             </div>
 
             <a
-              href="#lead-form"
+              href="/get-a-quote"
               className="text-xs font-bold text-slate-700 hover:text-[#B87A00] inline-flex items-center gap-1 transition-colors pt-1 cursor-pointer"
             >
               <span>Explore Redesign Audit</span>
@@ -268,7 +268,7 @@ export function WebDesignServicesGrid() {
             </ul>
 
             <a
-              href="#lead-form"
+              href="/get-a-quote"
               className="text-xs font-bold text-slate-700 hover:text-[#B87A00] inline-flex items-center gap-1 transition-colors cursor-pointer"
             >
               <span>Build Storefront</span>
@@ -321,7 +321,7 @@ export function WebDesignServicesGrid() {
             </ul>
 
             <a
-              href="#lead-form"
+              href="/get-a-quote"
               className="text-xs font-bold text-slate-700 hover:text-[#B87A00] inline-flex items-center gap-1 transition-colors cursor-pointer"
             >
               <span>Explore CMS Solutions</span>

@@ -153,8 +153,7 @@ export function WebDesignCaseStudies() {
                 )}
 
                 <a
-                  href="#lead-form"
-                  onClick={scrollToLeadForm}
+                  href="/get-a-quote"
                   className="px-2.5 py-1 rounded-lg bg-[#060B22] text-[#FFB020] text-[10.5px] font-bold inline-flex items-center gap-1 hover:bg-[#B87A00] hover:text-white transition-all shadow-2xs"
                 >
                   <span>Build Like This</span>

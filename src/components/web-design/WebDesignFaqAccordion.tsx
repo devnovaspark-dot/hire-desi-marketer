@@ -105,7 +105,7 @@ export function WebDesignFaqAccordion({
         <p className="text-xs text-slate-500">
           Have a question that isn&apos;t answered here?{" "}
           <a
-            href="#lead-form"
+            href="/get-a-quote"
             className="font-bold text-[#0B1B3A] hover:text-[#B87A00] underline underline-offset-4 transition-colors"
           >
             Ask our lead architects directly &rarr;

@@ -101,6 +101,7 @@ export function WebDesignLeadForm({
       }
 
       setSubmitted(true);
+      window.location.href = "/thank-you-get-a-quote";
     } catch (err: any) {
       console.error("Web design lead form submission error:", err);
       setError(

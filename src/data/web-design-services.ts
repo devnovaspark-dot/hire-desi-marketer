@@ -485,7 +485,7 @@ export const PRICING_MODELS: WebPricingModel[] = [
       "Fast response and rapid turnaround within 24–48 hours",
     ],
     ctaText: "Discuss Your Project",
-    ctaHref: "#lead-form",
+    ctaHref: "/get-a-quote",
   },
   {
     id: "monthly-dedicated",
@@ -505,7 +505,7 @@ export const PRICING_MODELS: WebPricingModel[] = [
       "Seamless talent replacement guarantee whenever needed",
     ],
     ctaText: "Discuss Your Project",
-    ctaHref: "#lead-form",
+    ctaHref: "/get-a-quote",
     isPopular: true,
   },
   {
@@ -526,7 +526,7 @@ export const PRICING_MODELS: WebPricingModel[] = [
       "30-day post-launch warranty and handoff training included",
     ],
     ctaText: "Discuss Your Project",
-    ctaHref: "#lead-form",
+    ctaHref: "/get-a-quote",
   },
 ];
 

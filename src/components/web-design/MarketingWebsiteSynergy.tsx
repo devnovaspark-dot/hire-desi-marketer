@@ -337,7 +337,7 @@ export function MarketingWebsiteSynergy() {
 
               {/* Action Button inside Studio */}
               <a
-                href="#lead-form"
+                href="/get-a-quote"
                 className="btn-luxury-gold btn-shimmer py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm text-center cursor-pointer"
               >
                 <span>Audit Your {activeChannel.tabLabel} Flow</span>
@@ -365,7 +365,7 @@ export function MarketingWebsiteSynergy() {
 
             <div className="lg:col-span-4 flex items-center justify-start lg:justify-end">
               <a
-                href="#lead-form"
+                href="/get-a-quote"
                 className="btn-luxury-gold btn-shimmer py-3 px-5 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-lg cursor-pointer w-full sm:w-auto justify-center"
               >
                 <span>Start Your Website Project</span>
