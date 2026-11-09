@@ -144,17 +144,17 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 2. COMPLETE WEBSITE DESIGN & DEVELOPMENT SERVICES               */}
         {/* ================================================================ */}
-        <section id="services" className="py-10 sm:py-14 lg:py-16 bg-white border-y border-[#E2DBD0]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-3">
+        <section id="services" className="py-8 sm:py-12 lg:py-16 bg-white border-y border-[#E2DBD0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-2.5">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>Full-Spectrum Solutions</span>
               </div>
-              <h2 className="font-display font-black text-2xl sm:text-4xl lg:text-[40px] text-[#0B1B3A] tracking-tight leading-tight">
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
                 Complete Website Solutions to Help Your Business Grow
               </h2>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal">
                 Your website is one of your most important business assets. We
                 help businesses build, redesign, and optimize websites that
                 deliver better user experiences, improve performance, and support
@@ -175,17 +175,17 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 4. TECHNOLOGIES & PLATFORMS WE WORK WITH                          */}
         {/* ================================================================ */}
-        <section id="tech-stack" className="py-10 sm:py-14 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-3">
+        <section id="tech-stack" className="py-8 sm:py-12 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-2.5">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Code2 className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>Modern Engineering &amp; Platforms</span>
               </div>
-              <h2 className="font-display font-black text-2xl sm:text-4xl text-[#0B1B3A] tracking-tight">
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight">
                 Expertise Across Modern Web Technologies &amp; CMS Platforms
               </h2>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal">
                 Whether you want to build a website from scratch or improve your
                 existing platform, our developers work with a wide range of
                 technologies and content management systems.
@@ -198,19 +198,19 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 4. INDUSTRIES WE SERVE                                            */}
+        {/* 5. INDUSTRIES WE SERVE                                            */}
         {/* ================================================================ */}
-        <section id="industries" className="py-10 sm:py-14 lg:py-16 bg-white border-y border-[#E2DBD0]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-3">
+        <section id="industries" className="py-8 sm:py-12 lg:py-16 bg-white border-y border-[#E2DBD0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-2.5">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Building className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>Specialized Domain Experience</span>
               </div>
-              <h2 className="font-display font-black text-2xl sm:text-4xl text-[#0B1B3A] tracking-tight">
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight">
                 Website Solutions for Businesses Across Industries
               </h2>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal">
                 We understand that every industry has different website
                 requirements, customer expectations, and business objectives. Our
                 team develops tailored website solutions for businesses across
@@ -224,19 +224,19 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 5. OUR WEBSITE DESIGN & DEVELOPMENT PROCESS                       */}
+        {/* 6. OUR WEBSITE DESIGN & DEVELOPMENT PROCESS                       */}
         {/* ================================================================ */}
-        <section id="process" className="py-10 sm:py-14 lg:py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-3">
+        <section id="process" className="py-8 sm:py-12 lg:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-2.5">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>Agile &amp; Transparent Delivery</span>
               </div>
-              <h2 className="font-display font-black text-2xl sm:text-4xl text-[#0B1B3A] tracking-tight">
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight">
                 Our Proven Website Development Process
               </h2>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal">
                 We follow a structured development process to ensure every project
                 is delivered with quality, transparency, and alignment with your
                 business objectives.
@@ -249,22 +249,22 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 6. FLEXIBLE ENGAGEMENT MODELS (ZERO PRICING)                     */}
+        {/* 7. FLEXIBLE ENGAGEMENT MODELS (ZERO PRICING)                     */}
         {/* ================================================================ */}
         <section
           id="engagement-models"
-          className="py-10 sm:py-14 lg:py-16 bg-white border-y border-[#E2DBD0] scroll-mt-24 sm:scroll-mt-28"
+          className="py-8 sm:py-12 lg:py-16 bg-white border-y border-[#E2DBD0] scroll-mt-24 sm:scroll-mt-28"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-3">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-2.5">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Layers className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>Flexible Collaboration · Zero Lock-Ins</span>
               </div>
-              <h2 className="font-display font-black text-2xl sm:text-4xl text-[#0B1B3A] tracking-tight">
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight">
                 Flexible Engagement Models Built for Your Business Needs
               </h2>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal">
                 Every website project has distinct requirements. Choose the collaboration structure that best fits your goals, bandwidth, and development roadmap.
               </p>
             </div>
@@ -411,19 +411,19 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 7. WEBSITE INSPIRATION & LIVE DESIGN REFERENCES                  */}
+        {/* 8. WEBSITE INSPIRATION & LIVE DESIGN REFERENCES                  */}
         {/* ================================================================ */}
-        <section id="work" className="py-10 sm:py-14 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-3">
+        <section id="work" className="py-8 sm:py-12 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-2.5">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Laptop className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>Website Inspiration &amp; Design References</span>
               </div>
-              <h2 className="font-display font-black text-2xl sm:text-4xl text-[#0B1B3A] tracking-tight">
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight">
                 Website Inspirations &amp; Live Design References
               </h2>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal">
                 Explore realistic digital benchmarks and design patterns across healthcare, e-commerce, high-growth SaaS, and enterprise consulting that inspire our engineering standards.
               </p>
             </div>
@@ -433,22 +433,22 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 8. WHY CHOOSE HIRE DESI MARKETER? (CAMPUS & TEAM SHOWCASE)        */}
+        {/* 9. WHY CHOOSE HIRE DESI MARKETER? (CAMPUS & TEAM SHOWCASE)        */}
         {/* ================================================================ */}
         <section
           id="why-choose-us"
-          className="py-10 sm:py-14 lg:py-16 bg-white border-y border-[#E2DBD0]"
+          className="py-8 sm:py-12 lg:py-16 bg-white border-y border-[#E2DBD0]"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-3">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-2.5">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>Key Differentiators &amp; Verified Infrastructure</span>
               </div>
-              <h2 className="font-display font-black text-2xl sm:text-4xl text-[#0B1B3A] tracking-tight">
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight">
                 Why Choose Hire Desi Marketer for Web Design and Development Services?
               </h2>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
+              <p className="text-xs sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal">
                 Choosing the right website development partner is important for creating a website that supports your business goals. At Hire Desi Marketer, we combine experienced design and development professionals, modern technologies and transparent project management to deliver tailored website solutions.
               </p>
             </div>
@@ -601,9 +601,9 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 10. FAQ SECTION                                                   */}
+        {/* 11. FAQ SECTION                                                  */}
         {/* ================================================================ */}
-        <section id="faq" className="py-10 sm:py-14 lg:py-16 bg-white border-t border-[#E2DBD0]">
+        <section id="faq" className="py-8 sm:py-12 lg:py-16 bg-white border-t border-[#E2DBD0]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <WebDesignFaqAccordion faqs={WEB_FAQS} />
           </div>

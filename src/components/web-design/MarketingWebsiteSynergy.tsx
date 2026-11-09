@@ -4,21 +4,23 @@ import React, { useState } from "react";
 import {
   Sparkles,
   ArrowRight,
-  TrendingUp,
   Target,
   Search,
   Share2,
   CheckCircle2,
   Zap,
-  ShieldCheck,
   MousePointerClick,
-  Layers,
   Activity,
+  ArrowDown,
+  ShieldCheck,
+  Check,
+  AlertTriangle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface MarketingChannelCard {
+interface MarketingChannelData {
   id: string;
+  tabLabel: string;
   channel: string;
   icon: React.ReactNode;
   badge: string;
@@ -32,18 +34,21 @@ interface MarketingChannelCard {
     label: string;
     value: string;
   };
-  gradient: string;
+  beforeState: string;
+  afterState: string;
+  signalTag: string;
 }
 
-const MARKETING_CHANNELS: MarketingChannelCard[] = [
+const MARKETING_CHANNELS: MarketingChannelData[] = [
   {
     id: "google-ads",
-    channel: "Google Ads",
-    icon: <Target className="w-5 h-5 text-[#FFB020]" />,
+    tabLabel: "Google Ads",
+    channel: "Google Paid Search",
+    icon: <Target className="w-4 h-4 text-[#FFB020]" />,
     badge: "Paid Search Performance",
     heading: "Google Ads Need High-Converting Landing Pages",
     explanation:
-      "Driving high-intent Google Search traffic to a generic, slow homepage burns your advertising budget. Google Ads demand fast, laser-focused landing pages matching ad copy to drive high Quality Scores and maximum ROAS.",
+      "Driving high-intent Google Search traffic to a generic, slow homepage burns your advertising budget. Google Ads demand fast, laser-focused landing pages matching ad copy to drive high Quality Scores, lower CPCs, and maximum ROAS.",
     pillars: [
       {
         title: "Relevant Landing Page Content",
@@ -66,12 +71,15 @@ const MARKETING_CHANNELS: MarketingChannelCard[] = [
       label: "Quality Score",
       value: "10/10 Benchmark",
     },
-    gradient: "from-amber-500/10 via-amber-500/5 to-transparent",
+    beforeState: "Generic slow homepage, 68% bounce rate, inflated cost-per-click",
+    afterState: "Sub-second bespoke lander, 10/10 Quality Score, lowest acquisition cost",
+    signalTag: "Ad Relevance 100%",
   },
   {
     id: "meta-ads",
-    channel: "Meta Ads",
-    icon: <MousePointerClick className="w-5 h-5 text-[#FFB020]" />,
+    tabLabel: "Meta Ads",
+    channel: "Meta Paid Social",
+    icon: <MousePointerClick className="w-4 h-4 text-[#FFB020]" />,
     badge: "Social Paid Acquisition",
     heading: "Meta Ads Need Conversion-Ready Websites",
     explanation:
@@ -98,12 +106,15 @@ const MARKETING_CHANNELS: MarketingChannelCard[] = [
       label: "CAPI Signal Quality",
       value: "9.4/10 Great",
     },
-    gradient: "from-blue-500/10 via-blue-500/5 to-transparent",
+    beforeState: "Signal loss from ad blockers, untracked mobile drops, blind bidding",
+    afterState: "First-party CAPI telemetry, 1-tap mobile booking, self-learning ROAS",
+    signalTag: "Zero Signal Loss",
   },
   {
     id: "seo",
-    channel: "Search Engine Optimization (SEO)",
-    icon: <Search className="w-5 h-5 text-[#FFB020]" />,
+    tabLabel: "SEO & Organic",
+    channel: "Search Engine Optimization",
+    icon: <Search className="w-4 h-4 text-[#FFB020]" />,
     badge: "Organic Search Authority",
     heading: "SEO Needs a Technically Strong Website",
     explanation:
@@ -130,12 +141,15 @@ const MARKETING_CHANNELS: MarketingChannelCard[] = [
       label: "Core Web Vitals",
       value: "95+ Green Score",
     },
-    gradient: "from-emerald-500/10 via-emerald-500/5 to-transparent",
+    beforeState: "Red Core Web Vitals, layout shifts, uncrawled dynamic scripts",
+    afterState: "100/100 Vitals, clean Schema JSON-LD, instant organic rankings",
+    signalTag: "Google Top 1% Speed",
   },
   {
     id: "social-media",
-    channel: "Organic Social Media",
-    icon: <Share2 className="w-5 h-5 text-[#FFB020]" />,
+    tabLabel: "Social Media",
+    channel: "Brand & Organic Social",
+    icon: <Share2 className="w-4 h-4 text-[#FFB020]" />,
     badge: "Brand Engagement & Trust",
     heading: "Social Media Needs a Website That Converts",
     explanation:
@@ -162,229 +176,200 @@ const MARKETING_CHANNELS: MarketingChannelCard[] = [
       label: "Lead Conversion Lift",
       value: "2.4x Avg. Increase",
     },
-    gradient: "from-purple-500/10 via-purple-500/5 to-transparent",
+    beforeState: "Bio link dropped onto desktop homepage with confusing navigation",
+    afterState: "Custom campaign flow, instant trust triggers, direct appointment booking",
+    signalTag: "2.4x Avg. Conv. Lift",
   },
 ];
 
 export function MarketingWebsiteSynergy() {
-  const [activeCard, setActiveCard] = useState<string>("google-ads");
+  const [activeChannelId, setActiveChannelId] = useState<string>("google-ads");
+
+  const activeChannel =
+    MARKETING_CHANNELS.find((c) => c.id === activeChannelId) ||
+    MARKETING_CHANNELS[0];
 
   return (
     <section
       id="marketing-foundation"
-      className="py-12 sm:py-16 lg:py-20 bg-white border-y border-[#E2DBD0] relative overflow-hidden"
+      className="py-8 sm:py-12 lg:py-16 bg-white border-y border-[#E2DBD0] relative overflow-hidden"
     >
-      {/* Background Decorative Ambient Gradients */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#FFB020]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#060B22]/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Ambient Gradient Mesh */}
+      <div className="absolute top-0 right-1/4 w-80 h-80 bg-[#FFB020]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-[#060B22]/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3.5">
+        <div className="text-center max-w-3xl mx-auto space-y-2.5">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
             <span>The Marketing + Website Relationship</span>
           </div>
 
-          <h2 className="font-display font-black text-2xl sm:text-4xl lg:text-[40px] text-[#0B1B3A] tracking-tight leading-[1.18]">
+          <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
             Your Marketing Efforts Will Only Work If You Have a Good Website.
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
-            Every marketing channel needs a strong website experience to turn visitors into customers. Without high-velocity code, persuasive architecture, and frictionless conversion funnels, advertising traffic is wasted.
+          <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal">
+            Every marketing channel needs a strong website experience to turn visitors into customers.
           </p>
         </div>
 
-        {/* 4 Interactive Editorial Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 items-stretch">
-          {MARKETING_CHANNELS.map((item, idx) => {
-            const isActive = activeCard === item.id;
-
+        {/* Interactive Channel Selector Ribbon (Touch Friendly on Mobile) */}
+        <div className="flex items-center justify-center gap-1.5 sm:gap-2.5 overflow-x-auto pb-1 no-scrollbar">
+          {MARKETING_CHANNELS.map((ch) => {
+            const isSelected = ch.id === activeChannel.id;
             return (
-              <div
-                key={item.id}
-                onMouseEnter={() => setActiveCard(item.id)}
+              <button
+                key={ch.id}
+                type="button"
+                onClick={() => setActiveChannelId(ch.id)}
                 className={cn(
-                  "rounded-2xl sm:rounded-3xl p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 relative text-left group cursor-pointer border overflow-hidden",
-                  isActive
-                    ? "bg-[#060B22] text-white border-[#FFB020] shadow-[0_20px_40px_-8px_rgba(6,11,34,0.35)] -translate-y-1.5 ring-2 ring-[#FFB020]/20"
-                    : "bg-[#FAF8F5] text-[#0B1B3A] border-[#E2DBD0] hover:border-[#FFB020]/70 hover:shadow-lg hover:-translate-y-1"
+                  "px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer select-none inline-flex items-center gap-2 shrink-0 border",
+                  isSelected
+                    ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] shadow-sm ring-2 ring-[#FFB020]/20"
+                    : "bg-[#FAF8F5] text-slate-700 border-[#E2DBD0] hover:border-slate-400"
                 )}
               >
-                {/* Top Subtle Glow Line on active card */}
-                <div
-                  className={cn(
-                    "absolute top-0 inset-x-0 h-1 transition-all duration-300",
-                    isActive
-                      ? "bg-gradient-to-r from-transparent via-[#FFB020] to-transparent"
-                      : "bg-transparent group-hover:bg-[#FFB020]/50"
-                  )}
-                />
-
-                <div className="space-y-4 flex-1 flex flex-col">
-                  {/* Top Bar: Icon + Metric Badge */}
-                  <div className="flex items-center justify-between gap-2">
-                    <div
-                      className={cn(
-                        "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors border",
-                        isActive
-                          ? "bg-white/10 border-white/20 text-[#FFB020]"
-                          : "bg-white border-[#E2DBD0] text-[#0B1B3A] group-hover:bg-[#FFB020]/20"
-                      )}
-                    >
-                      {item.icon}
-                    </div>
-
-                    <span
-                      className={cn(
-                        "px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border shrink-0",
-                        isActive
-                          ? "bg-[#FFB020] text-[#060B22] border-[#FFB020] font-black"
-                          : "bg-white text-slate-600 border-[#E2DBD0] group-hover:border-[#FFB020]/40"
-                      )}
-                    >
-                      {item.metricBadge.value}
-                    </span>
-                  </div>
-
-                  {/* Channel Tag & Headline */}
-                  <div className="space-y-1.5">
-                    <div
-                      className={cn(
-                        "text-[10px] font-black uppercase tracking-wider",
-                        isActive ? "text-[#FFB020]" : "text-[#B87A00]"
-                      )}
-                    >
-                      {item.badge}
-                    </div>
-                    <h3
-                      className={cn(
-                        "font-display font-black text-lg sm:text-xl tracking-tight leading-snug transition-colors",
-                        isActive ? "text-white" : "text-[#0B1B3A] group-hover:text-[#B87A00]"
-                      )}
-                    >
-                      {item.heading}
-                    </h3>
-                  </div>
-
-                  {/* Explanation Paragraph */}
-                  <p
-                    className={cn(
-                      "text-xs leading-relaxed font-normal",
-                      isActive ? "text-slate-300" : "text-slate-600"
-                    )}
-                  >
-                    {item.explanation}
-                  </p>
-
-                  {/* 4 Foundation Pillars */}
-                  <div
-                    className={cn(
-                      "pt-3 mt-auto border-t space-y-2.5",
-                      isActive ? "border-white/10" : "border-[#E2DBD0]"
-                    )}
-                  >
-                    <div
-                      className={cn(
-                        "text-[10px] font-black uppercase tracking-wider",
-                        isActive ? "text-slate-400" : "text-slate-500"
-                      )}
-                    >
-                      Required Website Standards:
-                    </div>
-
-                    <ul className="space-y-2 text-xs">
-                      {item.pillars.map((pillar, pIdx) => (
-                        <li key={pIdx} className="flex items-start gap-2">
-                          <CheckCircle2
-                            className={cn(
-                              "w-3.5 h-3.5 shrink-0 mt-0.5",
-                              isActive ? "text-[#FFB020]" : "text-[#B87A00]"
-                            )}
-                          />
-                          <div className="min-w-0">
-                            <span
-                              className={cn(
-                                "font-bold text-[11px] block leading-snug",
-                                isActive ? "text-white" : "text-[#0B1B3A]"
-                              )}
-                            >
-                              {pillar.title}
-                            </span>
-                            <span
-                              className={cn(
-                                "text-[10.5px] block leading-snug",
-                                isActive ? "text-slate-400" : "text-slate-500"
-                              )}
-                            >
-                              {pillar.description}
-                            </span>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Bottom Card Footer */}
-                <div
-                  className={cn(
-                    "pt-4 mt-4 border-t flex items-center justify-between text-[11px] font-bold",
-                    isActive ? "border-white/10 text-[#FFB020]" : "border-slate-200/80 text-slate-500 group-hover:text-[#B87A00]"
-                  )}
-                >
-                  <span className="flex items-center gap-1.5">
-                    <Activity className="w-3.5 h-3.5" />
-                    <span>Conversion Ready</span>
-                  </span>
-                  <span className="font-mono text-[10px]">0{idx + 1}</span>
-                </div>
-              </div>
+                <span>{ch.icon}</span>
+                <span>{ch.tabLabel}</span>
+                {isSelected && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                )}
+              </button>
             );
           })}
         </div>
 
-        {/* Closing Impact Statement & Direct Conversion Banner */}
-        <div className="rounded-2xl sm:rounded-3xl skeuo-card-dark text-white p-6 sm:p-8 lg:p-10 border border-white/15 shadow-xl relative overflow-hidden">
-          {/* Subtle Ambient Glow */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-[#FFB020]/15 rounded-full blur-3xl pointer-events-none" />
+        {/* Interactive Visual Transformation Studio (Breaks Generic 4-Card Look) */}
+        <div className="rounded-2xl sm:rounded-3xl bg-[#FAF8F5] border border-[#E2DBD0] p-4 sm:p-7 lg:p-8 shadow-xs">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+            {/* Left Column (7 cols): Channel Requirements & Standards */}
+            <div className="lg:col-span-7 space-y-4 text-left flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-[#B87A00] bg-[#FFB020]/20 px-2.5 py-0.5 rounded-full border border-[#FFB020]/30">
+                    {activeChannel.badge}
+                  </span>
+                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+                    <Activity className="w-3 h-3 text-emerald-500" />
+                    <span>{activeChannel.metricBadge.value}</span>
+                  </span>
+                </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-10">
-            {/* Left Column: Authoritative Closing Synthesis */}
-            <div className="lg:col-span-8 space-y-3 text-left">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#FFB020] text-[10px] sm:text-xs font-black uppercase tracking-wider border border-white/15">
-                <Zap className="w-3.5 h-3.5 text-[#FFB020]" />
-                <span>The Complete Conversion Formula</span>
+                <h3 className="font-display font-black text-xl sm:text-2xl text-[#0B1B3A] tracking-tight leading-snug">
+                  {activeChannel.heading}
+                </h3>
+
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                  {activeChannel.explanation}
+                </p>
               </div>
 
-              <blockquote className="font-display font-black text-lg sm:text-2xl lg:text-3xl text-white tracking-tight leading-snug">
+              {/* 4 Required Website Standards */}
+              <div className="pt-2 border-t border-[#E2DBD0] space-y-2">
+                <div className="text-[10px] font-black uppercase tracking-wider text-slate-700">
+                  Required Website Standards for {activeChannel.tabLabel}:
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                  {activeChannel.pillars.map((pillar, i) => (
+                    <div
+                      key={i}
+                      className="p-2.5 rounded-xl bg-white border border-[#E2DBD0] space-y-0.5 text-left"
+                    >
+                      <div className="flex items-center gap-1.5 font-bold text-[#0B1B3A] text-[11px] sm:text-xs">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#B87A00] shrink-0" />
+                        <span>{pillar.title}</span>
+                      </div>
+                      <p className="text-[10.5px] text-slate-500 leading-relaxed pl-5">
+                        {pillar.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column (5 cols): Funnel Transformation Visual (The "Why It Matters" Engine) */}
+            <div className="lg:col-span-5 rounded-2xl bg-[#060B22] text-white p-4 sm:p-6 flex flex-col justify-between space-y-4 shadow-md border border-white/10 text-left">
+              <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+                <div className="flex items-center gap-2">
+                  <Zap className="w-4 h-4 text-[#FFB020]" />
+                  <span className="text-xs font-black uppercase tracking-wider text-white">
+                    Traffic-to-Revenue Bridge
+                  </span>
+                </div>
+                <span className="text-[10px] font-bold text-[#FFB020] bg-white/10 px-2 py-0.5 rounded-full">
+                  {activeChannel.signalTag}
+                </span>
+              </div>
+
+              {/* Visual Funnel Comparison */}
+              <div className="space-y-3 flex-1 flex flex-col justify-center">
+                {/* Friction State */}
+                <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-xs space-y-1">
+                  <div className="flex items-center gap-1.5 font-bold text-rose-300 text-[11px]">
+                    <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />
+                    <span>Without High-Converting Website:</span>
+                  </div>
+                  <p className="text-[10.5px] text-slate-300 leading-snug">
+                    {activeChannel.beforeState}
+                  </p>
+                </div>
+
+                <div className="flex justify-center">
+                  <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-slate-400">
+                    <ArrowDown className="w-3.5 h-3.5 text-[#FFB020]" />
+                  </div>
+                </div>
+
+                {/* Optimized Solution State */}
+                <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-xs space-y-1">
+                  <div className="flex items-center gap-1.5 font-bold text-emerald-300 text-[11px]">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>With Hire Desi Marketer Engineering:</span>
+                  </div>
+                  <p className="text-[10.5px] text-slate-200 leading-snug">
+                    {activeChannel.afterState}
+                  </p>
+                </div>
+              </div>
+
+              {/* Action Button inside Studio */}
+              <a
+                href="#lead-form"
+                className="btn-luxury-gold btn-shimmer py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm text-center cursor-pointer"
+              >
+                <span>Audit Your {activeChannel.tabLabel} Flow</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Closing Impact Synthesis Banner */}
+        <div className="rounded-2xl sm:rounded-3xl skeuo-card-dark text-white p-4 sm:p-7 lg:p-8 border border-white/15 shadow-xl relative overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 items-center text-left">
+            <div className="lg:col-span-8 space-y-2">
+              <blockquote className="font-display font-black text-base sm:text-xl lg:text-2xl text-white tracking-tight leading-snug">
                 &ldquo;Your ads bring visitors. Your SEO brings visibility. Your social media builds awareness.{" "}
                 <span className="text-[#FFB020]">
                   Your website turns all of it into business growth.
                 </span>
                 &rdquo;
               </blockquote>
-
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal max-w-2xl">
-                Don't let valuable campaign traffic leak away through slow load speeds, uninspired wireframes, or friction-heavy forms. We build websites engineered from the ground up to maximize the ROI of every single marketing dollar you invest.
+              <p className="text-[11px] sm:text-xs text-slate-300 leading-relaxed font-normal">
+                Don't let valuable campaign traffic leak away through slow load speeds, uninspired wireframes, or friction-heavy forms. We build websites engineered from the ground up to turn traffic into paying clients.
               </p>
             </div>
 
-            {/* Right Column: High-Intent Action Button */}
-            <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col items-stretch justify-center gap-3">
+            <div className="lg:col-span-4 flex items-center justify-start lg:justify-end">
               <a
                 href="#lead-form"
-                className="btn-luxury-gold btn-shimmer py-3.5 px-6 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer text-center"
+                className="btn-luxury-gold btn-shimmer py-3 px-5 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-lg cursor-pointer w-full sm:w-auto justify-center"
               >
-                <span>Audit Your Website Conversion Flow</span>
+                <span>Start Your Website Project</span>
                 <ArrowRight className="w-4 h-4" />
-              </a>
-
-              <a
-                href="#services"
-                className="py-3 px-5 rounded-xl text-xs font-bold text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/15 flex items-center justify-center gap-1.5 transition-colors cursor-pointer text-center"
-              >
-                <span>Explore Website Solutions</span>
               </a>
             </div>
           </div>
@@ -393,4 +378,3 @@ export function MarketingWebsiteSynergy() {
     </section>
   );
 }
-
