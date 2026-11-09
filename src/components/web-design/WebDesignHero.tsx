@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {
-  Sparkles,
   ArrowRight,
   Palette,
   Zap,
@@ -12,16 +11,11 @@ import {
   Star,
   ShieldCheck,
   Clock,
-  CheckCircle2,
   Activity,
-  Code2,
-  Check,
   Laptop,
   Smartphone,
+  CheckCircle2,
   ExternalLink,
-  Layers,
-  ChevronRight,
-  MousePointer2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -40,53 +34,124 @@ interface WebsitePreviewState {
 const PREVIEW_DATA: WebsitePreviewState[] = [
   {
     id: "saas",
-    name: "Linear · Next-Gen SaaS",
-    category: "High-Growth Software",
+    name: "Linear",
+    category: "Next-Gen SaaS & Product",
     desktopImage: "/images/ref-linear.jpg",
     mobileImage: "/images/ref-linear.jpg",
-    url: "linear.app/craft",
-    tagline: "Sub-second developer tools & keyboard-first navigation",
+    url: "linear.app",
+    tagline: "Sub-second developer workflow & keyboard-first navigation",
     metric: "100/100 Core Web Vitals",
     techBadge: "Next.js 16 + React 19",
   },
   {
     id: "ecommerce",
-    name: "Allbirds · DTC Retail",
-    category: "High-Velocity Commerce",
+    name: "Allbirds",
+    category: "High-Growth DTC Commerce",
     desktopImage: "/images/ref-allbirds.jpg",
     mobileImage: "/images/ref-allbirds.jpg",
-    url: "allbirds.com/store",
+    url: "allbirds.com",
     tagline: "Headless Shopify Plus with instant slide-out micro-cart",
     metric: "4.6% Avg. Checkout Conv.",
     techBadge: "Shopify Plus & Stripe",
   },
   {
     id: "healthcare",
-    name: "One Medical · Digital Health",
-    category: "Telehealth & Clinic",
+    name: "One Medical",
+    category: "Telehealth & Clinic Portal",
     desktopImage: "/images/ref-onemedical.jpg",
     mobileImage: "/images/ref-onemedical.jpg",
-    url: "onemedical.com/care",
-    tagline: "Frictionless 1-tap mobile booking & HIPAA-grade portal",
+    url: "onemedical.com",
+    tagline: "Frictionless 1-tap mobile booking & HIPAA-grade patient UX",
     metric: "< 0.8s LCP Load Time",
     techBadge: "Custom UI/UX & React",
   },
   {
     id: "corporate",
-    name: "McKinsey · Global Advisory",
-    category: "Enterprise Consulting",
+    name: "McKinsey",
+    category: "Global Enterprise Advisory",
     desktopImage: "/images/ref-mckinsey.jpg",
     mobileImage: "/images/ref-mckinsey.jpg",
-    url: "mckinsey.com/insights",
+    url: "mckinsey.com",
     tagline: "Authoritative editorial portal & executive lead routing",
     metric: "Multi-Language CDN",
     techBadge: "Enterprise Headless CMS",
   },
 ];
 
+interface ArchitecturePillar {
+  id: string;
+  icon: React.ReactNode;
+  title: string;
+  subtitle: string;
+  badge: string;
+}
+
+const ARCHITECTURE_PILLARS: ArchitecturePillar[] = [
+  {
+    id: "bespoke",
+    icon: <Palette className="w-4 h-4 text-[#B87A00]" />,
+    title: "Bespoke UI/UX & Code",
+    subtitle: "Custom Figma wireframes to clean semantic code",
+    badge: "100% Tailored",
+  },
+  {
+    id: "speed",
+    icon: <Zap className="w-4 h-4 text-[#B87A00]" />,
+    title: "Sub-Second Performance",
+    subtitle: "Core Web Vitals 95+ speed benchmark guaranteed",
+    badge: "< 0.8s LCP",
+  },
+  {
+    id: "commerce",
+    icon: <ShoppingBag className="w-4 h-4 text-[#B87A00]" />,
+    title: "CMS & Modern Commerce",
+    subtitle: "Shopify Plus, Webflow & custom WordPress",
+    badge: "Headless & Native",
+  },
+  {
+    id: "squad",
+    icon: <Users className="w-4 h-4 text-[#B87A00]" />,
+    title: "Dedicated Dev Squad",
+    subtitle: "Direct timezone overlap with fixed sprint delivery",
+    badge: "Real-Time Sync",
+  },
+];
+
 export function WebDesignHero() {
   const [activePreviewId, setActivePreviewId] = useState<string>("saas");
   const [activeDevice, setActiveDevice] = useState<"desktop" | "mobile">("desktop");
+  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [cycleProgress, setCycleProgress] = useState<number>(0);
+
+  // Smooth auto-cycle between website showcases with pause on hover
+  useEffect(() => {
+    if (isPaused) return;
+
+    const intervalMs = 60;
+    const durationMs = 5000;
+    const step = (intervalMs / durationMs) * 100;
+
+    const timer = setInterval(() => {
+      setCycleProgress((prev) => {
+        if (prev >= 100) {
+          setActivePreviewId((currentId) => {
+            const currentIndex = PREVIEW_DATA.findIndex((p) => p.id === currentId);
+            const nextIndex = (currentIndex + 1) % PREVIEW_DATA.length;
+            return PREVIEW_DATA[nextIndex].id;
+          });
+          return 0;
+        }
+        return prev + step;
+      });
+    }, intervalMs);
+
+    return () => clearInterval(timer);
+  }, [isPaused, activePreviewId]);
+
+  const handleSelectTab = (id: string) => {
+    setActivePreviewId(id);
+    setCycleProgress(0);
+  };
 
   const currentPreview =
     PREVIEW_DATA.find((p) => p.id === activePreviewId) || PREVIEW_DATA[0];
@@ -100,11 +165,11 @@ export function WebDesignHero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-center">
           {/* ================================================================ */}
-          {/* LEFT COLUMN (6 cols): Editorial Messaging, Authority & Actions  */}
+          {/* LEFT COLUMN (6 cols): Editorial Authority, Value & Engagement    */}
           {/* ================================================================ */}
-          <div className="lg:col-span-6 space-y-4 sm:space-y-5 text-left">
+          <div className="lg:col-span-6 space-y-4 sm:space-y-4.5 text-left">
             {/* 1. Prestige Agency Live Overlap Kicker */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-[#E2DBD0] shadow-2xs">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-[#E2DBD0] shadow-2xs">
               <span className="flex h-2 w-2 relative">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
@@ -118,9 +183,9 @@ export function WebDesignHero() {
               </span>
             </div>
 
-            {/* 2. Authority Headline: "Your Website Should Do More Than Look Good..." */}
-            <div className="space-y-2.5">
-              <h1 className="font-display font-black text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] text-[#060B22] tracking-tight leading-[1.12]">
+            {/* 2. Authority Headline & Approved Copy */}
+            <div className="space-y-2 sm:space-y-2.5">
+              <h1 className="font-display font-black text-3xl sm:text-4xl lg:text-[38px] xl:text-[43px] text-[#060B22] tracking-tight leading-[1.12]">
                 Your Website Should Do More Than Look Good.{" "}
                 <span className="bg-gradient-to-r from-[#B87A00] via-[#FFB020] to-[#E68A00] bg-clip-text text-transparent">
                   It Should Grow Your Business.
@@ -128,9 +193,9 @@ export function WebDesignHero() {
               </h1>
 
               {/* Subheading: Professional Web Design and Development Services for Growing Businesses */}
-              <div className="space-y-2 text-xs sm:text-[13px] text-slate-700 leading-relaxed font-normal max-w-xl">
-                <p className="font-semibold text-slate-800">
-                  Professional Web Design and Development Services for Growing Businesses.
+              <div className="space-y-2 text-xs sm:text-[12.5px] text-slate-700 leading-relaxed font-normal max-w-xl">
+                <p className="font-bold text-slate-900 text-xs sm:text-[13px] tracking-tight">
+                  Professional Web Design and Development Services for Growing Businesses
                 </p>
                 <p>
                   If you are searching for web design and development services to build or upgrade your business website, Hire Desi Marketer offers web design and development services that blend simple design ideas, up-to-date development tools and user-friendly experiences to make websites that fit your business goals.
@@ -141,14 +206,38 @@ export function WebDesignHero() {
               </div>
             </div>
 
-            {/* 3. Primary & Secondary CTAs (Clear, Non-Conflicting Hierarchy) */}
+            {/* 3. Four Interactive Architecture Chips (Tactile Micro-Interactions) */}
+            <div className="grid grid-cols-2 gap-2 sm:gap-2.5 pt-0.5">
+              {ARCHITECTURE_PILLARS.map((pillar) => (
+                <div
+                  key={pillar.id}
+                  className="p-2 sm:p-2.5 rounded-xl bg-white/90 backdrop-blur-xs border border-[#E2DBD0] hover:border-[#FFB020] hover:bg-white transition-all duration-200 group/pill shadow-2xs"
+                >
+                  <div className="flex items-center justify-between gap-1 mb-0.5">
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      <span className="p-1 rounded-md bg-[#FFB020]/15 shrink-0 group-hover/pill:bg-[#FFB020] transition-colors">
+                        {pillar.icon}
+                      </span>
+                      <span className="text-[11px] font-bold text-[#060B22] truncate">
+                        {pillar.title}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between text-[10px] text-slate-500 font-medium pl-6">
+                    <span className="truncate">{pillar.subtitle}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* 4. Primary & Secondary Action Flow */}
             <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <a
                 href="#final-cta"
-                className="btn-luxury-gold btn-shimmer py-3 px-6 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:shadow-[0_0_25px_rgba(255,176,32,0.4)] transition-all cursor-pointer text-center"
+                className="btn-luxury-gold btn-shimmer py-3 px-6 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:shadow-[0_0_25px_rgba(255,176,32,0.4)] transition-all cursor-pointer text-center group"
               >
                 <span>Let's Build Your Website</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
 
               <a
@@ -159,7 +248,7 @@ export function WebDesignHero() {
               </a>
             </div>
 
-            {/* 4. Instant Fixed Scoping Prompt */}
+            {/* 5. Instant Scoping Prompt */}
             <div className="flex items-center gap-2 text-xs text-slate-600">
               <Zap className="w-3.5 h-3.5 text-[#B87A00] shrink-0" />
               <span>
@@ -173,8 +262,8 @@ export function WebDesignHero() {
               </span>
             </div>
 
-            {/* 5. Clean Trust & Verified Deliverables Row */}
-            <div className="pt-3 border-t border-[#E2DBD0] flex flex-wrap items-center gap-3 sm:gap-5 text-[11px] text-slate-600">
+            {/* 6. Clean Trust & Verified Deliverables Strip */}
+            <div className="pt-2.5 border-t border-[#E2DBD0] flex flex-wrap items-center gap-3 sm:gap-5 text-[11px] text-slate-600">
               <div className="flex items-center gap-1.5">
                 <div className="flex text-amber-400">
                   {[...Array(5)].map((_, i) => (
@@ -203,44 +292,55 @@ export function WebDesignHero() {
           </div>
 
           {/* ================================================================ */}
-          {/* RIGHT COLUMN (6 cols): Realistic Interactive Website Showcase    */}
+          {/* RIGHT COLUMN (6 cols): Pristine Digital Showcase (Zero Text on Img)*/}
           {/* ================================================================ */}
-          <div className="lg:col-span-6 relative mt-4 lg:mt-0">
-            {/* Interactive Category Selector Tabs */}
-            <div className="flex items-center justify-between gap-1 mb-2.5 pb-1 overflow-x-auto no-scrollbar">
-              <div className="flex items-center gap-1">
+          <div
+            className="lg:col-span-6 relative mt-4 lg:mt-0"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {/* Interactive Selector Header: Tabs & Viewport Toggle */}
+            <div className="flex items-center justify-between gap-1.5 mb-2.5 pb-0.5 overflow-x-auto no-scrollbar">
+              <div className="flex items-center gap-1 bg-white/80 backdrop-blur-md p-1 rounded-xl border border-[#E2DBD0] shadow-2xs">
                 {PREVIEW_DATA.map((p) => {
                   const isSelected = p.id === activePreviewId;
                   return (
                     <button
                       key={p.id}
                       type="button"
-                      onClick={() => setActivePreviewId(p.id)}
+                      onClick={() => handleSelectTab(p.id)}
                       className={cn(
-                        "px-2.5 sm:px-3 py-1 rounded-lg text-[10px] sm:text-[11px] font-bold transition-all duration-200 cursor-pointer select-none border shrink-0",
+                        "relative px-2.5 sm:px-3 py-1 rounded-lg text-[10px] sm:text-[11px] font-bold transition-all duration-200 cursor-pointer select-none shrink-0 overflow-hidden",
                         isSelected
-                          ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] shadow-xs"
-                          : "bg-white/80 text-slate-600 border-[#E2DBD0] hover:border-slate-400 hover:text-[#060B22]"
+                          ? "bg-[#060B22] text-[#FFB020] shadow-xs"
+                          : "text-slate-600 hover:text-[#060B22] hover:bg-slate-100"
                       )}
                     >
-                      {p.name.split("·")[0].trim()}
+                      {/* Active Tab Progress Indicator (shows cycle countdown) */}
+                      {isSelected && !isPaused && (
+                        <span
+                          className="absolute bottom-0 left-0 h-[2px] bg-[#FFB020] transition-all duration-75"
+                          style={{ width: `${cycleProgress}%` }}
+                        />
+                      )}
+                      <span>{p.name}</span>
                     </button>
                   );
                 })}
               </div>
 
-              {/* Viewport Switcher (Desktop vs Mobile Mockup Focus) */}
-              <div className="hidden sm:flex items-center gap-1 bg-white border border-[#E2DBD0] p-0.5 rounded-lg text-slate-500 text-[10px] shrink-0">
+              {/* Viewport Switcher (Desktop 1440px vs Mobile 390px) */}
+              <div className="hidden sm:flex items-center gap-1 bg-white/90 backdrop-blur-md border border-[#E2DBD0] p-1 rounded-xl text-slate-500 text-[10px] shrink-0 shadow-2xs">
                 <button
                   type="button"
                   onClick={() => setActiveDevice("desktop")}
                   className={cn(
-                    "px-2 py-0.5 rounded-md font-bold transition-all flex items-center gap-1 cursor-pointer",
+                    "px-2 py-0.5 rounded-lg font-bold transition-all flex items-center gap-1 cursor-pointer",
                     activeDevice === "desktop"
                       ? "bg-[#060B22] text-white"
                       : "hover:text-[#060B22]"
                   )}
-                  title="Inspect Desktop Architecture"
+                  title="Inspect Desktop Viewport (1440px)"
                 >
                   <Laptop className="w-3 h-3" />
                   <span>1440px</span>
@@ -249,12 +349,12 @@ export function WebDesignHero() {
                   type="button"
                   onClick={() => setActiveDevice("mobile")}
                   className={cn(
-                    "px-2 py-0.5 rounded-md font-bold transition-all flex items-center gap-1 cursor-pointer",
+                    "px-2 py-0.5 rounded-lg font-bold transition-all flex items-center gap-1 cursor-pointer",
                     activeDevice === "mobile"
-                      ? "bg-[#060B22] text-white"
+                      ? "bg-[#060B22] text-[#FFB020] ring-1 ring-[#FFB020]/40"
                       : "hover:text-[#060B22]"
                   )}
-                  title="Inspect Mobile Responsive Flow"
+                  title="Inspect Mobile Viewport (390px)"
                 >
                   <Smartphone className="w-3 h-3" />
                   <span>390px</span>
@@ -262,87 +362,80 @@ export function WebDesignHero() {
               </div>
             </div>
 
-            {/* Central Layered Showcase Canvas (Clean Studio Presentation - No Fake Browser Header) */}
-            <div className="relative rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] shadow-[0_20px_50px_-12px_rgba(6,11,34,0.14)] overflow-hidden transition-all duration-300 group">
-              {/* Realistic Website Screenshot Area */}
+            {/* Central Layered Showcase Canvas */}
+            <div
+              className={cn(
+                "relative rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] shadow-[0_24px_60px_-15px_rgba(6,11,34,0.18)] overflow-hidden transition-all duration-500 group",
+                activeDevice === "desktop" ? "scale-100" : "sm:scale-[0.98]"
+              )}
+            >
+              {/* Pure Website Screenshot Display — 100% UNINTERRUPTED & PRISTINE (ZERO TEXT OVERLAYS) */}
               <div className="relative aspect-[16/10] sm:aspect-[16/9.5] w-full bg-slate-950 overflow-hidden">
                 <Image
                   src={currentPreview.desktopImage}
-                  alt={`${currentPreview.name} live preview`}
+                  alt={`${currentPreview.name} authentic website design showcase`}
                   fill
-                  className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-103"
+                  className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-102"
                   sizes="(max-width: 1024px) 100vw, 650px"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+              </div>
 
-                {/* Interactive Floating Design Inspector Tag */}
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#060B22]/90 backdrop-blur-md border border-white/20 text-[#FFB020] text-[9.5px] font-mono font-bold flex items-center gap-1.5 shadow-md pointer-events-none z-10 animate-float-subtle">
-                  <Code2 className="w-3 h-3 text-[#FFB020]" />
-                  <span>&lt;Hero.Architecture performance="99+" /&gt;</span>
+              {/* Dedicated Showcase Footer Bar (Cleanly UNDERNEATH the Image, Never Covering It) */}
+              <div className="p-3.5 sm:p-4 bg-white border-t border-[#E2DBD0] flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-left">
+                <div className="min-w-0 space-y-0.5">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[9.5px] uppercase font-bold tracking-wider text-[#B87A00] bg-[#FFB020]/15 px-2 py-0.5 rounded-md border border-[#FFB020]/30">
+                      {currentPreview.category}
+                    </span>
+                    <span className="text-xs font-bold text-[#060B22]">
+                      {currentPreview.name}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-600 font-medium truncate max-w-sm sm:max-w-md">
+                    {currentPreview.tagline}
+                  </p>
                 </div>
 
-                {/* Bottom Bar inside Browser: Live Metrics & Tech Stack */}
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none gap-2">
-                  <div className="bg-[#060B22]/90 backdrop-blur-md border border-white/15 px-3 py-1 rounded-xl text-left">
-                    <div className="text-[9px] uppercase tracking-wider text-slate-400 font-bold">
-                      {currentPreview.category}
-                    </div>
-                    <div className="text-xs font-bold text-white truncate max-w-[220px]">
-                      {currentPreview.name}
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 bg-[#060B22]/90 backdrop-blur-md border border-white/15 px-2.5 py-1 rounded-xl text-right">
+                <div className="flex items-center gap-2 shrink-0">
+                  <div className="flex items-center gap-1.5 bg-[#060B22] text-white px-2.5 py-1 rounded-lg border border-slate-800">
                     <Activity className="w-3 h-3 text-emerald-400 animate-pulse" />
-                    <span className="text-[10px] font-black text-emerald-300">
+                    <span className="text-[10px] font-mono font-bold text-emerald-300">
                       {currentPreview.metric}
                     </span>
                   </div>
-                </div>
-              </div>
-
-              {/* Showcase Footer with Micro-Capabilities */}
-              <div className="p-3 sm:p-3.5 bg-white border-t border-[#E2DBD0] flex items-center justify-between text-left text-xs">
-                <div className="min-w-0 pr-2">
-                  <span className="text-[10px] uppercase font-bold text-[#B87A00] block">
-                    Architecture Highlights:
-                  </span>
-                  <span className="text-slate-600 text-[11px] font-medium block truncate">
-                    {currentPreview.tagline}
+                  <span className="hidden sm:inline-block px-2 py-1 rounded-lg bg-slate-100 text-slate-700 text-[10px] font-bold border border-slate-200">
+                    {currentPreview.techBadge}
                   </span>
                 </div>
-                <span className="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-[10px] font-bold border border-slate-200 shrink-0">
-                  {currentPreview.techBadge}
-                </span>
               </div>
             </div>
 
-            {/* Floating Mobile Device Preview (Layered Depth & 3D Parallax Touch) */}
+            {/* Layered 3D Smartphone Device Mockup (Clean Mobile Preview — ZERO TEXT OVERLAY) */}
             <div
+              onClick={() =>
+                setActiveDevice((prev) => (prev === "mobile" ? "desktop" : "mobile"))
+              }
               className={cn(
-                "hidden sm:block absolute -bottom-5 -right-3 sm:-right-5 w-32 sm:w-40 aspect-[9/18] rounded-[2rem] bg-slate-950 border-4 border-slate-800 shadow-2xl overflow-hidden z-20 transition-all duration-300 hover:scale-105",
+                "hidden sm:block absolute -bottom-6 -right-3 sm:-right-5 w-32 sm:w-44 aspect-[9/18] rounded-[2.2rem] bg-slate-950 border-[5px] border-slate-900 shadow-[0_25px_50px_-10px_rgba(0,0,0,0.5)] overflow-hidden z-30 transition-all duration-500 ease-out cursor-pointer group/phone",
                 activeDevice === "mobile"
-                  ? "ring-4 ring-[#FFB020] scale-105"
-                  : "hover:ring-2 hover:ring-[#FFB020]/40"
+                  ? "ring-4 ring-[#FFB020] scale-110 -translate-y-3 shadow-[0_30px_60px_-10px_rgba(255,176,32,0.35)]"
+                  : "hover:-translate-y-2 hover:scale-105 hover:ring-2 hover:ring-[#FFB020]/60"
               )}
+              title="Click to toggle mobile responsive view"
             >
-              {/* Dynamic Island / Mobile Notch */}
-              <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-12 h-2.5 bg-black rounded-full z-30" />
+              {/* Dynamic Island Speaker Notch */}
+              <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-3 bg-black rounded-full z-40 border border-slate-800/50" />
 
+              {/* Pure Mobile Screenshot (Zero Text Overlay on Phone Screen) */}
               <div className="relative w-full h-full bg-slate-900">
                 <Image
                   src={currentPreview.mobileImage}
-                  alt={`${currentPreview.name} mobile responsive preview`}
+                  alt={`${currentPreview.name} mobile responsive design showcase`}
                   fill
-                  className="object-cover object-top"
-                  sizes="160px"
+                  className="object-cover object-top transition-transform duration-500 group-hover/phone:scale-103"
+                  sizes="180px"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-
-                <div className="absolute bottom-2 left-1.5 right-1.5 bg-black/85 backdrop-blur-md p-1 rounded-lg text-center text-[7.5px] font-bold text-white">
-                  100% Mobile Fluid
-                </div>
               </div>
             </div>
           </div>
