@@ -12,28 +12,27 @@ import {
   Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import PixelCard from "@/components/ui/PixelCard";
 import StarBorder from "@/components/ui/StarBorder";
 
 /* ========================================================================== */
-/* 3D ISOMETRIC ICON COMPONENTS (PURE CSS + SVG LAYERS)                       */
+/* 3D ISOMETRIC ICON COMPONENTS (ELEVATED AMBIENT GLOW & CRISP DETAIL)        */
 /* ========================================================================== */
 
 // 1. 3D Isometric Milestone Vault (Fixed-Cost)
 function MilestoneVault3DIcon({ isActive }: { isActive: boolean }) {
   return (
-    <div className="relative w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center">
+    <div className="relative w-12 h-12 flex items-center justify-center">
       <div
         className={cn(
-          "absolute inset-0 rounded-xl blur-lg transition-all duration-500",
-          isActive ? "bg-[#FFB020]/30 scale-110" : "bg-[#FFB020]/15 scale-90"
+          "absolute inset-0 rounded-2xl blur-xl transition-all duration-500",
+          isActive ? "bg-[#FFB020]/40 scale-125" : "bg-[#FFB020]/20 scale-100"
         )}
       />
       <svg
         viewBox="0 0 100 100"
         className={cn(
-          "w-full h-full transition-transform duration-500 ease-out drop-shadow-md",
-          isActive ? "scale-105 -translate-y-0.5" : "opacity-90"
+          "w-full h-full transition-transform duration-500 ease-out drop-shadow-lg",
+          isActive ? "scale-110 -translate-y-1" : "scale-100"
         )}
       >
         <defs>
@@ -66,18 +65,18 @@ function MilestoneVault3DIcon({ isActive }: { isActive: boolean }) {
 // 2. 3D Isometric Dev Pod Tower (Monthly Dedicated)
 function DedicatedSquad3DIcon({ isActive }: { isActive: boolean }) {
   return (
-    <div className="relative w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center">
+    <div className="relative w-12 h-12 flex items-center justify-center">
       <div
         className={cn(
-          "absolute inset-0 rounded-xl blur-lg transition-all duration-500",
-          isActive ? "bg-cyan-500/35 scale-110" : "bg-cyan-500/15 scale-90"
+          "absolute inset-0 rounded-2xl blur-xl transition-all duration-500",
+          isActive ? "bg-cyan-500/40 scale-125" : "bg-cyan-500/20 scale-100"
         )}
       />
       <svg
         viewBox="0 0 100 100"
         className={cn(
-          "w-full h-full transition-transform duration-500 ease-out drop-shadow-md",
-          isActive ? "scale-105 -translate-y-0.5" : "opacity-90"
+          "w-full h-full transition-transform duration-500 ease-out drop-shadow-lg",
+          isActive ? "scale-110 -translate-y-1" : "scale-100"
         )}
       >
         <defs>
@@ -115,18 +114,18 @@ function DedicatedSquad3DIcon({ isActive }: { isActive: boolean }) {
 // 3. 3D Isometric Chrono-Turbine (Hourly On-Demand)
 function ChronoTurbine3DIcon({ isActive }: { isActive: boolean }) {
   return (
-    <div className="relative w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center">
+    <div className="relative w-12 h-12 flex items-center justify-center">
       <div
         className={cn(
-          "absolute inset-0 rounded-xl blur-lg transition-all duration-500",
-          isActive ? "bg-emerald-500/35 scale-110" : "bg-emerald-500/15 scale-90"
+          "absolute inset-0 rounded-2xl blur-xl transition-all duration-500",
+          isActive ? "bg-emerald-500/40 scale-125" : "bg-emerald-500/20 scale-100"
         )}
       />
       <svg
         viewBox="0 0 100 100"
         className={cn(
-          "w-full h-full transition-transform duration-500 ease-out drop-shadow-md",
-          isActive ? "scale-105 -translate-y-0.5" : "opacity-90"
+          "w-full h-full transition-transform duration-500 ease-out drop-shadow-lg",
+          isActive ? "scale-110 -translate-y-1" : "scale-100"
         )}
       >
         <defs>
@@ -162,7 +161,6 @@ interface CollaborationModel {
   name: string;
   badge: string;
   isPopular?: boolean;
-  pixelVariant: "gold" | "navy" | "default" | "blue" | "yellow" | "pink";
   kicker: string;
   valueHighlight: string;
   valueSubtext: string;
@@ -172,6 +170,9 @@ interface CollaborationModel {
   squadMakeup: string;
   sla: string;
   ctaText: string;
+  cardBg: string;
+  borderColor: string;
+  accentGlow: string;
 }
 
 const COLLAB_MODELS: CollaborationModel[] = [
@@ -179,7 +180,6 @@ const COLLAB_MODELS: CollaborationModel[] = [
     id: "fixed-cost",
     name: "Fixed-Cost Project",
     badge: "Milestone-Based",
-    pixelVariant: "navy",
     kicker: "Scope Certainty",
     valueHighlight: "Fixed-Milestone",
     valueSubtext: "Guaranteed launch date • Zero surprise costs",
@@ -194,13 +194,15 @@ const COLLAB_MODELS: CollaborationModel[] = [
     squadMakeup: "Lead UI Designer + Senior Full-Stack Dev + QA Lead",
     sla: "100% Guaranteed Launch Date",
     ctaText: "Discuss Fixed-Cost Scope",
+    cardBg: "bg-gradient-to-b from-[#081232]/95 via-[#060c23]/95 to-[#040817]/95",
+    borderColor: "border-white/15 hover:border-[#FFB020]/40",
+    accentGlow: "shadow-[0_15px_35px_-5px_rgba(0,0,0,0.5)]",
   },
   {
     id: "monthly-dedicated",
     name: "Monthly Dedicated Squad",
     badge: "Continuous Velocity",
     isPopular: true,
-    pixelVariant: "gold",
     kicker: "Full-Time Senior Engineers",
     valueHighlight: "Dedicated Squad",
     valueSubtext: "160 hrs/month • Full-time senior engineering",
@@ -215,12 +217,14 @@ const COLLAB_MODELS: CollaborationModel[] = [
     squadMakeup: "Senior React / Next.js Developer (160h/mo)",
     sla: "Timezone-Aligned Overlap",
     ctaText: "Hire Dedicated Developers",
+    cardBg: "bg-gradient-to-b from-[#0c1842]/95 via-[#081335]/95 to-[#040a1d]/95",
+    borderColor: "border-[#FFB020] ring-1 ring-[#FFB020]/50",
+    accentGlow: "shadow-[0_20px_50px_-10px_rgba(255,176,32,0.22)]",
   },
   {
     id: "hourly",
     name: "Hourly On-Demand Support",
     badge: "Pay-As-You-Need",
-    pixelVariant: "blue",
     kicker: "Flexible Technical Agility",
     valueHighlight: "On-Demand Agility",
     valueSubtext: "Pay as you need • Sub-24h sprint kickoff",
@@ -235,6 +239,9 @@ const COLLAB_MODELS: CollaborationModel[] = [
     squadMakeup: "On-Demand Senior Full-Stack Specialists",
     sla: "< 24h Scoping & Kickoff",
     ctaText: "Book On-Demand Dev Hours",
+    cardBg: "bg-gradient-to-b from-[#06172e]/95 via-[#051020]/95 to-[#030914]/95",
+    borderColor: "border-white/15 hover:border-emerald-400/40",
+    accentGlow: "shadow-[0_15px_35px_-5px_rgba(0,0,0,0.5)]",
   },
 ];
 
@@ -244,7 +251,7 @@ export function WebDesignEngagementModels() {
   return (
     <div className="w-full max-w-7xl mx-auto select-none text-left">
       {/* ==================================================================== */}
-      {/* 3 PIXELCARD COLLABORATION FRAMEWORK CARDS (SINGLE-WINDOW VIEWPORT)  */}
+      {/* 3 COLLABORATION FRAMEWORK CARDS (PREMIUM LUXURY STYLING)             */}
       {/* ==================================================================== */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-6 items-stretch">
         {COLLAB_MODELS.map((model) => {
@@ -254,159 +261,174 @@ export function WebDesignEngagementModels() {
             <div
               key={model.id}
               onMouseEnter={() => setActiveModelId(model.id)}
-              className="h-full flex"
+              className={cn(
+                "rounded-3xl p-6 sm:p-7 border transition-all duration-300 relative group flex flex-col justify-between",
+                model.cardBg,
+                model.borderColor,
+                model.accentGlow,
+                model.isPopular
+                  ? "lg:-translate-y-3 z-20 border-2 border-[#FFB020] shadow-[0_25px_60px_-12px_rgba(255,176,32,0.35)]"
+                  : "hover:-translate-y-1 z-10 hover:shadow-[0_20px_45px_-10px_rgba(0,0,0,0.6)]"
+              )}
             >
-              <PixelCard
-                variant={model.pixelVariant}
-                pixelSize={2}
-                gap={6}
-                speed={model.isPopular ? 24 : 20}
-                spotlight={model.isPopular ? 0.35 : 0.25}
-                glow={model.isPopular ? 0.35 : 0.22}
-                opacity={0.4}
-                radius={24}
-                className={cn(
-                  "p-5 sm:p-6 transition-all duration-300 relative group flex flex-col justify-between",
-                  model.isPopular
-                    ? "ring-1 ring-[#FFB020]/40 shadow-xl shadow-[#FFB020]/10 lg:-translate-y-1"
-                    : "hover:ring-1 hover:ring-white/20"
-                )}
-              >
-                {/* Popular Model Top Badge */}
-                {model.isPopular && (
-                  <div className="absolute top-0 right-0 z-10">
-                    <div className="bg-gradient-to-r from-[#FFB020] to-[#E68A00] text-[#060B22] text-[10px] font-mono font-black uppercase tracking-wider py-1 px-3.5 rounded-bl-xl shadow-xs flex items-center gap-1">
-                      <Sparkles className="w-3 h-3 fill-[#060B22]" />
-                      <span>Popular</span>
+              {/* Inner Clipped Glow Layer for Ambient Radiance */}
+              <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
+                <div
+                  className={cn(
+                    "absolute top-0 right-0 w-72 h-72 rounded-full blur-3xl pointer-events-none transition-opacity duration-300",
+                    model.isPopular
+                      ? "bg-[#FFB020]/20 opacity-100"
+                      : "bg-white/5 opacity-40 group-hover:opacity-80"
+                  )}
+                />
+                <div
+                  className={cn(
+                    "absolute top-0 inset-x-0 h-[2px] transition-opacity duration-300",
+                    model.isPopular
+                      ? "bg-gradient-to-r from-transparent via-[#FFB020] to-transparent opacity-100"
+                      : "bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100"
+                  )}
+                />
+              </div>
+
+              {/* ============================================================== */}
+              {/* BESPOKE LUXURY "MOST POPULAR" FLOATING CROWN CAPSULE BADGE     */}
+              {/* (NO BORING FLAT RECTANGLES - REPLACED WITH AN EXQUISITE PILL)  */}
+              {/* ============================================================== */}
+              {model.isPopular && (
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-30 whitespace-nowrap">
+                  <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#FFB020] via-[#FFE89E] to-[#FFB020] text-[#060B22] font-mono text-[10.5px] font-black uppercase tracking-widest shadow-[0_4px_25px_rgba(255,176,32,0.65)] border border-white/80 ring-1 ring-[#FFB020]/50 animate-pulse">
+                    <Sparkles className="w-3.5 h-3.5 text-[#060B22] fill-[#060B22]" />
+                    <span>Most Popular • High Velocity</span>
+                    <Sparkles className="w-3.5 h-3.5 text-[#060B22] fill-[#060B22]" />
+                  </div>
+                </div>
+              )}
+
+              <div className="space-y-4 relative z-10 pt-1">
+                {/* Top Row: 3D Isometric Icon + Plan Name */}
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="shrink-0 p-2 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm shadow-inner">
+                      {model.renderIcon(isSelected)}
+                    </div>
+                    <div>
+                      <div
+                        className={cn(
+                          "text-[10px] font-mono font-bold uppercase tracking-wider",
+                          model.isPopular ? "text-[#FFB020]" : "text-slate-400"
+                        )}
+                      >
+                        {model.kicker}
+                      </div>
+                      <h3 className="font-display font-black text-lg sm:text-xl text-white tracking-tight leading-tight">
+                        {model.name}
+                      </h3>
                     </div>
                   </div>
-                )}
 
-                <div className="space-y-4">
-                  {/* Top Row: Icon + Plan Name */}
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <div className="shrink-0 p-1.5 rounded-xl bg-[#060B22]/80 border border-white/10 backdrop-blur-xs">
-                        {model.renderIcon(isSelected)}
-                      </div>
-                      <div>
-                        <div
-                          className={cn(
-                            "text-[10px] font-mono font-bold uppercase tracking-wider",
-                            model.isPopular ? "text-[#FFB020]" : "text-slate-400"
-                          )}
-                        >
-                          {model.kicker}
-                        </div>
-                        <h3 className="font-display font-black text-lg sm:text-xl text-white tracking-tight leading-tight">
-                          {model.name}
-                        </h3>
-                      </div>
-                    </div>
+                  {!model.isPopular && (
+                    <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-white/5 text-slate-300 border border-white/10 shrink-0 backdrop-blur-xs">
+                      {model.badge}
+                    </span>
+                  )}
+                </div>
 
-                    {!model.isPopular && (
-                      <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-[#060B22]/80 text-slate-300 border border-white/10 shrink-0 backdrop-blur-xs">
-                        {model.badge}
-                      </span>
+                {/* Scope Certainty Value Highlight (ZERO NUMERICAL PRICING) */}
+                <div className="pt-2 pb-2 border-b border-white/10">
+                  <div
+                    className={cn(
+                      "font-display font-black text-2xl tracking-tight",
+                      model.isPopular ? "text-[#FFB020]" : "text-white"
                     )}
-                  </div>
-
-                  {/* Clean Scope Certainty Highlight Block (ZERO PRICING) */}
-                  <div className="pt-2 pb-1 border-b border-white/10">
-                    <div
-                      className={cn(
-                        "font-display font-black text-2xl tracking-tight",
-                        model.isPopular ? "text-[#FFB020]" : "text-white"
-                      )}
-                    >
-                      {model.valueHighlight}
-                    </div>
-                    <div className="text-xs text-slate-300 font-medium mt-0.5">
-                      {model.valueSubtext}
-                    </div>
-                  </div>
-
-                  {/* Concise Tagline */}
-                  <p className="text-xs text-slate-300 leading-relaxed font-normal line-clamp-2">
-                    {model.tagline}
-                  </p>
-
-                  {/* 4 Concrete Deliverables Checklist with dark glass contrast shield */}
-                  <div className="space-y-2 pt-1 p-3 rounded-xl bg-[#060B22]/60 border border-white/5 backdrop-blur-[2px]">
-                    <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300 flex items-center justify-between">
-                      <span>Verified Deliverables</span>
-                      <span className="text-[9px] text-[#FFB020] font-normal">HDM Certified</span>
-                    </div>
-
-                    <div className="space-y-2 text-xs">
-                      {model.deliverables.map((item, idx) => (
-                        <div key={idx} className="flex items-start gap-2">
-                          <CheckCircle2
-                            className={cn(
-                              "w-3.5 h-3.5 shrink-0 mt-0.5",
-                              model.isPopular ? "text-[#FFB020]" : "text-emerald-400"
-                            )}
-                          />
-                          <span className="text-[11.5px] leading-snug font-medium text-slate-200">
-                            {item}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Squad Structure Box with dark glass contrast shield */}
-                  <div className="p-2.5 rounded-xl bg-[#060B22]/70 border border-white/10 text-[11px] space-y-0.5 backdrop-blur-[2px]">
-                    <div className="font-mono text-[9px] uppercase tracking-wider text-slate-400 font-bold">
-                      Squad Structure:
-                    </div>
-                    <div className="font-bold truncate text-[11px] text-white">
-                      {model.squadMakeup}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Card Footer: SLA & Direct Action Button */}
-                <div className="pt-4 border-t border-white/10 space-y-3 mt-4">
-                  <div className="flex items-center justify-between text-[11px] font-mono">
-                    <span className="flex items-center gap-1.5 text-emerald-400 font-bold">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>{model.sla}</span>
-                    </span>
-                    <span
-                      className={cn(
-                        "font-bold text-[10.5px]",
-                        model.isPopular ? "text-[#FFB020]" : "text-slate-400"
-                      )}
-                    >
-                      Zero Lock-In
-                    </span>
-                  </div>
-
-                  <StarBorder
-                    as={Link}
-                    href="/get-a-quote"
-                    className="w-full py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs cursor-pointer text-center group transition-all"
-                    radius={12}
-                    color={model.isPopular ? "#FFF8E7" : "#FFB020"}
-                    trailColor={model.isPopular ? "#FFB020" : "#38BDF8"}
-                    backgroundColor={
-                      model.isPopular ? "#FFB020" : "rgba(255, 255, 255, 0.08)"
-                    }
-                    textColor={model.isPopular ? "#060B22" : "#FFFFFF"}
-                    borderColor={
-                      model.isPopular
-                        ? "rgba(255, 176, 32, 0.6)"
-                        : "rgba(255, 255, 255, 0.2)"
-                    }
-                    sparkle={true}
-                    glow={model.isPopular ? 0.85 : 0.6}
                   >
-                    <span>{model.ctaText}</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </StarBorder>
+                    {model.valueHighlight}
+                  </div>
+                  <div className="text-xs text-slate-300 font-medium mt-0.5">
+                    {model.valueSubtext}
+                  </div>
                 </div>
-              </PixelCard>
+
+                {/* Concise Tagline */}
+                <p className="text-xs text-slate-300 leading-relaxed font-normal line-clamp-2">
+                  {model.tagline}
+                </p>
+
+                {/* 4 Concrete Deliverables Checklist with High-Contrast Frosted Glass */}
+                <div className="space-y-2 pt-1 p-3.5 rounded-2xl bg-[#040817]/80 border border-white/10 backdrop-blur-sm">
+                  <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300 flex items-center justify-between pb-1 border-b border-white/5">
+                    <span>Verified Deliverables</span>
+                    <span className="text-[9.5px] text-[#FFB020] font-mono">HDM Certified</span>
+                  </div>
+
+                  <div className="space-y-2 text-xs pt-1">
+                    {model.deliverables.map((item, idx) => (
+                      <div key={idx} className="flex items-start gap-2">
+                        <CheckCircle2
+                          className={cn(
+                            "w-3.5 h-3.5 shrink-0 mt-0.5",
+                            model.isPopular ? "text-[#FFB020]" : "text-emerald-400"
+                          )}
+                        />
+                        <span className="text-[11.5px] leading-snug font-medium text-slate-200">
+                          {item}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Squad Structure Box with High-Contrast Frosted Glass */}
+                <div className="p-3 rounded-2xl bg-[#040817]/80 border border-white/10 text-[11px] space-y-0.5 backdrop-blur-sm">
+                  <div className="font-mono text-[9.5px] uppercase tracking-wider text-slate-400 font-bold">
+                    Squad Structure:
+                  </div>
+                  <div className="font-bold truncate text-[11.5px] text-white">
+                    {model.squadMakeup}
+                  </div>
+                </div>
+              </div>
+
+              {/* Card Footer: SLA & Direct Action Button */}
+              <div className="pt-4 border-t border-white/10 space-y-3 mt-4 relative z-10">
+                <div className="flex items-center justify-between text-[11px] font-mono">
+                  <span className="flex items-center gap-1.5 text-emerald-400 font-bold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>{model.sla}</span>
+                  </span>
+                  <span
+                    className={cn(
+                      "font-bold text-[10.5px]",
+                      model.isPopular ? "text-[#FFB020]" : "text-slate-400"
+                    )}
+                  >
+                    Zero Lock-In
+                  </span>
+                </div>
+
+                <StarBorder
+                  as={Link}
+                  href="/get-a-quote"
+                  className="w-full py-3 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg cursor-pointer text-center group transition-all"
+                  radius={12}
+                  color={model.isPopular ? "#FFF8E7" : "#FFB020"}
+                  trailColor={model.isPopular ? "#FFB020" : "#38BDF8"}
+                  backgroundColor={
+                    model.isPopular ? "#FFB020" : "rgba(255, 255, 255, 0.08)"
+                  }
+                  textColor={model.isPopular ? "#060B22" : "#FFFFFF"}
+                  borderColor={
+                    model.isPopular
+                      ? "rgba(255, 176, 32, 0.7)"
+                      : "rgba(255, 255, 255, 0.2)"
+                  }
+                  sparkle={true}
+                  glow={model.isPopular ? 0.9 : 0.6}
+                >
+                  <span>{model.ctaText}</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </StarBorder>
+              </div>
             </div>
           );
         })}

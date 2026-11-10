@@ -4,6 +4,7 @@
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   -webkit-user-select: none;
+  margin: 0 auto;
 }
 
 .bounce-cards__card {
@@ -13,9 +14,8 @@
   width: var(--bounce-cards-size);
   aspect-ratio: 1;
   overflow: hidden;
-  border: var(--bounce-cards-border) solid var(--bounce-cards-border-color);
   border-radius: var(--bounce-cards-radius);
-  background: var(--bounce-cards-border-color);
+  background: transparent;
   box-shadow: var(--bounce-cards-shadow);
   transform: translate(-50%, -50%) scale(0);
   transition: box-shadow 0.3s ease;
@@ -31,7 +31,7 @@
 }
 
 .bounce-cards__card--clickable:focus-visible {
-  outline: 2px solid var(--bounce-cards-border-color);
+  outline: 2px solid rgba(255, 176, 32, 0.6);
   outline-offset: 3px;
 }
 
@@ -43,4 +43,3 @@
   pointer-events: none;
   user-select: none;
 }
-

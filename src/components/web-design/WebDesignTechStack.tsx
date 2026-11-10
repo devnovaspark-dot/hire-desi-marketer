@@ -20,92 +20,219 @@ import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
 import BounceCards, { BounceCardItem } from "@/components/ui/BounceCards";
 
-// Authentic Official Framework & CMS Brand Logos
-function NextJsIcon({ className = "w-7 h-7" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 180 180" fill="none">
-      <circle cx="90" cy="90" r="90" fill="#000" />
-      <path
-        d="M149.508 157.438L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.138 149.508 157.438Z"
-        fill="url(#next-diag)"
-      />
-      <path d="M115 54H127V126H115V54Z" fill="url(#next-vert)" />
-      <defs>
-        <linearGradient id="next-diag" x1="109.5" y1="116.5" x2="144.5" y2="160.5" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#fff" />
-          <stop offset="1" stopColor="#fff" stopOpacity="0" />
-        </linearGradient>
-        <linearGradient id="next-vert" x1="121" y1="54" x2="120.799" y2="106.875" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#fff" />
-          <stop offset="1" stopColor="#fff" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-    </svg>
-  );
-}
+// ====================================================================
+// BESPOKE 3D-RENDERED STACK & PLATFORM ICONS WITH DEPTH & SPECULAR GLOSS
+// ====================================================================
 
-function ReactIcon({ className = "w-7 h-7" }: { className?: string }) {
+function ThreeDNextJsIcon({ className = "w-11 h-11" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 100 100" fill="none">
-      <ellipse cx="50" cy="50" rx="42" ry="16" stroke="#00D8FF" strokeWidth="4" />
-      <ellipse cx="50" cy="50" rx="42" ry="16" stroke="#00D8FF" strokeWidth="4" transform="rotate(60 50 50)" />
-      <ellipse cx="50" cy="50" rx="42" ry="16" stroke="#00D8FF" strokeWidth="4" transform="rotate(120 50 50)" />
-      <circle cx="50" cy="50" r="7" fill="#00D8FF" />
-    </svg>
-  );
-}
-
-function TailwindIcon({ className = "w-7 h-7" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.335 6.182 14.974 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.335 13.382 8.974 12 6.001 12z"
-        fill="#38BDF8"
-      />
-    </svg>
-  );
-}
-
-function ShopifyIcon({ className = "w-7 h-7" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M20.25 6.75l-2.25-1.5-1.5.75-2.25-3.75L12 3l-1.5-.75L8.25 6 6.75 5.25 4.5 6.75 3 21h18l-.75-14.25z"
-        fill="#95BF47"
-      />
-      <path
-        d="M14.25 10.5c-.75-.75-1.5-.75-2.25-.75s-1.5 0-2.25.75c-.75.75-.75 1.5-.75 2.25 0 2.25 3.75 3 3.75 4.5s-.75 1.5-1.5 1.5-1.5-.75-1.5-1.5h-1.5c0 1.5 1.5 2.25 3 2.25s3-.75 3-2.25c0-2.25-3.75-3-3.75-4.5s.75-1.5 1.5-1.5 1.5.75 1.5 1.5h1.5c0-1.5-.75-2.25-1.5-2.25z"
-        fill="#fff"
-      />
-    </svg>
-  );
-}
-
-function WordPressIcon({ className = "w-7 h-7" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="10" fill="#21759B" />
-      <path
-        d="M3.75 12c0 3.75 2.5 6.75 6 7.75l-4.5-12.5C4.25 8.75 3.75 10.25 3.75 12zm13.75 5.5l-3.25-9.5c.75-.05 1.25-.1 1.25-.1.5-.05.45-.75-.05-.75 0 0-1.5.15-2.5.15-1 0-2.5-.15-2.5-.15-.5 0-.55.7.05.75 0 0 .5.05 1.05.1l1.55 4.25-2.25 6.75c1-.25 2-.5 3.15-.5.5 0 1 .05 1.5.15zm-4.75-14.25c-4.75 0-8.5 3.75-8.5 8.5 0 1.25.25 2.25.75 3.25L9.5 5.25c0-.5-.05-1-.25-1.25-.25-.25-.75-.25-1.25-.25v-.5c1 .05 2 .05 3.25.05 1.25 0 2.25 0 3.25-.05v.5c-.5 0-1 0-1.25.25-.2.25-.25.75-.25 1.25l-.25 1.5 3 8.75c1.25-1.75 2-4 2-6.25 0-4.75-3.75-8.5-8.5-8.5z"
-        fill="#fff"
-      />
-    </svg>
-  );
-}
-
-function SupabaseIcon({ className = "w-7 h-7" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12.5 2L3 13.5h7.5L8.5 22 20 10.5h-7.5L12.5 2z"
-        fill="url(#supa-grad)"
-      />
       <defs>
-        <linearGradient id="supa-grad" x1="3" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#3ECF8E" />
-          <stop offset="1" stopColor="#249361" />
+        <radialGradient id="next3d-sphere" cx="35%" cy="30%" r="70%">
+          <stop offset="0%" stopColor="#2A2F45" />
+          <stop offset="50%" stopColor="#101524" />
+          <stop offset="100%" stopColor="#050811" />
+        </radialGradient>
+        <linearGradient id="next3d-rim" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.7" />
+          <stop offset="50%" stopColor="#FFB020" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#000000" stopOpacity="0.8" />
         </linearGradient>
+        <linearGradient id="next3d-diag" x1="30" y1="25" x2="75" y2="80" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="70%" stopColor="#FFB020" />
+          <stop offset="100%" stopColor="#FFB020" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id="next3d-vert" x1="62" y1="28" x2="62" y2="72" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="100%" stopColor="#8E99B3" />
+        </linearGradient>
+        <filter id="next3d-shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="4" stdDeviation="4" floodColor="#000000" floodOpacity="0.6" />
+        </filter>
       </defs>
+      <circle cx="50" cy="50" r="44" fill="url(#next3d-sphere)" stroke="url(#next3d-rim)" strokeWidth="2.5" filter="url(#next3d-shadow)" />
+      <ellipse cx="38" cy="24" rx="14" ry="6" fill="#FFFFFF" fillOpacity="0.25" transform="rotate(-20 38 24)" />
+      <path d="M32 28H40V72H32V28Z" fill="url(#next3d-vert)" filter="url(#next3d-shadow)" />
+      <path d="M74.2 70.8L38.4 28H32V32.4L69.8 74.8C71.4 73.6 72.8 72.2 74.2 70.8Z" fill="url(#next3d-diag)" />
+      <path d="M60 28H68V72H60V28Z" fill="url(#next3d-vert)" opacity="0.9" />
+    </svg>
+  );
+}
+
+function ThreeDReactIcon({ className = "w-11 h-11" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 100 100" fill="none">
+      <defs>
+        <radialGradient id="react3d-core" cx="35%" cy="30%" r="70%">
+          <stop offset="0%" stopColor="#E0FAFF" />
+          <stop offset="40%" stopColor="#00D8FF" />
+          <stop offset="100%" stopColor="#005B73" />
+        </radialGradient>
+        <linearGradient id="react3d-ring1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="50%" stopColor="#00D8FF" />
+          <stop offset="100%" stopColor="#004D66" />
+        </linearGradient>
+        <filter id="react3d-glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="2.5" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+      <circle cx="50" cy="50" r="38" fill="#00D8FF" fillOpacity="0.12" />
+      <g strokeWidth="3.2" strokeLinecap="round" filter="url(#react3d-glow)">
+        <ellipse cx="50" cy="50" rx="42" ry="16" stroke="url(#react3d-ring1)" />
+        <ellipse cx="50" cy="50" rx="42" ry="16" stroke="url(#react3d-ring1)" transform="rotate(60 50 50)" />
+        <ellipse cx="50" cy="50" rx="42" ry="16" stroke="url(#react3d-ring1)" transform="rotate(120 50 50)" />
+      </g>
+      <circle cx="50" cy="50" r="9.5" fill="url(#react3d-core)" filter="url(#react3d-glow)" />
+      <circle cx="47" cy="47" r="2.8" fill="#FFFFFF" fillOpacity="0.85" />
+    </svg>
+  );
+}
+
+function ThreeDTailwindIcon({ className = "w-11 h-11" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 100 100" fill="none">
+      <defs>
+        <linearGradient id="tw3d-wave1" x1="15" y1="20" x2="85" y2="55" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#7DD3FC" />
+          <stop offset="50%" stopColor="#38BDF8" />
+          <stop offset="100%" stopColor="#0284C7" />
+        </linearGradient>
+        <linearGradient id="tw3d-wave2" x1="15" y1="50" x2="85" y2="85" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#38BDF8" />
+          <stop offset="50%" stopColor="#0EA5E9" />
+          <stop offset="100%" stopColor="#0369A1" />
+        </linearGradient>
+        <filter id="tw3d-shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="4" stdDeviation="4" floodColor="#0284C7" floodOpacity="0.45" />
+        </filter>
+      </defs>
+      <path
+        d="M32 34C38 23 48 20 58 24C60 25 62 27 64 29C68 33 71 36 78 36C87 36 91 30 93 25C91 36 84 43 74 43C68 43 65 39 61 35C57 31 53 28 47 28C38 28 34 35 32 34Z"
+        fill="url(#tw3d-wave1)"
+        filter="url(#tw3d-shadow)"
+      />
+      <path
+        d="M36 30C42 22 50 21 58 24C62 26 64 29 67 32"
+        stroke="#FFFFFF"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeOpacity="0.7"
+      />
+      <path
+        d="M17 56C23 45 33 42 43 46C45 47 47 49 49 51C53 55 56 58 63 58C72 58 76 52 78 47C76 58 69 65 59 65C53 65 50 61 46 57C42 53 38 50 32 50C23 50 19 57 17 56Z"
+        fill="url(#tw3d-wave2)"
+        filter="url(#tw3d-shadow)"
+      />
+      <path
+        d="M21 52C27 44 35 43 43 46C47 48 49 51 52 54"
+        stroke="#FFFFFF"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeOpacity="0.7"
+      />
+    </svg>
+  );
+}
+
+function ThreeDShopifyIcon({ className = "w-11 h-11" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 100 100" fill="none">
+      <defs>
+        <linearGradient id="shop3d-bag" x1="20" y1="25" x2="80" y2="90" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#A3E635" />
+          <stop offset="40%" stopColor="#95BF47" />
+          <stop offset="100%" stopColor="#5E8E3E" />
+        </linearGradient>
+        <linearGradient id="shop3d-shadow" x1="50" y1="30" x2="50" y2="90" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#4D7C28" stopOpacity="0" />
+          <stop offset="100%" stopColor="#1E3A0F" stopOpacity="0.6" />
+        </linearGradient>
+        <linearGradient id="shop3d-handle" x1="40" y1="10" x2="60" y2="35" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#FDE047" />
+          <stop offset="100%" stopColor="#CA8A04" />
+        </linearGradient>
+        <filter id="shop3d-drop" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="5" stdDeviation="5" floodColor="#3F6212" floodOpacity="0.4" />
+        </filter>
+      </defs>
+      <path
+        d="M38 32V22C38 15.37 43.37 10 50 10C56.63 10 62 15.37 62 22V32"
+        stroke="url(#shop3d-handle)"
+        strokeWidth="3.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M26 30L34 26L74 24L78 30L84 82C84 85.3 81.3 88 78 88H26C22.7 88 20 85.3 20 82L26 30Z"
+        fill="url(#shop3d-bag)"
+        filter="url(#shop3d-drop)"
+      />
+      <path
+        d="M26 30L34 26L74 24L78 30L84 82C84 85.3 81.3 88 78 88H26C22.7 88 20 85.3 20 82L26 30Z"
+        fill="url(#shop3d-shadow)"
+      />
+      <path d="M34 26L52 33L74 24" stroke="#FFFFFF" strokeWidth="1.5" strokeOpacity="0.6" />
+      <path
+        d="M57 46C56 44 54 43 51 43C47 43 45 45 45 48C45 52 55 53 55 60C55 65 50 67 46 67C41 67 38 64 37 60L41 58C42 61 44 63 47 63C49 63 51 62 51 59C51 54 41 54 41 47C41 43 45 39 51 39C55 39 58 41 59 44L57 46Z"
+        fill="#FFFFFF"
+      />
+    </svg>
+  );
+}
+
+function ThreeDWordPressIcon({ className = "w-11 h-11" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 100 100" fill="none">
+      <defs>
+        <radialGradient id="wp3d-sphere" cx="35%" cy="30%" r="70%">
+          <stop offset="0%" stopColor="#4FA6D1" />
+          <stop offset="45%" stopColor="#21759B" />
+          <stop offset="100%" stopColor="#0B374C" />
+        </radialGradient>
+        <linearGradient id="wp3d-rim" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#BAE6FD" />
+          <stop offset="100%" stopColor="#075985" />
+        </linearGradient>
+        <filter id="wp3d-shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="5" stdDeviation="5" floodColor="#082F49" floodOpacity="0.4" />
+        </filter>
+      </defs>
+      <circle cx="50" cy="50" r="42" fill="url(#wp3d-sphere)" stroke="url(#wp3d-rim)" strokeWidth="2.5" filter="url(#wp3d-shadow)" />
+      <path d="M26 34C32 24 44 20 58 22" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.55" />
+      <path
+        d="M22 50C22 61 28 70 37 75L27 47C24 47 22 48 22 50ZM69 49C69 44 67 40 64 40C60 40 57 44 57 47C57 49 58 52 59 55L68 76C74 70 78 61 78 50C78 49 78 49 78 48C72 49 69 49 69 49ZM50 20C38 20 27 28 22 39C24 39 27 39 30 39C34 39 39 38 39 38C41 38 41 40 39 40C39 40 37 41 35 41L45 71L51 53L47 41C45 41 43 40 43 40C41 40 41 38 43 38C43 38 48 39 52 39C56 39 61 38 61 38C63 38 63 40 61 40C61 40 59 41 57 41L67 71L75 46C76 43 76 41 74 41C72 41 70 40 70 40C68 40 68 38 70 38C70 38 75 39 78 39C72 28 62 20 50 20Z"
+        fill="#FFFFFF"
+      />
+    </svg>
+  );
+}
+
+function ThreeDSupabaseIcon({ className = "w-11 h-11" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 100 100" fill="none">
+      <defs>
+        <linearGradient id="supa3d-facet1" x1="20" y1="10" x2="70" y2="90" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#6EE7B7" />
+          <stop offset="50%" stopColor="#3ECF8E" />
+          <stop offset="100%" stopColor="#059669" />
+        </linearGradient>
+        <linearGradient id="supa3d-facet2" x1="40" y1="30" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#10B981" />
+          <stop offset="100%" stopColor="#064E3B" />
+        </linearGradient>
+        <filter id="supa3d-shadow" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="5" stdDeviation="5" floodColor="#065F46" floodOpacity="0.45" />
+          <feGaussianBlur stdDeviation="2" result="glow" />
+          <feComposite in="SourceGraphic" in2="glow" operator="over" />
+        </filter>
+      </defs>
+      <g filter="url(#supa3d-shadow)">
+        <path d="M52 12L20 54H48L42 88L76 46H48L52 12Z" fill="url(#supa3d-facet1)" />
+        <path d="M52 12L48 46H76L42 88L45 54H20L52 12Z" fill="url(#supa3d-facet2)" opacity="0.55" />
+        <path d="M52 12L48 46L42 88" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.8" />
+      </g>
     </svg>
   );
 }
@@ -114,13 +241,18 @@ interface PlatformItem {
   id: string;
   name: string;
   category: "all" | "frameworks" | "cms";
-  icon: React.ReactNode;
+  icon3d: React.ReactNode;
   badge: string;
   subtitle: string;
   businessBenefit: string;
   pills: string[];
   slaMetric: string;
   slaLabel: string;
+  cardGradient: string;
+  borderColor: string;
+  glowColor: string;
+  accentText: string;
+  metricBadgeColor: string;
 }
 
 const PLATFORMS: PlatformItem[] = [
@@ -128,7 +260,7 @@ const PLATFORMS: PlatformItem[] = [
     id: "nextjs",
     name: "Next.js 16",
     category: "frameworks",
-    icon: <NextJsIcon />,
+    icon3d: <ThreeDNextJsIcon />,
     badge: "100/100 Core Web Vitals",
     subtitle: "Edge Speed & Global SEO",
     businessBenefit:
@@ -136,12 +268,17 @@ const PLATFORMS: PlatformItem[] = [
     pills: ["< 0.58s Initial Paint", "Edge Server Components", "Automated SEO Schema"],
     slaMetric: "0.58s",
     slaLabel: "LCP Speed Benchmark",
+    cardGradient: "bg-gradient-to-br from-[#0c1326] via-[#121c38] to-[#070b16]",
+    borderColor: "border-[#FFB020]/40 hover:border-[#FFB020]",
+    glowColor: "shadow-[0_16px_36px_rgba(255,176,32,0.22)]",
+    accentText: "text-[#FFB020]",
+    metricBadgeColor: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
   },
   {
     id: "react",
     name: "React 19",
     category: "frameworks",
-    icon: <ReactIcon />,
+    icon3d: <ThreeDReactIcon />,
     badge: "60 FPS Fluid UI",
     subtitle: "Concurrent Dynamic Interfaces",
     businessBenefit:
@@ -149,12 +286,17 @@ const PLATFORMS: PlatformItem[] = [
     pills: ["Zero Page Freezes", "Interactive Lead Funnels", "Instant Optimistic UI"],
     slaMetric: "60 FPS",
     slaLabel: "Hardware Render SLA",
+    cardGradient: "bg-gradient-to-br from-[#051e33] via-[#092e4c] to-[#031422]",
+    borderColor: "border-[#00D8FF]/40 hover:border-[#00D8FF]",
+    glowColor: "shadow-[0_16px_36px_rgba(0,216,255,0.25)]",
+    accentText: "text-[#00D8FF]",
+    metricBadgeColor: "bg-cyan-500/15 text-[#00D8FF] border-cyan-500/30",
   },
   {
     id: "tailwind",
     name: "Tailwind CSS",
     category: "frameworks",
-    icon: <TailwindIcon />,
+    icon3d: <ThreeDTailwindIcon />,
     badge: "Zero-Bloat Styling",
     subtitle: "Pixel-Perfect Design Fidelity",
     businessBenefit:
@@ -162,12 +304,17 @@ const PLATFORMS: PlatformItem[] = [
     pills: ["< 15KB Tiny Bundle", "100% Mobile Responsive", "Zero Styling Bloat"],
     slaMetric: "0.45s",
     slaLabel: "Browser Paint Time",
+    cardGradient: "bg-gradient-to-br from-[#082942] via-[#0d3c61] to-[#051929]",
+    borderColor: "border-[#38BDF8]/40 hover:border-[#38BDF8]",
+    glowColor: "shadow-[0_16px_36px_rgba(56,189,248,0.25)]",
+    accentText: "text-[#38BDF8]",
+    metricBadgeColor: "bg-sky-500/15 text-[#38BDF8] border-sky-500/30",
   },
   {
     id: "shopify",
     name: "Shopify Plus",
     category: "cms",
-    icon: <ShopifyIcon />,
+    icon3d: <ThreeDShopifyIcon />,
     badge: "Headless Commerce",
     subtitle: "High-AOV Digital Storefronts",
     businessBenefit:
@@ -175,12 +322,17 @@ const PLATFORMS: PlatformItem[] = [
     pills: ["1-Tap Shop Pay", "Instant Slide-Out Cart", "Automated ERP Webhooks"],
     slaMetric: "4.6%",
     slaLabel: "Avg. Checkout Conversion",
+    cardGradient: "bg-gradient-to-br from-[#0a2c1d] via-[#10472e] to-[#051a11]",
+    borderColor: "border-[#10B981]/40 hover:border-[#10B981]",
+    glowColor: "shadow-[0_16px_36px_rgba(16,185,129,0.25)]",
+    accentText: "text-emerald-400",
+    metricBadgeColor: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
   },
   {
     id: "wordpress",
     name: "WordPress CMS",
     category: "cms",
-    icon: <WordPressIcon />,
+    icon3d: <ThreeDWordPressIcon />,
     badge: "Client-Editable Hub",
     subtitle: "Bespoke Gutenberg Theme Engine",
     businessBenefit:
@@ -188,12 +340,17 @@ const PLATFORMS: PlatformItem[] = [
     pills: ["Zero Page-Builder Bloat", "Visual Drag-and-Drop", "100% Client Code Ownership"],
     slaMetric: "0.85s",
     slaLabel: "Sub-Second Initial Paint",
+    cardGradient: "bg-gradient-to-br from-[#0c2344] via-[#143663] to-[#07162b]",
+    borderColor: "border-[#38BDF8]/40 hover:border-[#38BDF8]",
+    glowColor: "shadow-[0_16px_36px_rgba(33,117,155,0.28)]",
+    accentText: "text-sky-300",
+    metricBadgeColor: "bg-blue-500/15 text-sky-300 border-blue-500/30",
   },
   {
     id: "supabase",
     name: "Supabase & Cloud APIs",
     category: "frameworks",
-    icon: <SupabaseIcon />,
+    icon3d: <ThreeDSupabaseIcon />,
     badge: "Realtime Cloud",
     subtitle: "Scalable Data & API Webhooks",
     businessBenefit:
@@ -201,99 +358,114 @@ const PLATFORMS: PlatformItem[] = [
     pills: ["Bank-Grade Security", "Instant API Webhooks", "Zero-Wait Query Sync"],
     slaMetric: "99.99%",
     slaLabel: "High-Availability Uptime",
+    cardGradient: "bg-gradient-to-br from-[#062b20] via-[#0e4533] to-[#041a13]",
+    borderColor: "border-[#3ECF8E]/40 hover:border-[#3ECF8E]",
+    glowColor: "shadow-[0_16px_36px_rgba(62,207,142,0.28)]",
+    accentText: "text-[#3ECF8E]",
+    metricBadgeColor: "bg-emerald-500/15 text-[#3ECF8E] border-emerald-500/30",
   },
 ];
 
-const BOUNCE_CARDS_DATA: BounceCardItem[] = PLATFORMS.map((platform) => ({
-  title: platform.name,
-  alt: platform.name,
-  content: (
-    <div className="w-full h-full p-4 sm:p-5 flex flex-col justify-between bg-gradient-to-br from-[#060B22] to-[#081232] text-white rounded-[22px] relative overflow-hidden group select-none cursor-pointer">
-      {/* Top ambient glow */}
-      <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#FFB020]/15 rounded-full blur-xl pointer-events-none" />
-
-      {/* Top Header: Official Brand Logo & SLA Pill */}
-      <div className="flex items-center justify-between z-10">
-        <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center p-2 shadow-inner">
-          {platform.icon}
-        </div>
-        <span className="text-[9.5px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-          {platform.slaMetric}
-        </span>
-      </div>
-
-      {/* Center: Name & Subtitle */}
-      <div className="z-10 my-auto text-left">
-        <div className="font-display font-black text-base sm:text-lg text-white tracking-tight leading-tight">
-          {platform.name}
-        </div>
-        <div className="text-[10.5px] font-semibold text-[#FFB020] mt-0.5 truncate">
-          {platform.subtitle}
-        </div>
-      </div>
-
-      {/* Bottom: Badge */}
-      <div className="z-10 pt-2 border-t border-white/10 flex items-center justify-between text-[9.5px] font-mono text-slate-300">
-        <span className="truncate">{platform.badge}</span>
-        <ArrowRight className="w-3 h-3 text-[#FFB020] shrink-0" />
-      </div>
-    </div>
-  ),
-}));
-
 export function WebDesignTechStack() {
-  const [activeFilter, setActiveFilter] = useState<"all" | "frameworks" | "cms">("all");
   const [selectedPlatformId, setSelectedPlatformId] = useState<string>("nextjs");
-
-  const filteredPlatforms =
-    activeFilter === "all"
-      ? PLATFORMS
-      : PLATFORMS.filter((p) => p.category === activeFilter);
 
   const activePlatform =
     PLATFORMS.find((p) => p.id === selectedPlatformId) || PLATFORMS[0];
 
+  // Prepare custom 3D Bounce / Shuffle Cards with rich tactile styling
+  const SHUFFLE_CARDS: BounceCardItem[] = PLATFORMS.map((platform) => {
+    const isSelected = platform.id === selectedPlatformId;
+
+    return {
+      title: platform.name,
+      alt: platform.name,
+      content: (
+        <div
+          className={cn(
+            "w-full h-full p-4 sm:p-5 flex flex-col justify-between text-white rounded-[24px] border relative overflow-hidden select-none cursor-pointer transition-all duration-300",
+            platform.cardGradient,
+            platform.borderColor,
+            platform.glowColor
+          )}
+        >
+          {/* Subtle ambient light flare */}
+          <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none" />
+
+          {/* Top Row: 3D Official Stack Icon & SLA Metric Pill */}
+          <div className="flex items-center justify-between z-10">
+            <div className="p-1 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm shadow-inner flex items-center justify-center">
+              {platform.icon3d}
+            </div>
+            <span
+              className={cn(
+                "text-[10px] font-mono font-black px-2.5 py-1 rounded-full border shadow-xs",
+                platform.metricBadgeColor
+              )}
+            >
+              {platform.slaMetric}
+            </span>
+          </div>
+
+          {/* Center: Title & Subtitle */}
+          <div className="z-10 my-auto text-left pt-1">
+            <div className="font-display font-black text-lg sm:text-xl text-white tracking-tight leading-tight">
+              {platform.name}
+            </div>
+            <div
+              className={cn(
+                "text-xs font-semibold mt-0.5 truncate",
+                platform.accentText
+              )}
+            >
+              {platform.subtitle}
+            </div>
+          </div>
+
+          {/* Bottom: Core Architectural Badge */}
+          <div className="z-10 pt-2 border-t border-white/10 flex items-center justify-between text-[10.5px] font-mono text-slate-200">
+            <span className="truncate">{platform.badge}</span>
+            <ArrowRight className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
+          </div>
+        </div>
+      ),
+    };
+  });
+
   return (
     <div className="w-full max-w-7xl mx-auto space-y-6 sm:space-y-8 select-none text-left">
       {/* ==================================================================== */}
-      {/* 1. INTERACTIVE BOUNCE CARDS ARCHITECTURE STAGE (PHYSICS FAN)         */}
+      {/* 1. SEAMLESS UNBOXED SHUFFLE CARDS (ZERO SURROUNDING CARD, ZERO BOX)  */}
       {/* ==================================================================== */}
-      <div className="rounded-3xl bg-gradient-to-b from-[#060B22] to-[#081232] border border-[#FFB020]/25 shadow-2xl p-4 sm:p-6 lg:p-8 relative overflow-hidden text-center">
-        {/* Background ambient dot grid pattern */}
-        <div
-          className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"
-          aria-hidden="true"
-        />
-
-        {/* Header bar: Stage Telemetry */}
-        <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-white/10 text-xs text-slate-300">
+      <div className="w-full text-center relative py-2">
+        {/* Minimalist Stage Header Line */}
+        <div className="flex items-center justify-between max-w-2xl mx-auto px-4 pb-3 mb-2 text-xs text-slate-500 font-mono border-b border-[#E2DBD0]">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-mono text-[11px] uppercase tracking-wider text-[#FFB020] font-bold">
-              Interactive Physics Architecture Fan
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="font-bold text-[#0B1B3A] uppercase tracking-wider text-[11px]">
+              Interactive Architecture Shuffle Fan
             </span>
           </div>
-          <div className="font-mono text-[10.5px] text-slate-400">
-            Hover or Click Cards to Inspect Stack Dynamics
-          </div>
+          <span className="text-slate-400 text-[10.5px]">
+            Hover or Click Any Card to Inspect
+          </span>
         </div>
 
-        {/* The BounceCards Viewport */}
-        <div className="relative z-10 w-full h-[290px] sm:h-[330px] flex items-center justify-center overflow-visible py-2">
+        {/* Floating Shuffle Cards Viewport */}
+        <div className="w-full h-[320px] sm:h-[350px] flex items-center justify-center overflow-visible py-2">
           <BounceCards
-            images={BOUNCE_CARDS_DATA}
+            images={SHUFFLE_CARDS}
             containerWidth="100%"
-            containerHeight={290}
-            cardSize={185}
-            spread={100}
-            rotation={7}
-            arc={22}
+            containerHeight={320}
+            cardSize={215}
+            spread={110}
+            rotation={8}
+            arc={26}
             bounciness={0.65}
-            pushDistance={145}
-            hoverScale={1.1}
-            borderWidth={2}
-            borderColor="rgba(255, 176, 32, 0.4)"
-            radius={22}
+            pushDistance={165}
+            hoverScale={1.12}
+            borderWidth={0}
+            borderColor="transparent"
+            radius={24}
             onCardClick={(index) => {
               const selected = PLATFORMS[index];
               if (selected) {
@@ -303,188 +475,69 @@ export function WebDesignTechStack() {
           />
         </div>
 
-        {/* Live Active Platform Indicator */}
-        <div className="relative z-10 pt-2 text-center text-xs text-slate-400 font-mono">
-          <span>Inspected Framework: </span>
-          <span className="text-white font-bold">{activePlatform.name}</span>
+        {/* Active Inspection Indicator */}
+        <div className="pt-2 text-center text-xs text-slate-500 font-mono">
+          <span>Active Selection: </span>
+          <span className="font-bold text-[#0B1B3A]">{activePlatform.name}</span>
           <span className="text-[#FFB020] mx-2">•</span>
-          <span className="text-emerald-400">{activePlatform.badge}</span>
+          <span className="text-emerald-600 font-bold">{activePlatform.badge}</span>
         </div>
       </div>
 
       {/* ==================================================================== */}
-      {/* 2. FILTER TABS: Clean, Minimalist, User-Friendly                     */}
+      {/* 2. UNBOXED ACTIVE FRAMEWORK SPOTLIGHT & TECH CONSULTATION CTA        */}
+      {/* (NO REDUNDANT 6-CARD GRID, NO TABS, JUST CLEAN DIRECT VALUE)         */}
       {/* ==================================================================== */}
-      <div className="flex flex-wrap items-center justify-center gap-2">
-        <button
-          type="button"
-          onClick={() => setActiveFilter("all")}
-          className={cn(
-            "px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer",
-            activeFilter === "all"
-              ? "bg-[#060B22] text-[#FFB020] border border-[#FFB020]/40 shadow-sm"
-              : "bg-white text-slate-600 border border-[#E2DBD0] hover:border-slate-400 hover:text-[#0B1B3A]"
-          )}
-        >
-          All Technologies (6)
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveFilter("frameworks")}
-          className={cn(
-            "px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer",
-            activeFilter === "frameworks"
-              ? "bg-[#060B22] text-[#FFB020] border border-[#FFB020]/40 shadow-sm"
-              : "bg-white text-slate-600 border border-[#E2DBD0] hover:border-slate-400 hover:text-[#0B1B3A]"
-          )}
-        >
-          Modern Edge Frameworks (4)
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveFilter("cms")}
-          className={cn(
-            "px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer",
-            activeFilter === "cms"
-              ? "bg-[#060B22] text-[#FFB020] border border-[#FFB020]/40 shadow-sm"
-              : "bg-white text-slate-600 border border-[#E2DBD0] hover:border-slate-400 hover:text-[#0B1B3A]"
-          )}
-        >
-          CMS &amp; E-Commerce Platforms (2)
-        </button>
-      </div>
-
-      {/* ==================================================================== */}
-      {/* 3. THE 6 PLATFORMS GRID: Clean, Visual, Balanced, Attractive Cards   */}
-      {/* ==================================================================== */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
-        {filteredPlatforms.map((platform) => {
-          const isSelected = platform.id === selectedPlatformId;
-
-          return (
-            <div
-              key={platform.id}
-              onClick={() => setSelectedPlatformId(platform.id)}
-              className={cn(
-                "rounded-3xl p-6 sm:p-7 bg-white border transition-all duration-300 group relative overflow-hidden flex flex-col justify-between cursor-pointer",
-                isSelected
-                  ? "border-[#FFB020] ring-2 ring-[#FFB020]/30 shadow-xl shadow-[#FFB020]/10 -translate-y-0.5"
-                  : "border-[#E2DBD0] hover:border-[#FFB020] hover:shadow-xl"
-              )}
-            >
-              {/* Top Amber Accent Line */}
-              <div
-                className={cn(
-                  "absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#FFB020] to-transparent transition-opacity duration-300",
-                  isSelected ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-                )}
-              />
-
-              <div className="space-y-4">
-                {/* Header: Official Brand Logo & Live SLA Badge */}
-                <div className="flex items-center justify-between gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#E2DBD0] flex items-center justify-center p-2 group-hover:scale-105 group-hover:border-[#FFB020]/50 transition-all duration-300 shadow-2xs">
-                    {platform.icon}
-                  </div>
-
-                  <span className="text-[10.5px] font-mono font-bold px-3 py-1 rounded-full bg-[#FAF8F5] text-[#0B1B3A] border border-[#E2DBD0] group-hover:border-[#FFB020]/40 group-hover:text-[#B87A00] transition-colors flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span>{platform.badge}</span>
-                  </span>
-                </div>
-
-                {/* Title & Subtitle */}
-                <div>
-                  <h3 className="font-display font-black text-xl text-[#0B1B3A] tracking-tight group-hover:text-[#B87A00] transition-colors">
-                    {platform.name}
-                  </h3>
-                  <div className="text-xs font-semibold text-slate-500 mt-0.5">
-                    {platform.subtitle}
-                  </div>
-                </div>
-
-                {/* Clear, Concise Business Value (Zero Developer Jargon) */}
-                <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal">
-                  {platform.businessBenefit}
-                </p>
-
-                {/* 3 Quick Value Pills */}
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {platform.pills.map((pill, idx) => (
-                    <span
-                      key={idx}
-                      className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-[#E2DBD0] text-[11px] font-semibold text-slate-700"
-                    >
-                      {pill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Bottom Row: SLA Benchmark & Direct Scope Link */}
-              <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs">
-                <div>
-                  <div className="font-display font-black text-base text-[#0B1B3A]">
-                    {platform.slaMetric}
-                  </div>
-                  <div className="text-[10px] font-mono text-slate-400">
-                    {platform.slaLabel}
-                  </div>
-                </div>
-
-                <StarBorder
-                  as={Link}
-                  href="/get-a-quote"
-                  className="py-2 px-3.5 rounded-xl text-[11px] font-black uppercase tracking-wider inline-flex items-center gap-1.5 shadow-2xs group/btn"
-                  radius={10}
-                  color="#FFF8E7"
-                  trailColor="#FFB020"
-                  backgroundColor="#FFB020"
-                  textColor="#060B22"
-                  borderColor="rgba(255, 176, 32, 0.6)"
-                  sparkle={true}
-                  glow={0.7}
-                >
-                  <span>Hire Devs</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
-                </StarBorder>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* ==================================================================== */}
-      {/* 4. ENTERPRISE ENGINEERING GUARANTEE STRIP (CLEAN 1-ROW SUMMARY)      */}
-      {/* ==================================================================== */}
-      <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E2DBD0] shadow-sm flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-700">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-[#060B22] text-[#FFB020] flex items-center justify-center shrink-0">
-            <ShieldCheck className="w-4 h-4 text-[#FFB020]" />
+      <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#E2DBD0] shadow-sm flex flex-col lg:flex-row items-center justify-between gap-6 text-left">
+        {/* Left: Active Stack Value Proposition */}
+        <div className="space-y-2.5 max-w-3xl">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-xs font-mono font-black uppercase tracking-wider text-[#060B22] bg-[#FFB020] px-3 py-1 rounded-full shadow-xs">
+              {activePlatform.name} Architecture
+            </span>
+            <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+              Benchmark SLA: {activePlatform.slaMetric}
+            </span>
+            <span className="text-xs font-mono text-slate-400">
+              {activePlatform.slaLabel}
+            </span>
           </div>
-          <span className="font-semibold text-slate-800">
-            100% Client-Owned Source Code • Zero Proprietary Lock-In • Timezone-Aligned Senior Developers (US, UK, CA, AU)
-          </span>
+
+          <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
+            {activePlatform.businessBenefit}
+          </p>
+
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            {activePlatform.pills.map((pill, idx) => (
+              <span
+                key={idx}
+                className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-[#E2DBD0] text-xs font-semibold text-slate-700"
+              >
+                {pill}
+              </span>
+            ))}
+          </div>
         </div>
 
-        <StarBorder
-          as={Link}
-          href="/get-a-quote"
-          className="py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shrink-0 whitespace-nowrap"
-          radius={10}
-          color="#FFB020"
-          trailColor="#38BDF8"
-          backgroundColor="#060B22"
-          textColor="#FFFFFF"
-          borderColor="rgba(255, 176, 32, 0.4)"
-          sparkle={true}
-          glow={0.7}
-        >
-          <span>Schedule Tech Alignment Call</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </StarBorder>
+        {/* Right: Direct CTA to Hire Devs / Alignment Session */}
+        <div className="shrink-0 w-full lg:w-auto pt-2 lg:pt-0">
+          <StarBorder
+            as={Link}
+            href="/get-a-quote"
+            className="w-full lg:w-auto py-3.5 px-6 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg cursor-pointer text-center group whitespace-nowrap"
+            radius={12}
+            color="#FFB020"
+            trailColor="#38BDF8"
+            backgroundColor="#060B22"
+            textColor="#FFFFFF"
+            borderColor="rgba(255, 176, 32, 0.4)"
+            sparkle={true}
+            glow={0.8}
+          >
+            <span>Hire Senior {activePlatform.name} Devs</span>
+            <ArrowRight className="w-4 h-4 text-[#FFB020] group-hover:translate-x-1 transition-transform" />
+          </StarBorder>
+        </div>
       </div>
     </div>
   );
