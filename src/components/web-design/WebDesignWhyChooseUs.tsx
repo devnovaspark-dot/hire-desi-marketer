@@ -16,40 +16,6 @@ import {
 import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
 
-// Classical Pythagorean Harmonic Chimes for the 4 Pillars
-function playPillarChime(freq: number) {
-  if (typeof window === "undefined") return;
-  try {
-    const AudioContextClass =
-      window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-    if (!AudioContextClass) return;
-
-    const ctx = new AudioContextClass();
-    if (ctx.state === "suspended") {
-      ctx.resume().catch(() => {});
-    }
-
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-
-    osc.type = "sine";
-    const now = ctx.currentTime;
-    osc.frequency.setValueAtTime(freq, now);
-    osc.frequency.exponentialRampToValueAtTime(freq * 1.5, now + 0.1);
-
-    gain.gain.setValueAtTime(0.08, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
-
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-
-    osc.start(now);
-    osc.stop(now + 0.18);
-  } catch {
-    // Graceful fallback
-  }
-}
-
 /* ========================================================================== */
 /* REAL CLASSICAL MARBLE ARCHITECTURAL PILLAR SVG (PROPORTIONAL DORIC COLUMN) */
 /* Single-Window Viewport Calibrated: Capital + Shaft + Base + Ground Shadow  */
@@ -302,7 +268,6 @@ interface ArchitecturalPillar {
   badge: string;
   icon: React.ReactNode;
   themeGradient: string;
-  freq: number;
   specs: {
     label: string;
     value: string;
@@ -322,7 +287,6 @@ const PILLARS: ArchitecturalPillar[] = [
     badge: "Principal Staff",
     icon: <Users className="w-5 h-5 text-[#FFB020]" />,
     themeGradient: "from-[#060B22] via-[#0B1B3A] to-[#1E3A70]",
-    freq: 432,
     specs: [
       { label: "Squad Level", value: "Principal & Staff Only" },
       { label: "Middlemen", value: "Zero Account Reps" },
@@ -341,7 +305,6 @@ const PILLARS: ArchitecturalPillar[] = [
     badge: "100/100 Vitals",
     icon: <Zap className="w-5 h-5 text-[#FFB020]" />,
     themeGradient: "from-[#060B22] via-[#0A2540] to-[#0284C7]",
-    freq: 486,
     specs: [
       { label: "LCP Benchmark", value: "< 0.58s Initial Paint" },
       { label: "PageSpeed Score", value: "100 / 100 Grade A+" },
@@ -360,7 +323,6 @@ const PILLARS: ArchitecturalPillar[] = [
     badge: "Zero Lock-In",
     icon: <Lock className="w-5 h-5 text-[#FFB020]" />,
     themeGradient: "from-[#060B22] via-[#102A18] to-[#16A34A]",
-    freq: 540,
     specs: [
       { label: "Repository", value: "Private Client GitHub" },
       { label: "Legal Protection", value: "Bilateral NDA Deed" },
@@ -379,7 +341,6 @@ const PILLARS: ArchitecturalPillar[] = [
     badge: "Zero Dark Periods",
     icon: <Clock className="w-5 h-5 text-[#FFB020]" />,
     themeGradient: "from-[#060B22] via-[#2A1800] to-[#D97706]",
-    freq: 576,
     specs: [
       { label: "Demo Rhythm", value: "Daily Loom Walkthroughs" },
       { label: "Staging Access", value: "Live Passworded URL" },
@@ -394,8 +355,6 @@ export function WebDesignWhyChooseUs() {
 
   const handlePillarSelect = (idx: number) => {
     setActiveIdx(idx);
-    const p = PILLARS[idx];
-    if (p) playPillarChime(p.freq);
   };
 
   return (
@@ -433,11 +392,6 @@ export function WebDesignWhyChooseUs() {
                 role="button"
                 tabIndex={0}
                 onClick={() => handlePillarSelect(idx)}
-                onMouseEnter={() => {
-                  if (idx !== activeIdx) {
-                    playPillarChime(pillar.freq);
-                  }
-                }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
