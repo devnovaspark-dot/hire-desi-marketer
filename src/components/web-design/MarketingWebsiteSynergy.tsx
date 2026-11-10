@@ -273,8 +273,8 @@ export function MarketingWebsiteSynergy() {
 
           <div className="text-[11px] font-mono text-slate-500">
             {mode === "hdm" ? (
-              <span className="text-emerald-700 font-bold flex items-center gap-1.5 justify-center">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-teal-700 font-bold flex items-center gap-1.5 justify-center">
+                <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
                 Simulating: Sub-second paint, zero layout shift, 1-tap conversion flow
               </span>
             ) : (
@@ -322,7 +322,7 @@ export function MarketingWebsiteSynergy() {
                   <span
                     className={cn(
                       "w-1.5 h-1.5 rounded-full ml-0.5",
-                      mode === "hdm" ? "bg-emerald-400 animate-pulse" : "bg-rose-400 animate-ping"
+                      mode === "hdm" ? "bg-teal-400 animate-pulse" : "bg-rose-400 animate-ping"
                     )}
                   />
                 )}
@@ -337,7 +337,7 @@ export function MarketingWebsiteSynergy() {
             className={cn(
               "w-1 h-full rounded-full transition-all duration-500",
               mode === "hdm"
-                ? "bg-gradient-to-b from-[#FFB020] to-emerald-400 shadow-[0_0_8px_rgba(255,176,32,0.8)]"
+                ? "bg-gradient-to-b from-[#FFB020] via-teal-400 to-teal-400 shadow-[0_0_8px_rgba(45,212,191,0.8)]"
                 : "bg-gradient-to-b from-rose-500 to-rose-700 shadow-[0_0_8px_rgba(244,63,94,0.8)] animate-pulse"
             )}
           />
@@ -364,7 +364,7 @@ export function MarketingWebsiteSynergy() {
           <div
             className={cn(
               "absolute -bottom-24 -left-24 w-96 h-96 rounded-full blur-[130px] pointer-events-none transition-all duration-700",
-              mode === "hdm" ? "bg-emerald-500/20" : "bg-red-800/25"
+              mode === "hdm" ? "bg-teal-500/25" : "bg-red-800/25"
             )}
           />
 
@@ -404,14 +404,14 @@ export function MarketingWebsiteSynergy() {
                 className={cn(
                   "px-3.5 py-1.5 rounded-full font-mono text-xs font-bold border inline-flex items-center gap-2 self-start sm:self-center transition-all",
                   mode === "hdm"
-                    ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-xs"
+                    ? "bg-teal-500/20 text-teal-300 border-teal-500/40 shadow-xs"
                     : "bg-rose-500/20 text-rose-300 border-rose-500/40 shadow-xs"
                 )}
               >
                 <span
                   className={cn(
                     "w-2 h-2 rounded-full",
-                    mode === "hdm" ? "bg-emerald-400 animate-pulse" : "bg-rose-400 animate-ping"
+                    mode === "hdm" ? "bg-teal-400 animate-pulse" : "bg-rose-400 animate-ping"
                   )}
                 />
                 <span>
@@ -451,7 +451,7 @@ export function MarketingWebsiteSynergy() {
                 <div
                   className={cn(
                     "font-display font-black text-2xl transition-colors",
-                    mode === "hdm" ? "text-emerald-400" : "text-rose-400"
+                    mode === "hdm" ? "text-teal-400" : "text-rose-400"
                   )}
                 >
                   {mode === "hdm"
@@ -501,7 +501,7 @@ export function MarketingWebsiteSynergy() {
                 <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
                   <span>ROAS / Capital Multiplier</span>
                   {mode === "hdm" ? (
-                    <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
+                    <TrendingUp className="w-3.5 h-3.5 text-teal-400" />
                   ) : (
                     <TrendingDown className="w-3.5 h-3.5 text-rose-400" />
                   )}
@@ -509,7 +509,7 @@ export function MarketingWebsiteSynergy() {
                 <div
                   className={cn(
                     "font-display font-black text-2xl transition-colors",
-                    mode === "hdm" ? "text-emerald-400" : "text-rose-400"
+                    mode === "hdm" ? "text-teal-400" : "text-rose-400"
                   )}
                 >
                   {mode === "hdm"
@@ -525,7 +525,7 @@ export function MarketingWebsiteSynergy() {
             {/* Bottom Direct Audit Action */}
             <div className="pt-5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-xs text-slate-300 text-left">
-                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                <ShieldCheck className="w-4 h-4 text-teal-400 shrink-0" />
                 <span>
                   Stop leaking marketing budget. Our lead architects will audit your website conversion funnel.
                 </span>
@@ -544,7 +544,7 @@ export function MarketingWebsiteSynergy() {
                 sparkle={true}
                 glow={0.8}
               >
-                <span>Audit Your Website Funnel</span>
+                <span>AUDIT YOUR WEBSITE FUNNEL</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </StarBorder>
             </div>
