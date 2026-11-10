@@ -5,443 +5,391 @@ import Link from "next/link";
 import {
   Sparkles,
   ArrowRight,
-  Target,
-  Search,
-  Share2,
-  MousePointerClick,
-  CheckCircle2,
-  XCircle,
-  Zap,
-  Activity,
-  Lock,
   TrendingUp,
   AlertTriangle,
+  Zap,
+  Target,
+  MousePointerClick,
+  Search,
+  Share2,
+  CheckCircle2,
+  XCircle,
+  Activity,
+  ShieldCheck,
   Flame,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface ChannelConfig {
+type EngineMode = "leaky" | "hdm";
+
+interface TrafficChannel {
   id: string;
   name: string;
   badge: string;
   icon: React.ReactNode;
-  accentColor: string;
-  bgGlow: string;
-  queryExample: string;
-  trafficVolume: string;
-  // Leaky website scenario
-  leakScenario: {
-    bounceRate: string;
+  leakyState: {
     friction: string;
-    wastedAdSpend: string;
+    speed: string;
+    bounce: string;
+    lossHeadline: string;
   };
-  // HDM Engineered scenario
-  hdmScenario: {
-    conversionMultiplier: string;
-    speedScore: string;
-    outcome: string;
+  hdmState: {
+    breakthrough: string;
+    speed: string;
+    conversion: string;
+    growthHeadline: string;
   };
 }
 
-const CHANNELS: ChannelConfig[] = [
+const CHANNELS: TrafficChannel[] = [
   {
     id: "google-ads",
     name: "Google Ads",
     badge: "Paid Search Intent",
-    icon: <Target className="w-4 h-4 text-[#FFB020]" />,
-    accentColor: "#FFB020",
-    bgGlow: "rgba(255,176,32,0.25)",
-    queryExample: '"hire web development agency india"',
-    trafficVolume: "High Commercial Intent",
-    leakScenario: {
-      bounceRate: "72% Bounce Rate",
-      friction: "Slow generic lander, mismatched headline, lost buyer in 3 seconds.",
-      wastedAdSpend: "High Cost-Per-Click Budget Burn",
+    icon: <Target className="w-4 h-4" />,
+    leakyState: {
+      friction: "Slow generic lander with mismatched headlines causes 72% bounce.",
+      speed: "3.6s Initial Paint",
+      bounce: "72% Bounce Rate",
+      lossHeadline: "Paying Top Dollar for Clicks That Bounce in 3 Seconds",
     },
-    hdmScenario: {
-      conversionMultiplier: "3.8x Lead Lift",
-      speedScore: "10/10 Quality Score",
-      outcome: "Exact keyword-to-headline match with sub-second initial paint.",
+    hdmState: {
+      breakthrough: "Exact keyword-to-headline alignment with sub-second page paint.",
+      speed: "0.58s Initial Paint",
+      conversion: "10/10 Quality Score",
+      growthHeadline: "Lowest Cost-Per-Click & 3.8x Higher Lead Capture",
     },
   },
   {
     id: "meta-ads",
-    name: "Meta Ads",
-    badge: "Paid Social & Instagram",
-    icon: <MousePointerClick className="w-4 h-4 text-[#38BDF8]" />,
-    accentColor: "#38BDF8",
-    bgGlow: "rgba(56,189,248,0.25)",
-    queryExample: "Instagram Feed Visual Impulse",
-    trafficVolume: "High Mobile Volume",
-    leakScenario: {
-      bounceRate: "81% Mobile Dropoff",
-      friction: "Mobile lag > 2.5s, iOS signal loss, clumsy checkout forms.",
-      wastedAdSpend: "Ad Algorithm Bids on Bounced Users",
+    name: "Meta & Instagram",
+    badge: "Social Mobile Feed",
+    icon: <MousePointerClick className="w-4 h-4" />,
+    leakyState: {
+      friction: "Mobile lag > 2.5s and clumsy multi-page forms lose 81% of feed shoppers.",
+      speed: "3.9s Mobile Load",
+      bounce: "81% Dropoff Rate",
+      lossHeadline: "Ad Algorithms Optimize for Bounced Clicks",
     },
-    hdmScenario: {
-      conversionMultiplier: "4.2x ROAS",
-      speedScore: "< 0.6s Mobile Paint",
-      outcome: "Thumb-first mobile flow with server-side CAPI telemetry & 1-tap checkout.",
+    hdmState: {
+      breakthrough: "Thumb-first mobile flow with server-side CAPI and 1-tap checkout.",
+      speed: "0.62s Mobile Paint",
+      conversion: "4.2x ROAS Lift",
+      growthHeadline: "Frictionless Mobile Checkout with Maximum Return on Ad Spend",
     },
   },
   {
     id: "seo",
     name: "Technical SEO",
-    badge: "Organic Search Engines",
-    icon: <Search className="w-4 h-4 text-[#34D399]" />,
-    accentColor: "#34D399",
-    bgGlow: "rgba(52,211,153,0.25)",
-    queryExample: "Top-3 Ranking Commercial Keywords",
-    trafficVolume: "Compounding Traffic",
-    leakScenario: {
-      bounceRate: "68% Pogo-Sticking",
-      friction: "Failing Core Web Vitals, layout shifts (CLS), users return to search results.",
-      wastedAdSpend: "Google Demotes Organic Keyword Rankings",
+    badge: "Organic Search",
+    icon: <Search className="w-4 h-4" />,
+    leakyState: {
+      friction: "Layout shifts (CLS) and failing Core Web Vitals get penalized by Google.",
+      speed: "Failing Vitals",
+      bounce: "65% Pogo-Sticking",
+      lossHeadline: "Google Demotes Rankings Due to Bad User Experience",
     },
-    hdmScenario: {
-      conversionMultiplier: "100/100 Vitals",
-      speedScore: "< 0.8s LCP Edge",
-      outcome: "Clean semantic HTML5, zero CLS, and automated Schema.org structured data.",
+    hdmState: {
+      breakthrough: "Clean semantic HTML5, zero CLS, and automated Schema structured data.",
+      speed: "100/100 Core Web Vitals",
+      conversion: "Top-3 Keyword Ranks",
+      growthHeadline: "Compounding Organic Rankings with Sub-Second Edge Delivery",
     },
   },
   {
-    id: "social",
-    name: "Social & Brand",
-    badge: "Executive Inbound Authority",
-    icon: <Share2 className="w-4 h-4 text-[#A78BFA]" />,
-    accentColor: "#A78BFA",
-    bgGlow: "rgba(167,139,250,0.25)",
-    queryExample: "Founder Podcast & LinkedIn Bio Links",
-    trafficVolume: "Warm Trust Traffic",
-    leakScenario: {
-      bounceRate: "75% Abandonment",
-      friction: "Bio links dropped on homepages with no clear conversion funnel or proof.",
-      wastedAdSpend: "Curious Prospects Never Turn Into Calls",
+    id: "social-brand",
+    name: "Brand & Direct",
+    badge: "Executive Authority",
+    icon: <Share2 className="w-4 h-4" />,
+    leakyState: {
+      friction: "Bio links dropped on cluttered homepages with no clear commercial next step.",
+      speed: "Confusing Navigation",
+      bounce: "58% Inactive Exits",
+      lossHeadline: "Executive Referrals Leave Without Booking Consultation",
     },
-    hdmScenario: {
-      conversionMultiplier: "2.9x Retainer Lift",
-      speedScore: "Executive Proof Hub",
-      outcome: "Dedicated campaign landers with verified metrics and 1-click consultation scheduling.",
+    hdmState: {
+      breakthrough: "Curated campaign landers with direct Calendar & Lead Funnel integration.",
+      speed: "Instant Interactive Flow",
+      conversion: "+48% Booked Calls",
+      growthHeadline: "Direct Conversion of High-Value Founder & Enterprise Inquiries",
     },
   },
 ];
 
 export function MarketingWebsiteSynergy() {
+  const [mode, setMode] = useState<EngineMode>("hdm");
   const [activeChannelId, setActiveChannelId] = useState<string>("google-ads");
-  const [mode, setMode] = useState<"engine" | "leak">("engine");
 
-  const active =
+  const activeChannel =
     CHANNELS.find((c) => c.id === activeChannelId) || CHANNELS[0];
 
   return (
     <section
       id="marketing-foundation"
-      className="py-12 sm:py-16 lg:py-20 bg-[#060B22] text-white border-y border-white/10 relative overflow-hidden text-left"
+      className="py-12 sm:py-16 lg:py-20 bg-[#FAF8F5] border-y border-[#E2DBD0] select-none scroll-mt-24"
     >
-      {/* Cinematic Ambient Glows */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#FFB020]/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8 sm:space-y-10">
-        {/* ================================================================ */}
-        {/* HEADER: Editorial Narrative with Mode Toggle                     */}
-        {/* ================================================================ */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-6">
-          <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
-              <span>Interactive Marketing Infographic</span>
-            </div>
-            <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-tight">
-              Traffic Drives Visitors.{" "}
-              <span className="text-[#FFB020]">Your Website Captures Revenue.</span>
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
-              Advertising without a high-converting website is pouring money into a leaky bucket. Click channels to see how HDM engineering multiplies your ROI.
-            </p>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10 text-center">
+        {/* ============================================================ */}
+        {/* 1. CENTERED SECTION HEADER (CLEAN & PUNCHY)                  */}
+        {/* ============================================================ */}
+        <div className="max-w-3xl mx-auto space-y-3 pb-6 border-b border-[#E2DBD0]">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
+            <span>03 · The Marketing + Website Relationship</span>
           </div>
 
-          {/* Interactive Simulation Switcher: Revenue Engine vs Leaky Bucket */}
-          <div className="flex items-center gap-1.5 p-1 bg-white/10 backdrop-blur-md rounded-2xl border border-white/15 shrink-0">
+          <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
+            A Great Advertising Campaign Cannot Fix a Leaky Website.
+          </h2>
+
+          <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+            Your ad spend is only as profitable as the website it sends visitors to. See the difference between a typical template and an engineered conversion engine.
+          </p>
+        </div>
+
+        {/* ============================================================ */}
+        {/* 2. DUAL-MODE INTERACTIVE TOGGLE SWITCH                       */}
+        {/* ============================================================ */}
+        <div className="flex flex-col items-center justify-center space-y-2">
+          <div className="p-1.5 bg-white rounded-2xl border border-[#E2DBD0] shadow-sm flex items-center gap-2 max-w-md w-full">
             <button
               type="button"
-              onClick={() => setMode("engine")}
+              onClick={() => setMode("leaky")}
               className={cn(
-                "px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer",
-                mode === "engine"
-                  ? "bg-gradient-to-r from-[#FFB020] to-[#E68A00] text-[#060B22] shadow-[0_0_20px_rgba(255,176,32,0.4)] font-black"
-                  : "text-slate-300 hover:text-white"
+                "flex-1 py-3 px-4 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 border",
+                mode === "leaky"
+                  ? "bg-rose-950 text-rose-300 border-rose-500/50 shadow-md scale-102 font-black"
+                  : "bg-transparent text-slate-600 border-transparent hover:text-slate-900 hover:bg-slate-50"
               )}
             >
-              <Zap className="w-3.5 h-3.5" />
-              <span>HDM Revenue Engine</span>
+              <AlertTriangle className="w-4 h-4 text-rose-400" />
+              <span>Typical Leaky Website</span>
             </button>
 
             <button
               type="button"
-              onClick={() => setMode("leak")}
+              onClick={() => setMode("hdm")}
               className={cn(
-                "px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer",
-                mode === "leak"
-                  ? "bg-rose-500 text-white shadow-[0_0_20px_rgba(244,63,94,0.4)] font-black"
-                  : "text-slate-300 hover:text-white"
+                "flex-1 py-3 px-4 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 border",
+                mode === "hdm"
+                  ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] shadow-md scale-102 font-black"
+                  : "bg-transparent text-slate-600 border-transparent hover:text-slate-900 hover:bg-slate-50"
               )}
             >
-              <AlertTriangle className="w-3.5 h-3.5" />
-              <span>Typical Leaky Website</span>
+              <Zap className="w-4 h-4 text-[#FFB020]" />
+              <span>HDM Revenue Engine</span>
             </button>
+          </div>
+
+          <div className="text-[11px] font-mono text-slate-500">
+            {mode === "hdm" ? (
+              <span className="text-emerald-700 font-bold flex items-center gap-1.5 justify-center">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                Simulating: Sub-second paint, zero layout shift, 1-tap conversion flow
+              </span>
+            ) : (
+              <span className="text-rose-700 font-bold flex items-center gap-1.5 justify-center">
+                <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+                Simulating: Slow legacy template, 70%+ bounce rate, wasted ad budget
+              </span>
+            )}
           </div>
         </div>
 
-        {/* ================================================================ */}
-        {/* INTERACTIVE INFOGRAPHIC TOPOLOGY CANVAS                          */}
-        {/* ================================================================ */}
-        <div className="rounded-3xl bg-gradient-to-b from-white/[0.07] to-white/[0.02] border border-white/15 backdrop-blur-xl p-5 sm:p-8 lg:p-10 shadow-2xl space-y-8 relative overflow-hidden">
-          {/* Channel Selector Ribbon */}
-          <div className="flex items-center justify-start lg:justify-center gap-2 overflow-x-auto pb-1 no-scrollbar">
-            {CHANNELS.map((channel) => {
-              const isSelected = channel.id === active.id;
+        {/* ============================================================ */}
+        {/* 3. CHANNEL SELECTOR STRIP                                    */}
+        {/* ============================================================ */}
+        <div className="flex items-center justify-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+          {CHANNELS.map((ch) => {
+            const isSelected = ch.id === activeChannelId;
+            return (
+              <button
+                key={ch.id}
+                type="button"
+                onClick={() => setActiveChannelId(ch.id)}
+                className={cn(
+                  "px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-2 border",
+                  isSelected
+                    ? mode === "hdm"
+                      ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] shadow-sm"
+                      : "bg-rose-950 text-rose-200 border-rose-500 shadow-sm"
+                    : "bg-white text-slate-600 border-[#E2DBD0] hover:border-slate-400"
+                )}
+              >
+                <span>{ch.icon}</span>
+                <span>{ch.name}</span>
+                <span className="text-[10px] font-mono opacity-70 hidden sm:inline">
+                  ({ch.badge})
+                </span>
+              </button>
+            );
+          })}
+        </div>
 
-              return (
-                <button
-                  key={channel.id}
-                  type="button"
-                  onClick={() => setActiveChannelId(channel.id)}
+        {/* ============================================================ */}
+        {/* 4. THE INTERACTIVE CONVERSION CHAMBER (ANIMATED DISPLAY)     */}
+        {/* ============================================================ */}
+        <div
+          className={cn(
+            "rounded-3xl border transition-all duration-700 p-6 sm:p-10 text-white relative overflow-hidden shadow-2xl text-left",
+            mode === "hdm"
+              ? "bg-gradient-to-br from-[#060B22] via-[#091638] to-[#060B22] border-[#FFB020]/40 shadow-[0_20px_60px_-15px_rgba(255,176,32,0.25)]"
+              : "bg-gradient-to-br from-[#1C0A0E] via-[#2A0E15] to-[#140609] border-rose-500/40 shadow-[0_20px_60px_-15px_rgba(239,68,68,0.2)]"
+          )}
+        >
+          {/* Ambient Chamber Glow */}
+          <div
+            className={cn(
+              "absolute -top-24 -right-24 w-96 h-96 rounded-full blur-[120px] pointer-events-none transition-all duration-700",
+              mode === "hdm" ? "bg-[#FFB020]/25" : "bg-rose-600/25"
+            )}
+          />
+          <div
+            className={cn(
+              "absolute -bottom-24 -left-24 w-96 h-96 rounded-full blur-[120px] pointer-events-none transition-all duration-700",
+              mode === "hdm" ? "bg-emerald-500/20" : "bg-red-800/20"
+            )}
+          />
+
+          <div className="relative z-10 space-y-8">
+            {/* Top State Status Bar */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-white/10">
+              <div className="flex items-center gap-3">
+                <div
                   className={cn(
-                    "px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer select-none inline-flex items-center gap-2 shrink-0 border",
-                    isSelected
-                      ? "bg-[#FFB020] text-[#060B22] border-[#FFB020] shadow-[0_0_25px_rgba(255,176,32,0.4)] scale-102 font-black"
-                      : "bg-white/5 text-slate-300 border-white/10 hover:border-white/30 hover:text-white"
+                    "w-10 h-10 rounded-2xl flex items-center justify-center font-black text-sm",
+                    mode === "hdm"
+                      ? "bg-[#FFB020] text-[#060B22]"
+                      : "bg-rose-500 text-white"
                   )}
                 >
-                  <span>{channel.icon}</span>
-                  <span>{channel.name}</span>
-                  {isSelected && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#060B22] animate-pulse shrink-0" />
-                  )}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* ============================================================== */}
-          {/* 3-NODE INFOGRAPHIC CIRCUIT (Inbound -> Central Engine -> Pipeline) */}
-          {/* ============================================================== */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center relative">
-            {/* 1. NODE 1: Inbound Traffic Emitter (4 cols) */}
-            <div className="lg:col-span-4 p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3 relative overflow-hidden text-left">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
-                  Step 01 · Inbound Source
-                </span>
-                <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
-              </div>
-
-              <div className="space-y-1">
-                <div className="font-display font-black text-xl text-white flex items-center gap-2">
-                  <span>{active.icon}</span>
-                  <span>{active.name}</span>
+                  {mode === "hdm" ? <Zap className="w-5 h-5" /> : <AlertTriangle className="w-5 h-5" />}
                 </div>
-                <div className="text-xs text-[#FFB020] font-semibold">
-                  {active.badge}
+
+                <div>
+                  <div
+                    className={cn(
+                      "text-[11px] font-mono font-bold uppercase tracking-wider",
+                      mode === "hdm" ? "text-[#FFB020]" : "text-rose-400"
+                    )}
+                  >
+                    {mode === "hdm" ? "HDM Conversion Engine State" : "Typical Leaky Template State"}
+                  </div>
+                  <div className="text-white font-bold text-sm sm:text-base">
+                    Channel: {activeChannel.name} ({activeChannel.badge})
+                  </div>
                 </div>
               </div>
 
-              {/* Sample User Query / Trigger */}
-              <div className="p-2.5 rounded-xl bg-black/40 border border-white/10 font-mono text-[11px] text-slate-300 truncate">
-                <span className="text-slate-500 select-none">&gt; </span>
-                <span>{active.queryExample}</span>
-              </div>
-
-              <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-                <span>Audience Volume:</span>
-                <span className="text-white font-bold">{active.trafficVolume}</span>
-              </div>
-            </div>
-
-            {/* Glowing Flow Arrow (1 col) */}
-            <div className="lg:col-span-1 flex items-center justify-center py-2 lg:py-0">
-              <div className="flex flex-col lg:flex-row items-center gap-1.5">
+              <div
+                className={cn(
+                  "px-3.5 py-1.5 rounded-full font-mono text-xs font-bold border inline-flex items-center gap-2 self-start sm:self-center",
+                  mode === "hdm"
+                    ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
+                    : "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                )}
+              >
                 <span
                   className={cn(
-                    "w-2.5 h-2.5 rounded-full animate-ping",
-                    mode === "engine" ? "bg-[#FFB020]" : "bg-rose-400"
+                    "w-2 h-2 rounded-full",
+                    mode === "hdm" ? "bg-emerald-400 animate-pulse" : "bg-rose-400 animate-ping"
                   )}
                 />
-                <ArrowRight
-                  className={cn(
-                    "w-6 h-6 rotate-90 lg:rotate-0 transition-colors",
-                    mode === "engine" ? "text-[#FFB020]" : "text-rose-400"
-                  )}
-                />
-              </div>
-            </div>
-
-            {/* 2. NODE 2: The Central Website Conversion Engine (4 cols) */}
-            <div
-              className={cn(
-                "lg:col-span-4 p-5 sm:p-6 rounded-2xl transition-all duration-500 space-y-3.5 relative overflow-hidden text-left",
-                mode === "engine"
-                  ? "bg-gradient-to-b from-[#0E1A3D] to-[#060B22] border-2 border-[#FFB020] shadow-[0_0_40px_rgba(255,176,32,0.3)]"
-                  : "bg-gradient-to-b from-rose-950/60 to-[#060B22] border-2 border-rose-500 shadow-[0_0_40px_rgba(244,63,94,0.3)]"
-              )}
-            >
-              {/* Mini Browser Bar */}
-              <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
-                  <span className="text-[10px] font-mono text-slate-300 pl-1.5">
-                    {mode === "engine" ? "hdm-engine://active" : "slow-template://lagging"}
-                  </span>
-                </div>
-                <span
-                  className={cn(
-                    "text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded",
-                    mode === "engine"
-                      ? "text-[#FFB020] bg-[#FFB020]/20"
-                      : "text-rose-400 bg-rose-500/20"
-                  )}
-                >
-                  {mode === "engine" ? "The Multiplier" : "The Leak"}
+                <span>
+                  {mode === "hdm" ? "REVENUE MULTIPLIER ACTIVE" : "MARKETING BUDGET LEAKAGE"}
                 </span>
               </div>
-
-              {/* Central Status */}
-              <div className="space-y-1">
-                <div className="text-[11px] font-mono uppercase text-slate-400">
-                  Step 02 · Conversion Crucible
-                </div>
-                <div className="font-display font-black text-base sm:text-lg text-white">
-                  {mode === "engine"
-                    ? "HDM Engineered Conversion Website"
-                    : "Generic Slow Template Website"}
-                </div>
-              </div>
-
-              {/* Dynamic Telemetry Meter */}
-              {mode === "engine" ? (
-                <div className="space-y-2 pt-1 animate-in fade-in duration-300">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-300">Conversion Velocity</span>
-                    <span className="text-emerald-400 font-mono font-bold">
-                      {active.hdmScenario.conversionMultiplier}
-                    </span>
-                  </div>
-                  <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
-                    <div className="bg-gradient-to-r from-[#FFB020] to-emerald-400 h-full w-[92%]" />
-                  </div>
-                  <p className="text-[11px] text-slate-300 leading-snug pt-1">
-                    {active.hdmScenario.outcome}
-                  </p>
-                </div>
-              ) : (
-                <div className="space-y-2 pt-1 animate-in fade-in duration-300">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-rose-300">Traffic Leakage</span>
-                    <span className="text-rose-400 font-mono font-bold">
-                      {active.leakScenario.bounceRate}
-                    </span>
-                  </div>
-                  <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
-                    <div className="bg-rose-500 h-full w-[78%]" />
-                  </div>
-                  <p className="text-[11px] text-rose-200 leading-snug pt-1">
-                    {active.leakScenario.friction}
-                  </p>
-                </div>
-              )}
             </div>
 
-            {/* Glowing Flow Arrow (1 col) */}
-            <div className="lg:col-span-1 flex items-center justify-center py-2 lg:py-0">
-              <div className="flex flex-col lg:flex-row items-center gap-1.5">
-                <span
-                  className={cn(
-                    "w-2.5 h-2.5 rounded-full animate-ping",
-                    mode === "engine" ? "bg-emerald-400" : "bg-rose-500"
-                  )}
-                />
-                <ArrowRight
-                  className={cn(
-                    "w-6 h-6 rotate-90 lg:rotate-0 transition-colors",
-                    mode === "engine" ? "text-emerald-400" : "text-rose-500"
-                  )}
-                />
-              </div>
+            {/* Core Outcome Headline */}
+            <div className="space-y-2">
+              <h3 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight leading-snug">
+                {mode === "hdm"
+                  ? activeChannel.hdmState.growthHeadline
+                  : activeChannel.leakyState.lossHeadline}
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl">
+                {mode === "hdm"
+                  ? activeChannel.hdmState.breakthrough
+                  : activeChannel.leakyState.friction}
+              </p>
             </div>
 
-            {/* 3. NODE 3: Business Outcome Pipeline (4 cols) */}
-            <div
-              className={cn(
-                "lg:col-span-4 p-5 rounded-2xl border space-y-3 relative overflow-hidden text-left transition-all duration-500",
-                mode === "engine"
-                  ? "bg-emerald-950/40 border-emerald-500/40"
-                  : "bg-rose-950/30 border-rose-500/30"
-              )}
-            >
-              <div className="flex items-center justify-between">
-                <span
-                  className={cn(
-                    "text-[10px] font-black uppercase tracking-wider",
-                    mode === "engine" ? "text-emerald-400" : "text-rose-400"
-                  )}
-                >
-                  Step 03 · Pipeline Impact
-                </span>
-                <span
-                  className={cn(
-                    "w-2 h-2 rounded-full animate-pulse",
-                    mode === "engine" ? "bg-emerald-400" : "bg-rose-400"
-                  )}
-                />
-              </div>
-
-              <div className="space-y-1">
-                <div className="font-display font-black text-xl text-white">
-                  {mode === "engine"
-                    ? "Verified Business Revenue"
-                    : "Wasted Advertising Capital"}
+            {/* Live Visual Telemetry Meters */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1">
+                <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                  Initial Paint Speed
                 </div>
                 <div
                   className={cn(
-                    "text-xs font-semibold",
-                    mode === "engine" ? "text-emerald-300" : "text-rose-300"
+                    "font-display font-black text-2xl",
+                    mode === "hdm" ? "text-emerald-400" : "text-rose-400"
                   )}
                 >
-                  {mode === "engine"
-                    ? active.hdmScenario.speedScore
-                    : active.leakScenario.wastedAdSpend}
+                  {mode === "hdm"
+                    ? activeChannel.hdmState.speed
+                    : activeChannel.leakyState.speed}
+                </div>
+                <div className="text-[11px] text-slate-400">
+                  {mode === "hdm" ? "Zero bounce penalty" : "Causes instant dropoff"}
                 </div>
               </div>
 
-              <p className="text-[11px] text-slate-300 leading-relaxed">
-                {mode === "engine"
-                  ? "Qualified client calls booked, verified e-commerce sales, and maximum advertising ROAS."
-                  : "Visitors bounce without taking action, ad algorithms bid blindly, and acquisition costs spiral."}
-              </p>
-            </div>
-          </div>
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1">
+                <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                  Conversion &amp; Vitals
+                </div>
+                <div
+                  className={cn(
+                    "font-display font-black text-2xl",
+                    mode === "hdm" ? "text-[#FFB020]" : "text-rose-400"
+                  )}
+                >
+                  {mode === "hdm"
+                    ? activeChannel.hdmState.conversion
+                    : activeChannel.leakyState.bounce}
+                </div>
+                <div className="text-[11px] text-slate-400">
+                  {mode === "hdm" ? "Highest ad ranking" : "Ad algorithm penalties"}
+                </div>
+              </div>
 
-          {/* ============================================================== */}
-          {/* BOTTOM DIRECT AUDIT ACTION BAR                                  */}
-          {/* ============================================================== */}
-          <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-xs text-slate-300 text-center sm:text-left">
-              <Sparkles className="w-4 h-4 text-[#FFB020] shrink-0" />
-              <span>
-                Stop leaking marketing dollars. Let our web architects audit your conversion funnel.
-              </span>
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1">
+                <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                  Business Capital Impact
+                </div>
+                <div
+                  className={cn(
+                    "font-display font-black text-2xl",
+                    mode === "hdm" ? "text-emerald-400" : "text-rose-400"
+                  )}
+                >
+                  {mode === "hdm" ? "Maximized ROAS" : "Wasted Ad Dollars"}
+                </div>
+                <div className="text-[11px] text-slate-400">
+                  {mode === "hdm" ? "Full return on ad spend" : "Lost customer inquiries"}
+                </div>
+              </div>
             </div>
 
-            <Link
-              href="/get-a-quote"
-              className="btn-luxury-gold btn-shimmer py-3 px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-lg"
-            >
-              <span>Audit Your Website Funnel</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            {/* Bottom Direct Audit Action */}
+            <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-2 text-xs text-slate-300">
+                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>
+                  Stop leaking marketing budget. Our lead architects will audit your website conversion funnel.
+                </span>
+              </div>
+
+              <Link
+                href="/get-a-quote"
+                className="btn-luxury-gold btn-shimmer py-3 px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-lg group"
+              >
+                <span>Audit Your Website Funnel</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

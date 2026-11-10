@@ -136,18 +136,16 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         <section id="services" className="py-8 sm:py-12 lg:py-16 bg-white border-y border-[#E2DBD0]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-[#E2DBD0] pb-5">
-              <div className="space-y-2 max-w-2xl">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
-                  <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
-                  <span>01 · Bespoke Digital Architecture</span>
-                </div>
-                <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
-                  Complete Website Solutions Built to Grow Your Business.
-                </h2>
+            <div className="text-center max-w-3xl mx-auto space-y-3 pb-6 border-b border-[#E2DBD0]">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+                <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
+                <span>01 · Bespoke Digital Architecture</span>
               </div>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-md">
-                We combine bespoke Figma design, modern full-stack development, and conversion rate optimization to turn websites into high-performing commercial assets.
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
+                Complete Website Solutions Built to Grow Your Business.
+              </h2>
+              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+                Bespoke Figma UI/UX design, modern full-stack engineering, and conversion rate optimization.
               </p>
             </div>
 

@@ -702,52 +702,52 @@ export const DIFFERENTIATORS = [
 
 export const WEB_FAQS: WebFaqItem[] = [
   {
-    question: "1. How is the cost of website design and development determined?",
+    question: "How is the cost of website design and development determined?",
     answer:
       "Website investment depends entirely on your specific scope, features, and chosen platform. We offer three transparent engagement structures: Fixed-Cost Projects for well-defined scope and deliverables, Hourly Support for flexible ad-hoc tasks, and Monthly Dedicated Developers for continuous roadmap execution. Contact us for a tailored, milestone-based proposal with zero hidden fees.",
   },
   {
-    question: "2. How long does it take to develop a business website?",
+    question: "How long does it take to develop a business website?",
     answer:
       "A standard professional business website typically takes 2 to 4 weeks from kickoff to deployment. Larger e-commerce stores or complex custom web applications usually take 4 to 8 weeks. Because our team operates with agile sprints and continuous staging environments, you can preview and test your website in real-time throughout the entire build.",
   },
   {
-    question: "3. Can you redesign or improve my existing website?",
+    question: "Can you redesign or improve my existing website?",
     answer:
       "Yes, absolutely. We frequently help businesses modernize outdated websites, fix broken layouts, improve mobile responsiveness, and boost loading speeds without disrupting your ongoing operations. For redesigns, we create a complete 301 redirect mapping plan to ensure your existing Google search rankings and backlinks are 100% protected.",
   },
   {
-    question: "4. Do you work with WordPress, Shopify, and WooCommerce?",
+    question: "Do you work with WordPress, Shopify, and WooCommerce?",
     answer:
       "Yes. We have deep expertise across the world's leading CMS and e-commerce platforms including WordPress (custom themes, ACF Pro, Gutenberg), Shopify & Shopify Plus (Liquid, custom apps, checkout extensions), WooCommerce, Webflow, and custom headless Next.js platforms. We advise you on the best platform based on your budget and internal team capabilities.",
   },
   {
-    question: "5. Can you work with our existing development team?",
+    question: "Can you work with our existing development team?",
     answer:
       "Yes. Our developers integrate seamlessly into existing in-house engineering and marketing teams. We adapt to your workflows, use your Git repositories (GitHub, GitLab, Bitbucket), collaborate directly in your Slack or Teams workspace, and track tasks in your Jira, Trello, Asana, or ClickUp boards.",
   },
   {
-    question: "6. Do you offer hourly and monthly developer hiring?",
+    question: "Do you offer hourly and monthly developer hiring?",
     answer:
       "Yes. If you don't require a full fixed-cost project, you can hire our developers by the hour for specific bug fixes, landing pages, or plugin configurations. If you require continuous development throughput, our Monthly Dedicated Developer model provides a dedicated, full-time engineer (160 hours/month) dedicated solely to your tasks.",
   },
   {
-    question: "7. Will my website be mobile-friendly and SEO-ready?",
+    question: "Will my website be mobile-friendly and SEO-ready?",
     answer:
       "Every single website we build is 100% mobile-first and responsive across all device breakpoints (iPhone, Android, tablets, laptops, and ultra-wide desktops). We implement technical SEO best practices from the start: semantic HTML5 tags, Schema.org structured data markup, OpenGraph social cards, canonical URLs, XML sitemaps, and optimized Core Web Vitals.",
   },
   {
-    question: "8. Do you provide website maintenance and ongoing support?",
+    question: "Do you provide website maintenance and ongoing support?",
     answer:
       "Yes. Every fixed-cost project includes 30 days of complimentary post-launch bug-fixing and warranty support. Beyond launch, we offer monthly maintenance packages covering weekly core/plugin updates, automated daily cloud backups, 24/7 uptime monitoring, security firewalls, and priority turnarounds for new pages or banners.",
   },
   {
-    question: "9. Can you integrate third-party APIs and business tools?",
+    question: "Can you integrate third-party APIs and business tools?",
     answer:
       "Yes. We integrate CRMs (HubSpot, Salesforce, Zoho), email marketing tools (Klaviyo, Mailchimp, ActiveCampaign), payment gateways (Stripe, PayPal, Apple Pay, Authorize.net), booking systems (Calendly, Acuity, OpenTable), analytics (Google Tag Manager, GA4, Meta Pixel), and custom REST/GraphQL APIs.",
   },
   {
-    question: "10. Do you work with international clients across different timezones?",
+    question: "Do you work with international clients across different timezones?",
     answer:
       "Yes, our team supports clients globally across North America, the UK, Europe, Australia, and the Middle East. Our management and senior developers work in dedicated shifts ensuring real-time business hour overlap (EST, PST, GMT, and AEST). We communicate clearly in fluent English through Slack, email, WhatsApp, and live Zoom / Google Meet calls.",
   },
