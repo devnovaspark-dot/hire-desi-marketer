@@ -374,16 +374,16 @@ export function WebDesignIndustriesGrid() {
                 type="button"
                 onClick={() => handleSectorSelect(index)}
                 className={cn(
-                  "px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer select-none inline-flex items-center gap-2",
+                  "px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer select-none inline-flex items-center gap-2 border",
                   isSelected
-                    ? "bg-[#FFB020] text-[#060B22] shadow-lg shadow-[#FFB020]/25 font-black scale-105"
-                    : "bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 border border-white/10"
+                    ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] shadow-md shadow-slate-900/10 font-black scale-105"
+                    : "bg-white text-slate-700 hover:text-slate-900 hover:bg-slate-50 border-[#E2DBD0]"
                 )}
               >
                 <span>{sector.icon}</span>
                 <span>{sector.shortLabel}</span>
                 {isSelected && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#060B22] shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FFB020] shrink-0" />
                 )}
               </button>
             );
@@ -391,11 +391,11 @@ export function WebDesignIndustriesGrid() {
         </div>
 
         {/* Minimalist Navigation & Auto-Scroll Status Bar */}
-        <div className="flex items-center justify-between w-full max-w-2xl px-2 pt-1 text-xs text-slate-400">
+        <div className="flex items-center justify-between w-full max-w-2xl px-2 pt-1 text-xs text-slate-500">
           <button
             type="button"
             onClick={() => carouselRef.current?.prev()}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors cursor-pointer text-xs font-semibold"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white hover:bg-slate-50 border border-[#E2DBD0] text-slate-700 hover:text-black transition-colors cursor-pointer text-xs font-semibold shadow-2xs"
           >
             <ChevronLeft className="w-3.5 h-3.5" />
             <span>Previous</span>
@@ -405,10 +405,10 @@ export function WebDesignIndustriesGrid() {
             <span
               className={cn(
                 "w-2 h-2 rounded-full",
-                isAutoScrolling ? "bg-[#FFB020] animate-ping" : "bg-emerald-400 animate-pulse"
+                isAutoScrolling ? "bg-[#FFB020] animate-ping" : "bg-emerald-600 animate-pulse"
               )}
             />
-            <span className="font-mono text-[11px] text-slate-300">
+            <span className="font-mono text-[11px] text-slate-600 font-medium">
               {isAutoScrolling
                 ? "Blueprint 9/9 reached • Scrolling down..."
                 : `Blueprint 0${selectedSectorIndex + 1} of 09 (Auto-advancing)`}
@@ -418,7 +418,7 @@ export function WebDesignIndustriesGrid() {
           <button
             type="button"
             onClick={() => carouselRef.current?.next()}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors cursor-pointer text-xs font-semibold"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white hover:bg-slate-50 border border-[#E2DBD0] text-slate-700 hover:text-black transition-colors cursor-pointer text-xs font-semibold shadow-2xs"
           >
             <span>Next</span>
             <ChevronRight className="w-3.5 h-3.5" />
@@ -454,7 +454,7 @@ export function WebDesignIndustriesGrid() {
       {/* ==================================================================== */}
       {/* 3. UNBOXED BLUEPRINT SPECIFICATIONS (NO ENCLOSING BOX, NO CARD)     */}
       {/* ==================================================================== */}
-      <div className="pt-6 sm:pt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-t border-white/10">
+      <div className="pt-6 sm:pt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-t border-[#E2DBD0]">
         {/* Left Column (7 cols): Architecture Overview & SLA */}
         <div className="lg:col-span-7 space-y-3.5">
           <div className="flex items-center gap-2 flex-wrap">
@@ -462,36 +462,36 @@ export function WebDesignIndustriesGrid() {
               {activeSector.categoryTag}
             </span>
 
-            <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+            <span className="text-xs font-mono font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
               {activeSector.metric}
             </span>
 
-            <span className="text-xs font-mono text-slate-400">
+            <span className="text-xs font-mono text-slate-500 font-medium">
               Blueprint 0{selectedSectorIndex + 1} of 09
             </span>
           </div>
 
-          <h3 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-snug">
+          <h3 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-snug">
             {activeSector.headline}
           </h3>
 
-          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal max-w-2xl">
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-2xl">
             {activeSector.description}
           </p>
 
           {/* Compliance & SLA Line */}
-          <div className="inline-flex items-center gap-2.5 text-xs text-slate-200 font-semibold pt-1">
-            <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+          <div className="inline-flex items-center gap-2.5 text-xs text-slate-700 font-semibold pt-1">
+            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
             <span>{activeSector.complianceSla}</span>
           </div>
         </div>
 
         {/* Right Column (5 cols): Capabilities Checklist & Action CTA */}
-        <div className="lg:col-span-5 space-y-4 lg:border-l lg:border-white/10 lg:pl-8">
+        <div className="lg:col-span-5 space-y-4 lg:border-l lg:border-[#E2DBD0] lg:pl-8">
           <div className="space-y-2.5">
-            <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-wider text-slate-300">
+            <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-wider text-slate-600">
               <span>Industry-Specific Inclusions:</span>
-              <span className="text-[#FFB020] font-mono">
+              <span className="text-[#060B22] font-mono font-bold">
                 {showMoreSpecs ? "6 Inclusions" : "3 Inclusions"}
               </span>
             </div>
@@ -499,8 +499,8 @@ export function WebDesignIndustriesGrid() {
             <div className="space-y-2 text-xs">
               {activeSector.keyFeatures.map((feat, i) => (
                 <div key={i} className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#FFB020] shrink-0 mt-0.5" />
-                  <span className="font-medium text-[12.5px] leading-snug text-slate-200">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span className="font-medium text-[12.5px] leading-snug text-slate-800">
                     {feat}
                   </span>
                 </div>
@@ -514,8 +514,8 @@ export function WebDesignIndustriesGrid() {
                     key={`more-${i}`}
                     className="flex items-start gap-2 animate-in fade-in slide-in-from-top-1 duration-200"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span className="font-medium text-[12.5px] leading-snug text-slate-100">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span className="font-medium text-[12.5px] leading-snug text-slate-800">
                       {feat}
                     </span>
                   </div>
@@ -527,7 +527,7 @@ export function WebDesignIndustriesGrid() {
               <button
                 type="button"
                 onClick={() => setShowMoreSpecs(!showMoreSpecs)}
-                className="pt-1 text-[11.5px] font-bold text-[#FFB020] hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                className="pt-1 text-[11.5px] font-bold text-slate-700 hover:text-[#060B22] transition-colors cursor-pointer inline-flex items-center gap-1.5"
               >
                 <span>
                   {showMoreSpecs
@@ -546,10 +546,10 @@ export function WebDesignIndustriesGrid() {
               className="w-full py-3.5 px-6 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg cursor-pointer text-center group"
               radius={12}
               color="#FFB020"
-              trailColor="#38BDF8"
+              trailColor="#FFB020"
               backgroundColor="#060B22"
               textColor="#FFFFFF"
-              borderColor="rgba(255, 176, 32, 0.4)"
+              borderColor="rgba(255, 176, 32, 0.5)"
               sparkle={true}
               glow={0.8}
             >

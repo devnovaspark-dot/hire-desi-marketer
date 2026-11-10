@@ -2,15 +2,32 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Zap, ArrowRight, CheckCircle2, ShieldCheck, ChevronRight } from "lucide-react";
+import {
+  Zap,
+  ArrowRight,
+  CheckCircle2,
+  ShieldCheck,
+  ChevronRight,
+  Layout,
+  Layers,
+  Code2,
+  Cpu,
+  ShoppingBag,
+  CreditCard,
+  Database,
+  Lock,
+  Gauge,
+  Shield,
+  FileCode,
+  Sparkles,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
 
 // ====================================================================
-// REAL AUTHENTIC BRAND & TECHNOLOGY SVG ICONS (HIGH QUALITY)
+// REAL AUTHENTIC BRAND & TECHNOLOGY SVG ICONS
 // ====================================================================
 
-// 1. Official Figma Brand Icon
 function RealFigmaIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 38 57" fill="none">
@@ -38,7 +55,6 @@ function RealFigmaIcon({ className = "w-6 h-6" }: { className?: string }) {
   );
 }
 
-// 2. Official Next.js & React Modern Stack Icon
 function RealNextJsIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 180 180" fill="none">
@@ -58,7 +74,6 @@ function RealNextJsIcon({ className = "w-6 h-6" }: { className?: string }) {
   );
 }
 
-// 3. Official Shopify Plus E-Commerce Icon
 function RealShopifyIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 109 123" fill="none">
@@ -78,7 +93,6 @@ function RealShopifyIcon({ className = "w-6 h-6" }: { className?: string }) {
   );
 }
 
-// 4. Official Webflow CMS & Visual Engineering Icon
 function RealWebflowIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none">
@@ -90,7 +104,6 @@ function RealWebflowIcon({ className = "w-6 h-6" }: { className?: string }) {
   );
 }
 
-// 5. Official Supabase Cloud Database & Auth Icon
 function RealSupabaseIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none">
@@ -108,7 +121,6 @@ function RealSupabaseIcon({ className = "w-6 h-6" }: { className?: string }) {
   );
 }
 
-// 6. Official Google Core Web Vitals & Lighthouse Speed Icon
 function RealVitalsIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none">
@@ -122,8 +134,14 @@ function RealVitalsIcon({ className = "w-6 h-6" }: { className?: string }) {
 }
 
 // ====================================================================
-// 6 ARCHITECTURE NODES DATA MODEL
+// ARCHITECTURE NODES DATA WITH 4 SATELLITE NODES FOR CONVERGING CIRCUIT
 // ====================================================================
+interface SatelliteNode {
+  label: string;
+  sublabel: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
 interface ArchitectureNode {
   id: string;
   number: string;
@@ -131,6 +149,8 @@ interface ArchitectureNode {
   tag: string;
   badge: string;
   icon: React.ComponentType<{ className?: string }>;
+  hubLabel: string;
+  satellites: [SatelliteNode, SatelliteNode, SatelliteNode, SatelliteNode];
   statusLabel: string;
   statusMetric: string;
   headline: string;
@@ -146,6 +166,13 @@ const ARCHITECTURE_NODES: ArchitectureNode[] = [
     tag: "Figma to Next.js 16",
     badge: "100% Custom UI",
     icon: RealFigmaIcon,
+    hubLabel: "Compiled Design Token Engine",
+    satellites: [
+      { label: "Figma Tokens", sublabel: "Strict Auto-Layout", icon: Layout },
+      { label: "Design System", sublabel: "Modular Components", icon: Layers },
+      { label: "Semantic Schemas", sublabel: "Zero CSS Bloat", icon: FileCode },
+      { label: "Micro-Interactions", sublabel: "60 FPS Fluid UI", icon: Sparkles },
+    ],
     statusLabel: "Compiling Design Tokens to Semantic Next.js 16",
     statusMetric: "100% Bespoke Tokens",
     headline: "Bespoke Digital Experiences Engineered from Clean Figma Tokens",
@@ -164,6 +191,13 @@ const ARCHITECTURE_NODES: ArchitectureNode[] = [
     tag: "Next.js 16 & React 19",
     badge: "< 0.8s LCP SLA",
     icon: RealNextJsIcon,
+    hubLabel: "Sub-Second Edge Rendering Engine",
+    satellites: [
+      { label: "Next.js 16 App", sublabel: "Turbopack Bundler", icon: Code2 },
+      { label: "React 19 Core", sublabel: "Server Components", icon: Cpu },
+      { label: "Edge Caching", sublabel: "Global CDN Delivery", icon: Zap },
+      { label: "100/100 Vitals", sublabel: "< 0.8s LCP Benchmark", icon: Gauge },
+    ],
     statusLabel: "Deploying Sub-Second Edge Server-Side Rendering",
     statusMetric: "< 0.8s LCP Benchmark",
     headline: "Sub-Second Edge Performance with React 19 Concurrent Rendering",
@@ -182,6 +216,13 @@ const ARCHITECTURE_NODES: ArchitectureNode[] = [
     tag: "Shopify Plus & Headless",
     badge: "4.6% Avg Conv.",
     icon: RealShopifyIcon,
+    hubLabel: "1-Tap Express Checkout Engine",
+    satellites: [
+      { label: "Shopify Plus", sublabel: "Storefront GraphQL", icon: ShoppingBag },
+      { label: "Slide Cart", sublabel: "Dynamic Threshold Bar", icon: CreditCard },
+      { label: "1-Tap Express", sublabel: "Apple & Shop Pay", icon: Zap },
+      { label: "AOV Maximize", sublabel: "+42% Checkout Velocity", icon: Gauge },
+    ],
     statusLabel: "Optimizing Average Order Value & 1-Tap Checkout",
     statusMetric: "+42% Checkout Velocity",
     headline: "High-Velocity Storefronts Built for Maximum Average Order Value",
@@ -200,6 +241,13 @@ const ARCHITECTURE_NODES: ArchitectureNode[] = [
     tag: "Zero-Code Autonomy",
     badge: "Marketing Freedom",
     icon: RealWebflowIcon,
+    hubLabel: "1-Click Publishing Hub",
+    satellites: [
+      { label: "Webflow", sublabel: "Visual Block Editor", icon: Layout },
+      { label: "Headless CMS", sublabel: "Sanity / WordPress", icon: Database },
+      { label: "Schemas", sublabel: "Locked Brand Guardrails", icon: Layers },
+      { label: "Visual Edit", sublabel: "Zero Dev Dependency", icon: Sparkles },
+    ],
     statusLabel: "Empowering Marketing Team Publishing Autonomy",
     statusMetric: "Zero Dev Dependency",
     headline: "Empower Your Marketing Team with Zero Developer Dependencies",
@@ -218,6 +266,13 @@ const ARCHITECTURE_NODES: ArchitectureNode[] = [
     tag: "Supabase & Cloud APIs",
     badge: "RBAC & MFA",
     icon: RealSupabaseIcon,
+    hubLabel: "Enterprise API & Portal Gateway",
+    satellites: [
+      { label: "Supabase DB", sublabel: "PostgreSQL Engine", icon: Database },
+      { label: "Auth & MFA", sublabel: "OAuth & SSO Ready", icon: Lock },
+      { label: "REST Webhooks", sublabel: "Live Event Stream", icon: Zap },
+      { label: "Row-Level RBAC", sublabel: "Encrypted Data Vault", icon: Shield },
+    ],
     statusLabel: "Securing Client Portal Sessions & DB Webhooks",
     statusMetric: "Enterprise RBAC",
     headline: "Secure Client Portals & Scalable Cloud API Integrations",
@@ -236,6 +291,13 @@ const ARCHITECTURE_NODES: ArchitectureNode[] = [
     tag: "Google Top 1% Lighthouse",
     badge: "Google Top 1%",
     icon: RealVitalsIcon,
+    hubLabel: "Google Top 1% Speed Shield",
+    satellites: [
+      { label: "0.58s Paint", sublabel: "Sub-Second LCP", icon: Gauge },
+      { label: "Zero CLS", sublabel: "No Layout Shift", icon: Layout },
+      { label: "301 Shield", sublabel: "1:1 SEO Redirects", icon: Shield },
+      { label: "JSON-LD", sublabel: "Google Rich Snippets", icon: FileCode },
+    ],
     statusLabel: "Google Lighthouse Certified Speed & 301 Protection",
     statusMetric: "100/100 Core Vitals",
     headline: "Google Lighthouse Certified Speed & 301 SEO Authority Protection",
@@ -250,7 +312,7 @@ const ARCHITECTURE_NODES: ArchitectureNode[] = [
 ];
 
 export default function BentoGrid() {
-  const [activeIndex, setActiveIndex] = useState<number>(1);
+  const [activeIndex, setActiveIndex] = useState<number>(3); // Default to 04 Client-Editable CMS to match screenshot
   const [progress, setProgress] = useState<number>(85);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -264,7 +326,7 @@ export default function BentoGrid() {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % ARCHITECTURE_NODES.length);
       setProgress(60);
-    }, 4600);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [isPaused]);
@@ -288,15 +350,20 @@ export default function BentoGrid() {
     }
     pauseTimeoutRef.current = setTimeout(() => {
       setIsPaused(false);
-    }, 14000);
+    }, 15000);
   };
+
+  // Coordinates for the 4 satellite wires on 600px wide SVG viewBox:
+  const satelliteXCoords = [75, 225, 375, 525];
+  const hubCenterX = 300;
+  const hubCenterY = 90;
 
   return (
     <div className="w-full select-none text-left">
-      {/* 2-Column Vertical Layout: Left Vertical Selectors, Right Architecture Theater */}
+      {/* 2-Column Vertical Architecture Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start max-w-6xl mx-auto px-2 sm:px-4">
         {/* ==================================================================== */}
-        {/* LEFT COLUMN: VERTICAL LIST OF 6 ARCHITECTURE NODES                   */}
+        {/* LEFT COLUMN: VERTICAL LIST OF 6 ARCHITECTURE SOLUTIONS               */}
         {/* ==================================================================== */}
         <div className="lg:col-span-5 space-y-2.5">
           <div className="flex items-center justify-between px-2 pb-1 text-xs font-mono font-bold text-slate-500 uppercase tracking-wider">
@@ -392,44 +459,125 @@ export default function BentoGrid() {
         {/* ==================================================================== */}
         <div className="lg:col-span-7">
           <div className="bg-white rounded-3xl border border-[#E2DBD0] p-6 sm:p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden text-left space-y-6">
-            {/* Top Status & Central Hub Capsule */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#E2DBD0]/70">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#060B22] text-white font-display font-black text-xs border border-[#FFB020]/40 shadow-xs">
-                <Zap className="w-3.5 h-3.5 text-[#FFB020] fill-[#FFB020] animate-pulse" />
-                <span>Compiled Production Architecture</span>
-              </div>
-
-              <div className="flex items-center gap-2 text-xs font-mono">
-                <span className="text-slate-500 font-medium">Standard:</span>
-                <span className="px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-800 font-bold border border-emerald-200">
-                  {active.badge}
-                </span>
-              </div>
+            {/* Top State Badge & Solution Counter */}
+            <div className="flex items-center justify-between pb-3 border-b border-[#E2DBD0]/70">
+              <span className="text-[10.5px] font-mono font-black uppercase tracking-wider px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] border border-[#FFB020]/30 shadow-xs">
+                {active.tag}
+              </span>
+              <span className="text-xs font-mono font-bold text-slate-500">
+                Solution 0{activeIndex + 1} of 06
+              </span>
             </div>
 
-            {/* Monochromatic Refined Telemetry Bar (Zero Flashy Rainbow Color) */}
-            <div className="space-y-2 bg-[#FAF8F5] p-3.5 sm:p-4 rounded-2xl border border-[#E2DBD0]">
-              <div className="flex items-center justify-between text-xs font-mono">
-                <div className="flex items-center gap-2 text-slate-700">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
-                  </span>
-                  <span className="truncate max-w-[240px] sm:max-w-none text-left font-medium">
-                    {active.statusLabel}
-                  </span>
-                </div>
-                <span className="text-emerald-800 font-bold shrink-0">
-                  {active.statusMetric}
-                </span>
+            {/* ================================================================ */}
+            {/* SIGNATURE CONVERGING CIRCUIT: 4 SATELLITES -> 1 COMPILED HUB     */}
+            {/* ================================================================ */}
+            <div className="bg-[#FAF8F5] rounded-2xl border border-[#E2DBD0] p-4 sm:p-5 relative overflow-hidden">
+              {/* 1. 4 Satellite Technology Nodes */}
+              <div className="grid grid-cols-4 gap-2 text-center relative z-10">
+                {active.satellites.map((sat, sIdx) => {
+                  const SatIcon = sat.icon;
+                  return (
+                    <div
+                      key={sIdx}
+                      className="flex flex-col items-center gap-1.5 p-2 rounded-xl bg-white border border-[#E2DBD0] shadow-xs hover:border-[#FFB020] transition-all group"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#E2DBD0] flex items-center justify-center text-[#060B22] group-hover:scale-110 transition-transform">
+                        <SatIcon className="w-4 h-4 text-[#060B22]" />
+                      </div>
+                      <div className="text-[10px] font-display font-black text-[#0B1B3A] tracking-tight truncate w-full">
+                        {sat.label}
+                      </div>
+                      <div className="text-[8.5px] font-mono text-slate-500 truncate w-full hidden sm:block">
+                        {sat.sublabel}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
 
-              {/* Clean Single-Palette Progress Bar (Refined Gold on Slate Track) */}
-              <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden p-0.5">
-                <div
-                  className="h-full bg-gradient-to-r from-[#FFB020] to-[#E59A10] rounded-full transition-all duration-700 ease-out"
-                  style={{ width: `${progress}%` }}
-                />
+              {/* 2. Curved Converging Circuit Lines (Monochromatic / Subtle Gold) */}
+              <div className="relative w-full h-16 sm:h-20 my-1 pointer-events-none">
+                <svg
+                  className="w-full h-full overflow-visible"
+                  viewBox="0 0 600 90"
+                  fill="none"
+                  preserveAspectRatio="none"
+                >
+                  <defs>
+                    <linearGradient id="monochrome-wire" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#060B22" stopOpacity="0.15" />
+                      <stop offset="80%" stopColor="#FFB020" stopOpacity="0.8" />
+                      <stop offset="100%" stopColor="#FFB020" stopOpacity="1" />
+                    </linearGradient>
+                  </defs>
+
+                  {satelliteXCoords.map((x, sIdx) => {
+                    const pathD = `M ${x} 0 C ${x} 45, ${hubCenterX + (x - hubCenterX) * 0.15} 60, ${hubCenterX} ${hubCenterY}`;
+                    return (
+                      <g key={sIdx}>
+                        {/* Base Wire Track */}
+                        <path
+                          d={pathD}
+                          stroke="rgba(6, 11, 34, 0.15)"
+                          strokeWidth="1.8"
+                          strokeDasharray="3 3"
+                          strokeLinecap="round"
+                        />
+
+                        {/* Active subtle pulse wire */}
+                        <path
+                          d={pathD}
+                          stroke="url(#monochrome-wire)"
+                          strokeWidth="2.2"
+                          strokeLinecap="round"
+                        />
+
+                        {/* Traveling refined gold photon particle (NO rainbow color) */}
+                        <circle r="3.5" fill="#FFB020">
+                          <animateMotion
+                            path={pathD}
+                            dur={`${1.6 + sIdx * 0.25}s`}
+                            repeatCount="indefinite"
+                          />
+                        </circle>
+                      </g>
+                    );
+                  })}
+                </svg>
+              </div>
+
+              {/* 3. Central Compiled Hub Capsule */}
+              <div className="flex justify-center relative z-10 -mt-2">
+                <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-[#060B22] via-[#0B1638] to-[#060B22] text-white font-display font-black text-xs shadow-md border-2 border-[#FFB020] hover:scale-105 transition-transform cursor-pointer">
+                  <Zap className="w-3.5 h-3.5 text-[#FFB020] fill-[#FFB020] animate-pulse" />
+                  <span>{active.hubLabel}</span>
+                </div>
+              </div>
+
+              {/* 4. Real-Time Telemetry Bar (Refined Single-Palette Gold) */}
+              <div className="mt-4 space-y-1.5 pt-3 border-t border-[#E2DBD0]">
+                <div className="flex items-center justify-between text-[11px] font-mono">
+                  <div className="flex items-center gap-2 text-slate-700">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
+                    </span>
+                    <span className="truncate max-w-[220px] sm:max-w-none text-left font-medium">
+                      {active.statusLabel}
+                    </span>
+                  </div>
+                  <span className="text-emerald-800 font-bold shrink-0">
+                    {active.statusMetric}
+                  </span>
+                </div>
+
+                <div className="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden p-0.5">
+                  <div
+                    className="h-full bg-gradient-to-r from-[#FFB020] to-[#E59A10] rounded-full transition-all duration-700 ease-out"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
               </div>
             </div>
 
