@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   CheckCircle2,
@@ -21,13 +21,11 @@ import {
   ChevronRight,
   MessageSquare,
   FileCheck,
+  Shield,
+  RefreshCw,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
-import RotatingCards, {
-  RotatingCardsHandle,
-  RotatingCardItem,
-} from "@/components/ui/RotatingCards";
 
 interface ProcessPhase {
   step: number;
@@ -37,12 +35,13 @@ interface ProcessPhase {
   tag: string;
   duration: string;
   icon: React.ComponentType<{ className?: string }>;
-  gradient: string;
   accentColor: string;
+  glowRgba: string;
   headline: string;
   summary: string;
   deliverables: string[];
   slaMetric: string;
+  position: { x: number; y: number }; // Percentage % across canvas
   renderArtifact: () => React.ReactNode;
 }
 
@@ -55,8 +54,9 @@ const PHASES: ProcessPhase[] = [
     tag: "Sprint 01 · Foundation Spec",
     duration: "1–2 Days",
     icon: Search,
-    gradient: "from-amber-500/30 via-[#081232] to-[#060B22]",
     accentColor: "#FFB020",
+    glowRgba: "rgba(255, 176, 32, 0.35)",
+    position: { x: 16, y: 18 },
     headline: "Commercial Objective Mapping & Sitemap Architecture",
     summary:
       "We align on your revenue targets, map the complete page hierarchy, and lock in milestone deliverables with zero ambiguity or scope creep.",
@@ -81,21 +81,27 @@ const PHASES: ProcessPhase[] = [
             <div className="text-[10px] text-[#FFB020] font-bold">01 · Root Engine</div>
             <div className="text-white font-bold text-xs">/ (Homepage)</div>
             <div className="text-[10px] text-slate-400">Hero + Proof + Dual CTAs</div>
-            <span className="inline-block text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">Approved</span>
+            <span className="inline-block text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">
+              Approved
+            </span>
           </div>
 
           <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-left space-y-1.5 hover:border-[#FFB020]/40 transition-colors">
             <div className="text-[10px] text-[#FFB020] font-bold">02 · Solutions Hub</div>
             <div className="text-white font-bold text-xs">/services/*</div>
             <div className="text-[10px] text-slate-400">6 Bespoke Service Silos</div>
-            <span className="inline-block text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">Approved</span>
+            <span className="inline-block text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">
+              Approved
+            </span>
           </div>
 
           <div className="p-3 rounded-xl bg-[#FFB020]/10 border border-[#FFB020]/40 text-left space-y-1.5 shadow-inner">
             <div className="text-[10px] text-[#FFB020] font-bold">03 · Lead Funnel</div>
             <div className="text-white font-bold text-xs">/get-a-quote</div>
             <div className="text-[10px] text-emerald-300">1-Tap Conversion API</div>
-            <span className="inline-block text-[9px] px-1.5 py-0.5 rounded bg-[#FFB020]/20 text-[#FFB020] font-bold">Locked Spec</span>
+            <span className="inline-block text-[9px] px-1.5 py-0.5 rounded bg-[#FFB020]/20 text-[#FFB020] font-bold">
+              Locked Spec
+            </span>
           </div>
         </div>
 
@@ -114,8 +120,9 @@ const PHASES: ProcessPhase[] = [
     tag: "Sprint 02 · Blueprint & SEO Map",
     duration: "2–3 Days",
     icon: Layers,
-    gradient: "from-sky-500/30 via-[#081232] to-[#060B22]",
-    accentColor: "#38BDF8",
+    accentColor: "#0284C7",
+    glowRgba: "rgba(2, 132, 199, 0.35)",
+    position: { x: 50, y: 12 },
     headline: "Framework Blueprint & 1:1 SEO Safeguard Mapping",
     summary:
       "We select the optimal tech stack, map structured data schemas, and configure 1:1 301 redirects so your Google keyword rankings never drop.",
@@ -161,8 +168,9 @@ const PHASES: ProcessPhase[] = [
     tag: "Sprint 03 · Figma Prototypes",
     duration: "4–6 Days",
     icon: PenTool,
-    gradient: "from-purple-500/30 via-[#081232] to-[#060B22]",
-    accentColor: "#A855F7",
+    accentColor: "#8B5CF6",
+    glowRgba: "rgba(139, 92, 246, 0.35)",
+    position: { x: 84, y: 18 },
     headline: "Pixel-Perfect Figma Prototypes & Design Tokens",
     summary:
       "Senior designers craft bespoke wireframes and clickable desktop & mobile prototypes tailored to your brand, with revisions until you are 100% satisfied.",
@@ -171,7 +179,7 @@ const PHASES: ProcessPhase[] = [
       "Interactive Clickable Desktop & Mobile Flows",
       "WCAG 2.1 AA Accessibility Signoff",
     ],
-    slaMetric: "Clickable Figma Prototype Signoff",
+    slaMetric: "Clickable Figma Signoff",
     renderArtifact: () => (
       <div className="space-y-3 font-mono text-xs">
         <div className="flex items-center justify-between pb-2 border-b border-white/10 text-[11px] text-slate-400">
@@ -214,8 +222,9 @@ const PHASES: ProcessPhase[] = [
     tag: "Sprint 04 · Next.js & APIs",
     duration: "1–2 Weeks",
     icon: Code2,
-    gradient: "from-blue-600/30 via-[#081232] to-[#060B22]",
-    accentColor: "#3B82F6",
+    accentColor: "#10B981",
+    glowRgba: "rgba(16, 185, 129, 0.35)",
+    position: { x: 88, y: 56 },
     headline: "Modular Full-Stack Next.js 16 Engineering",
     summary:
       "Clean, maintainable components built with Next.js 16, headless CMS integration, third-party API webhooks, and live staging preview builds.",
@@ -262,8 +271,9 @@ const PHASES: ProcessPhase[] = [
     tag: "Sprint 05 · Speed & Vitals",
     duration: "3–4 Days",
     icon: Activity,
-    gradient: "from-emerald-500/30 via-[#081232] to-[#060B22]",
-    accentColor: "#10B981",
+    accentColor: "#06B6D4",
+    glowRgba: "rgba(6, 182, 212, 0.35)",
+    position: { x: 74, y: 84 },
     headline: "Speed Hardening & Google Core Web Vitals Audit",
     summary:
       "Rigorous cross-device testing, speed remediation for green 95+ Core Web Vitals, zero layout shifts, and form notification delivery verification.",
@@ -314,8 +324,9 @@ const PHASES: ProcessPhase[] = [
     tag: "Sprint 06 · Production Launch",
     duration: "1 Day",
     icon: Rocket,
-    gradient: "from-rose-500/30 via-[#081232] to-[#060B22]",
     accentColor: "#F43F5E",
+    glowRgba: "rgba(244, 63, 94, 0.35)",
+    position: { x: 26, y: 84 },
     headline: "Zero-Downtime Server Cutover & Analytics Validation",
     summary:
       "Global edge DNS propagation, Google Tag Manager container setup, GA4 conversion event verification, and live Google Search Console sitemap indexing.",
@@ -357,12 +368,13 @@ const PHASES: ProcessPhase[] = [
     step: 7,
     number: "07",
     title: "Warranty & SLA",
-    shortTag: "Support",
+    shortTag: "Warranty SLA",
     tag: "Sprint 07 · Ongoing SLA",
     duration: "30 Days+",
     icon: MessageSquare,
-    gradient: "from-amber-600/30 via-[#081232] to-[#060B22]",
-    accentColor: "#F59E0B",
+    accentColor: "#D97706",
+    glowRgba: "rgba(217, 119, 6, 0.35)",
+    position: { x: 12, y: 56 },
     headline: "30-Day Full Warranty & Dedicated Architect SLA",
     summary:
       "30-day post-launch bug warranty, scheduled cloud backups, security patches, and direct developer communication in your private Slack/Teams channel.",
@@ -404,101 +416,91 @@ const PHASES: ProcessPhase[] = [
 
 export function WebDesignProcessStream() {
   const [activeStepIdx, setActiveStepIdx] = useState<number>(0);
-  const rotatingCardsRef = useRef<RotatingCardsHandle>(null);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const pauseTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const flowContainerRef = useRef<HTMLDivElement>(null);
+  const [containerSize, setContainerSize] = useState<{ width: number; height: number }>({
+    width: 1000,
+    height: 640,
+  });
 
   const activePhase = PHASES[activeStepIdx] || PHASES[0];
-  const IconComponent = activePhase.icon;
 
-  // Format 7 cards for RotatingCards 3D Ring
-  const ROTATING_CARD_ITEMS: RotatingCardItem[] = PHASES.map((phase, idx) => ({
-    id: phase.step,
-    number: phase.number,
-    title: phase.title,
-    subtitle: phase.headline,
-    badge: phase.duration,
-    tag: phase.slaMetric,
-    content: (
-      <div
-        className={cn(
-          "w-full h-full p-6 sm:p-7 rounded-3xl bg-gradient-to-b from-[#0B1536] via-[#081232] to-[#040818] border-2 shadow-2xl flex flex-col justify-between text-left select-none relative overflow-hidden transition-all duration-300",
-          idx === activeStepIdx
-            ? "border-[#FFB020] ring-2 ring-[#FFB020]/60 shadow-[0_25px_60px_-10px_rgba(255,176,32,0.35)] scale-102"
-            : "border-[#FFB020]/30 hover:border-[#FFB020]/60 shadow-[0_20px_45px_-12px_rgba(6,11,34,0.45)]"
-        )}
-      >
-        {/* Top Metallic Bevel Edge */}
-        <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#FFB020]/60 to-transparent pointer-events-none" />
+  // Dynamic dimension tracking for precise SVG curved line connections
+  useEffect(() => {
+    const updateSize = () => {
+      if (!flowContainerRef.current) return;
+      const rect = flowContainerRef.current.getBoundingClientRect();
+      setContainerSize({
+        width: rect.width || 1000,
+        height: rect.height || 640,
+      });
+    };
 
-        {/* Subtle ambient corner light */}
-        <div className="absolute -top-10 -right-10 w-28 h-28 bg-[#FFB020]/15 rounded-full blur-xl pointer-events-none" />
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
 
-        {/* Top: Sprint Number & Duration Badge */}
-        <div className="flex items-center justify-between z-10">
-          <span className="font-mono text-3xl sm:text-4xl font-black text-[#FFB020] tracking-tight">
-            {phase.number}
-          </span>
-          <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-white/10 text-white border border-white/20 backdrop-blur-sm shadow-xs">
-            {phase.duration}
-          </span>
-        </div>
+  // Auto-cycle through the 7 sprints smoothly
+  useEffect(() => {
+    if (isPaused) return;
 
-        {/* Center: Phase Icon, Title & Tag */}
-        <div className="z-10 space-y-2">
-          <div className="w-10 h-10 rounded-xl bg-white/10 border border-[#FFB020]/30 flex items-center justify-center text-[#FFB020] shadow-sm">
-            <phase.icon className="w-5 h-5" />
-          </div>
-          <div className="font-display font-black text-lg sm:text-xl text-white tracking-tight leading-snug">
-            {phase.title}
-          </div>
-          <div className="text-[11px] text-slate-300 line-clamp-2 font-normal leading-relaxed">
-            {phase.summary}
-          </div>
-        </div>
+    const interval = setInterval(() => {
+      setActiveStepIdx((prev) => (prev + 1) % PHASES.length);
+    }, 4600);
 
-        {/* Bottom: SLA Metric Bar */}
-        <div className="z-10 pt-3 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-slate-300">
-          <span className="truncate text-emerald-400 font-bold flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            {phase.slaMetric}
-          </span>
-          <ArrowRight className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
-        </div>
-      </div>
-    ),
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const handleSelectSprint = (index: number) => {
+    setActiveStepIdx(index);
+    setIsPaused(true);
+
+    if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current);
+    pauseTimerRef.current = setTimeout(() => {
+      setIsPaused(false);
+    }, 12000);
+  };
+
+  const centerX = containerSize.width / 2;
+  const centerY = containerSize.height / 2;
+
+  // Build the continuous perimeter circuit path linking 01 -> 02 -> 03 -> 04 -> 05 -> 06 -> 07 -> 01
+  const perimeterPoints = PHASES.map((p) => ({
+    x: (p.position.x / 100) * containerSize.width,
+    y: (p.position.y / 100) * containerSize.height,
   }));
 
-  const handleCardChange = (idx: number) => {
-    setActiveStepIdx(idx);
-  };
-
-  const handleStepJump = (idx: number) => {
-    setActiveStepIdx(idx);
-    rotatingCardsRef.current?.goTo(idx);
-  };
+  const perimeterPathD = perimeterPoints.reduce((acc, pt, idx) => {
+    if (idx === 0) return `M ${pt.x} ${pt.y}`;
+    const prev = perimeterPoints[idx - 1];
+    const midX = (prev.x + pt.x) / 2;
+    const midY = (prev.y + pt.y) / 2;
+    return `${acc} Q ${prev.x} ${prev.y}, ${midX} ${midY} T ${pt.x} ${pt.y}`;
+  }, "") + " Z";
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto select-none">
+    <div className="space-y-6 sm:space-y-8 max-w-7xl mx-auto select-none">
       {/* ==================================================================== */}
-      {/* 1. TOP SPRINT QUICK-PILL TABS                                       */}
+      {/* 1. TOP SPRINT QUICK-JUMP TABS (ACCESSIBLE ACROSS ALL SCREENS)         */}
       {/* ==================================================================== */}
-      <div className="flex flex-wrap items-center justify-center gap-2">
+      <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-2">
         {PHASES.map((phase, idx) => {
           const isSelected = idx === activeStepIdx;
           return (
             <button
               key={phase.step}
               type="button"
-              onClick={() => handleStepJump(idx)}
+              onClick={() => handleSelectSprint(idx)}
               className={cn(
-                "px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer select-none inline-flex items-center gap-2",
+                "px-3 sm:px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer select-none inline-flex items-center gap-1.5 sm:gap-2",
                 isSelected
                   ? "bg-[#060B22] text-[#FFB020] border border-[#FFB020] shadow-md ring-2 ring-[#FFB020]/25 font-black scale-105"
                   : "bg-white text-slate-600 border border-[#E2DBD0] hover:border-slate-400 hover:text-[#0B1B3A]"
               )}
             >
-              <span className="font-mono text-[10px] opacity-70">
-                {phase.number}
-              </span>
+              <span className="font-mono text-[10px] opacity-70">{phase.number}</span>
               <span>{phase.shortTag}</span>
               {isSelected && (
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -509,50 +511,320 @@ export function WebDesignProcessStream() {
       </div>
 
       {/* ==================================================================== */}
-      {/* 2. THE 3D ROTATING CARDS THEATER (CLEAN, NO USELESS SURROUNDING TEXT) */}
+      {/* 2. THE 7-SPRINT AGILE CENTER FLOW THEATER (DESKTOP & TABLET VIEW)    */}
       {/* ==================================================================== */}
-      <div className="relative overflow-visible text-center py-1">
-        {/* Sleek Floating Prev / Next Controls on Right */}
-        <div className="flex items-center justify-end gap-2 max-w-5xl mx-auto px-4 mb-2">
-          <button
-            type="button"
-            onClick={() => rotatingCardsRef.current?.prev()}
-            className="p-2 rounded-full bg-white hover:bg-slate-50 border border-[#E2DBD0] text-slate-700 hover:text-[#060B22] hover:border-slate-400 transition-colors cursor-pointer shadow-xs inline-flex items-center justify-center"
-            aria-label="Previous Sprint"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            type="button"
-            onClick={() => rotatingCardsRef.current?.next()}
-            className="p-2 rounded-full bg-white hover:bg-slate-50 border border-[#E2DBD0] text-slate-700 hover:text-[#060B22] hover:border-slate-400 transition-colors cursor-pointer shadow-xs inline-flex items-center justify-center"
-            aria-label="Next Sprint"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
+      <div
+        ref={flowContainerRef}
+        className="relative hidden md:flex items-center justify-center w-full min-h-[580px] lg:min-h-[640px] overflow-visible py-4 select-none"
+      >
+        {/* ================================================================== */}
+        {/* DYNAMIC SVG CONNECTING CIRCUIT WITH GLOWING TRAVELING PULSES       */}
+        {/* ================================================================== */}
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none overflow-visible"
+          viewBox={`0 0 ${containerSize.width} ${containerSize.height}`}
+          fill="none"
+        >
+          <defs>
+            <filter id="agile-hub-glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          {/* Sequential Perimeter Agile Lifecycle Track */}
+          <path
+            d={perimeterPathD}
+            stroke="rgba(6, 11, 34, 0.08)"
+            strokeWidth="1.5"
+            strokeDasharray="6 6"
+            fill="none"
+          />
+
+          {/* Perimeter continuous traveling momentum photon */}
+          <circle r="3.5" fill="#FFB020" filter="url(#agile-hub-glow)">
+            <animateMotion path={perimeterPathD} dur="12s" repeatCount="indefinite" />
+          </circle>
+
+          {/* 7 Hub-to-Sprint Radial Energy Beziers */}
+          {PHASES.map((phase, idx) => {
+            const targetX = (phase.position.x / 100) * containerSize.width;
+            const targetY = (phase.position.y / 100) * containerSize.height;
+            const isActive = idx === activeStepIdx;
+            const lineColor = isActive ? phase.accentColor : "rgba(6, 11, 34, 0.14)";
+
+            const dx = targetX - centerX;
+            const dy = targetY - centerY;
+            const cp1X = centerX + dx * 0.45;
+            const cp1Y = centerY + dy * 0.15;
+            const cp2X = centerX + dx * 0.55;
+            const cp2Y = targetY;
+
+            const pathD = `M ${centerX} ${centerY} C ${cp1X} ${cp1Y}, ${cp2X} ${cp2Y}, ${targetX} ${targetY}`;
+
+            return (
+              <g key={phase.step}>
+                {/* Base Line */}
+                <path
+                  d={pathD}
+                  stroke={lineColor}
+                  strokeWidth={isActive ? 2.8 : 1.5}
+                  strokeDasharray={isActive ? "none" : "4 4"}
+                  strokeOpacity={isActive ? 0.95 : 0.6}
+                  strokeLinecap="round"
+                  className="transition-all duration-300"
+                />
+
+                {/* Glowing underlay rail on active sprint */}
+                {isActive && (
+                  <path
+                    d={pathD}
+                    stroke={phase.accentColor}
+                    strokeWidth={6}
+                    strokeOpacity={0.25}
+                    filter="url(#agile-hub-glow)"
+                  />
+                )}
+
+                {/* Primary Outward Traveling Photon */}
+                <circle
+                  r={isActive ? 4.5 : 3}
+                  fill={phase.accentColor}
+                  filter="url(#agile-hub-glow)"
+                >
+                  <animateMotion
+                    path={pathD}
+                    dur={`${2.2 + (idx % 3) * 0.3}s`}
+                    repeatCount="indefinite"
+                  />
+                </circle>
+
+                {/* Secondary Staggered Pulse */}
+                <circle
+                  r={isActive ? 3 : 2}
+                  fill={phase.accentColor}
+                  opacity={0.6}
+                >
+                  <animateMotion
+                    path={pathD}
+                    dur={`${2.2 + (idx % 3) * 0.3}s`}
+                    begin={`${1.1 + (idx % 3) * 0.15}s`}
+                    repeatCount="indefinite"
+                  />
+                </circle>
+              </g>
+            );
+          })}
+        </svg>
+
+        {/* ================================================================== */}
+        {/* CENTRAL SPRINT REACTOR HUB (DISCIPLINED AGILE CORE)                */}
+        {/* ================================================================== */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+          <div className="relative flex items-center justify-center">
+            {/* Outer Breathing Energy Rings */}
+            <div className="absolute w-48 h-48 rounded-full border border-[#FFB020]/25 animate-ping opacity-25 pointer-events-none" />
+            <div className="absolute w-40 h-40 rounded-full border border-dashed border-[#FFB020]/40 animate-spin opacity-40 pointer-events-none" style={{ animationDuration: "25s" }} />
+            <div className="absolute w-34 h-34 rounded-full border-2 border-[#FFB020]/30 animate-pulse pointer-events-none" />
+
+            {/* Central Hub Core Card */}
+            <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-3xl bg-gradient-to-br from-[#060B22] via-[#081232] to-[#040818] border-2 border-[#FFB020] shadow-[0_15px_45px_rgba(255,176,32,0.38)] flex flex-col items-center justify-center p-3 text-center z-10 select-none">
+              <span className="text-[9px] font-mono font-black uppercase tracking-wider text-[#FFB020] bg-white/10 px-2 py-0.5 rounded-full border border-[#FFB020]/40 mb-1 shadow-xs">
+                HDM AGILE CORE
+              </span>
+
+              <div className="w-8 h-8 rounded-full bg-white/10 border border-[#FFB020]/40 flex items-center justify-center text-[#FFB020] my-1 shadow-inner">
+                <Sparkles className="w-4 h-4 text-[#FFB020]" />
+              </div>
+
+              <div className="font-display font-black text-xs sm:text-sm text-white tracking-tight leading-tight">
+                Sprint {activePhase.number} Active
+              </div>
+
+              <div className="text-[10px] text-emerald-400 font-mono mt-0.5 font-bold flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>100% On-Time SLA</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* 3D Rotating Cards Ring Floating Directly on Canvas */}
-        <div className="relative w-full overflow-visible py-2">
-          <RotatingCards
-            ref={rotatingCardsRef}
-            cards={ROTATING_CARD_ITEMS}
-            radius={380}
-            cardWidth={270}
-            cardHeight={350}
-            tilt={13}
-            autoRotate={true}
-            autoRotateSpeed={0.1}
-            pauseOnHover={true}
-            selectedIndex={activeStepIdx}
-            onCardChange={handleCardChange}
-            onCardClick={handleStepJump}
+        {/* ================================================================== */}
+        {/* 7 RADIAL SPRINT SATELLITE NODES                                    */}
+        {/* ================================================================== */}
+        {PHASES.map((phase, idx) => {
+          const isActive = idx === activeStepIdx;
+          const Icon = phase.icon;
+
+          return (
+            <div
+              key={phase.step}
+              onClick={() => handleSelectSprint(idx)}
+              onMouseEnter={() => handleSelectSprint(idx)}
+              className={cn(
+                "absolute cursor-pointer -translate-x-1/2 -translate-y-1/2 transition-all duration-300 z-20 outline-none",
+                isActive ? "z-30 scale-105 -translate-y-2" : "hover:scale-102 hover:z-25"
+              )}
+              style={{
+                left: `${phase.position.x}%`,
+                top: `${phase.position.y}%`,
+              }}
+            >
+              <div
+                className={cn(
+                  "p-3 sm:p-3.5 rounded-2xl border transition-all duration-300 w-[190px] lg:w-[215px] text-left select-none relative overflow-hidden bg-white/95 backdrop-blur-md",
+                  isActive
+                    ? "border-[#FFB020] shadow-xl"
+                    : "border-[#E2DBD0] hover:border-slate-400 shadow-md"
+                )}
+                style={
+                  isActive
+                    ? {
+                        boxShadow: `0 12px 30px ${phase.glowRgba}, 0 2px 8px rgba(0,0,0,0.06)`,
+                        borderColor: phase.accentColor,
+                      }
+                    : undefined
+                }
+              >
+                {/* Top Active Accent Line */}
+                {isActive && (
+                  <div
+                    className="absolute top-0 inset-x-0 h-1 transition-all duration-300"
+                    style={{ backgroundColor: phase.accentColor }}
+                  />
+                )}
+
+                {/* Top Header: Sprint Number & Duration */}
+                <div className="flex items-center justify-between mb-1.5">
+                  <span
+                    className="text-[10px] font-mono font-black uppercase tracking-wider px-2 py-0.5 rounded-md text-white"
+                    style={{ backgroundColor: phase.accentColor }}
+                  >
+                    Sprint {phase.number}
+                  </span>
+                  <span className="text-[10px] font-mono font-bold text-slate-600 bg-[#FAF8F5] px-2 py-0.5 rounded border border-[#E2DBD0]">
+                    {phase.duration}
+                  </span>
+                </div>
+
+                {/* Middle: Icon & Title */}
+                <div className="flex items-center gap-2 mb-1">
+                  <div
+                    className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border"
+                    style={{
+                      backgroundColor: `${phase.accentColor}15`,
+                      borderColor: `${phase.accentColor}40`,
+                      color: phase.accentColor,
+                    }}
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                  </div>
+                  <div
+                    className={cn(
+                      "font-display font-bold text-xs sm:text-sm tracking-tight truncate",
+                      isActive ? "text-[#060B22] font-black" : "text-slate-800"
+                    )}
+                  >
+                    {phase.title}
+                  </div>
+                </div>
+
+                {/* Bottom: Milestone SLA */}
+                <div className="pt-1 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono">
+                  <span className="text-emerald-700 font-bold truncate">
+                    {phase.slaMetric}
+                  </span>
+                  <ArrowRight
+                    className="w-3 h-3 text-slate-400 transition-transform group-hover:translate-x-0.5"
+                    style={isActive ? { color: phase.accentColor } : undefined}
+                  />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ==================================================================== */}
+      {/* 2B. MOBILE TOUCH-FRIENDLY INTERACTIVE SPRINT CARD (UNDER 768px)      */}
+      {/* ==================================================================== */}
+      <div className="md:hidden block px-2">
+        <div className="p-5 rounded-3xl bg-white border border-[#E2DBD0] shadow-lg relative overflow-hidden">
+          <div
+            className="absolute top-0 inset-x-0 h-1.5"
+            style={{ backgroundColor: activePhase.accentColor }}
           />
+
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+            <span
+              className="text-xs font-mono font-black uppercase px-2.5 py-1 rounded-md text-white"
+              style={{ backgroundColor: activePhase.accentColor }}
+            >
+              Sprint {activePhase.number}
+            </span>
+            <span className="text-xs font-mono font-bold text-slate-700 bg-[#FAF8F5] px-2.5 py-1 rounded-full border border-[#E2DBD0]">
+              Duration: {activePhase.duration}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-3 mb-2">
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center border shrink-0"
+              style={{
+                backgroundColor: `${activePhase.accentColor}15`,
+                borderColor: `${activePhase.accentColor}40`,
+                color: activePhase.accentColor,
+              }}
+            >
+              <activePhase.icon className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="font-display font-black text-base text-[#0B1B3A]">
+                {activePhase.title}
+              </div>
+              <div className="text-xs text-emerald-700 font-mono font-bold">
+                {activePhase.slaMetric}
+              </div>
+            </div>
+          </div>
+
+          <p className="text-xs text-slate-600 leading-relaxed font-normal pt-1">
+            {activePhase.summary}
+          </p>
+
+          {/* Prev / Next mobile steppers */}
+          <div className="flex items-center justify-between pt-4 mt-3 border-t border-slate-100">
+            <button
+              type="button"
+              onClick={() =>
+                handleSelectSprint((activeStepIdx - 1 + PHASES.length) % PHASES.length)
+              }
+              className="p-2 rounded-xl bg-[#FAF8F5] border border-[#E2DBD0] text-slate-700 hover:text-[#060B22] text-xs font-bold inline-flex items-center gap-1.5"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              <span>Prev Sprint</span>
+            </button>
+
+            <span className="text-xs font-mono font-bold text-slate-500">
+              {activeStepIdx + 1} of {PHASES.length}
+            </span>
+
+            <button
+              type="button"
+              onClick={() =>
+                handleSelectSprint((activeStepIdx + 1) % PHASES.length)
+              }
+              className="p-2 rounded-xl bg-[#060B22] text-[#FFB020] border border-[#FFB020] text-xs font-bold inline-flex items-center gap-1.5"
+            >
+              <span>Next Sprint</span>
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
 
       {/* ==================================================================== */}
-      {/* 3. ACTIVE SPRINT DEEP-DIVE STAGE (DELIVERABLES & VERIFIED ARTIFACT)  */}
+      {/* 3. ACTIVE SPRINT DEEP-DIVE STAGE (DELIVERABLES & LIVE ARTIFACT)       */}
       {/* ==================================================================== */}
       <div className="rounded-3xl bg-white border border-[#E2DBD0] shadow-xl p-6 sm:p-8 lg:p-10 relative overflow-hidden text-left">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -579,8 +851,9 @@ export function WebDesignProcessStream() {
 
             {/* Verified Sprint Deliverables */}
             <div className="pt-2 space-y-2.5">
-              <div className="text-xs font-black uppercase tracking-wider text-slate-700">
-                Verified Sprint Deliverables:
+              <div className="text-xs font-black uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                <Shield className="w-4 h-4 text-emerald-600" />
+                <span>Verified Sprint Deliverables:</span>
               </div>
               <div className="space-y-2">
                 {activePhase.deliverables.map((item, idx) => (
@@ -628,7 +901,7 @@ export function WebDesignProcessStream() {
                 sparkle={true}
                 glow={0.8}
               >
-                <span>Book 15-Min Technical Scope Session</span>
+                <span>Discuss Sprint {activePhase.number} Timeline</span>
                 <ArrowRight className="w-4 h-4 text-[#FFB020] group-hover:translate-x-1 transition-transform" />
               </StarBorder>
 
