@@ -13,7 +13,6 @@ import {
   Code2,
   Lock,
   ArrowRight,
-  TrendingUp,
   Award,
 } from "lucide-react";
 import { WebDesignTeamShowcase } from "./WebDesignTeamShowcase";
@@ -59,16 +58,16 @@ const CAPABILITY_PILLARS = [
 
 export function WebDesignWhyChooseUs() {
   return (
-    <div className="space-y-8 sm:space-y-12">
+    <div className="space-y-8 sm:space-y-10 max-w-7xl mx-auto text-left">
       {/* 1. Authentic In-House Campus & Leadership Team Showcase */}
       <WebDesignTeamShowcase />
 
-      {/* 2. Asymmetric 4-Pillar Editorial Storytelling Matrix */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-left">
+      {/* 2. Asymmetric 4-Pillar Editorial Storytelling Matrix (Avoids generic 4-col card grid) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {CAPABILITY_PILLARS.map((pillar) => (
           <div
             key={pillar.number}
-            className="p-5 sm:p-7 rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] hover:border-[#FFB020] transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between space-y-4 group relative overflow-hidden"
+            className="p-5 sm:p-7 rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] hover:border-[#FFB020] transition-all duration-300 shadow-xs hover:shadow-md flex flex-col justify-between space-y-4 group relative overflow-hidden"
           >
             {/* Top Hover Gradient Line */}
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-transparent to-transparent group-hover:via-[#FFB020] transition-all duration-300" />

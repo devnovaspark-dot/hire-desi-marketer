@@ -15,6 +15,7 @@ import {
   ArrowRight,
   ShieldCheck,
   Lock,
+  ChevronRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -41,13 +42,13 @@ const SHOWCASE_SERVICES: ShowcaseService[] = [
     image: "/images/services-ui-design-showcase.jpg",
     stagingUrl: "bespoke-design.hdm.preview",
     description:
-      "Bespoke websites designed from scratch in Figma to reflect your brand's unique market authority, then coded into clean semantic Next.js 16 and React 19.",
+      "Handcrafted Figma wireframes translated into high-performance Next.js 16 code with sub-second speeds and custom brand design tokens.",
     metricBadge: "Figma to Semantic Code",
     deliverables: [
-      "Custom UI/UX designed in Figma with design tokens",
-      "Pixel-perfect responsive coding across all device viewports",
-      "Sub-second Core Web Vitals speed benchmark (< 0.8s LCP)",
-      "Schema.org structured data & automated search indexing",
+      "Custom Figma UI/UX with responsive design system",
+      "Pixel-perfect responsive frontend & edge rendering",
+      "Sub-second Core Web Vitals speed (< 0.8s LCP)",
+      "Automated Schema.org structured SEO metadata",
     ],
   },
   {
@@ -59,13 +60,13 @@ const SHOWCASE_SERVICES: ShowcaseService[] = [
     image: "/images/case-study-aesthetic.webp",
     stagingUrl: "modernization.hdm.preview",
     description:
-      "Transform outdated websites into modern, high-converting digital assets while meticulously preserving your existing SEO rankings and search authority.",
+      "Modernize legacy platforms into high-converting digital assets while strictly safeguarding all existing SEO keyword rankings and backlink equity.",
     metricBadge: "301 SEO Rank Protected",
     deliverables: [
-      "Comprehensive UI/UX audit & conversion friction analysis",
-      "Modern brand aesthetic revamp & typography system",
-      "Strict preservation of existing SEO rankings & 301 redirect map",
-      "Frictionless lead-capture funnels and mobile navigation",
+      "Full UX audit & conversion friction breakdown",
+      "Aesthetic modernization & fluid typography",
+      "Strict preservation of 301 URL redirect maps",
+      "Frictionless mobile conversion pathways",
     ],
   },
   {
@@ -77,13 +78,13 @@ const SHOWCASE_SERVICES: ShowcaseService[] = [
     image: "/images/case-study-cafe.webp",
     stagingUrl: "storefront-checkout.hdm.preview",
     description:
-      "Fast online storefronts optimized for high average order value (AOV), instant slide-out micro-carts, and frictionless 1-tap mobile checkout.",
+      "Lightning-fast Shopify Plus and headless storefronts engineered for high average order value, slide-out micro-carts, and 1-tap checkout.",
     metricBadge: "Sub-Second Micro-Cart",
     deliverables: [
-      "Custom Shopify 2.0, WooCommerce, or Headless commerce build",
-      "Slide-out drawer cart with progressive free-shipping triggers",
-      "1-tap Apple Pay, Shop Pay, Stripe, and global multi-currency",
-      "Automated inventory, ERP, and CRM webhook synchronization",
+      "Custom Shopify 2.0 or headless commerce architecture",
+      "Slide-out drawer cart with free-shipping tiers",
+      "1-tap Apple Pay, Shop Pay & Stripe integration",
+      "Real-time ERP, CRM, and inventory synchronization",
     ],
   },
   {
@@ -95,13 +96,13 @@ const SHOWCASE_SERVICES: ShowcaseService[] = [
     image: "/images/blog-hero-bg.webp",
     stagingUrl: "marketing-cms.hdm.preview",
     description:
-      "Empower your marketing team to publish landing pages, edit copy, and launch campaigns without touching a line of code or depending on developers.",
+      "Empower your marketing team to launch landing pages and publish content effortlessly without touching code or waiting on developers.",
     metricBadge: "Zero Developer Dependency",
     deliverables: [
-      "Clean visual block editor customized exclusively for your team",
-      "Zero bloated third-party page builders for maximum edge speed",
-      "Built-in metadata generation, OpenGraph previews & sitemaps",
-      "Role-based publishing permissions and automated cloud backups",
+      "Custom visual block editor for your exact brand guidelines",
+      "Zero bloated third-party plugins for maximal edge speed",
+      "Automated OpenGraph metadata, XML sitemaps & backups",
+      "Role-based permissions & staging approval workflows",
     ],
   },
   {
@@ -113,13 +114,13 @@ const SHOWCASE_SERVICES: ShowcaseService[] = [
     image: "/images/hero-devices-mockup.jpg",
     stagingUrl: "cloud-portal.hdm.preview",
     description:
-      "Customer portals, SaaS dashboards, and web applications built with Next.js, Node.js, and secure database integrations that scale seamlessly.",
-    metricBadge: "App-Like SPA Speed",
+      "Interactive customer dashboards, client portals, and SaaS web apps built with Next.js, Node.js, and secure database integrations.",
+    metricBadge: "App-Like SPA Velocity",
     deliverables: [
-      "Interactive customer dashboards and client portals",
-      "Secure user authentication (JWT / OAuth / Supabase / Auth0)",
-      "Custom REST and GraphQL API development",
-      "Real-time notifications, reporting, and CRM data syncing",
+      "Interactive customer portals & telemetry dashboards",
+      "Secure authentication (JWT / OAuth / Supabase / Auth0)",
+      "High-throughput REST and GraphQL API integrations",
+      "Real-time data syncing & automated event triggers",
     ],
   },
   {
@@ -131,12 +132,12 @@ const SHOWCASE_SERVICES: ShowcaseService[] = [
     image: "/images/web-dev-hero-bg.jpg",
     stagingUrl: "speed-audit.hdm.preview",
     description:
-      "Remediate slow load times, eliminate layout shifts, and compress asset pipelines to achieve green 95+ Core Web Vitals on mobile and desktop.",
+      "Eliminate render-blocking scripts, compress media pipelines, and achieve green 95+ Core Web Vitals scores across mobile and desktop.",
     metricBadge: "< 0.8s LCP Verified",
     deliverables: [
-      "Elimination of render-blocking JavaScript and bulky plugins",
-      "Automated image conversion into modern WebP & AVIF formats",
-      "Server-side caching and global edge CDN optimization",
+      "Elimination of render-blocking JavaScript & layout shifts",
+      "Automated WebP/AVIF image transcoding & edge CDN",
+      "Server-side response caching & font preloading",
       "Zero Cumulative Layout Shift (CLS 0.00) guaranteed",
     ],
   },
@@ -150,9 +151,9 @@ export function WebDesignServicesGrid() {
     SHOWCASE_SERVICES[0];
 
   return (
-    <div className="space-y-6 sm:space-y-8">
-      {/* Editorial Horizontal Service Navigation Bar */}
-      <div className="flex items-center justify-center gap-1.5 sm:gap-2.5 overflow-x-auto pb-1 no-scrollbar">
+    <div className="space-y-6 sm:space-y-8 max-w-7xl mx-auto text-left">
+      {/* 1. Large Editorial Interactive Selector Navigation */}
+      <div className="flex items-center justify-start lg:justify-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 no-scrollbar">
         {SHOWCASE_SERVICES.map((srv) => {
           const isSelected = srv.id === activeService.id;
 
@@ -178,13 +179,13 @@ export function WebDesignServicesGrid() {
         })}
       </div>
 
-      {/* Asymmetric Studio Canvas (Breaks Repetitive Card Grids) */}
-      <div className="rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] shadow-sm overflow-hidden text-left max-w-6xl mx-auto">
+      {/* 2. Full-Width Panoramic Visual Portfolio Stage (Card-Free Editorial Canvas) */}
+      <div className="rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] shadow-sm overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
-          {/* Left / Top (7 cols): Large Panoramic Browser Frame (STRICT ZERO TEXT OVERLAY) */}
-          <div className="lg:col-span-7 p-4 sm:p-6 lg:p-7 bg-[#FAF8F5] border-b lg:border-b-0 lg:border-r border-[#E2DBD0] flex flex-col justify-center">
+          {/* Visual Showcase (7 cols): Large Panoramic Browser Viewport */}
+          <div className="lg:col-span-7 p-4 sm:p-6 lg:p-8 bg-[#FAF8F5] border-b lg:border-b-0 lg:border-r border-[#E2DBD0] flex flex-col justify-center">
             <div className="rounded-xl overflow-hidden border border-[#060B22]/15 shadow-md bg-white">
-              {/* Realistic Browser Header Bar */}
+              {/* Browser Header Bar */}
               <div className="h-8 bg-[#060B22] px-3.5 flex items-center justify-between border-b border-white/10">
                 <div className="flex items-center gap-1.5 shrink-0">
                   <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
@@ -202,19 +203,19 @@ export function WebDesignServicesGrid() {
                 </span>
               </div>
 
-              {/* Pristine Authentic Website Screenshot (ZERO HTML TEXT OVERLAY) */}
+              {/* Pristine Website Screenshot (STRICT ZERO TEXT OVERLAY) */}
               <div className="relative aspect-[16/10] sm:aspect-[16/9.5] w-full bg-slate-950 overflow-hidden">
                 <Image
                   src={activeService.image}
                   alt={`${activeService.title} preview`}
                   fill
                   className="object-cover object-top transition-transform duration-700 ease-out hover:scale-102"
-                  sizes="(max-width: 1024px) 100vw, 700px"
+                  sizes="(max-width: 1024px) 100vw, 750px"
                   priority
                 />
               </div>
 
-              {/* Clean Bottom Frame Strip */}
+              {/* Bottom Frame Status */}
               <div className="px-3.5 py-2 bg-[#060B22] border-t border-white/10 flex items-center justify-between text-[11px] text-slate-300">
                 <span className="font-bold text-white truncate">{activeService.title}</span>
                 <span className="text-[10px] text-emerald-400 font-mono font-bold shrink-0">
@@ -224,8 +225,8 @@ export function WebDesignServicesGrid() {
             </div>
           </div>
 
-          {/* Right / Bottom (5 cols): Editorial Specifications & Direct CTA */}
-          <div className="lg:col-span-5 p-5 sm:p-7 flex flex-col justify-between space-y-5 text-left">
+          {/* Editorial Specs (5 cols): 40% Content Ratio with Direct CTA */}
+          <div className="lg:col-span-5 p-5 sm:p-7 lg:p-8 flex flex-col justify-between space-y-5">
             <div className="space-y-3">
               <div className="flex items-center justify-between gap-2">
                 <span className="text-[10px] font-black uppercase tracking-wider text-[#B87A00] bg-[#FFB020]/15 px-2.5 py-0.5 rounded-full border border-[#FFB020]/30">
@@ -246,7 +247,7 @@ export function WebDesignServicesGrid() {
               </p>
             </div>
 
-            {/* Included Deliverables */}
+            {/* Deliverables Checklist */}
             <div className="pt-2 border-t border-slate-100 space-y-2">
               <div className="text-[10px] font-black uppercase tracking-wider text-slate-700">
                 Key Technical Deliverables:

@@ -12,121 +12,119 @@ import {
   CheckCircle2,
   XCircle,
   Zap,
+  Activity,
+  Lock,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface JourneyPathway {
+interface TrafficSource {
   id: string;
+  name: string;
   channel: string;
+  intent: string;
   icon: React.ReactNode;
-  trafficSource: string;
-  websiteAdvantage: string;
-  businessOutcome: string;
-  metricBadge: string;
+  activeColor: string;
   frictionPoint: string;
-  hdmSolution: string;
+  hdmImpact: string;
 }
 
-const PATHWAYS: JourneyPathway[] = [
+const TRAFFIC_SOURCES: TrafficSource[] = [
   {
     id: "google-ads",
-    channel: "Google Ads",
-    icon: <Target className="w-3.5 h-3.5 text-[#FFB020]" />,
-    trafficSource: "High-Intent Keyword Search",
-    websiteAdvantage: "Sub-Second Exact-Match Lander",
-    businessOutcome: "10/10 Quality Score & Max Leads",
-    metricBadge: "Quality Score 10/10",
-    frictionPoint: "Generic slow page, 70% bounce rate, inflated cost-per-click.",
-    hdmSolution: "Exact keyword-to-headline match with sub-second initial paint.",
+    name: "Google Ads",
+    channel: "Paid Search Intent",
+    intent: "High-intent buyers searching specific solutions",
+    icon: <Target className="w-4 h-4 text-[#FFB020]" />,
+    activeColor: "#FFB020",
+    frictionPoint: "Slow generic lander causes 70% bounce & inflated cost-per-click.",
+    hdmImpact: "Exact keyword-to-headline match with sub-second page rendering.",
   },
   {
     id: "meta-ads",
-    channel: "Meta Ads",
-    icon: <MousePointerClick className="w-3.5 h-3.5 text-[#FFB020]" />,
-    trafficSource: "Instagram & FB Mobile Feed",
-    websiteAdvantage: "Thumb-First Mobile Flow + CAPI",
-    businessOutcome: "Zero Signal Loss & Scalable ROAS",
-    metricBadge: "< 0.6s Mobile Paint",
-    frictionPoint: "Mobile lag > 2s, iOS signal loss, abandoned ad clicks.",
-    hdmSolution: "Server-side CAPI telemetry with 1-tap frictionless checkout.",
+    name: "Meta Ads",
+    channel: "Paid Social & Instagram",
+    intent: "Visual impulse curiosity on mobile feeds",
+    icon: <MousePointerClick className="w-4 h-4 text-[#FFB020]" />,
+    activeColor: "#38BDF8",
+    frictionPoint: "Mobile lag > 2s and cluttered forms lose 80% of ad clickers.",
+    hdmImpact: "Thumb-first mobile flow with instant 1-tap booking or checkout.",
   },
   {
     id: "seo",
-    channel: "Technical SEO",
-    icon: <Search className="w-3.5 h-3.5 text-[#FFB020]" />,
-    trafficSource: "Top-3 Commercial Rankings",
-    websiteAdvantage: "100/100 Core Web Vitals & Schema",
-    businessOutcome: "High Dwell Time & Compounding Rank",
-    metricBadge: "100/100 Vitals Score",
-    frictionPoint: "Failing Vitals, layout shifts, high pogo-stick bounces.",
-    hdmSolution: "Clean semantic HTML5, zero CLS, and automated Schema JSON-LD.",
+    name: "Technical SEO",
+    channel: "Organic Search Engines",
+    intent: "High-volume commercial discovery queries",
+    icon: <Search className="w-4 h-4 text-[#FFB020]" />,
+    activeColor: "#34D399",
+    frictionPoint: "Poor Core Web Vitals and layout shifts tank Google keyword rankings.",
+    hdmImpact: "100/100 Core Web Vitals, clean semantic HTML5 and automated Schema.",
   },
   {
-    id: "social-media",
-    channel: "Social & Brand",
-    icon: <Share2 className="w-3.5 h-3.5 text-[#FFB020]" />,
-    trafficSource: "Founder Bio Links & Content",
-    websiteAdvantage: "Executive Brand Story & Proof",
-    businessOutcome: "Turn Curiosity Into Booked Clients",
-    metricBadge: "2.4x Conv. Lift",
-    frictionPoint: "Bio links dropped on cluttered pages with no clear next step.",
-    hdmSolution: "Curated campaign hubs with instant consultation scheduling.",
+    id: "social",
+    name: "Social & Brand",
+    channel: "Executive Inbound Authority",
+    intent: "Founder podcasts, LinkedIn content, and referrals",
+    icon: <Share2 className="w-4 h-4 text-[#FFB020]" />,
+    activeColor: "#A78BFA",
+    frictionPoint: "Bio links dropped on homepages with no clear conversion path.",
+    hdmImpact: "Curated campaign hubs with immediate consultation scheduling.",
   },
 ];
 
 export function MarketingWebsiteSynergy() {
-  const [activePathwayId, setActivePathwayId] = useState<string>("google-ads");
+  const [activeChannelId, setActiveChannelId] = useState<string>("google-ads");
 
-  const active =
-    PATHWAYS.find((p) => p.id === activePathwayId) || PATHWAYS[0];
+  const activeChannel =
+    TRAFFIC_SOURCES.find((t) => t.id === activeChannelId) || TRAFFIC_SOURCES[0];
 
   return (
     <section
       id="marketing-foundation"
-      className="py-10 sm:py-14 bg-[#060B22] text-white border-y border-white/10 relative overflow-hidden"
+      className="py-12 sm:py-16 bg-[#060B22] text-white border-y border-white/10 relative overflow-hidden text-left"
     >
-      {/* Cinematic Ambient Glows */}
-      <div className="absolute top-0 right-1/4 w-80 h-80 bg-[#FFB020]/15 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-blue-600/10 rounded-full blur-[100px] pointer-events-none" />
+      {/* Background Cinematic Glows */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FFB020]/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 space-y-6 text-center">
-        {/* Compact Editorial Header */}
-        <div className="space-y-2 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#FFB020] text-[11px] font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
-            <span>The Marketing + Website Relationship</span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8 sm:space-y-10">
+        {/* Section Header: 40% Content Ratio */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6">
+          <div className="space-y-2 max-w-2xl">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
+              <span>Interactive Marketing Infographic</span>
+            </div>
+            <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-tight">
+              Traffic Brings Visitors.{" "}
+              <span className="text-[#FFB020]">Your Website Captures Revenue.</span>
+            </h2>
           </div>
-
-          <h2 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight leading-tight">
-            Your Marketing Generates Traffic.{" "}
-            <span className="text-[#FFB020]">Your Website Captures Revenue.</span>
-          </h2>
-
-          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
-            Advertising brings visitors. But your website is where every single marketing dollar is won or lost.
+          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal max-w-md">
+            Advertising without a high-converting website is like pouring water into a leaky bucket. Your website is where marketing ROI is determined.
           </p>
         </div>
 
-        {/* Compact Minimalist Showcase Card */}
-        <div className="rounded-2xl bg-white/5 border border-white/15 backdrop-blur-md p-4 sm:p-6 shadow-xl text-left space-y-5">
-          {/* Sleek Channel Selector Pills */}
-          <div className="flex items-center justify-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 no-scrollbar">
-            {PATHWAYS.map((p) => {
-              const isSelected = p.id === active.id;
+        {/* 60% Visual: Interactive Visual Infographic Demonstration */}
+        <div className="rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md p-5 sm:p-8 lg:p-10 shadow-2xl space-y-8">
+          {/* Channel Selector Pills */}
+          <div className="flex items-center justify-start lg:justify-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+            {TRAFFIC_SOURCES.map((source) => {
+              const isSelected = source.id === activeChannel.id;
+
               return (
                 <button
-                  key={p.id}
+                  key={source.id}
                   type="button"
-                  onClick={() => setActivePathwayId(p.id)}
+                  onClick={() => setActiveChannelId(source.id)}
                   className={cn(
-                    "px-3.5 sm:px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer select-none inline-flex items-center gap-1.5 shrink-0 border",
+                    "px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer select-none inline-flex items-center gap-2 shrink-0 border",
                     isSelected
-                      ? "bg-[#FFB020] text-[#060B22] border-[#FFB020] shadow-sm font-black"
+                      ? "bg-[#FFB020] text-[#060B22] border-[#FFB020] shadow-[0_0_20px_rgba(255,176,32,0.35)] scale-102 font-black"
                       : "bg-white/5 text-slate-300 border-white/10 hover:border-white/30 hover:text-white"
                   )}
                 >
-                  <span>{p.icon}</span>
-                  <span>{p.channel}</span>
+                  <span>{source.icon}</span>
+                  <span>{source.name}</span>
                   {isSelected && (
                     <span className="w-1.5 h-1.5 rounded-full bg-[#060B22] animate-pulse shrink-0" />
                   )}
@@ -135,87 +133,132 @@ export function MarketingWebsiteSynergy() {
             })}
           </div>
 
-          {/* 3-Stage Visual Pipeline */}
-          <div className="grid grid-cols-1 md:grid-cols-11 gap-2.5 items-center">
-            {/* Stage 1 */}
-            <div className="md:col-span-3 p-3 sm:p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
-              <div className="text-[9.5px] font-black uppercase tracking-wider text-slate-400">
-                1 · Inbound Traffic
-              </div>
-              <div className="text-xs sm:text-sm font-bold text-white truncate">
-                {active.trafficSource}
-              </div>
-              <div className="text-[10.5px] text-slate-400">Paid / Organic Visit</div>
-            </div>
-
-            {/* Arrow */}
-            <div className="md:col-span-1 flex items-center justify-center text-[#FFB020]">
-              <ArrowRight className="w-4 h-4 rotate-90 md:rotate-0" />
-            </div>
-
-            {/* Stage 2: Website Multiplier */}
-            <div className="md:col-span-3 p-3 sm:p-3.5 rounded-xl bg-gradient-to-b from-[#0E1A3D] to-[#060B22] border-2 border-[#FFB020] shadow-[0_0_20px_rgba(255,176,32,0.15)] space-y-1">
+          {/* Interactive Infographic Flow Stage (Left: Inbound Source -> Center: Central Website Engine -> Right: Captured Revenue) */}
+          <div className="grid grid-cols-1 lg:grid-cols-11 gap-4 items-center">
+            {/* 1. Inbound Marketing Source (3 cols) */}
+            <div className="lg:col-span-3 p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/10 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[9.5px] font-black uppercase tracking-wider text-[#FFB020]">
-                  2 · Website Filter
+                <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
+                  Step 01 · Inbound Campaign
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
               </div>
-              <div className="text-xs sm:text-sm font-black text-white truncate">
-                {active.websiteAdvantage}
+              <div className="font-display font-black text-lg text-white">
+                {activeChannel.name}
               </div>
-              <div className="text-[10px] font-mono text-emerald-300 font-bold">
-                {active.metricBadge}
+              <div className="text-xs text-[#FFB020] font-semibold">
+                {activeChannel.channel}
+              </div>
+              <p className="text-[11px] text-slate-300 leading-relaxed">
+                {activeChannel.intent}
+              </p>
+            </div>
+
+            {/* Glowing Connector Stream (1 col) */}
+            <div className="lg:col-span-1 flex items-center justify-center text-[#FFB020] py-2 lg:py-0">
+              <div className="flex flex-col lg:flex-row items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-[#FFB020] animate-pulse" />
+                <ArrowRight className="w-5 h-5 rotate-90 lg:rotate-0 text-[#FFB020]" />
               </div>
             </div>
 
-            {/* Arrow */}
-            <div className="md:col-span-1 flex items-center justify-center text-[#FFB020]">
-              <ArrowRight className="w-4 h-4 rotate-90 md:rotate-0" />
+            {/* 2. Central Website Conversion Multiplier (3 cols) */}
+            <div className="lg:col-span-3 p-5 rounded-2xl bg-gradient-to-b from-[#0E1A3D] to-[#060B22] border-2 border-[#FFB020] shadow-[0_0_35px_rgba(255,176,32,0.25)] space-y-3 relative overflow-hidden">
+              <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-[#FF5F56]" />
+                  <div className="w-2 h-2 rounded-full bg-[#FFBD2E]" />
+                  <div className="w-2 h-2 rounded-full bg-[#27C93F]" />
+                  <span className="text-[10px] font-mono text-slate-300 pl-1">hdm-funnel.live</span>
+                </div>
+                <span className="text-[9px] font-black text-[#FFB020] uppercase tracking-wider">
+                  Multiplier
+                </span>
+              </div>
+
+              <div className="space-y-1">
+                <div className="text-xs font-bold text-slate-300">
+                  Step 02 · Central Conversion Engine
+                </div>
+                <div className="text-sm sm:text-base font-black text-white">
+                  High-Converting Experience
+                </div>
+              </div>
+
+              {/* Conversion Metrics Meter */}
+              <div className="space-y-1.5 pt-1">
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-slate-300">Conversion Rate</span>
+                  <span className="text-emerald-400 font-mono font-bold">3.4x Industry Avg</span>
+                </div>
+                <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                  <div className="bg-gradient-to-r from-[#FFB020] to-emerald-400 h-full w-[88%]" />
+                </div>
+              </div>
             </div>
 
-            {/* Stage 3 */}
-            <div className="md:col-span-3 p-3 sm:p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 space-y-1">
-              <div className="text-[9.5px] font-black uppercase tracking-wider text-emerald-400">
-                3 · Real Revenue
+            {/* Glowing Connector Stream (1 col) */}
+            <div className="lg:col-span-1 flex items-center justify-center text-emerald-400 py-2 lg:py-0">
+              <div className="flex flex-col lg:flex-row items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <ArrowRight className="w-5 h-5 rotate-90 lg:rotate-0 text-emerald-400" />
               </div>
-              <div className="text-xs sm:text-sm font-bold text-emerald-100 truncate">
-                {active.businessOutcome}
+            </div>
+
+            {/* 3. Captured Business Revenue Pipeline (3 cols) */}
+            <div className="lg:col-span-3 p-4 sm:p-5 rounded-2xl bg-emerald-950/40 border border-emerald-500/30 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-black uppercase tracking-wider text-emerald-400">
+                  Step 03 · Pipeline Impact
+                </span>
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               </div>
-              <div className="text-[10.5px] text-emerald-300/80">Captured Opportunity</div>
+              <div className="font-display font-black text-lg text-emerald-100">
+                Verified Business Revenue
+              </div>
+              <div className="text-xs text-emerald-300 font-semibold">
+                Zero Leaked Marketing Dollars
+              </div>
+              <p className="text-[11px] text-emerald-300/80 leading-relaxed">
+                Qualified inquiries, paid transactions, and booked consultation calls.
+              </p>
             </div>
           </div>
 
-          {/* Compact Contrast Callout */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 border-t border-white/10 text-xs">
-            <div className="flex items-start gap-2 p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-200">
-              <XCircle className="w-3.5 h-3.5 text-rose-400 shrink-0 mt-0.5" />
-              <div className="space-y-0.5 text-[11px] leading-snug">
-                <span className="font-bold text-rose-300">Without HDM Website: </span>
-                <span>{active.frictionPoint}</span>
+          {/* Minimalist Before vs After Comparison Strip */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-white/10 text-xs">
+            <div className="flex items-start gap-2.5 p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-200">
+              <XCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+              <div className="space-y-0.5">
+                <div className="text-[10px] font-black uppercase tracking-wider text-rose-300">
+                  Without HDM High-Converting Website:
+                </div>
+                <div className="text-[11.5px] leading-snug">{activeChannel.frictionPoint}</div>
               </div>
             </div>
 
-            <div className="flex items-start gap-2 p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-200">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-              <div className="space-y-0.5 text-[11px] leading-snug">
-                <span className="font-bold text-emerald-300">With HDM Engineering: </span>
-                <span>{active.hdmSolution}</span>
+            <div className="flex items-start gap-2.5 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-200">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+              <div className="space-y-0.5">
+                <div className="text-[10px] font-black uppercase tracking-wider text-emerald-300">
+                  With Hire Desi Marketer Engineering:
+                </div>
+                <div className="text-[11.5px] leading-snug font-medium">{activeChannel.hdmImpact}</div>
               </div>
             </div>
           </div>
 
-          {/* Direct Minimalist Action Strip */}
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-white/10">
-            <span className="text-[11px] text-slate-300 text-center sm:text-left">
-              Don't let ad dollars leak through a slow or uninspiring website.
-            </span>
+          {/* Direct Funnel Audit Action */}
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10">
+            <div className="text-xs text-slate-300 text-center sm:text-left">
+              Ensure every dollar spent on Google, Meta, SEO or Social converts into business pipeline.
+            </div>
             <Link
               href="/get-a-quote"
-              className="btn-luxury-gold py-2 px-4 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-1.5 shrink-0 shadow-sm cursor-pointer"
+              className="btn-luxury-gold py-2.5 px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shrink-0 cursor-pointer shadow-lg"
             >
               <span>Audit Your Website Funnel</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

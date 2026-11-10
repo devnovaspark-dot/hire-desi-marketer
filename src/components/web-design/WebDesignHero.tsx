@@ -18,9 +18,7 @@ import {
   Sparkles,
   Lock,
   ExternalLink,
-  Layers,
   Code2,
-  CheckCircle2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -39,16 +37,16 @@ interface WebsitePreviewState {
 
 const PREVIEW_DATA: WebsitePreviewState[] = [
   {
-    id: "healthcare",
-    name: "One Medical",
-    shortTag: "Healthcare",
-    category: "Healthcare & Life Sciences",
-    desktopImage: "/images/ref-onemedical.jpg",
-    mobileImage: "/images/ref-onemedical.jpg",
-    url: "onemedical.com/patient-portal",
-    tagline: "Frictionless 1-tap mobile booking & HIPAA-grade patient UX",
-    metric: "100/100 Core Web Vitals",
-    techBadge: "React 19 + Next.js",
+    id: "saas",
+    name: "Linear",
+    shortTag: "Modern SaaS",
+    category: "Next-Gen Web Application",
+    desktopImage: "/images/ref-linear.jpg",
+    mobileImage: "/images/ref-linear.jpg",
+    url: "linear.app/craft",
+    tagline: "Sub-second developer workflow & keyboard-first cloud architecture",
+    metric: "< 0.8s LCP Benchmark",
+    techBadge: "Next.js 16 + Tailwind",
   },
   {
     id: "ecommerce",
@@ -63,16 +61,16 @@ const PREVIEW_DATA: WebsitePreviewState[] = [
     techBadge: "Shopify Plus & Stripe",
   },
   {
-    id: "saas",
-    name: "Linear",
-    shortTag: "Modern SaaS",
-    category: "Modern Enterprise Web App",
-    desktopImage: "/images/ref-linear.jpg",
-    mobileImage: "/images/ref-linear.jpg",
-    url: "linear.app/craft",
-    tagline: "Sub-second developer workflow & keyboard-first cloud architecture",
-    metric: "< 0.8s LCP Benchmark",
-    techBadge: "Next.js 16 + Tailwind",
+    id: "healthcare",
+    name: "One Medical",
+    shortTag: "Healthcare",
+    category: "Healthcare & Life Sciences",
+    desktopImage: "/images/ref-onemedical.jpg",
+    mobileImage: "/images/ref-onemedical.jpg",
+    url: "onemedical.com/patient-portal",
+    tagline: "Frictionless 1-tap mobile booking & HIPAA-grade patient UX",
+    metric: "100/100 Core Web Vitals",
+    techBadge: "React 19 + Next.js",
   },
   {
     id: "corporate",
@@ -96,7 +94,7 @@ export function WebDesignHero() {
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [cycleProgress, setCycleProgress] = useState<number>(0);
 
-  // Mouse coordinates for subtle 3D perspective tilt
+  // Mouse coordinates for 3D perspective tilt
   const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -113,12 +111,12 @@ export function WebDesignHero() {
     setIsPaused(false);
   };
 
-  // Auto-cycle between website showcases with pause on hover
+  // Auto-cycle through live showcases with pause on hover
   useEffect(() => {
     if (isPaused || viewMode !== "showcase") return;
 
     const intervalMs = 60;
-    const durationMs = 5000;
+    const durationMs = 6000;
     const step = (intervalMs / durationMs) * 100;
 
     const timer = setInterval(() => {
@@ -149,16 +147,16 @@ export function WebDesignHero() {
 
   return (
     <section className="relative overflow-hidden w-full min-h-auto lg:min-h-[calc(100vh-4.5rem)] flex flex-col justify-center py-8 sm:py-12 lg:py-10 bg-[#F6F4EE] bg-[radial-gradient(#E2DBD0_1px,transparent_1px)] [background-size:24px_24px] border-b border-[#E2DBD0]">
-      {/* Luxury Diffuse Ambient Glows */}
+      {/* Cinematic Ambient Glows */}
       <div className="absolute top-10 left-6 sm:left-24 w-72 sm:w-[560px] h-72 sm:h-[560px] bg-[#FFB020]/15 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" />
       <div className="absolute bottom-10 right-6 sm:right-32 w-64 sm:w-[500px] h-64 sm:h-[500px] bg-[#060B22]/10 rounded-full blur-[110px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-center">
           {/* ================================================================ */}
-          {/* LEFT COLUMN (6 cols): Bold Editorial Statement & Direct Conversion */}
+          {/* LEFT: 40% Content Ratio — Oversized Editorial Typography & CTAs   */}
           {/* ================================================================ */}
-          <div className="lg:col-span-6 space-y-5 text-left">
+          <div className="lg:col-span-5 space-y-5 text-left">
             {/* Live Agency Status Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-[#E2DBD0] shadow-2xs">
               <span className="flex h-2 w-2 relative">
@@ -174,49 +172,42 @@ export function WebDesignHero() {
               </span>
             </div>
 
-            {/* Editorial Headline with Intentional Line Breaks */}
+            {/* Oversized Editorial Headline */}
             <div className="space-y-3">
-              <h1 className="font-display font-black text-3xl sm:text-5xl lg:text-[44px] xl:text-[50px] text-[#060B22] tracking-tight leading-[1.1]">
-                Your Website Should Do More Than Look Good.{" "}
+              <h1 className="font-display font-black text-3xl sm:text-5xl lg:text-[42px] xl:text-[48px] text-[#060B22] tracking-tight leading-[1.08]">
+                We Build Digital Experiences{" "}
                 <span className="bg-gradient-to-r from-[#B87A00] via-[#FFB020] to-[#E68A00] bg-clip-text text-transparent block sm:inline">
-                  It Should Grow Your Business.
+                  That Move Businesses Forward.
                 </span>
               </h1>
 
-              <div className="space-y-2 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal max-w-xl">
-                <p className="font-bold text-[#060B22] text-sm sm:text-base">
-                  Professional Web Design and Development Services for Growing Businesses
-                </p>
-                <p className="text-slate-600 text-xs sm:text-[13px]">
-                  If you are searching for web design and development services to build or upgrade your business website, Hire Desi Marketer offers web design and development services that blend simple design ideas, up-to-date development tools and user-friendly experiences to make websites that fit your business goals.
-                </p>
-                <p className="text-slate-600 text-xs sm:text-[13px]">
-                  From custom website design and website redesign services to ecommerce website development and CMS development, our team offers scalable and user-friendly website solutions. Whether you need a website or want to hire experienced web developers in India, we help turn your requirements into a good digital experience.
-                </p>
-              </div>
+              {/* Concise Supporting Statement (Zero Fluff) */}
+              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal max-w-lg">
+                Custom Figma design, Next.js full-stack engineering, and conversion rate optimization built to turn your website into a high-growth revenue asset.
+              </p>
             </div>
 
-            {/* 4 Feature Badges */}
+            {/* Micro Pillars Strip */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
-              <div className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/95 border border-[#E2DBD0] text-[11px] font-bold text-[#060B22] shadow-2xs hover:border-[#FFB020] transition-colors">
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/95 border border-[#E2DBD0] text-[10.5px] font-bold text-[#060B22] shadow-2xs">
                 <Palette className="w-3.5 h-3.5 text-[#B87A00] shrink-0" />
                 <span className="truncate">Bespoke UI/UX</span>
               </div>
-              <div className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/95 border border-[#E2DBD0] text-[11px] font-bold text-[#060B22] shadow-2xs hover:border-[#FFB020] transition-colors">
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/95 border border-[#E2DBD0] text-[10.5px] font-bold text-[#060B22] shadow-2xs">
                 <Zap className="w-3.5 h-3.5 text-[#B87A00] shrink-0" />
                 <span className="truncate">99+ Speed</span>
               </div>
-              <div className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/95 border border-[#E2DBD0] text-[11px] font-bold text-[#060B22] shadow-2xs hover:border-[#FFB020] transition-colors">
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/95 border border-[#E2DBD0] text-[10.5px] font-bold text-[#060B22] shadow-2xs">
                 <ShoppingBag className="w-3.5 h-3.5 text-[#B87A00] shrink-0" />
                 <span className="truncate">CMS &amp; E-Com</span>
               </div>
-              <div className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/95 border border-[#E2DBD0] text-[11px] font-bold text-[#060B22] shadow-2xs hover:border-[#FFB020] transition-colors">
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/95 border border-[#E2DBD0] text-[10.5px] font-bold text-[#060B22] shadow-2xs">
                 <Users className="w-3.5 h-3.5 text-[#B87A00] shrink-0" />
                 <span className="truncate">Dedicated Devs</span>
               </div>
             </div>
 
-            {/* Action CTAs */}
+            {/* Direct Conversion Actions */}
             <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <Link
                 href="/get-a-quote"
@@ -230,25 +221,11 @@ export function WebDesignHero() {
                 href="#services"
                 className="btn-luxury-navy py-3.5 px-5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-2xs border border-slate-700 hover:border-[#FFB020] transition-colors cursor-pointer text-center"
               >
-                <span>Explore Our Work</span>
+                <span>Explore Solutions</span>
               </a>
             </div>
 
-            {/* Scoping Promise */}
-            <div className="flex items-center gap-2 text-xs text-slate-600">
-              <Zap className="w-3.5 h-3.5 text-[#B87A00] shrink-0" />
-              <span>
-                Need a tailored proposal &amp; roadmap within 24 hours?{" "}
-                <Link
-                  href="/get-a-quote"
-                  className="font-bold text-[#060B22] hover:text-[#B87A00] underline underline-offset-2 transition-colors cursor-pointer"
-                >
-                  Request a Free Consultation →
-                </Link>
-              </span>
-            </div>
-
-            {/* Social Proof Strip */}
+            {/* Trust Proof */}
             <div className="pt-2 border-t border-[#E2DBD0] flex flex-wrap items-center gap-3 sm:gap-4 text-[11px] text-slate-600">
               <div className="flex items-center gap-1.5">
                 <div className="flex text-amber-400">
@@ -278,11 +255,11 @@ export function WebDesignHero() {
           </div>
 
           {/* ================================================================ */}
-          {/* RIGHT COLUMN (6 cols): 3D Interactive Stage (Unobstructed View)   */}
+          {/* RIGHT: 60% Visual Ratio — 3D Floating Interactive Digital Stage   */}
           {/* ================================================================ */}
           <div
             ref={containerRef}
-            className="lg:col-span-6 relative mt-6 lg:mt-0 space-y-3"
+            className="lg:col-span-7 relative mt-6 lg:mt-0 space-y-3"
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={handleMouseLeave}
@@ -377,6 +354,19 @@ export function WebDesignHero() {
                 transformStyle: "preserve-3d",
               }}
             >
+              {/* Floating 3D Telemetry HUD Pill (translateZ: 60px) */}
+              <div
+                className="absolute -top-3.5 -left-3 sm:-left-4 bg-[#060B22]/95 backdrop-blur-md border border-[#FFB020]/40 text-white px-3 py-1 rounded-xl shadow-xl flex items-center gap-2 z-30 transition-transform duration-300 hidden sm:flex"
+                style={{
+                  transform: `translateZ(60px) translate(${mousePos.x * 6}px, ${mousePos.y * 6}px)`,
+                }}
+              >
+                <Sparkles className="w-3 h-3 text-[#FFB020]" />
+                <span className="text-[10px] font-bold text-white">
+                  Next.js 16 + React 19 Engine
+                </span>
+              </div>
+
               {/* ============================================================== */}
               {/* VIEW 1: LIVE BRAND SHOWCASE MODE (DESKTOP OR MOBILE)           */}
               {/* ============================================================== */}
@@ -413,7 +403,7 @@ export function WebDesignHero() {
                           alt={`${currentPreview.name} authentic desktop website showcase`}
                           fill
                           className="object-cover object-top transition-transform duration-700 ease-out hover:scale-102"
-                          sizes="(max-width: 1024px) 100vw, 680px"
+                          sizes="(max-width: 1024px) 100vw, 750px"
                           priority
                         />
                       </div>
@@ -481,7 +471,7 @@ export function WebDesignHero() {
               )}
 
               {/* ============================================================== */}
-              {/* VIEW 2: INTERACTIVE UI ARCHITECTURE STUDIO (AS SEEN IN MOCKUP) */}
+              {/* VIEW 2: INTERACTIVE UI ARCHITECTURE STUDIO                     */}
               {/* ============================================================== */}
               {viewMode === "architecture" && (
                 <div
@@ -555,7 +545,6 @@ export function WebDesignHero() {
 
                   {/* Visual Blueprint Canvas */}
                   <div className="p-5 sm:p-6 space-y-4 min-h-[260px] flex flex-col justify-between">
-                    {/* Simulated Wireframe / UI Header */}
                     <div className="flex items-center justify-between border-b border-white/10 pb-3">
                       <div className="flex items-center gap-2">
                         <div className="w-6 h-6 rounded-md bg-[#FFB020] flex items-center justify-center font-bold text-[10px] text-[#060B22]">
@@ -570,7 +559,6 @@ export function WebDesignHero() {
                       </div>
                     </div>
 
-                    {/* Dynamic Tab Body */}
                     {activeArchTab === "ui" && (
                       <div className="space-y-3 py-2">
                         <div className="w-3/4 h-4 bg-[#FFB020]/90 rounded-md" />
@@ -614,7 +602,7 @@ export function WebDesignHero() {
                         </div>
 
                         <div className="flex items-center justify-between text-xs text-white pt-1">
-                          <span>First Input Delay / Interaction (INP)</span>
+                          <span>First Input Delay (INP)</span>
                           <span className="text-emerald-400 font-mono font-bold">24ms (Instant)</span>
                         </div>
                         <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">

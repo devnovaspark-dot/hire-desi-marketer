@@ -11,8 +11,6 @@ import {
   Zap,
   Globe,
   ShieldCheck,
-  Cpu,
-  Layers,
   Terminal,
   Copy,
   Check,
@@ -45,9 +43,9 @@ const TECH_CATALOG: TechShowcaseItem[] = [
     category: "modern",
     tag: "Full-Stack React Framework",
     icon: "/icons/nextjs.svg",
-    headline: "Sub-Second Edge Rendering & Superior Search Engine Authority",
+    headline: "Sub-Second Edge Rendering & Core Web Vitals Dominance",
     businessValue:
-      "Next.js 16 combines server-side streaming, partial pre-rendering, and global edge caching to deliver near-instant load times. Google rewards this speed with higher organic rankings and lower acquisition costs.",
+      "Next.js 16 partial pre-rendering and edge caching deliver near-instant initial paints that Google rewards with top organic rankings.",
     speedBadge: "< 0.65s LCP Speed",
     seoBadge: "100/100 Core Web Vitals",
     scaleBadge: "Global Edge CDN",
@@ -70,9 +68,9 @@ const TECH_CATALOG: TechShowcaseItem[] = [
       ],
     },
     capabilities: [
-      "Sub-second page speeds on mobile and desktop viewports",
-      "Automated image conversion into modern WebP & AVIF formats",
-      "Automated Schema.org JSON-LD structured metadata generation",
+      "Sub-second page speeds across mobile and desktop viewports",
+      "Automated WebP and AVIF image format optimization",
+      "Automated Schema.org structured JSON-LD metadata",
       "Zero render-blocking scripts with partial pre-rendering",
     ],
   },
@@ -82,9 +80,9 @@ const TECH_CATALOG: TechShowcaseItem[] = [
     category: "modern",
     tag: "Interactive UI Engine",
     icon: "/icons/react.svg",
-    headline: "Fluid, 60fps Interactive Components with Zero Page Flicker",
+    headline: "Fluid 60fps Micro-Interactions with Zero Page Flickering",
     businessValue:
-      "React 19 powers dynamic micro-interactions, seamless multi-step lead funnels, and app-like transitions without page refreshes, keeping visitors engaged and dramatically increasing conversion rates.",
+      "React 19 powers buttery-smooth client states, interactive multi-step funnels, and app-like transitions that dramatically increase on-page engagement.",
     speedBadge: "Zero Full Page Reloads",
     seoBadge: "SEO Hydrated",
     scaleBadge: "Modular Design Tokens",
@@ -99,118 +97,117 @@ const TECH_CATALOG: TechShowcaseItem[] = [
         "  const [state, submitAction, isPending] = useActionState(submitScope);",
         "  const [optimisticStatus, setStatus] = useOptimistic('idle');",
         "",
-        "  return (",
-        "    <FrictionlessStage onSubmit={submitAction} isFluid={true} />",
-        "  );",
+        "  return <InteractiveQuoteWorkflow onSubmit={submitAction} isPending={isPending} />;",
         "}",
       ],
     },
     capabilities: [
-      "Modular Figma-to-React design systems customized for your brand",
-      "Instant response times with zero layout shift (CLS 0.00)",
-      "Seamless integration with third-party APIs, CRMs, and analytics",
-      "Smooth micro-interactions and scroll-triggered storytelling",
+      "Fluid state updates and optimistic UI responses",
+      "Concurrent React architecture for instant touch responses",
+      "Component-level code splitting and lazy asset loading",
+      "Modular design system tokens with clean reusability",
     ],
   },
   {
     id: "tailwind",
     name: "Tailwind CSS v4",
     category: "modern",
-    tag: "Modern Styling System",
+    tag: "Utility-First Design System",
     icon: "/icons/tailwind.svg",
-    headline: "Ultra-Lightweight CSS Architecture & Flawless Responsive Breakpoints",
+    headline: "Ultra-Lightweight CSS with Zero Unused Stylesheets",
     businessValue:
-      "Tailwind eliminates bloated legacy stylesheets by compiling only the exact utility styles your website uses. The result is a bespoke visual identity that loads in the blink of an eye.",
-    speedBadge: "< 12KB Stylesheet",
-    seoBadge: "Zero Render-Blocking",
-    scaleBadge: "100% Mobile Parity",
+      "Eliminate bulky legacy CSS files. Tailwind compiles into a tiny production stylesheet for instant browser rendering and perfect visual consistency.",
+    speedBadge: "< 12KB Total CSS",
+    seoBadge: "Zero CSS Blocking",
+    scaleBadge: "Design Tokens",
     codeSnippet: {
-      filename: "styles/theme.css",
+      filename: "src/app/theme.css",
       language: "css",
       lines: [
         "@theme {",
         "  --color-brand-navy: #060B22;",
         "  --color-brand-gold: #FFB020;",
         "  --font-display: 'Bricolage Grotesque', sans-serif;",
-        "  --shadow-luxury: 0 24px 60px -15px rgba(6, 11, 34, 0.2);",
+        "  --breakpoint-3xl: 1920px;",
         "}",
         "",
-        "@utility fluid-type {",
-        "  font-size: clamp(1.25rem, 2vw + 1rem, 2.5rem);",
+        ".btn-conversion {",
+        "  @apply bg-brand-gold text-brand-navy font-black rounded-xl shadow-lg;",
         "}",
       ],
     },
     capabilities: [
-      "100% custom visual styling matching your exact brand guidelines",
-      "Consistent typography hierarchy, fluid spacing, and color tokens",
-      "Instantaneous mobile layout responsiveness across all device sizes",
-      "Clean CSS architecture with zero style pollution or legacy conflicts",
+      "Zero bloated CSS files loaded into client browsers",
+      "Fluid responsive breakpoints from mobile to 4K displays",
+      "Strict brand color tokens and typography consistency",
+      "Hardware-accelerated CSS 3D transforms and keyframes",
     ],
   },
   {
     id: "shopify",
     name: "Shopify Plus",
     category: "cms",
-    tag: "E-Commerce Authority",
+    tag: "Enterprise Commerce Platform",
     icon: "/icons/shopify.svg",
-    headline: "High-Velocity Headless & Native Storefronts Built for High AOV",
+    headline: "Scalable Storefronts with Sub-Second Checkout Velocity",
     businessValue:
-      "Shopify Plus powers frictionless commerce experiences with high-converting 1-page checkouts, global multi-currency payment processing, and automated inventory sync across warehouses.",
-    speedBadge: "99.99% Store Uptime",
-    seoBadge: "1-Click Checkout",
-    scaleBadge: "Scale to 8-Figures",
+      "Enterprise Shopify Plus builds handling millions in GMV with instant slide-out carts, 1-tap Shop Pay / Apple Pay, and automated ERP/CRM syncing.",
+    speedBadge: "1-Tap Checkout",
+    seoBadge: "E-Com Rich Snippets",
+    scaleBadge: "Unlimited Traffic Spikes",
     codeSnippet: {
-      filename: "lib/shopify-client.ts",
-      language: "typescript",
+      filename: "sections/slide-out-cart.liquid",
+      language: "liquid",
       lines: [
-        "// Shopify Storefront API with Headless Micro-Cart",
-        "export async function createInstantCart(lines: CartLine[]) {",
-        "  const cart = await shopifyFetch({",
-        "    query: CREATE_CART_MUTATION,",
-        "    variables: { lines, freeShippingThreshold: 75 },",
-        "  });",
-        "  return { cart, instantCheckoutUrl: cart.checkoutUrl };",
-        "}",
+        "{% comment %} HDM High-Converting Slide Drawer Cart {% endcomment %}",
+        "<div class=\"cart-drawer\" data-shipping-threshold=\"100\">",
+        "  {% render 'free-shipping-progress', cart: cart %}",
+        "  {% render 'cart-items', items: cart.items %}",
+        "  <button type=\"submit\" name=\"checkout\" class=\"btn-apple-pay\">",
+        "    Instant 1-Tap Checkout",
+        "  </button>",
+        "</div>",
       ],
     },
     capabilities: [
-      "Custom Shopify 2.0 theme design matching your brand aesthetic",
-      "Integrated Apple Pay, Shop Pay, Stripe, and global multi-currency",
-      "Automated inventory tracking and shipping notification sync",
-      "Slide-out drawer cart with progressive free-shipping incentives",
+      "Custom Liquid 2.0 themes and headless Storefront API builds",
+      "Slide-out drawer cart with automatic free-shipping tier meter",
+      "Omnichannel inventory, QuickBooks, and ERP webhook sync",
+      "International multi-currency and localized taxation setup",
     ],
   },
   {
     id: "wordpress",
     name: "Custom WordPress",
     category: "cms",
-    tag: "Flexible Content CMS",
+    tag: "Headless & Gutenberg Architecture",
     icon: "/icons/wordpress.svg",
-    headline: "Empower Your Marketing Team to Publish Without Code",
+    headline: "Enterprise Content Governance with Zero Page Builder Bloat",
     businessValue:
-      "We build clean, custom block-based WordPress websites that give your marketing team full freedom to create pages, publish articles, and update content without depending on developers.",
-    speedBadge: "< 1.0s Edge Cached",
-    seoBadge: "Rank Math / Yoast SEO",
-    scaleBadge: "Client-Editable",
+      "Custom Gutenberg block themes designed exclusively for marketing autonomy. Zero heavy Elementor or Divi bloat to keep load times under one second.",
+    speedBadge: "< 0.8s LCP Speed",
+    seoBadge: "Yoast / RankMath API",
+    scaleBadge: "Redis Object Cache",
     codeSnippet: {
       filename: "functions.php",
       language: "php",
       lines: [
-        "<?php",
-        "// Zero-bloat custom block theme registration",
-        "add_action('init', function () {",
-        "    register_block_type(__DIR__ . '/blocks/hero-showcase');",
-        "    register_block_type(__DIR__ . '/blocks/conversion-hub');",
-        "    add_theme_support('custom-spacing');",
+        "// HDM Custom Enterprise WordPress Architecture",
+        "add_action('after_setup_theme', function() {",
         "    add_theme_support('align-wide');",
+        "    add_theme_support('responsive-embeds');",
+        "    add_theme_support('editor-styles');",
         "});",
+        "",
+        "// Disable unnecessary scripts & bloat",
+        "remove_action('wp_head', 'wp_generator');",
       ],
     },
     capabilities: [
-      "Custom visual block editor designed exclusively for your team",
-      "Zero bloated third-party page builders for maximum performance",
-      "Top-tier technical SEO setup with clean canonical structure",
-      "Hardened security firewalls and daily cloud backups",
+      "Custom Gutenberg blocks tailored to your exact brand styles",
+      "Strict security hardening and automated daily off-site backups",
+      "Server-side Redis object caching and Cloudflare edge CDN",
+      "Complete editorial independence for content and marketing teams",
     ],
   },
   {
@@ -219,115 +216,51 @@ const TECH_CATALOG: TechShowcaseItem[] = [
     category: "cms",
     tag: "Visual Development Platform",
     icon: "/icons/webflow.svg",
-    headline: "Award-Winning Agency Polish with Built-In Enterprise Hosting",
+    headline: "Rapid Marketing Launch Speed with Custom Code Integrations",
     businessValue:
-      "Webflow bridges the gap between high-end design and clean code, providing stunning fluid animations, scroll-triggered visual storytelling, and reliable enterprise hosting on AWS and Fastly.",
-    speedBadge: "AWS & Fastly Edge CDN",
-    seoBadge: "Visual Content Editor",
-    scaleBadge: "Agency-Tier Polish",
+      "Bespoke Webflow websites with custom JavaScript integrations, dynamic CMS collections, and client-friendly visual editing for rapid marketing agility.",
+    speedBadge: "Global AWS Cloudfront",
+    seoBadge: "Built-In OpenGraph",
+    scaleBadge: "Zero Hosting Hassle",
     codeSnippet: {
-      filename: "webflow/interactions.js",
+      filename: "webflow-custom.js",
       language: "javascript",
       lines: [
-        "// Custom Webflow Engine Micro-Interactions",
-        "Webflow.push(function () {",
-        "  initSmoothScroll({ lerp: 0.08 });",
-        "  bindPerspectiveTilt('.browser-stage');",
-        "  trackConversionSignals({ gtmId: 'GTM-5RS9F324' });",
+        "// HDM Webflow Custom Interaction Bridge",
+        "document.addEventListener('DOMContentLoaded', () => {",
+        "  const forms = document.querySelectorAll('[data-hdm-form]');",
+        "  forms.forEach(form => {",
+        "    form.addEventListener('submit', handleConversionTracking);",
+        "  });",
         "});",
       ],
     },
     capabilities: [
-      "Smooth micro-interactions and scroll-triggered animations",
-      "Intuitive on-page visual editor for your marketing team",
-      "Zero plugin maintenance or server update hassles",
-      "Built-in SSL and enterprise DDoS protection",
-    ],
-  },
-  {
-    id: "laravel",
-    name: "Laravel 11",
-    category: "modern",
-    tag: "Enterprise Backend Architecture",
-    icon: "/icons/laravel.svg",
-    headline: "Secure, Structured & Reliable Architecture for Custom Solutions",
-    businessValue:
-      "Laravel provides enterprise-grade structure with built-in authentication, encryption, and automated database handling, ensuring your business logic is robust, secure, and easily maintainable.",
-    speedBadge: "Sub-25ms Execution",
-    seoBadge: "Enterprise Security",
-    scaleBadge: "Clean Modularity",
-    codeSnippet: {
-      filename: "app/Services/ProjectScopingService.php",
-      language: "php",
-      lines: [
-        "namespace App\\Services;",
-        "",
-        "class ProjectScopingService {",
-        "    public function generateRoadmap(ClientRequest $request): ScopeReport {",
-        "        return ScopeReport::createFromRequirements($request->validated());",
-        "    }",
-        "}",
-      ],
-    },
-    capabilities: [
-      "Built-in bank-grade security protocols against vulnerabilities",
-      "Custom customer dashboards, portals, and billing systems",
-      "Automated email notifications and PDF invoice generators",
-      "Seamless database migrations and reliable backups",
-    ],
-  },
-  {
-    id: "nodejs",
-    name: "Node.js & APIs",
-    category: "modern",
-    tag: "High-Concurrency Runtime",
-    icon: "/icons/nodejs.svg",
-    headline: "High-Velocity Serverless APIs & Real-Time Data Pipelines",
-    businessValue:
-      "Node.js powers fast, lightweight backends capable of handling thousands of concurrent users simultaneously without slowing down, perfect for customer portals and high-traffic integrations.",
-    speedBadge: "Sub-20ms API Response",
-    seoBadge: "Serverless Runtime",
-    scaleBadge: "Zero Downtime",
-    codeSnippet: {
-      filename: "api/routes/quote.ts",
-      language: "typescript",
-      lines: [
-        "import { NextResponse } from 'next/server';",
-        "",
-        "export async function POST(req: Request) {",
-        "  const { client, scope } = await req.json();",
-        "  await dispatchToSeniorArchitect(client, scope);",
-        "  return NextResponse.json({ success: true, sla: '< 24h' });",
-        "}",
-      ],
-    },
-    capabilities: [
-      "Real-time notifications, chat, and data syncing",
-      "Custom REST and GraphQL API development",
-      "Automated lead routing and CRM background sync",
-      "Cost-effective server resource utilization",
+      "Clean semantic CSS class architecture via Client-First framework",
+      "Custom dynamic CMS collection templates and search filters",
+      "Third-party API webhook integrations with Zapier and Make",
+      "Intuitive client editor mode with zero risk of breaking layouts",
     ],
   },
 ];
 
 export function WebDesignTechStack() {
-  const [selectedTechId, setSelectedTechId] = useState<string>("nextjs");
+  const [activeTechId, setActiveTechId] = useState<string>("nextjs");
   const [copied, setCopied] = useState<boolean>(false);
 
   const activeTech =
-    TECH_CATALOG.find((t) => t.id === selectedTechId) || TECH_CATALOG[0];
+    TECH_CATALOG.find((t) => t.id === activeTechId) || TECH_CATALOG[0];
 
   const handleCopyCode = () => {
-    const text = activeTech.codeSnippet.lines.join("\n");
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText(activeTech.codeSnippet.lines.join("\n"));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <div className="space-y-6 sm:space-y-8">
-      {/* 1. Distinctive Horizontal Technology Selector Ribbon */}
-      <div className="flex items-center justify-center gap-1.5 sm:gap-2.5 overflow-x-auto pb-1 no-scrollbar">
+    <div className="space-y-6 sm:space-y-8 max-w-7xl mx-auto text-left">
+      {/* 1. Technology Selector Ribbon */}
+      <div className="flex items-center justify-start lg:justify-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 no-scrollbar">
         {TECH_CATALOG.map((tech) => {
           const isSelected = tech.id === activeTech.id;
 
@@ -335,7 +268,7 @@ export function WebDesignTechStack() {
             <button
               key={tech.id}
               type="button"
-              onClick={() => setSelectedTechId(tech.id)}
+              onClick={() => setActiveTechId(tech.id)}
               className={cn(
                 "px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer select-none inline-flex items-center gap-2 shrink-0 border",
                 isSelected
@@ -352,23 +285,23 @@ export function WebDesignTechStack() {
         })}
       </div>
 
-      {/* 2. Interactive Engineering Workbench Studio */}
-      <div className="rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] shadow-sm overflow-hidden text-left max-w-6xl mx-auto">
+      {/* 2. Central Technology Studio Environment (Card-Free Split Canvas) */}
+      <div className="rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] shadow-sm overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
-          {/* Left Column (6 cols): Specifications & Business Advantage */}
-          <div className="lg:col-span-6 p-5 sm:p-7 flex flex-col justify-between space-y-5 border-b lg:border-b-0 lg:border-r border-[#E2DBD0]">
-            <div className="space-y-3.5">
+          {/* Left Column (6 cols): Architecture Specs & Metrics */}
+          <div className="lg:col-span-6 p-5 sm:p-7 lg:p-8 flex flex-col justify-between space-y-5 border-b lg:border-b-0 lg:border-r border-[#E2DBD0]">
+            <div className="space-y-3">
               <div className="flex items-center justify-between gap-2">
                 <span className="text-[10px] font-black uppercase tracking-wider text-[#B87A00] bg-[#FFB020]/15 px-2.5 py-0.5 rounded-full border border-[#FFB020]/30">
                   {activeTech.tag}
                 </span>
 
-                <span className="font-mono text-xs font-bold text-slate-400">
-                  Core Framework
+                <span className="text-xs font-mono font-bold text-slate-400">
+                  {activeTech.name}
                 </span>
               </div>
 
-              <h3 className="font-display font-black text-2xl sm:text-3xl text-[#0B1B3A] tracking-tight leading-snug">
+              <h3 className="font-display font-black text-xl sm:text-2xl text-[#0B1B3A] tracking-tight leading-snug">
                 {activeTech.headline}
               </h3>
 
@@ -376,30 +309,19 @@ export function WebDesignTechStack() {
                 {activeTech.businessValue}
               </p>
 
-              {/* 3 Clear Telemetry Badges */}
-              <div className="grid grid-cols-3 gap-2 pt-1">
-                <div className="p-2 sm:p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E2DBD0] text-center sm:text-left">
-                  <div className="text-[9px] uppercase font-black text-slate-400">Speed Benchmark</div>
-                  <div className="text-[11px] font-black text-[#0B1B3A] truncate mt-0.5 flex items-center justify-center sm:justify-start gap-1">
-                    <Zap className="w-3 h-3 text-[#FFB020]" />
-                    <span className="truncate">{activeTech.speedBadge}</span>
-                  </div>
+              {/* Verified Metrics Badges */}
+              <div className="grid grid-cols-3 gap-2 pt-2">
+                <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E2DBD0] text-center space-y-0.5">
+                  <div className="text-[10px] font-mono font-bold text-slate-500 uppercase">Speed</div>
+                  <div className="text-[11px] font-bold text-[#0B1B3A] truncate">{activeTech.speedBadge}</div>
                 </div>
-
-                <div className="p-2 sm:p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E2DBD0] text-center sm:text-left">
-                  <div className="text-[9px] uppercase font-black text-slate-400">Search &amp; SEO</div>
-                  <div className="text-[11px] font-black text-[#0B1B3A] truncate mt-0.5 flex items-center justify-center sm:justify-start gap-1">
-                    <Globe className="w-3 h-3 text-blue-500" />
-                    <span className="truncate">{activeTech.seoBadge}</span>
-                  </div>
+                <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E2DBD0] text-center space-y-0.5">
+                  <div className="text-[10px] font-mono font-bold text-slate-500 uppercase">SEO Vitals</div>
+                  <div className="text-[11px] font-bold text-emerald-700 truncate">{activeTech.seoBadge}</div>
                 </div>
-
-                <div className="p-2 sm:p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E2DBD0] text-center sm:text-left">
-                  <div className="text-[9px] uppercase font-black text-slate-400">Scale Architecture</div>
-                  <div className="text-[11px] font-black text-[#0B1B3A] truncate mt-0.5 flex items-center justify-center sm:justify-start gap-1">
-                    <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                    <span className="truncate">{activeTech.scaleBadge}</span>
-                  </div>
+                <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E2DBD0] text-center space-y-0.5">
+                  <div className="text-[10px] font-mono font-bold text-slate-500 uppercase">Scale</div>
+                  <div className="text-[11px] font-bold text-blue-700 truncate">{activeTech.scaleBadge}</div>
                 </div>
               </div>
             </div>

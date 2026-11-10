@@ -15,8 +15,8 @@ export function WebDesignCaseStudies() {
     WEB_CASE_STUDIES[0];
 
   return (
-    <div className="space-y-6 sm:space-y-8 max-w-6xl mx-auto text-left">
-      {/* 1. Interactive Curated Exhibition Selector Strip */}
+    <div className="space-y-6 sm:space-y-8 max-w-7xl mx-auto text-left">
+      {/* 1. Curated Exhibition Filmstrip Selector */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
         {WEB_CASE_STUDIES.map((study, idx) => {
           const isSelected = study.id === activeStudy.id;
@@ -33,7 +33,6 @@ export function WebDesignCaseStudies() {
                   : "bg-white text-slate-700 border-[#E2DBD0] hover:border-slate-400 hover:bg-[#FAF8F5]"
               )}
             >
-              {/* Progress Bar / Active Indicator */}
               {isSelected && (
                 <div className="absolute top-0 inset-x-0 h-1 bg-[#FFB020]" />
               )}
@@ -83,11 +82,11 @@ export function WebDesignCaseStudies() {
         })}
       </div>
 
-      {/* 2. Flagship Exhibition Spotlight Canvas (Breaks Repetitive Card Grids) */}
+      {/* 2. Flagship Exhibition Spotlight Stage (Visuals Dominate 70%) */}
       <div className="rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] shadow-md overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
-          {/* Left Column (7 cols): Full-Bleed Realistic Browser Viewport (STRICT ZERO TEXT OVERLAY) */}
-          <div className="lg:col-span-7 p-4 sm:p-6 bg-[#FAF8F5] border-b lg:border-b-0 lg:border-r border-[#E2DBD0] flex flex-col justify-center">
+          {/* Panoramic Realistic Browser Frame (STRICT ZERO TEXT OVERLAY) */}
+          <div className="lg:col-span-7 p-4 sm:p-6 lg:p-8 bg-[#FAF8F5] border-b lg:border-b-0 lg:border-r border-[#E2DBD0] flex flex-col justify-center">
             <div className="rounded-xl overflow-hidden border border-[#060B22]/15 shadow-md bg-white">
               {/* Browser Header Bar */}
               <div className="h-8 bg-[#060B22] px-3.5 flex items-center justify-between border-b border-white/10">
@@ -107,14 +106,14 @@ export function WebDesignCaseStudies() {
                 </span>
               </div>
 
-              {/* Pristine Authentic Screenshot (ZERO TEXT OVERLAY) */}
+              {/* Pristine Authentic Screenshot (STRICT ZERO TEXT OVERLAY) */}
               <div className="relative aspect-[16/10] sm:aspect-[16/9.5] w-full bg-slate-950 overflow-hidden">
                 <Image
                   src={activeStudy.image}
                   alt={activeStudy.imageAlt}
                   fill
                   className="object-cover object-top transition-transform duration-700 ease-out hover:scale-102"
-                  sizes="(max-width: 1024px) 100vw, 700px"
+                  sizes="(max-width: 1024px) 100vw, 750px"
                   priority
                 />
               </div>
@@ -130,8 +129,8 @@ export function WebDesignCaseStudies() {
             </div>
           </div>
 
-          {/* Right Column (5 cols): Architectural Specs & Direct Conversion */}
-          <div className="lg:col-span-5 p-5 sm:p-7 flex flex-col justify-between space-y-5">
+          {/* Exhibition Specs & Direct Actions */}
+          <div className="lg:col-span-5 p-5 sm:p-7 lg:p-8 flex flex-col justify-between space-y-5">
             <div className="space-y-3.5">
               <div className="flex items-center justify-between gap-2">
                 <span className="text-[10px] font-black uppercase tracking-wider text-[#B87A00] bg-[#FFB020]/15 px-2.5 py-0.5 rounded-full border border-[#FFB020]/30">
