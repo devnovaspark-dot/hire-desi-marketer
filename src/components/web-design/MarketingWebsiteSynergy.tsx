@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   Sparkles,
@@ -18,21 +18,17 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
-import TileReveal from "@/components/ui/TileReveal";
 
 type EngineMode = "leaky" | "hdm";
 
-// Real High-Conversion Portfolio & Benchmark Screens for React Bits Tile Reveal
-const TILE_IMAGES = [
-  "/images/ref-linear.jpg",
-  "/images/ref-allbirds.jpg",
-  "/images/ref-onemedical.jpg",
-  "/images/ref-mckinsey.jpg",
-  "/images/services-ui-design-showcase.jpg",
-  "/images/hero-devices-mockup.jpg",
-  "/images/case-study-aesthetic.webp",
-  "/images/case-study-cafe.webp",
-  "/images/case-study-dental.webp",
+// Real High-Conversion Portfolio & Benchmark Screens for Scroll-Driven Roll-Out Shutter
+const ROLLOUT_TILES = [
+  { src: "/images/ref-linear.jpg", title: "SaaS Enterprise", side: "left" },
+  { src: "/images/ref-allbirds.jpg", title: "Direct-to-Consumer", side: "left" },
+  { src: "/images/ref-onemedical.jpg", title: "Healthcare Portal", side: "left" },
+  { src: "/images/ref-mckinsey.jpg", title: "Global Corporate", side: "right" },
+  { src: "/images/services-ui-design-showcase.jpg", title: "High-AOV Storefront", side: "right" },
+  { src: "/images/hero-devices-mockup.jpg", title: "Web Application", side: "right" },
 ];
 
 // Real Brand SVGs for authentic industry recognizability
@@ -223,6 +219,25 @@ const CHANNELS: TrafficChannel[] = [
 export function MarketingWebsiteSynergy() {
   const [mode, setMode] = useState<EngineMode>("hdm");
   const [activeChannelId, setActiveChannelId] = useState<string>("google-ads");
+  const headerRef = useRef<HTMLDivElement>(null);
+  const [rollout, setRollout] = useState<number>(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!headerRef.current) return;
+      const rect = headerRef.current.getBoundingClientRect();
+      const winH = window.innerHeight;
+      // Start roll-out as header scrolls into view, complete smoothly within 350px
+      const start = winH * 0.9;
+      const end = winH * 0.35;
+      const p = Math.min(Math.max((start - rect.top) / (start - end), 0), 1);
+      setRollout(p);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const activeChannel =
     CHANNELS.find((c) => c.id === activeChannelId) || CHANNELS[0];
@@ -230,41 +245,90 @@ export function MarketingWebsiteSynergy() {
   return (
     <section
       id="marketing-foundation"
-      className="bg-[#FAF8F5] border-y border-[#E2DBD0] select-none scroll-mt-24"
+      className="py-10 sm:py-14 lg:py-16 bg-[#FAF8F5] border-y border-[#E2DBD0] select-none scroll-mt-24 relative overflow-hidden"
     >
       {/* ============================================================ */}
-      {/* 1. REACT BITS PRO TILE REVEAL COMPONENT                      */}
-      {/* Image tiles fly in & split on scroll to reveal the headline  */}
+      {/* 1. SCROLL-DRIVEN PARALLAX ROLL-OUT SHUTTER HEADER            */}
+      {/* Images part laterally on scroll; zero dead space below       */}
       {/* ============================================================ */}
-      <TileReveal
-        images={TILE_IMAGES}
-        columns={3}
-        gap={16}
-        gridWidth={880}
-        scrollLength={0.85}
-        backgroundColor="#FAF8F5"
-        headline={
-          <div className="max-w-3xl mx-auto space-y-3 px-4">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
-              <span>03 · The Marketing + Website Relationship</span>
-            </div>
-
-            <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
-              A Great Advertising Campaign Cannot Fix a Leaky Website.
-            </h2>
-
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
-              Your ad spend is only as profitable as the website it sends visitors to. See the difference between a typical template and an engineered conversion engine.
-            </p>
+      <div
+        ref={headerRef}
+        className="relative max-w-4xl mx-auto px-4 text-center mb-6 sm:mb-8"
+      >
+        {/* Floating Shutter Preview Tiles (Left & Right Flanks) */}
+        <div className="pointer-events-none absolute inset-0 z-20 hidden md:flex items-center justify-between px-2 sm:px-6 overflow-hidden">
+          {/* Left Shutter Group */}
+          <div
+            className="flex flex-col gap-2.5 transition-transform duration-300 ease-out will-change-transform"
+            style={{
+              transform: `translate3d(-${rollout * 160}%, 0, 0) rotate(-${rollout * 10}deg)`,
+              opacity: Math.max(0, 1 - rollout * 1.4),
+            }}
+          >
+            {ROLLOUT_TILES.filter((t) => t.side === "left").map((tile, i) => (
+              <div
+                key={i}
+                className="w-32 sm:w-36 h-20 sm:h-22 rounded-xl overflow-hidden border-2 border-white/90 shadow-xl bg-slate-900"
+              >
+                <img
+                  src={tile.src}
+                  alt={tile.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
           </div>
-        }
-      />
+
+          {/* Right Shutter Group */}
+          <div
+            className="flex flex-col gap-2.5 transition-transform duration-300 ease-out will-change-transform"
+            style={{
+              transform: `translate3d(${rollout * 160}%, 0, 0) rotate(${rollout * 10}deg)`,
+              opacity: Math.max(0, 1 - rollout * 1.4),
+            }}
+          >
+            {ROLLOUT_TILES.filter((t) => t.side === "right").map((tile, i) => (
+              <div
+                key={i}
+                className="w-32 sm:w-36 h-20 sm:h-22 rounded-xl overflow-hidden border-2 border-white/90 shadow-xl bg-slate-900"
+              >
+                <img
+                  src={tile.src}
+                  alt={tile.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Revealed Section Headline (Unveiled as tiles part) */}
+        <div
+          className="space-y-2.5 transition-all duration-500 relative z-10"
+          style={{
+            opacity: Math.min(1, 0.45 + rollout * 0.55),
+            transform: `scale(${0.97 + rollout * 0.03})`,
+          }}
+        >
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
+            <span>03 · The Marketing + Website Relationship</span>
+          </div>
+
+          <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
+            A Great Advertising Campaign Cannot Fix a Leaky Website.
+          </h2>
+
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+            Your ad spend is only as profitable as the website it sends visitors to. See the difference between a typical template and an engineered conversion engine.
+          </p>
+        </div>
+      </div>
 
       {/* ============================================================ */}
       {/* 2. THE INTERACTIVE CONVERSION ENGINE SIMULATOR               */}
       {/* ============================================================ */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 text-center pb-16 pt-2">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 text-center pb-8 sm:pb-12">
 
         {/* ============================================================ */}
         {/* 2. DUAL-MODE INTERACTIVE TOGGLE SWITCH                       */}
