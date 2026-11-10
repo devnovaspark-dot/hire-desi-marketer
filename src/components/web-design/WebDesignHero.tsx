@@ -14,11 +14,9 @@ import {
   CheckCircle2,
   Cpu,
   GitBranch,
-  Gauge,
-  Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { HeroBackgroundAnimation } from "./HeroBackgroundAnimation";
+import GhostFibers from "@/components/ui/GhostFibers";
 
 type ConsoleTab = "vitals" | "design" | "stack" | "ownership";
 
@@ -26,44 +24,75 @@ export function WebDesignHero() {
   const [activeTab, setActiveTab] = useState<ConsoleTab>("vitals");
 
   return (
-    <section className="relative overflow-hidden w-full py-10 sm:py-14 lg:py-18 bg-[#F6F4EE] border-b border-[#E2DBD0] select-none">
-      {/* 1. Amazing Interactive Background Canvas Animation & Radiant Ambient Lighting */}
-      <HeroBackgroundAnimation />
+    <section className="relative overflow-hidden w-full py-12 sm:py-16 lg:py-20 bg-[#060B22] text-white border-b border-[#FFB020]/20 select-none">
+      {/* ================================================================ */}
+      {/* 1. GHOST FIBERS 3D WEBGL2 BACKGROUND ANIMATION                   */}
+      {/* ================================================================ */}
+      <GhostFibers
+        glowColor="#FFB020"
+        lineColor="#FFE082"
+        secondaryColor="#E68A00"
+        speed={0.4}
+        scale={1.05}
+        rotation={16}
+        rollSpeed={0.12}
+        layers={3}
+        threads={80}
+        density={1.1}
+        thickness={1.1}
+        flow={0.35}
+        particles={0.8}
+        sparkle={0.8}
+        glow={1.15}
+        brightness={1.05}
+        vignette={0.3}
+        grain={0.05}
+        mouseInteraction={true}
+        hoverEffect="focus"
+        mouseStrength={1}
+        pulseOnClick={true}
+        className="absolute inset-0 w-full h-full opacity-90"
+      />
 
+      {/* Subtle Ambient Radial Lighting Behind Fibers */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[850px] h-[380px] bg-[#FFB020]/8 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-80 h-80 bg-sky-500/5 rounded-full blur-[120px] pointer-events-none" />
+
+      {/* ================================================================ */}
+      {/* 2. HERO CONTENT LAYER (ABOVE CANVAS WITH POINTER INTERACTION)    */}
+      {/* ================================================================ */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6 sm:space-y-8">
-        {/* ================================================================ */}
-        {/* 1. CENTERED GRAND EDITORIAL MASTHEAD                              */}
-        {/* ================================================================ */}
+        {/* Grand Editorial Masthead */}
         <div className="space-y-4 max-w-4xl mx-auto">
           {/* Live Agency Status Pill */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-[#E2DBD0] shadow-2xs">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#FFB020]/30 shadow-2xs">
             <span className="flex h-2 w-2 relative">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
-            <span className="text-[10.5px] sm:text-[11px] font-black text-[#060B22] uppercase tracking-wider">
+            <span className="text-[10.5px] sm:text-[11px] font-black text-[#FFB020] uppercase tracking-wider">
               Enterprise Web Engineering &amp; Bespoke UI/UX
             </span>
-            <span className="text-slate-300 hidden sm:inline">|</span>
-            <span className="text-[10.5px] font-semibold text-slate-500 hidden sm:inline">
+            <span className="text-white/20 hidden sm:inline">|</span>
+            <span className="text-[10.5px] font-semibold text-slate-300 hidden sm:inline">
               Serving USA · Canada · UK · Australia
             </span>
           </div>
 
           {/* Grand Authoritative Headline */}
-          <h1 className="font-display font-black text-3xl sm:text-5xl lg:text-[56px] text-[#060B22] tracking-tight leading-[1.08]">
+          <h1 className="font-display font-black text-3xl sm:text-5xl lg:text-[56px] text-white tracking-tight leading-[1.08]">
             Your Website Should Do More Than Look Good.{" "}
-            <span className="bg-gradient-to-r from-[#B87A00] via-[#FFB020] to-[#E68A00] bg-clip-text text-transparent block sm:inline">
+            <span className="bg-gradient-to-r from-[#FFB020] via-[#FFE082] to-[#E68A00] bg-clip-text text-transparent block sm:inline">
               It Should Grow Your Business.
             </span>
           </h1>
 
           {/* Editorial Subtitle */}
           <div className="space-y-1 max-w-2xl mx-auto pt-1">
-            <p className="font-bold text-[#060B22] text-sm sm:text-base">
+            <p className="font-bold text-slate-200 text-sm sm:text-base">
               Professional Web Design and Development Services for Growing Businesses
             </p>
-            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
               We design and engineer bespoke, high-converting digital platforms that blend Figma-grade design systems with sub-second Next.js full-stack development—turning casual visitors into qualified enterprise revenue.
             </p>
           </div>
@@ -80,14 +109,14 @@ export function WebDesignHero() {
 
             <a
               href="#services"
-              className="btn-luxury-navy py-3.5 px-7 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-xs cursor-pointer text-center"
+              className="py-3.5 px-7 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-xs cursor-pointer text-center bg-white/10 hover:bg-white/15 text-white border border-white/20 hover:border-[#FFB020]/50 transition-all"
             >
               <span>Explore Solutions ↓</span>
             </a>
           </div>
 
           {/* Verified Trust Strip */}
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-600">
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-300">
             <div className="flex items-center gap-1.5">
               <div className="flex text-[#FFB020]">
                 {[...Array(5)].map((_, i) => (
@@ -97,31 +126,31 @@ export function WebDesignHero() {
                   />
                 ))}
               </div>
-              <span className="font-bold text-[#060B22]">4.9 / 5.0</span>
-              <span className="text-[10.5px] text-slate-500 font-normal">
+              <span className="font-bold text-white">4.9 / 5.0</span>
+              <span className="text-[10.5px] text-slate-400 font-normal">
                 (120+ Brands Delivered)
               </span>
             </div>
-            <span className="text-slate-300 hidden sm:inline">•</span>
-            <div className="flex items-center gap-1.5 font-semibold text-slate-700">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+            <span className="text-white/20 hidden sm:inline">•</span>
+            <div className="flex items-center gap-1.5 font-semibold text-slate-200">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
               <span>100% Code &amp; IP Ownership</span>
             </div>
-            <span className="text-slate-300 hidden sm:inline">•</span>
-            <div className="flex items-center gap-1.5 font-semibold text-slate-700">
-              <Clock className="w-3.5 h-3.5 text-[#B87A00]" />
+            <span className="text-white/20 hidden sm:inline">•</span>
+            <div className="flex items-center gap-1.5 font-semibold text-slate-200">
+              <Clock className="w-3.5 h-3.5 text-[#FFB020]" />
               <span>&lt; 24h Turnaround</span>
             </div>
-            <span className="text-slate-300 hidden sm:inline">•</span>
-            <div className="flex items-center gap-1.5 font-semibold text-slate-700">
-              <Zap className="w-3.5 h-3.5 text-[#FFB020]" />
+            <span className="text-white/20 hidden sm:inline">•</span>
+            <div className="flex items-center gap-1.5 font-semibold text-slate-200">
+              <Zap className="w-3.5 h-3.5 text-emerald-400" />
               <span>&lt; 0.8s LCP SLA</span>
             </div>
           </div>
         </div>
 
         {/* ================================================================ */}
-        {/* 2. INTERACTIVE DIGITAL ENGINEERING STUDIO CONSOLE (ZERO IMAGES!)  */}
+        {/* 3. INTERACTIVE DIGITAL ENGINEERING STUDIO CONSOLE (ZERO IMAGES!)  */}
         {/* ================================================================ */}
         <div className="pt-2 max-w-5xl mx-auto space-y-3">
           {/* Interactive Feature Switcher Tabs */}
@@ -142,8 +171,8 @@ export function WebDesignHero() {
                   className={cn(
                     "px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer flex items-center gap-1.5 select-none",
                     isSelected
-                      ? "bg-[#060B22] text-[#FFB020] border border-[#FFB020]/50 shadow-md ring-1 ring-[#FFB020]/30 scale-102"
-                      : "bg-white/95 text-slate-600 border border-[#E2DBD0] hover:border-slate-400 hover:text-[#0B1B3A]"
+                      ? "bg-gradient-to-r from-[#FFB020] to-[#E68A00] text-[#060B22] font-black shadow-lg shadow-[#FFB020]/20 scale-102"
+                      : "bg-white/10 text-slate-300 border border-white/15 hover:border-white/30 hover:text-white"
                   )}
                 >
                   <span>{tab.label}</span>
@@ -151,8 +180,8 @@ export function WebDesignHero() {
                     className={cn(
                       "text-[10px] font-mono px-1.5 py-0.2 rounded-md hidden md:inline-block",
                       isSelected
-                        ? "bg-[#FFB020]/20 text-[#FFB020]"
-                        : "bg-slate-100 text-slate-500"
+                        ? "bg-[#060B22]/20 text-[#060B22]"
+                        : "bg-white/10 text-slate-400"
                     )}
                   >
                     {tab.kicker}
@@ -163,9 +192,9 @@ export function WebDesignHero() {
           </div>
 
           {/* Architectural Studio Stage (Mac-Style Terminal & Visual Telemetry) */}
-          <div className="relative rounded-2xl sm:rounded-3xl bg-[#060B22] border border-[#FFB020]/25 shadow-[0_25px_60px_-15px_rgba(6,11,34,0.35)] overflow-hidden text-left">
+          <div className="relative rounded-2xl sm:rounded-3xl bg-[#081232]/90 backdrop-blur-xl border border-[#FFB020]/30 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] overflow-hidden text-left">
             {/* Minimalist macOS Browser Top Bar */}
-            <div className="h-10 bg-[#081232] px-4 flex items-center justify-between border-b border-white/10">
+            <div className="h-10 bg-[#060B22]/95 px-4 flex items-center justify-between border-b border-white/10">
               <div className="flex items-center gap-2">
                 <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
                 <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
@@ -247,7 +276,7 @@ export function WebDesignHero() {
                     </div>
 
                     {/* Speed Comparison Bars */}
-                    <div className="space-y-2 p-3.5 rounded-xl bg-black/30 border border-white/10 text-xs">
+                    <div className="space-y-2 p-3.5 rounded-xl bg-black/40 border border-white/10 text-xs">
                       <div className="flex items-center justify-between text-[11px]">
                         <span className="text-white font-bold flex items-center gap-1.5">
                           <span className="w-2 h-2 rounded-full bg-emerald-400" />
