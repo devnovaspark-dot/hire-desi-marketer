@@ -234,9 +234,9 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         <section
           id="engagement-models"
-          className="py-8 sm:py-12 lg:py-16 bg-white border-y border-[#E2DBD0] scroll-mt-24 sm:scroll-mt-28"
+          className="py-6 sm:py-10 lg:py-12 bg-white border-y border-[#E2DBD0] scroll-mt-24 sm:scroll-mt-28"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5 sm:space-y-6">
             <div className="text-center max-w-3xl mx-auto space-y-2.5">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Layers className="w-3.5 h-3.5 text-[#FFB020]" />
