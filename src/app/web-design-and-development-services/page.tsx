@@ -278,15 +278,13 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 9. THE 4 ARCHITECTURAL PILLARS (SINGLE-WINDOW COLONNADE)         */}
+        {/* 9. THE 4 ARCHITECTURAL PILLARS (SINGLE-WINDOW REAL PILLARS)       */}
         {/* ================================================================ */}
         <section
           id="why-choose-us"
-          className="py-6 sm:py-8 lg:py-10 bg-gradient-to-b from-[#060B22] via-[#081232] to-[#060B22] text-white border-y border-white/10 relative overflow-hidden scroll-mt-24"
+          className="py-8 sm:py-12 lg:py-14 bg-[#FAF8F5] border-y border-[#E2DBD0] scroll-mt-24 sm:scroll-mt-28"
         >
-          {/* Ambient Stage Lighting Glows */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-[#FFB020]/15 rounded-full blur-[140px] pointer-events-none" />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <WebDesignWhyChooseUs />
           </div>
         </section>
