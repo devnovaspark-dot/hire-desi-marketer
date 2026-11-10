@@ -47,7 +47,6 @@ import { WebDesignEngagementModels } from "@/components/web-design/WebDesignEnga
 import { WebDesignWhyChooseUs } from "@/components/web-design/WebDesignWhyChooseUs";
 import { WebDesignTeamShowcase } from "@/components/web-design/WebDesignTeamShowcase";
 import { WebDesignFaqAccordion } from "@/components/web-design/WebDesignFaqAccordion";
-import LaserFlow from "@/components/ui/LaserFlow";
 import {
   WEB_SERVICES,
   WEB_INDUSTRIES,
@@ -140,23 +139,6 @@ export default function WebDesignServicesPage() {
           id="services"
           className="py-10 sm:py-14 lg:py-18 bg-[#060B22] text-white border-y border-[#FFB020]/20 relative overflow-hidden"
         >
-          {/* LaserFlow WebGL2 Background Animation */}
-          <LaserFlow
-            color="#FFB020"
-            beamPosition={0.5}
-            surfaceLevel={0.22}
-            intensity={1.8}
-            beamWidth={1.5}
-            flare={1.5}
-            spread={1.6}
-            spill={1.2}
-            fog={0.25}
-            dust={1.8}
-            streaks={1.5}
-            theme="dark"
-            className="absolute inset-0 w-full h-full opacity-85"
-          />
-
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 relative z-10">
             <div className="text-center max-w-3xl mx-auto space-y-3 pb-6 border-b border-white/10">
               <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/10 text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">

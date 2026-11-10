@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
+import LaserFlow from "@/components/ui/LaserFlow";
 
 interface ShowcaseService {
   id: string;
@@ -165,6 +166,7 @@ export function WebDesignServicesGrid() {
   const [selectedServiceId, setSelectedServiceId] = useState<string>("custom-design");
   const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const stageRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const activeService =
     SHOWCASE_SERVICES.find((s) => s.id === selectedServiceId) ||
@@ -286,13 +288,31 @@ export function WebDesignServicesGrid() {
           ref={stageRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className="lg:col-span-7 lg:sticky lg:top-24 space-y-4"
+          className="lg:col-span-7 lg:sticky lg:top-24 space-y-4 relative pt-12 sm:pt-14"
           style={{
             perspective: "1400px",
           }}
         >
+          {/* LaserFlow WebGL2 Animation Flowing Like Liquid Over the Head of the Card */}
+          <LaserFlow
+            surfaceRef={cardRef}
+            color="#FFB020"
+            beamPosition={0.5}
+            surfaceLevel={0.12}
+            intensity={1.5}
+            beamWidth={1.2}
+            flare={1.1}
+            spread={1.8}
+            spill={1.5}
+            fog={0.15}
+            dust={1.2}
+            streaks={1.2}
+            theme="dark"
+            className="absolute inset-0 w-full h-full pointer-events-none"
+          />
+
           {/* Top Status Indicators */}
-          <div className="flex items-center justify-between px-1 text-xs">
+          <div className="flex items-center justify-between px-1 text-xs relative z-10">
             <div className="flex items-center gap-2">
               <span className="text-[10.5px] font-mono font-black uppercase tracking-wider text-[#FFB020] bg-[#FFB020]/15 px-3 py-0.5 rounded-full border border-[#FFB020]/30">
                 {activeService.categoryBadge}
@@ -310,7 +330,8 @@ export function WebDesignServicesGrid() {
 
           {/* Panoramic 3D Browser Viewport (STRICT ZERO TEXT OVERLAY ON IMAGE) */}
           <div
-            className="rounded-3xl bg-[#060B22] border border-white/10 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden transition-transform duration-300 ease-out"
+            ref={cardRef}
+            className="rounded-3xl bg-[#060B22] border border-white/10 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden transition-transform duration-300 ease-out relative z-10"
             style={{
               transform: `rotateY(${mousePos.x * 4}deg) rotateX(${-mousePos.y * 4}deg)`,
               transformStyle: "preserve-3d",
