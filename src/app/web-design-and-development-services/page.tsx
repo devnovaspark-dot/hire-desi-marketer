@@ -134,21 +134,20 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 2. COMPLETE WEBSITE DESIGN & DEVELOPMENT SERVICES               */}
         {/* ================================================================ */}
-        <section id="services" className="py-8 sm:py-12 lg:py-16 bg-white border-y border-[#E2DBD0]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-2.5">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
-                <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
-                <span>Full-Spectrum Solutions</span>
+        <section id="services" className="py-10 sm:py-16 lg:py-20 bg-white border-y border-[#E2DBD0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-[#E2DBD0] pb-6">
+              <div className="space-y-2 max-w-2xl">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+                  <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
+                  <span>01 · Bespoke Digital Architecture</span>
+                </div>
+                <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
+                  Complete Website Solutions Built to Grow Your Business.
+                </h2>
               </div>
-              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
-                Complete Website Solutions to Help Your Business Grow
-              </h2>
-              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal">
-                Your website is one of your most important business assets. We
-                help businesses build, redesign, and optimize websites that
-                deliver better user experiences, improve performance, and support
-                business growth.
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-md">
+                We combine bespoke Figma design, modern full-stack development, and conversion rate optimization to turn websites into high-performing commercial assets.
               </p>
             </div>
 
@@ -165,20 +164,20 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 4. TECHNOLOGIES & PLATFORMS WE WORK WITH                          */}
         {/* ================================================================ */}
-        <section id="tech-stack" className="py-8 sm:py-12 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-2.5">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
-                <Code2 className="w-3.5 h-3.5 text-[#FFB020]" />
-                <span>Modern Engineering &amp; Platforms</span>
+        <section id="tech-stack" className="py-10 sm:py-16 lg:py-20 scroll-mt-24 sm:scroll-mt-28">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-[#E2DBD0] pb-6">
+              <div className="space-y-2 max-w-2xl">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+                  <Code2 className="w-3.5 h-3.5 text-[#FFB020]" />
+                  <span>02 · Engineering Standards</span>
+                </div>
+                <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
+                  Battle-Tested Frameworks &amp; Modern CMS Architecture.
+                </h2>
               </div>
-              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight">
-                Expertise Across Modern Web Technologies &amp; CMS Platforms
-              </h2>
-              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal">
-                Whether you want to build a website from scratch or improve your
-                existing platform, our developers work with a wide range of
-                technologies and content management systems.
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-md">
+                Whether you require a headless Next.js web application or a flexible Shopify / WordPress build, we architect for sub-second speeds and zero technical debt.
               </p>
             </div>
 
@@ -190,21 +189,18 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 5. INDUSTRIES WE SERVE                                            */}
         {/* ================================================================ */}
-        <section id="industries" className="py-8 sm:py-12 lg:py-16 bg-white border-y border-[#E2DBD0]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-2.5">
+        <section id="industries" className="py-10 sm:py-16 lg:py-20 bg-white border-y border-[#E2DBD0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Building className="w-3.5 h-3.5 text-[#FFB020]" />
-                <span>Specialized Domain Experience</span>
+                <span>03 · Specialized Domain Blueprints</span>
               </div>
               <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight">
-                Website Solutions for Businesses Across Industries
+                Tailored Digital Experiences Across Key Sectors
               </h2>
-              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal">
-                We understand that every industry has different website
-                requirements, customer expectations, and business objectives. Our
-                team develops tailored website solutions for businesses across
-                multiple industries.
+              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+                We engineer industry-specific user journeys—from HIPAA-compliant patient booking to sub-second headless e-commerce checkouts.
               </p>
             </div>
 
@@ -216,20 +212,20 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 6. OUR WEBSITE DESIGN & DEVELOPMENT PROCESS                       */}
         {/* ================================================================ */}
-        <section id="process" className="py-8 sm:py-12 lg:py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-2.5">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020]" />
-                <span>Agile &amp; Transparent Delivery</span>
+        <section id="process" className="py-10 sm:py-16 lg:py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-[#E2DBD0] pb-6">
+              <div className="space-y-2 max-w-2xl">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020]" />
+                  <span>04 · Disciplined Agile Delivery</span>
+                </div>
+                <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
+                  From Discovery to High-Impact Launch in 7 Predictable Sprints.
+                </h2>
               </div>
-              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight">
-                Our Proven Website Development Process
-              </h2>
-              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal">
-                We follow a structured development process to ensure every project
-                is delivered with quality, transparency, and alignment with your
-                business objectives.
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-md">
+                Zero black-box development. Follow real-time staging builds, Loom video walkthroughs, and weekly milestone demos.
               </p>
             </div>
 
@@ -243,19 +239,19 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         <section
           id="engagement-models"
-          className="py-8 sm:py-12 lg:py-16 bg-white border-y border-[#E2DBD0] scroll-mt-24 sm:scroll-mt-28"
+          className="py-10 sm:py-16 lg:py-20 bg-white border-y border-[#E2DBD0] scroll-mt-24 sm:scroll-mt-28"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-2.5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+            <div className="text-center max-w-3xl mx-auto space-y-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Layers className="w-3.5 h-3.5 text-[#FFB020]" />
-                <span>Flexible Collaboration · Zero Lock-Ins</span>
+                <span>05 · Collaboration Framework</span>
               </div>
               <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight">
-                Flexible Engagement Models Built for Your Business Needs
+                Flexible Engagement Models Built for Scope Certainty
               </h2>
-              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal">
-                Every website project has distinct requirements. Choose the collaboration structure that best fits your goals, bandwidth, and development roadmap.
+              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+                Choose the collaboration structure that best fits your goals, bandwidth, and development roadmap. Zero long-term lock-in.
               </p>
             </div>
 
@@ -267,18 +263,20 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 8. WEBSITE INSPIRATION & LIVE DESIGN REFERENCES                  */}
         {/* ================================================================ */}
-        <section id="work" className="py-8 sm:py-12 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-2.5">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
-                <Laptop className="w-3.5 h-3.5 text-[#FFB020]" />
-                <span>Website Inspiration &amp; Design References</span>
+        <section id="work" className="py-10 sm:py-16 lg:py-20 scroll-mt-24 sm:scroll-mt-28">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-[#E2DBD0] pb-6">
+              <div className="space-y-2 max-w-2xl">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+                  <Laptop className="w-3.5 h-3.5 text-[#FFB020]" />
+                  <span>06 · Design Craft &amp; References</span>
+                </div>
+                <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
+                  Website Inspirations &amp; Verified Production Benchmarks.
+                </h2>
               </div>
-              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight">
-                Website Inspirations &amp; Live Design References
-              </h2>
-              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal">
-                Explore realistic digital benchmarks and design patterns across healthcare, e-commerce, high-growth SaaS, and enterprise consulting that inspire our engineering standards.
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-md">
+                Explore live digital benchmarks across healthcare, e-commerce, high-growth SaaS, and enterprise consulting that inspire our engineering standards.
               </p>
             </div>
 
