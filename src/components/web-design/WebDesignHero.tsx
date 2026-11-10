@@ -193,7 +193,7 @@ export function WebDesignHero() {
                   </div>
                 </div>
 
-                {/* High-Resolution Interactive Website Preview (ZERO TEXT OVERLAYS) */}
+                {/* High-Resolution Interactive Website Preview (STRICT ZERO TEXT OVERLAYS) */}
                 <div className="relative aspect-[16/10.5] sm:aspect-[16/10] w-full bg-slate-950 overflow-hidden">
                   <Image
                     src="/images/ref-linear.jpg"
@@ -203,45 +203,6 @@ export function WebDesignHero() {
                     sizes="(max-width: 1024px) 100vw, 750px"
                     priority
                   />
-                </div>
-              </div>
-
-              {/* Floating Holographic Satellite Chips in 3D Space */}
-              <div
-                className="absolute -bottom-4 -left-4 sm:-bottom-5 sm:-left-5 p-3 rounded-2xl bg-white/95 backdrop-blur-md border border-[#E2DBD0] shadow-xl flex items-center gap-2.5 text-xs z-30 transition-transform duration-300"
-                style={{
-                  transform: "translateZ(30px)",
-                }}
-              >
-                <div className="w-8 h-8 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center shrink-0">
-                  <Zap className="w-4 h-4 text-emerald-600" />
-                </div>
-                <div>
-                  <div className="font-display font-black text-xs text-[#060B22]">
-                    &lt; 0.58s Initial Paint
-                  </div>
-                  <div className="text-[10px] text-slate-500 font-mono">
-                    Sub-Second Edge Rendering
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className="absolute -top-4 -right-4 sm:-top-5 sm:-right-5 p-3 rounded-2xl bg-[#060B22]/95 backdrop-blur-md border border-white/15 shadow-xl flex items-center gap-2.5 text-xs text-white z-30 transition-transform duration-300"
-                style={{
-                  transform: "translateZ(30px)",
-                }}
-              >
-                <div className="w-8 h-8 rounded-xl bg-[#FFB020]/20 border border-[#FFB020]/40 flex items-center justify-center shrink-0">
-                  <Activity className="w-4 h-4 text-[#FFB020]" />
-                </div>
-                <div>
-                  <div className="font-display font-black text-xs text-white">
-                    100 / 100 Vitals
-                  </div>
-                  <div className="text-[10px] text-emerald-400 font-mono">
-                    Google PageSpeed Verified
-                  </div>
                 </div>
               </div>
             </div>
