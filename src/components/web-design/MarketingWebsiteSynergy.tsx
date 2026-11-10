@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
+import TileReveal from "@/components/ui/TileReveal";
 
 type EngineMode = "leaky" | "hdm";
 
@@ -206,6 +207,18 @@ const CHANNELS: TrafficChannel[] = [
   },
 ];
 
+const TILE_IMAGES = [
+  "/images/ref-linear.jpg",
+  "/images/ref-allbirds.jpg",
+  "/images/ref-onemedical.jpg",
+  "/images/ref-mckinsey.jpg",
+  "/images/services-ui-design-showcase.jpg",
+  "/images/hero-devices-mockup.jpg",
+  "/images/case-study-aesthetic.webp",
+  "/images/case-study-cafe.webp",
+  "/images/case-study-dental.webp",
+];
+
 export function MarketingWebsiteSynergy() {
   const [mode, setMode] = useState<EngineMode>("hdm");
   const [activeChannelId, setActiveChannelId] = useState<string>("google-ads");
@@ -216,341 +229,363 @@ export function MarketingWebsiteSynergy() {
   return (
     <section
       id="marketing-foundation"
-      className="py-10 sm:py-14 lg:py-16 bg-[#FAF8F5] border-y border-[#E2DBD0] select-none scroll-mt-24"
+      className="bg-[#FAF8F5] border-y border-[#E2DBD0] select-none scroll-mt-24 relative"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 text-center">
-        {/* ============================================================ */}
-        {/* 1. CENTERED SECTION HEADER                                   */}
-        {/* ============================================================ */}
-        <div className="max-w-3xl mx-auto space-y-2.5 pb-5 border-b border-[#E2DBD0]">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
-            <span>03 · The Marketing + Website Relationship</span>
+      {/* React Bits Pro Tile Reveal Hero Section */}
+      <TileReveal
+        images={TILE_IMAGES}
+        columns={3}
+        gap={18}
+        gridWidth={860}
+        tileAspect={1.2}
+        tileRadius={16}
+        zoom={2.2}
+        spread={0.45}
+        scrollLength={1.8}
+        scrub={0.08}
+        contentGap={20}
+        headline={
+          <div className="max-w-3xl mx-auto space-y-3 px-4 pt-10 sm:pt-14">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
+              <span>03 · The Marketing + Website Relationship</span>
+            </div>
+
+            <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-[#0B1B3A] tracking-tight leading-tight">
+              A Great Advertising Campaign Cannot Fix a Leaky Website.
+            </h2>
+
+            <p className="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+              Your ad spend is only as profitable as the website it sends visitors to. See the difference between a typical template and an engineered conversion engine.
+            </p>
           </div>
-
-          <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
-            A Great Advertising Campaign Cannot Fix a Leaky Website.
-          </h2>
-
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
-            Your ad spend is only as profitable as the website it sends visitors to. See the difference between a typical template and an engineered conversion engine.
-          </p>
+        }
+      >
+        <div className="flex flex-col items-center gap-2 pt-2">
+          <a
+            href="#conversion-simulator"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/95 hover:bg-white backdrop-blur-md border border-[#E2DBD0] shadow-sm text-xs font-bold text-slate-800 transition-all hover:scale-105 hover:border-[#FFB020] cursor-pointer group"
+          >
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Explore Live Conversion Simulator Below</span>
+            <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-800 group-hover:translate-y-0.5 transition-transform rotate-90" />
+          </a>
         </div>
+      </TileReveal>
 
-        {/* ============================================================ */}
-        {/* 2. DUAL-MODE INTERACTIVE TOGGLE SWITCH                       */}
-        {/* ============================================================ */}
-        <div className="flex flex-col items-center justify-center space-y-2">
-          <div className="p-1.5 bg-white rounded-2xl border border-[#E2DBD0] shadow-sm flex items-center gap-2 max-w-md w-full">
-            <button
-              type="button"
-              onClick={() => setMode("leaky")}
-              className={cn(
-                "flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 border",
-                mode === "leaky"
-                  ? "bg-rose-950 text-rose-300 border-rose-500/50 shadow-md scale-102 font-black"
-                  : "bg-transparent text-slate-600 border-transparent hover:text-slate-900 hover:bg-slate-50"
-              )}
-            >
-              <AlertTriangle className="w-4 h-4 text-rose-400" />
-              <span>Typical Leaky Website</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setMode("hdm")}
-              className={cn(
-                "flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 border",
-                mode === "hdm"
-                  ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] shadow-md scale-102 font-black"
-                  : "bg-transparent text-slate-600 border-transparent hover:text-slate-900 hover:bg-slate-50"
-              )}
-            >
-              <Zap className="w-4 h-4 text-[#FFB020]" />
-              <span>HDM Revenue Engine</span>
-            </button>
-          </div>
-
-          <div className="text-[11px] font-mono text-slate-500">
-            {mode === "hdm" ? (
-              <span className="text-emerald-700 font-bold flex items-center gap-1.5 justify-center">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                Simulating: Sub-second paint, zero layout shift, 1-tap conversion flow
-              </span>
-            ) : (
-              <span className="text-rose-700 font-bold flex items-center gap-1.5 justify-center">
-                <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping" />
-                Simulating: Slow legacy template, 70%+ bounce rate, wasted ad budget
-              </span>
-            )}
-          </div>
-        </div>
-
-        {/* ============================================================ */}
-        {/* 3. CHANNEL SELECTOR STRIP WITH REAL BRAND ICONS              */}
-        {/* ============================================================ */}
-        <div className="flex items-center justify-center gap-2 sm:gap-3 overflow-x-auto pb-1 no-scrollbar">
-          {CHANNELS.map((ch) => {
-            const isSelected = ch.id === activeChannelId;
-            return (
+      {/* The Full Interactive Conversion Engine Simulator Chamber */}
+      <div
+        id="conversion-simulator"
+        className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-24 space-y-6 text-center border-t border-[#E2DBD0]/60"
+      >
+          {/* Dual-Mode Interactive Toggle Switch */}
+          <div className="flex flex-col items-center justify-center space-y-2">
+            <div className="p-1.5 bg-white rounded-2xl border border-[#E2DBD0] shadow-sm flex items-center gap-2 max-w-md w-full">
               <button
-                key={ch.id}
                 type="button"
-                onClick={() => setActiveChannelId(ch.id)}
+                onClick={() => setMode("leaky")}
                 className={cn(
-                  "px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-bold transition-all duration-300 cursor-pointer whitespace-nowrap flex items-center gap-2.5 border shadow-2xs group",
-                  isSelected
-                    ? mode === "hdm"
-                      ? "bg-[#060B22] text-white border-[#FFB020] ring-2 ring-[#FFB020]/25 shadow-md scale-102"
-                      : "bg-rose-950 text-rose-100 border-rose-500 ring-2 ring-rose-500/25 shadow-md scale-102"
-                    : "bg-white text-slate-700 border-[#E2DBD0] hover:border-slate-400 hover:bg-white"
+                  "flex-1 py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2 border",
+                  mode === "leaky"
+                    ? "bg-rose-950 text-rose-300 border-rose-500/50 shadow-md scale-102 font-black"
+                    : "bg-transparent text-slate-600 border-transparent hover:text-slate-900 hover:bg-slate-50"
                 )}
               >
-                <div
+                <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />
+                <span>Typical Leaky Website</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setMode("hdm")}
+                className={cn(
+                  "flex-1 py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2 border",
+                  mode === "hdm"
+                    ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] shadow-md scale-102 font-black"
+                    : "bg-transparent text-slate-600 border-transparent hover:text-slate-900 hover:bg-slate-50"
+                )}
+              >
+                <Zap className="w-3.5 h-3.5 text-[#FFB020]" />
+                <span>HDM Revenue Engine</span>
+              </button>
+            </div>
+
+            <div className="text-[11px] font-mono text-slate-500">
+              {mode === "hdm" ? (
+                <span className="text-emerald-700 font-bold flex items-center gap-1.5 justify-center">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  Simulating: Sub-second paint, zero layout shift, 1-tap conversion flow
+                </span>
+              ) : (
+                <span className="text-rose-700 font-bold flex items-center gap-1.5 justify-center">
+                  <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping" />
+                  Simulating: Slow legacy template, 70%+ bounce rate, wasted ad budget
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Channel Selector Strip with Real Brand Icons */}
+          <div className="flex items-center justify-center gap-2 sm:gap-3 overflow-x-auto pb-1 no-scrollbar">
+            {CHANNELS.map((ch) => {
+              const isSelected = ch.id === activeChannelId;
+              return (
+                <button
+                  key={ch.id}
+                  type="button"
+                  onClick={() => setActiveChannelId(ch.id)}
                   className={cn(
-                    "w-6 h-6 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110",
-                    isSelected ? "bg-white/10" : "bg-[#FAF8F5]"
+                    "px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-bold transition-all duration-300 cursor-pointer whitespace-nowrap flex items-center gap-2 border shadow-2xs group",
+                    isSelected
+                      ? mode === "hdm"
+                        ? "bg-[#060B22] text-white border-[#FFB020] ring-2 ring-[#FFB020]/25 shadow-md scale-102"
+                        : "bg-rose-950 text-rose-100 border-rose-500 ring-2 ring-rose-500/25 shadow-md scale-102"
+                      : "bg-white text-slate-700 border-[#E2DBD0] hover:border-slate-400 hover:bg-white"
                   )}
                 >
-                  {ch.icon}
+                  <div
+                    className={cn(
+                      "w-5 h-5 sm:w-6 sm:h-6 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110",
+                      isSelected ? "bg-white/10" : "bg-[#FAF8F5]"
+                    )}
+                  >
+                    {ch.icon}
+                  </div>
+                  <span className="font-extrabold">{ch.name}</span>
+                  <span className="text-[10px] font-mono opacity-70 hidden md:inline">
+                    ({ch.badge})
+                  </span>
+                  {isSelected && (
+                    <span
+                      className={cn(
+                        "w-1.5 h-1.5 rounded-full ml-0.5",
+                        mode === "hdm" ? "bg-emerald-400 animate-pulse" : "bg-rose-400 animate-ping"
+                      )}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Animated Traffic Data Stream Beam Connecting Channel to Chamber */}
+          <div className="relative h-3 flex items-center justify-center overflow-hidden pointer-events-none">
+            <div
+              className={cn(
+                "w-1 h-full rounded-full transition-all duration-500",
+                mode === "hdm"
+                  ? "bg-gradient-to-b from-[#FFB020] to-emerald-400 shadow-[0_0_8px_rgba(255,176,32,0.8)]"
+                  : "bg-gradient-to-b from-rose-500 to-rose-700 shadow-[0_0_8px_rgba(244,63,94,0.8)] animate-pulse"
+              )}
+            />
+          </div>
+
+          {/* The Interactive Conversion Chamber (Animated HUD Display) */}
+          <div
+            className={cn(
+              "rounded-3xl border transition-all duration-700 p-5 sm:p-7 text-white relative overflow-hidden shadow-xl text-left",
+              mode === "hdm"
+                ? "bg-gradient-to-br from-[#060B22] via-[#091638] to-[#060B22] border-[#FFB020]/40 shadow-[0_25px_60px_-15px_rgba(255,176,32,0.25)]"
+                : "bg-gradient-to-br from-[#1C0A0E] via-[#2A0E15] to-[#140609] border-rose-500/40 shadow-[0_25px_60px_-15px_rgba(239,68,68,0.25)]"
+            )}
+          >
+            {/* Ambient Chamber Glows */}
+            <div
+              className={cn(
+                "absolute -top-24 -right-24 w-80 h-80 rounded-full blur-[110px] pointer-events-none transition-all duration-700",
+                mode === "hdm" ? "bg-[#FFB020]/25" : "bg-rose-600/30"
+              )}
+            />
+            <div
+              className={cn(
+                "absolute -bottom-24 -left-24 w-80 h-80 rounded-full blur-[110px] pointer-events-none transition-all duration-700",
+                mode === "hdm" ? "bg-emerald-500/20" : "bg-red-800/25"
+              )}
+            />
+
+            <div className="relative z-10 space-y-4 sm:space-y-5">
+              {/* Top State Status Bar */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10">
+                <div className="flex items-center gap-3">
+                  <div
+                    className={cn(
+                      "w-10 h-10 rounded-2xl flex items-center justify-center font-black transition-all duration-500 shadow-md",
+                      mode === "hdm"
+                        ? "bg-[#FFB020] text-[#060B22] ring-2 ring-[#FFB020]/40"
+                        : "bg-rose-600 text-white ring-2 ring-rose-500/40 animate-pulse"
+                    )}
+                  >
+                    {mode === "hdm" ? <Zap className="w-5 h-5" /> : <Droplets className="w-5 h-5" />}
+                  </div>
+
+                  <div>
+                    <div
+                      className={cn(
+                        "text-[10px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5",
+                        mode === "hdm" ? "text-[#FFB020]" : "text-rose-400"
+                      )}
+                    >
+                      <span>{mode === "hdm" ? "HDM Conversion Engine Active" : "Leaky Website Simulation"}</span>
+                      <span>·</span>
+                      <span className="text-white font-mono">{activeChannel.name}</span>
+                    </div>
+                    <div className="text-white font-black text-sm sm:text-base mt-0.5">
+                      Traffic Source: {activeChannel.name} ({activeChannel.badge})
+                    </div>
+                  </div>
                 </div>
-                <span className="font-extrabold">{ch.name}</span>
-                <span className="text-[10px] font-mono opacity-70 hidden md:inline">
-                  ({ch.badge})
-                </span>
-                {isSelected && (
+
+                <div
+                  className={cn(
+                    "px-3 py-1 rounded-full font-mono text-xs font-bold border inline-flex items-center gap-2 self-start sm:self-center transition-all",
+                    mode === "hdm"
+                      ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-xs"
+                      : "bg-rose-500/20 text-rose-300 border-rose-500/40 shadow-xs"
+                  )}
+                >
                   <span
                     className={cn(
-                      "w-1.5 h-1.5 rounded-full ml-0.5",
+                      "w-2 h-2 rounded-full",
                       mode === "hdm" ? "bg-emerald-400 animate-pulse" : "bg-rose-400 animate-ping"
                     )}
                   />
-                )}
-              </button>
-            );
-          })}
-        </div>
+                  <span>
+                    {mode === "hdm" ? "REVENUE MULTIPLIER: ACTIVE" : "BUDGET LEAKAGE DETECTED"}
+                  </span>
+                </div>
+              </div>
 
-        {/* Animated Traffic Data Stream Beam Connecting Channel to Chamber */}
-        <div className="relative h-4 flex items-center justify-center overflow-hidden pointer-events-none">
-          <div
-            className={cn(
-              "w-1 h-full rounded-full transition-all duration-500",
-              mode === "hdm"
-                ? "bg-gradient-to-b from-[#FFB020] to-emerald-400 shadow-[0_0_8px_rgba(255,176,32,0.8)]"
-                : "bg-gradient-to-b from-rose-500 to-rose-700 shadow-[0_0_8px_rgba(244,63,94,0.8)] animate-pulse"
-            )}
-          />
-        </div>
+              {/* Core Outcome Headline */}
+              <div className="space-y-1">
+                <h3 className="font-display font-black text-lg sm:text-xl lg:text-2xl text-white tracking-tight leading-snug">
+                  {mode === "hdm"
+                    ? activeChannel.hdmState.growthHeadline
+                    : activeChannel.leakyState.lossHeadline}
+                </h3>
+                <p className="text-xs text-slate-300 leading-relaxed max-w-3xl font-normal">
+                  {mode === "hdm"
+                    ? activeChannel.hdmState.breakthrough
+                    : activeChannel.leakyState.friction}
+                </p>
+              </div>
 
-        {/* ============================================================ */}
-        {/* 4. THE INTERACTIVE CONVERSION CHAMBER (ANIMATED HUD DISPLAY) */}
-        {/* ============================================================ */}
-        <div
-          className={cn(
-            "rounded-3xl border transition-all duration-700 p-6 sm:p-8 lg:p-10 text-white relative overflow-hidden shadow-2xl text-left",
-            mode === "hdm"
-              ? "bg-gradient-to-br from-[#060B22] via-[#091638] to-[#060B22] border-[#FFB020]/40 shadow-[0_25px_60px_-15px_rgba(255,176,32,0.25)]"
-              : "bg-gradient-to-br from-[#1C0A0E] via-[#2A0E15] to-[#140609] border-rose-500/40 shadow-[0_25px_60px_-15px_rgba(239,68,68,0.25)]"
-          )}
-        >
-          {/* Ambient Chamber Glows */}
-          <div
-            className={cn(
-              "absolute -top-24 -right-24 w-96 h-96 rounded-full blur-[130px] pointer-events-none transition-all duration-700",
-              mode === "hdm" ? "bg-[#FFB020]/25" : "bg-rose-600/30"
-            )}
-          />
-          <div
-            className={cn(
-              "absolute -bottom-24 -left-24 w-96 h-96 rounded-full blur-[130px] pointer-events-none transition-all duration-700",
-              mode === "hdm" ? "bg-emerald-500/20" : "bg-red-800/25"
-            )}
-          />
-
-          <div className="relative z-10 space-y-6 sm:space-y-8">
-            {/* Top State Status Bar */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-white/10">
-              <div className="flex items-center gap-3">
+              {/* 3 Live Visual Telemetry Meters */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div
                   className={cn(
-                    "w-11 h-11 rounded-2xl flex items-center justify-center font-black transition-all duration-500 shadow-md",
+                    "p-3.5 rounded-2xl border transition-all duration-500 space-y-0.5 relative overflow-hidden",
                     mode === "hdm"
-                      ? "bg-[#FFB020] text-[#060B22] ring-2 ring-[#FFB020]/40"
-                      : "bg-rose-600 text-white ring-2 ring-rose-500/40 animate-pulse"
+                      ? "bg-white/[0.04] border-white/10"
+                      : "bg-rose-950/40 border-rose-500/20"
                   )}
                 >
-                  {mode === "hdm" ? <Zap className="w-5 h-5" /> : <Droplets className="w-5 h-5" />}
-                </div>
-
-                <div>
+                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                    <span>Initial Paint Speed</span>
+                    <Activity className="w-3.5 h-3.5 text-slate-400" />
+                  </div>
                   <div
                     className={cn(
-                      "text-[10.5px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5",
+                      "font-display font-black text-xl transition-colors",
+                      mode === "hdm" ? "text-emerald-400" : "text-rose-400"
+                    )}
+                  >
+                    {mode === "hdm"
+                      ? activeChannel.hdmState.speed
+                      : activeChannel.leakyState.speed}
+                  </div>
+                  <div className="text-[10px] text-slate-400 font-medium">
+                    {mode === "hdm" ? "Sub-second edge paint ✓" : "Causes instant mobile bounce ✗"}
+                  </div>
+                </div>
+
+                <div
+                  className={cn(
+                    "p-3.5 rounded-2xl border transition-all duration-500 space-y-0.5 relative overflow-hidden",
+                    mode === "hdm"
+                      ? "bg-white/[0.04] border-white/10"
+                      : "bg-rose-950/40 border-rose-500/20"
+                  )}
+                >
+                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                    <span>Quality Score &amp; Vitals</span>
+                    <Gauge className="w-3.5 h-3.5 text-slate-400" />
+                  </div>
+                  <div
+                    className={cn(
+                      "font-display font-black text-xl transition-colors",
                       mode === "hdm" ? "text-[#FFB020]" : "text-rose-400"
                     )}
                   >
-                    <span>{mode === "hdm" ? "HDM Conversion Engine Active" : "Leaky Website Simulation"}</span>
-                    <span>·</span>
-                    <span className="text-white font-mono">{activeChannel.name}</span>
+                    {mode === "hdm"
+                      ? activeChannel.hdmState.conversion
+                      : activeChannel.leakyState.bounce}
                   </div>
-                  <div className="text-white font-black text-sm sm:text-base mt-0.5">
-                    Traffic Source: {activeChannel.name} ({activeChannel.badge})
+                  <div className="text-[10px] text-slate-400 font-medium">
+                    {mode === "hdm" ? "Lowest CPC / Highest Rank ✓" : "Ad algorithm cost penalties ✗"}
+                  </div>
+                </div>
+
+                <div
+                  className={cn(
+                    "p-3.5 rounded-2xl border transition-all duration-500 space-y-0.5 relative overflow-hidden",
+                    mode === "hdm"
+                      ? "bg-white/[0.04] border-white/10"
+                      : "bg-rose-950/40 border-rose-500/20"
+                  )}
+                >
+                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                    <span>ROAS / Capital Multiplier</span>
+                    {mode === "hdm" ? (
+                      <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
+                    ) : (
+                      <TrendingDown className="w-3.5 h-3.5 text-rose-400" />
+                    )}
+                  </div>
+                  <div
+                    className={cn(
+                      "font-display font-black text-xl transition-colors",
+                      mode === "hdm" ? "text-emerald-400" : "text-rose-400"
+                    )}
+                  >
+                    {mode === "hdm"
+                      ? activeChannel.hdmState.roas
+                      : activeChannel.leakyState.roas}
+                  </div>
+                  <div className="text-[10px] text-slate-400 font-medium">
+                    {mode === "hdm" ? "Full conversion on ad dollars ✓" : "Capital drained before inquiry ✗"}
                   </div>
                 </div>
               </div>
 
-              <div
-                className={cn(
-                  "px-3.5 py-1.5 rounded-full font-mono text-xs font-bold border inline-flex items-center gap-2 self-start sm:self-center transition-all",
-                  mode === "hdm"
-                    ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-xs"
-                    : "bg-rose-500/20 text-rose-300 border-rose-500/40 shadow-xs"
-                )}
-              >
-                <span
-                  className={cn(
-                    "w-2 h-2 rounded-full",
-                    mode === "hdm" ? "bg-emerald-400 animate-pulse" : "bg-rose-400 animate-ping"
-                  )}
-                />
-                <span>
-                  {mode === "hdm" ? "REVENUE MULTIPLIER: ACTIVE" : "BUDGET LEAKAGE DETECTED"}
-                </span>
-              </div>
-            </div>
-
-            {/* Core Outcome Headline */}
-            <div className="space-y-2">
-              <h3 className="font-display font-black text-xl sm:text-2xl lg:text-3xl text-white tracking-tight leading-snug">
-                {mode === "hdm"
-                  ? activeChannel.hdmState.growthHeadline
-                  : activeChannel.leakyState.lossHeadline}
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl font-normal">
-                {mode === "hdm"
-                  ? activeChannel.hdmState.breakthrough
-                  : activeChannel.leakyState.friction}
-              </p>
-            </div>
-
-            {/* 3 Live Visual Telemetry Meters */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-              <div
-                className={cn(
-                  "p-4 rounded-2xl border transition-all duration-500 space-y-1 relative overflow-hidden",
-                  mode === "hdm"
-                    ? "bg-white/[0.04] border-white/10"
-                    : "bg-rose-950/40 border-rose-500/20"
-                )}
-              >
-                <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
-                  <span>Initial Paint Speed</span>
-                  <Activity className="w-3.5 h-3.5 text-slate-400" />
+              {/* Bottom Direct Audit Action */}
+              <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div className="flex items-center gap-2 text-xs text-slate-300 text-left">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>
+                    Stop leaking marketing budget. Our lead architects will audit your website conversion funnel.
+                  </span>
                 </div>
-                <div
-                  className={cn(
-                    "font-display font-black text-2xl transition-colors",
-                    mode === "hdm" ? "text-emerald-400" : "text-rose-400"
-                  )}
+
+                <StarBorder
+                  as={Link}
+                  href="/get-a-quote"
+                  className="py-2.5 px-5 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-lg group"
+                  radius={12}
+                  color="#FFF8E7"
+                  trailColor="#FFB020"
+                  backgroundColor="#FFB020"
+                  textColor="#060B22"
+                  borderColor="rgba(255, 176, 32, 0.5)"
+                  sparkle={true}
+                  glow={0.8}
                 >
-                  {mode === "hdm"
-                    ? activeChannel.hdmState.speed
-                    : activeChannel.leakyState.speed}
-                </div>
-                <div className="text-[11px] text-slate-400 font-medium">
-                  {mode === "hdm" ? "Sub-second edge paint ✓" : "Causes instant mobile bounce ✗"}
-                </div>
+                  <span>Audit Your Website Funnel</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </StarBorder>
               </div>
-
-              <div
-                className={cn(
-                  "p-4 rounded-2xl border transition-all duration-500 space-y-1 relative overflow-hidden",
-                  mode === "hdm"
-                    ? "bg-white/[0.04] border-white/10"
-                    : "bg-rose-950/40 border-rose-500/20"
-                )}
-              >
-                <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
-                  <span>Quality Score &amp; Vitals</span>
-                  <Gauge className="w-3.5 h-3.5 text-slate-400" />
-                </div>
-                <div
-                  className={cn(
-                    "font-display font-black text-2xl transition-colors",
-                    mode === "hdm" ? "text-[#FFB020]" : "text-rose-400"
-                  )}
-                >
-                  {mode === "hdm"
-                    ? activeChannel.hdmState.conversion
-                    : activeChannel.leakyState.bounce}
-                </div>
-                <div className="text-[11px] text-slate-400 font-medium">
-                  {mode === "hdm" ? "Lowest CPC / Highest Rank ✓" : "Ad algorithm cost penalties ✗"}
-                </div>
-              </div>
-
-              <div
-                className={cn(
-                  "p-4 rounded-2xl border transition-all duration-500 space-y-1 relative overflow-hidden",
-                  mode === "hdm"
-                    ? "bg-white/[0.04] border-white/10"
-                    : "bg-rose-950/40 border-rose-500/20"
-                )}
-              >
-                <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
-                  <span>ROAS / Capital Multiplier</span>
-                  {mode === "hdm" ? (
-                    <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
-                  ) : (
-                    <TrendingDown className="w-3.5 h-3.5 text-rose-400" />
-                  )}
-                </div>
-                <div
-                  className={cn(
-                    "font-display font-black text-2xl transition-colors",
-                    mode === "hdm" ? "text-emerald-400" : "text-rose-400"
-                  )}
-                >
-                  {mode === "hdm"
-                    ? activeChannel.hdmState.roas
-                    : activeChannel.leakyState.roas}
-                </div>
-                <div className="text-[11px] text-slate-400 font-medium">
-                  {mode === "hdm" ? "Full conversion on ad dollars ✓" : "Capital drained before inquiry ✗"}
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Direct Audit Action */}
-            <div className="pt-5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-2 text-xs text-slate-300 text-left">
-                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>
-                  Stop leaking marketing budget. Our lead architects will audit your website conversion funnel.
-                </span>
-              </div>
-
-              <StarBorder
-                as={Link}
-                href="/get-a-quote"
-                className="py-3 px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-lg group"
-                radius={12}
-                color="#FFF8E7"
-                trailColor="#FFB020"
-                backgroundColor="#FFB020"
-                textColor="#060B22"
-                borderColor="rgba(255, 176, 32, 0.5)"
-                sparkle={true}
-                glow={0.8}
-              >
-                <span>Audit Your Website Funnel</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </StarBorder>
             </div>
           </div>
         </div>
-      </div>
     </section>
   );
 }
