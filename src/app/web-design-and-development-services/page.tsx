@@ -138,18 +138,18 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         <section
           id="services"
-          className="py-10 sm:py-14 lg:py-18 bg-[#060B22] text-white border-y border-[#FFB020]/20 relative overflow-hidden"
+          className="py-10 sm:py-14 lg:py-18 bg-[#FAF8F5] text-slate-900 border-y border-[#E2DBD0] relative overflow-hidden"
         >
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
-            <div className="text-center max-w-3xl mx-auto space-y-3 pb-6 border-b border-white/10">
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/10 text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+            <div className="text-center max-w-3xl mx-auto space-y-3 pb-6 border-b border-[#E2DBD0]">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>01 · Bespoke Digital Architecture</span>
               </div>
-              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-tight">
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
                 Complete Website Solutions Built to Grow Your Business.
               </h2>
-              <p className="text-xs sm:text-base text-slate-300 leading-relaxed font-normal max-w-2xl mx-auto">
+              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
                 Bespoke Figma UI/UX design, modern full-stack engineering, and conversion rate optimization.
               </p>
             </div>
