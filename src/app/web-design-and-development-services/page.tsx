@@ -169,8 +169,8 @@ export default function WebDesignServicesPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-[#E2DBD0] pb-5">
               <div className="space-y-2 max-w-2xl">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
-                  <Code2 className="w-3.5 h-3.5 text-[#FFB020]" />
-                  <span>02 · Engineering Standards</span>
+                  <Cpu className="w-3.5 h-3.5 text-[#FFB020]" />
+                  <span>02 · Modern Frameworks &amp; CMS Architecture</span>
                 </div>
                 <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
                   Battle-Tested Frameworks &amp; Modern CMS Architecture.
