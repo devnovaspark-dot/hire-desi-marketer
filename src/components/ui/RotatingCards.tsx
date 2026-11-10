@@ -342,49 +342,51 @@ const RotatingCards = forwardRef<RotatingCardsHandle, RotatingCardsProps>(
                     onCardClick?.(idx);
                   }}
                 >
-                  {/* Two-Sided 3D Card Structure */}
+                  {/* Two-Sided 3D Card Structure with Fail-Safe Depth Culling */}
                   <div className="rotating-card-inner">
-                    {/* Front Face: Shown when card faces the viewer */}
-                    <div className="rotating-card-front">
-                      {card.content}
-                    </div>
+                    {depth >= -0.08 ? (
+                      /* Front Face: Shown when card faces the viewer */
+                      <div className="rotating-card-front">
+                        {card.content}
+                      </div>
+                    ) : (
+                      /* Back Face: Shown when card faces away (ZERO backwards reversed text!) */
+                      <div className="rotating-card-back">
+                        {card.backContent ?? (
+                          <div className="w-full h-full p-6 rounded-3xl bg-gradient-to-b from-[#0B1536] via-[#081232] to-[#04091A] border-2 border-[#FFB020]/20 shadow-2xl text-white flex flex-col justify-between items-center text-center select-none relative overflow-hidden">
+                            {/* Ambient background lattice pattern */}
+                            <div
+                              className="absolute inset-0 bg-[radial-gradient(rgba(255,176,32,0.12)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"
+                              aria-hidden="true"
+                            />
 
-                    {/* Back Face: Shown when card faces away (ZERO backwards reversed text!) */}
-                    <div className="rotating-card-back">
-                      {card.backContent ?? (
-                        <div className="w-full h-full p-6 rounded-3xl bg-gradient-to-b from-[#0B1536] via-[#081232] to-[#04091A] border-2 border-white/10 shadow-2xl text-white flex flex-col justify-between items-center text-center select-none relative overflow-hidden">
-                          {/* Ambient background lattice pattern */}
-                          <div
-                            className="absolute inset-0 bg-[radial-gradient(rgba(255,176,32,0.12)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"
-                            aria-hidden="true"
-                          />
+                            <div className="w-full flex justify-between items-center z-10">
+                              <span className="font-mono text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                                Sprint {card.number ?? `0${idx + 1}`}
+                              </span>
+                              <span className="w-2 h-2 rounded-full bg-[#FFB020]" />
+                            </div>
 
-                          <div className="w-full flex justify-between items-center z-10">
-                            <span className="font-mono text-[10px] text-slate-400 font-bold uppercase tracking-wider">
-                              Agile Sprint {card.number ?? `0${idx + 1}`}
-                            </span>
-                            <span className="w-2 h-2 rounded-full bg-[#FFB020]" />
-                          </div>
-
-                          {/* Center 3D Luxury Monogram */}
-                          <div className="z-10 flex flex-col items-center gap-2">
-                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FFB020]/20 to-white/5 border border-[#FFB020]/40 flex items-center justify-center shadow-[0_0_25px_rgba(255,176,32,0.25)]">
-                              <span className="font-display font-black text-xl text-[#FFB020] tracking-wider">
-                                HDM
+                            {/* Center 3D Luxury Monogram */}
+                            <div className="z-10 flex flex-col items-center gap-2">
+                              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FFB020]/20 to-white/5 border border-[#FFB020]/40 flex items-center justify-center shadow-[0_0_25px_rgba(255,176,32,0.25)]">
+                                <span className="font-display font-black text-xl text-[#FFB020] tracking-wider">
+                                  HDM
+                                </span>
+                              </div>
+                              <span className="text-[10px] font-mono tracking-widest uppercase text-slate-300 font-bold">
+                                Verified Delivery
                               </span>
                             </div>
-                            <span className="text-[10px] font-mono tracking-widest uppercase text-slate-300 font-bold">
-                              Verified Delivery
-                            </span>
-                          </div>
 
-                          <div className="w-full pt-3 border-t border-white/10 flex items-center justify-between text-[9.5px] font-mono text-slate-400 z-10">
-                            <span>SLA Guaranteed</span>
-                            <span className="text-[#FFB020]">100% Quality</span>
+                            <div className="w-full pt-3 border-t border-white/10 flex items-center justify-between text-[9.5px] font-mono text-slate-400 z-10">
+                              <span>SLA Guaranteed</span>
+                              <span className="text-[#FFB020]">100% Quality</span>
+                            </div>
                           </div>
-                        </div>
-                      )}
-                    </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               );

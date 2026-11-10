@@ -16,6 +16,40 @@ import {
 import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
 
+// Classical Pythagorean Harmonic Chimes for the 4 Pillars
+function playPillarChime(freq: number) {
+  if (typeof window === "undefined") return;
+  try {
+    const AudioContextClass =
+      window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    if (!AudioContextClass) return;
+
+    const ctx = new AudioContextClass();
+    if (ctx.state === "suspended") {
+      ctx.resume().catch(() => {});
+    }
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "sine";
+    const now = ctx.currentTime;
+    osc.frequency.setValueAtTime(freq, now);
+    osc.frequency.exponentialRampToValueAtTime(freq * 1.5, now + 0.1);
+
+    gain.gain.setValueAtTime(0.08, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.18);
+  } catch {
+    // Graceful fallback
+  }
+}
+
 /* ========================================================================== */
 /* REAL CLASSICAL MARBLE ARCHITECTURAL PILLAR SVG (PROPORTIONAL DORIC COLUMN) */
 /* Single-Window Viewport Calibrated: Capital + Shaft + Base + Ground Shadow  */
@@ -31,14 +65,25 @@ function ClassicalMarblePillar({
   number: string;
 }) {
   return (
-    <div className="relative w-full max-w-[140px] sm:max-w-[160px] mx-auto flex flex-col items-center">
+    <div className="relative w-full max-w-[140px] sm:max-w-[165px] mx-auto flex flex-col items-center">
+      {/* Divine Radiant Spotlight Beam from Above on Active Pillar */}
+      {isActive && (
+        <div
+          className="absolute -top-12 inset-x-0 h-44 rounded-t-full pointer-events-none transition-opacity duration-500 animate-pulse"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 0%, rgba(255, 176, 32, 0.35) 0%, rgba(255, 176, 32, 0.08) 50%, transparent 75%)",
+          }}
+        />
+      )}
+
       <svg
         viewBox="0 0 160 236"
         className={cn(
           "w-full h-auto transition-all duration-500 ease-out",
           isActive
-            ? "-translate-y-2 filter drop-shadow-[0_14px_22px_rgba(255,176,32,0.32)]"
-            : "hover:-translate-y-1 opacity-90 hover:opacity-100 filter drop-shadow-[0_8px_16px_rgba(6,11,34,0.08)]"
+            ? "-translate-y-3 filter drop-shadow-[0_16px_26px_rgba(255,176,32,0.38)]"
+            : "hover:-translate-y-2 opacity-90 hover:opacity-100 filter drop-shadow-[0_8px_16px_rgba(6,11,34,0.08)]"
         )}
       >
         <defs>
@@ -257,6 +302,7 @@ interface ArchitecturalPillar {
   badge: string;
   icon: React.ReactNode;
   themeGradient: string;
+  freq: number;
   specs: {
     label: string;
     value: string;
@@ -276,6 +322,7 @@ const PILLARS: ArchitecturalPillar[] = [
     badge: "Principal Staff",
     icon: <Users className="w-5 h-5 text-[#FFB020]" />,
     themeGradient: "from-[#060B22] via-[#0B1B3A] to-[#1E3A70]",
+    freq: 432,
     specs: [
       { label: "Squad Level", value: "Principal & Staff Only" },
       { label: "Middlemen", value: "Zero Account Reps" },
@@ -294,6 +341,7 @@ const PILLARS: ArchitecturalPillar[] = [
     badge: "100/100 Vitals",
     icon: <Zap className="w-5 h-5 text-[#FFB020]" />,
     themeGradient: "from-[#060B22] via-[#0A2540] to-[#0284C7]",
+    freq: 486,
     specs: [
       { label: "LCP Benchmark", value: "< 0.58s Initial Paint" },
       { label: "PageSpeed Score", value: "100 / 100 Grade A+" },
@@ -312,6 +360,7 @@ const PILLARS: ArchitecturalPillar[] = [
     badge: "Zero Lock-In",
     icon: <Lock className="w-5 h-5 text-[#FFB020]" />,
     themeGradient: "from-[#060B22] via-[#102A18] to-[#16A34A]",
+    freq: 540,
     specs: [
       { label: "Repository", value: "Private Client GitHub" },
       { label: "Legal Protection", value: "Bilateral NDA Deed" },
@@ -330,6 +379,7 @@ const PILLARS: ArchitecturalPillar[] = [
     badge: "Zero Dark Periods",
     icon: <Clock className="w-5 h-5 text-[#FFB020]" />,
     themeGradient: "from-[#060B22] via-[#2A1800] to-[#D97706]",
+    freq: 576,
     specs: [
       { label: "Demo Rhythm", value: "Daily Loom Walkthroughs" },
       { label: "Staging Access", value: "Live Passworded URL" },
@@ -341,6 +391,12 @@ const PILLARS: ArchitecturalPillar[] = [
 export function WebDesignWhyChooseUs() {
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const activePillar = PILLARS[activeIdx];
+
+  const handlePillarSelect = (idx: number) => {
+    setActiveIdx(idx);
+    const p = PILLARS[idx];
+    if (p) playPillarChime(p.freq);
+  };
 
   return (
     <div className="w-full text-slate-800 select-none">
@@ -363,11 +419,11 @@ export function WebDesignWhyChooseUs() {
       </div>
 
       {/* ==================================================================== */}
-      {/* 2. REAL MARBLE ARCHITECTURAL COLUMNS (MATCHING REFERENCE IMAGE)     */}
+      {/* 2. REAL MARBLE ARCHITECTURAL COLUMNS (CLEAN, NO CLUNKY LABELS)       */}
       {/* 4 Standing Pillars side by side with Floating Icons on the Capitals  */}
       {/* ==================================================================== */}
-      <div className="relative pt-1 pb-1">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 lg:gap-5 items-end">
+      <div className="relative pt-2 pb-1">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 items-end">
           {PILLARS.map((pillar, idx) => {
             const isSelected = idx === activeIdx;
 
@@ -376,31 +432,36 @@ export function WebDesignWhyChooseUs() {
                 key={pillar.id}
                 role="button"
                 tabIndex={0}
-                onClick={() => setActiveIdx(idx)}
+                onClick={() => handlePillarSelect(idx)}
+                onMouseEnter={() => {
+                  if (idx !== activeIdx) {
+                    playPillarChime(pillar.freq);
+                  }
+                }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
-                    setActiveIdx(idx);
+                    handlePillarSelect(idx);
                   }
                 }}
                 className={cn(
-                  "group relative cursor-pointer outline-none transition-all duration-300 flex flex-col items-center text-center",
+                  "group relative cursor-pointer outline-none transition-all duration-400 flex flex-col items-center text-center",
                   isSelected
-                    ? "-translate-y-2 scale-102"
-                    : "hover:-translate-y-1 opacity-90 hover:opacity-100"
+                    ? "-translate-y-4 scale-105 z-20"
+                    : "hover:-translate-y-2 opacity-85 hover:opacity-100 z-10"
                 )}
               >
-                {/* --- 3D FLOATING TROPHY EMBLEM & TITLE (LIKE REFERENCE IMAGE) --- */}
-                <div className="space-y-1 mb-1.5 w-full px-1 flex flex-col items-center">
+                {/* --- 3D FLOATING TROPHY EMBLEM & TITLE --- */}
+                <div className="space-y-1 mb-2 w-full px-1 flex flex-col items-center">
                   {/* Vibrant 3D Circular Medallion */}
                   <div
                     className={cn(
-                      "w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-md border",
+                      "w-11 h-11 sm:w-13 sm:h-13 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-md border",
                       isSelected
                         ? "bg-gradient-to-tr " +
                             pillar.themeGradient +
-                            " text-white border-[#FFB020] shadow-[0_6px_20px_rgba(255,176,32,0.4)] scale-110 ring-2 ring-[#FFB020]/40"
-                        : "bg-white text-slate-700 border-[#E2DBD0] group-hover:border-[#FFB020]/60 group-hover:scale-105"
+                            " text-white border-[#FFB020] shadow-[0_8px_25px_rgba(255,176,32,0.45)] scale-115 ring-2 ring-[#FFB020]/50"
+                        : "bg-white text-slate-700 border-[#E2DBD0] group-hover:border-[#FFB020]/60 group-hover:scale-108 group-hover:shadow-md"
                     )}
                   >
                     {pillar.icon}
@@ -414,9 +475,9 @@ export function WebDesignWhyChooseUs() {
                   {/* Status chip */}
                   <span
                     className={cn(
-                      "inline-block px-2 py-0.5 rounded-full text-[9px] sm:text-[9.5px] font-mono font-bold uppercase tracking-wider border transition-colors",
+                      "inline-block px-2.5 py-0.5 rounded-full text-[9px] sm:text-[9.5px] font-mono font-bold uppercase tracking-wider border transition-colors",
                       isSelected
-                        ? "bg-[#FFB020] text-[#060B22] border-[#FFB020] font-black shadow-2xs"
+                        ? "bg-[#FFB020] text-[#060B22] border-[#FFB020] font-black shadow-xs"
                         : "bg-white text-slate-600 border-[#E2DBD0] group-hover:border-slate-400"
                     )}
                   >
@@ -431,16 +492,13 @@ export function WebDesignWhyChooseUs() {
                   number={pillar.number}
                 />
 
-                {/* Bottom Active Status Flag */}
-                <div className="mt-1 text-center">
-                  <span
-                    className={cn(
-                      "text-[9.5px] font-mono font-bold transition-colors",
-                      isSelected ? "text-[#B87A00]" : "text-slate-400 group-hover:text-slate-600"
-                    )}
-                  >
-                    {isSelected ? "Active Pillar ✓" : "Click to Inspect →"}
-                  </span>
+                {/* Minimalist Glowing Pedestal Indicator Dot (Zero Clunky Text) */}
+                <div className="mt-2.5 flex items-center justify-center h-4">
+                  {isSelected ? (
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#FFB020] shadow-[0_0_14px_#FFB020] animate-pulse ring-4 ring-[#FFB020]/25" />
+                  ) : (
+                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300 group-hover:bg-[#FFB020]/60 transition-colors" />
+                  )}
                 </div>
               </div>
             );

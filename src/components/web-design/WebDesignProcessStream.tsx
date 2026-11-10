@@ -509,44 +509,27 @@ export function WebDesignProcessStream() {
       </div>
 
       {/* ==================================================================== */}
-      {/* 2. THE 3D ROTATING CARDS THEATER (NO ENCLOSING CARD, MATCHES CANVAS) */}
+      {/* 2. THE 3D ROTATING CARDS THEATER (CLEAN, NO USELESS SURROUNDING TEXT) */}
       {/* ==================================================================== */}
-      <div className="relative overflow-visible text-center pt-1 pb-3">
-        {/* Navigation & Telemetry Header on Natural Canvas */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pb-3 mb-2 border-b border-[#E2DBD0] text-xs">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="font-mono text-xs uppercase tracking-wider text-[#060B22] font-black">
-              3D Agile Sprint Ring
-            </span>
-            <span className="text-slate-300 hidden sm:inline">•</span>
-            <span className="text-slate-500 font-mono text-xs hidden sm:inline">
-              Smooth Scroll, Drag, or Click to Spin
-            </span>
-          </div>
-
-          {/* Previous / Next Controls */}
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => rotatingCardsRef.current?.prev()}
-              className="px-3.5 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-[#E2DBD0] text-slate-700 hover:text-[#060B22] hover:border-slate-400 transition-colors cursor-pointer text-xs font-bold inline-flex items-center gap-1 shadow-xs"
-            >
-              <ChevronLeft className="w-3.5 h-3.5" />
-              <span>Prev</span>
-            </button>
-            <span className="font-mono text-xs font-bold text-slate-600 px-1">
-              Sprint 0{activeStepIdx + 1} of 07
-            </span>
-            <button
-              type="button"
-              onClick={() => rotatingCardsRef.current?.next()}
-              className="px-3.5 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-[#E2DBD0] text-slate-700 hover:text-[#060B22] hover:border-slate-400 transition-colors cursor-pointer text-xs font-bold inline-flex items-center gap-1 shadow-xs"
-            >
-              <span>Next</span>
-              <ChevronRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
+      <div className="relative overflow-visible text-center py-1">
+        {/* Sleek Floating Prev / Next Controls on Right */}
+        <div className="flex items-center justify-end gap-2 max-w-5xl mx-auto px-4 mb-2">
+          <button
+            type="button"
+            onClick={() => rotatingCardsRef.current?.prev()}
+            className="p-2 rounded-full bg-white hover:bg-slate-50 border border-[#E2DBD0] text-slate-700 hover:text-[#060B22] hover:border-slate-400 transition-colors cursor-pointer shadow-xs inline-flex items-center justify-center"
+            aria-label="Previous Sprint"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => rotatingCardsRef.current?.next()}
+            className="p-2 rounded-full bg-white hover:bg-slate-50 border border-[#E2DBD0] text-slate-700 hover:text-[#060B22] hover:border-slate-400 transition-colors cursor-pointer shadow-xs inline-flex items-center justify-center"
+            aria-label="Next Sprint"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
 
         {/* 3D Rotating Cards Ring Floating Directly on Canvas */}
@@ -565,14 +548,6 @@ export function WebDesignProcessStream() {
             onCardChange={handleCardChange}
             onCardClick={handleStepJump}
           />
-        </div>
-
-        {/* Active Phase Cue */}
-        <div className="relative pt-2 text-center text-xs font-mono text-slate-600">
-          <span>Active Phase: </span>
-          <span className="text-[#060B22] font-black">{activePhase.title}</span>
-          <span className="text-slate-300 mx-2">•</span>
-          <span className="text-emerald-700 font-bold">{activePhase.duration}</span>
         </div>
       </div>
 
