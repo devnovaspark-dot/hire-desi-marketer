@@ -17,6 +17,7 @@ import {
   Code2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import StarBorder from "@/components/ui/StarBorder";
 
 // Authentic Official Framework & CMS Brand Logos
 function NextJsIcon({ className = "w-7 h-7" }: { className?: string }) {
@@ -320,13 +321,22 @@ export function WebDesignTechStack() {
                 </div>
               </div>
 
-              <Link
+              <StarBorder
+                as={Link}
                 href="/get-a-quote"
-                className="btn-luxury-gold btn-shimmer py-2 px-3.5 rounded-xl text-[11px] font-black uppercase tracking-wider inline-flex items-center gap-1.5 shadow-2xs group/btn"
+                className="py-2 px-3.5 rounded-xl text-[11px] font-black uppercase tracking-wider inline-flex items-center gap-1.5 shadow-2xs group/btn"
+                radius={10}
+                color="#FFF8E7"
+                trailColor="#FFB020"
+                backgroundColor="#FFB020"
+                textColor="#060B22"
+                borderColor="rgba(255, 176, 32, 0.6)"
+                sparkle={true}
+                glow={0.7}
               >
                 <span>Hire Devs</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
-              </Link>
+              </StarBorder>
             </div>
           </div>
         ))}
@@ -345,13 +355,22 @@ export function WebDesignTechStack() {
           </span>
         </div>
 
-        <Link
+        <StarBorder
+          as={Link}
           href="/get-a-quote"
-          className="text-[#B87A00] hover:text-[#0B1B3A] transition-colors font-bold text-xs uppercase tracking-wider flex items-center gap-1 shrink-0 whitespace-nowrap"
+          className="py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+          radius={10}
+          color="#FFB020"
+          trailColor="#38BDF8"
+          backgroundColor="#060B22"
+          textColor="#FFFFFF"
+          borderColor="rgba(255, 176, 32, 0.4)"
+          sparkle={true}
+          glow={0.7}
         >
           <span>Schedule Tech Alignment Call</span>
           <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
+        </StarBorder>
       </div>
     </div>
   );

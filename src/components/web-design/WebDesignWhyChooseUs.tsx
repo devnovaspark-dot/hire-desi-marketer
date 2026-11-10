@@ -14,6 +14,7 @@ import {
   Award,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import StarBorder from "@/components/ui/StarBorder";
 
 /* ========================================================================== */
 /* REAL CLASSICAL MARBLE ARCHITECTURAL PILLAR SVG (PROPORTIONAL DORIC COLUMN) */
@@ -492,13 +493,22 @@ export function WebDesignWhyChooseUs() {
 
           {/* Direct CTA Action (3 cols) */}
           <div className="lg:col-span-3 flex items-center justify-end">
-            <Link
+            <StarBorder
+              as={Link}
               href="/get-a-quote"
-              className="btn-luxury-gold btn-shimmer w-full py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs cursor-pointer text-center group"
+              className="w-full py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs cursor-pointer text-center group"
+              radius={12}
+              color="#FFF8E7"
+              trailColor="#FFB020"
+              backgroundColor="#FFB020"
+              textColor="#060B22"
+              borderColor="rgba(255, 176, 32, 0.6)"
+              sparkle={true}
+              glow={0.8}
             >
               <span>Schedule Scoping</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </StarBorder>
           </div>
         </div>
       </div>

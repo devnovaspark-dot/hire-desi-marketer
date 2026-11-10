@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import PixelCard from "@/components/ui/PixelCard";
+import StarBorder from "@/components/ui/StarBorder";
 
 /* ========================================================================== */
 /* 3D ISOMETRIC ICON COMPONENTS (PURE CSS + SVG LAYERS)                       */
@@ -380,18 +381,28 @@ export function WebDesignEngagementModels() {
                     </span>
                   </div>
 
-                  <Link
+                  <StarBorder
+                    as={Link}
                     href="/get-a-quote"
-                    className={cn(
-                      "w-full py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs cursor-pointer text-center group transition-all",
+                    className="w-full py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs cursor-pointer text-center group transition-all"
+                    radius={12}
+                    color={model.isPopular ? "#FFF8E7" : "#FFB020"}
+                    trailColor={model.isPopular ? "#FFB020" : "#38BDF8"}
+                    backgroundColor={
+                      model.isPopular ? "#FFB020" : "rgba(255, 255, 255, 0.08)"
+                    }
+                    textColor={model.isPopular ? "#060B22" : "#FFFFFF"}
+                    borderColor={
                       model.isPopular
-                        ? "btn-luxury-gold btn-shimmer"
-                        : "bg-white/10 hover:bg-white/15 text-white border border-white/15 hover:border-[#FFB020]/50"
-                    )}
+                        ? "rgba(255, 176, 32, 0.6)"
+                        : "rgba(255, 255, 255, 0.2)"
+                    }
+                    sparkle={true}
+                    glow={model.isPopular ? 0.85 : 0.6}
                   >
                     <span>{model.ctaText}</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  </StarBorder>
                 </div>
               </PixelCard>
             </div>

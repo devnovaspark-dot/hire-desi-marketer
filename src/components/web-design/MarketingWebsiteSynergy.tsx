@@ -17,6 +17,7 @@ import {
   Flame,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import StarBorder from "@/components/ui/StarBorder";
 
 type EngineMode = "leaky" | "hdm";
 
@@ -530,13 +531,22 @@ export function MarketingWebsiteSynergy() {
                 </span>
               </div>
 
-              <Link
+              <StarBorder
+                as={Link}
                 href="/get-a-quote"
-                className="btn-luxury-gold btn-shimmer py-3 px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-lg group"
+                className="py-3 px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-lg group"
+                radius={12}
+                color="#FFF8E7"
+                trailColor="#FFB020"
+                backgroundColor="#FFB020"
+                textColor="#060B22"
+                borderColor="rgba(255, 176, 32, 0.5)"
+                sparkle={true}
+                glow={0.8}
               >
                 <span>Audit Your Website Funnel</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </StarBorder>
             </div>
           </div>
         </div>

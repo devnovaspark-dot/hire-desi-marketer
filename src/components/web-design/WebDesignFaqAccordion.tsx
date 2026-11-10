@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { WebFaqItem } from "@/data/web-design-services";
 import { cn } from "@/lib/utils";
+import StarBorder from "@/components/ui/StarBorder";
 
 interface WebDesignFaqAccordionProps {
   faqs: WebFaqItem[];
@@ -80,13 +81,22 @@ export function WebDesignFaqAccordion({
               </div>
             </div>
 
-            <Link
+            <StarBorder
+              as={Link}
               href="/get-a-quote"
-              className="btn-luxury-gold btn-shimmer w-full py-3.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 cursor-pointer shadow-lg relative z-10 group"
+              className="w-full py-3.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 cursor-pointer shadow-lg relative z-10 group"
+              radius={12}
+              color="#FFF8E7"
+              trailColor="#FFB020"
+              backgroundColor="#FFB020"
+              textColor="#060B22"
+              borderColor="rgba(255, 176, 32, 0.6)"
+              sparkle={true}
+              glow={0.85}
             >
               <span>Ask Our Lead Architects</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </StarBorder>
           </div>
         </div>
 

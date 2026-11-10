@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { WEB_CASE_STUDIES, WebCaseStudy } from "@/data/web-design-services";
 import { cn } from "@/lib/utils";
+import StarBorder from "@/components/ui/StarBorder";
 
 export function WebDesignCaseStudies() {
   const [activeStudyId, setActiveStudyId] = useState<string>("saas-reference");
@@ -178,13 +179,22 @@ export function WebDesignCaseStudies() {
             </div>
 
             {/* Direct Consultation Action */}
-            <Link
+            <StarBorder
+              as={Link}
               href="/get-a-quote"
-              className="btn-luxury-gold btn-shimmer w-full py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs cursor-pointer text-center group"
+              className="w-full py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs cursor-pointer text-center group"
+              radius={12}
+              color="#FFF8E7"
+              trailColor="#FFB020"
+              backgroundColor="#FFB020"
+              textColor="#060B22"
+              borderColor="rgba(255, 176, 32, 0.6)"
+              sparkle={true}
+              glow={0.8}
             >
               <span>Schedule Scoping Session</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </StarBorder>
           </div>
         </div>
 

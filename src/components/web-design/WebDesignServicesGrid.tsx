@@ -20,6 +20,7 @@ import {
   Check,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import StarBorder from "@/components/ui/StarBorder";
 
 interface ShowcaseService {
   id: string;
@@ -363,13 +364,22 @@ export function WebDesignServicesGrid() {
               </div>
             </div>
 
-            <Link
+            <StarBorder
+              as={Link}
               href="/get-a-quote"
-              className="btn-luxury-gold btn-shimmer py-3 px-5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shrink-0 shadow-sm cursor-pointer whitespace-nowrap group"
+              className="py-3 px-5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shrink-0 shadow-sm cursor-pointer whitespace-nowrap group"
+              radius={12}
+              color="#FFF8E7"
+              trailColor="#FFB020"
+              backgroundColor="#FFB020"
+              textColor="#060B22"
+              borderColor="rgba(255, 176, 32, 0.5)"
+              sparkle={true}
+              glow={0.8}
             >
               <span>Discuss Solution</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </StarBorder>
           </div>
         </div>
       </div>

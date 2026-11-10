@@ -24,6 +24,7 @@ import {
   Layers,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import StarBorder from "@/components/ui/StarBorder";
 
 interface SectorItem {
   id: string;
@@ -484,13 +485,22 @@ export function WebDesignIndustriesGrid() {
 
             {/* Direct Action Button */}
             <div className="pt-2 border-t border-slate-100">
-              <Link
+              <StarBorder
+                as={Link}
                 href="/get-a-quote"
-                className="btn-luxury-navy w-full py-3 px-5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm cursor-pointer text-center group"
+                className="w-full py-3.5 px-5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm cursor-pointer text-center group"
+                radius={12}
+                color="#FFB020"
+                trailColor="#38BDF8"
+                backgroundColor="#060B22"
+                textColor="#FFFFFF"
+                borderColor="rgba(255, 176, 32, 0.4)"
+                sparkle={true}
+                glow={0.8}
               >
                 <span>Request {activeSector.shortLabel} Blueprint</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#FFB020] group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </StarBorder>
             </div>
           </div>
         </div>

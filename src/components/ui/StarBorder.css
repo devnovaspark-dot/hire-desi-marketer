@@ -1,0 +1,68 @@
+/* ---- StarBorder.css ---- */
+.star-border {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.875rem 1.75rem;
+  border: 0;
+  border-radius: var(--star-border-radius, 14px);
+  background: var(--star-border-surface, #FFB020);
+  color: var(--star-border-text, #060B22);
+  font: inherit;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  line-height: 1.25;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  user-select: none;
+}
+
+.star-border:hover {
+  transform: translateY(-1px);
+}
+
+.star-border:active {
+  transform: translateY(0);
+}
+
+.star-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 var(--star-border-thickness, 1.5px) var(--star-border-track, rgba(255, 176, 32, 0.4));
+  pointer-events: none;
+}
+
+.star-border__light {
+  position: absolute;
+  top: -48px;
+  left: -48px;
+  z-index: -1;
+  width: calc(100% + 96px);
+  height: calc(100% + 96px);
+  pointer-events: none;
+}
+
+button.star-border,
+a.star-border {
+  cursor: pointer;
+}
+
+.star-border:focus-visible {
+  outline: 2px solid var(--star-border-track, #FFB020);
+  outline-offset: 3px;
+}
+
+.star-border:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

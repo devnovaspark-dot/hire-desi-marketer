@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { cn } from "@/lib/utils";
+import StarBorder from "@/components/ui/StarBorder";
 
 function WhatsAppIcon({ className = "w-5 h-5" }: { className?: string }) {
   return (
@@ -285,10 +286,19 @@ export function Footer() {
                   className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/20 text-white placeholder-slate-400 text-xs focus:outline-none focus:border-[#FFB020] focus:ring-1 focus:ring-[#FFB020] shadow-inner backdrop-blur-md transition-colors"
                 />
               </div>
-              <button
+              <StarBorder
+                as="button"
                 type="submit"
                 disabled={isSubmitting}
-                className="btn-luxury-gold btn-shimmer w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-[#060B22] flex items-center justify-center gap-2 cursor-pointer shadow-lg whitespace-nowrap active:scale-95 transition-transform disabled:opacity-50"
+                className="w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-[#060B22] flex items-center justify-center gap-2 cursor-pointer shadow-lg whitespace-nowrap active:scale-95 transition-transform disabled:opacity-50"
+                radius={12}
+                color="#FFF8E7"
+                trailColor="#FFB020"
+                backgroundColor="#FFB020"
+                textColor="#060B22"
+                borderColor="rgba(255, 176, 32, 0.6)"
+                sparkle={true}
+                glow={0.8}
               >
                 <span>
                   {isSubmitting
@@ -302,7 +312,7 @@ export function Footer() {
                 ) : (
                   <ArrowRight className="w-3.5 h-3.5" />
                 )}
-              </button>
+              </StarBorder>
             </div>
             {submitted && (
               <p className="text-xs text-emerald-400 font-bold flex items-center gap-1.5 animate-in fade-in">

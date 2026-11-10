@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BrandLogo } from "@/components/ui/BrandLogo";
+import StarBorder from "@/components/ui/StarBorder";
 
 export interface ServiceDropdownItem {
   title: string;
@@ -372,14 +373,23 @@ export function Header() {
 
           {/* Desktop Right Action */}
           <div className="hidden md:flex items-center gap-3">
-            {/* Shimmering 3D Luxury CTA Button - Sleek & Refined */}
-            <Link
+            {/* Shimmering StarBorder Luxury CTA Button */}
+            <StarBorder
+              as={Link}
               href="/get-a-quote"
-              className="btn-luxury-gold btn-shimmer px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-wider inline-flex items-center gap-1.5 group cursor-pointer shadow-md"
+              className="px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-wider inline-flex items-center gap-1.5 group cursor-pointer shadow-md"
+              radius={999}
+              color="#FFF8E7"
+              trailColor="#FFB020"
+              backgroundColor="#FFB020"
+              textColor="#060B22"
+              borderColor="rgba(255, 176, 32, 0.5)"
+              sparkle={true}
+              glow={0.8}
             >
               <span>Get a Free Quote</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform stroke-[2.5]" />
-            </Link>
+            </StarBorder>
           </div>
 
           {/* Mobile Menu Button */}
@@ -503,14 +513,23 @@ export function Header() {
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Bhubaneswar HQ Online · Dedicated Western Shifts</span>
             </div>
-            <Link
+            <StarBorder
+              as={Link}
               href="/get-a-quote"
               onClick={() => setMobileMenuOpen(false)}
-              className="btn-luxury-gold btn-shimmer py-3 px-4 rounded-xl text-center text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2"
+              className="py-3 px-4 rounded-xl text-center text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2"
+              radius={12}
+              color="#FFF8E7"
+              trailColor="#FFB020"
+              backgroundColor="#FFB020"
+              textColor="#060B22"
+              borderColor="rgba(255, 176, 32, 0.5)"
+              sparkle={true}
+              glow={0.8}
             >
               <Sparkles className="w-4 h-4" />
               <span>Get Free 90-Day Plan &amp; Quote</span>
-            </Link>
+            </StarBorder>
           </div>
         </div>
       )}

@@ -27,6 +27,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import StarBorder from "@/components/ui/StarBorder";
 
 interface ProcessPhase {
   step: number;
@@ -513,13 +514,22 @@ export function WebDesignProcessStream() {
 
             {/* Direct Scope Action */}
             <div className="pt-2">
-              <Link
+              <StarBorder
+                as={Link}
                 href="/get-a-quote"
-                className="btn-luxury-gold btn-shimmer py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-md cursor-pointer group"
+                className="py-2.5 px-5 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-md cursor-pointer group"
+                radius={12}
+                color="#FFF8E7"
+                trailColor="#FFB020"
+                backgroundColor="#FFB020"
+                textColor="#060B22"
+                borderColor="rgba(255, 176, 32, 0.5)"
+                sparkle={true}
+                glow={0.8}
               >
                 <span>Schedule This Sprint</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </StarBorder>
             </div>
           </div>
 

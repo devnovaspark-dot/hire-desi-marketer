@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import GhostFibers from "@/components/ui/GhostFibers";
+import StarBorder from "@/components/ui/StarBorder";
 
 type ConsoleTab = "vitals" | "design" | "stack" | "ownership";
 
@@ -99,20 +100,38 @@ export function WebDesignHero() {
 
           {/* Dual Conversion Actions */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-            <Link
+            <StarBorder
+              as={Link}
               href="/get-a-quote"
-              className="btn-luxury-gold btn-shimmer py-3.5 px-8 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-lg cursor-pointer text-center group"
+              className="py-3.5 px-8 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-lg cursor-pointer text-center group"
+              radius={12}
+              color="#FFF8E7"
+              trailColor="#FFB020"
+              backgroundColor="#FFB020"
+              textColor="#060B22"
+              borderColor="rgba(255, 176, 32, 0.6)"
+              sparkle={true}
+              glow={0.85}
             >
               <span>LET&apos;S BUILD YOUR WEBSITE</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </StarBorder>
 
-            <a
+            <StarBorder
+              as="a"
               href="#services"
-              className="py-3.5 px-7 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-xs cursor-pointer text-center bg-white/10 hover:bg-white/15 text-white border border-white/20 hover:border-[#FFB020]/50 transition-all"
+              className="py-3.5 px-7 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-xs cursor-pointer text-center group"
+              radius={12}
+              color="#FFB020"
+              trailColor="#38BDF8"
+              backgroundColor="rgba(255, 255, 255, 0.08)"
+              textColor="#FFFFFF"
+              borderColor="rgba(255, 255, 255, 0.2)"
+              sparkle={false}
+              glow={0.5}
             >
               <span>Explore Solutions ↓</span>
-            </a>
+            </StarBorder>
           </div>
 
           {/* Verified Trust Strip */}
@@ -518,13 +537,22 @@ export function WebDesignHero() {
                   </span>
                 </div>
 
-                <Link
+                <StarBorder
+                  as={Link}
                   href="/get-a-quote"
-                  className="text-[#FFB020] hover:text-white transition-colors font-bold text-[11px] uppercase tracking-wider flex items-center gap-1 shrink-0 self-end sm:self-auto group"
+                  className="py-2 px-4 rounded-lg text-[11px] font-bold uppercase tracking-wider flex items-center gap-1 shrink-0 self-end sm:self-auto group"
+                  radius={8}
+                  color="#FFF8E7"
+                  trailColor="#FFB020"
+                  backgroundColor="rgba(255, 176, 32, 0.15)"
+                  textColor="#FFB020"
+                  borderColor="rgba(255, 176, 32, 0.4)"
+                  sparkle={true}
+                  glow={0.7}
                 >
                   <span>Discuss Your Project Scope</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                </StarBorder>
               </div>
             </div>
           </div>
