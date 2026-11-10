@@ -9,8 +9,6 @@ import {
   Sparkles,
   Clock,
   ShieldCheck,
-  Play,
-  Pause,
   RotateCw,
   Search,
   Layers,
@@ -19,7 +17,9 @@ import {
   FileCheck,
   Rocket,
   Wrench,
-  Zap,
+  Video,
+  Play,
+  Pause,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -78,7 +78,7 @@ const PHASES: ProcessPhase[] = [
     step: 3,
     number: "03",
     title: "UI/UX Design",
-    shortTag: "UI/UX Design",
+    shortTag: "Design",
     tag: "Figma Prototypes & Systems",
     duration: "4–6 Days",
     headline: "Crafting Pixel-Perfect Interactive Prototypes in Figma",
@@ -89,7 +89,7 @@ const PHASES: ProcessPhase[] = [
       "Interactive clickable mobile & desktop prototypes",
       "Accessibility & WCAG contrast verification",
     ],
-    visualMetric: "Figma Clickable Prototype",
+    visualMetric: "Clickable Figma Prototype",
     icon: <PenTool className="w-5 h-5 text-[#FFB020]" />,
   },
   {
@@ -132,7 +132,7 @@ const PHASES: ProcessPhase[] = [
     step: 6,
     number: "06",
     title: "Deployment & Launch",
-    shortTag: "Go-Live",
+    shortTag: "Launch",
     tag: "Flawless Go-Live",
     duration: "1 Day",
     headline: "Zero-Downtime Production Deployment & Analytics Verification",
@@ -150,7 +150,7 @@ const PHASES: ProcessPhase[] = [
     step: 7,
     number: "07",
     title: "Ongoing Partnership",
-    shortTag: "Growth & SLA",
+    shortTag: "Warranty & SLA",
     tag: "Long-Term Growth",
     duration: "Ongoing",
     headline: "30-Day Post-Launch Warranty, Security Patches & Scaling",
@@ -167,31 +167,72 @@ const PHASES: ProcessPhase[] = [
 ];
 
 export function WebDesignProcessStream() {
-  const [activeStepIdx, setActiveStepIdx] = useState<number>(2); // Default to UI/UX Design
+  const [activeStepIdx, setActiveStepIdx] = useState<number>(1); // Default to Phase 02
   const [isAutoSpin, setIsAutoSpin] = useState<boolean>(true);
+  const [isInView, setIsInView] = useState<boolean>(false);
   const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [autoProgress, setAutoProgress] = useState<number>(0);
 
-  // Touch & Drag state for 3D swiping
+  // Drag & Touch states
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [dragStartX, setDragStartX] = useState<number>(0);
-  const containerRef = useRef<HTMLDivElement>(null);
 
+  const containerRef = useRef<HTMLDivElement>(null);
   const totalPhases = PHASES.length;
   const anglePerPhase = 360 / totalPhases; // ~51.43 deg
+  const cylinderRadius = 310; // 3D radius in px
 
-  // 3D Cylinder radius (in pixels)
-  const cylinderRadius = 310;
-
-  // Auto-spin interval
+  // 1. Viewport-driven Auto-Scroll Trigger: starts auto-scroll when user scrolls down to this section
   useEffect(() => {
-    if (!isAutoSpin || isDragging) return;
+    const el = containerRef.current;
+    if (!el) return;
 
-    const interval = setInterval(() => {
-      setActiveStepIdx((prev) => (prev + 1) % totalPhases);
-    }, 4500);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.25 }
+    );
 
-    return () => clearInterval(interval);
-  }, [isAutoSpin, isDragging, totalPhases]);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // 2. Auto-advance loop when in view (advances smoothly every 3.8s with smooth progress bar)
+  useEffect(() => {
+    if (!isAutoSpin || isDragging || !isInView) return;
+
+    const tickMs = 50;
+    const totalDurationMs = 3800;
+    const stepIncrement = (tickMs / totalDurationMs) * 100;
+
+    const timer = setInterval(() => {
+      setAutoProgress((prev) => {
+        if (prev >= 100) {
+          setActiveStepIdx((current) => (current + 1) % totalPhases);
+          return 0;
+        }
+        return prev + stepIncrement;
+      });
+    }, tickMs);
+
+    return () => clearInterval(timer);
+  }, [isAutoSpin, isDragging, isInView, totalPhases]);
+
+  // 3. Scroll Wheel Interaction: scrolling down/up over the 3D cylinder rotates to next/prev sprint
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    // Only capture vertical delta if significant
+    if (Math.abs(e.deltaY) > 25) {
+      if (e.deltaY > 0) {
+        // Scroll down -> next sprint
+        setActiveStepIdx((prev) => (prev + 1) % totalPhases);
+      } else {
+        // Scroll up -> prev sprint
+        setActiveStepIdx((prev) => (prev > 0 ? prev - 1 : totalPhases - 1));
+      }
+      setAutoProgress(0);
+    }
+  };
 
   // Parallax tilt on mouse move
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -207,7 +248,7 @@ export function WebDesignProcessStream() {
     setIsDragging(false);
   };
 
-  // Drag controls
+  // Mouse drag handlers
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
     setDragStartX(e.clientX);
@@ -216,19 +257,18 @@ export function WebDesignProcessStream() {
   const handleMouseUp = (e: React.MouseEvent) => {
     if (!isDragging) return;
     const diff = e.clientX - dragStartX;
-    if (Math.abs(diff) > 40) {
+    if (Math.abs(diff) > 35) {
       if (diff > 0) {
-        // Dragged right -> previous phase
         setActiveStepIdx((prev) => (prev > 0 ? prev - 1 : totalPhases - 1));
       } else {
-        // Dragged left -> next phase
         setActiveStepIdx((prev) => (prev + 1) % totalPhases);
       }
+      setAutoProgress(0);
     }
     setIsDragging(false);
   };
 
-  // Touch controls for mobile
+  // Touch handlers for mobile swipe
   const handleTouchStart = (e: React.TouchEvent) => {
     setIsDragging(true);
     setDragStartX(e.touches[0].clientX);
@@ -237,139 +277,162 @@ export function WebDesignProcessStream() {
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (!isDragging) return;
     const diff = e.changedTouches[0].clientX - dragStartX;
-    if (Math.abs(diff) > 35) {
+    if (Math.abs(diff) > 30) {
       if (diff > 0) {
         setActiveStepIdx((prev) => (prev > 0 ? prev - 1 : totalPhases - 1));
       } else {
         setActiveStepIdx((prev) => (prev + 1) % totalPhases);
       }
+      setAutoProgress(0);
     }
     setIsDragging(false);
   };
 
+  const selectPhase = (idx: number) => {
+    setActiveStepIdx(idx);
+    setAutoProgress(0);
+  };
+
   const handleNext = () => {
     setActiveStepIdx((prev) => (prev + 1) % totalPhases);
+    setAutoProgress(0);
   };
 
   const handlePrev = () => {
     setActiveStepIdx((prev) => (prev > 0 ? prev - 1 : totalPhases - 1));
+    setAutoProgress(0);
   };
 
   const activePhase = PHASES[activeStepIdx];
+  const progressPercent = Math.round(((activeStepIdx + 1) / totalPhases) * 100);
 
   return (
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="space-y-8 sm:space-y-10 max-w-7xl mx-auto text-left select-none"
+      className="space-y-6 sm:space-y-8 max-w-7xl mx-auto select-none"
     >
       {/* ==================================================================== */}
-      {/* 1. TOP CONTROLS: 3D Rounding Status, Auto-Spin & Dial Buttons         */}
+      {/* 1. CENTERED PHASE SELECTOR & JOURNEY CONTROLS                        */}
       {/* ==================================================================== */}
-      <div className="flex flex-wrap items-center justify-between gap-3 px-2">
-        {/* Phase Pills Strip */}
-        <div className="flex items-center gap-1.5 p-1 bg-white/90 backdrop-blur-md rounded-2xl border border-[#E2DBD0] shadow-2xs overflow-x-auto no-scrollbar">
+      <div className="flex flex-col items-center justify-center space-y-3">
+        {/* Centered Horizontal Phase Selector Pills */}
+        <div className="flex items-center justify-center gap-1.5 p-1.5 bg-white rounded-2xl border border-[#E2DBD0] shadow-sm max-w-full overflow-x-auto no-scrollbar">
           {PHASES.map((p, idx) => {
             const isSelected = idx === activeStepIdx;
             return (
               <button
                 key={p.step}
                 type="button"
-                onClick={() => setActiveStepIdx(idx)}
+                onClick={() => selectPhase(idx)}
                 className={cn(
-                  "px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5",
+                  "relative px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap flex items-center gap-1.5 overflow-hidden",
                   isSelected
-                    ? "bg-[#060B22] text-[#FFB020] shadow-xs scale-102"
+                    ? "bg-[#060B22] text-[#FFB020] shadow-md scale-102"
                     : "text-slate-600 hover:text-[#060B22] hover:bg-slate-100"
                 )}
               >
-                <span className="font-mono text-[10px] text-[#FFB020]">{p.number}</span>
+                {/* Active countdown auto-scroll line */}
+                {isSelected && isAutoSpin && isInView && (
+                  <span
+                    className="absolute bottom-0 left-0 h-[2.5px] bg-[#FFB020] transition-all duration-75"
+                    style={{ width: `${autoProgress}%` }}
+                  />
+                )}
+                <span className="font-mono text-[10.5px] text-[#FFB020]">{p.number}</span>
                 <span>{p.shortTag}</span>
                 {isSelected && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
                 )}
               </button>
             );
           })}
         </div>
 
-        {/* 3D Orbit Controls */}
-        <div className="flex items-center gap-2">
-          {/* Auto-Spin Toggle */}
+        {/* Centered Status Bar with Auto-Scroll Controls */}
+        <div className="flex items-center justify-center gap-3 text-xs">
           <button
             type="button"
             onClick={() => setIsAutoSpin(!isAutoSpin)}
             className={cn(
-              "px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 border cursor-pointer",
+              "px-3 py-1 rounded-full font-mono text-[11px] font-bold flex items-center gap-1.5 border transition-colors cursor-pointer",
               isAutoSpin
                 ? "bg-[#060B22] text-[#FFB020] border-[#FFB020]/40 shadow-xs"
-                : "bg-white text-slate-700 border-[#E2DBD0] hover:border-slate-400"
+                : "bg-white text-slate-600 border-[#E2DBD0] hover:border-slate-400"
             )}
             title="Toggle 3D auto rotation"
           >
-            <RotateCw className={cn("w-3.5 h-3.5", isAutoSpin ? "animate-spin" : "")} />
-            <span className="hidden sm:inline">3D Orbit:</span>
-            <span>{isAutoSpin ? "Active" : "Paused"}</span>
+            <RotateCw className={cn("w-3 h-3", isAutoSpin ? "animate-spin" : "")} />
+            <span>Auto-Scroll: {isAutoSpin ? "Active" : "Paused"}</span>
           </button>
 
-          {/* Prev / Next Rotation Arrows */}
-          <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-[#E2DBD0] shadow-2xs">
+          <span className="text-slate-300">•</span>
+
+          {/* Stepper Controls */}
+          <div className="flex items-center gap-1 bg-white px-2 py-0.5 rounded-full border border-[#E2DBD0]">
             <button
               type="button"
               onClick={handlePrev}
-              className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-700 hover:text-[#060B22] transition-colors cursor-pointer"
-              title="Rotate Left"
+              className="p-1 hover:text-[#060B22] text-slate-500 transition-colors cursor-pointer"
+              title="Previous Sprint"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-3.5 h-3.5" />
             </button>
-            <span className="text-[11px] font-mono font-bold text-slate-400 px-1">
-              {activeStepIdx + 1}/{totalPhases}
+            <span className="font-mono font-bold text-[11px] text-[#060B22] px-1.5">
+              Sprint 0{activeStepIdx + 1} / 07
             </span>
             <button
               type="button"
               onClick={handleNext}
-              className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-700 hover:text-[#060B22] transition-colors cursor-pointer"
-              title="Rotate Right"
+              className="p-1 hover:text-[#060B22] text-slate-500 transition-colors cursor-pointer"
+              title="Next Sprint"
             >
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
+
+          <span className="text-slate-300 hidden sm:inline">•</span>
+
+          <span className="text-[11px] font-mono text-slate-500 hidden sm:inline">
+            Overall Progress: <strong className="text-[#0B1B3A]">{progressPercent}%</strong>
+          </span>
         </div>
       </div>
 
       {/* ==================================================================== */}
-      {/* 2. THE 3D ROUNDING CYLINDER STAGE (3D ROTATING ORBITAL CAROUSEL)     */}
+      {/* 2. CENTERED 3D ROUNDING ORBITAL STAGE (CINEMATIC 3D PERSPECTIVE)     */}
       {/* ==================================================================== */}
       <div
-        className="relative w-full h-[320px] sm:h-[350px] lg:h-[370px] flex items-center justify-center overflow-hidden rounded-3xl bg-gradient-to-b from-[#060B22] via-[#091438] to-[#060B22] border border-white/10 shadow-2xl"
+        onWheel={handleWheel}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        className="relative w-full h-[330px] sm:h-[360px] lg:h-[380px] flex items-center justify-center overflow-hidden rounded-3xl bg-gradient-to-b from-[#060B22] via-[#0A163B] to-[#060B22] border border-white/10 shadow-2xl"
         style={{
-          perspective: "1400px",
+          perspective: "1500px",
           cursor: isDragging ? "grabbing" : "grab",
         }}
       >
-        {/* Ambient 3D Depth Lighting & Orbital Rings */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,176,32,0.18)_0%,transparent_70%)] pointer-events-none" />
-        <div className="absolute -bottom-20 w-[550px] sm:w-[700px] h-32 bg-[#FFB020]/20 rounded-full blur-[80px] pointer-events-none" />
+        {/* Ambient Center Glow & Floor Grid */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,176,32,0.2)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute -bottom-16 w-[600px] h-28 bg-[#FFB020]/25 rounded-full blur-[90px] pointer-events-none" />
 
-        {/* 3D Elliptical Orbit Ring Graphic on Floor */}
+        {/* 3D Elliptical Orbit Rings */}
         <div
-          className="absolute w-[680px] h-[340px] rounded-full border-2 border-dashed border-[#FFB020]/25 pointer-events-none"
+          className="absolute w-[720px] h-[360px] rounded-full border-2 border-dashed border-[#FFB020]/25 pointer-events-none"
           style={{
-            transform: "rotateX(72deg) translateZ(-60px)",
+            transform: "rotateX(74deg) translateZ(-50px)",
           }}
         />
 
-        {/* Center 3D Revolving Cylinder Container */}
+        {/* Revolving Cylinder Center Pivot */}
         <div
-          className="relative w-[280px] sm:w-[320px] h-[210px] sm:h-[220px] transition-transform duration-700 ease-out"
+          className="relative w-[280px] sm:w-[330px] h-[210px] sm:h-[225px] transition-transform duration-700 ease-out"
           style={{
             transformStyle: "preserve-3d",
-            transform: `rotateY(${-activeStepIdx * anglePerPhase + mousePos.x * 12}deg) rotateX(${mousePos.y * -8}deg)`,
+            transform: `rotateY(${-activeStepIdx * anglePerPhase + mousePos.x * 10}deg) rotateX(${mousePos.y * -6}deg)`,
           }}
         >
           {PHASES.map((phase, idx) => {
@@ -379,24 +442,24 @@ export function WebDesignProcessStream() {
             return (
               <div
                 key={phase.step}
-                onClick={() => setActiveStepIdx(idx)}
+                onClick={() => selectPhase(idx)}
                 className={cn(
-                  "absolute inset-0 rounded-2xl p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 cursor-pointer border backdrop-blur-md select-none",
+                  "absolute inset-0 rounded-2xl p-5 flex flex-col justify-between transition-all duration-500 cursor-pointer border select-none",
                   isCurrent
-                    ? "bg-gradient-to-b from-[#0E1A3D] to-[#060B22] text-white border-2 border-[#FFB020] shadow-[0_0_35px_rgba(255,176,32,0.35)] ring-2 ring-[#FFB020]/30"
-                    : "bg-[#060B22]/85 text-slate-300 border-white/10 hover:border-white/30 hover:bg-[#060B22]/95 opacity-55 hover:opacity-85"
+                    ? "bg-gradient-to-b from-[#11204C] to-[#060B22] text-white border-2 border-[#FFB020] shadow-[0_0_40px_rgba(255,176,32,0.4)] ring-2 ring-[#FFB020]/40 z-30"
+                    : "bg-[#060B22]/85 text-slate-300 border-white/10 hover:border-white/30 opacity-50 hover:opacity-80 z-10"
                 )}
                 style={{
                   transform: `rotateY(${phaseAngle}deg) translateZ(${cylinderRadius}px)`,
                   backfaceVisibility: "hidden",
                 }}
               >
-                {/* Card Top: Number & Duration Badge */}
-                <div className="flex items-center justify-between gap-2">
+                {/* Card Top: Number & Duration */}
+                <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div
                       className={cn(
-                        "w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs",
+                        "w-7 h-7 rounded-lg flex items-center justify-center font-mono font-black text-xs",
                         isCurrent
                           ? "bg-[#FFB020] text-[#060B22]"
                           : "bg-white/10 text-slate-300"
@@ -404,14 +467,14 @@ export function WebDesignProcessStream() {
                     >
                       {phase.number}
                     </div>
-                    <span className="text-[10px] font-mono text-slate-400">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
                       Phase {phase.number}
                     </span>
                   </div>
 
                   <span
                     className={cn(
-                      "text-[9.5px] font-bold px-2 py-0.5 rounded-full border",
+                      "text-[10px] font-bold px-2.5 py-0.5 rounded-full border font-mono",
                       isCurrent
                         ? "text-[#FFB020] bg-[#FFB020]/15 border-[#FFB020]/30"
                         : "text-slate-400 bg-white/5 border-white/10"
@@ -422,62 +485,62 @@ export function WebDesignProcessStream() {
                 </div>
 
                 {/* Card Center: Icon & Title */}
-                <div className="space-y-1.5 my-auto">
-                  <div className="flex items-center gap-2">
-                    <span className="p-1.5 rounded-lg bg-white/10">{phase.icon}</span>
-                    <h4 className="font-display font-black text-sm sm:text-base text-white tracking-tight">
+                <div className="space-y-1.5 my-auto text-left">
+                  <div className="flex items-center gap-2.5">
+                    <span className="p-1.5 rounded-lg bg-white/10 shrink-0">{phase.icon}</span>
+                    <h4 className="font-display font-black text-base sm:text-lg text-white tracking-tight">
                       {phase.title}
                     </h4>
                   </div>
-                  <p className="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed">
                     {phase.tag}
                   </p>
                 </div>
 
-                {/* Card Bottom: Visual Metric & Status */}
-                <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[10px]">
-                  <span className="text-emerald-400 font-mono font-bold flex items-center gap-1 truncate">
+                {/* Card Bottom: Metric */}
+                <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs">
+                  <span className="text-emerald-400 font-mono font-bold flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     <span>{phase.visualMetric}</span>
                   </span>
-                  <span className="text-[#FFB020] font-bold">Inspect →</span>
+                  <span className="text-[#FFB020] font-bold text-[11px]">Inspect →</span>
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Swipe / Drag Hint Overlay */}
+        {/* Center Hint Prompt */}
         <div className="absolute bottom-3 inset-x-0 flex items-center justify-center gap-2 text-[10.5px] font-mono text-slate-400 pointer-events-none">
           <RotateCw className="w-3 h-3 text-[#FFB020]" />
-          <span>Drag or Swipe Horizontally to Spin 3D Rounding Orbit</span>
+          <span>Scroll down or swipe horizontally to rotate 3D orbital sprints</span>
         </div>
       </div>
 
       {/* ==================================================================== */}
-      {/* 3. ACTIVE PHASE DETAILS CANVAS: Visual Milestone Specs & Direct CTA */}
+      {/* 3. CENTER-BALANCED CLEAN MILESTONE SPECIFICATIONS                    */}
       {/* ==================================================================== */}
-      <div className="rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] shadow-sm overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
-          {/* Left Column (7 cols): Milestone Specifications */}
-          <div className="lg:col-span-7 p-5 sm:p-7 lg:p-8 bg-[#FAF8F5] border-b lg:border-b-0 lg:border-r border-[#E2DBD0] flex flex-col justify-between space-y-5">
+      <div className="rounded-3xl bg-white border border-[#E2DBD0] shadow-lg overflow-hidden text-left">
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+          {/* Left Column (7 cols): Sprint Scope & Guarantee */}
+          <div className="lg:col-span-7 p-6 sm:p-8 lg:p-9 bg-[#FAF8F5] border-b lg:border-b-0 lg:border-r border-[#E2DBD0] flex flex-col justify-between space-y-6">
             <div className="space-y-3">
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-[10px] font-black uppercase tracking-wider text-[#B87A00] bg-[#FFB020]/15 px-2.5 py-0.5 rounded-full border border-[#FFB020]/30">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-[#B87A00] bg-[#FFB020]/15 px-3 py-1 rounded-full border border-[#FFB020]/30 font-mono">
                   {activePhase.tag}
                 </span>
 
-                <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-slate-500">
+                <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-slate-600 bg-white px-2.5 py-1 rounded-full border border-[#E2DBD0]">
                   <Clock className="w-3.5 h-3.5 text-[#B87A00]" />
-                  <span>Sprint Duration: {activePhase.duration}</span>
+                  <span>Duration: {activePhase.duration}</span>
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <div className="font-mono text-xs font-black text-slate-400">
-                  Milestone Sprint Phase {activePhase.number} of 07
+              <div className="space-y-1.5">
+                <div className="font-mono text-xs font-bold text-slate-500">
+                  Sprint Phase {activePhase.number} of 07
                 </div>
-                <h3 className="font-display font-black text-xl sm:text-2xl text-[#0B1B3A] tracking-tight leading-snug">
+                <h3 className="font-display font-black text-2xl sm:text-3xl text-[#0B1B3A] tracking-tight leading-tight">
                   {activePhase.headline}
                 </h3>
               </div>
@@ -488,32 +551,33 @@ export function WebDesignProcessStream() {
             </div>
 
             {/* Visual Assurance Badge */}
-            <div className="p-3.5 rounded-2xl bg-white border border-[#E2DBD0] flex items-center justify-between gap-3 text-xs">
+            <div className="p-4 rounded-2xl bg-white border border-[#E2DBD0] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span className="font-bold text-[#060B22]">{activePhase.visualMetric}</span>
               </div>
-              <span className="text-[10.5px] font-mono text-slate-400">
-                Loom Video Demos Included
-              </span>
+              <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#B87A00]">
+                <Video className="w-3.5 h-3.5" />
+                <span>Daily Loom Walkthroughs Included</span>
+              </div>
             </div>
           </div>
 
-          {/* Right Column (5 cols): Concrete Deliverables & Direct Action */}
-          <div className="lg:col-span-5 p-5 sm:p-7 lg:p-8 flex flex-col justify-between space-y-5">
+          {/* Right Column (5 cols): Concrete Deliverables & Direct CTA */}
+          <div className="lg:col-span-5 p-6 sm:p-8 lg:p-9 flex flex-col justify-between space-y-6">
             <div className="space-y-3">
-              <div className="text-[10px] font-black uppercase tracking-wider text-slate-700">
-                Milestone Deliverables &amp; Artifacts:
+              <div className="text-[10.5px] font-black uppercase tracking-wider text-slate-500">
+                Phase {activePhase.number} Deliverables &amp; Artifacts:
               </div>
 
               <div className="space-y-2 text-xs text-slate-700">
                 {activePhase.deliverables.map((item, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-2.5 p-2 rounded-xl bg-[#FAF8F5] border border-[#E2DBD0]/60"
+                    className="flex items-start gap-2.5 p-3 rounded-xl bg-[#FAF8F5] border border-[#E2DBD0]/60"
                   >
                     <CheckCircle2 className="w-4 h-4 text-[#FFB020] shrink-0 mt-0.5" />
-                    <span className="font-medium text-[11.5px] leading-snug">{item}</span>
+                    <span className="font-medium text-xs leading-snug">{item}</span>
                   </div>
                 ))}
               </div>
@@ -523,10 +587,10 @@ export function WebDesignProcessStream() {
             <div className="pt-3 border-t border-slate-100">
               <Link
                 href="/get-a-quote"
-                className="btn-luxury-gold btn-shimmer w-full py-3.5 px-5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs cursor-pointer text-center"
+                className="btn-luxury-gold btn-shimmer w-full py-3.5 px-5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm cursor-pointer text-center group"
               >
                 <span>Request Project Timeline &amp; Scope</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
