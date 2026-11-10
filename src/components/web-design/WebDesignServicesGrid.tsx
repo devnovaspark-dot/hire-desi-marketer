@@ -191,9 +191,9 @@ export function WebDesignServicesGrid() {
         {/* LEFT COLUMN (5 cols): Clean, Uniform, Attractive Solution Cards  */}
         {/* ================================================================ */}
         <div className="lg:col-span-5 space-y-2.5">
-          <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500 px-1 pb-1 flex items-center justify-between">
+          <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 px-1 pb-1 flex items-center justify-between">
             <span>Select Architecture Solution:</span>
-            <span className="text-[#B87A00]">6 Solutions</span>
+            <span className="text-[#FFB020]">6 Solutions</span>
           </div>
 
           <div className="space-y-2">
@@ -208,8 +208,8 @@ export function WebDesignServicesGrid() {
                   className={cn(
                     "w-full p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 cursor-pointer text-left relative overflow-hidden group flex items-center justify-between gap-3",
                     isSelected
-                      ? "bg-[#060B22] text-white border-[#FFB020] shadow-md ring-1 ring-[#FFB020]/30 scale-[1.01]"
-                      : "bg-white text-slate-700 border-[#E2DBD0] hover:border-slate-400 hover:bg-[#FAF8F5]"
+                      ? "bg-gradient-to-r from-[#0B1536] to-[#060B22] text-white border-[#FFB020] shadow-lg ring-1 ring-[#FFB020]/40 scale-[1.01]"
+                      : "bg-white/5 backdrop-blur-md text-slate-200 border-white/10 hover:border-white/25 hover:bg-white/10"
                   )}
                 >
                   {/* Left Active Accent Pill */}
@@ -223,7 +223,7 @@ export function WebDesignServicesGrid() {
                         "w-8 h-8 rounded-xl font-mono text-xs font-black flex items-center justify-center shrink-0 transition-colors",
                         isSelected
                           ? "bg-[#FFB020] text-[#060B22]"
-                          : "bg-[#FAF8F5] text-slate-500 border border-[#E2DBD0] group-hover:text-[#0B1B3A]"
+                          : "bg-white/10 text-slate-300 border border-white/10 group-hover:text-white"
                       )}
                     >
                       {service.number}
@@ -235,7 +235,7 @@ export function WebDesignServicesGrid() {
                           "font-display font-black text-sm sm:text-[14.5px] tracking-tight truncate transition-colors",
                           isSelected
                             ? "text-white"
-                            : "text-[#0B1B3A] group-hover:text-[#B87A00]"
+                            : "text-white group-hover:text-[#FFB020]"
                         )}
                       >
                         {service.title}
@@ -243,7 +243,7 @@ export function WebDesignServicesGrid() {
                       <div
                         className={cn(
                           "text-[11px] truncate mt-0.5 font-medium transition-colors",
-                          isSelected ? "text-slate-300" : "text-slate-500"
+                          isSelected ? "text-slate-300" : "text-slate-400"
                         )}
                       >
                         {service.subtag}
@@ -257,7 +257,7 @@ export function WebDesignServicesGrid() {
                         "text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border hidden sm:inline-block",
                         isSelected
                           ? "bg-[#FFB020]/20 text-[#FFB020] border-[#FFB020]/30"
-                          : "bg-[#FAF8F5] text-slate-500 border-[#E2DBD0]"
+                          : "bg-white/5 text-slate-300 border-white/10"
                       )}
                     >
                       {service.metricBadge}
@@ -293,23 +293,23 @@ export function WebDesignServicesGrid() {
           {/* Top Status Indicators */}
           <div className="flex items-center justify-between px-1 text-xs">
             <div className="flex items-center gap-2">
-              <span className="text-[10.5px] font-mono font-black uppercase tracking-wider text-[#B87A00] bg-[#FFB020]/15 px-3 py-0.5 rounded-full border border-[#FFB020]/30">
+              <span className="text-[10.5px] font-mono font-black uppercase tracking-wider text-[#FFB020] bg-[#FFB020]/15 px-3 py-0.5 rounded-full border border-[#FFB020]/30">
                 {activeService.categoryBadge}
               </span>
-              <span className="font-bold text-[#0B1B3A] hidden sm:inline">
+              <span className="font-bold text-white hidden sm:inline">
                 {activeService.shortTag}
               </span>
             </div>
 
-            <div className="flex items-center gap-1.5 text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-              <Activity className="w-3 h-3 text-emerald-500 animate-pulse" />
+            <div className="flex items-center gap-1.5 text-[11px] font-mono text-emerald-400 bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+              <Activity className="w-3 h-3 text-emerald-400 animate-pulse" />
               <span>{activeService.speedScore}</span>
             </div>
           </div>
 
           {/* Panoramic 3D Browser Viewport (STRICT ZERO TEXT OVERLAY ON IMAGE) */}
           <div
-            className="rounded-3xl bg-[#060B22] border border-[#060B22]/20 shadow-[0_24px_60px_-15px_rgba(6,11,34,0.3)] overflow-hidden transition-transform duration-300 ease-out"
+            className="rounded-3xl bg-[#060B22] border border-white/10 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden transition-transform duration-300 ease-out"
             style={{
               transform: `rotateY(${mousePos.x * 4}deg) rotateX(${-mousePos.y * 4}deg)`,
               transformStyle: "preserve-3d",
@@ -348,15 +348,15 @@ export function WebDesignServicesGrid() {
           </div>
 
           {/* Clean Architectural Deliverables Strip (Below the Stage) */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-white border border-[#E2DBD0] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="p-5 sm:p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-1.5 min-w-0">
-              <div className="font-display font-black text-sm sm:text-base text-[#0B1B3A]">
+              <div className="font-display font-black text-sm sm:text-base text-white">
                 {activeService.title} Deliverables
               </div>
-              <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-slate-600">
+              <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-slate-300">
                 {activeService.deliverables.map((d, i) => (
                   <span key={i} className="flex items-center gap-1">
-                    <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                     <span>{d}</span>
                   </span>
                 ))}
