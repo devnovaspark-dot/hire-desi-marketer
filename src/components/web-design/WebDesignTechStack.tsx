@@ -437,9 +437,87 @@ export function WebDesignTechStack() {
   return (
     <div className="w-full max-w-7xl mx-auto space-y-6 sm:space-y-8 select-none text-left">
       {/* ==================================================================== */}
-      {/* 1. SEAMLESS BIGGER SHUFFLE CARDS (NO UNNECESSARY TEXT, PURE CARDS)   */}
+      {/* 1A. MOBILE TECHNOLOGY SELECTOR & ACTIVE CARD (md:hidden)             */}
       {/* ==================================================================== */}
-      <div className="w-full text-center relative py-2 overflow-visible">
+      <div className="md:hidden space-y-4">
+        {/* Horizontal Scrollable Selector Navigation */}
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 px-1">
+          {PLATFORMS.map((platform) => {
+            const isSelected = platform.id === selectedPlatformId;
+            return (
+              <button
+                key={`mobile-tab-${platform.id}`}
+                type="button"
+                onClick={() => setSelectedPlatformId(platform.id)}
+                className={cn(
+                  "px-3.5 py-2 rounded-xl text-xs font-bold transition-all duration-200 whitespace-nowrap flex items-center gap-2 border shadow-xs shrink-0 cursor-pointer",
+                  isSelected
+                    ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] ring-2 ring-[#FFB020]/25 shadow-md"
+                    : "bg-white text-slate-700 border-[#E2DBD0] hover:border-slate-400"
+                )}
+              >
+                <span className="font-display">{platform.name}</span>
+                <span
+                  className={cn(
+                    "text-[10px] font-mono px-1.5 py-0.5 rounded-md border",
+                    isSelected
+                      ? "bg-white/10 border-white/20 text-[#FFB020]"
+                      : "bg-[#FAF8F5] border-[#E2DBD0] text-slate-500"
+                  )}
+                >
+                  {platform.slaMetric}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Active Technology Card Full-Width */}
+        <div
+          className={cn(
+            "w-full p-5 flex flex-col justify-between text-white rounded-2xl border-2 relative overflow-hidden select-none shadow-xl",
+            activePlatform.cardGradient,
+            activePlatform.borderColor,
+            activePlatform.glowColor
+          )}
+        >
+          {/* Top Row: 3D Official Stack Icon & SLA Metric Pill */}
+          <div className="flex items-center justify-between z-10 pb-2">
+            <div className="p-1.5 rounded-xl bg-white/10 border border-white/15 backdrop-blur-sm shadow-inner flex items-center justify-center">
+              {activePlatform.icon3d}
+            </div>
+            <span
+              className={cn(
+                "text-xs font-mono font-black px-3 py-1 rounded-full border shadow-xs",
+                activePlatform.metricBadgeColor
+              )}
+            >
+              {activePlatform.slaMetric}
+            </span>
+          </div>
+
+          {/* Title & Subtitle */}
+          <div className="z-10 py-2 space-y-0.5">
+            <div className="font-display font-black text-xl text-white tracking-tight">
+              {activePlatform.name}
+            </div>
+            <div className={cn("text-xs font-semibold", activePlatform.accentText)}>
+              {activePlatform.subtitle}
+            </div>
+          </div>
+
+          {/* Bottom Architectural Badge */}
+          <div className="z-10 pt-2.5 border-t border-white/15 flex items-center justify-between text-xs font-mono text-slate-100">
+            <span className="truncate font-medium">{activePlatform.badge}</span>
+            <span className="text-[11px] font-bold text-[#FFB020]">Active Selection ✓</span>
+          </div>
+        </div>
+      </div>
+
+      {/* ==================================================================== */}
+      {/* 1B. DESKTOP BOUNCE CARDS SHUFFLE VIEWPORT (hidden md:block)          */}
+      {/* ==================================================================== */}
+      <div className="hidden md:block w-full text-center relative py-2 overflow-visible">
         {/* Floating Shuffle Cards Viewport */}
         <div className="w-full h-[380px] sm:h-[420px] flex items-center justify-center overflow-visible py-2">
           <BounceCards

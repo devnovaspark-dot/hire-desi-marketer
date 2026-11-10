@@ -111,9 +111,50 @@ export function WebDesignCaseStudies() {
   return (
     <div className="w-full max-w-7xl mx-auto space-y-6 sm:space-y-8 select-none text-left">
       {/* ==================================================================== */}
-      {/* 1. CENTER FLOW ARCHITECTURAL STAGE (NO ENCLOSING CARD, UNBOXED)      */}
+      {/* 1A. MOBILE SELECTOR PILLS (md:hidden)                                */}
       {/* ==================================================================== */}
-      <div className="relative overflow-visible py-2">
+      <div className="md:hidden space-y-2">
+        <div className="flex items-center justify-between px-1 text-xs font-mono font-bold text-slate-500 uppercase tracking-wider">
+          <span>Select Benchmark Reference:</span>
+          <span className="text-[#060B22] font-black">Craft 0{BENCHMARK_NODES.findIndex(n => n.id === activeStudyId) + 1} of 04</span>
+        </div>
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 px-1">
+          {BENCHMARK_NODES.map((node, idx) => {
+            const isSelected = node.id === activeStudyId;
+            return (
+              <button
+                key={`mobile-bench-${node.id}`}
+                type="button"
+                onClick={() => handleNodeSelect(node)}
+                className={cn(
+                  "px-3.5 py-2 rounded-xl text-xs font-bold transition-all duration-200 whitespace-nowrap flex items-center gap-2 border shadow-xs shrink-0 cursor-pointer",
+                  isSelected
+                    ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] ring-2 ring-[#FFB020]/25 shadow-md"
+                    : "bg-white text-slate-700 border-[#E2DBD0] hover:border-slate-400"
+                )}
+              >
+                <span>{node.icon}</span>
+                <span className="font-display">{node.title}</span>
+                <span
+                  className={cn(
+                    "text-[10px] font-mono px-1.5 py-0.5 rounded-md border",
+                    isSelected
+                      ? "bg-white/10 border-white/20 text-[#FFB020]"
+                      : "bg-[#FAF8F5] border-[#E2DBD0] text-slate-500"
+                  )}
+                >
+                  {node.badge}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ==================================================================== */}
+      {/* 1B. DESKTOP CENTER FLOW ARCHITECTURAL STAGE (hidden md:block)        */}
+      {/* ==================================================================== */}
+      <div className="hidden md:block relative overflow-visible py-2">
         <CenterFlow
           hub={{
             badge: "HDM CORE",

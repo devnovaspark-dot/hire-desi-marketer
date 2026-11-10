@@ -330,10 +330,45 @@ export default function BentoGrid() {
       {/* 2-Column Vertical Architecture Layout with Bottom-Aligned Height Balance */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch max-w-6xl mx-auto px-2 sm:px-4">
         {/* ==================================================================== */}
-        {/* LEFT COLUMN: VERTICAL LIST OF 6 ARCHITECTURE SOLUTIONS               */}
+        {/* MOBILE SELECTOR: HORIZONTAL SCROLLABLE SOLUTION SELECTOR (lg:hidden) */}
+        {/* ==================================================================== */}
+        <div className="lg:hidden flex flex-col gap-2 w-full">
+          <div className="flex items-center justify-between px-1 text-xs font-mono font-bold text-slate-500 uppercase tracking-wider">
+            <span>Select Solution:</span>
+            <span className="text-[#060B22] font-black">Solution 0{activeIndex + 1} of 06</span>
+          </div>
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 px-1">
+            {ARCHITECTURE_NODES.map((node, idx) => {
+              const Icon = node.icon;
+              const isActive = idx === activeIndex;
+              return (
+                <button
+                  key={`mobile-${node.id}`}
+                  type="button"
+                  onClick={() => handleSelectNode(idx)}
+                  className={cn(
+                    "px-3 py-2 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer whitespace-nowrap flex items-center gap-2 border shadow-xs shrink-0",
+                    isActive
+                      ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] ring-2 ring-[#FFB020]/25 shadow-md"
+                      : "bg-white text-slate-700 border-[#E2DBD0] hover:border-slate-400"
+                  )}
+                >
+                  <div className="w-5 h-5 flex items-center justify-center shrink-0">
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <span className="font-mono text-[10px] opacity-75">{node.number}</span>
+                  <span className="truncate max-w-[150px] font-display">{node.name}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ==================================================================== */}
+        {/* DESKTOP LEFT COLUMN: VERTICAL LIST OF 6 ARCHITECTURE SOLUTIONS        */}
         {/* Bottom-aligned with right column through flex distribution           */}
         {/* ==================================================================== */}
-        <div className="lg:col-span-5 flex flex-col h-full">
+        <div className="hidden lg:flex lg:col-span-5 flex-col h-full">
           <div className="flex items-center justify-between px-2 pb-2 text-xs font-mono font-bold text-slate-500 uppercase tracking-wider shrink-0">
             <span>Select Architecture Solution:</span>
             <span className="text-[#060B22] font-black">Solution 0{activeIndex + 1} of 06</span>
@@ -443,21 +478,21 @@ export default function BentoGrid() {
               {/* ================================================================ */}
               <div className="bg-[#FAF8F5] rounded-2xl border border-[#E2DBD0] p-4 sm:p-5 relative overflow-hidden">
                 {/* 1. 4 Satellite Technology Nodes */}
-                <div className="grid grid-cols-4 gap-2 text-center relative z-10">
+                <div className="grid grid-cols-4 gap-1.5 sm:gap-2 text-center relative z-10">
                   {active.satellites.map((sat, sIdx) => {
                     const SatIcon = sat.icon;
                     return (
                       <div
                         key={sIdx}
-                        className="flex flex-col items-center gap-1.5 p-2 rounded-xl bg-white border border-[#E2DBD0] shadow-xs hover:border-[#FFB020] transition-all group"
+                        className="flex flex-col items-center gap-1 sm:gap-1.5 p-1.5 sm:p-2 rounded-xl bg-white border border-[#E2DBD0] shadow-xs hover:border-[#FFB020] transition-all group"
                       >
-                        <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#E2DBD0] flex items-center justify-center text-[#060B22] group-hover:scale-110 transition-transform">
-                          <SatIcon className="w-4 h-4 text-[#060B22]" />
+                        <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#FAF8F5] border border-[#E2DBD0] flex items-center justify-center text-[#060B22] group-hover:scale-110 transition-transform">
+                          <SatIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#060B22]" />
                         </div>
-                        <div className="text-[10px] font-display font-black text-[#0B1B3A] tracking-tight truncate w-full">
+                        <div className="text-[9px] sm:text-[10px] font-display font-black text-[#0B1B3A] tracking-tight truncate w-full">
                           {sat.label}
                         </div>
-                        <div className="text-[8.5px] font-mono text-slate-500 truncate w-full hidden sm:block">
+                        <div className="text-[8px] sm:text-[8.5px] font-mono text-slate-500 truncate w-full hidden sm:block">
                           {sat.sublabel}
                         </div>
                       </div>

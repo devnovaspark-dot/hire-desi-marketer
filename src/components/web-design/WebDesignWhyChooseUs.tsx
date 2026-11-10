@@ -487,16 +487,16 @@ export function WebDesignWhyChooseUs() {
           </div>
 
           {/* 3 Key Architecture SLA Specs (5 cols) */}
-          <div className="lg:col-span-5 grid grid-cols-3 gap-2">
+          <div className="lg:col-span-5 grid grid-cols-3 gap-1.5 sm:gap-2">
             {activePillar.specs.map((spec, i) => (
               <div
                 key={i}
-                className="p-2 sm:p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E2DBD0] text-center space-y-0.5"
+                className="p-1.5 sm:p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E2DBD0] text-center space-y-0.5"
               >
-                <div className="text-[9px] font-mono uppercase tracking-wider text-slate-500 truncate">
+                <div className="text-[8.5px] sm:text-[9px] font-mono uppercase tracking-wider text-slate-500 truncate">
                   {spec.label}
                 </div>
-                <div className="font-bold text-[10.5px] sm:text-[11px] text-[#0B1B3A] truncate">
+                <div className="font-bold text-[10px] sm:text-[11px] text-[#0B1B3A] truncate">
                   {spec.value}
                 </div>
               </div>

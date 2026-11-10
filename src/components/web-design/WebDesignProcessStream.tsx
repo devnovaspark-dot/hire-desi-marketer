@@ -746,80 +746,91 @@ export function WebDesignProcessStream() {
       </div>
 
       {/* ==================================================================== */}
-      {/* 2B. MOBILE TOUCH-FRIENDLY INTERACTIVE SPRINT CARD (UNDER 768px)      */}
+      {/* 2B. MOBILE VERTICAL MILESTONE TIMELINE (md:hidden)                   */}
       {/* ==================================================================== */}
-      <div className="md:hidden block px-2">
-        <div className="p-5 rounded-3xl bg-white border border-[#E2DBD0] shadow-lg relative overflow-hidden">
-          <div
-            className="absolute top-0 inset-x-0 h-1.5"
-            style={{ backgroundColor: activePhase.accentColor }}
-          />
+      <div className="md:hidden block px-1 space-y-3">
+        <div className="relative pl-6 sm:pl-8 space-y-3.5">
+          {/* Continuous Aligned Vertical Timeline Spine */}
+          <div className="absolute left-3.5 sm:left-4 top-4 bottom-4 w-0.5 bg-gradient-to-b from-[#FFB020] via-[#0284C7] to-[#10B981]" />
 
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-            <span
-              className="text-xs font-mono font-black uppercase px-2.5 py-1 rounded-md text-white"
-              style={{ backgroundColor: activePhase.accentColor }}
-            >
-              Sprint {activePhase.number}
-            </span>
-            <span className="text-xs font-mono font-bold text-slate-700 bg-[#FAF8F5] px-2.5 py-1 rounded-full border border-[#E2DBD0]">
-              Duration: {activePhase.duration}
-            </span>
-          </div>
+          {PHASES.map((phase, idx) => {
+            const isSelected = idx === activeStepIdx;
+            const PhaseIcon = phase.icon;
 
-          <div className="flex items-center gap-3 mb-2">
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center border shrink-0"
-              style={{
-                backgroundColor: `${activePhase.accentColor}15`,
-                borderColor: `${activePhase.accentColor}40`,
-                color: activePhase.accentColor,
-              }}
-            >
-              <activePhase.icon className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="font-display font-black text-base text-[#0B1B3A]">
-                {activePhase.title}
+            return (
+              <div
+                key={`mobile-timeline-${phase.step}`}
+                onClick={() => handleSelectSprint(idx)}
+                className={cn(
+                  "relative rounded-2xl border transition-all duration-300 p-4 text-left cursor-pointer",
+                  isSelected
+                    ? "bg-white border-[#FFB020] shadow-lg ring-2 ring-[#FFB020]/30"
+                    : "bg-white/80 border-[#E2DBD0] hover:border-slate-400"
+                )}
+              >
+                {/* Milestone Node on the Spine */}
+                <div
+                  className={cn(
+                    "absolute -left-6 sm:-left-8 top-4 w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 flex items-center justify-center font-mono font-black text-[11px] transition-all duration-300",
+                    isSelected
+                      ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] shadow-[0_0_10px_rgba(255,176,32,0.8)] scale-110"
+                      : "bg-white text-slate-600 border-[#DDD5C9]"
+                  )}
+                >
+                  {phase.number}
+                </div>
+
+                {/* Header: Sprint Tag & Duration */}
+                <div className="flex items-center justify-between pb-1.5 border-b border-slate-100">
+                  <span
+                    className="text-[10px] font-mono font-black uppercase px-2 py-0.5 rounded text-white"
+                    style={{ backgroundColor: phase.accentColor }}
+                  >
+                    Sprint {phase.number}
+                  </span>
+                  <span className="text-[10px] font-mono font-bold text-slate-600 bg-[#FAF8F5] px-2 py-0.5 rounded border border-[#E2DBD0]">
+                    {phase.duration}
+                  </span>
+                </div>
+
+                {/* Milestone Title & Icon */}
+                <div className="flex items-center gap-2 pt-2">
+                  <div
+                    className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border"
+                    style={{
+                      backgroundColor: `${phase.accentColor}15`,
+                      borderColor: `${phase.accentColor}40`,
+                      color: phase.accentColor,
+                    }}
+                  >
+                    <PhaseIcon className="w-3.5 h-3.5" />
+                  </div>
+                  <div className="font-display font-black text-sm text-[#0B1B3A] tracking-tight">
+                    {phase.title}
+                  </div>
+                </div>
+
+                <p className="text-xs text-slate-600 font-normal leading-relaxed pt-1.5 line-clamp-2">
+                  {phase.summary}
+                </p>
+
+                {/* Deliverables snippet */}
+                <div className="pt-2 mt-2 border-t border-slate-100 flex items-center justify-between text-[10.5px] font-mono">
+                  <span className="text-emerald-700 font-bold truncate">
+                    {phase.slaMetric}
+                  </span>
+                  <span
+                    className={cn(
+                      "font-bold text-[10px]",
+                      isSelected ? "text-[#FFB020]" : "text-slate-400"
+                    )}
+                  >
+                    {isSelected ? "Active Milestone ✓" : "Tap to inspect"}
+                  </span>
+                </div>
               </div>
-              <div className="text-xs text-emerald-700 font-mono font-bold">
-                {activePhase.slaMetric}
-              </div>
-            </div>
-          </div>
-
-          <p className="text-xs text-slate-600 leading-relaxed font-normal pt-1">
-            {activePhase.summary}
-          </p>
-
-          {/* Prev / Next mobile steppers */}
-          <div className="flex items-center justify-between pt-4 mt-3 border-t border-slate-100">
-            <button
-              type="button"
-              onClick={() =>
-                handleSelectSprint((activeStepIdx - 1 + PHASES.length) % PHASES.length)
-              }
-              className="p-2 rounded-xl bg-[#FAF8F5] border border-[#E2DBD0] text-slate-700 hover:text-[#060B22] text-xs font-bold inline-flex items-center gap-1.5"
-            >
-              <ChevronLeft className="w-4 h-4" />
-              <span>Prev Sprint</span>
-            </button>
-
-            <span className="text-xs font-mono font-bold text-slate-500">
-              {activeStepIdx + 1} of {PHASES.length}
-            </span>
-
-            <button
-              type="button"
-              onClick={() =>
-                handleSelectSprint((activeStepIdx + 1) % PHASES.length)
-              }
-              className="p-2 rounded-xl bg-[#060B22] text-[#FFB020] border border-[#FFB020] text-xs font-bold inline-flex items-center gap-1.5"
-            >
-              <span>Next Sprint</span>
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
+            );
+          })}
         </div>
       </div>
 

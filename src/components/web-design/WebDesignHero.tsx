@@ -41,7 +41,7 @@ export function WebDesignHero() {
         hoverEffect="focus"
         mouseStrength={1}
         pulseOnClick={true}
-        className="absolute inset-0 w-full h-full opacity-90"
+        className="absolute inset-0 w-full h-full opacity-90 pointer-events-none md:pointer-events-auto"
       />
 
       {/* Subtle Ambient Radial Lighting Behind Fibers */}
@@ -88,11 +88,11 @@ export function WebDesignHero() {
           </div>
 
           {/* Dual Conversion Actions */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 w-full max-w-md sm:max-w-none mx-auto">
             <StarBorder
               as={Link}
               href="/get-a-quote"
-              className="py-3.5 px-8 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-lg cursor-pointer text-center group"
+              className="w-full sm:w-auto py-3.5 px-8 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-lg cursor-pointer text-center group"
               radius={12}
               color="#FFF8E7"
               trailColor="#FFB020"
@@ -109,7 +109,7 @@ export function WebDesignHero() {
             <StarBorder
               as="a"
               href="#services"
-              className="py-3.5 px-7 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-xs cursor-pointer text-center group"
+              className="w-full sm:w-auto py-3.5 px-7 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-xs cursor-pointer text-center group"
               radius={12}
               color="#FFB020"
               trailColor="#38BDF8"

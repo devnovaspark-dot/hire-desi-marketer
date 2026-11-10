@@ -242,20 +242,20 @@ export function WebDesignLeadForm({
             </div>
           )}
 
-          {/* Row 1: Full Name & Business Email (2 side-by-side on all screens) */}
-          <div className="grid grid-cols-2 gap-2 sm:gap-3">
+          {/* Row 1: Full Name & Business Email (Stacked 1-col on mobile, 2-col on tablet/desktop) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
             <div className="space-y-1 text-left">
               <label
                 htmlFor={`${formId}-name`}
                 className={cn(
-                  "block text-[9px] sm:text-[10px] font-bold uppercase tracking-wider truncate",
+                  "block text-[10px] sm:text-[10px] font-bold uppercase tracking-wider truncate",
                   isDark ? "text-slate-300" : "text-slate-700"
                 )}
               >
                 Full Name <span className="text-amber-500">*</span>
               </label>
               <div className="relative">
-                <User className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <User className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   id={`${formId}-name`}
                   type="text"
@@ -264,7 +264,7 @@ export function WebDesignLeadForm({
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   className={cn(
-                    "w-full pl-7 sm:pl-8 pr-2 sm:pr-3 py-1.5 sm:py-2 text-[11px] sm:text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all",
+                    "w-full pl-8 pr-3 py-2 sm:py-2 text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all min-h-[42px] sm:min-h-0",
                     isDark
                       ? "bg-white/10 border-white/20 text-white placeholder-slate-400"
                       : "bg-slate-50/80 border-[#E2DBD0] text-[#0B1B3A] placeholder-slate-400"
@@ -277,14 +277,14 @@ export function WebDesignLeadForm({
               <label
                 htmlFor={`${formId}-email`}
                 className={cn(
-                  "block text-[9px] sm:text-[10px] font-bold uppercase tracking-wider truncate",
+                  "block text-[10px] sm:text-[10px] font-bold uppercase tracking-wider truncate",
                   isDark ? "text-slate-300" : "text-slate-700"
                 )}
               >
                 Work Email <span className="text-amber-500">*</span>
               </label>
               <div className="relative">
-                <Mail className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Mail className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   id={`${formId}-email`}
                   type="email"
@@ -293,7 +293,7 @@ export function WebDesignLeadForm({
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className={cn(
-                    "w-full pl-7 sm:pl-8 pr-2 sm:pr-3 py-1.5 sm:py-2 text-[11px] sm:text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all",
+                    "w-full pl-8 pr-3 py-2 sm:py-2 text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all min-h-[42px] sm:min-h-0",
                     isDark
                       ? "bg-white/10 border-white/20 text-white placeholder-slate-400"
                       : "bg-slate-50/80 border-[#E2DBD0] text-[#0B1B3A] placeholder-slate-400"
@@ -303,20 +303,20 @@ export function WebDesignLeadForm({
             </div>
           </div>
 
-          {/* Row 2: Company Name & Website URL (2 side-by-side on all screens) */}
-          <div className="grid grid-cols-2 gap-2 sm:gap-3">
+          {/* Row 2: Company Name & Website URL (Stacked 1-col on mobile, 2-col on tablet/desktop) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
             <div className="space-y-1 text-left">
               <label
                 htmlFor={`${formId}-company`}
                 className={cn(
-                  "block text-[9px] sm:text-[10px] font-bold uppercase tracking-wider truncate",
+                  "block text-[10px] sm:text-[10px] font-bold uppercase tracking-wider truncate",
                   isDark ? "text-slate-300" : "text-slate-700"
                 )}
               >
                 Company <span className="text-amber-500">*</span>
               </label>
               <div className="relative">
-                <Building className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Building className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   id={`${formId}-company`}
                   type="text"
@@ -325,7 +325,7 @@ export function WebDesignLeadForm({
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
                   className={cn(
-                    "w-full pl-7 sm:pl-8 pr-2 sm:pr-3 py-1.5 sm:py-2 text-[11px] sm:text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all",
+                    "w-full pl-8 pr-3 py-2 sm:py-2 text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all min-h-[42px] sm:min-h-0",
                     isDark
                       ? "bg-white/10 border-white/20 text-white placeholder-slate-400"
                       : "bg-slate-50/80 border-[#E2DBD0] text-[#0B1B3A] placeholder-slate-400"
@@ -338,14 +338,14 @@ export function WebDesignLeadForm({
               <label
                 htmlFor={`${formId}-url`}
                 className={cn(
-                  "block text-[9px] sm:text-[10px] font-bold uppercase tracking-wider truncate",
+                  "block text-[10px] sm:text-[10px] font-bold uppercase tracking-wider truncate",
                   isDark ? "text-slate-300" : "text-slate-700"
                 )}
               >
                 Website URL <span className="text-slate-400 font-normal hidden xs:inline">(Optional)</span>
               </label>
               <div className="relative">
-                <Globe className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Globe className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   id={`${formId}-url`}
                   type="url"
@@ -353,7 +353,7 @@ export function WebDesignLeadForm({
                   value={websiteUrl}
                   onChange={(e) => setWebsiteUrl(e.target.value)}
                   className={cn(
-                    "w-full pl-7 sm:pl-8 pr-2 sm:pr-3 py-1.5 sm:py-2 text-[11px] sm:text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all",
+                    "w-full pl-8 pr-3 py-2 sm:py-2 text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all min-h-[42px] sm:min-h-0",
                     isDark
                       ? "bg-white/10 border-white/20 text-white placeholder-slate-400"
                       : "bg-slate-50/80 border-[#E2DBD0] text-[#0B1B3A] placeholder-slate-400"
@@ -363,13 +363,13 @@ export function WebDesignLeadForm({
             </div>
           </div>
 
-          {/* Row 3: Service Required & Project Budget (2 side-by-side on all screens) */}
-          <div className="grid grid-cols-2 gap-2 sm:gap-3">
+          {/* Row 3: Service Required & Project Budget (Stacked 1-col on mobile, 2-col on tablet/desktop) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
             <div className="space-y-1 text-left">
               <label
                 htmlFor={`${formId}-service`}
                 className={cn(
-                  "block text-[9px] sm:text-[10px] font-bold uppercase tracking-wider truncate",
+                  "block text-[10px] sm:text-[10px] font-bold uppercase tracking-wider truncate",
                   isDark ? "text-slate-300" : "text-slate-700"
                 )}
               >
@@ -380,7 +380,7 @@ export function WebDesignLeadForm({
                 value={serviceRequired}
                 onChange={(e) => setServiceRequired(e.target.value)}
                 className={cn(
-                  "w-full px-2 sm:px-2.5 py-1.5 sm:py-2 text-[11px] sm:text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all cursor-pointer font-medium truncate",
+                  "w-full px-2.5 py-2 sm:py-2 text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all cursor-pointer font-medium truncate min-h-[42px] sm:min-h-0",
                   isDark
                     ? "bg-[#0B132B] border-white/20 text-white"
                     : "bg-slate-50/80 border-[#E2DBD0] text-[#0B1B3A]"
@@ -401,20 +401,20 @@ export function WebDesignLeadForm({
               <label
                 htmlFor={`${formId}-budget`}
                 className={cn(
-                  "block text-[9px] sm:text-[10px] font-bold uppercase tracking-wider truncate",
+                  "block text-[10px] sm:text-[10px] font-bold uppercase tracking-wider truncate",
                   isDark ? "text-slate-300" : "text-slate-700"
                 )}
               >
                 Engagement Model
               </label>
               <div className="relative">
-                <Briefcase className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Briefcase className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <select
                   id={`${formId}-budget`}
                   value={projectBudget}
                   onChange={(e) => setProjectBudget(e.target.value)}
                   className={cn(
-                    "w-full pl-6 sm:pl-7 pr-2 py-1.5 sm:py-2 text-[11px] sm:text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all cursor-pointer font-medium truncate",
+                    "w-full pl-8 pr-3 py-2 sm:py-2 text-xs rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#FFB020] transition-all cursor-pointer font-medium truncate min-h-[42px] sm:min-h-0",
                     isDark
                       ? "bg-[#0B132B] border-white/20 text-white"
                       : "bg-slate-50/80 border-[#E2DBD0] text-[#0B1B3A]"
@@ -460,7 +460,7 @@ export function WebDesignLeadForm({
             as="button"
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-md disabled:opacity-70 transition-all"
+            className="w-full py-3 sm:py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-md disabled:opacity-70 transition-all min-h-[44px]"
             radius={12}
             color="#FFF8E7"
             trailColor="#FFB020"

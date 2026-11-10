@@ -382,7 +382,7 @@ export function MarketingWebsiteSynergy() {
         {/* ============================================================ */}
         {/* 3. CHANNEL SELECTOR STRIP WITH REAL BRAND ICONS              */}
         {/* ============================================================ */}
-        <div className="flex items-center justify-center gap-2 sm:gap-3 overflow-x-auto pb-1 no-scrollbar">
+        <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 overflow-x-auto pb-1 px-1 no-scrollbar">
           {CHANNELS.map((ch) => {
             const isSelected = ch.id === activeChannelId;
             return (
@@ -627,7 +627,7 @@ export function MarketingWebsiteSynergy() {
               <StarBorder
                 as={Link}
                 href="/get-a-quote"
-                className="py-3 px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-lg group"
+                className="w-full sm:w-auto py-3 px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-lg group"
                 radius={12}
                 color="#FFF8E7"
                 trailColor="#FFB020"
