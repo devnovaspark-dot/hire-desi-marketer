@@ -18,8 +18,22 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
+import TileReveal from "@/components/ui/TileReveal";
 
 type EngineMode = "leaky" | "hdm";
+
+// Real High-Conversion Portfolio & Benchmark Screens for React Bits Tile Reveal
+const TILE_IMAGES = [
+  "/images/ref-linear.jpg",
+  "/images/ref-allbirds.jpg",
+  "/images/ref-onemedical.jpg",
+  "/images/ref-mckinsey.jpg",
+  "/images/services-ui-design-showcase.jpg",
+  "/images/hero-devices-mockup.jpg",
+  "/images/case-study-aesthetic.webp",
+  "/images/case-study-cafe.webp",
+  "/images/case-study-dental.webp",
+];
 
 // Real Brand SVGs for authentic industry recognizability
 function GoogleAdsIcon({ className = "w-4 h-4" }: { className?: string }) {
@@ -216,26 +230,41 @@ export function MarketingWebsiteSynergy() {
   return (
     <section
       id="marketing-foundation"
-      className="py-10 sm:py-14 lg:py-16 bg-[#FAF8F5] border-y border-[#E2DBD0] select-none scroll-mt-24"
+      className="bg-[#FAF8F5] border-y border-[#E2DBD0] select-none scroll-mt-24"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 text-center">
-        {/* ============================================================ */}
-        {/* 1. CENTERED SECTION HEADER                                   */}
-        {/* ============================================================ */}
-        <div className="max-w-3xl mx-auto space-y-2.5 pb-5 border-b border-[#E2DBD0]">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
-            <span>03 · The Marketing + Website Relationship</span>
+      {/* ============================================================ */}
+      {/* 1. REACT BITS PRO TILE REVEAL COMPONENT                      */}
+      {/* Image tiles fly in & split on scroll to reveal the headline  */}
+      {/* ============================================================ */}
+      <TileReveal
+        images={TILE_IMAGES}
+        columns={3}
+        gap={16}
+        gridWidth={880}
+        scrollLength={0.85}
+        backgroundColor="#FAF8F5"
+        headline={
+          <div className="max-w-3xl mx-auto space-y-3 px-4">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
+              <span>03 · The Marketing + Website Relationship</span>
+            </div>
+
+            <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
+              A Great Advertising Campaign Cannot Fix a Leaky Website.
+            </h2>
+
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+              Your ad spend is only as profitable as the website it sends visitors to. See the difference between a typical template and an engineered conversion engine.
+            </p>
           </div>
+        }
+      />
 
-          <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
-            A Great Advertising Campaign Cannot Fix a Leaky Website.
-          </h2>
-
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
-            Your ad spend is only as profitable as the website it sends visitors to. See the difference between a typical template and an engineered conversion engine.
-          </p>
-        </div>
+      {/* ============================================================ */}
+      {/* 2. THE INTERACTIVE CONVERSION ENGINE SIMULATOR               */}
+      {/* ============================================================ */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 text-center pb-16 pt-2">
 
         {/* ============================================================ */}
         {/* 2. DUAL-MODE INTERACTIVE TOGGLE SWITCH                       */}
