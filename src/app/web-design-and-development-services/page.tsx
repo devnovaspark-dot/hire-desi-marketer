@@ -282,7 +282,7 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         <section
           id="why-choose-us"
-          className="py-8 sm:py-12 lg:py-14 bg-[#FAF8F5] border-y border-[#E2DBD0] scroll-mt-24 sm:scroll-mt-28"
+          className="py-5 sm:py-7 lg:py-8 bg-[#FAF8F5] border-y border-[#E2DBD0] scroll-mt-24 sm:scroll-mt-28"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <WebDesignWhyChooseUs />

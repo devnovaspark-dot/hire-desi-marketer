@@ -16,8 +16,8 @@ import {
 import { cn } from "@/lib/utils";
 
 /* ========================================================================== */
-/* REAL CLASSICAL MARBLE ARCHITECTURAL PILLAR SVG (DORIC / IONIC REAL COLUMN) */
-/* Flared Capital + Fluted Cylindrical Shaft + Tiered Base & Contact Shadow   */
+/* REAL CLASSICAL MARBLE ARCHITECTURAL PILLAR SVG (PROPORTIONAL DORIC COLUMN) */
+/* Single-Window Viewport Calibrated: Capital + Shaft + Base + Ground Shadow  */
 /* ========================================================================== */
 
 function ClassicalMarblePillar({
@@ -30,138 +30,137 @@ function ClassicalMarblePillar({
   number: string;
 }) {
   return (
-    <div className="relative w-full max-w-[150px] sm:max-w-[170px] mx-auto flex flex-col items-center">
+    <div className="relative w-full max-w-[140px] sm:max-w-[160px] mx-auto flex flex-col items-center">
       <svg
-        viewBox="0 0 160 370"
+        viewBox="0 0 160 236"
         className={cn(
-          "w-full h-auto drop-shadow-xl transition-all duration-500 ease-out",
+          "w-full h-auto transition-all duration-500 ease-out",
           isActive
-            ? "-translate-y-2 filter drop-shadow-[0_16px_25px_rgba(255,176,32,0.3)]"
-            : "hover:-translate-y-1 opacity-90 hover:opacity-100"
+            ? "-translate-y-2 filter drop-shadow-[0_14px_22px_rgba(255,176,32,0.32)]"
+            : "hover:-translate-y-1 opacity-90 hover:opacity-100 filter drop-shadow-[0_8px_16px_rgba(6,11,34,0.08)]"
         )}
       >
         <defs>
-          {/* Real Marble Cylindrical Shading (Left-to-Right Curved Lighting) */}
+          {/* Classical White Marble Cylindrical Lighting (Left-to-Right Depth) */}
           <linearGradient id={`marbleCylinder-${number}`} x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#DFD9D0" />
-            <stop offset="20%" stopColor="#FAF7F2" />
-            <stop offset="50%" stopColor="#FFFFFF" />
-            <stop offset="78%" stopColor="#ECE5DB" />
+            <stop offset="18%" stopColor="#FAF7F2" />
+            <stop offset="48%" stopColor="#FFFFFF" />
+            <stop offset="76%" stopColor="#ECE5DB" />
             <stop offset="100%" stopColor="#C8C0B3" />
           </linearGradient>
 
           {/* Active Golden Illuminated Marble */}
           <linearGradient id={`goldMarble-${number}`} x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#E6D7B8" />
-            <stop offset="25%" stopColor="#FFFDF7" />
-            <stop offset="55%" stopColor="#FFF8E7" />
+            <stop offset="22%" stopColor="#FFFDF7" />
+            <stop offset="52%" stopColor="#FFF8E7" />
             <stop offset="80%" stopColor="#F5E4BE" />
             <stop offset="100%" stopColor="#D4BC8C" />
           </linearGradient>
 
-          {/* Deep Flute Groove Inset Shadow */}
-          <linearGradient id={`fluteGrad-${number}`} x1="0%" y1="0%" x2="100%" y2="0%">
+          {/* Flute Groove Shadow */}
+          <linearGradient id={`fluteShadow-${number}`} x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#B3AAA0" />
-            <stop offset="40%" stopColor="#D9D2C7" />
-            <stop offset="70%" stopColor="#FFFFFF" />
-            <stop offset="100%" stopColor="#EDE7DF" />
+            <stop offset="50%" stopColor="#FFFFFF" />
+            <stop offset="100%" stopColor="#C8C0B3" />
           </linearGradient>
         </defs>
 
         {/* --- FLOOR CONTACT DROP SHADOWS --- */}
-        <ellipse cx="80" cy="358" rx="66" ry="10" fill="rgba(6,11,34,0.14)" />
-        <ellipse cx="80" cy="356" rx="48" ry="6" fill="rgba(6,11,34,0.22)" />
+        <ellipse cx="80" cy="228" rx="64" ry="7" fill="rgba(6,11,34,0.12)" />
+        <ellipse cx="80" cy="226" rx="44" ry="4" fill="rgba(6,11,34,0.22)" />
 
-        {/* --- 1. CAPITAL (TOP PLATFORM & FLARED MOLDINGS) --- */}
-        {/* Flat Top Abacus Lintel */}
+        {/* --- 1. CAPITAL (TOP ABACUS PLATFORM & FLARED ECHINUS) --- */}
+        {/* Top Abacus Slab */}
         <path
-          d="M 12 18 L 148 18 L 144 26 L 16 26 Z"
+          d="M 14 10 L 146 10 L 142 16 L 18 16 Z"
           fill={isActive ? `url(#goldMarble-${number})` : `url(#marbleCylinder-${number})`}
           stroke={isActive ? "#FFB020" : "#C8C0B3"}
           strokeWidth="0.75"
         />
         <rect
-          x="16"
-          y="26"
-          width="128"
-          height="8"
+          x="18"
+          y="16"
+          width="124"
+          height="5.5"
           rx="1"
           fill={isActive ? "#F8ECCF" : "#EBE5DB"}
           stroke={isActive ? "#FFB020" : "#C8C0B3"}
           strokeWidth="0.75"
         />
 
-        {/* Classical Flared Curved Echinus (Bell Flair) */}
+        {/* Flared Curved Echinus (Bell Molding) */}
         <path
-          d="M 18 34 Q 30 52 46 56 L 114 56 Q 130 52 142 34 Z"
+          d="M 20 21.5 Q 32 34 48 37.5 L 112 37.5 Q 128 34 140 21.5 Z"
           fill={isActive ? `url(#goldMarble-${number})` : `url(#marbleCylinder-${number})`}
           stroke={isActive ? "#FFB020" : "#C8C0B3"}
           strokeWidth="0.75"
         />
 
-        {/* Capital Necking Rings (Astragal) */}
+        {/* Necking Astragal Rings */}
         <rect
-          x="44"
-          y="56"
-          width="72"
-          height="5"
-          rx="2.5"
+          x="46"
+          y="37.5"
+          width="68"
+          height="3.5"
+          rx="1.5"
           fill={isActive ? "#FFB020" : "#D9D2C7"}
           stroke={isActive ? "#B87A00" : "#B8B2A6"}
-          strokeWidth="0.75"
+          strokeWidth="0.6"
         />
         <rect
-          x="48"
-          y="61"
-          width="64"
-          height="4"
+          x="49"
+          y="41"
+          width="62"
+          height="3"
           rx="1"
           fill={isActive ? "#F0E1BE" : "#E2DCD3"}
         />
 
         {/* --- 2. COLUMN SHAFT (FLUTED CYLINDRICAL STONE BODY) --- */}
         <path
-          d="M 48 65 L 112 65 L 116 290 L 44 290 Z"
+          d="M 49 44 L 111 44 L 114 172 L 46 172 Z"
           fill={isActive ? `url(#goldMarble-${number})` : `url(#marbleCylinder-${number})`}
           stroke={isActive ? "#FFB020" : "#C8C0B3"}
           strokeWidth="0.75"
         />
 
-        {/* 6 Realistic Vertical Carved Marble Flutes */}
+        {/* 6 Carved Classical Marble Flutes with Specular Lighting */}
         {/* Flute 1 */}
-        <path d="M 52 68 Q 54 74 54 80 L 52 280 Q 52 286 50 288" fill="none" stroke="#B8B2A6" strokeWidth="2.5" strokeLinecap="round" />
-        <path d="M 53 68 Q 55 74 55 80 L 53 280 Q 53 286 51 288" fill="none" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" />
+        <path d="M 52 46 Q 54 52 54 58 L 52 165 Q 52 169 50 171" fill="none" stroke="#B8B2A6" strokeWidth="2.2" strokeLinecap="round" />
+        <path d="M 53 46 Q 55 52 55 58 L 53 165 Q 53 169 51 171" fill="none" stroke="#FFFFFF" strokeWidth="0.9" strokeLinecap="round" />
 
         {/* Flute 2 */}
-        <path d="M 62 67 Q 64 73 64 80 L 63 281 Q 63 287 61 289" fill="none" stroke="#B8B2A6" strokeWidth="3" strokeLinecap="round" />
-        <path d="M 63.5 67 Q 65.5 73 65.5 80 L 64.5 281 Q 64.5 287 62.5 289" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeLinecap="round" />
+        <path d="M 62 45 Q 64 51 64 58 L 63 166 Q 63 170 61 172" fill="none" stroke="#B8B2A6" strokeWidth="2.6" strokeLinecap="round" />
+        <path d="M 63.5 45 Q 65.5 51 65.5 58 L 64.5 166 Q 64.5 170 62.5 172" fill="none" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" />
 
         {/* Flute 3 (Center-Left) */}
-        <path d="M 73 66 Q 74.5 72 74.5 80 L 74 282 Q 74 288 72.5 290" fill="none" stroke={isActive ? "#D9A030" : "#B8B2A6"} strokeWidth="3.2" strokeLinecap="round" />
-        <path d="M 74.5 66 Q 76 72 76 80 L 75.5 282 Q 75.5 288 74 290" fill="none" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M 73 44.5 Q 74.5 50.5 74.5 58 L 74 167 Q 74 171 72.5 173" fill="none" stroke={isActive ? "#D9A030" : "#B8B2A6"} strokeWidth="2.8" strokeLinecap="round" />
+        <path d="M 74.5 44.5 Q 76 50.5 76 58 L 75.5 167 Q 75.5 171 74 173" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeLinecap="round" />
 
         {/* Flute 4 (Center-Right) */}
-        <path d="M 85 66 Q 86.5 72 86.5 80 L 86 282 Q 86 288 84.5 290" fill="none" stroke={isActive ? "#D9A030" : "#B8B2A6"} strokeWidth="3.2" strokeLinecap="round" />
-        <path d="M 86.5 66 Q 88 72 88 80 L 87.5 282 Q 87.5 288 86 290" fill="none" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M 85 44.5 Q 86.5 50.5 86.5 58 L 86 167 Q 86 171 84.5 173" fill="none" stroke={isActive ? "#D9A030" : "#B8B2A6"} strokeWidth="2.8" strokeLinecap="round" />
+        <path d="M 86.5 44.5 Q 88 50.5 88 58 L 87.5 167 Q 87.5 171 86 173" fill="none" stroke="#FFFFFF" strokeWidth="1.2" strokeLinecap="round" />
 
         {/* Flute 5 */}
-        <path d="M 97 67 Q 98.5 73 98.5 80 L 98 281 Q 98 287 96.5 289" fill="none" stroke="#A8A095" strokeWidth="3" strokeLinecap="round" />
-        <path d="M 98.5 67 Q 100 73 100 80 L 99.5 281 Q 99.5 287 98 289" fill="none" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" />
+        <path d="M 97 45 Q 98.5 51 98.5 58 L 98 166 Q 98 170 96.5 172" fill="none" stroke="#A8A095" strokeWidth="2.6" strokeLinecap="round" />
+        <path d="M 98.5 45 Q 100 51 100 58 L 99.5 166 Q 99.5 170 98 172" fill="none" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" />
 
         {/* Flute 6 */}
-        <path d="M 107 68 Q 108 74 108 80 L 109 280 Q 109 286 108 288" fill="none" stroke="#9E968A" strokeWidth="2.5" strokeLinecap="round" />
-        <path d="M 108 68 Q 109 74 109 80 L 110 280 Q 110 286 109 288" fill="none" stroke="#FFFFFF" strokeWidth="0.8" strokeLinecap="round" />
+        <path d="M 107 46 Q 108 52 108 58 L 109 165 Q 109 169 108 171" fill="none" stroke="#9E968A" strokeWidth="2.2" strokeLinecap="round" />
+        <path d="M 108 46 Q 109 52 109 58 L 110 165 Q 110 169 109 171" fill="none" stroke="#FFFFFF" strokeWidth="0.8" strokeLinecap="round" />
 
         {/* Specular Center Highlight Reflection */}
-        <line x1="78" y1="70" x2="80" y2="285" stroke="#FFFFFF" strokeWidth="3" strokeOpacity={isActive ? "0.9" : "0.55"} strokeLinecap="round" />
+        <line x1="78" y1="47" x2="80" y2="169" stroke="#FFFFFF" strokeWidth="2.5" strokeOpacity={isActive ? "0.9" : "0.55"} strokeLinecap="round" />
 
         {/* --- 3. BASE (MOLDED TORUS & STEPPED MARBLE PLINTH) --- */}
         <rect
-          x="43"
-          y="290"
-          width="74"
-          height="5"
-          rx="1.5"
+          x="45"
+          y="172"
+          width="70"
+          height="3.5"
+          rx="1"
           fill={isActive ? "#F0E1BE" : "#E2DCD3"}
           stroke={isActive ? "#FFB020" : "#C8C0B3"}
           strokeWidth="0.5"
@@ -169,7 +168,7 @@ function ClassicalMarblePillar({
 
         {/* Upper Torus Ring */}
         <path
-          d="M 38 295 Q 36 303 44 309 L 116 309 Q 124 303 122 295 Z"
+          d="M 40 175.5 Q 38 182 46 186 L 114 186 Q 122 182 120 175.5 Z"
           fill={isActive ? `url(#goldMarble-${number})` : `url(#marbleCylinder-${number})`}
           stroke={isActive ? "#FFB020" : "#C8C0B3"}
           strokeWidth="0.75"
@@ -177,17 +176,17 @@ function ClassicalMarblePillar({
 
         {/* Scotia (Recessed Hollow Ring) */}
         <rect
-          x="42"
-          y="309"
-          width="76"
-          height="7"
+          x="44"
+          y="186"
+          width="72"
+          height="4.5"
           rx="1"
           fill={isActive ? "#D4BC8C" : "#C8C0B3"}
         />
 
         {/* Lower Torus Ring */}
         <path
-          d="M 32 316 Q 28 327 40 332 L 120 332 Q 132 327 128 316 Z"
+          d="M 34 190.5 Q 30 198 42 201 L 118 201 Q 130 198 126 190.5 Z"
           fill={isActive ? `url(#goldMarble-${number})` : `url(#marbleCylinder-${number})`}
           stroke={isActive ? "#FFB020" : "#C8C0B3"}
           strokeWidth="0.75"
@@ -195,10 +194,10 @@ function ClassicalMarblePillar({
 
         {/* Plinth Block Step 1 */}
         <rect
-          x="24"
-          y="332"
-          width="112"
-          height="12"
+          x="26"
+          y="201"
+          width="108"
+          height="8.5"
           rx="1.5"
           fill={isActive ? "#F4E7CB" : "#E8E2D8"}
           stroke={isActive ? "#FFB020" : "#C8C0B3"}
@@ -207,9 +206,9 @@ function ClassicalMarblePillar({
 
         {/* Plinth Block Step 2 (Base Foundation) */}
         <rect
-          x="16"
-          y="344"
-          width="128"
+          x="18"
+          y="209.5"
+          width="124"
           height="12"
           rx="2"
           fill={isActive ? "#E8D5B0" : "#DDD7CC"}
@@ -218,23 +217,23 @@ function ClassicalMarblePillar({
         />
 
         {/* Foundation Roman Numeral Plaque */}
-        <g transform="translate(62, 334)">
+        <g transform="translate(63, 203)">
           <rect
             x="0"
             y="0"
-            width="36"
-            height="18"
-            rx="3"
+            width="34"
+            height="14"
+            rx="2.5"
             fill={isActive ? "#060B22" : "#FAF8F5"}
             stroke={isActive ? "#FFB020" : "#C8C0B3"}
-            strokeWidth="1.2"
+            strokeWidth="1"
           />
           <text
-            x="18"
-            y="13"
+            x="17"
+            y="10.5"
             textAnchor="middle"
             fill={isActive ? "#FFB020" : "#0B1B3A"}
-            fontSize="10"
+            fontSize="9"
             fontWeight="900"
             fontFamily="monospace"
           >
@@ -256,6 +255,7 @@ interface ArchitecturalPillar {
   metric: string;
   badge: string;
   icon: React.ReactNode;
+  themeGradient: string;
   specs: {
     label: string;
     value: string;
@@ -267,16 +267,17 @@ const PILLARS: ArchitecturalPillar[] = [
     id: "senior-architects",
     number: "01",
     roman: "I",
-    title: "Direct Senior Architect Access",
+    title: "Senior Architect Access",
     subtitle: "Zero Junior Handoffs",
     description:
       "Direct collaboration with principal full-stack engineers and senior UI/UX directors. No junior intern middlemen or disconnected account reps.",
     metric: "100% Senior Squad",
     badge: "Principal Staff",
     icon: <Users className="w-5 h-5 text-[#FFB020]" />,
+    themeGradient: "from-[#060B22] via-[#0B1B3A] to-[#1E3A70]",
     specs: [
       { label: "Squad Level", value: "Principal & Staff Only" },
-      { label: "Middlemen", value: "Zero Account Managers" },
+      { label: "Middlemen", value: "Zero Account Reps" },
       { label: "Direct SLA", value: "< 15 Mins Client Slack" },
     ],
   },
@@ -287,10 +288,11 @@ const PILLARS: ArchitecturalPillar[] = [
     title: "Sub-Second Speed & Vitals",
     subtitle: "< 0.8s LCP Benchmark",
     description:
-      "Modern full-stack architecture (Next.js 16, React 19, Tailwind, Headless CMS) engineered for sub-second initial paint and zero bounce rate.",
+      "Modern full-stack architecture (Next.js 16, React 19, Tailwind) engineered for sub-second initial paint and zero bounce rate.",
     metric: "< 0.58s Initial Paint",
     badge: "100/100 Vitals",
     icon: <Zap className="w-5 h-5 text-[#FFB020]" />,
+    themeGradient: "from-[#060B22] via-[#0A2540] to-[#0284C7]",
     specs: [
       { label: "LCP Benchmark", value: "< 0.58s Initial Paint" },
       { label: "PageSpeed Score", value: "100 / 100 Grade A+" },
@@ -308,6 +310,7 @@ const PILLARS: ArchitecturalPillar[] = [
     metric: "100% Client Repo",
     badge: "Zero Lock-In",
     icon: <Lock className="w-5 h-5 text-[#FFB020]" />,
+    themeGradient: "from-[#060B22] via-[#102A18] to-[#16A34A]",
     specs: [
       { label: "Repository", value: "Private Client GitHub" },
       { label: "Legal Protection", value: "Bilateral NDA Deed" },
@@ -325,6 +328,7 @@ const PILLARS: ArchitecturalPillar[] = [
     metric: "Daily Loom Demos",
     badge: "Zero Dark Periods",
     icon: <Clock className="w-5 h-5 text-[#FFB020]" />,
+    themeGradient: "from-[#060B22] via-[#2A1800] to-[#D97706]",
     specs: [
       { label: "Demo Rhythm", value: "Daily Loom Walkthroughs" },
       { label: "Staging Access", value: "Live Passworded URL" },
@@ -340,15 +344,15 @@ export function WebDesignWhyChooseUs() {
   return (
     <div className="w-full text-slate-800 select-none">
       {/* ==================================================================== */}
-      {/* 1. CENTERED SECTION HEADER (MATCHING REFERENCE COMPOSITION)          */}
+      {/* 1. CENTERED SECTION HEADER (COMPACT & COMMANDING)                    */}
       {/* ==================================================================== */}
-      <div className="text-center max-w-3xl mx-auto space-y-2.5 pb-4">
+      <div className="text-center max-w-3xl mx-auto space-y-2 pb-2 sm:pb-3">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
           <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
           <span>The 4 Architectural Pillars of Hire Desi Marketer</span>
         </div>
 
-        <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
+        <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-[34px] text-[#0B1B3A] tracking-tight leading-tight">
           Engineered Foundations That Guarantee Commercial Success.
         </h2>
 
@@ -361,8 +365,8 @@ export function WebDesignWhyChooseUs() {
       {/* 2. REAL MARBLE ARCHITECTURAL COLUMNS (MATCHING REFERENCE IMAGE)     */}
       {/* 4 Standing Pillars side by side with Floating Icons on the Capitals  */}
       {/* ==================================================================== */}
-      <div className="relative pt-2 pb-2">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 items-end">
+      <div className="relative pt-1 pb-1">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 lg:gap-5 items-end">
           {PILLARS.map((pillar, idx) => {
             const isSelected = idx === activeIdx;
 
@@ -385,31 +389,34 @@ export function WebDesignWhyChooseUs() {
                     : "hover:-translate-y-1 opacity-90 hover:opacity-100"
                 )}
               >
-                {/* --- FLOATING METRIC & EMBLEM ABOVE THE CAPITAL (LIKE REFERENCE) --- */}
-                <div className="space-y-1.5 mb-2 w-full px-2 flex flex-col items-center">
-                  {/* Floating Circular Icon Medallion */}
+                {/* --- 3D FLOATING TROPHY EMBLEM & TITLE (LIKE REFERENCE IMAGE) --- */}
+                <div className="space-y-1 mb-1.5 w-full px-1 flex flex-col items-center">
+                  {/* Vibrant 3D Circular Medallion */}
                   <div
                     className={cn(
                       "w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-md border",
                       isSelected
-                        ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] shadow-[0_5px_15px_rgba(255,176,32,0.3)] scale-105"
-                        : "bg-white text-slate-700 border-[#E2DBD0] group-hover:border-[#FFB020]/50"
+                        ? "bg-gradient-to-tr " +
+                            pillar.themeGradient +
+                            " text-white border-[#FFB020] shadow-[0_6px_20px_rgba(255,176,32,0.4)] scale-110 ring-2 ring-[#FFB020]/40"
+                        : "bg-white text-slate-700 border-[#E2DBD0] group-hover:border-[#FFB020]/60 group-hover:scale-105"
                     )}
                   >
                     {pillar.icon}
                   </div>
 
-                  {/* Title & Badge on Top of Capital */}
-                  <h4 className="font-display font-black text-xs sm:text-[13.5px] text-[#0B1B3A] tracking-tight leading-snug line-clamp-2 min-h-[34px] flex items-center justify-center">
+                  {/* Title directly above the capital */}
+                  <h4 className="font-display font-black text-xs sm:text-[13px] text-[#0B1B3A] tracking-tight leading-snug line-clamp-1 flex items-center justify-center pt-0.5">
                     {pillar.title}
                   </h4>
 
+                  {/* Status chip */}
                   <span
                     className={cn(
-                      "inline-block px-2 py-0.5 rounded-full text-[9.5px] font-mono font-bold uppercase tracking-wider border transition-colors",
+                      "inline-block px-2 py-0.5 rounded-full text-[9px] sm:text-[9.5px] font-mono font-bold uppercase tracking-wider border transition-colors",
                       isSelected
-                        ? "bg-[#FFB020] text-[#060B22] border-[#FFB020] font-black"
-                        : "bg-white text-slate-600 border-[#E2DBD0]"
+                        ? "bg-[#FFB020] text-[#060B22] border-[#FFB020] font-black shadow-2xs"
+                        : "bg-white text-slate-600 border-[#E2DBD0] group-hover:border-slate-400"
                     )}
                   >
                     {pillar.metric}
@@ -427,7 +434,7 @@ export function WebDesignWhyChooseUs() {
                 <div className="mt-1 text-center">
                   <span
                     className={cn(
-                      "text-[10px] font-mono font-bold transition-colors",
+                      "text-[9.5px] font-mono font-bold transition-colors",
                       isSelected ? "text-[#B87A00]" : "text-slate-400 group-hover:text-slate-600"
                     )}
                   >
@@ -443,8 +450,8 @@ export function WebDesignWhyChooseUs() {
       {/* ==================================================================== */}
       {/* 3. COMPACT SPECIFICATION CONSOLE (FITS IN SINGLE WINDOW)             */}
       {/* ==================================================================== */}
-      <div className="mt-3 p-3.5 sm:p-4 rounded-2xl bg-white border border-[#E2DBD0] shadow-md text-left">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-center">
+      <div className="mt-2.5 p-3.5 sm:p-4 rounded-2xl bg-white border border-[#E2DBD0] shadow-md text-left">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-center">
           {/* Active Pillar Overview (4 cols) */}
           <div className="lg:col-span-4 space-y-1 min-w-0">
             <div className="flex items-center gap-2">
@@ -466,8 +473,8 @@ export function WebDesignWhyChooseUs() {
             </p>
           </div>
 
-          {/* 3 Architectural Specifications (5 cols) */}
-          <div className="lg:col-span-5 grid grid-cols-3 gap-1.5 sm:gap-2">
+          {/* 3 Key Architecture SLA Specs (5 cols) */}
+          <div className="lg:col-span-5 grid grid-cols-3 gap-2">
             {activePillar.specs.map((spec, i) => (
               <div
                 key={i}
@@ -483,7 +490,7 @@ export function WebDesignWhyChooseUs() {
             ))}
           </div>
 
-          {/* Instant Scoping Action (3 cols) */}
+          {/* Direct CTA Action (3 cols) */}
           <div className="lg:col-span-3 flex items-center justify-end">
             <Link
               href="/get-a-quote"
