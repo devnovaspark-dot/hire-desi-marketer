@@ -134,9 +134,9 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 2. COMPLETE WEBSITE DESIGN & DEVELOPMENT SERVICES               */}
         {/* ================================================================ */}
-        <section id="services" className="py-10 sm:py-16 lg:py-20 bg-white border-y border-[#E2DBD0]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-[#E2DBD0] pb-6">
+        <section id="services" className="py-8 sm:py-12 lg:py-16 bg-white border-y border-[#E2DBD0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-[#E2DBD0] pb-5">
               <div className="space-y-2 max-w-2xl">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                   <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
@@ -164,9 +164,9 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 4. TECHNOLOGIES & PLATFORMS WE WORK WITH                          */}
         {/* ================================================================ */}
-        <section id="tech-stack" className="py-10 sm:py-16 lg:py-20 scroll-mt-24 sm:scroll-mt-28">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-[#E2DBD0] pb-6">
+        <section id="tech-stack" className="py-8 sm:py-12 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-[#E2DBD0] pb-5">
               <div className="space-y-2 max-w-2xl">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                   <Code2 className="w-3.5 h-3.5 text-[#FFB020]" />
@@ -189,9 +189,9 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 5. INDUSTRIES WE SERVE                                            */}
         {/* ================================================================ */}
-        <section id="industries" className="py-10 sm:py-16 lg:py-20 bg-white border-y border-[#E2DBD0]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-3">
+        <section id="industries" className="py-8 sm:py-12 lg:py-16 bg-white border-y border-[#E2DBD0]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+            <div className="text-center max-w-3xl mx-auto space-y-2.5">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Building className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>03 · Specialized Domain Blueprints</span>
@@ -212,9 +212,9 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 6. OUR WEBSITE DESIGN & DEVELOPMENT PROCESS                       */}
         {/* ================================================================ */}
-        <section id="process" className="py-10 sm:py-16 lg:py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-[#E2DBD0] pb-6">
+        <section id="process" className="py-8 sm:py-12 lg:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-[#E2DBD0] pb-5">
               <div className="space-y-2 max-w-2xl">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020]" />
@@ -239,10 +239,10 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         <section
           id="engagement-models"
-          className="py-10 sm:py-16 lg:py-20 bg-white border-y border-[#E2DBD0] scroll-mt-24 sm:scroll-mt-28"
+          className="py-8 sm:py-12 lg:py-16 bg-white border-y border-[#E2DBD0] scroll-mt-24 sm:scroll-mt-28"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-3">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+            <div className="text-center max-w-3xl mx-auto space-y-2.5">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Layers className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>05 · Collaboration Framework</span>
@@ -263,9 +263,9 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 8. WEBSITE INSPIRATION & LIVE DESIGN REFERENCES                  */}
         {/* ================================================================ */}
-        <section id="work" className="py-10 sm:py-16 lg:py-20 scroll-mt-24 sm:scroll-mt-28">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-[#E2DBD0] pb-6">
+        <section id="work" className="py-8 sm:py-12 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left border-b border-[#E2DBD0] pb-5">
               <div className="space-y-2 max-w-2xl">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                   <Laptop className="w-3.5 h-3.5 text-[#FFB020]" />

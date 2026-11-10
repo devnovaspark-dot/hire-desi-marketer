@@ -36,9 +36,9 @@ const SECTORS: SectorItem[] = [
     id: "healthcare",
     shortLabel: "Healthcare",
     name: "Healthcare & Medical",
-    icon: <Stethoscope className="w-4 h-4 text-[#FFB020]" />,
+    icon: <Stethoscope className="w-3.5 h-3.5 text-[#FFB020]" />,
     previewImage: "/images/ref-onemedical.jpg",
-    previewUrl: "https://onemedical.hdm.preview/patient-portal",
+    previewUrl: "onemedical.com/patient-portal",
     categoryTag: "HIPAA-Ready & Accessible",
     metric: "+140% Online Bookings",
     headline: "Patient-First Portals & Frictionless Scheduling",
@@ -54,9 +54,9 @@ const SECTORS: SectorItem[] = [
     id: "ecommerce",
     shortLabel: "E-Commerce",
     name: "E-Commerce & DTC",
-    icon: <ShoppingBag className="w-4 h-4 text-[#FFB020]" />,
+    icon: <ShoppingBag className="w-3.5 h-3.5 text-[#FFB020]" />,
     previewImage: "/images/ref-allbirds.jpg",
-    previewUrl: "https://allbirds.hdm.preview/storefront",
+    previewUrl: "allbirds.com/storefront",
     categoryTag: "Shopify Plus & Headless",
     metric: "4.6% Avg. Checkout Conv.",
     headline: "High-Speed Storefronts Built for Maximum AOV",
@@ -72,9 +72,9 @@ const SECTORS: SectorItem[] = [
     id: "saas",
     shortLabel: "SaaS & Cloud",
     name: "IT, SaaS & Cloud",
-    icon: <Cpu className="w-4 h-4 text-[#FFB020]" />,
+    icon: <Cpu className="w-3.5 h-3.5 text-[#FFB020]" />,
     previewImage: "/images/ref-linear.jpg",
-    previewUrl: "https://linear.hdm.preview/product-tour",
+    previewUrl: "linear.app/craft",
     categoryTag: "Modern Developer UI",
     metric: "3.8x Free-to-Paid Lift",
     headline: "Product Marketing Sites & Developer Hubs",
@@ -90,9 +90,9 @@ const SECTORS: SectorItem[] = [
     id: "realestate",
     shortLabel: "Real Estate",
     name: "Real Estate & Property",
-    icon: <Home className="w-4 h-4 text-[#FFB020]" />,
+    icon: <Home className="w-3.5 h-3.5 text-[#FFB020]" />,
     previewImage: "/images/journal-desk-hero.webp",
-    previewUrl: "https://luxuryestates.hdm.preview/listings",
+    previewUrl: "luxuryestates.hdm.preview/listings",
     categoryTag: "MLS / IDX Integration",
     metric: "3.2x Buyer Inquiries",
     headline: "Luxury Brokerage & Commercial Portals",
@@ -108,9 +108,9 @@ const SECTORS: SectorItem[] = [
     id: "professional-services",
     shortLabel: "B2B Advisory",
     name: "Professional Services",
-    icon: <Briefcase className="w-4 h-4 text-[#FFB020]" />,
+    icon: <Briefcase className="w-3.5 h-3.5 text-[#FFB020]" />,
     previewImage: "/images/ref-mckinsey.jpg",
-    previewUrl: "https://advisory.hdm.preview/consulting",
+    previewUrl: "mckinsey.com/insights",
     categoryTag: "Executive Authority",
     metric: "+180% Qualified RFPs",
     headline: "Corporate Authority & High-Ticket Lead Engines",
@@ -126,9 +126,9 @@ const SECTORS: SectorItem[] = [
     id: "education",
     shortLabel: "Education",
     name: "Education & Academies",
-    icon: <GraduationCap className="w-4 h-4 text-[#FFB020]" />,
+    icon: <GraduationCap className="w-3.5 h-3.5 text-[#FFB020]" />,
     previewImage: "/images/blog-hero-bg.webp",
-    previewUrl: "https://academy.hdm.preview/courses",
+    previewUrl: "academy.hdm.preview/courses",
     categoryTag: "LMS & Video Streaming",
     metric: "68% Course Completion",
     headline: "E-Learning Academies & Course Portals",
@@ -149,7 +149,7 @@ export function WebDesignIndustriesGrid() {
     SECTORS.find((s) => s.id === selectedSectorId) || SECTORS[0];
 
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="space-y-5 max-w-4xl mx-auto text-left">
       {/* 1. Compact Sector Switcher Ribbon */}
       <div className="flex items-center justify-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 no-scrollbar">
         {SECTORS.map((sector) => {
@@ -161,9 +161,9 @@ export function WebDesignIndustriesGrid() {
               type="button"
               onClick={() => setSelectedSectorId(sector.id)}
               className={cn(
-                "px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer select-none inline-flex items-center gap-2 shrink-0 border",
+                "px-3 sm:px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer select-none inline-flex items-center gap-1.5 shrink-0 border",
                 isSelected
-                  ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] shadow-sm ring-2 ring-[#FFB020]/20"
+                  ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] shadow-xs ring-1 ring-[#FFB020]/30"
                   : "bg-white text-slate-700 border-[#E2DBD0] hover:border-slate-400"
               )}
             >
@@ -177,27 +177,27 @@ export function WebDesignIndustriesGrid() {
         })}
       </div>
 
-      {/* 2. Compact, Minimalist, Best-in-Class UI Showcase Card */}
-      <div className="rounded-2xl bg-white border border-[#E2DBD0] shadow-xs overflow-hidden text-left max-w-5xl mx-auto">
+      {/* 2. Compact, Minimalist Showcase Card */}
+      <div className="rounded-2xl bg-white border border-[#E2DBD0] shadow-xs overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-0 items-stretch">
           {/* Left Column (6 cols): Compact Browser Frame (STRICT ZERO TEXT OVERLAY) */}
           <div className="md:col-span-6 p-4 sm:p-5 bg-[#FAF8F5] border-b md:border-b-0 md:border-r border-[#E2DBD0] flex flex-col justify-center">
             <div className="rounded-xl overflow-hidden border border-[#060B22]/15 shadow-sm bg-white">
               {/* Browser Header Bar */}
-              <div className="h-8 bg-[#060B22] px-3 flex items-center justify-between border-b border-white/10">
+              <div className="h-7 bg-[#060B22] px-3 flex items-center justify-between border-b border-white/10">
                 <div className="flex items-center gap-1.5 shrink-0">
                   <div className="w-2 h-2 rounded-full bg-[#FF5F56]" />
                   <div className="w-2 h-2 rounded-full bg-[#FFBD2E]" />
                   <div className="w-2 h-2 rounded-full bg-[#27C93F]" />
                 </div>
 
-                <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-white/10 border border-white/15 text-[9.5px] text-slate-200 font-mono truncate max-w-[200px]">
+                <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-white/10 border border-white/15 text-[9.5px] text-slate-200 font-mono truncate max-w-[190px]">
                   <Lock className="w-2 h-2 text-emerald-400 shrink-0" />
                   <span className="truncate">{activeSector.previewUrl}</span>
                 </div>
 
-                <span className="text-[9px] text-[#FFB020] font-bold uppercase tracking-wider">
-                  Live Preview
+                <span className="text-[8.5px] text-[#FFB020] font-bold uppercase tracking-wider">
+                  Live
                 </span>
               </div>
 
@@ -208,7 +208,7 @@ export function WebDesignIndustriesGrid() {
                   alt={`${activeSector.name} website preview`}
                   fill
                   className="object-cover object-top transition-transform duration-500 ease-out hover:scale-102"
-                  sizes="(max-width: 768px) 100vw, 500px"
+                  sizes="(max-width: 768px) 100vw, 450px"
                   priority
                 />
               </div>
@@ -216,37 +216,37 @@ export function WebDesignIndustriesGrid() {
           </div>
 
           {/* Right Column (6 cols): Clean, Compact Specs & CTA */}
-          <div className="md:col-span-6 p-5 sm:p-6 flex flex-col justify-between space-y-4">
-            <div className="space-y-3">
+          <div className="md:col-span-6 p-4 sm:p-5 flex flex-col justify-between space-y-3">
+            <div className="space-y-2.5">
               {/* Badges: Tag & Metric */}
               <div className="flex items-center justify-between gap-2">
-                <span className="text-[10px] font-black uppercase tracking-wider text-[#B87A00] bg-[#FFB020]/15 px-2.5 py-0.5 rounded-full border border-[#FFB020]/30">
+                <span className="text-[9.5px] font-black uppercase tracking-wider text-[#B87A00] bg-[#FFB020]/15 px-2 py-0.5 rounded-full border border-[#FFB020]/30">
                   {activeSector.categoryTag}
                 </span>
 
-                <span className="text-[10px] font-black text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                <span className="text-[9.5px] font-black text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
                   {activeSector.metric}
                 </span>
               </div>
 
               {/* Heading & Clean Description */}
               <div>
-                <h3 className="font-display font-bold text-lg sm:text-xl text-[#0B1B3A] tracking-tight leading-snug">
+                <h3 className="font-display font-bold text-base sm:text-lg text-[#0B1B3A] tracking-tight leading-snug">
                   {activeSector.headline}
                 </h3>
-                <p className="text-xs text-slate-600 leading-relaxed font-normal mt-1.5">
+                <p className="text-xs text-slate-600 leading-relaxed font-normal mt-1">
                   {activeSector.description}
                 </p>
               </div>
 
               {/* 3 Key Deliverables */}
-              <div className="pt-2 border-t border-slate-100 space-y-1.5">
-                <div className="text-[10px] font-black uppercase tracking-wider text-slate-500">
-                  Key Capabilities Included:
+              <div className="pt-2 border-t border-slate-100 space-y-1">
+                <div className="text-[9.5px] font-black uppercase tracking-wider text-slate-500">
+                  Included Capabilities:
                 </div>
                 <div className="space-y-1 text-xs">
                   {activeSector.keyFeatures.map((feat, i) => (
-                    <div key={i} className="flex items-center gap-2 text-slate-700">
+                    <div key={i} className="flex items-center gap-1.5 text-slate-700">
                       <CheckCircle2 className="w-3.5 h-3.5 text-[#B87A00] shrink-0" />
                       <span className="font-medium text-[11px] sm:text-xs">{feat}</span>
                     </div>
@@ -261,7 +261,7 @@ export function WebDesignIndustriesGrid() {
                 href="/get-a-quote"
                 className="btn-luxury-navy w-full py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-2xs cursor-pointer text-center"
               >
-                <span>Request {activeSector.shortLabel} Website Blueprint</span>
+                <span>Request {activeSector.shortLabel} Blueprint</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#FFB020]" />
               </Link>
             </div>
