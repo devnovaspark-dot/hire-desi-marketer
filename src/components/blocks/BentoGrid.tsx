@@ -25,110 +25,179 @@ import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
 
 // ====================================================================
-// REAL AUTHENTIC BRAND & TECHNOLOGY SVG ICONS
+// SKEUOMORPHIC METALLIC FASTENERS (PRECISION CORNER HARDWARE)
+// ====================================================================
+function MetallicScrew({ className = "w-3.5 h-3.5" }: { className?: string }) {
+  return (
+    <div
+      className={cn(
+        "rounded-full bg-gradient-to-br from-[#FAF8F5] via-[#D5CEBF] to-[#999080] p-[1.5px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_1px_2px_rgba(0,0,0,0.18)] flex items-center justify-center select-none pointer-events-none",
+        className
+      )}
+    >
+      <div className="w-full h-full rounded-full bg-gradient-to-tl from-[#B3AA99] to-[#EAE6DE] flex items-center justify-center shadow-inner">
+        <div className="w-[60%] h-[1.5px] bg-[#6E6657] rounded-full rotate-45 shadow-[0_0.5px_0_rgba(255,255,255,0.6)]" />
+      </div>
+    </div>
+  );
+}
+
+// ====================================================================
+// 6 BESPOKE SKEUOMORPHIC METALLIC ICONS (COHESIVE EXECUTIVE GOLD & OBSIDIAN)
+// NO CRAZY RAINBOW COLORS – COHESIVE, LUXURIOUS, 3D TACTILE CRAFTSMANSHIP
 // ====================================================================
 
-function RealFigmaIcon({ className = "w-6 h-6" }: { className?: string }) {
+// 01: Custom Website Design & Engineering (Figma Tokens & Design Systems)
+function BespokeUiIcon({ className = "w-8 h-8" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 38 57" fill="none">
-      <path
-        d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z"
-        fill="#1ABCFE"
-      />
-      <path
-        d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z"
-        fill="#0ACF83"
-      />
-      <path
-        d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z"
-        fill="#FF7262"
-      />
-      <path
-        d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z"
-        fill="#F24E1E"
-      />
-      <path
-        d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z"
-        fill="#A259FF"
-      />
+    <svg className={className} viewBox="0 0 36 36" fill="none">
+      <defs>
+        <linearGradient id="gold-bevel-1" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#FFF2B2" />
+          <stop offset="45%" stopColor="#FFB020" />
+          <stop offset="100%" stopColor="#A86600" />
+        </linearGradient>
+        <radialGradient id="gold-core-1" cx="50%" cy="30%" r="70%">
+          <stop offset="0%" stopColor="#FFF9E6" />
+          <stop offset="60%" stopColor="#FFB020" />
+          <stop offset="100%" stopColor="#8A5200" />
+        </radialGradient>
+      </defs>
+      {/* Outer tactile bezel ring */}
+      <circle cx="18" cy="18" r="16" fill="#060B22" stroke="url(#gold-bevel-1)" strokeWidth="1.6" />
+      <circle cx="18" cy="18" r="13.5" stroke="rgba(255,176,32,0.25)" strokeWidth="0.8" strokeDasharray="2 2" />
+      {/* Precision Vector Pen & Token Diamond */}
+      <path d="M18 7L26 15L18 23L10 15L18 7Z" fill="url(#gold-core-1)" stroke="#FFF2B2" strokeWidth="0.8" />
+      <circle cx="18" cy="15" r="2.5" fill="#060B22" stroke="#FFF2B2" strokeWidth="0.9" />
+      <path d="M18 23V29M14.5 29H21.5" stroke="url(#gold-bevel-1)" strokeWidth="1.8" strokeLinecap="round" />
     </svg>
   );
 }
 
-function RealNextJsIcon({ className = "w-6 h-6" }: { className?: string }) {
+// 02: Website Redesign & Modernization (Next.js 16 & React 19 Concurrent Rendering)
+function FullStackCoreIcon({ className = "w-8 h-8" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 180 180" fill="none">
-      <circle cx="90" cy="90" r="90" fill="#060B22" />
-      <path
-        d="M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.166 149.508 157.52Z"
-        fill="url(#real-next-grad-vert)"
-      />
-      <rect x="115" y="54" width="12" height="72" fill="url(#real-next-grad-vert)" />
+    <svg className={className} viewBox="0 0 36 36" fill="none">
       <defs>
-        <linearGradient id="real-next-grad-vert" x1="109" y1="116.5" x2="144.5" y2="160.5" gradientUnits="userSpaceOnUse">
-          <stop stopColor="white" />
-          <stop offset="1" stopColor="white" stopOpacity="0" />
+        <linearGradient id="gold-bevel-2" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#FFF2B2" />
+          <stop offset="50%" stopColor="#FFB020" />
+          <stop offset="100%" stopColor="#A86600" />
         </linearGradient>
       </defs>
+      <circle cx="18" cy="18" r="16" fill="#060B22" stroke="url(#gold-bevel-2)" strokeWidth="1.6" />
+      {/* Dual Intersecting Orbital Atomic Rings */}
+      <ellipse cx="18" cy="18" rx="12" ry="4.8" transform="rotate(-30 18 18)" stroke="url(#gold-bevel-2)" strokeWidth="1.4" opacity="0.95" />
+      <ellipse cx="18" cy="18" rx="12" ry="4.8" transform="rotate(30 18 18)" stroke="url(#gold-bevel-2)" strokeWidth="1.4" opacity="0.95" />
+      {/* High-Energy Solid Central Reactor Hub */}
+      <circle cx="18" cy="18" r="3.6" fill="#FFF2B2" />
+      <circle cx="18" cy="18" r="1.6" fill="#060B22" />
+      {/* Orbital Energy Photons */}
+      <circle cx="28" cy="12" r="1.2" fill="#FFB020" />
+      <circle cx="8" cy="24" r="1.2" fill="#FFB020" />
     </svg>
   );
 }
 
-function RealShopifyIcon({ className = "w-6 h-6" }: { className?: string }) {
+// 03: High-Velocity E-Commerce Storefronts (Shopify Plus & Headless)
+function EcommerceVelocityIcon({ className = "w-8 h-8" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 109 123" fill="none">
-      <path
-        d="M94.6 28.9c-.3-1.9-1.9-3.2-3.7-3.1l-10.2.8c-2.3-7-6.5-13-13.2-16.3-5.2-2.5-10.7-2.8-15.4-.8-4.6 2-7.9 5.7-9.5 10.5L32.6 23c-1.8.1-3.2 1.7-3.4 3.5L20.3 95.6c-.2 2.1 1.4 3.9 3.5 4.1.2 0 .4 0 .6 0l57.8-4.5c2.1-.2 3.7-2 3.6-4.1L94.6 28.9z"
-        fill="#95BF47"
-      />
-      <path
-        d="M67.5 26.6l-10 .8c-.1-4.1-1.4-8.2-4.1-11.2-1.9-2.1-4.4-3.5-7.4-4 3.7-3 8.9-3.3 13.2-1.2 4.9 2.4 7.8 7.9 8.3 15.6z"
-        fill="#5E8E3E"
-      />
-      <path
-        d="M57.6 43.7c-1.3-.7-2.9-1-4.7-1-3.6 0-6.5 1.6-6.5 4.2 0 2.4 2.3 3.7 5.3 5 4.4 1.9 9.2 4.4 9.2 9.7 0 6.3-5.1 10.5-12.1 10.5-4.7 0-8.3-1.3-10.6-3l1.7-5.6c2.1 1.6 5 2.6 8.2 2.6 3.5 0 5.8-1.7 5.8-4.2 0-2.4-2.4-3.8-5.8-5.2-4.2-1.8-8.8-4.2-8.8-9.5 0-6.2 5.1-10.3 11.8-10.3 4.1 0 7.5 1 9.4 2.2l-2.9 6.6z"
-        fill="#FFFFFF"
-      />
-    </svg>
-  );
-}
-
-function RealWebflowIcon({ className = "w-6 h-6" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M17.818 5.76c-1.393 0-2.585.83-3.097 2.028-.432-1.198-1.573-2.028-2.91-2.028-1.728 0-3.13 1.402-3.13 3.13v.135c-.004.053-.004.106-.004.16 0 1.205.696 2.247 1.706 2.766L7.29 17.585c-.078.188-.027.406.126.54.153.133.376.155.553.053l4.337-2.502v-3.722c0-.658.534-1.192 1.192-1.192.658 0 1.192.534 1.192 1.192v2.791l3.128-1.806V8.89c0-1.728-1.402-3.13-3.13-3.13h2.13z"
-        fill="#146EF5"
-      />
-    </svg>
-  );
-}
-
-function RealSupabaseIcon({ className = "w-6 h-6" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M13.4 2.1c-.6-.7-1.7-.3-1.7.7v8.5H3.1c-.8 0-1.3.8-.8 1.5l8.5 11.2c.6.8 1.8.4 1.8-.6v-8.5h8.6c.8 0 1.3-.8.8-1.5L13.4 2.1z"
-        fill="url(#real-supa-grad-vert)"
-      />
+    <svg className={className} viewBox="0 0 36 36" fill="none">
       <defs>
-        <linearGradient id="real-supa-grad-vert" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#3ECF8E" />
-          <stop offset="1" stopColor="#1E8E5A" />
+        <linearGradient id="gold-bevel-3" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#FFF2B2" />
+          <stop offset="50%" stopColor="#FFB020" />
+          <stop offset="100%" stopColor="#A86600" />
         </linearGradient>
       </defs>
+      <circle cx="18" cy="18" r="16" fill="#060B22" stroke="url(#gold-bevel-3)" strokeWidth="1.6" />
+      {/* Luxury Shopping Bag Geometry with Bevel */}
+      <path
+        d="M11 13L13.5 8.5H22.5L25 13L26.5 27.5C26.5 28.3 25.8 29 25 29H11C10.2 29 9.5 28.3 9.5 27.5L11 13Z"
+        fill="rgba(255,176,32,0.12)"
+        stroke="url(#gold-bevel-3)"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      {/* Handle arch */}
+      <path d="M14.5 11V8C14.5 6 16 4.5 18 4.5C20 4.5 21.5 6 21.5 8V11" stroke="url(#gold-bevel-3)" strokeWidth="1.5" strokeLinecap="round" />
+      {/* 1-Tap Express Lightning Bolt */}
+      <path d="M18.5 14.5L15 20H18L17.5 25L21.5 19.5H18.5L18.5 14.5Z" fill="#FFF2B2" />
     </svg>
   );
 }
 
-function RealVitalsIcon({ className = "w-6 h-6" }: { className?: string }) {
+// 04: Client-Editable CMS & Webflow Platforms (Zero-Code Autonomy)
+function CmsAutonomyIcon({ className = "w-8 h-8" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none">
+    <svg className={className} viewBox="0 0 36 36" fill="none">
+      <defs>
+        <linearGradient id="gold-bevel-4" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#FFF2B2" />
+          <stop offset="50%" stopColor="#FFB020" />
+          <stop offset="100%" stopColor="#A86600" />
+        </linearGradient>
+      </defs>
+      <circle cx="18" cy="18" r="16" fill="#060B22" stroke="url(#gold-bevel-4)" strokeWidth="1.6" />
+      {/* Interlocking 3D Modular Layout Plates */}
+      <rect x="9" y="9" width="7.5" height="7.5" rx="2" fill="#FFF2B2" stroke="url(#gold-bevel-4)" strokeWidth="1" />
+      <rect x="19.5" y="9" width="7.5" height="7.5" rx="2" fill="rgba(255,176,32,0.3)" stroke="url(#gold-bevel-4)" strokeWidth="1" />
+      <rect x="9" y="19.5" width="18" height="7.5" rx="2" fill="rgba(255,176,32,0.18)" stroke="url(#gold-bevel-4)" strokeWidth="1" />
+      {/* Publishing indicator node */}
+      <circle cx="23.2" cy="12.7" r="1.3" fill="#FFFFFF" />
+      <line x1="12" y1="23.2" x2="24" y2="23.2" stroke="#FFB020" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+// 05: Full-Stack Web Applications & Portals (Supabase & Cloud APIs)
+function CloudPortalIcon({ className = "w-8 h-8" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 36 36" fill="none">
+      <defs>
+        <linearGradient id="gold-bevel-5" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#FFF2B2" />
+          <stop offset="50%" stopColor="#FFB020" />
+          <stop offset="100%" stopColor="#A86600" />
+        </linearGradient>
+      </defs>
+      <circle cx="18" cy="18" r="16" fill="#060B22" stroke="url(#gold-bevel-5)" strokeWidth="1.6" />
+      {/* 3-Tier Cylindrical Database Vault */}
+      <ellipse cx="18" cy="11" rx="8" ry="3" fill="rgba(255,176,32,0.35)" stroke="url(#gold-bevel-5)" strokeWidth="1.3" />
+      <path d="M10 11V18C10 19.7 13.6 21 18 21C22.4 21 26 19.7 26 18V11" stroke="url(#gold-bevel-5)" strokeWidth="1.3" />
+      <path d="M10 18V25C10 26.7 13.6 28 18 28C22.4 28 26 26.7 26 25V18" stroke="url(#gold-bevel-5)" strokeWidth="1.3" />
+      {/* Telemetry diodes */}
+      <circle cx="22" cy="25" r="1.2" fill="#FFF2B2" />
+      <circle cx="18.5" cy="25" r="1.2" fill="#FFB020" />
+    </svg>
+  );
+}
+
+// 06: Speed Tuning & Core Web Vitals Optimization (Google Top 1% Lighthouse)
+function SpeedShieldIcon({ className = "w-8 h-8" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 36 36" fill="none">
+      <defs>
+        <linearGradient id="gold-bevel-6" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#FFF2B2" />
+          <stop offset="50%" stopColor="#FFB020" />
+          <stop offset="100%" stopColor="#A86600" />
+        </linearGradient>
+      </defs>
+      <circle cx="18" cy="18" r="16" fill="#060B22" stroke="url(#gold-bevel-6)" strokeWidth="1.6" />
+      {/* Precision Chronometer Arc */}
       <path
-        d="M12 2C6.48 2 2 6.48 2 12c0 3.03 1.35 5.75 3.5 7.61V16c0-.55.45-1 1-1h1.1c.32-.82.8-1.55 1.4-2.16V10c0-.55.45-1 1-1h6c.55 0 1 .45 1 1v2.84c.6.61 1.08 1.34 1.4 2.16H18.5c.55 0 1 .45 1 1v3.61C20.65 17.75 22 15.03 22 12c0-5.52-4.48-10-10-10z"
-        fill="#FF5E00"
+        d="M9.5 23C8.5 20.8 8.2 18.2 8.7 15.6C9.4 13 11 10.7 13.1 9.3C15.2 7.8 17.8 7.3 20.4 7.8C23 8.4 25.3 10 26.7 12.1C28.2 14.2 28.7 16.8 28.2 19.4C27.6 22 26 24.3 23.9 25.7"
+        stroke="url(#gold-bevel-6)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeDasharray="2 2.5"
       />
-      <path d="M12 7l1.5 3.5L17 12l-3.5 1.5L12 17l-1.5-3.5L7 12l3.5-1.5L12 7z" fill="#00C49F" />
+      {/* High-Speed Needle Pointing to 100/100 Benchmark */}
+      <path d="M18 18L24.5 11.5" stroke="#FFF2B2" strokeWidth="2.2" strokeLinecap="round" />
+      <circle cx="18" cy="18" r="3" fill="#FFB020" stroke="#060B22" strokeWidth="1.2" />
+      {/* 100% Emerald Grade Indicator */}
+      <circle cx="24.5" cy="11.5" r="1.6" fill="#10B981" />
     </svg>
   );
 }
@@ -165,7 +234,7 @@ const ARCHITECTURE_NODES: ArchitectureNode[] = [
     name: "Custom Website Design & Engineering",
     tag: "Figma to Next.js 16",
     badge: "100% Custom UI",
-    icon: RealFigmaIcon,
+    icon: BespokeUiIcon,
     hubLabel: "Compiled Design Token Engine",
     satellites: [
       { label: "Figma Tokens", sublabel: "Strict Auto-Layout", icon: Layout },
@@ -190,7 +259,7 @@ const ARCHITECTURE_NODES: ArchitectureNode[] = [
     name: "Website Redesign & Modernization",
     tag: "Next.js 16 & React 19",
     badge: "< 0.8s LCP SLA",
-    icon: RealNextJsIcon,
+    icon: FullStackCoreIcon,
     hubLabel: "Sub-Second Edge Rendering Engine",
     satellites: [
       { label: "Next.js 16 App", sublabel: "Turbopack Bundler", icon: Code2 },
@@ -215,7 +284,7 @@ const ARCHITECTURE_NODES: ArchitectureNode[] = [
     name: "High-Velocity E-Commerce Storefronts",
     tag: "Shopify Plus & Headless",
     badge: "4.6% Avg Conv.",
-    icon: RealShopifyIcon,
+    icon: EcommerceVelocityIcon,
     hubLabel: "1-Tap Express Checkout Engine",
     satellites: [
       { label: "Shopify Plus", sublabel: "Storefront GraphQL", icon: ShoppingBag },
@@ -240,7 +309,7 @@ const ARCHITECTURE_NODES: ArchitectureNode[] = [
     name: "Client-Editable CMS & Webflow Platforms",
     tag: "Zero-Code Autonomy",
     badge: "Marketing Freedom",
-    icon: RealWebflowIcon,
+    icon: CmsAutonomyIcon,
     hubLabel: "1-Click Publishing Hub",
     satellites: [
       { label: "Webflow", sublabel: "Visual Block Editor", icon: Layout },
@@ -265,7 +334,7 @@ const ARCHITECTURE_NODES: ArchitectureNode[] = [
     name: "Full-Stack Web Applications & Portals",
     tag: "Supabase & Cloud APIs",
     badge: "RBAC & MFA",
-    icon: RealSupabaseIcon,
+    icon: CloudPortalIcon,
     hubLabel: "Enterprise API & Portal Gateway",
     satellites: [
       { label: "Supabase DB", sublabel: "PostgreSQL Engine", icon: Database },
@@ -290,7 +359,7 @@ const ARCHITECTURE_NODES: ArchitectureNode[] = [
     name: "Speed Tuning & Core Web Vitals Optimization",
     tag: "Google Top 1% Lighthouse",
     badge: "Google Top 1%",
-    icon: RealVitalsIcon,
+    icon: SpeedShieldIcon,
     hubLabel: "Google Top 1% Speed Shield",
     satellites: [
       { label: "0.58s Paint", sublabel: "Sub-Second LCP", icon: Gauge },
@@ -326,7 +395,7 @@ export default function BentoGrid() {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % ARCHITECTURE_NODES.length);
       setProgress(60);
-    }, 5000);
+    }, 5500);
 
     return () => clearInterval(interval);
   }, [isPaused]);
@@ -363,12 +432,17 @@ export default function BentoGrid() {
       {/* 2-Column Vertical Architecture Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start max-w-6xl mx-auto px-2 sm:px-4">
         {/* ==================================================================== */}
-        {/* LEFT COLUMN: VERTICAL LIST OF 6 ARCHITECTURE SOLUTIONS               */}
+        {/* LEFT COLUMN: SKEUOMORPHIC CONTROLLER (6 TACTILE SOLUTION PLATES)     */}
         {/* ==================================================================== */}
-        <div className="lg:col-span-5 space-y-2.5">
+        <div className="lg:col-span-5 space-y-3">
           <div className="flex items-center justify-between px-2 pb-1 text-xs font-mono font-bold text-slate-500 uppercase tracking-wider">
-            <span>Select Architecture Solution:</span>
-            <span className="text-emerald-700 font-bold">Solution 0{activeIndex + 1} of 06</span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#FFB020] animate-pulse" />
+              <span>Select Architecture Solution:</span>
+            </span>
+            <span className="text-[#060B22] font-mono font-black bg-white px-2.5 py-0.5 rounded-full border border-[#DCD5C8] shadow-2xs">
+              0{activeIndex + 1} / 06
+            </span>
           </div>
 
           <div className="space-y-2.5">
@@ -382,28 +456,28 @@ export default function BentoGrid() {
                   type="button"
                   onClick={() => handleSelectNode(idx)}
                   className={cn(
-                    "w-full text-left p-3.5 sm:p-4 rounded-2xl transition-all duration-300 flex items-center justify-between border cursor-pointer group relative outline-none",
+                    "w-full text-left p-3.5 sm:p-4 rounded-2xl transition-all duration-300 flex items-center justify-between cursor-pointer group relative outline-none",
                     isActive
-                      ? "bg-[#060B22] text-white border-[#FFB020] shadow-xl shadow-slate-900/10 scale-[1.01]"
-                      : "bg-white text-slate-700 border-[#E2DBD0] hover:border-slate-400 hover:bg-slate-50/70 hover:shadow-sm"
+                      ? "bg-gradient-to-b from-[#111C40] via-[#09112B] to-[#040816] text-white border-2 border-[#FFB020] border-t-[#FFE599] border-b-[#996200] shadow-[0_14px_32px_rgba(6,11,34,0.38),0_0_24px_rgba(255,176,32,0.25),inset_0_1px_1px_rgba(255,255,255,0.35),inset_0_-2px_4px_rgba(0,0,0,0.6)] scale-[1.01]"
+                      : "bg-gradient-to-b from-[#FFFFFF] via-[#FAF9F5] to-[#F1ECE2] text-slate-700 border border-[#DCD5C8] border-t-white border-b-2 border-b-[#C9C0B0] shadow-[0_2px_4px_rgba(11,27,58,0.04),0_8px_16px_-4px_rgba(11,27,58,0.06),inset_0_1px_0_rgba(255,255,255,0.95)] hover:border-[#FFB020]/60 hover:-translate-y-0.5 hover:shadow-md"
                   )}
                 >
-                  {/* Subtle active left indicator bar */}
+                  {/* Skeuomorphic tactile gold status bar for active card */}
                   {isActive && (
-                    <div className="absolute left-0 top-3 bottom-3 w-1.5 bg-[#FFB020] rounded-r-full" />
+                    <div className="absolute left-0 top-3 bottom-3 w-1.5 bg-gradient-to-b from-[#FFE599] via-[#FFB020] to-[#C47900] rounded-r-full shadow-[0_0_10px_rgba(255,176,32,0.8)]" />
                   )}
 
                   <div className="flex items-center gap-3.5 min-w-0 pr-2">
-                    {/* Real Authentic Brand Icon Container */}
+                    {/* Bespoke Skeuomorphic Icon Medallion */}
                     <div
                       className={cn(
-                        "w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0 border transition-all duration-300",
+                        "w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300",
                         isActive
-                          ? "bg-white/10 border-white/20 shadow-inner"
-                          : "bg-[#FAF8F5] border-[#E2DBD0] group-hover:bg-white group-hover:scale-105"
+                          ? "bg-gradient-to-b from-[#1C2C5E] to-[#0A122E] border border-[#FFB020]/50 shadow-[inset_0_1px_1px_rgba(255,255,255,0.3),0_2px_8px_rgba(0,0,0,0.5)] scale-105"
+                          : "bg-gradient-to-b from-[#F5F2EA] to-[#EAE4D6] border border-[#D8D0C0] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_1px_3px_rgba(0,0,0,0.06)] group-hover:scale-105"
                       )}
                     >
-                      <Icon className="w-6 h-6 sm:w-6.5 sm:h-6.5" />
+                      <Icon className="w-8 h-8 drop-shadow-sm" />
                     </div>
 
                     <div className="min-w-0">
@@ -421,8 +495,8 @@ export default function BentoGrid() {
                           className={cn(
                             "text-[10px] font-mono px-2 py-0.5 rounded-full border transition-colors",
                             isActive
-                              ? "bg-white/10 border-white/20 text-slate-300"
-                              : "bg-slate-100 border-slate-200 text-slate-600"
+                              ? "bg-white/10 border-white/20 text-[#FFE599] shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
+                              : "bg-[#EFEAE0] border-[#D5CEBD] text-slate-600 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]"
                           )}
                         >
                           {node.tag}
@@ -455,40 +529,54 @@ export default function BentoGrid() {
         </div>
 
         {/* ==================================================================== */}
-        {/* RIGHT COLUMN: ACTIVE SOLUTION ARCHITECTURE ENGINE & DELIVERABLES     */}
+        {/* RIGHT COLUMN: SKEUOMORPHIC MASTER ARCHITECTURE CONSOLE & CIRCUIT     */}
         {/* ==================================================================== */}
         <div className="lg:col-span-7">
-          <div className="bg-white rounded-3xl border border-[#E2DBD0] p-6 sm:p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden text-left space-y-6">
+          <div className="bg-gradient-to-b from-[#FFFFFF] via-[#FAF8F5] to-[#F1EDE2] rounded-3xl border border-[#DCD5C8] border-t-white border-b-[3px] border-b-[#C2B7A5] p-6 sm:p-8 shadow-[0_20px_50px_-10px_rgba(11,27,58,0.12),0_4px_12px_rgba(11,27,58,0.06),inset_0_1px_0_rgba(255,255,255,1)] relative overflow-hidden text-left space-y-6">
+            {/* 4 Machined Metallic Fasteners (Skeuomorphic Screws in 4 Corners) */}
+            <MetallicScrew className="absolute top-3.5 left-3.5" />
+            <MetallicScrew className="absolute top-3.5 right-3.5" />
+            <MetallicScrew className="absolute bottom-3.5 left-3.5" />
+            <MetallicScrew className="absolute bottom-3.5 right-3.5" />
+
             {/* Top State Badge & Solution Counter */}
-            <div className="flex items-center justify-between pb-3 border-b border-[#E2DBD0]/70">
-              <span className="text-[10.5px] font-mono font-black uppercase tracking-wider px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] border border-[#FFB020]/30 shadow-xs">
-                {active.tag}
-              </span>
-              <span className="text-xs font-mono font-bold text-slate-500">
+            <div className="flex items-center justify-between pb-3 border-b border-[#DCD5C8]">
+              <div className="flex items-center gap-2">
+                <span className="text-[10.5px] font-mono font-black uppercase tracking-wider px-3 py-1 rounded-full bg-gradient-to-b from-[#FFEAB5] to-[#FFD680] text-[#7A4500] border border-[#FFC95C] border-b-2 border-b-[#E6A117] shadow-[0_2px_4px_rgba(255,176,32,0.2),inset_0_1px_0_rgba(255,255,255,0.9)]">
+                  {active.tag}
+                </span>
+                <span className="text-[10.5px] font-mono font-bold text-slate-500 hidden sm:inline">
+                  Architecture Console v2.4
+                </span>
+              </div>
+              <span className="text-xs font-mono font-bold text-slate-600 bg-white/80 px-2.5 py-1 rounded-full border border-[#DCD5C8] shadow-2xs">
                 Solution 0{activeIndex + 1} of 06
               </span>
             </div>
 
             {/* ================================================================ */}
-            {/* SIGNATURE CONVERGING CIRCUIT: 4 SATELLITES -> 1 COMPILED HUB     */}
+            {/* SUNKEN CIRCUIT CHAMBER: SKEUOMORPHIC RECESSED OBSIDIAN BAY        */}
             {/* ================================================================ */}
-            <div className="bg-[#FAF8F5] rounded-2xl border border-[#E2DBD0] p-4 sm:p-5 relative overflow-hidden">
-              {/* 1. 4 Satellite Technology Nodes */}
-              <div className="grid grid-cols-4 gap-2 text-center relative z-10">
+            <div className="bg-gradient-to-b from-[#030612] via-[#070E28] to-[#040817] rounded-2xl border border-black/80 border-t-black/90 border-b-white/10 shadow-[inset_0_4px_16px_rgba(0,0,0,0.85),inset_0_1px_3px_rgba(0,0,0,0.95),0_1px_0_rgba(255,255,255,0.7)] p-4 sm:p-5 relative overflow-hidden">
+              {/* 1. 4 Skeuomorphic Surface-Mount Micro-Chips (Satellites) */}
+              <div className="grid grid-cols-4 gap-2 sm:gap-2.5 text-center relative z-10">
                 {active.satellites.map((sat, sIdx) => {
                   const SatIcon = sat.icon;
                   return (
                     <div
                       key={sIdx}
-                      className="flex flex-col items-center gap-1.5 p-2 rounded-xl bg-white border border-[#E2DBD0] shadow-xs hover:border-[#FFB020] transition-all group"
+                      className="flex flex-col items-center gap-1.5 p-2 sm:p-2.5 rounded-xl bg-gradient-to-b from-[#142045] via-[#0D1530] to-[#070D22] border border-[#FFB020]/25 border-t-white/15 border-b-black/80 shadow-[0_4px_10px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.15)] hover:border-[#FFB020]/60 transition-all group relative"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#E2DBD0] flex items-center justify-center text-[#060B22] group-hover:scale-110 transition-transform">
-                        <SatIcon className="w-4 h-4 text-[#060B22]" />
+                      {/* Micro LED diode */}
+                      <span className="absolute top-1.5 right-1.5 w-1 h-1 rounded-full bg-emerald-400 shadow-[0_0_4px_rgba(52,211,153,0.8)]" />
+
+                      <div className="w-8 h-8 rounded-lg bg-gradient-to-b from-[#1B2958] to-[#0A122E] border border-white/10 flex items-center justify-center text-[#FFB020] group-hover:scale-110 transition-transform shadow-inner">
+                        <SatIcon className="w-4 h-4 text-[#FFB020]" />
                       </div>
-                      <div className="text-[10px] font-display font-black text-[#0B1B3A] tracking-tight truncate w-full">
+                      <div className="text-[10px] font-display font-black text-white tracking-tight truncate w-full">
                         {sat.label}
                       </div>
-                      <div className="text-[8.5px] font-mono text-slate-500 truncate w-full hidden sm:block">
+                      <div className="text-[8.5px] font-mono text-slate-400 truncate w-full hidden sm:block">
                         {sat.sublabel}
                       </div>
                     </div>
@@ -496,7 +584,7 @@ export default function BentoGrid() {
                 })}
               </div>
 
-              {/* 2. Curved Converging Circuit Lines (Monochromatic / Subtle Gold) */}
+              {/* 2. Etched Circuit Board Tracks & Refined Champagne Gold Photons */}
               <div className="relative w-full h-16 sm:h-20 my-1 pointer-events-none">
                 <svg
                   className="w-full h-full overflow-visible"
@@ -506,38 +594,40 @@ export default function BentoGrid() {
                 >
                   <defs>
                     <linearGradient id="monochrome-wire" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#060B22" stopOpacity="0.15" />
-                      <stop offset="80%" stopColor="#FFB020" stopOpacity="0.8" />
-                      <stop offset="100%" stopColor="#FFB020" stopOpacity="1" />
+                      <stop offset="0%" stopColor="#0B1B3A" stopOpacity="0.4" />
+                      <stop offset="60%" stopColor="#FFB020" stopOpacity="0.75" />
+                      <stop offset="100%" stopColor="#FFE599" stopOpacity="1" />
                     </linearGradient>
+                    <filter id="gold-photon-glow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feDropShadow dx="0" dy="0" stdDeviation="2.5" floodColor="#FFB020" floodOpacity="0.9" />
+                    </filter>
                   </defs>
 
                   {satelliteXCoords.map((x, sIdx) => {
                     const pathD = `M ${x} 0 C ${x} 45, ${hubCenterX + (x - hubCenterX) * 0.15} 60, ${hubCenterX} ${hubCenterY}`;
                     return (
                       <g key={sIdx}>
-                        {/* Base Wire Track */}
+                        {/* Deep Etched Copper Groove */}
                         <path
                           d={pathD}
-                          stroke="rgba(6, 11, 34, 0.15)"
-                          strokeWidth="1.8"
-                          strokeDasharray="3 3"
+                          stroke="rgba(0, 0, 0, 0.8)"
+                          strokeWidth="2.5"
                           strokeLinecap="round"
                         />
 
-                        {/* Active subtle pulse wire */}
+                        {/* Active Shimmering Circuit Track */}
                         <path
                           d={pathD}
                           stroke="url(#monochrome-wire)"
-                          strokeWidth="2.2"
+                          strokeWidth="1.8"
                           strokeLinecap="round"
                         />
 
-                        {/* Traveling refined gold photon particle (NO rainbow color) */}
-                        <circle r="3.5" fill="#FFB020">
+                        {/* Traveling Champagne Gold Laser Particle (60 FPS Smooth Flow) */}
+                        <circle r="3.2" fill="#FFE599" filter="url(#gold-photon-glow)">
                           <animateMotion
                             path={pathD}
-                            dur={`${1.6 + sIdx * 0.25}s`}
+                            dur={`${1.8 + sIdx * 0.22}s`}
                             repeatCount="indefinite"
                           />
                         </circle>
@@ -547,34 +637,34 @@ export default function BentoGrid() {
                 </svg>
               </div>
 
-              {/* 3. Central Compiled Hub Capsule */}
+              {/* 3. Central Compiled Hub Capsule (Tactile Glossy Bevel) */}
               <div className="flex justify-center relative z-10 -mt-2">
-                <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-[#060B22] via-[#0B1638] to-[#060B22] text-white font-display font-black text-xs shadow-md border-2 border-[#FFB020] hover:scale-105 transition-transform cursor-pointer">
+                <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-b from-[#1C2C5E] via-[#0B1538] to-[#050A1C] text-white font-display font-black text-xs shadow-[0_8px_25px_rgba(0,0,0,0.6),0_0_30px_rgba(255,176,32,0.45),inset_0_1px_2px_rgba(255,255,255,0.5)] border-2 border-[#FFB020] border-t-[#FFF3B8] border-b-[#8F5900] hover:scale-105 transition-transform cursor-pointer">
                   <Zap className="w-3.5 h-3.5 text-[#FFB020] fill-[#FFB020] animate-pulse" />
-                  <span>{active.hubLabel}</span>
+                  <span className="tracking-wide">{active.hubLabel}</span>
                 </div>
               </div>
 
-              {/* 4. Real-Time Telemetry Bar (Refined Single-Palette Gold) */}
-              <div className="mt-4 space-y-1.5 pt-3 border-t border-[#E2DBD0]">
+              {/* 4. Real-Time Telemetry Bar (Recessed Instrument Well) */}
+              <div className="mt-4 space-y-1.5 pt-3 border-t border-white/10">
                 <div className="flex items-center justify-between text-[11px] font-mono">
-                  <div className="flex items-center gap-2 text-slate-700">
+                  <div className="flex items-center gap-2 text-slate-300">
                     <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                     </span>
                     <span className="truncate max-w-[220px] sm:max-w-none text-left font-medium">
                       {active.statusLabel}
                     </span>
                   </div>
-                  <span className="text-emerald-800 font-bold shrink-0">
+                  <span className="text-[#FFE599] font-mono font-bold shrink-0">
                     {active.statusMetric}
                   </span>
                 </div>
 
-                <div className="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden p-0.5">
+                <div className="h-2 w-full bg-[#02040B] rounded-full overflow-hidden p-[1.5px] border border-white/10 shadow-[inset_0_2px_5px_rgba(0,0,0,0.9)]">
                   <div
-                    className="h-full bg-gradient-to-r from-[#FFB020] to-[#E59A10] rounded-full transition-all duration-700 ease-out"
+                    className="h-full bg-gradient-to-r from-[#FFB020] via-[#FFE599] to-[#FFB020] rounded-full transition-all duration-700 ease-out shadow-[0_0_10px_rgba(255,176,32,0.7)]"
                     style={{ width: `${progress}%` }}
                   />
                 </div>
@@ -586,7 +676,7 @@ export default function BentoGrid() {
               <div className="text-[11px] font-mono font-black uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
                 <span>Blueprint 0{activeIndex + 1}</span>
                 <span>//</span>
-                <span className="text-[#060B22]">{active.tag}</span>
+                <span className="text-[#060B22] font-black">{active.tag}</span>
               </div>
 
               <h3 className="font-display font-black text-xl sm:text-2xl lg:text-3xl text-[#0B1B3A] tracking-tight leading-snug">
@@ -598,24 +688,26 @@ export default function BentoGrid() {
               </p>
             </div>
 
-            {/* 3 Verified Architecture Deliverables */}
-            <div className="pt-2 space-y-2.5 border-t border-slate-100">
-              <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+            {/* 3 Verified Architecture Deliverables with Skeuomorphic Check Badges */}
+            <div className="pt-2 space-y-2.5 border-t border-[#DCD5C8]">
+              <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Verified Architecture Deliverables:</span>
               </div>
               <div className="space-y-2">
                 {active.deliverables.map((item, dIdx) => (
                   <div key={dIdx} className="flex items-start gap-2.5 text-xs text-slate-800">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span className="font-medium text-[13px] leading-snug">{item}</span>
+                    <div className="w-4 h-4 rounded-full bg-gradient-to-b from-emerald-100 to-emerald-200 border border-emerald-400 flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
+                    </div>
+                    <span className="font-medium text-[13px] leading-snug text-slate-800">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Primary Action Button (StarBorder to /get-a-quote with ZERO Numerical Pricing) */}
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-slate-100">
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-[#DCD5C8]">
               <StarBorder
                 as={Link}
                 href="/get-a-quote"
