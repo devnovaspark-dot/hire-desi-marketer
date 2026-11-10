@@ -43,13 +43,12 @@ import { WebDesignTechStack } from "@/components/web-design/WebDesignTechStack";
 import { WebDesignIndustriesGrid } from "@/components/web-design/WebDesignIndustriesGrid";
 import { WebDesignProcessStream } from "@/components/web-design/WebDesignProcessStream";
 import { WebDesignCaseStudies } from "@/components/web-design/WebDesignCaseStudies";
-import { WebDesignTeamShowcase } from "@/components/web-design/WebDesignTeamShowcase";
+import { WebDesignEngagementModels } from "@/components/web-design/WebDesignEngagementModels";
+import { WebDesignWhyChooseUs } from "@/components/web-design/WebDesignWhyChooseUs";
 import { WebDesignFaqAccordion } from "@/components/web-design/WebDesignFaqAccordion";
 import {
   WEB_SERVICES,
   WEB_INDUSTRIES,
-  PRICING_MODELS,
-  DIFFERENTIATORS,
   WEB_FAQS,
 } from "@/data/web-design-services";
 
@@ -82,16 +81,7 @@ export const metadata: Metadata = {
   },
 };
 
-const differentiatorIcons: Record<string, React.ReactNode> = {
-  users: <Users className="w-5 h-5" />,
-  layers: <Layers className="w-5 h-5" />,
-  crosshair: <Crosshair className="w-5 h-5" />,
-  "dollar-sign": <DollarSign className="w-5 h-5" />,
-  clock: <Clock className="w-5 h-5" />,
-  "trending-up": <TrendingUp className="w-5 h-5" />,
-  "shield-check": <ShieldCheck className="w-5 h-5" />,
-  "heart-handshake": <HeartHandshake className="w-5 h-5" />,
-};
+
 
 export default function WebDesignServicesPage() {
   const serviceJsonLd = {
@@ -269,144 +259,8 @@ export default function WebDesignServicesPage() {
               </p>
             </div>
 
-            {/* 3 Engagement Cards Grid with Zero Pricing */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-              {PRICING_MODELS.map((model) => {
-                const modelIcon =
-                  model.id === "hourly" ? (
-                    <Clock className="w-5 h-5" />
-                  ) : model.id === "monthly-dedicated" ? (
-                    <Users className="w-5 h-5" />
-                  ) : (
-                    <Briefcase className="w-5 h-5" />
-                  );
-
-                return (
-                  <div
-                    key={model.id}
-                    className={`rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col justify-between transition-all duration-300 relative h-full group ${
-                      model.isPopular
-                        ? "skeuo-card-dark text-white border-2 border-[#FFB020] shadow-xl ring-4 ring-[#FFB020]/15"
-                        : "bg-white text-[#0B1B3A] border border-[#E2DBD0] hover:border-[#FFB020]/60 shadow-[0_4px_20px_-4px_rgba(6,11,34,0.06)] hover:shadow-[0_16px_36px_-6px_rgba(6,11,34,0.12)] hover:-translate-y-1"
-                    }`}
-                  >
-                    {/* Top Row: Badge & Model Icon */}
-                    <div className="flex items-center justify-between h-8 mb-3">
-                      {model.isPopular ? (
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020] text-[#060B22] text-[10px] font-black uppercase tracking-wider shadow-sm">
-                          <Sparkles className="w-3 h-3" />
-                          <span>{model.badge}</span>
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider border border-slate-200">
-                          {model.badge}
-                        </span>
-                      )}
-
-                      <div
-                        className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors ${
-                          model.isPopular
-                            ? "bg-white/10 text-[#FFB020] border border-white/15"
-                            : "bg-[#060B22]/5 text-[#0B1B3A] border border-[#E2DBD0] group-hover:bg-[#FFB020]/20 group-hover:text-[#B87A00]"
-                        }`}
-                      >
-                        {modelIcon}
-                      </div>
-                    </div>
-
-                    <div className="space-y-4 flex-1 flex flex-col">
-                      {/* Header */}
-                      <div className="space-y-1.5 text-left">
-                        <div
-                          className={`text-xs font-black uppercase tracking-wider ${
-                            model.isPopular ? "text-[#FFB020]" : "text-[#B87A00]"
-                          }`}
-                        >
-                          {model.subtitle}
-                        </div>
-                        <h3
-                          className={`font-display font-black text-2xl tracking-tight leading-snug ${
-                            model.isPopular ? "text-white" : "text-[#0B1B3A]"
-                          }`}
-                        >
-                          {model.title}
-                        </h3>
-                      </div>
-
-                      {/* Description */}
-                      <div>
-                        <p
-                          className={`text-xs sm:text-sm leading-relaxed ${
-                            model.isPopular ? "text-slate-300" : "text-slate-600"
-                          }`}
-                        >
-                          {model.description}
-                        </p>
-                      </div>
-
-                      {/* Best for box */}
-                      <div
-                        className={`p-3.5 rounded-xl text-xs font-bold ${
-                          model.isPopular
-                            ? "bg-white/10 text-white"
-                            : "bg-slate-50 text-slate-800 border border-[#E2DBD0]"
-                        }`}
-                      >
-                        <div>
-                          <span className="text-[#B87A00] font-black uppercase tracking-wider block text-[10px] mb-0.5">
-                            Best suited for:
-                          </span>
-                          <span className="font-medium">{model.idealFor}</span>
-                        </div>
-                      </div>
-
-                      {/* Features list */}
-                      <div className="space-y-2.5 pt-2 flex-1 flex flex-col">
-                        <div
-                          className={`text-xs font-black uppercase tracking-wider ${
-                            model.isPopular ? "text-slate-300" : "text-slate-700"
-                          }`}
-                        >
-                          Key Benefits &amp; Delivery:
-                        </div>
-                        <ul className="space-y-2 text-xs flex-1">
-                          {model.features.map((feat, i) => (
-                            <li
-                              key={i}
-                              className={`flex items-start gap-2 leading-snug ${
-                                model.isPopular ? "text-slate-200" : "text-slate-700"
-                              }`}
-                            >
-                              <CheckCircle2
-                                className={`w-4 h-4 shrink-0 mt-0.5 ${
-                                  model.isPopular ? "text-[#FFB020]" : "text-[#B87A00]"
-                                }`}
-                              />
-                              <span>{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-
-                    {/* Bottom Button */}
-                    <div className="pt-6 mt-auto">
-                      <a
-                        href={model.ctaHref}
-                        className={`w-full py-3.5 px-6 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer ${
-                          model.isPopular
-                            ? "btn-luxury-gold btn-shimmer"
-                            : "btn-luxury-navy"
-                        }`}
-                      >
-                        <span>Discuss Your Project</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </a>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            {/* Unified Collaborative Comparison Studio (Zero Numerical Prices) */}
+            <WebDesignEngagementModels />
           </div>
         </section>
 
@@ -453,49 +307,8 @@ export default function WebDesignServicesPage() {
               </p>
             </div>
 
-            {/* Authentic Engineering Campus Photo & Leadership Team Showcase */}
-            <WebDesignTeamShowcase />
-
-            {/* 8 Differentiators Grid with Elevated Card UI (Compact 2-col on mobile) */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6 pt-2 sm:pt-4">
-              {DIFFERENTIATORS.map((diff, i) => (
-                <div
-                  key={i}
-                  className="p-3.5 sm:p-6 rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] hover:border-[#FFB020] shadow-[0_4px_18px_-4px_rgba(6,11,34,0.04)] hover:shadow-[0_14px_30px_-6px_rgba(255,176,32,0.12)] hover:-translate-y-1 transition-all duration-300 space-y-3 sm:space-y-4 flex flex-col justify-between group relative overflow-hidden text-left"
-                >
-                  {/* Decorative Number Watermark in Background Corner */}
-                  <span className="absolute top-2 right-2.5 sm:top-3 sm:right-4 font-display font-black text-xl sm:text-3xl text-slate-100 group-hover:text-[#FFB020]/15 transition-colors select-none pointer-events-none">
-                    0{i + 1}
-                  </span>
-
-                  {/* Top Glow Accent Bar */}
-                  <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-transparent to-transparent group-hover:via-[#FFB020] transition-all duration-300" />
-
-                  <div className="space-y-2 sm:space-y-3 relative z-10">
-                    <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#060B22] text-[#FFB020] border border-[#FFB020]/25 flex items-center justify-center shadow-xs group-hover:scale-105 group-hover:bg-[#FFB020] group-hover:text-[#060B22] transition-all duration-300">
-                      {differentiatorIcons[diff.icon] || <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" />}
-                    </div>
-
-                    <h3 className="font-display font-black text-xs sm:text-base text-[#0B1B3A] leading-snug group-hover:text-[#B87A00] transition-colors line-clamp-2">
-                      {diff.title}
-                    </h3>
-
-                    <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed line-clamp-3 sm:line-clamp-none">
-                      {diff.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-2 sm:pt-3 border-t border-slate-100 flex items-center justify-between relative z-10">
-                    <span className="hidden sm:inline text-[10px] font-black uppercase tracking-wider text-slate-400">
-                      Verified Standard
-                    </span>
-                    <span className="px-1.5 sm:px-2.5 py-0.5 rounded-full bg-[#FFB020]/15 text-[#B87A00] font-black text-[9px] sm:text-[11px] border border-[#FFB020]/25 truncate">
-                      {diff.metric}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {/* Distinctive Visual Storytelling Experience (Campus, Senior Team & Verified Capabilities) */}
+            <WebDesignWhyChooseUs />
           </div>
         </section>
 
