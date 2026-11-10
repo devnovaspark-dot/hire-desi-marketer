@@ -190,17 +190,17 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 5. INDUSTRIES WE SERVE                                            */}
         {/* ================================================================ */}
-        <section id="industries" className="py-8 sm:py-12 lg:py-16 bg-white border-y border-[#E2DBD0]">
+        <section id="industries" className="py-8 sm:py-12 lg:py-16 bg-[#060B22] text-white border-y border-[#FFB020]/20 scroll-mt-24 sm:scroll-mt-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
             <div className="text-center max-w-3xl mx-auto space-y-2.5">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Building className="w-3.5 h-3.5 text-[#FFB020]" />
                 <span>03 · Specialized Domain Blueprints</span>
               </div>
-              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight">
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight">
                 Tailored Digital Experiences Across Key Sectors
               </h2>
-              <p className="text-xs sm:text-base text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+              <p className="text-xs sm:text-base text-slate-300 leading-relaxed font-normal max-w-2xl mx-auto">
                 We engineer industry-specific user journeys—from HIPAA-compliant patient booking to sub-second headless e-commerce checkouts.
               </p>
             </div>

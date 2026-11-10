@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   Sparkles,
@@ -16,15 +15,18 @@ import {
   GraduationCap,
   ShieldCheck,
   ChevronDown,
-  Building2,
   Plane,
   Factory,
-  Check,
-  Activity,
+  ChevronLeft,
+  ChevronRight,
   Layers,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
+import FlexCarousel, {
+  FlexCarouselHandle,
+  CarouselItem,
+} from "@/components/ui/FlexCarousel";
 
 interface SectorItem {
   id: string;
@@ -261,29 +263,31 @@ const SECTORS: SectorItem[] = [
   },
 ];
 
+const CAROUSEL_ITEMS: CarouselItem[] = SECTORS.map((s) => ({
+  src: s.previewImage,
+  alt: `${s.name} specialized domain blueprint`,
+  title: s.name,
+  subtitle: s.categoryTag,
+  id: s.id,
+}));
+
 export function WebDesignIndustriesGrid() {
   const [selectedSectorId, setSelectedSectorId] = useState<string>("healthcare");
   const [showAllSectors, setShowAllSectors] = useState<boolean>(false);
   const [showMoreSpecs, setShowMoreSpecs] = useState<boolean>(false);
-  const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-  const stageRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<FlexCarouselHandle>(null);
 
   const activeSector =
     SECTORS.find((s) => s.id === selectedSectorId) || SECTORS[0];
 
-  // Show top 4 sectors initially; show all 9 when toggled
-  const displayedSectors = showAllSectors ? SECTORS : SECTORS.slice(0, 4);
+  const displayedSectors = showAllSectors ? SECTORS : SECTORS.slice(0, 5);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!stageRef.current) return;
-    const rect = stageRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setMousePos({ x, y });
-  };
-
-  const handleMouseLeave = () => {
-    setMousePos({ x: 0, y: 0 });
+  const handleSectorSelect = (sectorId: string) => {
+    setSelectedSectorId(sectorId);
+    const index = SECTORS.findIndex((s) => s.id === sectorId);
+    if (index !== -1) {
+      carouselRef.current?.goTo(index);
+    }
   };
 
   return (
@@ -300,12 +304,12 @@ export function WebDesignIndustriesGrid() {
               <button
                 key={sector.id}
                 type="button"
-                onClick={() => setSelectedSectorId(sector.id)}
+                onClick={() => handleSectorSelect(sector.id)}
                 className={cn(
                   "px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer select-none inline-flex items-center gap-2 border",
                   isSelected
                     ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] shadow-md ring-2 ring-[#FFB020]/25 scale-102"
-                    : "bg-white text-slate-700 border-[#E2DBD0] hover:border-slate-400 hover:bg-[#FAF8F5]"
+                    : "bg-[#081232]/80 text-slate-300 border-white/10 hover:border-white/30 hover:bg-[#060B22]"
                 )}
               >
                 <span>{sector.icon}</span>
@@ -323,16 +327,16 @@ export function WebDesignIndustriesGrid() {
           <button
             type="button"
             onClick={() => setShowAllSectors(!showAllSectors)}
-            className="px-4 py-1.5 rounded-full bg-white border border-[#E2DBD0] hover:border-[#FFB020] text-xs font-bold text-slate-700 hover:text-[#0B1B3A] inline-flex items-center gap-1.5 shadow-2xs transition-all duration-300 cursor-pointer group"
+            className="px-4 py-1.5 rounded-full bg-[#081232] border border-white/10 hover:border-[#FFB020] text-xs font-bold text-slate-300 hover:text-white inline-flex items-center gap-1.5 shadow-xs transition-all duration-300 cursor-pointer group"
           >
             <span>
               {showAllSectors
                 ? "View Fewer Sectors"
-                : `View More Sectors (${SECTORS.length - 4} More)`}
+                : `View More Sectors (${SECTORS.length - 5} More)`}
             </span>
             <ChevronDown
               className={cn(
-                "w-3.5 h-3.5 text-[#B87A00] transition-transform duration-300",
+                "w-3.5 h-3.5 text-[#FFB020] transition-transform duration-300",
                 showAllSectors && "rotate-180"
               )}
             />
@@ -341,166 +345,175 @@ export function WebDesignIndustriesGrid() {
       </div>
 
       {/* ==================================================================== */}
-      {/* 2. FULL-WIDTH PANORAMIC VISUAL SHOWCASE STUDIO                       */}
+      {/* 2. FLEX CAROUSEL SHOWCASE THEATER (LIQUID GLASS WEBGL2 SHADER)       */}
       {/* ==================================================================== */}
-      <div className="rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] shadow-md overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
-          {/* Visual Showcase (7 cols): Large Realistic 3D Browser Viewport */}
-          <div
-            ref={stageRef}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className="lg:col-span-7 p-4 sm:p-6 lg:p-8 bg-[#FAF8F5] border-b lg:border-b-0 lg:border-r border-[#E2DBD0] flex flex-col justify-center"
-            style={{
-              perspective: "1400px",
-            }}
-          >
-            <div
-              className="rounded-2xl overflow-hidden border border-[#060B22]/20 shadow-xl bg-white transition-transform duration-500 ease-out"
-              style={{
-                transform: `rotateY(${mousePos.x * 4}deg) rotateX(${-mousePos.y * 4}deg)`,
-                transformStyle: "preserve-3d",
-              }}
-            >
-              {/* macOS Minimalist Browser Header Bar */}
-              <div className="h-8 bg-[#060B22] px-3.5 flex items-center justify-between border-b border-white/10">
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
-                </div>
+      <div className="rounded-3xl bg-gradient-to-b from-[#060B22] to-[#081232] border border-[#FFB020]/25 shadow-2xl overflow-hidden relative">
+        {/* macOS Minimalist Browser Header Bar with Navigation Controls */}
+        <div className="h-10 bg-[#040817] px-4 flex items-center justify-between border-b border-white/10">
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
 
-                <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-white/10 border border-white/15 text-[10px] text-slate-200 font-mono max-w-[240px] sm:max-w-[300px] truncate">
-                  <Lock className="w-2.5 h-2.5 text-emerald-400 shrink-0" />
-                  <span className="truncate">https://{activeSector.previewUrl}</span>
-                </div>
-
-                <div className="flex items-center gap-1 text-[9.5px] font-mono text-emerald-400 font-bold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="hidden sm:inline">60 FPS</span>
-                </div>
-              </div>
-
-              {/* Pristine Authentic Screenshot (STRICT ZERO TEXT OVERLAY) */}
-              <div className="relative aspect-[16/10] sm:aspect-[16/9.5] w-full bg-slate-950 overflow-hidden">
-                <Image
-                  src={activeSector.previewImage}
-                  alt={`${activeSector.name} bespoke digital blueprint preview`}
-                  fill
-                  className="object-cover object-top transition-transform duration-700 ease-out hover:scale-101"
-                  sizes="(max-width: 1024px) 100vw, 750px"
-                  priority
-                />
-              </div>
-
-              {/* Bottom Frame Telemetry Strip */}
-              <div className="px-4 py-2.5 bg-[#060B22] border-t border-white/10 flex items-center justify-between text-xs text-slate-300">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#FFB020]" />
-                  <span className="font-bold text-white truncate">{activeSector.name}</span>
-                </div>
-                <span className="text-[10.5px] text-emerald-400 font-mono font-bold shrink-0">
-                  {activeSector.metric}
-                </span>
-              </div>
+            <div className="hidden sm:flex items-center gap-1 ml-3 border-l border-white/10 pl-3">
+              <button
+                type="button"
+                onClick={() => carouselRef.current?.prev()}
+                className="w-6 h-6 rounded-md bg-white/5 hover:bg-white/15 flex items-center justify-center text-slate-300 hover:text-white transition-colors cursor-pointer"
+                aria-label="Previous blueprint"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => carouselRef.current?.next()}
+                className="w-6 h-6 rounded-md bg-white/5 hover:bg-white/15 flex items-center justify-center text-slate-300 hover:text-white transition-colors cursor-pointer"
+                aria-label="Next blueprint"
+              >
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
             </div>
           </div>
 
-          {/* Right Column (5 cols): Domain Specifications & Expandable Inclusions */}
-          <div className="lg:col-span-5 p-5 sm:p-7 lg:p-8 flex flex-col justify-between space-y-5">
-            <div className="space-y-3.5">
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-[10px] font-black uppercase tracking-wider text-[#B87A00] bg-[#FFB020]/15 px-2.5 py-0.5 rounded-full border border-[#FFB020]/30 font-mono">
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/5 border border-white/10 text-[10.5px] text-slate-300 font-mono max-w-[280px] sm:max-w-[360px] truncate">
+            <Lock className="w-2.5 h-2.5 text-emerald-400 shrink-0" />
+            <span className="truncate">https://{activeSector.previewUrl}</span>
+          </div>
+
+          <div className="flex items-center gap-2 text-[10px] font-mono text-emerald-400 font-bold shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="hidden sm:inline">Liquid Glass 60 FPS</span>
+          </div>
+        </div>
+
+        {/* Liquid WebGL2 Flex Carousel Viewport */}
+        <div className="h-[360px] sm:h-[420px] lg:h-[460px] w-full relative bg-[#060B22]">
+          <FlexCarousel
+            ref={carouselRef}
+            items={CAROUSEL_ITEMS}
+            preset="liquid"
+            cardHeight={0.62}
+            gap={16}
+            radius={18}
+            bend={0.34}
+            reach={0.36}
+            dispersion={0.45}
+            liquid={0.12}
+            squeeze={0.2}
+            captions={true}
+            focusOnClick={true}
+            onChange={(index) => {
+              if (SECTORS[index]) {
+                setSelectedSectorId(SECTORS[index].id);
+              }
+            }}
+            className="w-full h-full"
+          />
+        </div>
+
+        {/* ==================================================================== */}
+        {/* 3. ACTIVE DOMAIN SPECIFICATIONS & EXPANDABLE BLUEPRINT INCLUSIONS    */}
+        {/* ==================================================================== */}
+        <div className="p-5 sm:p-7 lg:p-8 bg-[#081232]/95 border-t border-white/10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            {/* Left Column (7 cols): Architecture Overview & SLA */}
+            <div className="lg:col-span-7 space-y-3.5">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-[10px] font-black uppercase tracking-wider text-[#060B22] bg-[#FFB020] px-2.5 py-0.5 rounded-full font-mono shadow-xs">
                   {activeSector.categoryTag}
                 </span>
 
-                <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
                   {activeSector.metric}
                 </span>
               </div>
 
-              <h3 className="font-display font-black text-xl sm:text-2xl text-[#0B1B3A] tracking-tight leading-snug">
+              <h3 className="font-display font-black text-xl sm:text-2xl lg:text-3xl text-white tracking-tight leading-snug">
                 {activeSector.headline}
               </h3>
 
-              <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
                 {activeSector.description}
               </p>
 
               {/* Regulatory Compliance SLA Badge */}
-              <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E2DBD0] flex items-center gap-2 text-[11px] text-slate-700 font-semibold">
-                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+              <div className="p-3 rounded-xl bg-[#060B22] border border-white/10 flex items-center gap-2.5 text-xs text-slate-200 font-semibold shadow-inner">
+                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>{activeSector.complianceSla}</span>
               </div>
             </div>
 
-            {/* Included Capabilities List */}
-            <div className="pt-2 border-t border-slate-100 space-y-2">
-              <div className="flex items-center justify-between text-[10.5px] font-black uppercase tracking-wider text-slate-700">
-                <span>Industry-Specific Capabilities:</span>
-                <span className="text-[#B87A00] font-mono">
-                  {showMoreSpecs ? "6 Inclusions" : "3 Inclusions"}
-                </span>
-              </div>
+            {/* Right Column (5 cols): Capabilities Checklist & Action CTA */}
+            <div className="lg:col-span-5 space-y-4 lg:border-l lg:border-white/10 lg:pl-6">
+              <div className="space-y-2.5">
+                <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-wider text-slate-300">
+                  <span>Industry-Specific Capabilities:</span>
+                  <span className="text-[#FFB020] font-mono">
+                    {showMoreSpecs ? "6 Inclusions" : "3 Inclusions"}
+                  </span>
+                </div>
 
-              <div className="space-y-1.5 text-xs text-slate-700">
-                {activeSector.keyFeatures.map((feat, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0 mt-0.5" />
-                    <span className="font-medium text-[11.5px] leading-snug">{feat}</span>
-                  </div>
-                ))}
-
-                {/* Additional Features Shown when "View More Specs" is Active */}
-                {showMoreSpecs &&
-                  activeSector.moreFeatures &&
-                  activeSector.moreFeatures.map((feat, i) => (
-                    <div
-                      key={`more-${i}`}
-                      className="flex items-start gap-2 animate-in fade-in slide-in-from-top-1 duration-200"
-                    >
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                      <span className="font-medium text-[11.5px] leading-snug text-slate-800">
+                <div className="space-y-2 text-xs text-slate-200">
+                  {activeSector.keyFeatures.map((feat, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0 mt-0.5" />
+                      <span className="font-medium text-[12px] leading-snug text-slate-200">
                         {feat}
                       </span>
                     </div>
                   ))}
+
+                  {/* Additional Features Shown when "View More Specs" is Active */}
+                  {showMoreSpecs &&
+                    activeSector.moreFeatures &&
+                    activeSector.moreFeatures.map((feat, i) => (
+                      <div
+                        key={`more-${i}`}
+                        className="flex items-start gap-2 animate-in fade-in slide-in-from-top-1 duration-200"
+                      >
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                        <span className="font-medium text-[12px] leading-snug text-slate-100">
+                          {feat}
+                        </span>
+                      </div>
+                    ))}
+                </div>
+
+                {/* View More / View Less Deliverables Toggle Button */}
+                {activeSector.moreFeatures && (
+                  <button
+                    type="button"
+                    onClick={() => setShowMoreSpecs(!showMoreSpecs)}
+                    className="pt-1 text-[11.5px] font-bold text-[#FFB020] hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1.5 group"
+                  >
+                    <span>
+                      {showMoreSpecs
+                        ? "View Fewer Deliverables ↑"
+                        : "View More Deliverables (+3 More) ↓"}
+                    </span>
+                  </button>
+                )}
               </div>
 
-              {/* View More / View Less Deliverables Toggle */}
-              {activeSector.moreFeatures && (
-                <button
-                  type="button"
-                  onClick={() => setShowMoreSpecs(!showMoreSpecs)}
-                  className="pt-1 text-[11px] font-bold text-[#B87A00] hover:text-[#0B1B3A] transition-colors cursor-pointer inline-flex items-center gap-1"
+              {/* Direct Action Button with StarBorder */}
+              <div className="pt-2">
+                <StarBorder
+                  as={Link}
+                  href="/get-a-quote"
+                  className="w-full py-3.5 px-5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg cursor-pointer text-center group"
+                  radius={12}
+                  color="#FFB020"
+                  trailColor="#38BDF8"
+                  backgroundColor="#060B22"
+                  textColor="#FFFFFF"
+                  borderColor="rgba(255, 176, 32, 0.4)"
+                  sparkle={true}
+                  glow={0.8}
                 >
-                  <span>
-                    {showMoreSpecs
-                      ? "View Fewer Deliverables ↑"
-                      : "View More Deliverables (+3 More) ↓"}
-                  </span>
-                </button>
-              )}
-            </div>
-
-            {/* Direct Action Button */}
-            <div className="pt-2 border-t border-slate-100">
-              <StarBorder
-                as={Link}
-                href="/get-a-quote"
-                className="w-full py-3.5 px-5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm cursor-pointer text-center group"
-                radius={12}
-                color="#FFB020"
-                trailColor="#38BDF8"
-                backgroundColor="#060B22"
-                textColor="#FFFFFF"
-                borderColor="rgba(255, 176, 32, 0.4)"
-                sparkle={true}
-                glow={0.8}
-              >
-                <span>Request {activeSector.shortLabel} Blueprint</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#FFB020] group-hover:translate-x-1 transition-transform" />
-              </StarBorder>
+                  <span>Request {activeSector.shortLabel} Blueprint</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#FFB020] group-hover:translate-x-1 transition-transform" />
+                </StarBorder>
+              </div>
             </div>
           </div>
         </div>

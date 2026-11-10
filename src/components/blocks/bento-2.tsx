@@ -171,3 +171,4 @@ export default function Bento2({
     </div>
   );
 }
+
