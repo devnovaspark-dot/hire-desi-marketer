@@ -162,7 +162,7 @@ interface CollaborationModel {
   name: string;
   badge: string;
   isPopular?: boolean;
-  pixelVariant: "gold" | "navy" | "default";
+  pixelVariant: "gold" | "navy" | "default" | "blue" | "yellow" | "pink";
   kicker: string;
   valueHighlight: string;
   valueSubtext: string;
@@ -179,7 +179,7 @@ const COLLAB_MODELS: CollaborationModel[] = [
     id: "fixed-cost",
     name: "Fixed-Cost Project",
     badge: "Milestone-Based",
-    pixelVariant: "default",
+    pixelVariant: "navy",
     kicker: "Scope Certainty",
     valueHighlight: "Fixed-Milestone",
     valueSubtext: "Guaranteed launch date • Zero surprise costs",
@@ -220,7 +220,7 @@ const COLLAB_MODELS: CollaborationModel[] = [
     id: "hourly",
     name: "Hourly On-Demand Support",
     badge: "Pay-As-You-Need",
-    pixelVariant: "navy",
+    pixelVariant: "blue",
     kicker: "Flexible Technical Agility",
     valueHighlight: "On-Demand Agility",
     valueSubtext: "Pay as you need • Sub-24h sprint kickoff",
@@ -258,11 +258,12 @@ export function WebDesignEngagementModels() {
             >
               <PixelCard
                 variant={model.pixelVariant}
-                pixelSize={2.5}
+                pixelSize={2}
                 gap={6}
-                speed={model.isPopular ? 30 : 25}
-                spotlight={model.isPopular ? 0.75 : 0.55}
-                glow={model.isPopular ? 0.75 : 0.5}
+                speed={model.isPopular ? 24 : 20}
+                spotlight={model.isPopular ? 0.35 : 0.25}
+                glow={model.isPopular ? 0.35 : 0.22}
+                opacity={0.4}
                 radius={24}
                 className={cn(
                   "p-5 sm:p-6 transition-all duration-300 relative group flex flex-col justify-between",
@@ -285,7 +286,7 @@ export function WebDesignEngagementModels() {
                   {/* Top Row: Icon + Plan Name */}
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <div className="shrink-0 p-1 rounded-xl bg-white/5 border border-white/10">
+                      <div className="shrink-0 p-1.5 rounded-xl bg-[#060B22]/80 border border-white/10 backdrop-blur-xs">
                         {model.renderIcon(isSelected)}
                       </div>
                       <div>
@@ -304,7 +305,7 @@ export function WebDesignEngagementModels() {
                     </div>
 
                     {!model.isPopular && (
-                      <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-white/5 text-slate-300 border border-white/10 shrink-0">
+                      <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-[#060B22]/80 text-slate-300 border border-white/10 shrink-0 backdrop-blur-xs">
                         {model.badge}
                       </span>
                     )}
@@ -320,7 +321,7 @@ export function WebDesignEngagementModels() {
                     >
                       {model.valueHighlight}
                     </div>
-                    <div className="text-xs text-slate-400 font-medium mt-0.5">
+                    <div className="text-xs text-slate-300 font-medium mt-0.5">
                       {model.valueSubtext}
                     </div>
                   </div>
@@ -330,10 +331,11 @@ export function WebDesignEngagementModels() {
                     {model.tagline}
                   </p>
 
-                  {/* 4 Concrete Deliverables Checklist */}
-                  <div className="space-y-2 pt-1">
-                    <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
-                      Verified Deliverables:
+                  {/* 4 Concrete Deliverables Checklist with dark glass contrast shield */}
+                  <div className="space-y-2 pt-1 p-3 rounded-xl bg-[#060B22]/60 border border-white/5 backdrop-blur-[2px]">
+                    <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300 flex items-center justify-between">
+                      <span>Verified Deliverables</span>
+                      <span className="text-[9px] text-[#FFB020] font-normal">HDM Certified</span>
                     </div>
 
                     <div className="space-y-2 text-xs">
@@ -353,8 +355,8 @@ export function WebDesignEngagementModels() {
                     </div>
                   </div>
 
-                  {/* Squad Structure Box */}
-                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-[11px] space-y-0.5">
+                  {/* Squad Structure Box with dark glass contrast shield */}
+                  <div className="p-2.5 rounded-xl bg-[#060B22]/70 border border-white/10 text-[11px] space-y-0.5 backdrop-blur-[2px]">
                     <div className="font-mono text-[9px] uppercase tracking-wider text-slate-400 font-bold">
                       Squad Structure:
                     </div>

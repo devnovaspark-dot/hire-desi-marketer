@@ -19,63 +19,63 @@ export interface PixelCardVariant {
 
 const VARIANTS: Record<string, PixelCardVariant> = {
   default: {
-    gap: 5,
-    speed: 35,
+    gap: 6,
+    speed: 25,
     colors: {
-      dark: ["#f8fafc", "#f1f5f9", "#cbd5e1"],
-      light: ["#18181b", "#52525b", "#a1a1aa"],
+      dark: ["#1E293B", "#334155", "#0284C7", "#38BDF8"],
+      light: ["#64748B", "#94A3B8", "#CBD5E1"],
     },
-    glow: { dark: "#cbd5e1", light: "#71717a" },
+    glow: { dark: "#0284C7", light: "#0284C7" },
     noFocus: false,
   },
   gold: {
-    gap: 5,
-    speed: 30,
+    gap: 6,
+    speed: 25,
     colors: {
-      dark: ["#FFF8E7", "#FFE082", "#FFB020", "#D49B26"],
-      light: ["#713f12", "#a16207", "#ca8a04"],
+      dark: ["#78350F", "#B45309", "#D97706", "#FFB020"],
+      light: ["#713F12", "#A16207", "#CA8A04"],
     },
-    glow: { dark: "#FFB020", light: "#ca8a04" },
+    glow: { dark: "#D97706", light: "#CA8A04" },
     noFocus: false,
   },
   navy: {
     gap: 6,
     speed: 25,
     colors: {
-      dark: ["#38BDF8", "#818CF8", "#FFB020"],
+      dark: ["#0F172A", "#1E293B", "#0284C7", "#38BDF8"],
       light: ["#0B1B3A", "#1E3A8A", "#0284C7"],
     },
-    glow: { dark: "#38BDF8", light: "#0284C7" },
+    glow: { dark: "#0284C7", light: "#0284C7" },
     noFocus: false,
   },
   blue: {
-    gap: 10,
+    gap: 8,
     speed: 25,
     colors: {
-      dark: ["#e0f2fe", "#7dd3fc", "#0ea5e9"],
-      light: ["#0c4a6e", "#0369a1", "#0284c7"],
+      dark: ["#075985", "#0284C7", "#0EA5E9", "#38BDF8"],
+      light: ["#0C4A6E", "#0369A1", "#0284C7"],
     },
-    glow: { dark: "#0ea5e9", light: "#0284c7" },
+    glow: { dark: "#0284C7", light: "#0284C7" },
     noFocus: false,
   },
   yellow: {
-    gap: 3,
+    gap: 5,
     speed: 20,
     colors: {
-      dark: ["#fef08a", "#fde047", "#eab308"],
-      light: ["#713f12", "#a16207", "#ca8a04"],
+      dark: ["#713F12", "#A16207", "#CA8A04", "#EAB308"],
+      light: ["#713F12", "#A16207", "#CA8A04"],
     },
-    glow: { dark: "#eab308", light: "#ca8a04" },
+    glow: { dark: "#EAB308", light: "#CA8A04" },
     noFocus: false,
   },
   pink: {
     gap: 6,
-    speed: 80,
+    speed: 40,
     colors: {
-      dark: ["#fecdd3", "#fda4af", "#e11d48"],
-      light: ["#831843", "#be123c", "#e11d48"],
+      dark: ["#831843", "#BE123C", "#E11D48", "#FB7185"],
+      light: ["#831843", "#BE123C", "#E11D48"],
     },
-    glow: { dark: "#e11d48", light: "#be123c" },
+    glow: { dark: "#E11D48", light: "#BE123C" },
     noFocus: true,
   },
 };
@@ -151,7 +151,7 @@ export interface PixelCardProps {
 }
 
 export default function PixelCard({
-  variant = "gold",
+  variant = "navy",
   colors,
   gap,
   speed,
@@ -159,10 +159,10 @@ export default function PixelCard({
   shape = "square",
   origin = "center",
   revealDuration = 600,
-  spotlight = 0.5,
-  glow = 0.5,
+  spotlight = 0.4,
+  glow = 0.35,
   glowColor,
-  opacity = 1,
+  opacity = 0.45,
   fade = 0,
   trigger = "hover",
   clickPulse = true,
@@ -403,11 +403,11 @@ export default function PixelCard({
         const reach = Math.max(width, height) * 0.85;
         const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, reach);
         const strength =
-          s.glow * s.opacity * 0.32 * Math.min(1, presenceAvg * 1.4);
+          s.glow * s.opacity * 0.22 * Math.min(1, presenceAvg * 1.2);
         gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${strength})`);
         gradient.addColorStop(
           0.45,
-          `rgba(${r}, ${g}, ${b}, ${strength * 0.35})`
+          `rgba(${r}, ${g}, ${b}, ${strength * 0.3})`
         );
         gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
         ctx.fillStyle = gradient;
@@ -450,10 +450,13 @@ export default function PixelCard({
               0,
               Math.hypot(x - state.spotX, y - state.spotY)
             );
-            size *= 1 + spotStrength * near * near * 2.4;
-            alpha += spotStrength * near * 0.45;
+            size *= 1 + spotStrength * near * near * 0.35;
+            alpha += spotStrength * near * 0.2;
           }
-          alpha = Math.min(1, alpha) * state.mask[i] * s.opacity;
+          // Safeguard: Never allow individual pixel squares to bloom so large that they merge into a solid sheet
+          const maxPixelDim = Math.max(1, (s.gap + s.pixelSize) * 0.48);
+          size = Math.min(maxPixelDim, size);
+          alpha = Math.min(0.55, alpha) * state.mask[i] * s.opacity;
           if (alpha <= 0.004) continue;
           for (let p = 0; p < pulses.length; p++) {
             const pulse = pulses[p];
