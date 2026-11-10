@@ -1,102 +1,34 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import Image from "next/image";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
-  Sparkles,
   Zap,
   Star,
   ShieldCheck,
   Clock,
   Lock,
-  Activity,
   Layers,
-  ChevronRight,
-  ExternalLink,
+  Code2,
+  CheckCircle2,
+  Cpu,
+  GitBranch,
+  Gauge,
+  Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { HeroBackgroundAnimation } from "./HeroBackgroundAnimation";
 
-interface HeroShowcaseItem {
-  id: string;
-  label: string;
-  sector: string;
-  image: string;
-  url: string;
-  tech: string;
-  speed: string;
-  metric: string;
-}
-
-const HERO_SHOWCASES: HeroShowcaseItem[] = [
-  {
-    id: "aether",
-    label: "✦ Multi-Device Studio",
-    sector: "Luxury Digital Agency",
-    image: "/images/hero-devices-mockup.jpg",
-    url: "aether-agency.hdm.live",
-    tech: "Next.js 16 + Figma Design Tokens",
-    speed: "< 0.52s Edge Paint",
-    metric: "+240% Engagement Lift",
-  },
-  {
-    id: "linear",
-    label: "⚡ SaaS Platform",
-    sector: "High-Growth Software",
-    image: "/images/ref-linear.jpg",
-    url: "linear-engine.hdm.live",
-    tech: "React 19 + TypeScript Full-Stack",
-    speed: "100/100 Core Web Vitals",
-    metric: "4.8% Product Signup Rate",
-  },
-  {
-    id: "dermaluxe",
-    label: "🌿 Aesthetic Clinic",
-    sector: "Medical & Healthcare",
-    image: "/images/case-study-aesthetic.webp",
-    url: "dermaluxe.hdm.live",
-    tech: "Headless Next.js + 1-Tap Booking",
-    speed: "99/100 Mobile Speed",
-    metric: "+215% Direct Inquiries",
-  },
-  {
-    id: "velocity",
-    label: "🛍️ DTC Storefront",
-    sector: "High-Velocity E-Commerce",
-    image: "/images/case-study-cafe.webp",
-    url: "velocity-store.hdm.live",
-    tech: "Shopify Plus + Instant Slide-Cart",
-    speed: "< 0.7s Micro-Checkout",
-    metric: "4.6% Avg. Conversion",
-  },
-];
+type ConsoleTab = "vitals" | "design" | "stack" | "ownership";
 
 export function WebDesignHero() {
-  const [activeShowcaseId, setActiveShowcaseId] = useState<string>("aether");
-  const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-  const stageRef = useRef<HTMLDivElement>(null);
-
-  const activeShowcase =
-    HERO_SHOWCASES.find((s) => s.id === activeShowcaseId) || HERO_SHOWCASES[0];
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!stageRef.current) return;
-    const rect = stageRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setMousePos({ x, y });
-  };
-
-  const handleMouseLeave = () => {
-    setMousePos({ x: 0, y: 0 });
-  };
+  const [activeTab, setActiveTab] = useState<ConsoleTab>("vitals");
 
   return (
-    <section className="relative overflow-hidden w-full py-10 sm:py-14 lg:py-16 bg-[#F6F4EE] bg-[radial-gradient(#E2DBD0_1px,transparent_1px)] [background-size:24px_24px] border-b border-[#E2DBD0] select-none">
-      {/* Luxury Diffuse Ambient Glows */}
-      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[720px] sm:w-[900px] h-[360px] bg-[#FFB020]/15 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-72 sm:w-[500px] h-72 sm:h-[500px] bg-[#060B22]/10 rounded-full blur-[120px] pointer-events-none" />
+    <section className="relative overflow-hidden w-full py-10 sm:py-14 lg:py-18 bg-[#F6F4EE] border-b border-[#E2DBD0] select-none">
+      {/* 1. Amazing Interactive Background Canvas Animation & Radiant Ambient Lighting */}
+      <HeroBackgroundAnimation />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6 sm:space-y-8">
         {/* ================================================================ */}
@@ -119,7 +51,7 @@ export function WebDesignHero() {
           </div>
 
           {/* Grand Authoritative Headline */}
-          <h1 className="font-display font-black text-3xl sm:text-5xl lg:text-[54px] text-[#060B22] tracking-tight leading-[1.08]">
+          <h1 className="font-display font-black text-3xl sm:text-5xl lg:text-[56px] text-[#060B22] tracking-tight leading-[1.08]">
             Your Website Should Do More Than Look Good.{" "}
             <span className="bg-gradient-to-r from-[#B87A00] via-[#FFB020] to-[#E68A00] bg-clip-text text-transparent block sm:inline">
               It Should Grow Your Business.
@@ -127,12 +59,12 @@ export function WebDesignHero() {
           </h1>
 
           {/* Editorial Subtitle */}
-          <div className="space-y-1.5 max-w-2xl mx-auto pt-1">
+          <div className="space-y-1 max-w-2xl mx-auto pt-1">
             <p className="font-bold text-[#060B22] text-sm sm:text-base">
               Professional Web Design and Development Services for Growing Businesses
             </p>
             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
-              We design and develop high-converting digital platforms that blend bespoke Figma design with modern full-stack development to turn your website into a powerful commercial growth asset.
+              We design and engineer bespoke, high-converting digital platforms that blend Figma-grade design systems with sub-second Next.js full-stack development—turning casual visitors into qualified enterprise revenue.
             </p>
           </div>
 
@@ -173,7 +105,7 @@ export function WebDesignHero() {
             <span className="text-slate-300 hidden sm:inline">•</span>
             <div className="flex items-center gap-1.5 font-semibold text-slate-700">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>100% Code Ownership</span>
+              <span>100% Code &amp; IP Ownership</span>
             </div>
             <span className="text-slate-300 hidden sm:inline">•</span>
             <div className="flex items-center gap-1.5 font-semibold text-slate-700">
@@ -189,114 +121,371 @@ export function WebDesignHero() {
         </div>
 
         {/* ================================================================ */}
-        {/* 2. PANORAMIC 3D MULTI-DEVICE DIGITAL PRODUCT STAGE               */}
+        {/* 2. INTERACTIVE DIGITAL ENGINEERING STUDIO CONSOLE (ZERO IMAGES!)  */}
         {/* ================================================================ */}
-        <div className="pt-3 space-y-4">
-          {/* Interactive Project Switcher Pills */}
+        <div className="pt-2 max-w-5xl mx-auto space-y-3">
+          {/* Interactive Feature Switcher Tabs */}
           <div className="flex flex-wrap items-center justify-center gap-2">
-            {HERO_SHOWCASES.map((showcase) => {
-              const isSelected = showcase.id === activeShowcase.id;
+            {[
+              { id: "vitals", label: "⚡ Sub-Second Speed & Vitals", kicker: "< 0.8s LCP Benchmark" },
+              { id: "design", label: "🎨 Bespoke Figma Tokens", kicker: "100% Custom UI/UX" },
+              { id: "stack", label: "🚀 Next.js 16 Full-Stack", kicker: "Zero Theme Bloat" },
+              { id: "ownership", label: "🛡️ 100% Code & IP Ownership", kicker: "Day-One Repo Access" },
+            ].map((tab) => {
+              const isSelected = activeTab === tab.id;
 
               return (
                 <button
-                  key={showcase.id}
+                  key={tab.id}
                   type="button"
-                  onClick={() => setActiveShowcaseId(showcase.id)}
+                  onClick={() => setActiveTab(tab.id as ConsoleTab)}
                   className={cn(
-                    "px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer flex items-center gap-1.5 select-none",
+                    "px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer flex items-center gap-1.5 select-none",
                     isSelected
                       ? "bg-[#060B22] text-[#FFB020] border border-[#FFB020]/50 shadow-md ring-1 ring-[#FFB020]/30 scale-102"
                       : "bg-white/95 text-slate-600 border border-[#E2DBD0] hover:border-slate-400 hover:text-[#0B1B3A]"
                   )}
                 >
-                  <span>{showcase.label}</span>
+                  <span>{tab.label}</span>
                   <span
                     className={cn(
-                      "text-[10px] font-mono px-1.5 py-0.2 rounded-full hidden sm:inline-block",
+                      "text-[10px] font-mono px-1.5 py-0.2 rounded-md hidden md:inline-block",
                       isSelected
                         ? "bg-[#FFB020]/20 text-[#FFB020]"
                         : "bg-slate-100 text-slate-500"
                     )}
                   >
-                    {showcase.sector}
+                    {tab.kicker}
                   </span>
                 </button>
               );
             })}
           </div>
 
-          {/* 3D Tilted Panoramic Stage (ZERO TEXT OVERLAYS ON IMAGE) */}
-          <div
-            ref={stageRef}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className="relative max-w-5xl mx-auto"
-            style={{
-              perspective: "1600px",
-            }}
-          >
-            {/* Ambient Backlight Halo */}
-            <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-[#FFB020]/25 via-transparent to-cyan-500/20 blur-2xl pointer-events-none" />
-
-            <div
-              className="relative rounded-2xl sm:rounded-3xl bg-[#060B22] border border-[#060B22]/30 shadow-[0_30px_70px_-15px_rgba(6,11,34,0.35)] overflow-hidden transition-transform duration-500 ease-out text-left"
-              style={{
-                transform: `rotateY(${mousePos.x * 5}deg) rotateX(${-mousePos.y * 5}deg)`,
-                transformStyle: "preserve-3d",
-              }}
-            >
-              {/* Minimalist macOS Browser Top Bar */}
-              <div className="h-9 sm:h-10 bg-[#060B22] px-4 flex items-center justify-between border-b border-white/10">
-                <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
-                </div>
-
-                {/* Centered Minimalist Staging URL */}
-                <div className="flex items-center gap-1.5 px-3 sm:px-4 py-1 rounded-md bg-white/10 border border-white/15 text-[10.5px] sm:text-xs text-slate-200 font-mono">
-                  <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
-                  <span>https://{activeShowcase.url}</span>
-                </div>
-
-                {/* Right Performance Telemetry */}
-                <div className="flex items-center gap-2 text-[10.5px] font-mono text-emerald-400 font-bold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="hidden sm:inline">60 FPS · 100/100 Core Web Vitals</span>
-                </div>
+          {/* Architectural Studio Stage (Mac-Style Terminal & Visual Telemetry) */}
+          <div className="relative rounded-2xl sm:rounded-3xl bg-[#060B22] border border-[#FFB020]/25 shadow-[0_25px_60px_-15px_rgba(6,11,34,0.35)] overflow-hidden text-left">
+            {/* Minimalist macOS Browser Top Bar */}
+            <div className="h-10 bg-[#081232] px-4 flex items-center justify-between border-b border-white/10">
+              <div className="flex items-center gap-2">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
               </div>
 
-              {/* High-Resolution Website Preview (STRICT ZERO TEXT OVERLAYS) */}
-              <div className="relative aspect-[16/9.5] sm:aspect-[16/9] w-full bg-slate-950 overflow-hidden">
-                <Image
-                  src={activeShowcase.image}
-                  alt={`${activeShowcase.sector} bespoke production platform preview`}
-                  fill
-                  className="object-cover object-top transition-all duration-700 ease-out hover:scale-101"
-                  sizes="(max-width: 1200px) 100vw, 1100px"
-                  priority
-                />
+              {/* Centered Minimalist Staging URL */}
+              <div className="flex items-center gap-1.5 px-3 sm:px-4 py-1 rounded-md bg-white/10 border border-white/15 text-[10.5px] sm:text-xs text-slate-200 font-mono">
+                <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
+                <span>https://engineering.hiredesimarketer.com/live-architecture</span>
               </div>
 
-              {/* Integrated Architectural Telemetry Console (Below the Screen) */}
-              <div className="p-3.5 sm:p-4 bg-[#081232] border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+              {/* Right Performance Telemetry Badge */}
+              <div className="flex items-center gap-2 text-[10.5px] font-mono text-emerald-400 font-bold">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="hidden sm:inline">60 FPS · Edge Validated</span>
+              </div>
+            </div>
+
+            {/* TAB CONTENT: 100% CODE-DRIVEN, ZERO STATIC IMAGES */}
+            <div className="p-5 sm:p-7 min-h-[320px] sm:min-h-[340px] flex flex-col justify-between">
+              {/* TAB 1: SUB-SECOND CORE WEB VITALS BENCHMARK */}
+              {activeTab === "vitals" && (
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                  {/* Left Column: Real-time PageSpeed Gauge */}
+                  <div className="lg:col-span-5 bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center justify-center text-center space-y-3">
+                    <div className="relative w-28 h-28 flex items-center justify-center">
+                      <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="42"
+                          stroke="rgba(255,255,255,0.1)"
+                          strokeWidth="8"
+                          fill="none"
+                        />
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="42"
+                          stroke="#10B981"
+                          strokeWidth="8"
+                          strokeDasharray="264"
+                          strokeDashoffset="10"
+                          strokeLinecap="round"
+                          fill="none"
+                          className="transition-all duration-1000"
+                        />
+                      </svg>
+                      <div className="absolute flex flex-col items-center">
+                        <span className="text-3xl font-display font-black text-white">99</span>
+                        <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase">Grade A+</span>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-white">Core Web Vitals Audit Pass</div>
+                      <p className="text-xs text-slate-400 mt-0.5">Google Lighthouse Certified Architecture</p>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Key Speed Benchmarks */}
+                  <div className="lg:col-span-7 space-y-4">
+                    <div className="grid grid-cols-3 gap-3">
+                      <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+                        <div className="text-[10px] font-mono text-slate-400 uppercase">LCP Speed</div>
+                        <div className="text-lg font-black text-[#FFB020] mt-0.5">&lt; 0.68s</div>
+                        <div className="text-[10px] text-emerald-400 font-semibold">Sub-Second Paint</div>
+                      </div>
+                      <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+                        <div className="text-[10px] font-mono text-slate-400 uppercase">INP / FID</div>
+                        <div className="text-lg font-black text-emerald-400 mt-0.5">12ms</div>
+                        <div className="text-[10px] text-slate-400 font-semibold">Instant Input</div>
+                      </div>
+                      <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+                        <div className="text-[10px] font-mono text-slate-400 uppercase">CLS Shift</div>
+                        <div className="text-lg font-black text-white mt-0.5">0.00</div>
+                        <div className="text-[10px] text-emerald-400 font-semibold">Zero Jitter</div>
+                      </div>
+                    </div>
+
+                    {/* Speed Comparison Bars */}
+                    <div className="space-y-2 p-3.5 rounded-xl bg-black/30 border border-white/10 text-xs">
+                      <div className="flex items-center justify-between text-[11px]">
+                        <span className="text-white font-bold flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                          HDM Bespoke Next.js Engine
+                        </span>
+                        <span className="text-emerald-400 font-mono font-bold">0.68s (100/100)</span>
+                      </div>
+                      <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                        <div className="w-[18%] h-full bg-gradient-to-r from-emerald-500 to-[#FFB020] rounded-full" />
+                      </div>
+
+                      <div className="flex items-center justify-between text-[11px] pt-1">
+                        <span className="text-slate-400 font-medium">Traditional Generic CMS Theme</span>
+                        <span className="text-amber-400 font-mono">4.85s (42/100)</span>
+                      </div>
+                      <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                        <div className="w-[85%] h-full bg-amber-500/70 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 2: BESPOKE FIGMA DESIGN SYSTEM */}
+              {activeTab === "design" && (
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                  <div className="lg:col-span-6 space-y-3">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#FFB020]/20 text-[#FFB020] text-[10.5px] font-mono font-bold uppercase tracking-wider border border-[#FFB020]/30">
+                      <Layers className="w-3 h-3 text-[#FFB020]" />
+                      Atomic Figma Design Tokens
+                    </div>
+                    <h3 className="font-display font-black text-xl sm:text-2xl text-white tracking-tight">
+                      Crafted Specifically for Your Brand Identity
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                      Zero pre-made marketplace templates. We construct custom design libraries with fluid 12-column responsive layouts, interactive prototype states, and accessible WCAG 2.1 AA contrast.
+                    </p>
+                    <div className="grid grid-cols-2 gap-2 pt-1 text-xs">
+                      <div className="flex items-center gap-1.5 text-slate-200">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
+                        <span>Interactive Prototype Handover</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-200">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
+                        <span>48+ Reusable UI Components</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-200">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
+                        <span>WCAG 2.1 AA Compliant</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-200">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
+                        <span>Figma-to-Code Sync</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Visual Design Token Palette */}
+                  <div className="lg:col-span-6 bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3">
+                    <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider font-bold">
+                      Live Token Architecture Preview:
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      <div className="p-2.5 rounded-xl bg-[#060B22] border border-white/15 text-center">
+                        <div className="w-5 h-5 rounded-md bg-[#060B22] border border-white/30 mx-auto mb-1.5" />
+                        <div className="text-[10px] font-mono text-white font-bold">#060B22</div>
+                        <div className="text-[9px] text-slate-400">Midnight</div>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-white/10 border border-white/15 text-center">
+                        <div className="w-5 h-5 rounded-md bg-[#FFB020] mx-auto mb-1.5 shadow-xs" />
+                        <div className="text-[10px] font-mono text-white font-bold">#FFB020</div>
+                        <div className="text-[9px] text-[#FFB020]">Signature Gold</div>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-white/10 border border-white/15 text-center">
+                        <div className="w-5 h-5 rounded-md bg-[#38BDF8] mx-auto mb-1.5" />
+                        <div className="text-[10px] font-mono text-white font-bold">#38BDF8</div>
+                        <div className="text-[9px] text-sky-300">Edge Cyan</div>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-white/10 border border-white/15 text-center">
+                        <div className="w-5 h-5 rounded-md bg-[#FAF8F5] mx-auto mb-1.5" />
+                        <div className="text-[10px] font-mono text-white font-bold">#FAF8F5</div>
+                        <div className="text-[9px] text-slate-300">Ivory Canvas</div>
+                      </div>
+                    </div>
+                    <div className="p-3 rounded-xl bg-black/40 border border-white/10 text-xs font-mono text-slate-300 space-y-1">
+                      <div className="text-[#FFB020]">// Figma Variables &amp; Tailwind Config</div>
+                      <div className="text-slate-400 font-mono text-[11px] truncate">
+                        const theme = &#123; radius: &apos;16px&apos;, typography: &apos;Satoshi + Inter&apos;, vitals: &apos;&lt;0.8s&apos; &#125;;
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 3: MODERN FULL-STACK STACK */}
+              {activeTab === "stack" && (
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                  <div className="lg:col-span-6 space-y-3">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-sky-500/20 text-sky-400 text-[10.5px] font-mono font-bold uppercase tracking-wider border border-sky-500/30">
+                      <Cpu className="w-3 h-3 text-sky-400" />
+                      Zero Technical Debt
+                    </div>
+                    <h3 className="font-display font-black text-xl sm:text-2xl text-white tracking-tight">
+                      Enterprise Frameworks &amp; Edge Streaming
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                      We engineer with Next.js 16, React 19, and Tailwind CSS. Zero slow plugin bloat or insecure page builders—delivering blistering page loads that maximize Google SEO rankings.
+                    </p>
+                    <div className="grid grid-cols-2 gap-2 pt-1 text-xs">
+                      <div className="flex items-center gap-1.5 text-slate-200">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span>React 19 Server Components</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-200">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span>Zero Runtime CSS Bloat</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-200">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span>Edge Global CDN Caching</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-200">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span>Shopify Plus / Headless APIs</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Stack Architecture Cards */}
+                  <div className="lg:col-span-6 grid grid-cols-2 gap-2.5">
+                    <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
+                      <div className="text-xs font-bold text-white flex items-center gap-1.5">
+                        <span className="text-[#FFB020]">⚡</span> Next.js 16 App Router
+                      </div>
+                      <p className="text-[11px] text-slate-400">Turbopack, streaming SSR, sub-second paints</p>
+                    </div>
+                    <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
+                      <div className="text-xs font-bold text-white flex items-center gap-1.5">
+                        <span className="text-sky-400">🎨</span> Tailwind CSS Engine
+                      </div>
+                      <p className="text-[11px] text-slate-400">Atomic utility-first styling with zero runtime delay</p>
+                    </div>
+                    <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
+                      <div className="text-xs font-bold text-white flex items-center gap-1.5">
+                        <span className="text-emerald-400">🛍️</span> Shopify Plus / CMS
+                      </div>
+                      <p className="text-[11px] text-slate-400">Custom headless liquid storefronts &amp; Gutenberg</p>
+                    </div>
+                    <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
+                      <div className="text-xs font-bold text-white flex items-center gap-1.5">
+                        <span className="text-indigo-400">🛡️</span> Cloudflare Edge
+                      </div>
+                      <p className="text-[11px] text-slate-400">Enterprise DDoS safeguard &amp; instant asset CDN</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 4: 100% CODE & IP OWNERSHIP */}
+              {activeTab === "ownership" && (
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                  <div className="lg:col-span-6 space-y-3">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-400 text-[10.5px] font-mono font-bold uppercase tracking-wider border border-emerald-500/30">
+                      <GitBranch className="w-3 h-3 text-emerald-400" />
+                      Day-One Client Ownership
+                    </div>
+                    <h3 className="font-display font-black text-xl sm:text-2xl text-white tracking-tight">
+                      100% Repository &amp; Intellectual Property Handover
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                      Zero proprietary vendor lock-in. You receive full administrative rights, source repository access on GitHub/GitLab, and complete environment documentation upon kickoff.
+                    </p>
+                    <div className="grid grid-cols-2 gap-2 pt-1 text-xs">
+                      <div className="flex items-center gap-1.5 text-slate-200">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span>Direct GitHub / GitLab Commits</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-200">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span>Zero Proprietary Code Lock-In</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-200">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span>Full Admin &amp; DNS Control</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-200">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span>Loom Video Walkthroughs</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Git Commit Terminal Stream */}
+                  <div className="lg:col-span-6 bg-black/40 border border-white/10 rounded-2xl p-4 font-mono text-xs space-y-2">
+                    <div className="flex items-center justify-between pb-2 border-b border-white/10 text-[11px] text-slate-400">
+                      <span className="flex items-center gap-1.5 text-emerald-400 font-bold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        git stream: main (client repo)
+                      </span>
+                      <span>Verified Commit History</span>
+                    </div>
+                    <div className="space-y-1.5 text-[11px]">
+                      <div className="text-slate-300 flex items-center gap-2">
+                        <span className="text-[#FFB020]">commit c4e912a</span>
+                        <span className="text-slate-400 truncate">feat(vitals): speed tuned to 0.68s LCP</span>
+                      </div>
+                      <div className="text-slate-300 flex items-center gap-2">
+                        <span className="text-[#FFB020]">commit b817da3</span>
+                        <span className="text-slate-400 truncate">feat(figma): sync responsive design tokens</span>
+                      </div>
+                      <div className="text-slate-300 flex items-center gap-2">
+                        <span className="text-[#FFB020]">commit a190f84</span>
+                        <span className="text-slate-400 truncate">chore(audit): automated 100/100 Lighthouse pass</span>
+                      </div>
+                      <div className="text-slate-300 flex items-center gap-2">
+                        <span className="text-emerald-400">origin/main</span>
+                        <span className="text-slate-400 truncate">100% owned &amp; deployed to client infrastructure</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Integrated Architectural Telemetry Console Footer */}
+              <div className="pt-4 mt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-slate-300">
                   <div className="flex items-center gap-1.5 text-white font-bold">
                     <span className="text-[#FFB020] font-mono">01</span>
-                    <span>{activeShowcase.sector}</span>
+                    <span>Live Architecture Standard</span>
                   </div>
                   <span className="text-white/20 hidden sm:inline">|</span>
                   <span className="text-slate-400 font-mono text-[11px]">
-                    {activeShowcase.tech}
+                    Next.js 16 + Figma Design Tokens
                   </span>
                   <span className="text-white/20 hidden sm:inline">|</span>
                   <span className="text-emerald-400 font-mono font-bold text-[11px] flex items-center gap-1">
                     <Zap className="w-3 h-3 text-emerald-400" />
-                    <span>{activeShowcase.speed}</span>
-                  </span>
-                  <span className="text-white/20 hidden sm:inline">|</span>
-                  <span className="text-[#FFB020] font-mono font-bold text-[11px]">
-                    {activeShowcase.metric}
+                    <span>&lt; 0.8s LCP SLA</span>
                   </span>
                 </div>
 
@@ -304,7 +493,7 @@ export function WebDesignHero() {
                   href="/get-a-quote"
                   className="text-[#FFB020] hover:text-white transition-colors font-bold text-[11px] uppercase tracking-wider flex items-center gap-1 shrink-0 self-end sm:self-auto group"
                 >
-                  <span>Schedule Scoping</span>
+                  <span>Discuss Your Project Scope</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>

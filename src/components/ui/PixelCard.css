@@ -1,0 +1,70 @@
+.pixel-card {
+  --pixel-card-surface: linear-gradient(180deg, #060B22 0%, #081232 100%);
+  --pixel-card-edge: rgba(255, 255, 255, 0.1);
+  --pixel-card-edge-active: rgba(255, 176, 32, 0.5);
+  --pixel-card-highlight: rgba(255, 176, 32, 0.15);
+  --pixel-card-shadow: 0 20px 45px -20px rgba(6, 11, 34, 0.7), 0 8px 18px -10px rgba(6, 11, 34, 0.4);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--pixel-card-radius, 24px);
+  background: var(--pixel-card-surface);
+  box-shadow: var(--pixel-card-shadow);
+  isolation: isolate;
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+}
+
+.pixel-card[data-theme='light'] {
+  --pixel-card-surface: linear-gradient(180deg, #ffffff 0%, #FAF8F5 100%);
+  --pixel-card-edge: rgba(226, 219, 208, 0.9);
+  --pixel-card-edge-active: rgba(255, 176, 32, 0.7);
+  --pixel-card-highlight: rgba(255, 255, 255, 1);
+  --pixel-card-shadow: 0 20px 45px -24px rgba(6, 11, 34, 0.1), 0 8px 18px -12px rgba(6, 11, 34, 0.05);
+}
+
+.pixel-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 0 1px var(--pixel-card-edge),
+    inset 0 1px 0 var(--pixel-card-highlight);
+  pointer-events: none;
+  transition: box-shadow 260ms ease;
+}
+
+.pixel-card[data-active]::after {
+  box-shadow:
+    inset 0 0 0 1.5px var(--pixel-card-edge-active),
+    inset 0 1px 0 var(--pixel-card-highlight);
+}
+
+.pixel-card:focus-visible {
+  box-shadow:
+    var(--pixel-card-shadow),
+    0 0 0 3px rgba(255, 176, 32, 0.5);
+}
+
+.pixel-card-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.pixel-card > :not(.pixel-card-canvas) {
+  position: relative;
+  z-index: 1;
+}
