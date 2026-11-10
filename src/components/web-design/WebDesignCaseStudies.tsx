@@ -111,37 +111,9 @@ export function WebDesignCaseStudies() {
   return (
     <div className="w-full max-w-7xl mx-auto space-y-6 sm:space-y-8 select-none text-left">
       {/* ==================================================================== */}
-      {/* 1. CENTER FLOW COMPONENT STAGE (HUB WITH OUTWARD FLOWING PULSES)     */}
+      {/* 1. CENTER FLOW ARCHITECTURAL STAGE (NO ENCLOSING CARD, UNBOXED)      */}
       {/* ==================================================================== */}
-      <div className="rounded-3xl bg-gradient-to-b from-[#060B22] to-[#081232] border border-[#FFB020]/25 shadow-2xl p-4 sm:p-6 lg:p-8 relative overflow-hidden">
-        {/* Background ambient dot grid */}
-        <div
-          className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"
-          aria-hidden="true"
-        />
-
-        {/* Ambient lighting glows */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[#FFB020]/10 rounded-full blur-3xl pointer-events-none" />
-
-        {/* Top Stage Telemetry Bar */}
-        <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 pb-3 mb-2 border-b border-white/10 text-xs text-slate-300">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-mono text-[11px] uppercase tracking-wider text-[#FFB020] font-bold">
-              Center Flow Architectural Hub
-            </span>
-            <span className="text-white/20 hidden sm:inline">•</span>
-            <span className="text-slate-400 font-mono text-[11px] hidden sm:inline">
-              Pulses flowing out to verified digital benchmarks
-            </span>
-          </div>
-
-          <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
-            <span>Click any node to inspect benchmark</span>
-          </div>
-        </div>
-
-        {/* The Center Flow Engine */}
+      <div className="relative overflow-visible py-2">
         <CenterFlow
           hub={{
             badge: "HDM CORE",
@@ -153,23 +125,10 @@ export function WebDesignCaseStudies() {
           activeNodeId={activeStudyId}
           onNodeClick={handleNodeSelect}
           pulseColor="#FFB020"
-          lineColor="rgba(255, 255, 255, 0.16)"
-          pulseDuration={2.4}
-          className="my-2 min-h-[460px] sm:min-h-[500px]"
+          lineColor="rgba(6, 11, 34, 0.18)"
+          pulseDuration={2.2}
+          className="my-2 min-h-[460px] sm:min-h-[520px]"
         />
-
-        {/* Live Active Benchmark Strip */}
-        <div className="relative z-10 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-slate-300">
-          <div className="flex items-center gap-2">
-            <span className="text-slate-400">Inspecting Node:</span>
-            <span className="text-white font-bold">{activeStudy.clientName}</span>
-            <span className="text-[#FFB020]">•</span>
-            <span className="text-emerald-400">{activeStudy.categoryLabel}</span>
-          </div>
-          <span className="text-slate-400 text-[11px]">
-            Auto-cycling 4 nodes • Click any satellite to inspect
-          </span>
-        </div>
       </div>
 
       {/* ==================================================================== */}

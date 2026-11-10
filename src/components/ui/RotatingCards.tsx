@@ -18,6 +18,7 @@ export interface RotatingCardItem {
   badge?: string;
   tag?: string;
   content?: React.ReactNode;
+  backContent?: React.ReactNode;
   color?: string;
   [key: string]: any;
 }
@@ -58,11 +59,11 @@ const RotatingCards = forwardRef<RotatingCardsHandle, RotatingCardsProps>(
     {
       cards = [],
       radius = 420,
-      cardWidth = 260,
+      cardWidth = 270,
       cardHeight = 360,
       tilt = 12,
       autoRotate = true,
-      autoRotateSpeed = 0.12,
+      autoRotateSpeed = 0.1,
       pauseOnHover = true,
       selectedIndex,
       onCardChange,
@@ -91,7 +92,7 @@ const RotatingCards = forwardRef<RotatingCardsHandle, RotatingCardsProps>(
     const total = cards.length || 1;
     const angleStep = 360 / total;
 
-    // Handle responsive radius for smaller screens
+    // Handle responsive radius for various screen sizes
     useEffect(() => {
       const updateRadius = () => {
         if (!containerRef.current) return;
@@ -141,7 +142,7 @@ const RotatingCards = forwardRef<RotatingCardsHandle, RotatingCardsProps>(
       },
     }));
 
-    // Main animation and physics loop
+    // Main animation and physics loop with smooth inertia
     useEffect(() => {
       let lastFrameTime = performance.now();
 
@@ -152,14 +153,14 @@ const RotatingCards = forwardRef<RotatingCardsHandle, RotatingCardsProps>(
         if (targetRotationRef.current !== null) {
           // Smooth spring to target
           const diff = targetRotationRef.current - rotationRef.current;
-          if (Math.abs(diff) < 0.1) {
+          if (Math.abs(diff) < 0.08) {
             rotationRef.current = targetRotationRef.current;
             targetRotationRef.current = null;
           } else {
-            rotationRef.current += diff * Math.min(dt * 9, 0.4);
+            rotationRef.current += diff * Math.min(dt * 10, 0.45);
           }
         } else if (isDraggingRef.current) {
-          // Controlled by pointer, no physics
+          // Controlled by pointer
         } else {
           // Inertia velocity decay
           if (Math.abs(velocityRef.current) > 0.01) {
@@ -196,6 +197,32 @@ const RotatingCards = forwardRef<RotatingCardsHandle, RotatingCardsProps>(
       };
     }, [autoRotate, autoRotateSpeed, pauseOnHover, angleStep, total, onCardChange]);
 
+    // Trackpad Horizontal & Mouse Wheel Smooth Scrolling
+    useEffect(() => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      const handleNativeWheel = (e: WheelEvent) => {
+        // If trackpad horizontal swipe or shift+wheel:
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY) * 0.7) {
+          e.preventDefault();
+          const sensitivity = 0.09;
+          velocityRef.current += e.deltaX * sensitivity;
+          velocityRef.current = Math.max(-14, Math.min(14, velocityRef.current));
+          targetRotationRef.current = null;
+        } else if (isHoveredRef.current && Math.abs(e.deltaY) > 6) {
+          // Responsive wheel rotation when mouse is over the cylinder
+          const sensitivity = 0.04;
+          velocityRef.current += e.deltaY * sensitivity;
+          velocityRef.current = Math.max(-9, Math.min(9, velocityRef.current));
+          targetRotationRef.current = null;
+        }
+      };
+
+      container.addEventListener("wheel", handleNativeWheel, { passive: false });
+      return () => container.removeEventListener("wheel", handleNativeWheel);
+    }, []);
+
     // Pointer Drag Handlers
     const handlePointerDown = (e: React.PointerEvent) => {
       isDraggingRef.current = true;
@@ -218,7 +245,7 @@ const RotatingCards = forwardRef<RotatingCardsHandle, RotatingCardsProps>(
       const dt = Math.max(now - lastTimeRef.current, 1);
 
       // Convert horizontal pixel drag to angular degrees
-      const sensitivity = 0.38;
+      const sensitivity = 0.4;
       rotationRef.current += deltaX * sensitivity;
 
       velocityRef.current = (deltaX / dt) * 16 * sensitivity;
@@ -233,8 +260,7 @@ const RotatingCards = forwardRef<RotatingCardsHandle, RotatingCardsProps>(
 
       // Check if it was a quick click rather than a drag
       const totalMoved = Math.abs(e.clientX - startXRef.current);
-      if (totalMoved < 5) {
-        // Handle click on specific card if hit
+      if (totalMoved < 6) {
         const target = (e.target as HTMLElement).closest("[data-card-index]");
         if (target) {
           const idx = Number(target.getAttribute("data-card-index"));
@@ -244,8 +270,8 @@ const RotatingCards = forwardRef<RotatingCardsHandle, RotatingCardsProps>(
           }
         }
       } else {
-        // Clamp velocity for pleasant inertia
-        velocityRef.current = Math.max(-12, Math.min(12, velocityRef.current));
+        // Clamp velocity for pleasant inertia throw
+        velocityRef.current = Math.max(-14, Math.min(14, velocityRef.current));
       }
 
       (e.target as HTMLElement).releasePointerCapture?.(e.pointerId);
@@ -257,7 +283,7 @@ const RotatingCards = forwardRef<RotatingCardsHandle, RotatingCardsProps>(
         className={`rotating-cards-container ${className}`.trim()}
         style={{
           ...style,
-          height: `${Math.max(cardHeight + 140, 480)}px`,
+          height: `${Math.max(cardHeight + 130, 480)}px`,
         }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
@@ -270,6 +296,15 @@ const RotatingCards = forwardRef<RotatingCardsHandle, RotatingCardsProps>(
           isHoveredRef.current = false;
         }}
       >
+        {/* Soft 3D Floor Reflection / Ground Shadow on Light Canvas */}
+        <div
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[720px] max-w-[92%] h-24 rounded-[100%] pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, rgba(6, 11, 34, 0.18) 0%, rgba(6, 11, 34, 0.05) 45%, transparent 70%)",
+          }}
+        />
+
         <div className="rotating-cards-stage">
           <div
             className="rotating-cards-ring"
@@ -284,11 +319,11 @@ const RotatingCards = forwardRef<RotatingCardsHandle, RotatingCardsProps>(
 
               // Calculate angular distance to camera for depth perception
               const currentAngle = normalizeAngle(cardAngle + rotationY);
-              const isFront = Math.abs(currentAngle) < angleStep * 0.75 || Math.abs(currentAngle - 360) < angleStep * 0.75;
               const angleRad = (currentAngle * Math.PI) / 180;
               const depth = Math.cos(angleRad); // 1 = front, -1 = back
-              const opacity = Math.max(0.42, (depth + 1) / 2 * 0.7 + 0.3);
-              const scale = Math.max(0.85, 0.92 + depth * 0.12);
+              const isFront = depth > 0.15;
+              const opacity = Math.max(0.45, (depth + 1) / 2 * 0.65 + 0.35);
+              const scale = Math.max(0.85, 0.94 + depth * 0.12);
 
               return (
                 <div
@@ -307,37 +342,50 @@ const RotatingCards = forwardRef<RotatingCardsHandle, RotatingCardsProps>(
                     onCardClick?.(idx);
                   }}
                 >
-                  {card.content ?? (
-                    <div className="w-full h-full p-6 rounded-3xl bg-gradient-to-br from-[#060B22] to-[#081232] border border-[#FFB020]/30 shadow-2xl text-white flex flex-col justify-between select-none">
-                      <div className="flex items-center justify-between">
-                        <span className="text-3xl font-black font-display text-[#FFB020]">
-                          {card.number ?? `0${idx + 1}`}
-                        </span>
-                        {card.badge && (
-                          <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-white/10 text-emerald-400 border border-white/10">
-                            {card.badge}
-                          </span>
-                        )}
-                      </div>
+                  {/* Two-Sided 3D Card Structure */}
+                  <div className="rotating-card-inner">
+                    {/* Front Face: Shown when card faces the viewer */}
+                    <div className="rotating-card-front">
+                      {card.content}
+                    </div>
 
-                      <div>
-                        <h4 className="text-lg font-bold font-display text-white tracking-tight">
-                          {card.title}
-                        </h4>
-                        {card.subtitle && (
-                          <p className="text-xs text-slate-300 mt-1 line-clamp-2">
-                            {card.subtitle}
-                          </p>
-                        )}
-                      </div>
+                    {/* Back Face: Shown when card faces away (ZERO backwards reversed text!) */}
+                    <div className="rotating-card-back">
+                      {card.backContent ?? (
+                        <div className="w-full h-full p-6 rounded-3xl bg-gradient-to-b from-[#0B1536] via-[#081232] to-[#04091A] border-2 border-white/10 shadow-2xl text-white flex flex-col justify-between items-center text-center select-none relative overflow-hidden">
+                          {/* Ambient background lattice pattern */}
+                          <div
+                            className="absolute inset-0 bg-[radial-gradient(rgba(255,176,32,0.12)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"
+                            aria-hidden="true"
+                          />
 
-                      {card.tag && (
-                        <div className="text-[10.5px] font-mono text-slate-400 pt-2 border-t border-white/10">
-                          {card.tag}
+                          <div className="w-full flex justify-between items-center z-10">
+                            <span className="font-mono text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                              Agile Sprint {card.number ?? `0${idx + 1}`}
+                            </span>
+                            <span className="w-2 h-2 rounded-full bg-[#FFB020]" />
+                          </div>
+
+                          {/* Center 3D Luxury Monogram */}
+                          <div className="z-10 flex flex-col items-center gap-2">
+                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FFB020]/20 to-white/5 border border-[#FFB020]/40 flex items-center justify-center shadow-[0_0_25px_rgba(255,176,32,0.25)]">
+                              <span className="font-display font-black text-xl text-[#FFB020] tracking-wider">
+                                HDM
+                              </span>
+                            </div>
+                            <span className="text-[10px] font-mono tracking-widest uppercase text-slate-300 font-bold">
+                              Verified Delivery
+                            </span>
+                          </div>
+
+                          <div className="w-full pt-3 border-t border-white/10 flex items-center justify-between text-[9.5px] font-mono text-slate-400 z-10">
+                            <span>SLA Guaranteed</span>
+                            <span className="text-[#FFB020]">100% Quality</span>
+                          </div>
                         </div>
                       )}
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}

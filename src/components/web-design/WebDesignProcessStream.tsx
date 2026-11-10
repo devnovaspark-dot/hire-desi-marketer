@@ -420,29 +420,31 @@ export function WebDesignProcessStream() {
     content: (
       <div
         className={cn(
-          "w-full h-full p-6 sm:p-7 rounded-3xl bg-gradient-to-br border shadow-2xl flex flex-col justify-between text-left select-none relative overflow-hidden transition-all duration-300",
-          phase.gradient,
+          "w-full h-full p-6 sm:p-7 rounded-3xl bg-gradient-to-b from-[#0B1536] via-[#081232] to-[#040818] border-2 shadow-2xl flex flex-col justify-between text-left select-none relative overflow-hidden transition-all duration-300",
           idx === activeStepIdx
-            ? "border-[#FFB020] ring-2 ring-[#FFB020]/30 shadow-[0_0_30px_rgba(255,176,32,0.25)]"
-            : "border-white/15 hover:border-white/30"
+            ? "border-[#FFB020] ring-2 ring-[#FFB020]/60 shadow-[0_25px_60px_-10px_rgba(255,176,32,0.35)] scale-102"
+            : "border-[#FFB020]/30 hover:border-[#FFB020]/60 shadow-[0_20px_45px_-12px_rgba(6,11,34,0.45)]"
         )}
       >
+        {/* Top Metallic Bevel Edge */}
+        <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#FFB020]/60 to-transparent pointer-events-none" />
+
         {/* Subtle ambient corner light */}
         <div className="absolute -top-10 -right-10 w-28 h-28 bg-[#FFB020]/15 rounded-full blur-xl pointer-events-none" />
 
         {/* Top: Sprint Number & Duration Badge */}
         <div className="flex items-center justify-between z-10">
-          <span className="font-mono text-3xl sm:text-4xl font-black text-white tracking-tight">
+          <span className="font-mono text-3xl sm:text-4xl font-black text-[#FFB020] tracking-tight">
             {phase.number}
           </span>
-          <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-white/10 text-[#FFB020] border border-[#FFB020]/30 backdrop-blur-sm">
+          <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-white/10 text-white border border-white/20 backdrop-blur-sm shadow-xs">
             {phase.duration}
           </span>
         </div>
 
         {/* Center: Phase Icon, Title & Tag */}
         <div className="z-10 space-y-2">
-          <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center text-[#FFB020]">
+          <div className="w-10 h-10 rounded-xl bg-white/10 border border-[#FFB020]/30 flex items-center justify-center text-[#FFB020] shadow-sm">
             <phase.icon className="w-5 h-5" />
           </div>
           <div className="font-display font-black text-lg sm:text-xl text-white tracking-tight leading-snug">
@@ -455,7 +457,7 @@ export function WebDesignProcessStream() {
 
         {/* Bottom: SLA Metric Bar */}
         <div className="z-10 pt-3 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-slate-300">
-          <span className="truncate text-emerald-400 font-bold flex items-center gap-1">
+          <span className="truncate text-emerald-400 font-bold flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             {phase.slaMetric}
           </span>
@@ -507,25 +509,19 @@ export function WebDesignProcessStream() {
       </div>
 
       {/* ==================================================================== */}
-      {/* 2. THE 3D ROTATING CARDS THEATER (DRAGGABLE RING IN 3D PERSPECTIVE)  */}
+      {/* 2. THE 3D ROTATING CARDS THEATER (NO ENCLOSING CARD, MATCHES CANVAS) */}
       {/* ==================================================================== */}
-      <div className="rounded-3xl bg-gradient-to-b from-[#060B22] to-[#081232] border border-[#FFB020]/25 shadow-2xl p-4 sm:p-6 lg:p-8 relative overflow-hidden text-center text-white">
-        {/* Ambient dot grid pattern in background */}
-        <div
-          className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"
-          aria-hidden="true"
-        />
-
-        {/* Stage Header & Navigation Bar */}
-        <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 pb-3 mb-2 border-b border-white/10 text-xs text-slate-300">
+      <div className="relative overflow-visible text-center pt-1 pb-3">
+        {/* Navigation & Telemetry Header on Natural Canvas */}
+        <div className="flex flex-wrap items-center justify-between gap-3 pb-3 mb-2 border-b border-[#E2DBD0] text-xs">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-mono text-[11px] uppercase tracking-wider text-[#FFB020] font-bold">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="font-mono text-xs uppercase tracking-wider text-[#060B22] font-black">
               3D Agile Sprint Ring
             </span>
-            <span className="text-white/20 hidden sm:inline">•</span>
-            <span className="text-slate-400 font-mono text-[11px] hidden sm:inline">
-              Drag or Swipe to Spin Ring
+            <span className="text-slate-300 hidden sm:inline">•</span>
+            <span className="text-slate-500 font-mono text-xs hidden sm:inline">
+              Smooth Scroll, Drag, or Click to Spin
             </span>
           </div>
 
@@ -534,18 +530,18 @@ export function WebDesignProcessStream() {
             <button
               type="button"
               onClick={() => rotatingCardsRef.current?.prev()}
-              className="px-3 py-1 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-colors cursor-pointer text-xs font-semibold inline-flex items-center gap-1"
+              className="px-3.5 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-[#E2DBD0] text-slate-700 hover:text-[#060B22] hover:border-slate-400 transition-colors cursor-pointer text-xs font-bold inline-flex items-center gap-1 shadow-xs"
             >
               <ChevronLeft className="w-3.5 h-3.5" />
               <span>Prev</span>
             </button>
-            <span className="font-mono text-[11px] text-slate-400 px-1">
+            <span className="font-mono text-xs font-bold text-slate-600 px-1">
               Sprint 0{activeStepIdx + 1} of 07
             </span>
             <button
               type="button"
               onClick={() => rotatingCardsRef.current?.next()}
-              className="px-3 py-1 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-colors cursor-pointer text-xs font-semibold inline-flex items-center gap-1"
+              className="px-3.5 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-[#E2DBD0] text-slate-700 hover:text-[#060B22] hover:border-slate-400 transition-colors cursor-pointer text-xs font-bold inline-flex items-center gap-1 shadow-xs"
             >
               <span>Next</span>
               <ChevronRight className="w-3.5 h-3.5" />
@@ -553,17 +549,17 @@ export function WebDesignProcessStream() {
           </div>
         </div>
 
-        {/* 3D Rotating Cards Component */}
-        <div className="relative z-10 w-full overflow-visible py-2">
+        {/* 3D Rotating Cards Ring Floating Directly on Canvas */}
+        <div className="relative w-full overflow-visible py-2">
           <RotatingCards
             ref={rotatingCardsRef}
             cards={ROTATING_CARD_ITEMS}
             radius={380}
-            cardWidth={260}
-            cardHeight={340}
-            tilt={14}
+            cardWidth={270}
+            cardHeight={350}
+            tilt={13}
             autoRotate={true}
-            autoRotateSpeed={0.12}
+            autoRotateSpeed={0.1}
             pauseOnHover={true}
             selectedIndex={activeStepIdx}
             onCardChange={handleCardChange}
@@ -571,12 +567,12 @@ export function WebDesignProcessStream() {
           />
         </div>
 
-        {/* Drag Instruction Cue */}
-        <div className="relative z-10 pt-2 text-center text-xs text-slate-400 font-mono">
+        {/* Active Phase Cue */}
+        <div className="relative pt-2 text-center text-xs font-mono text-slate-600">
           <span>Active Phase: </span>
-          <span className="text-white font-bold">{activePhase.title}</span>
-          <span className="text-[#FFB020] mx-2">•</span>
-          <span className="text-emerald-400 font-bold">{activePhase.duration}</span>
+          <span className="text-[#060B22] font-black">{activePhase.title}</span>
+          <span className="text-slate-300 mx-2">•</span>
+          <span className="text-emerald-700 font-bold">{activePhase.duration}</span>
         </div>
       </div>
 

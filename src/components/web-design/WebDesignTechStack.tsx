@@ -24,7 +24,7 @@ import BounceCards, { BounceCardItem } from "@/components/ui/BounceCards";
 // BESPOKE 3D-RENDERED STACK & PLATFORM ICONS WITH DEPTH & SPECULAR GLOSS
 // ====================================================================
 
-function ThreeDNextJsIcon({ className = "w-11 h-11" }: { className?: string }) {
+function ThreeDNextJsIcon({ className = "w-12 h-12" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 100 100" fill="none">
       <defs>
@@ -60,7 +60,7 @@ function ThreeDNextJsIcon({ className = "w-11 h-11" }: { className?: string }) {
   );
 }
 
-function ThreeDReactIcon({ className = "w-11 h-11" }: { className?: string }) {
+function ThreeDReactIcon({ className = "w-12 h-12" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 100 100" fill="none">
       <defs>
@@ -91,7 +91,7 @@ function ThreeDReactIcon({ className = "w-11 h-11" }: { className?: string }) {
   );
 }
 
-function ThreeDTailwindIcon({ className = "w-11 h-11" }: { className?: string }) {
+function ThreeDTailwindIcon({ className = "w-12 h-12" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 100 100" fill="none">
       <defs>
@@ -137,7 +137,7 @@ function ThreeDTailwindIcon({ className = "w-11 h-11" }: { className?: string })
   );
 }
 
-function ThreeDShopifyIcon({ className = "w-11 h-11" }: { className?: string }) {
+function ThreeDShopifyIcon({ className = "w-12 h-12" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 100 100" fill="none">
       <defs>
@@ -182,7 +182,7 @@ function ThreeDShopifyIcon({ className = "w-11 h-11" }: { className?: string }) 
   );
 }
 
-function ThreeDWordPressIcon({ className = "w-11 h-11" }: { className?: string }) {
+function ThreeDWordPressIcon({ className = "w-12 h-12" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 100 100" fill="none">
       <defs>
@@ -209,7 +209,7 @@ function ThreeDWordPressIcon({ className = "w-11 h-11" }: { className?: string }
   );
 }
 
-function ThreeDSupabaseIcon({ className = "w-11 h-11" }: { className?: string }) {
+function ThreeDSupabaseIcon({ className = "w-12 h-12" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 100 100" fill="none">
       <defs>
@@ -382,23 +382,26 @@ export function WebDesignTechStack() {
       content: (
         <div
           className={cn(
-            "w-full h-full p-4 sm:p-5 flex flex-col justify-between text-white rounded-[24px] border relative overflow-hidden select-none cursor-pointer transition-all duration-300",
+            "w-full h-full p-5 sm:p-6 flex flex-col justify-between text-white rounded-[28px] border-2 relative overflow-hidden select-none cursor-pointer transition-all duration-300 shadow-2xl",
             platform.cardGradient,
             platform.borderColor,
             platform.glowColor
           )}
         >
+          {/* Top Metallic Bevel Glare */}
+          <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
+
           {/* Subtle ambient light flare */}
-          <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none" />
+          <div className="absolute -top-8 -right-8 w-28 h-28 bg-white/10 rounded-full blur-xl pointer-events-none" />
 
           {/* Top Row: 3D Official Stack Icon & SLA Metric Pill */}
           <div className="flex items-center justify-between z-10">
-            <div className="p-1 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm shadow-inner flex items-center justify-center">
+            <div className="p-1.5 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm shadow-inner flex items-center justify-center">
               {platform.icon3d}
             </div>
             <span
               className={cn(
-                "text-[10px] font-mono font-black px-2.5 py-1 rounded-full border shadow-xs",
+                "text-xs font-mono font-black px-3 py-1 rounded-full border shadow-xs",
                 platform.metricBadgeColor
               )}
             >
@@ -407,13 +410,13 @@ export function WebDesignTechStack() {
           </div>
 
           {/* Center: Title & Subtitle */}
-          <div className="z-10 my-auto text-left pt-1">
-            <div className="font-display font-black text-lg sm:text-xl text-white tracking-tight leading-tight">
+          <div className="z-10 my-auto text-left pt-2 space-y-0.5">
+            <div className="font-display font-black text-xl sm:text-2xl text-white tracking-tight leading-tight">
               {platform.name}
             </div>
             <div
               className={cn(
-                "text-xs font-semibold mt-0.5 truncate",
+                "text-xs sm:text-sm font-semibold truncate",
                 platform.accentText
               )}
             >
@@ -422,9 +425,9 @@ export function WebDesignTechStack() {
           </div>
 
           {/* Bottom: Core Architectural Badge */}
-          <div className="z-10 pt-2 border-t border-white/10 flex items-center justify-between text-[10.5px] font-mono text-slate-200">
-            <span className="truncate">{platform.badge}</span>
-            <ArrowRight className="w-3.5 h-3.5 text-[#FFB020] shrink-0" />
+          <div className="z-10 pt-3 border-t border-white/15 flex items-center justify-between text-xs font-mono text-slate-100">
+            <span className="truncate font-medium">{platform.badge}</span>
+            <ArrowRight className="w-4 h-4 text-[#FFB020] shrink-0" />
           </div>
         </div>
       ),
@@ -434,38 +437,25 @@ export function WebDesignTechStack() {
   return (
     <div className="w-full max-w-7xl mx-auto space-y-6 sm:space-y-8 select-none text-left">
       {/* ==================================================================== */}
-      {/* 1. SEAMLESS UNBOXED SHUFFLE CARDS (ZERO SURROUNDING CARD, ZERO BOX)  */}
+      {/* 1. SEAMLESS BIGGER SHUFFLE CARDS (NO UNNECESSARY TEXT, PURE CARDS)   */}
       {/* ==================================================================== */}
-      <div className="w-full text-center relative py-2">
-        {/* Minimalist Stage Header Line */}
-        <div className="flex items-center justify-between max-w-2xl mx-auto px-4 pb-3 mb-2 text-xs text-slate-500 font-mono border-b border-[#E2DBD0]">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="font-bold text-[#0B1B3A] uppercase tracking-wider text-[11px]">
-              Interactive Architecture Shuffle Fan
-            </span>
-          </div>
-          <span className="text-slate-400 text-[10.5px]">
-            Hover or Click Any Card to Inspect
-          </span>
-        </div>
-
+      <div className="w-full text-center relative py-2 overflow-visible">
         {/* Floating Shuffle Cards Viewport */}
-        <div className="w-full h-[320px] sm:h-[350px] flex items-center justify-center overflow-visible py-2">
+        <div className="w-full h-[380px] sm:h-[420px] flex items-center justify-center overflow-visible py-2">
           <BounceCards
             images={SHUFFLE_CARDS}
             containerWidth="100%"
-            containerHeight={320}
-            cardSize={215}
-            spread={110}
-            rotation={8}
-            arc={26}
+            containerHeight={410}
+            cardSize={270}
+            spread={135}
+            rotation={7}
+            arc={22}
             bounciness={0.65}
-            pushDistance={165}
+            pushDistance={180}
             hoverScale={1.12}
             borderWidth={0}
             borderColor="transparent"
-            radius={24}
+            radius={28}
             onCardClick={(index) => {
               const selected = PLATFORMS[index];
               if (selected) {
@@ -473,14 +463,6 @@ export function WebDesignTechStack() {
               }
             }}
           />
-        </div>
-
-        {/* Active Inspection Indicator */}
-        <div className="pt-2 text-center text-xs text-slate-500 font-mono">
-          <span>Active Selection: </span>
-          <span className="font-bold text-[#0B1B3A]">{activePlatform.name}</span>
-          <span className="text-[#FFB020] mx-2">•</span>
-          <span className="text-emerald-600 font-bold">{activePlatform.badge}</span>
         </div>
       </div>
 

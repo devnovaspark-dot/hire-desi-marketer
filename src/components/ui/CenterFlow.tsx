@@ -177,18 +177,21 @@ export default function CenterFlow({
       {/* ================================================================== */}
       <div className="center-flow-hub">
         <div className="relative flex items-center justify-center">
+          {/* Floor Shadow Under Hub */}
+          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-32 h-6 rounded-[100%] bg-black/20 blur-sm pointer-events-none" />
+
           {/* Outer Breathing Rings */}
-          <div className="absolute w-44 h-44 rounded-full border border-[#FFB020]/20 animate-ping opacity-25 pointer-events-none" />
-          <div className="absolute w-36 h-36 rounded-full border border-sky-400/25 animate-pulse pointer-events-none" />
+          <div className="absolute w-44 h-44 rounded-full border-2 border-[#FFB020]/35 animate-ping opacity-30 pointer-events-none" />
+          <div className="absolute w-36 h-36 rounded-full border border-[#FFB020]/25 animate-pulse pointer-events-none" />
 
           {/* Central Hub Container */}
-          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-br from-[#060B22] via-[#081232] to-[#040817] border-2 border-[#FFB020] shadow-[0_0_40px_rgba(255,176,32,0.35)] flex flex-col items-center justify-center p-3 text-center z-10 select-none">
+          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-br from-[#060B22] via-[#081232] to-[#040817] border-2 border-[#FFB020] shadow-[0_12px_40px_rgba(255,176,32,0.35)] flex flex-col items-center justify-center p-3 text-center z-10 select-none">
             {hub.content ? (
               hub.content
             ) : (
               <>
                 {hub.badge && (
-                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-[#FFB020] bg-white/5 px-2 py-0.5 rounded-full border border-[#FFB020]/30 mb-1">
+                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-[#FFB020] bg-white/5 px-2 py-0.5 rounded-full border border-[#FFB020]/30 mb-1 shadow-xs">
                     {hub.badge}
                   </span>
                 )}
@@ -232,12 +235,16 @@ export default function CenterFlow({
             ) : (
               <div
                 className={cn(
-                  "p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 w-[190px] sm:w-[220px] backdrop-blur-md shadow-xl text-left select-none",
+                  "p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 w-[180px] sm:w-[220px] shadow-xl text-left select-none relative overflow-hidden",
                   isActive
-                    ? "bg-[#060B22] border-[#FFB020] shadow-[0_0_25px_rgba(255,176,32,0.3)] ring-1 ring-[#FFB020]/40"
-                    : "bg-[#060B22]/85 border-white/15 hover:border-white/35 hover:bg-[#060B22]"
+                    ? "bg-[#060B22] border-[#FFB020] shadow-[0_15px_35px_rgba(255,176,32,0.3)] ring-2 ring-[#FFB020]/50 scale-105"
+                    : "bg-[#081232] border-[#FFB020]/20 hover:border-[#FFB020]/50 hover:scale-102 shadow-lg"
                 )}
               >
+                {isActive && (
+                  <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#FFB020] to-transparent pointer-events-none" />
+                )}
+
                 <div className="flex items-center justify-between mb-1.5">
                   <span className="text-[9.5px] font-mono font-bold uppercase tracking-wider text-[#FFB020]">
                     {node.badge || `Node 0${index + 1}`}
@@ -267,3 +274,4 @@ export default function CenterFlow({
     </div>
   );
 }
+
