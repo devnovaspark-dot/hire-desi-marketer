@@ -48,6 +48,7 @@ next-env.d.ts
 brain_frame*.jpg
 frame_*.jpg
 next_640.webp
+.agents/
 *.docx
 _source_audit/
 setup_public_assets.js

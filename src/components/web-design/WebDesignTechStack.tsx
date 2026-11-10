@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
+import BounceCards, { BounceCardItem } from "@/components/ui/BounceCards";
 
 // Authentic Official Framework & CMS Brand Logos
 function NextJsIcon({ className = "w-7 h-7" }: { className?: string }) {
@@ -203,18 +204,116 @@ const PLATFORMS: PlatformItem[] = [
   },
 ];
 
+const BOUNCE_CARDS_DATA: BounceCardItem[] = PLATFORMS.map((platform) => ({
+  title: platform.name,
+  alt: platform.name,
+  content: (
+    <div className="w-full h-full p-4 sm:p-5 flex flex-col justify-between bg-gradient-to-br from-[#060B22] to-[#081232] text-white rounded-[22px] relative overflow-hidden group select-none cursor-pointer">
+      {/* Top ambient glow */}
+      <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#FFB020]/15 rounded-full blur-xl pointer-events-none" />
+
+      {/* Top Header: Official Brand Logo & SLA Pill */}
+      <div className="flex items-center justify-between z-10">
+        <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center p-2 shadow-inner">
+          {platform.icon}
+        </div>
+        <span className="text-[9.5px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          {platform.slaMetric}
+        </span>
+      </div>
+
+      {/* Center: Name & Subtitle */}
+      <div className="z-10 my-auto text-left">
+        <div className="font-display font-black text-base sm:text-lg text-white tracking-tight leading-tight">
+          {platform.name}
+        </div>
+        <div className="text-[10.5px] font-semibold text-[#FFB020] mt-0.5 truncate">
+          {platform.subtitle}
+        </div>
+      </div>
+
+      {/* Bottom: Badge */}
+      <div className="z-10 pt-2 border-t border-white/10 flex items-center justify-between text-[9.5px] font-mono text-slate-300">
+        <span className="truncate">{platform.badge}</span>
+        <ArrowRight className="w-3 h-3 text-[#FFB020] shrink-0" />
+      </div>
+    </div>
+  ),
+}));
+
 export function WebDesignTechStack() {
   const [activeFilter, setActiveFilter] = useState<"all" | "frameworks" | "cms">("all");
+  const [selectedPlatformId, setSelectedPlatformId] = useState<string>("nextjs");
 
   const filteredPlatforms =
     activeFilter === "all"
       ? PLATFORMS
       : PLATFORMS.filter((p) => p.category === activeFilter);
 
+  const activePlatform =
+    PLATFORMS.find((p) => p.id === selectedPlatformId) || PLATFORMS[0];
+
   return (
     <div className="w-full max-w-7xl mx-auto space-y-6 sm:space-y-8 select-none text-left">
       {/* ==================================================================== */}
-      {/* 1. FILTER TABS: Clean, Minimalist, User-Friendly                     */}
+      {/* 1. INTERACTIVE BOUNCE CARDS ARCHITECTURE STAGE (PHYSICS FAN)         */}
+      {/* ==================================================================== */}
+      <div className="rounded-3xl bg-gradient-to-b from-[#060B22] to-[#081232] border border-[#FFB020]/25 shadow-2xl p-4 sm:p-6 lg:p-8 relative overflow-hidden text-center">
+        {/* Background ambient dot grid pattern */}
+        <div
+          className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"
+          aria-hidden="true"
+        />
+
+        {/* Header bar: Stage Telemetry */}
+        <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-white/10 text-xs text-slate-300">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="font-mono text-[11px] uppercase tracking-wider text-[#FFB020] font-bold">
+              Interactive Physics Architecture Fan
+            </span>
+          </div>
+          <div className="font-mono text-[10.5px] text-slate-400">
+            Hover or Click Cards to Inspect Stack Dynamics
+          </div>
+        </div>
+
+        {/* The BounceCards Viewport */}
+        <div className="relative z-10 w-full h-[290px] sm:h-[330px] flex items-center justify-center overflow-visible py-2">
+          <BounceCards
+            images={BOUNCE_CARDS_DATA}
+            containerWidth="100%"
+            containerHeight={290}
+            cardSize={185}
+            spread={100}
+            rotation={7}
+            arc={22}
+            bounciness={0.65}
+            pushDistance={145}
+            hoverScale={1.1}
+            borderWidth={2}
+            borderColor="rgba(255, 176, 32, 0.4)"
+            radius={22}
+            onCardClick={(index) => {
+              const selected = PLATFORMS[index];
+              if (selected) {
+                setSelectedPlatformId(selected.id);
+              }
+            }}
+          />
+        </div>
+
+        {/* Live Active Platform Indicator */}
+        <div className="relative z-10 pt-2 text-center text-xs text-slate-400 font-mono">
+          <span>Inspected Framework: </span>
+          <span className="text-white font-bold">{activePlatform.name}</span>
+          <span className="text-[#FFB020] mx-2">•</span>
+          <span className="text-emerald-400">{activePlatform.badge}</span>
+        </div>
+      </div>
+
+      {/* ==================================================================== */}
+      {/* 2. FILTER TABS: Clean, Minimalist, User-Friendly                     */}
       {/* ==================================================================== */}
       <div className="flex flex-wrap items-center justify-center gap-2">
         <button
@@ -258,92 +357,107 @@ export function WebDesignTechStack() {
       </div>
 
       {/* ==================================================================== */}
-      {/* 2. THE 6 PLATFORMS GRID: Clean, Visual, Balanced, Attractive Cards   */}
+      {/* 3. THE 6 PLATFORMS GRID: Clean, Visual, Balanced, Attractive Cards   */}
       {/* ==================================================================== */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
-        {filteredPlatforms.map((platform) => (
-          <div
-            key={platform.id}
-            className="rounded-3xl p-6 sm:p-7 bg-white border border-[#E2DBD0] hover:border-[#FFB020] hover:shadow-xl transition-all duration-300 group relative overflow-hidden flex flex-col justify-between"
-          >
-            {/* Top Amber Hover Accent Line */}
-            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#FFB020] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        {filteredPlatforms.map((platform) => {
+          const isSelected = platform.id === selectedPlatformId;
 
-            <div className="space-y-4">
-              {/* Header: Official Brand Logo & Live SLA Badge */}
-              <div className="flex items-center justify-between gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#E2DBD0] flex items-center justify-center p-2 group-hover:scale-105 group-hover:border-[#FFB020]/50 transition-all duration-300 shadow-2xs">
-                  {platform.icon}
-                </div>
+          return (
+            <div
+              key={platform.id}
+              onClick={() => setSelectedPlatformId(platform.id)}
+              className={cn(
+                "rounded-3xl p-6 sm:p-7 bg-white border transition-all duration-300 group relative overflow-hidden flex flex-col justify-between cursor-pointer",
+                isSelected
+                  ? "border-[#FFB020] ring-2 ring-[#FFB020]/30 shadow-xl shadow-[#FFB020]/10 -translate-y-0.5"
+                  : "border-[#E2DBD0] hover:border-[#FFB020] hover:shadow-xl"
+              )}
+            >
+              {/* Top Amber Accent Line */}
+              <div
+                className={cn(
+                  "absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#FFB020] to-transparent transition-opacity duration-300",
+                  isSelected ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                )}
+              />
 
-                <span className="text-[10.5px] font-mono font-bold px-3 py-1 rounded-full bg-[#FAF8F5] text-[#0B1B3A] border border-[#E2DBD0] group-hover:border-[#FFB020]/40 group-hover:text-[#B87A00] transition-colors flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>{platform.badge}</span>
-                </span>
-              </div>
+              <div className="space-y-4">
+                {/* Header: Official Brand Logo & Live SLA Badge */}
+                <div className="flex items-center justify-between gap-3">
+                  <div className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#E2DBD0] flex items-center justify-center p-2 group-hover:scale-105 group-hover:border-[#FFB020]/50 transition-all duration-300 shadow-2xs">
+                    {platform.icon}
+                  </div>
 
-              {/* Title & Subtitle */}
-              <div>
-                <h3 className="font-display font-black text-xl text-[#0B1B3A] tracking-tight group-hover:text-[#B87A00] transition-colors">
-                  {platform.name}
-                </h3>
-                <div className="text-xs font-semibold text-slate-500 mt-0.5">
-                  {platform.subtitle}
-                </div>
-              </div>
-
-              {/* Clear, Concise Business Value (Zero Developer Jargon) */}
-              <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal">
-                {platform.businessBenefit}
-              </p>
-
-              {/* 3 Quick Value Pills */}
-              <div className="flex flex-wrap gap-1.5 pt-1">
-                {platform.pills.map((pill, idx) => (
-                  <span
-                    key={idx}
-                    className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-[#E2DBD0] text-[11px] font-semibold text-slate-700"
-                  >
-                    {pill}
+                  <span className="text-[10.5px] font-mono font-bold px-3 py-1 rounded-full bg-[#FAF8F5] text-[#0B1B3A] border border-[#E2DBD0] group-hover:border-[#FFB020]/40 group-hover:text-[#B87A00] transition-colors flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span>{platform.badge}</span>
                   </span>
-                ))}
+                </div>
+
+                {/* Title & Subtitle */}
+                <div>
+                  <h3 className="font-display font-black text-xl text-[#0B1B3A] tracking-tight group-hover:text-[#B87A00] transition-colors">
+                    {platform.name}
+                  </h3>
+                  <div className="text-xs font-semibold text-slate-500 mt-0.5">
+                    {platform.subtitle}
+                  </div>
+                </div>
+
+                {/* Clear, Concise Business Value (Zero Developer Jargon) */}
+                <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal">
+                  {platform.businessBenefit}
+                </p>
+
+                {/* 3 Quick Value Pills */}
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {platform.pills.map((pill, idx) => (
+                    <span
+                      key={idx}
+                      className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-[#E2DBD0] text-[11px] font-semibold text-slate-700"
+                    >
+                      {pill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom Row: SLA Benchmark & Direct Scope Link */}
+              <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs">
+                <div>
+                  <div className="font-display font-black text-base text-[#0B1B3A]">
+                    {platform.slaMetric}
+                  </div>
+                  <div className="text-[10px] font-mono text-slate-400">
+                    {platform.slaLabel}
+                  </div>
+                </div>
+
+                <StarBorder
+                  as={Link}
+                  href="/get-a-quote"
+                  className="py-2 px-3.5 rounded-xl text-[11px] font-black uppercase tracking-wider inline-flex items-center gap-1.5 shadow-2xs group/btn"
+                  radius={10}
+                  color="#FFF8E7"
+                  trailColor="#FFB020"
+                  backgroundColor="#FFB020"
+                  textColor="#060B22"
+                  borderColor="rgba(255, 176, 32, 0.6)"
+                  sparkle={true}
+                  glow={0.7}
+                >
+                  <span>Hire Devs</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
+                </StarBorder>
               </div>
             </div>
-
-            {/* Bottom Row: SLA Benchmark & Direct Scope Link */}
-            <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs">
-              <div>
-                <div className="font-display font-black text-base text-[#0B1B3A]">
-                  {platform.slaMetric}
-                </div>
-                <div className="text-[10px] font-mono text-slate-400">
-                  {platform.slaLabel}
-                </div>
-              </div>
-
-              <StarBorder
-                as={Link}
-                href="/get-a-quote"
-                className="py-2 px-3.5 rounded-xl text-[11px] font-black uppercase tracking-wider inline-flex items-center gap-1.5 shadow-2xs group/btn"
-                radius={10}
-                color="#FFF8E7"
-                trailColor="#FFB020"
-                backgroundColor="#FFB020"
-                textColor="#060B22"
-                borderColor="rgba(255, 176, 32, 0.6)"
-                sparkle={true}
-                glow={0.7}
-              >
-                <span>Hire Devs</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
-              </StarBorder>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* ==================================================================== */}
-      {/* 3. ENTERPRISE ENGINEERING GUARANTEE STRIP (CLEAN 1-ROW SUMMARY)      */}
+      {/* 4. ENTERPRISE ENGINEERING GUARANTEE STRIP (CLEAN 1-ROW SUMMARY)      */}
       {/* ==================================================================== */}
       <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E2DBD0] shadow-sm flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-700">
         <div className="flex items-center gap-3">
