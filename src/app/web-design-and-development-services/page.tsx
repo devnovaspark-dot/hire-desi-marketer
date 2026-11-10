@@ -37,6 +37,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WebDesignHero } from "@/components/web-design/WebDesignHero";
 import { WebDesignLeadForm } from "@/components/web-design/WebDesignLeadForm";
+import BentoGrid from "@/components/blocks/bento-grid";
 import { WebDesignServicesGrid } from "@/components/web-design/WebDesignServicesGrid";
 import { MarketingWebsiteSynergy } from "@/components/web-design/MarketingWebsiteSynergy";
 import { WebDesignTechStack } from "@/components/web-design/WebDesignTechStack";
@@ -139,7 +140,7 @@ export default function WebDesignServicesPage() {
           id="services"
           className="py-10 sm:py-14 lg:py-18 bg-[#060B22] text-white border-y border-[#FFB020]/20 relative overflow-hidden"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 relative z-10">
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
             <div className="text-center max-w-3xl mx-auto space-y-3 pb-6 border-b border-white/10">
               <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/10 text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
                 <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
@@ -153,8 +154,8 @@ export default function WebDesignServicesPage() {
               </p>
             </div>
 
-            {/* Dynamic Services Grid with Dedicated Browser Preview Windows */}
-            <WebDesignServicesGrid />
+            {/* React Bits Bento Grid Architecture */}
+            <BentoGrid />
           </div>
         </section>
 
