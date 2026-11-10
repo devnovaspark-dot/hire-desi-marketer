@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Shield, Sparkles, Layers, Cpu } from "lucide-react";
+import { Zap, ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
 
@@ -115,7 +115,6 @@ function ThreeDCommerceIcon({ className = "w-12 h-12" }: { className?: string })
         <path d="M29 36L32 84" stroke="#FFFFFF" strokeWidth="2" strokeOpacity="0.35" strokeLinecap="round" />
         <circle cx="50" cy="58" r="14" fill="url(#com3d-gold)" />
         <circle cx="50" cy="58" r="11" fill="none" stroke="#FFFFFF" strokeWidth="1.5" strokeOpacity="0.6" />
-        {/* Luxury Star Emblem on Coin */}
         <polygon points="50,51 52.5,56 58,56.5 53.8,60.2 55.2,65.5 50,62.5 44.8,65.5 46.2,60.2 42,56.5 47.5,56" fill="#060B22" />
       </g>
     </svg>
@@ -222,16 +221,10 @@ function ThreeDVitalsIcon({ className = "w-12 h-12" }: { className?: string }) {
 }
 
 // ====================================================================
-// ARCHITECTURE SOLUTION DEFINITIONS
+// ARCHITECTURE NODE DEFINITIONS (SILENT - ZERO AUDIO)
 // ====================================================================
 
-interface PipelineStep {
-  step: string;
-  title: string;
-  detail: string;
-}
-
-interface ArchitectureSolution {
+interface ArchitectureNode {
   id: string;
   number: string;
   name: string;
@@ -239,19 +232,14 @@ interface ArchitectureSolution {
   icon: React.ComponentType<{ className?: string }>;
   accentColor: string;
   glowRgba: string;
-  badge: string;
+  statusLabel: string;
+  statusMetric: string;
   headline: string;
   description: string;
   deliverables: string[];
-  specs: {
-    label: string;
-    value: string;
-  }[];
-  techStack: string[];
-  pipeline: PipelineStep[];
 }
 
-const ARCHITECTURE_SOLUTIONS: ArchitectureSolution[] = [
+const ARCHITECTURE_NODES: ArchitectureNode[] = [
   {
     id: "figma",
     number: "01",
@@ -259,27 +247,16 @@ const ARCHITECTURE_SOLUTIONS: ArchitectureSolution[] = [
     tag: "Figma Tokens",
     icon: ThreeDDesignIcon,
     accentColor: "#F24E1E",
-    glowRgba: "rgba(242, 78, 30, 0.25)",
-    badge: "Figma-First Architecture",
+    glowRgba: "rgba(242, 78, 30, 0.35)",
+    statusLabel: "Compiling Design Tokens to Semantic Next.js 16",
+    statusMetric: "100% Custom UI",
     headline: "Bespoke Digital Experiences Engineered from Clean Figma Tokens",
     description:
-      "Every single pixel is designed from scratch in Figma to reflect your brand's authority, then compiled directly into semantic Next.js 16 components with zero generic theme bloat.",
+      "Every single pixel is designed from scratch in Figma to reflect your brand's authority, then compiled into semantic Next.js 16 code with zero generic theme bloat.",
     deliverables: [
-      "Bespoke Figma design system & responsive mobile/desktop prototypes",
+      "Bespoke Figma UI/UX prototype & complete interactive design system",
       "Strict auto-layout token variables (spacing, typography, color themes)",
-      "Interactive component states & micro-interaction design specs",
-    ],
-    specs: [
-      { label: "Visual Fidelity", value: "100% Pixel-Perfect" },
-      { label: "Responsiveness", value: "Fluid Breakpoints" },
-      { label: "Design Ownership", value: "Full Figma File Access" },
-    ],
-    techStack: ["Figma Tokens", "Tailwind CSS", "Radix UI", "Motion"],
-    pipeline: [
-      { step: "01", title: "Figma Tokens", detail: "Color & typography primitives" },
-      { step: "02", title: "Interactive UI", detail: "Fluid prototype validation" },
-      { step: "03", title: "Component Library", detail: "Accessible Tailwind system" },
-      { step: "04", title: "Semantic Code", detail: "Zero-bloat React components" },
+      "Zero generic template bloat or inherited technical debt",
     ],
   },
   {
@@ -289,27 +266,16 @@ const ARCHITECTURE_SOLUTIONS: ArchitectureSolution[] = [
     tag: "Next.js 16 & React 19",
     icon: ThreeDFullStackIcon,
     accentColor: "#00D8FF",
-    glowRgba: "rgba(0, 216, 255, 0.25)",
-    badge: "Concurrent Edge Speed",
+    glowRgba: "rgba(0, 216, 255, 0.35)",
+    statusLabel: "Deploying Sub-Second Edge Server-Side Rendering",
+    statusMetric: "< 0.8s LCP SLA",
     headline: "Sub-Second Edge Performance with React 19 Concurrent Rendering",
     description:
       "Engineered for instantaneous route transitions, fluid micro-interactions, and Google Lighthouse 100/100 Core Web Vitals across every global user session.",
     deliverables: [
-      "Next.js 16 App Router with zero unnecessary client JavaScript",
-      "Automated edge server-side rendering (SSR) & dynamic image optimization",
-      "Google Lighthouse Grade A+ Core Web Vitals certified delivery",
-    ],
-    specs: [
-      { label: "LCP Benchmark", value: "< 0.8s Initial Paint" },
-      { label: "Core Web Vitals", value: "100 / 100 Grade A+" },
-      { label: "Edge Engine", value: "React 19 Concurrent" },
-    ],
-    techStack: ["Next.js 16", "React 19", "TypeScript", "Vercel Edge"],
-    pipeline: [
-      { step: "01", title: "Server Components", detail: "Zero client JS overhead" },
-      { step: "02", title: "Edge Deployment", detail: "Global CDN edge caching" },
-      { step: "03", title: "Concurrent UI", detail: "Sub-second transitions" },
-      { step: "04", title: "100/100 Vitals", detail: "Google Grade A+ guaranteed" },
+      "Next.js 16 App Router with React 19 concurrent edge rendering",
+      "Sub-second Largest Contentful Paint (< 0.8s LCP benchmark)",
+      "Google Lighthouse Grade A+ 100/100 Core Web Vitals certified",
     ],
   },
   {
@@ -319,27 +285,16 @@ const ARCHITECTURE_SOLUTIONS: ArchitectureSolution[] = [
     tag: "Shopify Plus & Headless",
     icon: ThreeDCommerceIcon,
     accentColor: "#10B981",
-    glowRgba: "rgba(16, 185, 129, 0.25)",
-    badge: "High-AOV Storefront",
+    glowRgba: "rgba(16, 185, 129, 0.35)",
+    statusLabel: "Optimizing Average Order Value & 1-Tap Checkout",
+    statusMetric: "4.6% Avg Conv.",
     headline: "High-Velocity Storefronts Built for Maximum Average Order Value",
     description:
-      "Custom Shopify Plus and headless storefronts with instant slide-out micro-carts, dynamic free-shipping progress bars, and frictionless multi-currency 1-tap checkout.",
+      "Custom Shopify Plus and headless storefronts with instant slide-out micro-carts, free-shipping threshold bars, and seamless multi-currency checkouts.",
     deliverables: [
-      "Custom Shopify theme or headless storefront architecture",
-      "Instant slide-out cart drawer with dynamic upsells & cross-sells",
-      "Global CDN caching optimized for sub-second product page loads",
-    ],
-    specs: [
-      { label: "Avg Conversion", value: "4.6% High-Converting" },
-      { label: "Checkout Engine", value: "1-Tap Express Native" },
-      { label: "Cart Velocity", value: "< 100ms Micro-Drawer" },
-    ],
-    techStack: ["Shopify Plus", "Storefront API", "Liquid / Headless", "Shop Pay"],
-    pipeline: [
-      { step: "01", title: "Catalog Schema", detail: "Structured variant models" },
-      { step: "02", title: "Instant Cart", detail: "Slide-out AOV boosters" },
-      { step: "03", title: "1-Tap Checkout", detail: "Shop Pay & Apple Pay" },
-      { step: "04", title: "Revenue Scale", detail: "High-velocity storefront" },
+      "Custom Shopify Plus theme or headless storefront architecture",
+      "Instant slide-out micro-cart with dynamic free-shipping progress bar",
+      "1-Tap native express checkout (Shop Pay, Apple Pay, Google Pay)",
     ],
   },
   {
@@ -349,27 +304,16 @@ const ARCHITECTURE_SOLUTIONS: ArchitectureSolution[] = [
     tag: "Webflow & Headless",
     icon: ThreeDCmsIcon,
     accentColor: "#A855F7",
-    glowRgba: "rgba(168, 85, 247, 0.25)",
-    badge: "Zero-Code Autonomy",
+    glowRgba: "rgba(168, 85, 247, 0.35)",
+    statusLabel: "Empowering Marketing Team Publishing Autonomy",
+    statusMetric: "Zero Dev Dependency",
     headline: "Empower Your Marketing Team with Zero Developer Dependencies",
     description:
       "Intuitive drag-and-drop publishing on Webflow, WordPress, or modern Headless CMS with structured schemas tailored strictly to approved brand guidelines.",
     deliverables: [
-      "Custom visual block editor strictly tailored to approved brand guidelines",
-      "Zero code required for publishing landing pages, blogs, and case studies",
+      "Intuitive visual block editor strictly tailored to approved brand guidelines",
+      "Zero code required for creating landing pages, blogs, and case studies",
       "Recorded Loom video training library for your marketing staff",
-    ],
-    specs: [
-      { label: "Publishing Speed", value: "Instant 1-Click Deploy" },
-      { label: "Dev Dependency", value: "Zero (100% Autonomy)" },
-      { label: "Platform Fit", value: "Webflow / Headless CMS" },
-    ],
-    techStack: ["Webflow CMS", "Sanity.io", "WordPress Block API", "ISR Caching"],
-    pipeline: [
-      { step: "01", title: "Schema Design", detail: "Structured content models" },
-      { step: "02", title: "Visual Editor", detail: "Drag-and-drop autonomy" },
-      { step: "03", title: "Brand Rules", detail: "Locked style guardrails" },
-      { step: "04", title: "1-Click Live", detail: "Zero dev support needed" },
     ],
   },
   {
@@ -379,27 +323,16 @@ const ARCHITECTURE_SOLUTIONS: ArchitectureSolution[] = [
     tag: "Supabase & REST/Auth",
     icon: ThreeDCloudIcon,
     accentColor: "#F59E0B",
-    glowRgba: "rgba(245, 158, 11, 0.25)",
-    badge: "Enterprise Security",
+    glowRgba: "rgba(245, 158, 11, 0.35)",
+    statusLabel: "Securing Client Portal Sessions & DB Webhooks",
+    statusMetric: "RBAC & MFA Secured",
     headline: "Secure Client Portals & Scalable Cloud API Integrations",
     description:
       "Role-based access control, multi-factor authentication, and PostgreSQL database connections for enterprise client portals and internal platforms.",
     deliverables: [
       "Role-based access control (RBAC) with row-level database security",
-      "Automated database backup pipelines & structured audit logging",
-      "Real-time webhook integrations for payment and CRM workflows",
-    ],
-    specs: [
-      { label: "Security Level", value: "Enterprise RBAC & MFA" },
-      { label: "Database Engine", value: "PostgreSQL High-Avail." },
-      { label: "API Latency", value: "< 120ms Global Response" },
-    ],
-    techStack: ["Supabase", "PostgreSQL", "REST APIs", "OAuth & MFA"],
-    pipeline: [
-      { step: "01", title: "Auth & MFA", detail: "Role-based access control" },
-      { step: "02", title: "PostgreSQL DB", detail: "Row-level security rules" },
-      { step: "03", title: "Webhooks", detail: "Real-time payment sync" },
-      { step: "04", title: "Client Portal", detail: "High-speed dashboard" },
+      "High-availability PostgreSQL database with real-time webhooks",
+      "Enterprise OAuth single sign-on, MFA, and automated audit logs",
     ],
   },
   {
@@ -409,51 +342,66 @@ const ARCHITECTURE_SOLUTIONS: ArchitectureSolution[] = [
     tag: "100/100 Core Vitals",
     icon: ThreeDVitalsIcon,
     accentColor: "#EC4899",
-    glowRgba: "rgba(236, 72, 153, 0.25)",
-    badge: "100/100 Lighthouse Shield",
+    glowRgba: "rgba(236, 72, 153, 0.35)",
+    statusLabel: "Google Lighthouse Certified Speed & 301 Protection",
+    statusMetric: "Google Top 1%",
     headline: "Google Lighthouse Certified Speed & 301 SEO Authority Protection",
     description:
       "Protect established search keyword rankings during website modernizations while passing Google Core Web Vitals with flying colors.",
     deliverables: [
-      "Rigorous 1:1 301 redirect map preventing any 404 search traffic loss",
+      "Rigorous 1:1 301 redirect mapping preventing any 404 traffic loss",
       "Automated JSON-LD rich snippet schemas for Google search results",
-      "Zero render-blocking scripts & WebP/AVIF automated image pipeline",
-    ],
-    specs: [
-      { label: "Core Web Vitals", value: "100 / 100 Mobile & Desk" },
-      { label: "SEO Migration", value: "0% Traffic Loss Guarantee" },
-      { label: "Layout Shift", value: "0.00 CLS Flawless" },
-    ],
-    techStack: ["Google Vitals", "JSON-LD Schema", "301 Engine", "AVIF Optimizer"],
-    pipeline: [
-      { step: "01", title: "Redirect Map", detail: "1:1 ranking preservation" },
-      { step: "02", title: "JSON-LD Schema", detail: "Rich SERP structured data" },
-      { step: "03", title: "Zero Blocking", detail: "Critical CSS inlining" },
-      { step: "04", title: "Google Top 1%", detail: "100/100 Lighthouse score" },
+      "Zero render-blocking scripts & automated WebP/AVIF image pipeline",
     ],
   },
 ];
 
+// Particle explosion vectors for the blasting hover animation
+const BLAST_OFFSETS = [
+  { x: -32, y: -32 },
+  { x: 0, y: -42 },
+  { x: 32, y: -32 },
+  { x: 42, y: 0 },
+  { x: 32, y: 32 },
+  { x: 0, y: 42 },
+  { x: -32, y: 32 },
+  { x: -42, y: 0 },
+];
+
 export default function BentoGrid() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [progress, setProgress] = useState<number>(75);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const active = ARCHITECTURE_SOLUTIONS[activeIndex] || ARCHITECTURE_SOLUTIONS[0];
+  const active = ARCHITECTURE_NODES[activeIndex] || ARCHITECTURE_NODES[0];
 
-  // Auto-cycle through the 6 solutions smoothly
+  // Auto-cycle through the 6 architecture nodes unless the user interacts
   useEffect(() => {
     if (isPaused) return;
 
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % ARCHITECTURE_SOLUTIONS.length);
-    }, 4500);
+      setActiveIndex((prev) => (prev + 1) % ARCHITECTURE_NODES.length);
+      setProgress(55);
+    }, 4200);
 
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  const handleSelectSolution = (index: number) => {
+  // Micro progress animation for telemetry
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prev) => (prev >= 95 ? 65 : prev + 6));
+    }, 1800);
+
+    return () => clearInterval(timer);
+  }, [activeIndex]);
+
+  const handleHoverNode = (index: number) => {
+    setHoveredIndex(index);
     setActiveIndex(index);
+    setProgress(80);
     setIsPaused(true);
 
     if (pauseTimeoutRef.current) {
@@ -464,71 +412,97 @@ export default function BentoGrid() {
     }, 12000);
   };
 
+  // Node X coordinates on 1000px wide SVG viewBox:
+  const nodeXCoords = [83, 250, 416, 583, 750, 916];
+  const hubX = 500;
+  const hubY = 140;
+
   return (
-    <div className="w-full select-none text-slate-800">
+    <div className="w-full select-none text-center">
       {/* ==================================================================== */}
-      {/* 1. TOP DOCK: 6 TACTILE 3D SOLUTION NODES                            */}
+      {/* 1. TOP ROW: 6 STREAMLINED 3D COLORFUL ICONS WITH BLASTING HOVER      */}
       {/* ==================================================================== */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 max-w-6xl mx-auto px-2">
-        {ARCHITECTURE_SOLUTIONS.map((sol, idx) => {
-          const Icon = sol.icon;
+        {ARCHITECTURE_NODES.map((node, idx) => {
+          const Icon = node.icon;
           const isActive = idx === activeIndex;
+          const isHovered = idx === hoveredIndex;
 
           return (
             <button
-              key={sol.id}
+              key={node.id}
               type="button"
-              onClick={() => handleSelectSolution(idx)}
-              onMouseEnter={() => handleSelectSolution(idx)}
+              onClick={() => handleHoverNode(idx)}
+              onMouseEnter={() => handleHoverNode(idx)}
+              onMouseLeave={() => setHoveredIndex(null)}
               className={cn(
-                "group relative flex flex-col items-center text-center p-3.5 sm:p-4 rounded-2xl transition-all duration-300 cursor-pointer outline-none border",
+                "flex flex-col items-center gap-2 p-3 sm:p-3.5 rounded-2xl transition-all duration-300 cursor-pointer group text-center relative outline-none",
                 isActive
-                  ? "bg-white shadow-xl -translate-y-1.5 border-[#FFB020]"
-                  : "bg-white/70 hover:bg-white hover:shadow-md hover:-translate-y-0.5 border-[#E2DBD0]"
+                  ? "bg-white shadow-xl scale-105 -translate-y-1.5 border border-[#FFB020]"
+                  : "bg-white/80 hover:bg-white hover:shadow-lg border border-[#E2DBD0] hover:-translate-y-0.5"
               )}
               style={
                 isActive
                   ? {
-                      boxShadow: `0 12px 30px ${sol.glowRgba}, 0 2px 8px rgba(0,0,0,0.04)`,
+                      boxShadow: `0 14px 35px ${node.glowRgba}, 0 2px 8px rgba(0,0,0,0.06)`,
                     }
                   : undefined
               }
             >
-              {/* Active illuminated top accent bar */}
-              {isActive && (
-                <div
-                  className="absolute top-0 inset-x-4 h-1 rounded-b-full transition-all duration-300"
-                  style={{ backgroundColor: sol.accentColor }}
-                />
+              {/* BLASTING PARTICLES EXPLOSION ON HOVER / ACTIVE */}
+              {(isHovered || isActive) && (
+                <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+                  {/* Expanding Shockwave Ripple */}
+                  <div
+                    className="absolute w-16 h-16 rounded-full border-2 animate-ping pointer-events-none"
+                    style={{ borderColor: node.accentColor, opacity: 0.35 }}
+                  />
+
+                  {/* 8 Blasting Spark Particles radiating outwards */}
+                  {BLAST_OFFSETS.map((offset, pIdx) => (
+                    <span
+                      key={pIdx}
+                      className="absolute w-2 h-2 rounded-full pointer-events-none animate-ping"
+                      style={{
+                        backgroundColor: node.accentColor,
+                        transform: `translate(${offset.x}px, ${offset.y}px)`,
+                        animationDuration: "0.85s",
+                      }}
+                    />
+                  ))}
+                </div>
               )}
 
-              {/* 3D Colorful Icon Container with Specular Sheen */}
+              {/* 3D Colorful Icon Container with Specular Glow */}
               <div
                 className={cn(
-                  "w-13 h-13 sm:w-15 sm:h-15 rounded-2xl flex items-center justify-center transition-all duration-300 mb-2 relative",
+                  "w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center transition-all duration-300 relative border shadow-sm",
                   isActive
-                    ? "scale-110 drop-shadow-md"
-                    : "group-hover:scale-105 opacity-85 group-hover:opacity-100"
+                    ? "bg-gradient-to-b from-white to-[#FAF8F5] border-[#FFB020] scale-110 drop-shadow-md"
+                    : "bg-white border-[#E2DBD0] group-hover:scale-108 group-hover:border-slate-300 group-hover:shadow-md"
                 )}
               >
-                <Icon className="w-10 h-10 sm:w-11 sm:h-11 transition-transform duration-300 group-hover:rotate-3" />
+                <Icon className="w-8 h-8 sm:w-9 sm:h-9 transition-transform duration-300 group-hover:rotate-6" />
+
+                {isActive && (
+                  <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-[#FFB020] animate-ping" />
+                )}
               </div>
 
-              {/* Solution Index & Name */}
-              <div className="space-y-0.5 w-full">
-                <div className="text-[10px] font-mono tracking-wider uppercase text-slate-600 font-bold">
-                  Solution {sol.number}
+              <div className="space-y-0.5 z-10 w-full">
+                <div className="text-[10px] font-mono font-bold tracking-wider uppercase text-slate-500">
+                  {node.number}
                 </div>
                 <div
                   className={cn(
-                    "text-xs font-display font-bold tracking-tight transition-colors line-clamp-1",
+                    "text-xs font-display font-bold tracking-tight transition-colors truncate",
                     isActive ? "text-[#060B22] font-black" : "text-slate-700 group-hover:text-[#060B22]"
                   )}
                 >
-                  {sol.name}
+                  {node.name}
                 </div>
-                <div className="text-[10px] font-mono text-slate-600 truncate">
-                  {sol.tag}
+                <div className="text-[10px] font-mono text-slate-500 truncate">
+                  {node.tag}
                 </div>
               </div>
             </button>
@@ -537,152 +511,215 @@ export default function BentoGrid() {
       </div>
 
       {/* ==================================================================== */}
-      {/* 2. THE PRODUCTION ARCHITECTURE SHOWCASE CONSOLE                       */}
-      {/* Clean, luxury glass console matching the light #FAF8F5 site design   */}
+      {/* 2. THE SIGNATURE FLOWING SVG CIRCUIT WITH GLOWING TRAVELING PULSES   */}
       {/* ==================================================================== */}
-      <div className="mt-6 max-w-6xl mx-auto px-2">
-        <div className="bg-white border border-[#E2DBD0] rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_12px_40px_rgba(6,11,34,0.06)] relative overflow-hidden transition-all duration-500">
-          {/* Subtle Ambient Accent Aura on Top-Right Corner */}
+      <div className="relative w-full max-w-5xl mx-auto h-28 sm:h-36 -my-1 sm:-my-2">
+        <svg
+          className="w-full h-full overflow-visible"
+          viewBox="0 0 1000 140"
+          fill="none"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <filter id="circuit-glow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="3.5" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+
+            {ARCHITECTURE_NODES.map((node) => (
+              <linearGradient
+                key={node.id}
+                id={`light-wire-${node.id}`}
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop offset="0%" stopColor={node.accentColor} stopOpacity="0.4" />
+                <stop offset="60%" stopColor={node.accentColor} stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#060B22" stopOpacity="1" />
+              </linearGradient>
+            ))}
+          </defs>
+
+          {/* 6 Curved Converging Circuit Paths on Light Canvas */}
+          {nodeXCoords.map((x, idx) => {
+            const node = ARCHITECTURE_NODES[idx];
+            const isActive = idx === activeIndex;
+            const pathD = `M ${x} 0 C ${x} 70, ${hubX + (x - hubX) * 0.15} 90, ${hubX} ${hubY}`;
+
+            return (
+              <g key={node.id}>
+                {/* Background base wire */}
+                <path
+                  d={pathD}
+                  stroke={
+                    isActive
+                      ? `url(#light-wire-${node.id})`
+                      : "rgba(6, 11, 34, 0.14)"
+                  }
+                  strokeWidth={isActive ? "3.2" : "1.5"}
+                  strokeDasharray={isActive ? "none" : "4 4"}
+                  strokeLinecap="round"
+                  className="transition-all duration-300"
+                />
+
+                {/* Glowing underlay on active wire */}
+                {isActive && (
+                  <path
+                    d={pathD}
+                    stroke={node.accentColor}
+                    strokeWidth="6"
+                    strokeOpacity="0.3"
+                    filter="url(#circuit-glow)"
+                  />
+                )}
+
+                {/* Traveling glowing photon pulse */}
+                <circle
+                  r={isActive ? "5" : "3"}
+                  fill={isActive ? node.accentColor : "#FFB020"}
+                  filter="url(#circuit-glow)"
+                >
+                  <animateMotion
+                    path={pathD}
+                    dur={`${1.8 + (idx % 3) * 0.3}s`}
+                    repeatCount="indefinite"
+                  />
+                </circle>
+
+                {/* Secondary staggered pulse on active path */}
+                {isActive && (
+                  <circle
+                    r="3.5"
+                    fill={node.accentColor}
+                    opacity={0.7}
+                  >
+                    <animateMotion
+                      path={pathD}
+                      dur="1.8s"
+                      begin="0.9s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                )}
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+
+      {/* ==================================================================== */}
+      {/* 3. CENTRAL PROCESSING HUB (FLOATING LUXURY CAPSULE PILL)             */}
+      {/* ==================================================================== */}
+      <div className="flex justify-center relative z-10 mb-4 sm:mb-5">
+        <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-gradient-to-r from-[#060B22] via-[#0B1536] to-[#060B22] text-white font-display font-black text-xs sm:text-sm shadow-[0_12px_35px_rgba(255,176,32,0.38)] border-2 border-[#FFB020] hover:scale-105 transition-transform cursor-pointer">
+          <Zap className="w-4 h-4 text-[#FFB020] fill-[#FFB020] animate-pulse" />
+          <span>Compiled Production Architecture</span>
+        </div>
+      </div>
+
+      {/* ==================================================================== */}
+      {/* 4. REAL-TIME TELEMETRY STATUS BAR (BENTO 1 SIGNATURE STYLE)          */}
+      {/* ==================================================================== */}
+      <div className="max-w-xl mx-auto w-full px-4 space-y-2 mb-6">
+        <div className="flex items-center justify-between text-xs font-mono">
+          <div className="flex items-center gap-2 text-slate-700">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
+            </span>
+            <span className="truncate max-w-[260px] sm:max-w-none text-left font-medium">
+              {active.statusLabel}
+            </span>
+          </div>
+          <span className="text-emerald-700 font-bold shrink-0">
+            {active.statusMetric}
+          </span>
+        </div>
+
+        {/* Multi-Color Gradient Progress Bar */}
+        <div className="h-2 w-full bg-slate-200/80 rounded-full overflow-hidden p-0.5">
           <div
-            className="absolute -top-24 -right-24 w-80 h-80 rounded-full blur-3xl pointer-events-none transition-all duration-700 opacity-20"
+            className="h-full bg-gradient-to-r from-[#FFB020] via-emerald-400 to-[#FFB020] rounded-full transition-all duration-700 ease-out shadow-xs"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
+
+      {/* ==================================================================== */}
+      {/* 5. EDITORIAL SHOWCASE & VERIFIED DELIVERABLES DECK                   */}
+      {/* ==================================================================== */}
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="bg-white border border-[#E2DBD0] rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/40 relative overflow-hidden text-left transition-all duration-500">
+          {/* Ambient Glow Aura */}
+          <div
+            className="absolute -top-20 -right-20 w-60 h-60 rounded-full blur-3xl pointer-events-none opacity-25 transition-all duration-700"
             style={{ backgroundColor: active.accentColor }}
           />
 
-          {/* --- CONSOLE HEADER BAR --- */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-slate-100 relative z-10">
-            <div className="flex items-center gap-2.5">
+          <div className="relative z-10 space-y-4">
+            {/* Header: Solution Badge */}
+            <div className="flex items-center justify-between flex-wrap gap-2">
               <span
-                className="w-2.5 h-2.5 rounded-full animate-ping"
+                className="text-xs font-mono font-black uppercase tracking-wider px-3 py-1 rounded-full text-white shadow-xs"
                 style={{ backgroundColor: active.accentColor }}
-              />
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-700">
+              >
                 Blueprint {active.number} // {active.name}
+              </span>
+              <span className="text-xs font-mono font-bold text-slate-600 bg-[#FAF8F5] px-3 py-1 rounded-full border border-[#E2DBD0]">
+                {active.statusMetric}
               </span>
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF8F5] border border-[#E2DBD0] text-xs font-mono font-semibold text-slate-700">
-              <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
-              <span>{active.badge}</span>
-            </div>
-          </div>
-
-          {/* --- INTERACTIVE 4-STEP PIPELINE STREAM --- */}
-          <div className="py-6 border-b border-slate-100 relative z-10">
-            <div className="text-[11px] font-mono uppercase tracking-wider text-slate-600 font-bold mb-4 flex items-center gap-2">
-              <Cpu className="w-3.5 h-3.5 text-[#FFB020]" />
-              <span>Compiled Production Pipeline</span>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 relative">
-              {active.pipeline.map((item, pIdx) => (
-                <div
-                  key={pIdx}
-                  className="bg-[#FAF8F5] border border-[#E2DBD0] rounded-2xl p-3.5 sm:p-4 relative transition-all duration-300 hover:bg-white hover:shadow-sm group"
-                >
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span
-                      className="text-[10px] font-mono font-black px-2 py-0.5 rounded-md text-white"
-                      style={{ backgroundColor: active.accentColor }}
-                    >
-                      STEP {item.step}
-                    </span>
-                    <span className="text-slate-600 text-xs font-mono group-hover:text-slate-600">→</span>
-                  </div>
-                  <div className="font-display font-bold text-xs sm:text-sm text-[#0B1B3A] tracking-tight">
-                    {item.title}
-                  </div>
-                  <div className="text-[11px] text-slate-600 font-normal mt-0.5 leading-snug">
-                    {item.detail}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* --- MAIN SHOWCASE BODY: EDITORIAL & SPECS --- */}
-          <div className="pt-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
-            {/* Left 7 Columns: Editorial Narrative & Deliverables */}
-            <div className="lg:col-span-7 space-y-4 text-left">
+            {/* Headline & Description */}
+            <div>
               <h3 className="font-display font-black text-xl sm:text-2xl text-[#0B1B3A] tracking-tight leading-snug">
                 {active.headline}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal mt-1.5">
                 {active.description}
               </p>
+            </div>
 
-              {/* Verified Deliverables List */}
-              <div className="pt-2 space-y-2.5">
-                <div className="text-[11px] font-mono uppercase tracking-wider text-slate-600 font-bold flex items-center gap-2">
-                  <Shield className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>Verified Architecture Deliverables</span>
-                </div>
-                <div className="space-y-2">
-                  {active.deliverables.map((del, dIdx) => (
-                    <div key={dIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <span>{del}</span>
-                    </div>
-                  ))}
-                </div>
+            {/* 3 Verified Deliverables Checklist */}
+            <div className="pt-2 space-y-2 border-t border-slate-100">
+              <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Verified Architecture Deliverables:</span>
               </div>
-
-              {/* Tech Stack Chips */}
-              <div className="pt-2 flex flex-wrap items-center gap-1.5">
-                <span className="text-[11px] font-mono text-slate-600 mr-1 font-semibold">Stack:</span>
-                {active.techStack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-[#E2DBD0] text-[11px] font-mono font-medium text-slate-700"
-                  >
-                    {tech}
-                  </span>
+              <div className="space-y-1.5">
+                {active.deliverables.map((item, dIdx) => (
+                  <div key={dIdx} className="flex items-start gap-2.5 text-xs text-slate-800">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span className="font-medium text-[13px] leading-snug">{item}</span>
+                  </div>
                 ))}
               </div>
             </div>
 
-            {/* Right 5 Columns: Telemetry Benchmark Panel & CTA */}
-            <div className="lg:col-span-5 flex flex-col justify-between h-full bg-[#FAF8F5] border border-[#E2DBD0] rounded-2xl p-5 sm:p-6 space-y-5">
-              <div className="space-y-3">
-                <div className="text-[11px] font-mono uppercase tracking-wider text-slate-600 font-bold flex items-center gap-1.5">
-                  <Layers className="w-3.5 h-3.5 text-[#FFB020]" />
-                  <span>Production SLA Benchmarks</span>
-                </div>
+            {/* Primary Action Button */}
+            <div className="pt-3 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-slate-100">
+              <StarBorder
+                as={Link}
+                href="/get-a-quote"
+                className="w-full sm:w-auto py-3 px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-lg cursor-pointer text-center group"
+                radius={12}
+                color="#FFB020"
+                trailColor="#38BDF8"
+                backgroundColor="#060B22"
+                textColor="#FFFFFF"
+                borderColor="rgba(255, 176, 32, 0.5)"
+                sparkle={true}
+                glow={0.8}
+              >
+                <span>Discuss {active.name} Scope</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#FFB020] group-hover:translate-x-1 transition-transform" />
+              </StarBorder>
 
-                <div className="space-y-2.5">
-                  {active.specs.map((sp, sIdx) => (
-                    <div
-                      key={sIdx}
-                      className="flex items-center justify-between p-2.5 rounded-xl bg-white border border-[#E2DBD0]"
-                    >
-                      <span className="text-xs text-slate-600 font-normal">{sp.label}</span>
-                      <span className="text-xs font-mono font-bold text-[#0B1B3A]">{sp.value}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Primary Call to Action */}
-              <div className="pt-2">
-                <StarBorder
-                  as={Link}
-                  href="/get-a-quote"
-                  className="w-full py-3.5 px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-lg cursor-pointer text-center group"
-                  radius={12}
-                  color="#FFB020"
-                  trailColor="#38BDF8"
-                  backgroundColor="#060B22"
-                  textColor="#FFFFFF"
-                  borderColor="rgba(255, 176, 32, 0.5)"
-                  sparkle={true}
-                  glow={0.8}
-                >
-                  <span>Discuss {active.name} Scope</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#FFB020] group-hover:translate-x-1 transition-transform" />
-                </StarBorder>
-                <p className="text-[10px] font-mono text-slate-600 text-center mt-2">
-                  Zero Lock-In • Day-One GitHub Commit Access
-                </p>
-              </div>
+              <span className="text-[11px] font-mono text-slate-500 text-center sm:text-right">
+                Zero Lock-In • Day-One GitHub Access
+              </span>
             </div>
           </div>
         </div>
