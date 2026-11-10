@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Sparkles,
@@ -368,6 +368,16 @@ const PLATFORMS: PlatformItem[] = [
 
 export function WebDesignTechStack() {
   const [selectedPlatformId, setSelectedPlatformId] = useState<string>("nextjs");
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const activePlatform =
     PLATFORMS.find((p) => p.id === selectedPlatformId) || PLATFORMS[0];
@@ -382,7 +392,7 @@ export function WebDesignTechStack() {
       content: (
         <div
           className={cn(
-            "w-full h-full p-5 sm:p-6 flex flex-col justify-between text-white rounded-[28px] border-2 relative overflow-hidden select-none cursor-pointer transition-all duration-300 shadow-2xl",
+            "w-full h-full p-3.5 sm:p-6 flex flex-col justify-between text-white rounded-[22px] sm:rounded-[28px] border-2 relative overflow-hidden select-none cursor-pointer transition-all duration-300 shadow-xl sm:shadow-2xl",
             platform.cardGradient,
             platform.borderColor,
             platform.glowColor
@@ -396,12 +406,12 @@ export function WebDesignTechStack() {
 
           {/* Top Row: 3D Official Stack Icon & SLA Metric Pill */}
           <div className="flex items-center justify-between z-10">
-            <div className="p-1.5 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm shadow-inner flex items-center justify-center">
+            <div className="p-1 sm:p-1.5 rounded-xl sm:rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm shadow-inner flex items-center justify-center scale-85 sm:scale-100 origin-left">
               {platform.icon3d}
             </div>
             <span
               className={cn(
-                "text-xs font-mono font-black px-3 py-1 rounded-full border shadow-xs",
+                "text-[10px] sm:text-xs font-mono font-black px-2 py-0.5 sm:px-3 sm:py-1 rounded-full border shadow-xs",
                 platform.metricBadgeColor
               )}
             >
@@ -410,13 +420,13 @@ export function WebDesignTechStack() {
           </div>
 
           {/* Center: Title & Subtitle */}
-          <div className="z-10 my-auto text-left pt-2 space-y-0.5">
-            <div className="font-display font-black text-xl sm:text-2xl text-white tracking-tight leading-tight">
+          <div className="z-10 my-auto text-left pt-1 sm:pt-2 space-y-0.5">
+            <div className="font-display font-black text-base sm:text-2xl text-white tracking-tight leading-tight">
               {platform.name}
             </div>
             <div
               className={cn(
-                "text-xs sm:text-sm font-semibold truncate",
+                "text-[10.5px] sm:text-sm font-semibold truncate",
                 platform.accentText
               )}
             >
@@ -425,9 +435,9 @@ export function WebDesignTechStack() {
           </div>
 
           {/* Bottom: Core Architectural Badge */}
-          <div className="z-10 pt-3 border-t border-white/15 flex items-center justify-between text-xs font-mono text-slate-100">
+          <div className="z-10 pt-2 sm:pt-3 border-t border-white/15 flex items-center justify-between text-[10px] sm:text-xs font-mono text-slate-100">
             <span className="truncate font-medium">{platform.badge}</span>
-            <ArrowRight className="w-4 h-4 text-[#FFB020] shrink-0" />
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FFB020] shrink-0" />
           </div>
         </div>
       ),
@@ -435,105 +445,27 @@ export function WebDesignTechStack() {
   });
 
   return (
-    <div className="w-full max-w-7xl mx-auto space-y-6 sm:space-y-8 select-none text-left">
+    <div className="w-full max-w-7xl mx-auto space-y-5 sm:space-y-8 select-none text-left">
       {/* ==================================================================== */}
-      {/* 1A. MOBILE TECHNOLOGY SELECTOR & ACTIVE CARD (md:hidden)             */}
+      {/* 1. SEAMLESS BIGGER SHUFFLE CARDS (IDENTICAL ON MOBILE & DESKTOP)     */}
       {/* ==================================================================== */}
-      <div className="md:hidden space-y-4">
-        {/* Horizontal Scrollable Selector Navigation */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 px-1">
-          {PLATFORMS.map((platform) => {
-            const isSelected = platform.id === selectedPlatformId;
-            return (
-              <button
-                key={`mobile-tab-${platform.id}`}
-                type="button"
-                onClick={() => setSelectedPlatformId(platform.id)}
-                className={cn(
-                  "px-3.5 py-2 rounded-xl text-xs font-bold transition-all duration-200 whitespace-nowrap flex items-center gap-2 border shadow-xs shrink-0 cursor-pointer",
-                  isSelected
-                    ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] ring-2 ring-[#FFB020]/25 shadow-md"
-                    : "bg-white text-slate-700 border-[#E2DBD0] hover:border-slate-400"
-                )}
-              >
-                <span className="font-display">{platform.name}</span>
-                <span
-                  className={cn(
-                    "text-[10px] font-mono px-1.5 py-0.5 rounded-md border",
-                    isSelected
-                      ? "bg-white/10 border-white/20 text-[#FFB020]"
-                      : "bg-[#FAF8F5] border-[#E2DBD0] text-slate-500"
-                  )}
-                >
-                  {platform.slaMetric}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Active Technology Card Full-Width */}
-        <div
-          className={cn(
-            "w-full p-5 flex flex-col justify-between text-white rounded-2xl border-2 relative overflow-hidden select-none shadow-xl",
-            activePlatform.cardGradient,
-            activePlatform.borderColor,
-            activePlatform.glowColor
-          )}
-        >
-          {/* Top Row: 3D Official Stack Icon & SLA Metric Pill */}
-          <div className="flex items-center justify-between z-10 pb-2">
-            <div className="p-1.5 rounded-xl bg-white/10 border border-white/15 backdrop-blur-sm shadow-inner flex items-center justify-center">
-              {activePlatform.icon3d}
-            </div>
-            <span
-              className={cn(
-                "text-xs font-mono font-black px-3 py-1 rounded-full border shadow-xs",
-                activePlatform.metricBadgeColor
-              )}
-            >
-              {activePlatform.slaMetric}
-            </span>
-          </div>
-
-          {/* Title & Subtitle */}
-          <div className="z-10 py-2 space-y-0.5">
-            <div className="font-display font-black text-xl text-white tracking-tight">
-              {activePlatform.name}
-            </div>
-            <div className={cn("text-xs font-semibold", activePlatform.accentText)}>
-              {activePlatform.subtitle}
-            </div>
-          </div>
-
-          {/* Bottom Architectural Badge */}
-          <div className="z-10 pt-2.5 border-t border-white/15 flex items-center justify-between text-xs font-mono text-slate-100">
-            <span className="truncate font-medium">{activePlatform.badge}</span>
-            <span className="text-[11px] font-bold text-[#FFB020]">Active Selection ✓</span>
-          </div>
-        </div>
-      </div>
-
-      {/* ==================================================================== */}
-      {/* 1B. DESKTOP BOUNCE CARDS SHUFFLE VIEWPORT (hidden md:block)          */}
-      {/* ==================================================================== */}
-      <div className="hidden md:block w-full text-center relative py-2 overflow-visible">
+      <div className="w-full text-center relative py-1 sm:py-2 overflow-visible">
         {/* Floating Shuffle Cards Viewport */}
-        <div className="w-full h-[380px] sm:h-[420px] flex items-center justify-center overflow-visible py-2">
+        <div className="w-full h-[300px] sm:h-[420px] flex items-center justify-center overflow-visible py-1 sm:py-2">
           <BounceCards
             images={SHUFFLE_CARDS}
             containerWidth="100%"
-            containerHeight={410}
-            cardSize={270}
-            spread={135}
+            containerHeight={isMobile ? 300 : 410}
+            cardSize={isMobile ? 180 : 270}
+            spread={isMobile ? 26 : 135}
             rotation={7}
-            arc={22}
+            arc={isMobile ? 12 : 22}
             bounciness={0.65}
-            pushDistance={180}
-            hoverScale={1.12}
+            pushDistance={isMobile ? 65 : 180}
+            hoverScale={1.1}
             borderWidth={0}
             borderColor="transparent"
-            radius={28}
+            radius={isMobile ? 22 : 28}
             onCardClick={(index) => {
               const selected = PLATFORMS[index];
               if (selected) {
@@ -548,17 +480,17 @@ export function WebDesignTechStack() {
       {/* 2. UNBOXED ACTIVE FRAMEWORK SPOTLIGHT & TECH CONSULTATION CTA        */}
       {/* (NO REDUNDANT 6-CARD GRID, NO TABS, JUST CLEAN DIRECT VALUE)         */}
       {/* ==================================================================== */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#E2DBD0] shadow-sm flex flex-col lg:flex-row items-center justify-between gap-6 text-left">
+      <div className="p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] shadow-sm flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6 text-left">
         {/* Left: Active Stack Value Proposition */}
-        <div className="space-y-2.5 max-w-3xl">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs font-mono font-black uppercase tracking-wider text-[#060B22] bg-[#FFB020] px-3 py-1 rounded-full shadow-xs">
+        <div className="space-y-2 sm:space-y-2.5 max-w-3xl">
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+            <span className="text-[11px] sm:text-xs font-mono font-black uppercase tracking-wider text-[#060B22] bg-[#FFB020] px-2.5 sm:px-3 py-1 rounded-full shadow-xs">
               {activePlatform.name} Architecture
             </span>
-            <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+            <span className="text-[11px] sm:text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2 sm:px-2.5 py-1 rounded-full border border-emerald-200">
               Benchmark SLA: {activePlatform.slaMetric}
             </span>
-            <span className="text-xs font-mono text-slate-400">
+            <span className="text-[11px] sm:text-xs font-mono text-slate-400">
               {activePlatform.slaLabel}
             </span>
           </div>
@@ -571,7 +503,7 @@ export function WebDesignTechStack() {
             {activePlatform.pills.map((pill, idx) => (
               <span
                 key={idx}
-                className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-[#E2DBD0] text-xs font-semibold text-slate-700"
+                className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg bg-[#FAF8F5] border border-[#E2DBD0] text-[11px] sm:text-xs font-semibold text-slate-700"
               >
                 {pill}
               </span>
@@ -580,11 +512,11 @@ export function WebDesignTechStack() {
         </div>
 
         {/* Right: Direct CTA to Hire Devs / Alignment Session */}
-        <div className="shrink-0 w-full lg:w-auto pt-2 lg:pt-0">
+        <div className="shrink-0 w-full lg:w-auto pt-1 lg:pt-0">
           <StarBorder
             as={Link}
             href="/get-a-quote"
-            className="w-full lg:w-auto py-3.5 px-6 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg cursor-pointer text-center group whitespace-nowrap"
+            className="w-full lg:w-auto py-3 sm:py-3.5 px-5 sm:px-6 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg cursor-pointer text-center group whitespace-nowrap"
             radius={12}
             color="#FFB020"
             trailColor="#38BDF8"

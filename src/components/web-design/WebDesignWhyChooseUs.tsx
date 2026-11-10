@@ -31,7 +31,7 @@ function ClassicalMarblePillar({
   number: string;
 }) {
   return (
-    <div className="relative w-full max-w-[140px] sm:max-w-[165px] mx-auto flex flex-col items-center">
+    <div className="relative w-full max-w-[115px] sm:max-w-[165px] mx-auto flex flex-col items-center">
       {/* Divine Radiant Spotlight Beam from Above on Active Pillar */}
       {isActive && (
         <div
@@ -406,30 +406,30 @@ export function WebDesignWhyChooseUs() {
                 )}
               >
                 {/* --- 3D FLOATING TROPHY EMBLEM & TITLE --- */}
-                <div className="space-y-1 mb-2 w-full px-1 flex flex-col items-center">
+                <div className="space-y-0.5 sm:space-y-1 mb-1.5 sm:mb-2 w-full px-0.5 flex flex-col items-center">
                   {/* Vibrant 3D Circular Medallion */}
                   <div
                     className={cn(
-                      "w-11 h-11 sm:w-13 sm:h-13 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-md border",
+                      "w-9 h-9 sm:w-13 sm:h-13 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 shadow-md border",
                       isSelected
                         ? "bg-gradient-to-tr " +
                             pillar.themeGradient +
-                            " text-white border-[#FFB020] shadow-[0_8px_25px_rgba(255,176,32,0.45)] scale-115 ring-2 ring-[#FFB020]/50"
-                        : "bg-white text-slate-700 border-[#E2DBD0] group-hover:border-[#FFB020]/60 group-hover:scale-108 group-hover:shadow-md"
+                            " text-white border-[#FFB020] shadow-[0_8px_25px_rgba(255,176,32,0.45)] scale-110 sm:scale-115 ring-2 ring-[#FFB020]/50"
+                        : "bg-white text-slate-700 border-[#E2DBD0] group-hover:border-[#FFB020]/60 group-hover:scale-105 group-hover:shadow-md"
                     )}
                   >
                     {pillar.icon}
                   </div>
 
                   {/* Title directly above the capital */}
-                  <h4 className="font-display font-black text-xs sm:text-[13px] text-[#0B1B3A] tracking-tight leading-snug line-clamp-1 flex items-center justify-center pt-0.5">
+                  <h4 className="font-display font-black text-[11px] sm:text-[13px] text-[#0B1B3A] tracking-tight leading-snug line-clamp-1 flex items-center justify-center pt-0.5">
                     {pillar.title}
                   </h4>
 
                   {/* Status chip */}
                   <span
                     className={cn(
-                      "inline-block px-2.5 py-0.5 rounded-full text-[9px] sm:text-[9.5px] font-mono font-bold uppercase tracking-wider border transition-colors",
+                      "inline-block px-2 py-0.5 rounded-full text-[8.5px] sm:text-[9.5px] font-mono font-bold uppercase tracking-wider border transition-colors",
                       isSelected
                         ? "bg-[#FFB020] text-[#060B22] border-[#FFB020] font-black shadow-xs"
                         : "bg-white text-slate-600 border-[#E2DBD0] group-hover:border-slate-400"

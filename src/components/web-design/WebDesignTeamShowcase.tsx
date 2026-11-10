@@ -18,16 +18,16 @@ import {
 
 export function WebDesignTeamShowcase() {
   return (
-    <div className="space-y-5 sm:space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Signature Agency Campus & Developer Squad Showcase Banner */}
-      <div className="rounded-3xl bg-gradient-to-br from-[#060B22] via-[#0B1536] to-[#060B22] text-white p-6 sm:p-10 lg:p-12 border border-white/15 shadow-2xl relative overflow-hidden">
+      <div className="rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#060B22] via-[#0B1536] to-[#060B22] text-white p-3.5 sm:p-8 lg:p-12 border border-white/15 shadow-2xl relative overflow-hidden">
         {/* Ambient Glows */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#FFB020]/15 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-12 items-center relative z-10">
           {/* Left Column (6 cols): Real Campus & Team Photo */}
-          <div className="lg:col-span-6 space-y-4">
+          <div className="lg:col-span-6 space-y-3 sm:space-y-4">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-white text-[10px] font-black uppercase tracking-wider border border-white/15 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Verified In-House Engineering Center</span>
@@ -63,15 +63,15 @@ export function WebDesignTeamShowcase() {
           </div>
 
           {/* Right Column (6 cols): Leadership Behind Your Success & Live Timezones */}
-          <div className="lg:col-span-6 space-y-6 text-left">
+          <div className="lg:col-span-6 space-y-4 sm:space-y-6 text-left">
             <div>
-              <span className="text-xs font-black uppercase tracking-wider text-[#FFB020]">
+              <span className="text-[10.5px] sm:text-xs font-black uppercase tracking-wider text-[#FFB020]">
                 Engineering Leadership
               </span>
-              <h3 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight mt-1">
+              <h3 className="font-display font-black text-lg sm:text-2xl lg:text-3xl text-white tracking-tight mt-0.5 sm:mt-1">
                 Senior Architects Guiding Your Project From Discovery to Launch
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 mt-1.5 sm:mt-2 leading-relaxed">
                 You work directly with proven technical directors and project managers who speak fluent English, adhere to Western timelines, and guarantee milestone precision.
               </p>
             </div>
@@ -146,7 +146,7 @@ export function WebDesignTeamShowcase() {
             </div>
 
             {/* Live Western Shifts & Trust Assurances */}
-            <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 space-y-3">
+            <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/[0.04] border border-white/10 space-y-2 sm:space-y-3">
               <div className="flex items-center justify-between text-[11px] text-slate-300 border-b border-white/10 pb-2">
                 <span className="font-bold text-white flex items-center gap-1.5">
                   <Globe2 className="w-3.5 h-3.5 text-[#FFB020]" />

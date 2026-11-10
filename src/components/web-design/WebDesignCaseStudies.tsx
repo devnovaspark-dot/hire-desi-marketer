@@ -175,22 +175,22 @@ export function WebDesignCaseStudies() {
       {/* ==================================================================== */}
       {/* 2. ACTIVE BENCHMARK DEEP-DIVE STAGE (SPECIFICATIONS & PROOF)         */}
       {/* ==================================================================== */}
-      <div className="rounded-3xl bg-white border border-[#E2DBD0] shadow-xl p-6 sm:p-8 lg:p-10 relative overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="rounded-2xl sm:rounded-3xl bg-white border border-[#E2DBD0] shadow-xl p-3.5 sm:p-6 lg:p-10 relative overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start">
           {/* Left Column (6 cols): Reference Overview, Solution & Scorecard */}
-          <div className="lg:col-span-6 space-y-4">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs font-mono font-black uppercase tracking-wider text-[#060B22] bg-[#FFB020] px-3 py-1 rounded-full shadow-xs">
+          <div className="lg:col-span-6 space-y-3 sm:space-y-4">
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+              <span className="text-[10.5px] sm:text-xs font-mono font-black uppercase tracking-wider text-[#060B22] bg-[#FFB020] px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full shadow-xs">
                 {activeStudy.categoryLabel}
               </span>
 
-              <span className="text-xs font-mono font-bold text-slate-700 bg-[#FAF8F5] px-3 py-1 rounded-full border border-[#E2DBD0]">
+              <span className="text-[10.5px] sm:text-xs font-mono font-bold text-slate-700 bg-[#FAF8F5] px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full border border-[#E2DBD0]">
                 {activeStudy.industry}
               </span>
             </div>
 
-            <div className="space-y-1.5">
-              <h3 className="font-display font-black text-2xl sm:text-3xl text-[#0B1B3A] tracking-tight leading-snug">
+            <div className="space-y-1 sm:space-y-1.5">
+              <h3 className="font-display font-black text-lg sm:text-2xl lg:text-3xl text-[#0B1B3A] tracking-tight leading-snug">
                 {activeStudy.projectType}
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
@@ -199,16 +199,16 @@ export function WebDesignCaseStudies() {
             </div>
 
             {/* 3 Verified Metric Scorecards */}
-            <div className="grid grid-cols-3 gap-2.5 pt-1">
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-2.5 pt-1">
               {activeStudy.metrics.map((m, i) => (
                 <div
                   key={i}
-                  className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#E2DBD0] text-center space-y-0.5"
+                  className="p-2 sm:p-3 rounded-xl sm:rounded-2xl bg-[#FAF8F5] border border-[#E2DBD0] text-center space-y-0.5"
                 >
-                  <div className="font-display font-black text-sm text-[#0B1B3A] truncate">
+                  <div className="font-display font-black text-xs sm:text-sm text-[#0B1B3A] truncate">
                     {m.value}
                   </div>
-                  <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider truncate">
+                  <div className="text-[8.5px] sm:text-[10px] font-mono text-slate-500 uppercase tracking-wider truncate">
                     {m.label}
                   </div>
                 </div>
@@ -216,15 +216,15 @@ export function WebDesignCaseStudies() {
             </div>
 
             {/* Technologies Applied */}
-            <div className="pt-2 space-y-1.5">
-              <div className="text-xs font-black uppercase tracking-wider text-slate-600">
+            <div className="pt-1.5 sm:pt-2 space-y-1 sm:space-y-1.5">
+              <div className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-slate-600">
                 Core Architecture Stack:
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {activeStudy.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-[#E2DBD0] text-xs font-semibold text-slate-700"
+                    className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg bg-[#FAF8F5] border border-[#E2DBD0] text-[11px] sm:text-xs font-semibold text-slate-700"
                   >
                     {tech}
                   </span>
@@ -233,11 +233,11 @@ export function WebDesignCaseStudies() {
             </div>
 
             {/* Direct Consultation Action with StarBorder */}
-            <div className="pt-3">
+            <div className="pt-2 sm:pt-3">
               <StarBorder
                 as={Link}
                 href="/get-a-quote"
-                className="w-full sm:w-auto py-3.5 px-6 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-lg cursor-pointer text-center group"
+                className="w-full sm:w-auto py-2.5 sm:py-3.5 px-5 sm:px-6 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-lg cursor-pointer text-center group"
                 radius={12}
                 color="#FFB020"
                 trailColor="#38BDF8"

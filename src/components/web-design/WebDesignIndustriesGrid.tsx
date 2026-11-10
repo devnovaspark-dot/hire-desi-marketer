@@ -363,8 +363,8 @@ export function WebDesignIndustriesGrid() {
       {/* 1. SECTOR SELECTOR PILLS & ARROWS (ZERO CARDS, PURE FLUID PILLS)     */}
       {/* ==================================================================== */}
       <div className="flex flex-col items-center gap-3">
-        {/* Horizontal Navigation Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full sm:flex-wrap sm:justify-center px-1 pb-1">
+        {/* Horizontal Navigation Pills (Identical Wrapping on Mobile & Desktop) */}
+        <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
           {SECTORS.map((sector, index) => {
             const isSelected = index === selectedSectorIndex;
 
@@ -374,7 +374,7 @@ export function WebDesignIndustriesGrid() {
                 type="button"
                 onClick={() => handleSectorSelect(index)}
                 className={cn(
-                  "px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer select-none inline-flex items-center gap-2 border shrink-0 sm:shrink",
+                  "px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer select-none inline-flex items-center gap-1.5 sm:gap-2 border",
                   isSelected
                     ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] shadow-md shadow-slate-900/10 font-black scale-105"
                     : "bg-white text-slate-700 hover:text-slate-900 hover:bg-slate-50 border-[#E2DBD0]"
@@ -429,7 +429,7 @@ export function WebDesignIndustriesGrid() {
       {/* ==================================================================== */}
       {/* 2. FLEX CAROUSEL (ZERO CARDS, ZERO BROWSER FRAMES, PURE LIQUID GLASS)*/}
       {/* ==================================================================== */}
-      <div className="relative w-full h-[320px] sm:h-[460px] lg:h-[500px] overflow-hidden sm:overflow-visible my-2">
+      <div className="relative w-full h-[380px] sm:h-[460px] lg:h-[500px] overflow-visible my-2">
         <FlexCarousel
           ref={carouselRef}
           items={CAROUSEL_ITEMS}

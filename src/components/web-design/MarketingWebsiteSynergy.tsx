@@ -441,7 +441,7 @@ export function MarketingWebsiteSynergy() {
         {/* ============================================================ */}
         <div
           className={cn(
-            "rounded-3xl border transition-all duration-700 p-6 sm:p-8 lg:p-10 text-white relative overflow-hidden shadow-2xl text-left",
+            "rounded-2xl sm:rounded-3xl border transition-all duration-700 p-3.5 sm:p-6 lg:p-10 text-white relative overflow-hidden shadow-2xl text-left",
             mode === "hdm"
               ? "bg-gradient-to-br from-[#060B22] via-[#091638] to-[#060B22] border-[#FFB020]/40 shadow-[0_25px_60px_-15px_rgba(255,176,32,0.25)]"
               : "bg-gradient-to-br from-[#1C0A0E] via-[#2A0E15] to-[#140609] border-rose-500/40 shadow-[0_25px_60px_-15px_rgba(239,68,68,0.25)]"
@@ -461,25 +461,25 @@ export function MarketingWebsiteSynergy() {
             )}
           />
 
-          <div className="relative z-10 space-y-6 sm:space-y-8">
+          <div className="relative z-10 space-y-3.5 sm:space-y-6 lg:space-y-8">
             {/* Top State Status Bar */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-white/10">
-              <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 pb-3 sm:pb-5 border-b border-white/10">
+              <div className="flex items-center gap-2.5 sm:gap-3">
                 <div
                   className={cn(
-                    "w-11 h-11 rounded-2xl flex items-center justify-center font-black transition-all duration-500 shadow-md",
+                    "w-8 h-8 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center font-black transition-all duration-500 shadow-md shrink-0",
                     mode === "hdm"
                       ? "bg-[#FFB020] text-[#060B22] ring-2 ring-[#FFB020]/40"
                       : "bg-rose-600 text-white ring-2 ring-rose-500/40 animate-pulse"
                   )}
                 >
-                  {mode === "hdm" ? <Zap className="w-5 h-5" /> : <Droplets className="w-5 h-5" />}
+                  {mode === "hdm" ? <Zap className="w-4 h-4 sm:w-5 sm:h-5" /> : <Droplets className="w-4 h-4 sm:w-5 sm:h-5" />}
                 </div>
 
                 <div>
                   <div
                     className={cn(
-                      "text-[10.5px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5",
+                      "text-[9.5px] sm:text-[10.5px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5",
                       mode === "hdm" ? "text-[#FFB020]" : "text-rose-400"
                     )}
                   >
@@ -487,7 +487,7 @@ export function MarketingWebsiteSynergy() {
                     <span>·</span>
                     <span className="text-white font-mono">{activeChannel.name}</span>
                   </div>
-                  <div className="text-white font-black text-sm sm:text-base mt-0.5">
+                  <div className="text-white font-black text-xs sm:text-base mt-0.5">
                     Traffic Source: {activeChannel.name} ({activeChannel.badge})
                   </div>
                 </div>
@@ -495,7 +495,7 @@ export function MarketingWebsiteSynergy() {
 
               <div
                 className={cn(
-                  "px-3.5 py-1.5 rounded-full font-mono text-xs font-bold border inline-flex items-center gap-2 self-start sm:self-center transition-all",
+                  "px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full font-mono text-[10.5px] sm:text-xs font-bold border inline-flex items-center gap-2 self-start sm:self-center transition-all",
                   mode === "hdm"
                     ? "bg-teal-500/20 text-teal-300 border-teal-500/40 shadow-xs"
                     : "bg-rose-500/20 text-rose-300 border-rose-500/40 shadow-xs"
@@ -514,8 +514,8 @@ export function MarketingWebsiteSynergy() {
             </div>
 
             {/* Core Outcome Headline */}
-            <div className="space-y-2">
-              <h3 className="font-display font-black text-xl sm:text-2xl lg:text-3xl text-white tracking-tight leading-snug">
+            <div className="space-y-1 sm:space-y-2">
+              <h3 className="font-display font-black text-lg sm:text-2xl lg:text-3xl text-white tracking-tight leading-snug">
                 {mode === "hdm"
                   ? activeChannel.hdmState.growthHeadline
                   : activeChannel.leakyState.lossHeadline}
@@ -528,22 +528,22 @@ export function MarketingWebsiteSynergy() {
             </div>
 
             {/* 3 Live Visual Telemetry Meters */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-4">
               <div
                 className={cn(
-                  "p-4 rounded-2xl border transition-all duration-500 space-y-1 relative overflow-hidden",
+                  "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-500 space-y-0.5 sm:space-y-1 relative overflow-hidden",
                   mode === "hdm"
                     ? "bg-white/[0.04] border-white/10"
                     : "bg-rose-950/40 border-rose-500/20"
                 )}
               >
-                <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                <div className="flex items-center justify-between text-[9.5px] sm:text-[10px] font-mono uppercase tracking-wider text-slate-400">
                   <span>Initial Paint Speed</span>
-                  <Activity className="w-3.5 h-3.5 text-slate-400" />
+                  <Activity className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400" />
                 </div>
                 <div
                   className={cn(
-                    "font-display font-black text-2xl transition-colors",
+                    "font-display font-black text-xl sm:text-2xl transition-colors",
                     mode === "hdm" ? "text-teal-400" : "text-rose-400"
                   )}
                 >
@@ -551,26 +551,26 @@ export function MarketingWebsiteSynergy() {
                     ? activeChannel.hdmState.speed
                     : activeChannel.leakyState.speed}
                 </div>
-                <div className="text-[11px] text-slate-400 font-medium">
+                <div className="text-[10.5px] sm:text-[11px] text-slate-400 font-medium">
                   {mode === "hdm" ? "Sub-second edge paint ✓" : "Causes instant mobile bounce ✗"}
                 </div>
               </div>
 
               <div
                 className={cn(
-                  "p-4 rounded-2xl border transition-all duration-500 space-y-1 relative overflow-hidden",
+                  "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-500 space-y-0.5 sm:space-y-1 relative overflow-hidden",
                   mode === "hdm"
                     ? "bg-white/[0.04] border-white/10"
                     : "bg-rose-950/40 border-rose-500/20"
                 )}
               >
-                <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                <div className="flex items-center justify-between text-[9.5px] sm:text-[10px] font-mono uppercase tracking-wider text-slate-400">
                   <span>Quality Score &amp; Vitals</span>
-                  <Gauge className="w-3.5 h-3.5 text-slate-400" />
+                  <Gauge className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400" />
                 </div>
                 <div
                   className={cn(
-                    "font-display font-black text-2xl transition-colors",
+                    "font-display font-black text-xl sm:text-2xl transition-colors",
                     mode === "hdm" ? "text-[#FFB020]" : "text-rose-400"
                   )}
                 >
@@ -578,30 +578,30 @@ export function MarketingWebsiteSynergy() {
                     ? activeChannel.hdmState.conversion
                     : activeChannel.leakyState.bounce}
                 </div>
-                <div className="text-[11px] text-slate-400 font-medium">
+                <div className="text-[10.5px] sm:text-[11px] text-slate-400 font-medium">
                   {mode === "hdm" ? "Lowest CPC / Highest Rank ✓" : "Ad algorithm cost penalties ✗"}
                 </div>
               </div>
 
               <div
                 className={cn(
-                  "p-4 rounded-2xl border transition-all duration-500 space-y-1 relative overflow-hidden",
+                  "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-500 space-y-0.5 sm:space-y-1 relative overflow-hidden",
                   mode === "hdm"
                     ? "bg-white/[0.04] border-white/10"
                     : "bg-rose-950/40 border-rose-500/20"
                 )}
               >
-                <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                <div className="flex items-center justify-between text-[9.5px] sm:text-[10px] font-mono uppercase tracking-wider text-slate-400">
                   <span>ROAS / Capital Multiplier</span>
                   {mode === "hdm" ? (
-                    <TrendingUp className="w-3.5 h-3.5 text-teal-400" />
+                    <TrendingUp className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-teal-400" />
                   ) : (
-                    <TrendingDown className="w-3.5 h-3.5 text-rose-400" />
+                    <TrendingDown className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-rose-400" />
                   )}
                 </div>
                 <div
                   className={cn(
-                    "font-display font-black text-2xl transition-colors",
+                    "font-display font-black text-xl sm:text-2xl transition-colors",
                     mode === "hdm" ? "text-teal-400" : "text-rose-400"
                   )}
                 >
@@ -609,14 +609,14 @@ export function MarketingWebsiteSynergy() {
                     ? activeChannel.hdmState.roas
                     : activeChannel.leakyState.roas}
                 </div>
-                <div className="text-[11px] text-slate-400 font-medium">
+                <div className="text-[10.5px] sm:text-[11px] text-slate-400 font-medium">
                   {mode === "hdm" ? "Full conversion on ad dollars ✓" : "Capital drained before inquiry ✗"}
                 </div>
               </div>
             </div>
 
             {/* Bottom Direct Audit Action */}
-            <div className="pt-5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="pt-3 sm:pt-5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
               <div className="flex items-center gap-2 text-xs text-slate-300 text-left">
                 <ShieldCheck className="w-4 h-4 text-teal-400 shrink-0" />
                 <span>
@@ -627,7 +627,7 @@ export function MarketingWebsiteSynergy() {
               <StarBorder
                 as={Link}
                 href="/get-a-quote"
-                className="w-full sm:w-auto py-3 px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-lg group"
+                className="w-full sm:w-auto py-2.5 sm:py-3 px-5 sm:px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-lg group"
                 radius={12}
                 color="#FFF8E7"
                 trailColor="#FFB020"
