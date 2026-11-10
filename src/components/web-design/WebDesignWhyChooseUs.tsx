@@ -1,40 +1,30 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
-  ShieldCheck,
-  CheckCircle2,
   Users,
-  Clock,
-  Sparkles,
   Zap,
   Lock,
+  Clock,
+  Sparkles,
   ArrowRight,
-  ArrowLeft,
+  CheckCircle2,
   Award,
-  GitBranch,
-  Terminal,
-  Activity,
-  PlayCircle,
-  RotateCw,
   Check,
-  Video,
-  Layers,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { WebDesignTeamShowcase } from "./WebDesignTeamShowcase";
 
 interface ArchitecturalPillar {
   id: string;
   number: string;
-  title: string;
+  roman: string;
   shortLabel: string;
-  tagline: string;
+  title: string;
+  subtitle: string;
   description: string;
   metric: string;
   badge: string;
-  capitalSubtitle: string;
   icon: React.ReactNode;
   specs: {
     label: string;
@@ -46,493 +36,390 @@ const PILLARS: ArchitecturalPillar[] = [
   {
     id: "senior-architects",
     number: "01",
+    roman: "I",
     shortLabel: "Senior Squad",
-    title: "Direct Access to Senior Architects",
-    tagline: "Zero Junior Handoffs · Direct Engineer Communication",
+    title: "Direct Senior Architect Access",
+    subtitle: "Zero Junior Handoffs",
     description:
-      "You collaborate directly with principal full-stack engineers and UI/UX designers who understand commercial growth. No junior intern middlemen, no disconnected account managers.",
+      "Direct collaboration with principal full-stack engineers and senior UI/UX directors. No junior intern middlemen or disconnected account reps.",
     metric: "100% Senior Squad",
     badge: "Principal Staff",
-    capitalSubtitle: "Staff Engineering & Design",
-    icon: <Users className="w-6 h-6 text-[#FFB020]" />,
+    icon: <Users className="w-5 h-5 text-[#FFB020]" />,
     specs: [
       { label: "Squad Level", value: "Principal & Staff Only" },
       { label: "Middlemen", value: "Zero Account Managers" },
-      { label: "SLA Reply", value: "< 15 Mins Direct Slack" },
+      { label: "Direct SLA", value: "< 15 Mins Client Slack" },
     ],
   },
   {
     id: "subsecond-speed",
     number: "02",
+    roman: "II",
     shortLabel: "Sub-Second Speed",
-    title: "Sub-Second Performance & Speed",
-    tagline: "< 0.8s LCP Benchmark · 95+ Core Web Vitals",
+    title: "Sub-Second Speed & Vitals",
+    subtitle: "< 0.8s LCP Benchmark",
     description:
-      "We engineer with modern stacks (Next.js 16, React 19, Tailwind, Headless CMS) to guarantee sub-second initial paint and eliminate the bounce rates caused by bloated legacy templates.",
-    metric: "< 0.8s Speed",
+      "Modern full-stack architecture (Next.js 16, React 19, Tailwind, Headless CMS) engineered for sub-second initial paint and zero bounce rate.",
+    metric: "< 0.8s Initial Paint",
     badge: "100/100 Vitals",
-    capitalSubtitle: "Core Web Vitals Engine",
-    icon: <Zap className="w-6 h-6 text-[#FFB020]" />,
+    icon: <Zap className="w-5 h-5 text-[#FFB020]" />,
     specs: [
-      { label: "LCP Speed", value: "< 0.58s Initial Paint" },
-      { label: "Lighthouse", value: "100 / 100 Grade A+" },
+      { label: "LCP Benchmark", value: "< 0.58s Initial Paint" },
+      { label: "PageSpeed Score", value: "100 / 100 Grade A+" },
       { label: "Layout Shift", value: "0.00 CLS Flawless" },
     ],
   },
   {
     id: "code-ownership",
     number: "03",
+    roman: "III",
     shortLabel: "100% IP & Repo",
     title: "100% Code & IP Ownership",
-    tagline: "Day-One Repository Access · Zero Platform Lock-In",
+    subtitle: "Day-One Repository Access",
     description:
-      "You own 100% of the code, designs, and digital assets from Day 1. We commit clean, documented code directly to your private GitHub or GitLab repository under strict bilateral NDA protection.",
-    metric: "100% Your IP",
-    badge: "Day-One Access",
-    capitalSubtitle: "Intellectual Property Vault",
-    icon: <Lock className="w-6 h-6 text-[#FFB020]" />,
+      "You own 100% of all source code, Figma design systems, and digital assets from Day 1. Committed directly to your private GitHub or GitLab.",
+    metric: "100% Client Repo",
+    badge: "Zero Lock-In",
+    icon: <Lock className="w-5 h-5 text-[#FFB020]" />,
     specs: [
       { label: "Repository", value: "Private Client GitHub" },
-      { label: "NDA Hash", value: "SHA-256 Legal Deed" },
-      { label: "Vendor Lock-In", value: "0% Clean Open Code" },
+      { label: "Legal Protection", value: "Bilateral NDA Deed" },
+      { label: "Platform Lock-In", value: "0% Clean Open Code" },
     ],
   },
   {
     id: "agile-delivery",
     number: "04",
+    roman: "IV",
     shortLabel: "Agile Telemetry",
-    title: "Transparent Agile Delivery & Daily Demos",
-    tagline: "Daily Loom Updates · Fixed Milestone Predictability",
+    title: "Transparent Agile Delivery",
+    subtitle: "Daily Demos & Staging",
     description:
-      "Experience zero dark periods. We deliver regular recorded video walkthroughs, shared staging URLs, and bi-weekly milestone demos so your project launches on time, every single sprint.",
-    metric: "< 24h Scoping",
+      "Zero black-box periods. Regular recorded Loom walkthroughs, live passworded staging builds, and bi-weekly milestone sign-offs guarantee delivery.",
+    metric: "Daily Loom Demos",
     badge: "Zero Dark Periods",
-    capitalSubtitle: "Sprint Visibility & Staging",
-    icon: <Clock className="w-6 h-6 text-[#FFB020]" />,
+    icon: <Clock className="w-5 h-5 text-[#FFB020]" />,
     specs: [
-      { label: "Video Demos", value: "Daily Loom Walkthroughs" },
+      { label: "Demo Rhythm", value: "Daily Loom Walkthroughs" },
       { label: "Staging Access", value: "Live Passworded URL" },
-      { label: "Milestones", value: "100% Guaranteed Launch" },
+      { label: "Milestone SLA", value: "100% On-Time Sprints" },
     ],
   },
 ];
 
 export function WebDesignWhyChooseUs() {
-  const [activePillarIdx, setActivePillarIdx] = useState<number>(0);
-  const [isAutoRotate, setIsAutoRotate] = useState<boolean>(true);
-  const [isInView, setIsInView] = useState<boolean>(false);
-  const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-
-  // Touch and drag states
-  const [isDragging, setIsDragging] = useState<boolean>(false);
-  const [dragStartX, setDragStartX] = useState<number>(0);
-
-  const containerRef = useRef<HTMLDivElement>(null);
-  const totalPillars = PILLARS.length; // 4 pillars
-  const anglePerPillar = 360 / totalPillars; // 90 degrees each
-  const orbitRadius = 290; // 3D cylinder depth radius
-
-  // Intersection observer: starts auto-spin when section is scrolled into view
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting);
-      },
-      { threshold: 0.2 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  // Auto-rotation loop
-  useEffect(() => {
-    if (!isAutoRotate || isDragging || !isInView) return;
-
-    const interval = setInterval(() => {
-      setActivePillarIdx((prev) => (prev + 1) % totalPillars);
-    }, 4200);
-
-    return () => clearInterval(interval);
-  }, [isAutoRotate, isDragging, isInView, totalPillars]);
-
-  // Wheel scroll interaction
-  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-    if (Math.abs(e.deltaY) > 25) {
-      if (e.deltaY > 0) {
-        setActivePillarIdx((prev) => (prev + 1) % totalPillars);
-      } else {
-        setActivePillarIdx((prev) => (prev > 0 ? prev - 1 : totalPillars - 1));
-      }
-    }
-  };
-
-  // Parallax tilt on mouse movement
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setMousePos({ x, y });
-  };
-
-  const handleMouseLeave = () => {
-    setMousePos({ x: 0, y: 0 });
-    setIsDragging(false);
-  };
-
-  // Drag controls
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    setDragStartX(e.clientX);
-  };
-
-  const handleMouseUp = (e: React.MouseEvent) => {
-    if (!isDragging) return;
-    const diff = e.clientX - dragStartX;
-    if (Math.abs(diff) > 35) {
-      if (diff > 0) {
-        setActivePillarIdx((prev) => (prev > 0 ? prev - 1 : totalPillars - 1));
-      } else {
-        setActivePillarIdx((prev) => (prev + 1) % totalPillars);
-      }
-    }
-    setIsDragging(false);
-  };
-
-  // Touch controls for mobile
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setIsDragging(true);
-    setDragStartX(e.touches[0].clientX);
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    const diff = e.changedTouches[0].clientX - dragStartX;
-    if (Math.abs(diff) > 30) {
-      if (diff > 0) {
-        setActivePillarIdx((prev) => (prev > 0 ? prev - 1 : totalPillars - 1));
-      } else {
-        setActivePillarIdx((prev) => (prev + 1) % totalPillars);
-      }
-    }
-    setIsDragging(false);
-  };
-
-  const activePillar = PILLARS[activePillarIdx];
+  const [activeIdx, setActiveIdx] = useState<number>(0);
+  const activePillar = PILLARS[activeIdx];
 
   return (
-    <div
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="space-y-8 sm:space-y-10 max-w-7xl mx-auto text-left select-none"
-    >
-      {/* 1. Authentic In-House Campus & Leadership Team Showcase */}
-      <WebDesignTeamShowcase />
-
-      {/* ============================================================== */}
-      {/* 2. REAL 3D ROTATING ARCHITECTURAL PILLARS THEATER               */}
-      {/* ============================================================== */}
-      <div className="rounded-3xl bg-gradient-to-b from-[#060B22] via-[#081232] to-[#060B22] border border-white/10 shadow-2xl p-6 sm:p-8 lg:p-10 text-white relative overflow-hidden">
-        {/* Ambient Stage Glows */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#FFB020]/15 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-0 right-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
-
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3 pb-6 border-b border-white/10 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/10 text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
-            <span>The 4 Architectural Pillars of Hire Desi Marketer</span>
-          </div>
-
-          <h3 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-tight">
-            Engineered Foundations That Guarantee Commercial Success.
-          </h3>
-
-          <p className="text-xs sm:text-base text-slate-300 leading-relaxed font-normal max-w-2xl mx-auto">
-            Eliminate traditional agency bureaucracy. Our four foundational engineering pillars protect your timeline, code ownership, and conversion speed.
-          </p>
+    <div className="w-full text-white select-none">
+      {/* ==================================================================== */}
+      {/* 1. COMPACT CENTERED SECTION HEADER (FITS IN SINGLE WINDOW)           */}
+      {/* ==================================================================== */}
+      <div className="text-center max-w-3xl mx-auto space-y-2 pb-4">
+        <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/10 text-[#FFB020] text-[11px] font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+          <Sparkles className="w-3 h-3 text-[#FFB020]" />
+          <span>The 4 Architectural Pillars of Hire Desi Marketer</span>
         </div>
 
-        {/* Centered Pillar Navigation Tabs */}
-        <div className="flex flex-col items-center justify-center space-y-3 pt-6 relative z-10">
-          <div className="flex items-center justify-center gap-2 p-1.5 bg-white/10 backdrop-blur-md rounded-2xl border border-white/15 max-w-full overflow-x-auto no-scrollbar">
-            {PILLARS.map((p, idx) => {
-              const isSelected = idx === activePillarIdx;
-              return (
-                <button
-                  key={p.id}
-                  type="button"
-                  onClick={() => setActivePillarIdx(idx)}
-                  className={cn(
-                    "px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap flex items-center gap-2 border",
-                    isSelected
-                      ? "bg-[#FFB020] text-[#060B22] border-[#FFB020] shadow-md font-black scale-102"
-                      : "bg-white/5 text-slate-300 border-transparent hover:bg-white/10 hover:text-white"
-                  )}
-                >
-                  <span className="font-mono text-[11px] opacity-80">Pillar {p.number}</span>
-                  <span>{p.shortLabel}</span>
-                  {isSelected && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#060B22] animate-pulse" />
-                  )}
-                </button>
-              );
-            })}
-          </div>
+        <h3 className="font-display font-black text-xl sm:text-2xl lg:text-3xl text-white tracking-tight leading-tight">
+          Engineered Foundations That Guarantee Commercial Success.
+        </h3>
 
-          {/* Orbit Controls & Auto-Rotate Toggle */}
-          <div className="flex items-center justify-center gap-3 text-xs">
-            <button
-              type="button"
-              onClick={() => setIsAutoRotate(!isAutoRotate)}
-              className={cn(
-                "px-3 py-1 rounded-full font-mono text-[11px] font-bold flex items-center gap-1.5 border transition-colors cursor-pointer",
-                isAutoRotate
-                  ? "bg-[#FFB020]/20 text-[#FFB020] border-[#FFB020]/40"
-                  : "bg-white/5 text-slate-400 border-white/10 hover:border-white/20"
-              )}
-            >
-              <RotateCw className={cn("w-3 h-3", isAutoRotate ? "animate-spin" : "")} />
-              <span>3D Orbit: {isAutoRotate ? "Active" : "Paused"}</span>
-            </button>
+        <p className="text-xs sm:text-sm text-slate-300 font-normal max-w-xl mx-auto leading-relaxed">
+          Four unshakeable engineering columns supporting your conversion rate, intellectual property, and launch velocity.
+        </p>
+      </div>
 
-            <span className="text-white/20">•</span>
+      {/* ==================================================================== */}
+      {/* 2. REAL ARCHITECTURAL COLONNADE — 4 REAL PILLARS STANDING SIDE-BY-SIDE */}
+      {/* Classical entablature, sculpted capitals, fluted shafts, plinths     */}
+      {/* ==================================================================== */}
+      <div className="relative pt-2 pb-3">
+        {/* Continuous Upper Architectural Cornice Beam across all 4 pillars */}
+        <div className="hidden sm:block absolute top-2 inset-x-4 h-2 bg-gradient-to-r from-transparent via-[#FFB020]/30 to-transparent border-t border-b border-white/15 rounded-full pointer-events-none" />
 
-            <div className="flex items-center gap-1 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">
-              <button
-                type="button"
-                onClick={() => setActivePillarIdx((prev) => (prev > 0 ? prev - 1 : totalPillars - 1))}
-                className="p-1 text-slate-400 hover:text-white transition-colors cursor-pointer"
-                title="Rotate Left"
+        {/* 4 Architectural Columns Colonnade */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5 items-end">
+          {PILLARS.map((pillar, idx) => {
+            const isSelected = idx === activeIdx;
+
+            return (
+              <div
+                key={pillar.id}
+                role="button"
+                tabIndex={0}
+                onClick={() => setActiveIdx(idx)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setActiveIdx(idx);
+                  }
+                }}
+                className={cn(
+                  "group relative cursor-pointer outline-none transition-all duration-300 flex flex-col items-center",
+                  isSelected ? "-translate-y-2" : "hover:-translate-y-1 opacity-85 hover:opacity-100"
+                )}
               >
-                <ArrowLeft className="w-3.5 h-3.5" />
-              </button>
-              <span className="font-mono font-bold text-[11px] text-[#FFB020] px-1.5">
-                0{activePillarIdx + 1} / 04
-              </span>
-              <button
-                type="button"
-                onClick={() => setActivePillarIdx((prev) => (prev + 1) % totalPillars)}
-                className="p-1 text-slate-400 hover:text-white transition-colors cursor-pointer"
-                title="Rotate Right"
-              >
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
-        </div>
+                {/* Active Column Aura Halo */}
+                {isSelected && (
+                  <div className="absolute -inset-2 bg-gradient-to-b from-[#FFB020]/25 via-[#FFB020]/10 to-transparent rounded-3xl blur-lg pointer-events-none -z-10" />
+                )}
 
-        {/* ============================================================== */}
-        {/* 3. PHYSICAL 3D PILLAR ORBITAL CAROUSEL STAGE                   */}
-        {/* ============================================================== */}
-        <div
-          onWheel={handleWheel}
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-          className="relative w-full h-[380px] sm:h-[420px] lg:h-[450px] flex items-center justify-center overflow-hidden my-4"
-          style={{
-            perspective: "1500px",
-            cursor: isDragging ? "grabbing" : "grab",
-          }}
-        >
-          {/* Reflective Ground Pedestal & Orbit Rings */}
-          <div
-            className="absolute w-[680px] h-[340px] rounded-full border-2 border-dashed border-[#FFB020]/30 pointer-events-none"
-            style={{
-              transform: "rotateX(75deg) translateZ(-80px)",
-            }}
-          />
-          <div
-            className="absolute w-[440px] h-[220px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,176,32,0.25)_0%,transparent_70%)] pointer-events-none"
-            style={{
-              transform: "rotateX(75deg) translateZ(-85px)",
-            }}
-          />
-
-          {/* 3D Rotating Monolith Cylinder */}
-          <div
-            className="relative w-[280px] sm:w-[320px] h-[310px] sm:h-[340px] transition-transform duration-700 ease-out"
-            style={{
-              transformStyle: "preserve-3d",
-              transform: `rotateY(${-activePillarIdx * anglePerPillar + mousePos.x * 12}deg) rotateX(${mousePos.y * -8}deg)`,
-            }}
-          >
-            {PILLARS.map((p, idx) => {
-              const pillarAngle = idx * anglePerPillar; // 0, 90, 180, 270 deg
-              const isFront = idx === activePillarIdx;
-
-              return (
+                {/* ======================================================== */}
+                {/* A. COLUMN CAPITAL (THE TOP CROWN OF THE PILLAR)          */}
+                {/* ======================================================== */}
                 <div
-                  key={p.id}
-                  onClick={() => setActivePillarIdx(idx)}
                   className={cn(
-                    "absolute inset-0 rounded-3xl transition-all duration-500 cursor-pointer select-none flex flex-col justify-between overflow-hidden",
-                    isFront
-                      ? "border-2 border-[#FFB020] shadow-[0_0_50px_rgba(255,176,32,0.45)] ring-2 ring-[#FFB020]/40 z-30 opacity-100"
-                      : "border border-white/10 opacity-40 hover:opacity-75 z-10"
+                    "w-full transition-all duration-300 relative rounded-t-2xl px-3 pt-3 pb-2 flex flex-col items-center border",
+                    isSelected
+                      ? "bg-gradient-to-b from-[#1C284E] to-[#121B38] border-[#FFB020] shadow-[0_-5px_15px_rgba(255,176,32,0.25)]"
+                      : "bg-gradient-to-b from-[#101730] to-[#0A1024] border-white/15 group-hover:border-white/30"
                   )}
-                  style={{
-                    transform: `rotateY(${pillarAngle}deg) translateZ(${orbitRadius}px)`,
-                    backfaceVisibility: "hidden",
-                    background: isFront
-                      ? "linear-gradient(180deg, #12214E 0%, #060B22 100%)"
-                      : "linear-gradient(180deg, #0A1435 0%, #040818 100%)",
-                  }}
                 >
-                  {/* ======================================================== */}
-                  {/* ARCHITECTURAL PILLAR TOP CAPITAL (CROWN)                 */}
-                  {/* ======================================================== */}
-                  <div className="p-4 sm:p-5 border-b border-white/10 bg-white/5 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div
-                        className={cn(
-                          "w-8 h-8 rounded-xl font-mono font-black text-xs flex items-center justify-center transition-colors shadow-inner",
-                          isFront ? "bg-[#FFB020] text-[#060B22]" : "bg-white/10 text-slate-300"
-                        )}
-                      >
-                        {p.number}
-                      </div>
-                      <div>
-                        <div className="font-mono text-[9px] uppercase tracking-widest text-[#FFB020] font-bold">
-                          PILLAR {p.number}
-                        </div>
-                        <div className="text-[10px] text-slate-300 font-medium">
-                          {p.capitalSubtitle}
-                        </div>
-                      </div>
+                  {/* Stepped Abacus Molding Top Line */}
+                  <div
+                    className={cn(
+                      "w-full h-1 rounded-full mb-2 transition-colors",
+                      isSelected ? "bg-[#FFB020]" : "bg-white/20 group-hover:bg-white/40"
+                    )}
+                  />
+
+                  {/* Golden Capital Medallion / Icon Badge */}
+                  <div className="relative">
+                    <div
+                      className={cn(
+                        "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 shadow-md border",
+                        isSelected
+                          ? "bg-[#FFB020] text-[#060B22] border-[#FFB020] scale-105"
+                          : "bg-white/5 text-[#FFB020] border-white/10 group-hover:bg-white/10"
+                      )}
+                    >
+                      {React.cloneElement(pillar.icon as React.ReactElement<{ className?: string }>, {
+                        className: cn(
+                          "w-5 h-5 transition-colors",
+                          isSelected ? "text-[#060B22]" : "text-[#FFB020]"
+                        ),
+                      })}
                     </div>
 
+                    {/* Capital Status Beacon */}
                     <span
                       className={cn(
-                        "text-[9.5px] font-mono font-bold px-2 py-0.5 rounded-full border",
-                        isFront
-                          ? "bg-[#FFB020]/20 text-[#FFB020] border-[#FFB020]/40"
+                        "absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full border border-[#060B22]",
+                        isSelected ? "bg-emerald-400 animate-pulse" : "bg-slate-500"
+                      )}
+                    />
+                  </div>
+
+                  {/* Roman Numeral Capital Marker */}
+                  <div className="mt-1.5 flex items-center gap-1 font-mono text-[10px] font-black uppercase tracking-widest text-[#FFB020]">
+                    <span>PILLAR</span>
+                    <span>·</span>
+                    <span>{pillar.roman}</span>
+                  </div>
+                </div>
+
+                {/* ======================================================== */}
+                {/* B. THE FLUTED COLUMN SHAFT (REAL ARCHITECTURAL BODY)    */}
+                {/* Cylindrical gradient + 5 vertical fluted carved grooves */}
+                {/* ======================================================== */}
+                <div
+                  className={cn(
+                    "w-full h-64 sm:h-72 relative transition-all duration-300 border-x flex flex-col justify-between py-4 px-3 overflow-hidden",
+                    isSelected
+                      ? "bg-gradient-to-r from-[#0C1530] via-[#1A264D] via-[#243566] via-[#1A264D] to-[#0A122B] border-[#FFB020]/60 shadow-lg"
+                      : "bg-gradient-to-r from-[#080E24] via-[#121A36] via-[#172244] via-[#121A36] to-[#060B1E] border-white/10 group-hover:border-white/20"
+                  )}
+                >
+                  {/* --- 5 REAL ARCHITECTURAL FLUTES (VERTICAL CARVED GROOVES) --- */}
+                  <div className="absolute inset-y-0 inset-x-2 flex justify-between pointer-events-none -z-0">
+                    {[0, 1, 2, 3, 4].map((fluteIdx) => {
+                      const isCenterFlute = fluteIdx === 2;
+                      return (
+                        <div
+                          key={fluteIdx}
+                          className={cn(
+                            "w-2.5 sm:w-3.5 h-full relative transition-colors duration-300 shadow-[inset_0_2px_6px_rgba(0,0,0,0.6)] border-l border-black/60 border-r border-white/10",
+                            isSelected
+                              ? isCenterFlute
+                                ? "bg-gradient-to-b from-[#FFB020]/20 via-[#FFB020]/40 to-[#FFB020]/15"
+                                : "bg-black/40"
+                              : "bg-black/30 group-hover:bg-black/40"
+                          )}
+                        >
+                          {/* Center flute active energy beam */}
+                          {isSelected && isCenterFlute && (
+                            <div className="absolute inset-0 bg-[#FFB020]/30 animate-pulse blur-[1px]" />
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Specular Column Cylinder Center Lighting Highlight */}
+                  <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-8 bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
+
+                  {/* Pillar Inscribed Content Layer */}
+                  <div className="relative z-10 text-center space-y-1">
+                    <span
+                      className={cn(
+                        "inline-block px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider border transition-colors",
+                        isSelected
+                          ? "bg-[#FFB020]/25 text-[#FFB020] border-[#FFB020]/40"
                           : "bg-white/5 text-slate-400 border-white/10"
                       )}
                     >
-                      {p.metric}
+                      {pillar.badge}
                     </span>
+
+                    <h4 className="font-display font-black text-xs sm:text-sm text-white leading-tight px-1">
+                      {pillar.title}
+                    </h4>
                   </div>
 
-                  {/* ======================================================== */}
-                  {/* ARCHITECTURAL PILLAR SHAFT (FLUTED COLUMN WITH GLOW)     */}
-                  {/* ======================================================== */}
-                  <div className="p-5 flex-1 flex flex-col justify-center space-y-3 relative">
-                    {/* Fluted Vertical Light Columns */}
-                    <div className="absolute inset-y-2 left-6 w-px bg-gradient-to-b from-transparent via-[#FFB020]/30 to-transparent pointer-events-none" />
-                    <div className="absolute inset-y-2 right-6 w-px bg-gradient-to-b from-transparent via-[#FFB020]/30 to-transparent pointer-events-none" />
-
-                    {/* Central 3D Glowing Emblem */}
-                    <div className="flex items-center justify-center">
+                  {/* Central Carved Pillar Medallion */}
+                  <div className="relative z-10 my-auto py-2 text-center">
+                    <div
+                      className={cn(
+                        "inline-block p-2 rounded-xl backdrop-blur-md border transition-all duration-300 max-w-full",
+                        isSelected
+                          ? "bg-[#060B22]/90 border-[#FFB020]/60 shadow-md"
+                          : "bg-black/40 border-white/10"
+                      )}
+                    >
+                      <div className="font-mono text-[9px] uppercase tracking-wider text-slate-400">
+                        Pillar Metric:
+                      </div>
                       <div
                         className={cn(
-                          "w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500",
-                          isFront
-                            ? "bg-gradient-to-tr from-[#FFB020] to-[#FFE082] text-[#060B22] shadow-[0_0_30px_rgba(255,176,32,0.6)] scale-110"
-                            : "bg-white/10 text-slate-400"
+                          "font-display font-black text-[11px] sm:text-xs truncate transition-colors",
+                          isSelected ? "text-[#FFB020]" : "text-white"
                         )}
                       >
-                        {p.icon}
+                        {pillar.metric}
                       </div>
                     </div>
+                  </div>
 
-                    {/* Pillar Title */}
-                    <div className="text-center space-y-1">
-                      <h4 className="font-display font-black text-lg sm:text-xl text-white tracking-tight leading-snug">
-                        {p.title}
-                      </h4>
-                      <p className="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">
-                        {p.tagline}
-                      </p>
+                  {/* Pillar Subtitle & Trigger */}
+                  <div className="relative z-10 text-center space-y-1">
+                    <p className="text-[10px] text-slate-400 font-medium line-clamp-1">
+                      {pillar.subtitle}
+                    </p>
+                    <div
+                      className={cn(
+                        "text-[9.5px] font-mono font-bold flex items-center justify-center gap-1 transition-colors",
+                        isSelected ? "text-[#FFB020]" : "text-slate-500 group-hover:text-slate-300"
+                      )}
+                    >
+                      <span>{isSelected ? "Active Pillar ✓" : "Inspect Pillar →"}</span>
                     </div>
                   </div>
+                </div>
 
-                  {/* ======================================================== */}
-                  {/* ARCHITECTURAL PILLAR PEDESTAL BASE (FOUNDATION)          */}
-                  {/* ======================================================== */}
-                  <div className="p-4 border-t border-white/10 bg-black/30 flex items-center justify-between text-xs">
-                    <span className="text-emerald-400 font-mono font-bold flex items-center gap-1.5 text-[11px]">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>{p.badge}</span>
-                    </span>
-                    <span className="text-[#FFB020] font-bold text-[11px] group-hover:translate-x-0.5 transition-transform">
-                      {isFront ? "Active Pillar ✓" : "Inspect →"}
+                {/* ======================================================== */}
+                {/* C. COLUMN BASE & PEDESTAL (THE PLINTH FOUNDATION)        */}
+                {/* Stepped classical pedestal with bronze Roman numeral     */}
+                {/* ======================================================== */}
+                <div
+                  className={cn(
+                    "w-full transition-all duration-300 relative rounded-b-2xl p-2.5 flex flex-col items-center border",
+                    isSelected
+                      ? "bg-gradient-to-b from-[#121B38] to-[#0A1024] border-[#FFB020] shadow-[0_8px_20px_rgba(255,176,32,0.2)]"
+                      : "bg-gradient-to-b from-[#0A1024] to-[#060A18] border-white/15 group-hover:border-white/30"
+                  )}
+                >
+                  {/* Torus Molding Highlight Line */}
+                  <div
+                    className={cn(
+                      "w-3/4 h-1 rounded-full mb-1.5 transition-colors",
+                      isSelected ? "bg-[#FFB020]" : "bg-white/20"
+                    )}
+                  />
+
+                  {/* Foundation Base Plaque */}
+                  <div className="flex items-center justify-between w-full px-1 text-[10px] font-mono">
+                    <span className="font-bold text-slate-400">FOUNDATION</span>
+                    <span
+                      className={cn(
+                        "font-black px-1.5 py-0.2 rounded border transition-colors",
+                        isSelected
+                          ? "bg-[#FFB020] text-[#060B22] border-[#FFB020]"
+                          : "bg-white/5 text-slate-300 border-white/10"
+                      )}
+                    >
+                      {pillar.number}
                     </span>
                   </div>
                 </div>
-              );
-            })}
-          </div>
 
-          {/* Interactive Navigation Hint */}
-          <div className="absolute bottom-2 inset-x-0 flex items-center justify-center gap-2 text-[10.5px] font-mono text-slate-400 pointer-events-none">
-            <RotateCw className="w-3 h-3 text-[#FFB020]" />
-            <span>Drag horizontally or scroll wheel to rotate 3D architectural pillars</span>
-          </div>
+                {/* Floor Reflection Spotlight Pool beneath each column */}
+                <div
+                  className={cn(
+                    "w-3/4 h-3 rounded-full blur-sm transition-all duration-300 mt-1 pointer-events-none",
+                    isSelected
+                      ? "bg-[#FFB020]/40 scale-x-110"
+                      : "bg-black/60 group-hover:bg-white/10"
+                  )}
+                />
+              </div>
+            );
+          })}
         </div>
+      </div>
 
-        {/* ============================================================== */}
-        {/* 4. ACTIVE PILLAR ARCHITECTURAL SPECIFICATION CONSOLE           */}
-        {/* ============================================================== */}
-        <div className="mt-6 pt-6 border-t border-white/10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-10">
-          {/* Left: Pillar Overview (7 cols) */}
-          <div className="lg:col-span-7 space-y-3">
+      {/* ==================================================================== */}
+      {/* 3. COMPACT ARCHITECTURAL TELEMETRY CONSOLE (FITS IN SINGLE WINDOW)   */}
+      {/* 1-row sleek status strip with specs, active guarantee & Quote CTA   */}
+      {/* ==================================================================== */}
+      <div className="mt-3 p-3.5 sm:p-4 rounded-2xl bg-white/[0.04] border border-white/12 backdrop-blur-md shadow-xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-center">
+          {/* Active Pillar Overview (4 cols) */}
+          <div className="lg:col-span-4 text-left space-y-1 min-w-0">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono font-black uppercase tracking-wider text-[#FFB020] bg-[#FFB020]/15 px-3 py-1 rounded-full border border-[#FFB020]/30">
+              <span className="text-[10px] font-mono font-black uppercase tracking-wider text-[#FFB020] bg-[#FFB020]/20 px-2.5 py-0.5 rounded-full border border-[#FFB020]/30">
                 Pillar {activePillar.number} · {activePillar.badge}
               </span>
-              <span className="text-xs font-mono font-bold text-slate-400">
-                {activePillar.metric}
+              <span className="text-[11px] font-mono font-bold text-emerald-400 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Verified SLA</span>
               </span>
             </div>
 
-            <h4 className="font-display font-black text-xl sm:text-2xl text-white tracking-tight">
+            <div className="font-display font-black text-sm sm:text-base text-white tracking-tight truncate">
               {activePillar.title}
-            </h4>
+            </div>
 
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+            <p className="text-[11px] text-slate-300 leading-snug line-clamp-1 font-normal">
               {activePillar.description}
             </p>
-
-            {/* Pillar Specs Badges */}
-            <div className="grid grid-cols-3 gap-2 pt-2">
-              {activePillar.specs.map((spec, i) => (
-                <div key={i} className="p-3 rounded-2xl bg-white/5 border border-white/10 text-center space-y-0.5">
-                  <div className="text-[9.5px] font-mono uppercase tracking-wider text-slate-400">
-                    {spec.label}
-                  </div>
-                  <div className="font-bold text-xs text-white truncate">
-                    {spec.value}
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
-          {/* Right: Guarantee & Action (5 cols) */}
-          <div className="lg:col-span-5 p-5 sm:p-6 rounded-2xl bg-white/[0.04] border border-white/10 space-y-4 flex flex-col justify-between">
-            <div className="space-y-2">
-              <div className="text-xs font-black uppercase tracking-wider text-[#FFB020] flex items-center gap-1.5">
-                <Award className="w-4 h-4 text-[#FFB020]" />
-                <span>Enterprise Scoping Guarantee</span>
+          {/* 3 Architectural Specifications (5 cols) */}
+          <div className="lg:col-span-5 grid grid-cols-3 gap-1.5 sm:gap-2">
+            {activePillar.specs.map((spec, i) => (
+              <div
+                key={i}
+                className="p-2 sm:p-2.5 rounded-xl bg-white/5 border border-white/10 text-center space-y-0.5"
+              >
+                <div className="text-[9px] font-mono uppercase tracking-wider text-slate-400 truncate">
+                  {spec.label}
+                </div>
+                <div className="font-bold text-[10.5px] sm:text-[11px] text-white truncate">
+                  {spec.value}
+                </div>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Receive a detailed technical roadmap, sprint breakdown, and fixed scope proposal within 24 hours from our senior architects.
-              </p>
-            </div>
+            ))}
+          </div>
 
+          {/* Instant Scoping Action (3 cols) */}
+          <div className="lg:col-span-3 flex items-center justify-end">
             <Link
               href="/get-a-quote"
-              className="btn-luxury-gold btn-shimmer w-full py-3.5 px-5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg cursor-pointer text-center group"
+              className="btn-luxury-gold btn-shimmer w-full py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md cursor-pointer text-center group"
             >
-              <span>Schedule Scoping Session</span>
+              <span>Schedule Scoping</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

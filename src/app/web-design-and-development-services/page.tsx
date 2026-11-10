@@ -45,6 +45,7 @@ import { WebDesignProcessStream } from "@/components/web-design/WebDesignProcess
 import { WebDesignCaseStudies } from "@/components/web-design/WebDesignCaseStudies";
 import { WebDesignEngagementModels } from "@/components/web-design/WebDesignEngagementModels";
 import { WebDesignWhyChooseUs } from "@/components/web-design/WebDesignWhyChooseUs";
+import { WebDesignTeamShowcase } from "@/components/web-design/WebDesignTeamShowcase";
 import { WebDesignFaqAccordion } from "@/components/web-design/WebDesignFaqAccordion";
 import {
   WEB_SERVICES,
@@ -279,28 +280,28 @@ export default function WebDesignServicesPage() {
         </section>
 
         {/* ================================================================ */}
-        {/* 9. WHY CHOOSE HIRE DESI MARKETER? (CAMPUS & TEAM SHOWCASE)        */}
+        {/* 9. THE 4 ARCHITECTURAL PILLARS (SINGLE-WINDOW COLONNADE)         */}
         {/* ================================================================ */}
         <section
           id="why-choose-us"
-          className="py-8 sm:py-12 lg:py-16 bg-white border-y border-[#E2DBD0]"
+          className="py-6 sm:py-8 lg:py-10 bg-gradient-to-b from-[#060B22] via-[#081232] to-[#060B22] text-white border-y border-white/10 relative overflow-hidden scroll-mt-24"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
-            <div className="text-center max-w-3xl mx-auto space-y-2.5">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB020]/20 text-[#B87A00] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#FFB020]" />
-                <span>Key Differentiators &amp; Verified Infrastructure</span>
-              </div>
-              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight">
-                Why Choose Hire Desi Marketer for Web Design and Development Services?
-              </h2>
-              <p className="text-xs sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal">
-                Choosing the right website development partner is important for creating a website that supports your business goals. At Hire Desi Marketer, we combine experienced design and development professionals, modern technologies and transparent project management to deliver tailored website solutions.
-              </p>
-            </div>
-
-            {/* Distinctive Visual Storytelling Experience (Campus, Senior Team & Verified Capabilities) */}
+          {/* Ambient Stage Lighting Glows */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-[#FFB020]/15 rounded-full blur-[140px] pointer-events-none" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <WebDesignWhyChooseUs />
+          </div>
+        </section>
+
+        {/* ================================================================ */}
+        {/* 10. AUTHENTIC IN-HOUSE CAMPUS & LEADERSHIP SHOWCASE              */}
+        {/* ================================================================ */}
+        <section
+          id="campus-showcase"
+          className="py-8 sm:py-12 bg-white border-b border-[#E2DBD0]"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <WebDesignTeamShowcase />
           </div>
         </section>
 
