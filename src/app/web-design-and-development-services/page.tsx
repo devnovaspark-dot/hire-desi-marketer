@@ -118,7 +118,7 @@ export default function WebDesignServicesPage() {
   };
 
   return (
-    <div suppressHydrationWarning className="flex flex-col min-h-screen bg-[#F6F4EE] text-[#0B1B3A] w-full max-w-full overflow-x-clip">
+    <div suppressHydrationWarning className="flex flex-col min-h-screen bg-[#060B22] text-[#0B1B3A] w-full max-w-full overflow-x-clip">
       {/* Schema.org Structured Data */}
       <script
         type="application/ld+json"
@@ -127,7 +127,7 @@ export default function WebDesignServicesPage() {
 
       <Header />
 
-      <main className="flex-1 pt-16 sm:pt-18 pb-12 w-full max-w-full overflow-x-clip">
+      <main className="flex-1 pt-0 pb-12 w-full max-w-full overflow-x-clip">
         {/* ================================================================ */}
         {/* 1. HERO SECTION – HIGH-CONVERTING BESPOKE AGENCY ARCHITECTURE     */}
         {/* ================================================================ */}
@@ -184,7 +184,7 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 4. TECHNOLOGIES & PLATFORMS WE WORK WITH                          */}
         {/* ================================================================ */}
-        <section id="tech-stack" className="py-8 sm:py-12 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
+        <section id="tech-stack" className="py-8 sm:py-12 lg:py-16 bg-[#FAF8F5] scroll-mt-24 sm:scroll-mt-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
             <div className="text-center max-w-3xl mx-auto space-y-3 pb-6 border-b border-[#E2DBD0]">
               <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
@@ -230,7 +230,7 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 6. OUR WEBSITE DESIGN & DEVELOPMENT PROCESS                       */}
         {/* ================================================================ */}
-        <section id="process" className="py-8 sm:py-12 lg:py-16">
+        <section id="process" className="py-8 sm:py-12 lg:py-16 bg-[#FAF8F5] border-t border-[#E2DBD0]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
             <div className="text-center max-w-3xl mx-auto space-y-3 pb-6 border-b border-[#E2DBD0]">
               <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
@@ -282,7 +282,7 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 8. WEBSITE INSPIRATION & LIVE DESIGN REFERENCES                  */}
         {/* ================================================================ */}
-        <section id="work" className="py-8 sm:py-12 lg:py-16 scroll-mt-24 sm:scroll-mt-28">
+        <section id="work" className="py-8 sm:py-12 lg:py-16 bg-[#FAF8F5] scroll-mt-24 sm:scroll-mt-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
             <div className="text-center max-w-3xl mx-auto space-y-3 pb-6 border-b border-[#E2DBD0]">
               <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
@@ -328,7 +328,7 @@ export default function WebDesignServicesPage() {
         {/* ================================================================ */}
         {/* 9. FINAL CTA SECTION WITH DUAL PANE LEAD FORM & TEAM ASSURANCE   */}
         {/* ================================================================ */}
-        <section id="lead-form" className="py-8 sm:py-14 lg:py-16 relative overflow-hidden scroll-mt-20 sm:scroll-mt-24">
+        <section id="lead-form" className="py-8 sm:py-14 lg:py-16 bg-[#FAF8F5] relative overflow-hidden scroll-mt-20 sm:scroll-mt-24">
           <div id="final-cta" className="sr-only" />
           <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
             <div className="rounded-2xl sm:rounded-3xl skeuo-card-dark text-white p-3.5 sm:p-8 lg:p-12 border border-white/15 shadow-2xl relative overflow-hidden">
