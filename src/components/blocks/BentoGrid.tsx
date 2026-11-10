@@ -312,45 +312,12 @@ const ARCHITECTURE_NODES: ArchitectureNode[] = [
 ];
 
 export default function BentoGrid() {
-  const [activeIndex, setActiveIndex] = useState<number>(3); // Default to 04 Client-Editable CMS to match screenshot
-  const [progress, setProgress] = useState<number>(85);
-  const [isPaused, setIsPaused] = useState<boolean>(false);
-  const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const active = ARCHITECTURE_NODES[activeIndex] || ARCHITECTURE_NODES[0];
 
-  // Auto-cycle through the 6 architecture nodes unless the user interacts
-  useEffect(() => {
-    if (isPaused) return;
-
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % ARCHITECTURE_NODES.length);
-      setProgress(60);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [isPaused]);
-
-  // Micro progress animation for telemetry
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prev) => (prev >= 96 ? 70 : prev + 5));
-    }, 1600);
-
-    return () => clearInterval(timer);
-  }, [activeIndex]);
-
   const handleSelectNode = (index: number) => {
     setActiveIndex(index);
-    setProgress(85);
-    setIsPaused(true);
-
-    if (pauseTimeoutRef.current) {
-      clearTimeout(pauseTimeoutRef.current);
-    }
-    pauseTimeoutRef.current = setTimeout(() => {
-      setIsPaused(false);
-    }, 15000);
   };
 
   // Coordinates for the 4 satellite wires on 600px wide SVG viewBox:
@@ -507,9 +474,25 @@ export default function BentoGrid() {
                     preserveAspectRatio="none"
                   >
                     <defs>
-                      <linearGradient id="monochrome-wire" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#060B22" stopOpacity="0.15" />
-                        <stop offset="80%" stopColor="#FFB020" stopOpacity="0.8" />
+                      {/* Physical glowing gold filter for authentic radiant beam */}
+                      <filter id="circuit-gold-glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="3.5" result="blur" />
+                        <feMerge>
+                          <feMergeNode in="blur" />
+                          <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                      </filter>
+
+                      {/* Smooth solid base wire track gradient matching screenshot */}
+                      <linearGradient id="circuit-base-wire" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#DDD5C9" />
+                        <stop offset="100%" stopColor="#C5BDB1" />
+                      </linearGradient>
+
+                      {/* Flowing golden light stream gradient */}
+                      <linearGradient id="circuit-gold-stream" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#DDD5C9" stopOpacity="0.4" />
+                        <stop offset="50%" stopColor="#FFB020" stopOpacity="0.85" />
                         <stop offset="100%" stopColor="#FFB020" stopOpacity="1" />
                       </linearGradient>
                     </defs>
@@ -518,28 +501,37 @@ export default function BentoGrid() {
                       const pathD = `M ${x} 0 C ${x} 45, ${hubCenterX + (x - hubCenterX) * 0.15} 60, ${hubCenterX} ${hubCenterY}`;
                       return (
                         <g key={sIdx}>
-                          {/* Base Wire Track */}
+                          {/* 1. Base Solid Wire Track (matching screenshot) */}
                           <path
                             d={pathD}
-                            stroke="rgba(6, 11, 34, 0.15)"
+                            stroke="url(#circuit-base-wire)"
                             strokeWidth="1.8"
-                            strokeDasharray="3 3"
                             strokeLinecap="round"
                           />
 
-                          {/* Active subtle pulse wire */}
+                          {/* 2. Flowing Golden Light Beam along Path */}
                           <path
                             d={pathD}
-                            stroke="url(#monochrome-wire)"
-                            strokeWidth="2.2"
+                            stroke="url(#circuit-gold-stream)"
+                            strokeWidth="2.4"
                             strokeLinecap="round"
+                            opacity="0.85"
                           />
 
-                          {/* Traveling refined gold photon particle */}
-                          <circle r="3.5" fill="#FFB020">
+                          {/* 3. Radiant Glowing Gold Flowing Photon Particle */}
+                          <circle r="4" fill="#FFB020" filter="url(#circuit-gold-glow)">
                             <animateMotion
                               path={pathD}
-                              dur={`${1.6 + sIdx * 0.25}s`}
+                              dur={`${2.0 + sIdx * 0.35}s`}
+                              repeatCount="indefinite"
+                            />
+                          </circle>
+
+                          {/* 4. White-hot center core for physical sharpness */}
+                          <circle r="2" fill="#FFFFFF">
+                            <animateMotion
+                              path={pathD}
+                              dur={`${2.0 + sIdx * 0.35}s`}
                               repeatCount="indefinite"
                             />
                           </circle>
@@ -552,7 +544,7 @@ export default function BentoGrid() {
                 {/* 3. Central Compiled Hub Capsule */}
                 <div className="flex justify-center relative z-10 -mt-2">
                   <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-[#060B22] via-[#0B1638] to-[#060B22] text-white font-display font-black text-xs shadow-md border-2 border-[#FFB020] hover:scale-105 transition-transform cursor-pointer">
-                    <Zap className="w-3.5 h-3.5 text-[#FFB020] fill-[#FFB020] animate-pulse" />
+                    <Zap className="w-3.5 h-3.5 text-[#FFB020] fill-[#FFB020]" />
                     <span>{active.hubLabel}</span>
                   </div>
                 </div>
@@ -561,10 +553,7 @@ export default function BentoGrid() {
                 <div className="mt-4 space-y-1.5 pt-3 border-t border-[#E2DBD0]">
                   <div className="flex items-center justify-between text-[11px] font-mono">
                     <div className="flex items-center gap-2 text-slate-700">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
-                      </span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
                       <span className="truncate max-w-[220px] sm:max-w-none text-left font-medium">
                         {active.statusLabel}
                       </span>
@@ -576,8 +565,8 @@ export default function BentoGrid() {
 
                   <div className="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden p-0.5">
                     <div
-                      className="h-full bg-gradient-to-r from-[#FFB020] to-[#E59A10] rounded-full transition-all duration-700 ease-out"
-                      style={{ width: `${progress}%` }}
+                      className="h-full bg-gradient-to-r from-[#FFB020] to-[#E59A10] rounded-full transition-all duration-500 ease-out"
+                      style={{ width: "94%" }}
                     />
                   </div>
                 </div>
