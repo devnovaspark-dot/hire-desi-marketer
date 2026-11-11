@@ -1,35 +1,24 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
   Sparkles,
   ArrowRight,
   AlertTriangle,
   Zap,
-  CheckCircle2,
-  Activity,
   ShieldCheck,
   TrendingDown,
   TrendingUp,
-  Droplets,
+  Activity,
   Gauge,
-  Flame,
+  CheckCircle2,
+  XCircle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
 
 type EngineMode = "leaky" | "hdm";
-
-// Real High-Conversion Portfolio & Benchmark Screens for Scroll-Driven Roll-Out Shutter
-const ROLLOUT_TILES = [
-  { src: "/images/ref-linear.jpg", title: "SaaS Enterprise", side: "left" },
-  { src: "/images/ref-allbirds.jpg", title: "Direct-to-Consumer", side: "left" },
-  { src: "/images/ref-onemedical.jpg", title: "Healthcare Portal", side: "left" },
-  { src: "/images/ref-mckinsey.jpg", title: "Global Corporate", side: "right" },
-  { src: "/images/services-ui-design-showcase.jpg", title: "High-AOV Storefront", side: "right" },
-  { src: "/images/hero-devices-mockup.jpg", title: "Web Application", side: "right" },
-];
 
 // Real Brand SVGs for authentic industry recognizability
 function GoogleAdsIcon({ className = "w-4 h-4" }: { className?: string }) {
@@ -112,46 +101,60 @@ function BrandDirectIcon({ className = "w-4 h-4" }: { className?: string }) {
   );
 }
 
-interface TrafficChannel {
+interface MetricDial {
+  label: string;
+  value: string;
+  note: string;
+}
+
+interface ChannelData {
   id: string;
   name: string;
   badge: string;
   icon: React.ReactNode;
-  leakyState: {
-    friction: string;
-    speed: string;
-    bounce: string;
-    roas: string;
-    lossHeadline: string;
+  leaky: {
+    headline: string;
+    description: string;
+    step2Status: string;
+    step3Status: string;
+    speed: MetricDial;
+    quality: MetricDial;
+    roas: MetricDial;
   };
-  hdmState: {
-    breakthrough: string;
-    speed: string;
-    conversion: string;
-    roas: string;
-    growthHeadline: string;
+  hdm: {
+    headline: string;
+    description: string;
+    step2Status: string;
+    step3Status: string;
+    speed: MetricDial;
+    quality: MetricDial;
+    roas: MetricDial;
   };
 }
 
-const CHANNELS: TrafficChannel[] = [
+const CHANNELS: ChannelData[] = [
   {
     id: "google-ads",
     name: "Google Ads",
     badge: "Paid Search Intent",
     icon: <GoogleAdsIcon className="w-4 h-4 shrink-0" />,
-    leakyState: {
-      friction: "Slow generic lander with mismatched headlines causes 72% bounce before form view.",
-      speed: "3.6s Initial Paint",
-      bounce: "72% Bounce Rate",
-      roas: "0.8x (Budget Waste)",
-      lossHeadline: "Paying Top Dollar for Clicks That Bounce in 3 Seconds",
+    leaky: {
+      headline: "Paying High CPC for Clicks That Bounce in 3 Seconds",
+      description: "Generic slow templates cause 72% bounce before the landing page hero finishes loading, wasting budget on unengaged clicks.",
+      step2Status: "3.6s Template Freeze (72% Dropoff)",
+      step3Status: "Wasted Ad Spend",
+      speed: { label: "Initial Paint Speed", value: "3.6s", note: "Slow template lag" },
+      quality: { label: "Quality Score", value: "3/10", note: "High CPC bid penalty" },
+      roas: { label: "Return on Ad Spend", value: "0.8x", note: "Capital leak" },
     },
-    hdmState: {
-      breakthrough: "Exact keyword-to-headline alignment with sub-second page paint and 1-tap booking.",
-      speed: "0.58s Initial Paint",
-      conversion: "10/10 Quality Score",
-      roas: "4.8x High-Impact ROAS",
-      growthHeadline: "Lowest Cost-Per-Click & 3.8x Higher Inbound Qualified Leads",
+    hdm: {
+      headline: "Lowest Cost-Per-Click & 3.8x Higher Inbound Leads",
+      description: "Exact keyword-to-headline alignment with sub-second page paint turns expensive search clicks into instant booked consultations.",
+      step2Status: "0.58s Edge Paint (Zero Dropoff)",
+      step3Status: "Verified Inbound Inquiry",
+      speed: { label: "Initial Paint Speed", value: "0.58s", note: "Sub-second edge paint ✓" },
+      quality: { label: "Quality Score", value: "10/10", note: "Lowest CPC / Top rank ✓" },
+      roas: { label: "Return on Ad Spend", value: "4.8x", note: "High-impact ROAS ✓" },
     },
   },
   {
@@ -159,19 +162,23 @@ const CHANNELS: TrafficChannel[] = [
     name: "Meta & Instagram",
     badge: "Social Mobile Feed",
     icon: <MetaInstagramIcon className="w-4 h-4 shrink-0" />,
-    leakyState: {
-      friction: "Mobile lag > 2.5s and clumsy multi-page forms lose 81% of feed shoppers instantly.",
-      speed: "3.9s Mobile Load",
-      bounce: "81% Dropoff Rate",
-      roas: "0.6x (Negative ROI)",
-      lossHeadline: "Ad Algorithms Optimize for Bounced Mobile Clicks",
+    leaky: {
+      headline: "Mobile Feed Shoppers Abandon Clumsy Multi-Page Forms",
+      description: "Mobile friction and sluggish page weight lose 81% of feed scrollers before they reach the second fold.",
+      step2Status: "3.9s Mobile Lag (81% Dropoff)",
+      step3Status: "Negative Ad ROI",
+      speed: { label: "Mobile Paint Speed", value: "3.9s", note: "Severe mobile dropoff" },
+      quality: { label: "Conversion Rate", value: "0.9%", note: "Cart abandon penalty" },
+      roas: { label: "Return on Ad Spend", value: "0.6x", note: "Negative return" },
     },
-    hdmState: {
-      breakthrough: "Thumb-first mobile flow with server-side CAPI event tracking and instant slide cart.",
-      speed: "0.62s Mobile Paint",
-      conversion: "4.2x ROAS Lift",
-      roas: "5.4x Blended ROAS",
-      growthHeadline: "Frictionless Mobile Checkout with Maximum Return on Ad Spend",
+    hdm: {
+      headline: "Thumb-First Mobile Flow with Maximum ROAS",
+      description: "Ultra-responsive mobile layout, instant slide cart, and frictionless 1-tap checkout capture mobile buyers seamlessly.",
+      step2Status: "0.62s Mobile Paint (Instant Flow)",
+      step3Status: "Direct Customer Purchase",
+      speed: { label: "Mobile Paint Speed", value: "0.62s", note: "Fluid 60 FPS mobile UI ✓" },
+      quality: { label: "Conversion Rate", value: "4.6%", note: "+380% conversion lift ✓" },
+      roas: { label: "Return on Ad Spend", value: "5.4x", note: "Compounding returns ✓" },
     },
   },
   {
@@ -179,39 +186,47 @@ const CHANNELS: TrafficChannel[] = [
     name: "Technical SEO",
     badge: "Organic Search",
     icon: <GoogleSearchIcon className="w-4 h-4 shrink-0" />,
-    leakyState: {
-      friction: "Layout shifts (CLS) and failing Core Web Vitals get demoted by Google rank algorithms.",
-      speed: "Failing Vitals",
-      bounce: "65% Pogo-Sticking",
-      roas: "Declining Traffic",
-      lossHeadline: "Google Demotes Organic Keyword Rankings Due to Poor UX",
+    leaky: {
+      headline: "Google Rank Penalties from Layout Shift and Poor Vitals",
+      description: "Failing Core Web Vitals and unstable layout shifts (CLS) trigger algorithmic rank demotions, drying up organic traffic.",
+      step2Status: "Failing Vitals (65% Pogo-Sticking)",
+      step3Status: "Declining Rankings",
+      speed: { label: "Core Web Vitals", value: "Poor", note: "Fails Google audit" },
+      quality: { label: "Organic Rank Position", value: "#18-35", note: "Suppressed keyword rank" },
+      roas: { label: "Organic Pipeline", value: "Stagnant", note: "Zero compounding growth" },
     },
-    hdmState: {
-      breakthrough: "Clean semantic HTML5, zero CLS, and automated Schema.org structured JSON-LD data.",
-      speed: "100/100 Core Web Vitals",
-      conversion: "Top-3 Keyword Ranks",
-      roas: "Free Compounding Leads",
-      growthHeadline: "Compounding Organic Rankings with Sub-Second Edge Delivery",
+    hdm: {
+      headline: "Compounding Top-3 Ranks with Sub-Second Edge Delivery",
+      description: "Clean semantic HTML5, zero CLS, and automated Schema.org structured data get rewarded with top Google rankings.",
+      step2Status: "100/100 Vitals (Sub-Second SLA)",
+      step3Status: "Top-3 Organic Positions",
+      speed: { label: "Core Web Vitals", value: "100/100", note: "Google top 1% benchmark ✓" },
+      quality: { label: "Organic Rank Position", value: "Top 3", note: "High search authority ✓" },
+      roas: { label: "Organic Pipeline", value: "3.8x Lift", note: "Free compounding leads ✓" },
     },
   },
   {
-    id: "social-brand",
+    id: "brand",
     name: "Brand & Direct",
     badge: "Executive Authority",
     icon: <BrandDirectIcon className="w-4 h-4 shrink-0" />,
-    leakyState: {
-      friction: "Executive referrals land on outdated homepages with no clear commercial next step.",
-      speed: "Confusing Navigation",
-      bounce: "58% Inactive Exits",
-      roas: "Lost Big Deals",
-      lossHeadline: "High-Ticket Enterprise Referrals Leave Without Inquiring",
+    leaky: {
+      headline: "High-Ticket Enterprise Referrals Bounce Without Inquiring",
+      description: "Executive referrals land on dated, generic homepages with no clear commercial next step, losing major deals.",
+      step2Status: "Confusing Navigation (58% Exit)",
+      step3Status: "Lost Enterprise Deals",
+      speed: { label: "Executive Perception", value: "Generic", note: "Template look & feel" },
+      quality: { label: "Form Completion", value: "12%", note: "Friction-heavy intake" },
+      roas: { label: "Enterprise Pipeline", value: "Low Win-Rate", note: "Weak brand credibility" },
     },
-    hdmState: {
-      breakthrough: "Curated campaign landers with direct interactive Calendar & lead qualification funnel.",
-      speed: "Instant Interactive Flow",
-      conversion: "+48% Booked Calls",
-      roas: "Enterprise Pipeline",
-      growthHeadline: "Direct Conversion of High-Value Founder & Enterprise Inquiries",
+    hdm: {
+      headline: "Institutional Authority & Direct Enterprise Scoping",
+      description: "Bespoke executive-grade design, interactive scoping modules, and direct senior calendar routing secure major accounts.",
+      step2Status: "Bespoke Authority (Sub-Second Flow)",
+      step3Status: "High-Ticket Client Retained",
+      speed: { label: "Executive Perception", value: "Elite Tier", note: "Bespoke digital craft ✓" },
+      quality: { label: "Form Completion", value: "48%", note: "Direct 1-tap intake ✓" },
+      roas: { label: "Enterprise Pipeline", value: "High-Value", note: "Premium pricing power ✓" },
     },
   },
 ];
@@ -219,100 +234,25 @@ const CHANNELS: TrafficChannel[] = [
 export function MarketingWebsiteSynergy() {
   const [mode, setMode] = useState<EngineMode>("hdm");
   const [activeChannelId, setActiveChannelId] = useState<string>("google-ads");
-  const headerRef = useRef<HTMLDivElement>(null);
-  const [rollout, setRollout] = useState<number>(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!headerRef.current) return;
-      const rect = headerRef.current.getBoundingClientRect();
-      const winH = window.innerHeight;
-      // Start roll-out as header scrolls into view, complete smoothly within 350px
-      const start = winH * 0.9;
-      const end = winH * 0.35;
-      const p = Math.min(Math.max((start - rect.top) / (start - end), 0), 1);
-      setRollout(p);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const activeChannel =
     CHANNELS.find((c) => c.id === activeChannelId) || CHANNELS[0];
+  const state = mode === "hdm" ? activeChannel.hdm : activeChannel.leaky;
+  const isHdm = mode === "hdm";
 
   return (
     <section
       id="marketing-foundation"
-      className="py-10 sm:py-14 lg:py-16 bg-[#FAF8F5] border-y border-[#E2DBD0] select-none scroll-mt-24 relative overflow-hidden"
+      className="py-12 sm:py-16 lg:py-20 bg-[#FAF8F5] border-y border-[#E2DBD0] select-none scroll-mt-24 relative overflow-hidden"
     >
-      {/* ============================================================ */}
-      {/* 1. SCROLL-DRIVEN PARALLAX ROLL-OUT SHUTTER HEADER            */}
-      {/* Images part laterally on scroll; zero dead space below       */}
-      {/* ============================================================ */}
-      <div
-        ref={headerRef}
-        className="relative max-w-4xl mx-auto px-4 text-center mb-6 sm:mb-8"
-      >
-        {/* Floating Shutter Preview Tiles (Left & Right Flanks) */}
-        <div className="pointer-events-none absolute inset-0 z-20 hidden md:flex items-center justify-between px-2 sm:px-6 overflow-hidden">
-          {/* Left Shutter Group */}
-          <div
-            className="flex flex-col gap-2.5 transition-transform duration-300 ease-out will-change-transform"
-            style={{
-              transform: `translate3d(-${rollout * 160}%, 0, 0) rotate(-${rollout * 10}deg)`,
-              opacity: Math.max(0, 1 - rollout * 1.4),
-            }}
-          >
-            {ROLLOUT_TILES.filter((t) => t.side === "left").map((tile, i) => (
-              <div
-                key={i}
-                className="w-32 sm:w-36 h-20 sm:h-22 rounded-xl overflow-hidden border-2 border-white/90 shadow-xl bg-slate-900"
-              >
-                <img
-                  src={tile.src}
-                  alt={tile.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Right Shutter Group */}
-          <div
-            className="flex flex-col gap-2.5 transition-transform duration-300 ease-out will-change-transform"
-            style={{
-              transform: `translate3d(${rollout * 160}%, 0, 0) rotate(${rollout * 10}deg)`,
-              opacity: Math.max(0, 1 - rollout * 1.4),
-            }}
-          >
-            {ROLLOUT_TILES.filter((t) => t.side === "right").map((tile, i) => (
-              <div
-                key={i}
-                className="w-32 sm:w-36 h-20 sm:h-22 rounded-xl overflow-hidden border-2 border-white/90 shadow-xl bg-slate-900"
-              >
-                <img
-                  src={tile.src}
-                  alt={tile.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Revealed Section Headline (Unveiled as tiles part) */}
-        <div
-          className="space-y-2.5 transition-all duration-500 relative z-10"
-          style={{
-            opacity: Math.min(1, 0.45 + rollout * 0.55),
-            transform: `scale(${0.97 + rollout * 0.03})`,
-          }}
-        >
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-7 sm:space-y-9 text-center">
+        {/* ============================================================ */}
+        {/* 1. CLEAN SECTION HEADER                                      */}
+        {/* ============================================================ */}
+        <div className="space-y-3 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-[#FFB020]" />
-            <span>03 · The Marketing + Website Relationship</span>
+            <span>Conversion Architecture · Marketing &amp; Website Synergy</span>
           </div>
 
           <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-[#0B1B3A] tracking-tight leading-tight">
@@ -320,32 +260,27 @@ export function MarketingWebsiteSynergy() {
           </h2>
 
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
-            Your ad spend is only as profitable as the website it sends visitors to. See the difference between a typical template and an engineered conversion engine.
+            Your ad spend is only as profitable as the website it sends visitors to. Compare how traffic performs on a typical template versus an engineered conversion engine.
           </p>
         </div>
-      </div>
-
-      {/* ============================================================ */}
-      {/* 2. THE INTERACTIVE CONVERSION ENGINE SIMULATOR               */}
-      {/* ============================================================ */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 text-center pb-8 sm:pb-12">
 
         {/* ============================================================ */}
-        {/* 2. DUAL-MODE INTERACTIVE TOGGLE SWITCH                       */}
+        {/* 2. DUAL-MODE CONTROLLER & CHANNELS (SUPER CLEAN UI)           */}
         {/* ============================================================ */}
-        <div className="flex flex-col items-center justify-center space-y-2">
-          <div className="p-1.5 bg-white rounded-2xl border border-[#E2DBD0] shadow-sm flex items-center gap-2 max-w-md w-full">
+        <div className="flex flex-col items-center gap-3.5 sm:gap-4 max-w-3xl mx-auto">
+          {/* Elegant Mode Toggle Switch */}
+          <div className="inline-flex items-center p-1 bg-white rounded-2xl border border-[#E2DBD0] shadow-xs">
             <button
               type="button"
               onClick={() => setMode("leaky")}
               className={cn(
-                "flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 border",
-                mode === "leaky"
-                  ? "bg-rose-950 text-rose-300 border-rose-500/50 shadow-md scale-102 font-black"
-                  : "bg-transparent text-slate-600 border-transparent hover:text-slate-900 hover:bg-slate-50"
+                "py-2 px-3.5 sm:px-5 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center gap-1.5 sm:gap-2",
+                !isHdm
+                  ? "bg-rose-950 text-rose-300 border border-rose-500/40 shadow-sm font-black"
+                  : "bg-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-50"
               )}
             >
-              <AlertTriangle className="w-4 h-4 text-rose-400" />
+              <AlertTriangle className={cn("w-3.5 h-3.5", !isHdm ? "text-rose-400" : "text-slate-400")} />
               <span>Typical Leaky Website</span>
             </button>
 
@@ -353,274 +288,276 @@ export function MarketingWebsiteSynergy() {
               type="button"
               onClick={() => setMode("hdm")}
               className={cn(
-                "flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 border",
-                mode === "hdm"
-                  ? "bg-[#060B22] text-[#FFB020] border-[#FFB020] shadow-md scale-102 font-black"
-                  : "bg-transparent text-slate-600 border-transparent hover:text-slate-900 hover:bg-slate-50"
+                "py-2 px-3.5 sm:px-5 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center gap-1.5 sm:gap-2",
+                isHdm
+                  ? "bg-[#060B22] text-[#FFB020] border border-[#FFB020]/60 shadow-sm font-black"
+                  : "bg-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-50"
               )}
             >
-              <Zap className="w-4 h-4 text-[#FFB020]" />
+              <Zap className={cn("w-3.5 h-3.5", isHdm ? "text-[#FFB020] fill-[#FFB020]" : "text-slate-400")} />
               <span>HDM Revenue Engine</span>
             </button>
           </div>
 
-          <div className="text-[11px] font-mono text-slate-500">
-            {mode === "hdm" ? (
-              <span className="text-teal-700 font-bold flex items-center gap-1.5 justify-center">
-                <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-                Simulating: Sub-second paint, zero layout shift, 1-tap conversion flow
-              </span>
-            ) : (
-              <span className="text-rose-700 font-bold flex items-center gap-1.5 justify-center">
-                <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping" />
-                Simulating: Slow legacy template, 70%+ bounce rate, wasted ad budget
-              </span>
-            )}
+          {/* 4 Clean Traffic Channels Pills */}
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap">
+            {CHANNELS.map((ch) => {
+              const isSelected = ch.id === activeChannelId;
+              return (
+                <button
+                  key={ch.id}
+                  type="button"
+                  onClick={() => setActiveChannelId(ch.id)}
+                  className={cn(
+                    "px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center gap-2 border shadow-2xs",
+                    isSelected
+                      ? isHdm
+                        ? "bg-[#060B22] text-white border-[#FFB020] ring-2 ring-[#FFB020]/25 shadow-md scale-102"
+                        : "bg-rose-950 text-rose-100 border-rose-500 ring-2 ring-rose-500/25 shadow-md scale-102"
+                      : "bg-white text-slate-700 border-[#E2DBD0] hover:border-slate-400 hover:bg-slate-50"
+                  )}
+                >
+                  <div className="w-4 h-4 flex items-center justify-center shrink-0">
+                    {ch.icon}
+                  </div>
+                  <span>{ch.name}</span>
+                  {isSelected && (
+                    <span
+                      className={cn(
+                        "w-1.5 h-1.5 rounded-full",
+                        isHdm ? "bg-teal-400 animate-pulse" : "bg-rose-400 animate-ping"
+                      )}
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
 
         {/* ============================================================ */}
-        {/* 3. CHANNEL SELECTOR STRIP WITH REAL BRAND ICONS              */}
-        {/* ============================================================ */}
-        <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 overflow-x-auto pb-1 px-1 no-scrollbar">
-          {CHANNELS.map((ch) => {
-            const isSelected = ch.id === activeChannelId;
-            return (
-              <button
-                key={ch.id}
-                type="button"
-                onClick={() => setActiveChannelId(ch.id)}
-                className={cn(
-                  "px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-bold transition-all duration-300 cursor-pointer whitespace-nowrap flex items-center gap-2.5 border shadow-2xs group",
-                  isSelected
-                    ? mode === "hdm"
-                      ? "bg-[#060B22] text-white border-[#FFB020] ring-2 ring-[#FFB020]/25 shadow-md scale-102"
-                      : "bg-rose-950 text-rose-100 border-rose-500 ring-2 ring-rose-500/25 shadow-md scale-102"
-                    : "bg-white text-slate-700 border-[#E2DBD0] hover:border-slate-400 hover:bg-white"
-                )}
-              >
-                <div
-                  className={cn(
-                    "w-6 h-6 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110",
-                    isSelected ? "bg-white/10" : "bg-[#FAF8F5]"
-                  )}
-                >
-                  {ch.icon}
-                </div>
-                <span className="font-extrabold">{ch.name}</span>
-                <span className="text-[10px] font-mono opacity-70 hidden md:inline">
-                  ({ch.badge})
-                </span>
-                {isSelected && (
-                  <span
-                    className={cn(
-                      "w-1.5 h-1.5 rounded-full ml-0.5",
-                      mode === "hdm" ? "bg-teal-400 animate-pulse" : "bg-rose-400 animate-ping"
-                    )}
-                  />
-                )}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Animated Traffic Data Stream Beam Connecting Channel to Chamber */}
-        <div className="relative h-4 flex items-center justify-center overflow-hidden pointer-events-none">
-          <div
-            className={cn(
-              "w-1 h-full rounded-full transition-all duration-500",
-              mode === "hdm"
-                ? "bg-gradient-to-b from-[#FFB020] via-teal-400 to-teal-400 shadow-[0_0_8px_rgba(45,212,191,0.8)]"
-                : "bg-gradient-to-b from-rose-500 to-rose-700 shadow-[0_0_8px_rgba(244,63,94,0.8)] animate-pulse"
-            )}
-          />
-        </div>
-
-        {/* ============================================================ */}
-        {/* 4. THE INTERACTIVE CONVERSION CHAMBER (ANIMATED HUD DISPLAY) */}
+        {/* 3. LUXURY DARK CONVERSION ENGINE HUD (SUPER CLEAN & ATTRACTIVE) */}
         {/* ============================================================ */}
         <div
           className={cn(
-            "rounded-2xl sm:rounded-3xl border transition-all duration-700 p-3.5 sm:p-6 lg:p-10 text-white relative overflow-hidden shadow-2xl text-left",
-            mode === "hdm"
-              ? "bg-gradient-to-br from-[#060B22] via-[#091638] to-[#060B22] border-[#FFB020]/40 shadow-[0_25px_60px_-15px_rgba(255,176,32,0.25)]"
-              : "bg-gradient-to-br from-[#1C0A0E] via-[#2A0E15] to-[#140609] border-rose-500/40 shadow-[0_25px_60px_-15px_rgba(239,68,68,0.25)]"
+            "rounded-2xl sm:rounded-3xl border transition-all duration-500 p-4 sm:p-7 lg:p-9 text-white relative overflow-hidden shadow-2xl text-left",
+            isHdm
+              ? "bg-gradient-to-br from-[#060B22] via-[#091536] to-[#040817] border-[#FFB020]/40 shadow-[0_20px_50px_-15px_rgba(6,11,34,0.5)]"
+              : "bg-gradient-to-br from-[#1C0A0E] via-[#240B12] to-[#120508] border-rose-500/40 shadow-[0_20px_50px_-15px_rgba(239,68,68,0.25)]"
           )}
         >
-          {/* Ambient Chamber Glows */}
+          {/* Subtle Ambient Glows */}
           <div
             className={cn(
-              "absolute -top-24 -right-24 w-96 h-96 rounded-full blur-[130px] pointer-events-none transition-all duration-700",
-              mode === "hdm" ? "bg-[#FFB020]/25" : "bg-rose-600/30"
+              "absolute -top-24 -right-24 w-80 h-80 rounded-full blur-[100px] pointer-events-none transition-all duration-700",
+              isHdm ? "bg-[#FFB020]/20" : "bg-rose-600/25"
             )}
           />
           <div
             className={cn(
-              "absolute -bottom-24 -left-24 w-96 h-96 rounded-full blur-[130px] pointer-events-none transition-all duration-700",
-              mode === "hdm" ? "bg-teal-500/25" : "bg-red-800/25"
+              "absolute -bottom-24 -left-24 w-80 h-80 rounded-full blur-[100px] pointer-events-none transition-all duration-700",
+              isHdm ? "bg-teal-500/20" : "bg-red-800/20"
             )}
           />
 
-          <div className="relative z-10 space-y-3.5 sm:space-y-6 lg:space-y-8">
-            {/* Top State Status Bar */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 pb-3 sm:pb-5 border-b border-white/10">
-              <div className="flex items-center gap-2.5 sm:gap-3">
+          <div className="relative z-10 space-y-5 sm:space-y-6">
+            {/* Top State Badge & Channel Indicator */}
+            <div className="flex items-center justify-between pb-3.5 border-b border-white/10 gap-3">
+              <div className="flex items-center gap-2.5">
                 <div
                   className={cn(
-                    "w-8 h-8 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center font-black transition-all duration-500 shadow-md shrink-0",
-                    mode === "hdm"
-                      ? "bg-[#FFB020] text-[#060B22] ring-2 ring-[#FFB020]/40"
-                      : "bg-rose-600 text-white ring-2 ring-rose-500/40 animate-pulse"
+                    "w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center font-black transition-all duration-300 shadow-md shrink-0",
+                    isHdm
+                      ? "bg-[#FFB020] text-[#060B22] ring-2 ring-[#FFB020]/30"
+                      : "bg-rose-600 text-white ring-2 ring-rose-500/30"
                   )}
                 >
-                  {mode === "hdm" ? <Zap className="w-4 h-4 sm:w-5 sm:h-5" /> : <Droplets className="w-4 h-4 sm:w-5 sm:h-5" />}
+                  {isHdm ? <Zap className="w-4 h-4 fill-[#060B22]" /> : <AlertTriangle className="w-4 h-4" />}
                 </div>
 
                 <div>
                   <div
                     className={cn(
-                      "text-[9.5px] sm:text-[10.5px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5",
-                      mode === "hdm" ? "text-[#FFB020]" : "text-rose-400"
+                      "text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider",
+                      isHdm ? "text-[#FFB020]" : "text-rose-400"
                     )}
                   >
-                    <span>{mode === "hdm" ? "HDM Conversion Engine Active" : "Leaky Website Simulation"}</span>
-                    <span>·</span>
-                    <span className="text-white font-mono">{activeChannel.name}</span>
+                    {isHdm ? "Engine Status: Active & Optimizing" : "Simulation: Friction Detected"}
                   </div>
-                  <div className="text-white font-black text-xs sm:text-base mt-0.5">
-                    Traffic Source: {activeChannel.name} ({activeChannel.badge})
+                  <div className="text-white font-extrabold text-xs sm:text-sm">
+                    {activeChannel.name} • {activeChannel.badge}
                   </div>
                 </div>
               </div>
 
               <div
                 className={cn(
-                  "px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full font-mono text-[10.5px] sm:text-xs font-bold border inline-flex items-center gap-2 self-start sm:self-center transition-all",
-                  mode === "hdm"
-                    ? "bg-teal-500/20 text-teal-300 border-teal-500/40 shadow-xs"
-                    : "bg-rose-500/20 text-rose-300 border-rose-500/40 shadow-xs"
+                  "px-2.5 sm:px-3 py-1 rounded-full font-mono text-[10px] sm:text-xs font-bold border inline-flex items-center gap-1.5 shrink-0",
+                  isHdm
+                    ? "bg-teal-500/15 text-teal-300 border-teal-500/30"
+                    : "bg-rose-500/15 text-rose-300 border-rose-500/30"
                 )}
               >
                 <span
                   className={cn(
-                    "w-2 h-2 rounded-full",
-                    mode === "hdm" ? "bg-teal-400 animate-pulse" : "bg-rose-400 animate-ping"
+                    "w-1.5 h-1.5 rounded-full",
+                    isHdm ? "bg-teal-400 animate-pulse" : "bg-rose-400 animate-ping"
                   )}
                 />
-                <span>
-                  {mode === "hdm" ? "REVENUE MULTIPLIER: ACTIVE" : "BUDGET LEAKAGE DETECTED"}
-                </span>
+                <span>{isHdm ? "MAX CONVERSION" : "BUDGET LEAK"}</span>
               </div>
             </div>
 
-            {/* Core Outcome Headline */}
-            <div className="space-y-1 sm:space-y-2">
-              <h3 className="font-display font-black text-lg sm:text-2xl lg:text-3xl text-white tracking-tight leading-snug">
-                {mode === "hdm"
-                  ? activeChannel.hdmState.growthHeadline
-                  : activeChannel.leakyState.lossHeadline}
+            {/* Headline & Concise Insight */}
+            <div className="space-y-1 sm:space-y-1.5">
+              <h3 className="font-display font-black text-lg sm:text-2xl text-white tracking-tight leading-snug">
+                {state.headline}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl font-normal">
-                {mode === "hdm"
-                  ? activeChannel.hdmState.breakthrough
-                  : activeChannel.leakyState.friction}
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal max-w-3xl">
+                {state.description}
               </p>
             </div>
 
-            {/* 3 Live Visual Telemetry Meters */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-4">
-              <div
-                className={cn(
-                  "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-500 space-y-0.5 sm:space-y-1 relative overflow-hidden",
-                  mode === "hdm"
-                    ? "bg-white/[0.04] border-white/10"
-                    : "bg-rose-950/40 border-rose-500/20"
-                )}
-              >
-                <div className="flex items-center justify-between text-[9.5px] sm:text-[10px] font-mono uppercase tracking-wider text-slate-400">
-                  <span>Initial Paint Speed</span>
-                  <Activity className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400" />
+            {/* ============================================================ */}
+            {/* VISUAL 3-STEP CONVERSION PIPELINE (INTUITIVE & CLEAN)         */}
+            {/* ============================================================ */}
+            <div
+              className={cn(
+                "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-300",
+                isHdm ? "bg-white/[0.03] border-white/10" : "bg-rose-950/30 border-rose-500/20"
+              )}
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 items-center text-center">
+                {/* Step 1: Ad Click */}
+                <div className="flex items-center sm:flex-col justify-between sm:justify-center gap-1 p-2 rounded-lg bg-black/20 border border-white/5">
+                  <span className="text-[10px] font-mono text-slate-400 uppercase">Step 01</span>
+                  <span className="text-xs sm:text-sm font-bold text-white">Paid Traffic Click</span>
                 </div>
-                <div
-                  className={cn(
-                    "font-display font-black text-xl sm:text-2xl transition-colors",
-                    mode === "hdm" ? "text-teal-400" : "text-rose-400"
-                  )}
-                >
-                  {mode === "hdm"
-                    ? activeChannel.hdmState.speed
-                    : activeChannel.leakyState.speed}
-                </div>
-                <div className="text-[10.5px] sm:text-[11px] text-slate-400 font-medium">
-                  {mode === "hdm" ? "Sub-second edge paint ✓" : "Causes instant mobile bounce ✗"}
-                </div>
-              </div>
 
-              <div
-                className={cn(
-                  "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-500 space-y-0.5 sm:space-y-1 relative overflow-hidden",
-                  mode === "hdm"
-                    ? "bg-white/[0.04] border-white/10"
-                    : "bg-rose-950/40 border-rose-500/20"
-                )}
-              >
-                <div className="flex items-center justify-between text-[9.5px] sm:text-[10px] font-mono uppercase tracking-wider text-slate-400">
-                  <span>Quality Score &amp; Vitals</span>
-                  <Gauge className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400" />
-                </div>
+                {/* Step 2: Landing Page Paint */}
                 <div
                   className={cn(
-                    "font-display font-black text-xl sm:text-2xl transition-colors",
-                    mode === "hdm" ? "text-[#FFB020]" : "text-rose-400"
+                    "flex items-center sm:flex-col justify-between sm:justify-center gap-1 p-2 rounded-lg border",
+                    isHdm
+                      ? "bg-teal-950/40 border-teal-500/30 text-teal-300"
+                      : "bg-rose-950/50 border-rose-500/30 text-rose-300"
                   )}
                 >
-                  {mode === "hdm"
-                    ? activeChannel.hdmState.conversion
-                    : activeChannel.leakyState.bounce}
+                  <span className="text-[10px] font-mono uppercase opacity-75">Step 02 · Experience</span>
+                  <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold">
+                    {isHdm ? (
+                      <CheckCircle2 className="w-3.5 h-3.5 text-teal-400 shrink-0" />
+                    ) : (
+                      <XCircle className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                    )}
+                    <span>{state.step2Status}</span>
+                  </div>
                 </div>
-                <div className="text-[10.5px] sm:text-[11px] text-slate-400 font-medium">
-                  {mode === "hdm" ? "Lowest CPC / Highest Rank ✓" : "Ad algorithm cost penalties ✗"}
-                </div>
-              </div>
 
-              <div
-                className={cn(
-                  "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-500 space-y-0.5 sm:space-y-1 relative overflow-hidden",
-                  mode === "hdm"
-                    ? "bg-white/[0.04] border-white/10"
-                    : "bg-rose-950/40 border-rose-500/20"
-                )}
-              >
-                <div className="flex items-center justify-between text-[9.5px] sm:text-[10px] font-mono uppercase tracking-wider text-slate-400">
-                  <span>ROAS / Capital Multiplier</span>
-                  {mode === "hdm" ? (
-                    <TrendingUp className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-teal-400" />
-                  ) : (
-                    <TrendingDown className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-rose-400" />
-                  )}
-                </div>
+                {/* Step 3: Commercial Outcome */}
                 <div
                   className={cn(
-                    "font-display font-black text-xl sm:text-2xl transition-colors",
-                    mode === "hdm" ? "text-teal-400" : "text-rose-400"
+                    "flex items-center sm:flex-col justify-between sm:justify-center gap-1 p-2 rounded-lg border",
+                    isHdm
+                      ? "bg-[#FFB020]/10 border-[#FFB020]/30 text-[#FFB020]"
+                      : "bg-rose-950/50 border-rose-500/30 text-rose-300"
                   )}
                 >
-                  {mode === "hdm"
-                    ? activeChannel.hdmState.roas
-                    : activeChannel.leakyState.roas}
-                </div>
-                <div className="text-[10.5px] sm:text-[11px] text-slate-400 font-medium">
-                  {mode === "hdm" ? "Full conversion on ad dollars ✓" : "Capital drained before inquiry ✗"}
+                  <span className="text-[10px] font-mono uppercase opacity-75">Step 03 · Commercial</span>
+                  <span className="text-xs sm:text-sm font-bold">{state.step3Status}</span>
                 </div>
               </div>
             </div>
 
-            {/* Bottom Direct Audit Action */}
-            <div className="pt-3 sm:pt-5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+            {/* ============================================================ */}
+            {/* 3 LIVE TELEMETRY METRIC CARDS                                */}
+            {/* ============================================================ */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3.5">
+              {/* Dial 1 */}
+              <div
+                className={cn(
+                  "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-500 space-y-1 relative overflow-hidden",
+                  isHdm ? "bg-white/[0.04] border-white/10" : "bg-rose-950/40 border-rose-500/20"
+                )}
+              >
+                <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                  <span>{state.speed.label}</span>
+                  <Activity className="w-3.5 h-3.5 text-slate-400" />
+                </div>
+                <div
+                  className={cn(
+                    "font-display font-black text-2xl sm:text-3xl transition-colors",
+                    isHdm ? "text-teal-400" : "text-rose-400"
+                  )}
+                >
+                  {state.speed.value}
+                </div>
+                <div className="text-[11px] text-slate-400 font-medium truncate">
+                  {state.speed.note}
+                </div>
+              </div>
+
+              {/* Dial 2 */}
+              <div
+                className={cn(
+                  "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-500 space-y-1 relative overflow-hidden",
+                  isHdm ? "bg-white/[0.04] border-white/10" : "bg-rose-950/40 border-rose-500/20"
+                )}
+              >
+                <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                  <span>{state.quality.label}</span>
+                  <Gauge className="w-3.5 h-3.5 text-slate-400" />
+                </div>
+                <div
+                  className={cn(
+                    "font-display font-black text-2xl sm:text-3xl transition-colors",
+                    isHdm ? "text-[#FFB020]" : "text-rose-400"
+                  )}
+                >
+                  {state.quality.value}
+                </div>
+                <div className="text-[11px] text-slate-400 font-medium truncate">
+                  {state.quality.note}
+                </div>
+              </div>
+
+              {/* Dial 3 */}
+              <div
+                className={cn(
+                  "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-500 space-y-1 relative overflow-hidden",
+                  isHdm ? "bg-white/[0.04] border-white/10" : "bg-rose-950/40 border-rose-500/20"
+                )}
+              >
+                <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                  <span>{state.roas.label}</span>
+                  {isHdm ? (
+                    <TrendingUp className="w-3.5 h-3.5 text-teal-400" />
+                  ) : (
+                    <TrendingDown className="w-3.5 h-3.5 text-rose-400" />
+                  )}
+                </div>
+                <div
+                  className={cn(
+                    "font-display font-black text-2xl sm:text-3xl transition-colors",
+                    isHdm ? "text-teal-400" : "text-rose-400"
+                  )}
+                >
+                  {state.roas.value}
+                </div>
+                <div className="text-[11px] text-slate-400 font-medium truncate">
+                  {state.roas.note}
+                </div>
+              </div>
+            </div>
+
+            {/* ============================================================ */}
+            {/* BOTTOM AUDIT ACTION BAR                                      */}
+            {/* ============================================================ */}
+            <div className="pt-3 sm:pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
               <div className="flex items-center gap-2 text-xs text-slate-300 text-left">
                 <ShieldCheck className="w-4 h-4 text-teal-400 shrink-0" />
                 <span>
-                  Stop leaking marketing budget. Our lead architects will audit your website conversion funnel.
+                  Stop leaking ad budget. Our lead architects will audit your website conversion funnel.
                 </span>
               </div>
 
@@ -638,7 +575,7 @@ export function MarketingWebsiteSynergy() {
                 glow={0.8}
               >
                 <span>AUDIT YOUR WEBSITE FUNNEL</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-[#060B22] group-hover:translate-x-1 transition-transform" />
               </StarBorder>
             </div>
           </div>
