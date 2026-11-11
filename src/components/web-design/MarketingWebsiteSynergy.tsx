@@ -14,48 +14,62 @@ import {
   Gauge,
   CheckCircle2,
   XCircle,
+  Clock,
+  Compass,
+  Layers,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
 
 type EngineMode = "leaky" | "hdm";
 
-// Real Brand SVGs for authentic industry recognizability
-function GoogleAdsIcon({ className = "w-4 h-4" }: { className?: string }) {
+// ====================================================================
+// AUTHENTIC HIGH-RESOLUTION BRAND ICONS (LARGER, SHARPER, TACTILE)
+// ====================================================================
+
+function RealGoogleAdsIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none">
+      <defs>
+        <filter id="gads-shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="1" stdDeviation="1" floodColor="#000" floodOpacity="0.15" />
+        </filter>
+      </defs>
       <path
         d="M4.05 14.53l6.09-10.55c.67-1.16 2.15-1.56 3.31-.89l3.41 1.97c1.16.67 1.56 2.15.89 3.31L11.66 18.92c-.67 1.16-2.15 1.56-3.31.89L4.94 17.84c-1.16-.67-1.56-2.15-.89-3.31z"
         fill="#FBBC04"
+        filter="url(#gads-shadow)"
       />
       <path
         d="M19.95 14.53l-6.09-10.55c-.67-1.16-2.15-1.56-3.31-.89l-3.41 1.97c-1.16.67-1.56 2.15-.89 3.31l6.09 10.55c.67 1.16 2.15 1.56 3.31.89l3.41-1.97c1.16-.67 1.56-2.15.89-3.31z"
         fill="#4285F4"
+        filter="url(#gads-shadow)"
       />
-      <circle cx="7.7" cy="16.5" r="3.2" fill="#34A853" />
+      <circle cx="7.7" cy="16.5" r="3.2" fill="#34A853" filter="url(#gads-shadow)" />
     </svg>
   );
 }
 
-function MetaInstagramIcon({ className = "w-4 h-4" }: { className?: string }) {
+function RealMetaIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path
-        fill="url(#meta-grad)"
-        d="M16.995 3c-2.457 0-4.07 1.488-4.995 2.871C11.075 4.488 9.462 3 7.005 3 3.633 3 1 5.922 1 9.94c0 4.673 3.978 8.653 10.428 11.06.37.139.774.139 1.144 0C19.022 18.593 23 14.613 23 9.94 23 5.922 20.367 3 16.995 3zm-9.99 12.35c-2.185 0-3.957-1.772-3.957-3.957 0-2.185 1.772-3.957 3.957-3.957 1.93 0 3.308 1.42 4.148 2.766-.99 1.587-2.316 5.148-4.148 5.148zm9.99 0c-1.832 0-3.158-3.561-4.148-5.148.84-1.346 2.218-2.766 4.148-2.766 2.185 0 3.957 1.772 3.957 3.957 0 2.185-1.772 3.957-3.957 3.957z"
-      />
+    <svg className={className} viewBox="0 0 24 24" fill="none">
       <defs>
-        <linearGradient id="meta-grad" x1="1" y1="12" x2="23" y2="12" gradientUnits="userSpaceOnUse">
+        <linearGradient id="meta-grad-real" x1="2" y1="12" x2="22" y2="12" gradientUnits="userSpaceOnUse">
           <stop stopColor="#0064E0" />
-          <stop offset="0.5" stopColor="#0082FB" />
-          <stop offset="1" stopColor="#00A2FF" />
+          <stop offset="0.45" stopColor="#0082FB" />
+          <stop offset="0.85" stopColor="#00A2FF" />
+          <stop offset="1" stopColor="#00C7FF" />
         </linearGradient>
       </defs>
+      <path
+        d="M16.995 3c-2.457 0-4.07 1.488-4.995 2.871C11.075 4.488 9.462 3 7.005 3 3.633 3 1 5.922 1 9.94c0 4.673 3.978 8.653 10.428 11.06.37.139.774.139 1.144 0C19.022 18.593 23 14.613 23 9.94 23 5.922 20.367 3 16.995 3zm-9.99 12.35c-2.185 0-3.957-1.772-3.957-3.957 0-2.185 1.772-3.957 3.957-3.957 1.93 0 3.308 1.42 4.148 2.766-.99 1.587-2.316 5.148-4.148 5.148zm9.99 0c-1.832 0-3.158-3.561-4.148-5.148.84-1.346 2.218-2.766 4.148-2.766 2.185 0 3.957 1.772 3.957 3.957 0 2.185-1.772 3.957-3.957 3.957z"
+        fill="url(#meta-grad-real)"
+      />
     </svg>
   );
 }
 
-function GoogleSearchIcon({ className = "w-4 h-4" }: { className?: string }) {
+function RealGoogleSearchIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24">
       <path
@@ -78,28 +92,33 @@ function GoogleSearchIcon({ className = "w-4 h-4" }: { className?: string }) {
   );
 }
 
-function BrandDirectIcon({ className = "w-4 h-4" }: { className?: string }) {
+function RealBrandShieldIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"
-        fill="url(#brand-shield-grad)"
-        stroke="#FFB020"
-        strokeWidth="1.5"
-      />
-      <path
-        d="M12 6l2.12 4.3 4.75.69-3.44 3.35.81 4.73L12 16.84l-4.24 2.23.81-4.73-3.44-3.35 4.75-.69L12 6z"
-        fill="#060B22"
-      />
       <defs>
-        <linearGradient id="brand-shield-grad" x1="3" y1="2" x2="21" y2="25" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#FFB020" />
-          <stop offset="1" stopColor="#B87A00" />
+        <linearGradient id="brand-gold-glow" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#FFE082" />
+          <stop offset="0.5" stopColor="#FFB020" />
+          <stop offset="1" stopColor="#B37400" />
         </linearGradient>
       </defs>
+      <path
+        d="M12 2L3 6.5v6.2c0 5.6 3.8 10.8 9 12.3 5.2-1.5 9-6.7 9-12.3V6.5L12 2z"
+        fill="url(#brand-gold-glow)"
+        stroke="#FFFFFF"
+        strokeWidth="1.2"
+      />
+      <path
+        d="M12 6.5l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5L12 6.5z"
+        fill="#060B22"
+      />
     </svg>
   );
 }
+
+// ====================================================================
+// CHANNEL SPECIFICATIONS & INTENT DATA
+// ====================================================================
 
 interface MetricDial {
   label: string;
@@ -111,12 +130,18 @@ interface ChannelData {
   id: string;
   name: string;
   badge: string;
-  icon: React.ReactNode;
+  icon: (props: { className?: string }) => React.ReactElement;
+  step1Label: string;
   leaky: {
     headline: string;
     description: string;
-    step2Status: string;
-    step3Status: string;
+    step2Title: string;
+    step2Sub: string;
+    step3Title: string;
+    step3Sub: string;
+    retentionBar: string;
+    retentionPercent: number;
+    comparisonCallout: string;
     speed: MetricDial;
     quality: MetricDial;
     roas: MetricDial;
@@ -124,8 +149,13 @@ interface ChannelData {
   hdm: {
     headline: string;
     description: string;
-    step2Status: string;
-    step3Status: string;
+    step2Title: string;
+    step2Sub: string;
+    step3Title: string;
+    step3Sub: string;
+    retentionBar: string;
+    retentionPercent: number;
+    comparisonCallout: string;
     speed: MetricDial;
     quality: MetricDial;
     roas: MetricDial;
@@ -137,23 +167,34 @@ const CHANNELS: ChannelData[] = [
     id: "google-ads",
     name: "Google Ads",
     badge: "Paid Search Intent",
-    icon: <GoogleAdsIcon className="w-4 h-4 shrink-0" />,
+    icon: RealGoogleAdsIcon,
+    step1Label: "Search Intent Keyword Click",
     leaky: {
-      headline: "Paying High CPC for Clicks That Bounce in 3 Seconds",
+      headline: "Paying Top-Dollar CPC for Visitors Who Bounce in 3 Seconds",
       description: "Generic slow templates cause 72% bounce before the landing page hero finishes loading, wasting budget on unengaged clicks.",
-      step2Status: "3.6s Template Freeze (72% Dropoff)",
-      step3Status: "Wasted Ad Spend",
-      speed: { label: "Initial Paint Speed", value: "3.6s", note: "Slow template lag" },
-      quality: { label: "Quality Score", value: "3/10", note: "High CPC bid penalty" },
+      step2Title: "3.6s Template Freeze",
+      step2Sub: "72% Bounce Before Headline Loads",
+      step3Title: "Wasted Ad Spend",
+      step3Sub: "$0 Inbound Pipeline Created",
+      retentionBar: "28% Visitors Retained • 72% Marketing Capital Lost",
+      retentionPercent: 28,
+      comparisonCallout: "⚠️ 6x Slower Load Time • 72% Budget Lost to Bounce • High Bid Cost Penalties",
+      speed: { label: "Page Paint Speed", value: "3.6s", note: "Slow template lag" },
+      quality: { label: "Google Quality Score", value: "3 / 10", note: "High CPC bid penalty" },
       roas: { label: "Return on Ad Spend", value: "0.8x", note: "Capital leak" },
     },
     hdm: {
       headline: "Lowest Cost-Per-Click & 3.8x Higher Inbound Leads",
       description: "Exact keyword-to-headline alignment with sub-second page paint turns expensive search clicks into instant booked consultations.",
-      step2Status: "0.58s Edge Paint (Zero Dropoff)",
-      step3Status: "Verified Inbound Inquiry",
-      speed: { label: "Initial Paint Speed", value: "0.58s", note: "Sub-second edge paint ✓" },
-      quality: { label: "Quality Score", value: "10/10", note: "Lowest CPC / Top rank ✓" },
+      step2Title: "0.58s Instant Edge Paint",
+      step2Sub: "100% of Incoming Visitors Retained",
+      step3Title: "Qualified Inbound Inquiry",
+      step3Sub: "Instant Calendar Consultation",
+      retentionBar: "96% Retained Traffic Efficiency (Top 1% Global Tier)",
+      retentionPercent: 96,
+      comparisonCallout: "⚡ vs. Typical Template: 6x Faster Speed • 10/10 Quality Score • 3.8x More Inbound Leads",
+      speed: { label: "Page Paint Speed", value: "0.58s", note: "Sub-second edge paint ✓" },
+      quality: { label: "Google Quality Score", value: "10 / 10", note: "Lowest CPC / Top rank ✓" },
       roas: { label: "Return on Ad Spend", value: "4.8x", note: "High-impact ROAS ✓" },
     },
   },
@@ -161,23 +202,34 @@ const CHANNELS: ChannelData[] = [
     id: "meta-ads",
     name: "Meta & Instagram",
     badge: "Social Mobile Feed",
-    icon: <MetaInstagramIcon className="w-4 h-4 shrink-0" />,
+    icon: RealMetaIcon,
+    step1Label: "Instagram & Meta Feed Click",
     leaky: {
       headline: "Mobile Feed Shoppers Abandon Clumsy Multi-Page Forms",
       description: "Mobile friction and sluggish page weight lose 81% of feed scrollers before they reach the second fold.",
-      step2Status: "3.9s Mobile Lag (81% Dropoff)",
-      step3Status: "Negative Ad ROI",
-      speed: { label: "Mobile Paint Speed", value: "3.9s", note: "Severe mobile dropoff" },
-      quality: { label: "Conversion Rate", value: "0.9%", note: "Cart abandon penalty" },
+      step2Title: "3.9s Mobile Delay",
+      step2Sub: "81% Dropoff on Mobile Feed",
+      step3Title: "Negative Social ROI",
+      step3Sub: "Cart & Intake Abandoned",
+      retentionBar: "19% Mobile Retention • 81% Ad Dollars Drained",
+      retentionPercent: 19,
+      comparisonCallout: "⚠️ High Drop-off • Slow Mobile Render • Abandoned Checkout Penalties",
+      speed: { label: "Mobile Paint Speed", value: "3.9s", note: "Severe mobile lag" },
+      quality: { label: "Mobile Conversion", value: "0.9%", note: "Cart abandon penalty" },
       roas: { label: "Return on Ad Spend", value: "0.6x", note: "Negative return" },
     },
     hdm: {
       headline: "Thumb-First Mobile Flow with Maximum ROAS",
       description: "Ultra-responsive mobile layout, instant slide cart, and frictionless 1-tap checkout capture mobile buyers seamlessly.",
-      step2Status: "0.62s Mobile Paint (Instant Flow)",
-      step3Status: "Direct Customer Purchase",
+      step2Title: "0.62s Fluid Mobile Paint",
+      step2Sub: "Zero Layout Shift & Smooth 60 FPS",
+      step3Title: "Direct Customer Purchase",
+      step3Sub: "1-Tap Apple & Google Pay",
+      retentionBar: "94% Mobile Conversion Flow (Sub-Second SLA)",
+      retentionPercent: 94,
+      comparisonCallout: "⚡ vs. Typical Template: Instant Slide Cart • 1-Tap Booking • +380% Mobile Conversion",
       speed: { label: "Mobile Paint Speed", value: "0.62s", note: "Fluid 60 FPS mobile UI ✓" },
-      quality: { label: "Conversion Rate", value: "4.6%", note: "+380% conversion lift ✓" },
+      quality: { label: "Mobile Conversion", value: "4.6%", note: "+380% conversion lift ✓" },
       roas: { label: "Return on Ad Spend", value: "5.4x", note: "Compounding returns ✓" },
     },
   },
@@ -185,21 +237,32 @@ const CHANNELS: ChannelData[] = [
     id: "seo",
     name: "Technical SEO",
     badge: "Organic Search",
-    icon: <GoogleSearchIcon className="w-4 h-4 shrink-0" />,
+    icon: RealGoogleSearchIcon,
+    step1Label: "Organic Keyword Search Click",
     leaky: {
       headline: "Google Rank Penalties from Layout Shift and Poor Vitals",
       description: "Failing Core Web Vitals and unstable layout shifts (CLS) trigger algorithmic rank demotions, drying up organic traffic.",
-      step2Status: "Failing Vitals (65% Pogo-Sticking)",
-      step3Status: "Declining Rankings",
-      speed: { label: "Core Web Vitals", value: "Poor", note: "Fails Google audit" },
+      step2Title: "Failing Core Web Vitals",
+      step2Sub: "65% Pogo-Sticking Bounce",
+      step3Title: "Declining Rankings",
+      step3Sub: "Suppressed Search Visibility",
+      retentionBar: "35% Organic Retention • Pogo-Sticking Penalties",
+      retentionPercent: 35,
+      comparisonCallout: "⚠️ Failing Google Vitals • Algorithmic Rank Demotions • Zero Organic Lift",
+      speed: { label: "Core Web Vitals", value: "Failing", note: "Fails Google audit" },
       quality: { label: "Organic Rank Position", value: "#18-35", note: "Suppressed keyword rank" },
       roas: { label: "Organic Pipeline", value: "Stagnant", note: "Zero compounding growth" },
     },
     hdm: {
       headline: "Compounding Top-3 Ranks with Sub-Second Edge Delivery",
       description: "Clean semantic HTML5, zero CLS, and automated Schema.org structured data get rewarded with top Google rankings.",
-      step2Status: "100/100 Vitals (Sub-Second SLA)",
-      step3Status: "Top-3 Organic Positions",
+      step2Title: "100/100 Core Web Vitals",
+      step2Sub: "Sub-Second Edge Rendering SLA",
+      step3Title: "Top-3 Organic Positions",
+      step3Sub: "Free Compounding Inbound Leads",
+      retentionBar: "98% Search Authority • Top 1% Lighthouse Score",
+      retentionPercent: 98,
+      comparisonCallout: "⚡ vs. Typical Template: 100/100 Lighthouse Vitals • Zero CLS • Top-3 Google Rankings",
       speed: { label: "Core Web Vitals", value: "100/100", note: "Google top 1% benchmark ✓" },
       quality: { label: "Organic Rank Position", value: "Top 3", note: "High search authority ✓" },
       roas: { label: "Organic Pipeline", value: "3.8x Lift", note: "Free compounding leads ✓" },
@@ -209,12 +272,18 @@ const CHANNELS: ChannelData[] = [
     id: "brand",
     name: "Brand & Direct",
     badge: "Executive Authority",
-    icon: <BrandDirectIcon className="w-4 h-4 shrink-0" />,
+    icon: RealBrandShieldIcon,
+    step1Label: "Executive Referral & Direct Visit",
     leaky: {
       headline: "High-Ticket Enterprise Referrals Bounce Without Inquiring",
       description: "Executive referrals land on dated, generic homepages with no clear commercial next step, losing major deals.",
-      step2Status: "Confusing Navigation (58% Exit)",
-      step3Status: "Lost Enterprise Deals",
+      step2Title: "Generic Template Look",
+      step2Sub: "58% Inactive Executive Exits",
+      step3Title: "Lost Major Deals",
+      step3Sub: "Zero Brand Credibility",
+      retentionBar: "42% Executive Retention • Missed Enterprise Deals",
+      retentionPercent: 42,
+      comparisonCallout: "⚠️ Clunky Navigation • Generic Theme Bloat • Lost High-Ticket Contracts",
       speed: { label: "Executive Perception", value: "Generic", note: "Template look & feel" },
       quality: { label: "Form Completion", value: "12%", note: "Friction-heavy intake" },
       roas: { label: "Enterprise Pipeline", value: "Low Win-Rate", note: "Weak brand credibility" },
@@ -222,8 +291,13 @@ const CHANNELS: ChannelData[] = [
     hdm: {
       headline: "Institutional Authority & Direct Enterprise Scoping",
       description: "Bespoke executive-grade design, interactive scoping modules, and direct senior calendar routing secure major accounts.",
-      step2Status: "Bespoke Authority (Sub-Second Flow)",
-      step3Status: "High-Ticket Client Retained",
+      step2Title: "Bespoke Brand Authority",
+      step2Sub: "Sub-Second Interactive Scoping",
+      step3Title: "Enterprise Client Retained",
+      step3Sub: "Direct Senior Calendar Routing",
+      retentionBar: "95% Executive Trust • High-Value Retainer Won",
+      retentionPercent: 95,
+      comparisonCallout: "⚡ vs. Typical Template: Bespoke Figma Craft • Interactive Scoping • Instant Enterprise Trust",
       speed: { label: "Executive Perception", value: "Elite Tier", note: "Bespoke digital craft ✓" },
       quality: { label: "Form Completion", value: "48%", note: "Direct 1-tap intake ✓" },
       roas: { label: "Enterprise Pipeline", value: "High-Value", note: "Premium pricing power ✓" },
@@ -239,15 +313,16 @@ export function MarketingWebsiteSynergy() {
     CHANNELS.find((c) => c.id === activeChannelId) || CHANNELS[0];
   const state = mode === "hdm" ? activeChannel.hdm : activeChannel.leaky;
   const isHdm = mode === "hdm";
+  const ActiveIcon = activeChannel.icon;
 
   return (
     <section
       id="marketing-foundation"
-      className="py-12 sm:py-16 lg:py-20 bg-[#FAF8F5] border-y border-[#E2DBD0] select-none scroll-mt-24 relative overflow-hidden"
+      className="py-12 sm:py-16 lg:py-20 bg-[#FAF8F5] border-y border-[#E2DBD0] select-none scroll-mt-24 relative overflow-hidden text-left"
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-7 sm:space-y-9 text-center">
         {/* ============================================================ */}
-        {/* 1. CLEAN SECTION HEADER                                      */}
+        {/* 1. SECTION HEADER                                            */}
         {/* ============================================================ */}
         <div className="space-y-3 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#060B22] text-[#FFB020] text-xs font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
@@ -265,22 +340,22 @@ export function MarketingWebsiteSynergy() {
         </div>
 
         {/* ============================================================ */}
-        {/* 2. DUAL-MODE CONTROLLER & CHANNELS (SUPER CLEAN UI)           */}
+        {/* 2. DUAL-MODE CONTROLLER & CHANNELS (LARGER, REAL ICONS)       */}
         {/* ============================================================ */}
         <div className="flex flex-col items-center gap-3.5 sm:gap-4 max-w-3xl mx-auto">
-          {/* Elegant Mode Toggle Switch */}
-          <div className="inline-flex items-center p-1 bg-white rounded-2xl border border-[#E2DBD0] shadow-xs">
+          {/* Tactile Mode Toggle Switch */}
+          <div className="inline-flex items-center p-1.5 bg-white rounded-2xl border border-[#E2DBD0] shadow-sm">
             <button
               type="button"
               onClick={() => setMode("leaky")}
               className={cn(
-                "py-2 px-3.5 sm:px-5 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center gap-1.5 sm:gap-2",
+                "py-2 px-3.5 sm:px-5 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center gap-2",
                 !isHdm
-                  ? "bg-rose-950 text-rose-300 border border-rose-500/40 shadow-sm font-black"
+                  ? "bg-rose-950 text-rose-300 border border-rose-500/40 shadow-sm font-black scale-102"
                   : "bg-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-50"
               )}
             >
-              <AlertTriangle className={cn("w-3.5 h-3.5", !isHdm ? "text-rose-400" : "text-slate-400")} />
+              <AlertTriangle className={cn("w-4 h-4", !isHdm ? "text-rose-400" : "text-slate-400")} />
               <span>Typical Leaky Website</span>
             </button>
 
@@ -288,28 +363,30 @@ export function MarketingWebsiteSynergy() {
               type="button"
               onClick={() => setMode("hdm")}
               className={cn(
-                "py-2 px-3.5 sm:px-5 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center gap-1.5 sm:gap-2",
+                "py-2 px-3.5 sm:px-5 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center gap-2",
                 isHdm
-                  ? "bg-[#060B22] text-[#FFB020] border border-[#FFB020]/60 shadow-sm font-black"
+                  ? "bg-[#060B22] text-[#FFB020] border border-[#FFB020]/60 shadow-sm font-black scale-102"
                   : "bg-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-50"
               )}
             >
-              <Zap className={cn("w-3.5 h-3.5", isHdm ? "text-[#FFB020] fill-[#FFB020]" : "text-slate-400")} />
+              <Zap className={cn("w-4 h-4", isHdm ? "text-[#FFB020] fill-[#FFB020]" : "text-slate-400")} />
               <span>HDM Revenue Engine</span>
             </button>
           </div>
 
-          {/* 4 Clean Traffic Channels Pills */}
-          <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap">
+          {/* 4 Clean Traffic Channels with Bigger, Real Brand Icons */}
+          <div className="flex items-center justify-center gap-2 sm:gap-2.5 flex-wrap">
             {CHANNELS.map((ch) => {
               const isSelected = ch.id === activeChannelId;
+              const IconComp = ch.icon;
+
               return (
                 <button
                   key={ch.id}
                   type="button"
                   onClick={() => setActiveChannelId(ch.id)}
                   className={cn(
-                    "px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center gap-2 border shadow-2xs",
+                    "px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center gap-2.5 border shadow-2xs group",
                     isSelected
                       ? isHdm
                         ? "bg-[#060B22] text-white border-[#FFB020] ring-2 ring-[#FFB020]/25 shadow-md scale-102"
@@ -317,14 +394,17 @@ export function MarketingWebsiteSynergy() {
                       : "bg-white text-slate-700 border-[#E2DBD0] hover:border-slate-400 hover:bg-slate-50"
                   )}
                 >
-                  <div className="w-4 h-4 flex items-center justify-center shrink-0">
-                    {ch.icon}
+                  {/* Real, Bigger Brand Icon Container */}
+                  <div className="w-6 h-6 flex items-center justify-center shrink-0 transition-transform group-hover:scale-110">
+                    <IconComp className="w-5 h-5 sm:w-5.5 sm:h-5.5" />
                   </div>
-                  <span>{ch.name}</span>
+
+                  <span className="font-extrabold">{ch.name}</span>
+
                   {isSelected && (
                     <span
                       className={cn(
-                        "w-1.5 h-1.5 rounded-full",
+                        "w-2 h-2 rounded-full ml-0.5",
                         isHdm ? "bg-teal-400 animate-pulse" : "bg-rose-400 animate-ping"
                       )}
                     />
@@ -336,7 +416,7 @@ export function MarketingWebsiteSynergy() {
         </div>
 
         {/* ============================================================ */}
-        {/* 3. LUXURY DARK CONVERSION ENGINE HUD (SUPER CLEAN & ATTRACTIVE) */}
+        {/* 3. LUXURY DARK CONVERSION ENGINE HUD (BETTER UNDERSTANDABLE) */}
         {/* ============================================================ */}
         <div
           className={cn(
@@ -346,7 +426,7 @@ export function MarketingWebsiteSynergy() {
               : "bg-gradient-to-br from-[#1C0A0E] via-[#240B12] to-[#120508] border-rose-500/40 shadow-[0_20px_50px_-15px_rgba(239,68,68,0.25)]"
           )}
         >
-          {/* Subtle Ambient Glows */}
+          {/* Ambient Glows */}
           <div
             className={cn(
               "absolute -top-24 -right-24 w-80 h-80 rounded-full blur-[100px] pointer-events-none transition-all duration-700",
@@ -361,41 +441,47 @@ export function MarketingWebsiteSynergy() {
           />
 
           <div className="relative z-10 space-y-5 sm:space-y-6">
-            {/* Top State Badge & Channel Indicator */}
-            <div className="flex items-center justify-between pb-3.5 border-b border-white/10 gap-3">
-              <div className="flex items-center gap-2.5">
+            {/* Top State Badge with Big Authentic Brand Emblem */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3.5 border-b border-white/10 gap-2.5 sm:gap-3">
+              <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                {/* Bigger, High-Res Brand Emblem Box */}
                 <div
                   className={cn(
-                    "w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center font-black transition-all duration-300 shadow-md shrink-0",
+                    "w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 shadow-md shrink-0 border",
                     isHdm
-                      ? "bg-[#FFB020] text-[#060B22] ring-2 ring-[#FFB020]/30"
-                      : "bg-rose-600 text-white ring-2 ring-rose-500/30"
+                      ? "bg-gradient-to-b from-white/15 to-white/5 border-white/20 ring-2 ring-[#FFB020]/40"
+                      : "bg-rose-950/80 border-rose-500/30 ring-2 ring-rose-500/30"
                   )}
                 >
-                  {isHdm ? <Zap className="w-4 h-4 fill-[#060B22]" /> : <AlertTriangle className="w-4 h-4" />}
+                  <ActiveIcon className="w-5 h-5 sm:w-7 sm:h-7" />
                 </div>
 
-                <div>
+                <div className="min-w-0">
                   <div
                     className={cn(
-                      "text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider",
+                      "text-[9.5px] sm:text-[11px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 truncate",
                       isHdm ? "text-[#FFB020]" : "text-rose-400"
                     )}
                   >
-                    {isHdm ? "Engine Status: Active & Optimizing" : "Simulation: Friction Detected"}
+                    <span>{isHdm ? "Engine: Active" : "Friction Detected"}</span>
+                    <span>•</span>
+                    <span className="text-white font-mono">{activeChannel.name}</span>
                   </div>
-                  <div className="text-white font-extrabold text-xs sm:text-sm">
-                    {activeChannel.name} • {activeChannel.badge}
+                  <div className="text-white font-black text-xs sm:text-base mt-0.5 truncate">
+                    {activeChannel.name}{" "}
+                    <span className="opacity-70 font-mono text-[10.5px] sm:text-xs font-normal">
+                      ({activeChannel.badge})
+                    </span>
                   </div>
                 </div>
               </div>
 
               <div
                 className={cn(
-                  "px-2.5 sm:px-3 py-1 rounded-full font-mono text-[10px] sm:text-xs font-bold border inline-flex items-center gap-1.5 shrink-0",
+                  "px-2.5 sm:px-3.5 py-0.5 sm:py-1.5 rounded-full font-mono text-[9px] sm:text-xs font-bold border inline-flex items-center gap-1.5 self-start sm:self-auto shrink-0",
                   isHdm
-                    ? "bg-teal-500/15 text-teal-300 border-teal-500/30"
-                    : "bg-rose-500/15 text-rose-300 border-rose-500/30"
+                    ? "bg-teal-500/15 text-teal-300 border-teal-500/40"
+                    : "bg-rose-500/15 text-rose-300 border-rose-500/40"
                 )}
               >
                 <span
@@ -408,8 +494,8 @@ export function MarketingWebsiteSynergy() {
               </div>
             </div>
 
-            {/* Headline & Concise Insight */}
-            <div className="space-y-1 sm:space-y-1.5">
+            {/* Core Outcome Headline & Summary */}
+            <div className="space-y-1.5">
               <h3 className="font-display font-black text-lg sm:text-2xl text-white tracking-tight leading-snug">
                 {state.headline}
               </h3>
@@ -419,70 +505,132 @@ export function MarketingWebsiteSynergy() {
             </div>
 
             {/* ============================================================ */}
-            {/* VISUAL 3-STEP CONVERSION PIPELINE (INTUITIVE & CLEAN)         */}
+            {/* VISUAL 3-STAGE CONVERSION JOURNEY (CLEAR, INTUITIVE FLOW)    */}
             {/* ============================================================ */}
             <div
               className={cn(
-                "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-300",
+                "p-3.5 sm:p-5 rounded-2xl border transition-all duration-300 space-y-3",
                 isHdm ? "bg-white/[0.03] border-white/10" : "bg-rose-950/30 border-rose-500/20"
               )}
             >
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 items-center text-center">
-                {/* Step 1: Ad Click */}
-                <div className="flex items-center sm:flex-col justify-between sm:justify-center gap-1 p-2 rounded-lg bg-black/20 border border-white/5">
-                  <span className="text-[10px] font-mono text-slate-400 uppercase">Step 01</span>
-                  <span className="text-xs sm:text-sm font-bold text-white">Paid Traffic Click</span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3.5 items-stretch text-center">
+                {/* Step 1: Traffic Channel Inflow */}
+                <div className="flex flex-col justify-center gap-1 p-2.5 sm:p-3 rounded-xl bg-black/30 border border-white/5 text-left sm:text-center">
+                  <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider flex items-center justify-between sm:justify-center gap-1.5">
+                    <span>Stage 01</span>
+                    <span>•</span>
+                    <span>Traffic Influx</span>
+                  </div>
+                  <div className="text-xs sm:text-sm font-extrabold text-white">
+                    {activeChannel.step1Label}
+                  </div>
                 </div>
 
-                {/* Step 2: Landing Page Paint */}
+                {/* Step 2: The Landing Page Battleground (The Direct Difference) */}
                 <div
                   className={cn(
-                    "flex items-center sm:flex-col justify-between sm:justify-center gap-1 p-2 rounded-lg border",
+                    "flex flex-col justify-center gap-1 p-2.5 sm:p-3 rounded-xl border text-left sm:text-center transition-colors",
                     isHdm
-                      ? "bg-teal-950/40 border-teal-500/30 text-teal-300"
-                      : "bg-rose-950/50 border-rose-500/30 text-rose-300"
+                      ? "bg-teal-950/40 border-teal-500/40 text-teal-300"
+                      : "bg-rose-950/50 border-rose-500/40 text-rose-300"
                   )}
                 >
-                  <span className="text-[10px] font-mono uppercase opacity-75">Step 02 · Experience</span>
-                  <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold">
+                  <div className="text-[10px] font-mono uppercase tracking-wider opacity-80 flex items-center justify-between sm:justify-center gap-1.5">
+                    <span>Stage 02</span>
+                    <span>•</span>
+                    <span>Visitor Retention</span>
+                  </div>
+                  <div className="flex items-center justify-start sm:justify-center gap-1.5 text-xs sm:text-sm font-black">
                     {isHdm ? (
-                      <CheckCircle2 className="w-3.5 h-3.5 text-teal-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />
                     ) : (
-                      <XCircle className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                      <XCircle className="w-4 h-4 text-rose-400 shrink-0" />
                     )}
-                    <span>{state.step2Status}</span>
+                    <span>{state.step2Title}</span>
+                  </div>
+                  <div className="text-[10.5px] opacity-80 truncate">
+                    {state.step2Sub}
                   </div>
                 </div>
 
                 {/* Step 3: Commercial Outcome */}
                 <div
                   className={cn(
-                    "flex items-center sm:flex-col justify-between sm:justify-center gap-1 p-2 rounded-lg border",
+                    "flex flex-col justify-center gap-1 p-2.5 sm:p-3 rounded-xl border text-left sm:text-center transition-colors",
                     isHdm
-                      ? "bg-[#FFB020]/10 border-[#FFB020]/30 text-[#FFB020]"
-                      : "bg-rose-950/50 border-rose-500/30 text-rose-300"
+                      ? "bg-[#FFB020]/15 border-[#FFB020]/40 text-[#FFB020]"
+                      : "bg-rose-950/50 border-rose-500/40 text-rose-300"
                   )}
                 >
-                  <span className="text-[10px] font-mono uppercase opacity-75">Step 03 · Commercial</span>
-                  <span className="text-xs sm:text-sm font-bold">{state.step3Status}</span>
+                  <div className="text-[10px] font-mono uppercase tracking-wider opacity-80 flex items-center justify-between sm:justify-center gap-1.5">
+                    <span>Stage 03</span>
+                    <span>•</span>
+                    <span>Commercial Return</span>
+                  </div>
+                  <div className="text-xs sm:text-sm font-black text-white">
+                    {state.step3Title}
+                  </div>
+                  <div className="text-[10.5px] opacity-85 truncate">
+                    {state.step3Sub}
+                  </div>
+                </div>
+              </div>
+
+              {/* Traffic Efficiency Progress Bar (Visual Difference) */}
+              <div className="pt-2 border-t border-white/10 space-y-1.5 text-left">
+                <div className="flex items-center justify-between text-[10.5px] sm:text-xs font-mono font-bold">
+                  <span className={cn(isHdm ? "text-teal-300" : "text-rose-400")}>
+                    {state.retentionBar}
+                  </span>
+                  <span className="text-slate-400 font-mono">
+                    {state.retentionPercent}% Efficiency
+                  </span>
+                </div>
+                <div className="h-2 w-full bg-black/40 rounded-full overflow-hidden p-0.5 border border-white/5">
+                  <div
+                    className={cn(
+                      "h-full rounded-full transition-all duration-700 ease-out",
+                      isHdm
+                        ? "bg-gradient-to-r from-teal-400 via-emerald-400 to-[#FFB020] shadow-[0_0_10px_rgba(45,212,191,0.8)]"
+                        : "bg-gradient-to-r from-rose-600 to-red-600 shadow-[0_0_10px_rgba(244,63,94,0.8)]"
+                    )}
+                    style={{ width: `${state.retentionPercent}%` }}
+                  />
                 </div>
               </div>
             </div>
 
+            {/* Direct Comparison Callout Pill */}
+            <div
+              className={cn(
+                "p-2.5 sm:p-3 rounded-xl border text-[11px] sm:text-xs font-mono font-bold flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-2",
+                isHdm
+                  ? "bg-[#060B22] border-[#FFB020]/40 text-[#FFB020]"
+                  : "bg-rose-950/60 border-rose-500/30 text-rose-300"
+              )}
+            >
+              <span className="leading-snug">{state.comparisonCallout}</span>
+              <span className="text-[10px] text-slate-400 uppercase shrink-0 hidden sm:inline">
+                Real-Time Benchmark
+              </span>
+            </div>
+
             {/* ============================================================ */}
-            {/* 3 LIVE TELEMETRY METRIC CARDS                                */}
+            {/* 3 LIVE TELEMETRY METRIC CARDS (BIGGER, RICHER ICONS)          */}
             {/* ============================================================ */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3.5">
-              {/* Dial 1 */}
+              {/* Dial 1: Initial Paint Speed */}
               <div
                 className={cn(
-                  "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-500 space-y-1 relative overflow-hidden",
+                  "p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-500 space-y-1 relative overflow-hidden",
                   isHdm ? "bg-white/[0.04] border-white/10" : "bg-rose-950/40 border-rose-500/20"
                 )}
               >
                 <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
                   <span>{state.speed.label}</span>
-                  <Activity className="w-3.5 h-3.5 text-slate-400" />
+                  <div className="w-6 h-6 rounded-lg bg-white/5 flex items-center justify-center">
+                    <Clock className="w-3.5 h-3.5 text-slate-300" />
+                  </div>
                 </div>
                 <div
                   className={cn(
@@ -497,16 +645,18 @@ export function MarketingWebsiteSynergy() {
                 </div>
               </div>
 
-              {/* Dial 2 */}
+              {/* Dial 2: Quality Score */}
               <div
                 className={cn(
-                  "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-500 space-y-1 relative overflow-hidden",
+                  "p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-500 space-y-1 relative overflow-hidden",
                   isHdm ? "bg-white/[0.04] border-white/10" : "bg-rose-950/40 border-rose-500/20"
                 )}
               >
                 <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
                   <span>{state.quality.label}</span>
-                  <Gauge className="w-3.5 h-3.5 text-slate-400" />
+                  <div className="w-6 h-6 rounded-lg bg-white/5 flex items-center justify-center">
+                    <Gauge className="w-3.5 h-3.5 text-slate-300" />
+                  </div>
                 </div>
                 <div
                   className={cn(
@@ -521,20 +671,22 @@ export function MarketingWebsiteSynergy() {
                 </div>
               </div>
 
-              {/* Dial 3 */}
+              {/* Dial 3: Return on Ad Spend */}
               <div
                 className={cn(
-                  "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-500 space-y-1 relative overflow-hidden",
+                  "p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-500 space-y-1 relative overflow-hidden",
                   isHdm ? "bg-white/[0.04] border-white/10" : "bg-rose-950/40 border-rose-500/20"
                 )}
               >
                 <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
                   <span>{state.roas.label}</span>
-                  {isHdm ? (
-                    <TrendingUp className="w-3.5 h-3.5 text-teal-400" />
-                  ) : (
-                    <TrendingDown className="w-3.5 h-3.5 text-rose-400" />
-                  )}
+                  <div className="w-6 h-6 rounded-lg bg-white/5 flex items-center justify-center">
+                    {isHdm ? (
+                      <TrendingUp className="w-3.5 h-3.5 text-teal-400" />
+                    ) : (
+                      <TrendingDown className="w-3.5 h-3.5 text-rose-400" />
+                    )}
+                  </div>
                 </div>
                 <div
                   className={cn(
