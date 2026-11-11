@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   Sparkles,
@@ -264,45 +264,44 @@ const CHANNELS: ChannelData[] = [
 ];
 
 export function MarketingWebsiteSynergy() {
-  // Default to "leaky" as requested: "keep by default on the leaky"
+  // 1. Default to "leaky" as requested: "keep by default on the leaky"
   const [mode, setMode] = useState<EngineMode>("leaky");
   const [activeChannelId, setActiveChannelId] = useState<string>("google-ads");
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isInView, setIsInView] = useState(false);
-  const sectionRef = React.useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  // Intersection Observer: Start timer only when section enters viewport
-  React.useEffect(() => {
+  // 2. Auto-slide: Starts on Leaky, and ONLY starts counting down once the visitor scrolls it into view!
+  useEffect(() => {
+    if (hasUserInteracted) return;
+
     const el = sectionRef.current;
     if (!el) return;
+
+    let slideTimer: ReturnType<typeof setTimeout> | null = null;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsInView(true);
+          if (entry.isIntersecting && !hasUserInteracted) {
+            // Once the user sees the leaky card in view, wait 2.5s then smoothly slide to HDM!
+            if (!slideTimer) {
+              slideTimer = setTimeout(() => {
+                setMode("hdm");
+              }, 2500);
+            }
           }
         });
       },
-      { threshold: 0.25 }
+      { threshold: 0.15 }
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
-  // Auto-slide to HDM (and cycle gently unless user interacts)
-  React.useEffect(() => {
-    if (hasUserInteracted || !isInView || isHovered) return;
-
-    // After 4.5s on leaky, auto-slide to HDM; then cycle every 6s unless interacted
-    const timer = setInterval(() => {
-      setMode((prev) => (prev === "leaky" ? "hdm" : "leaky"));
-    }, 4500);
-
-    return () => clearInterval(timer);
-  }, [hasUserInteracted, isInView, isHovered]);
+    return () => {
+      observer.disconnect();
+      if (slideTimer) clearTimeout(slideTimer);
+    };
+  }, [hasUserInteracted]);
 
   const handleModeChange = (newMode: EngineMode) => {
     setHasUserInteracted(true);
@@ -344,14 +343,14 @@ export function MarketingWebsiteSynergy() {
           </h2>
 
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
-            Your ad spend is only as profitable as the website it sends visitors to. See how 4 major traffic channels perform when converging into a conversion engine.
+            Your ad spend is only as profitable as the website it sends visitors to. Slide between a typical leaky website and an engineered conversion engine.
           </p>
         </div>
 
         {/* ============================================================ */}
         {/* 2. DUAL-MODE CONTROLLER WITH ANIMATED "VS" BADGE              */}
         {/* ============================================================ */}
-        <div className="flex flex-col items-center gap-3.5 sm:gap-4 max-w-3xl mx-auto">
+        <div className="flex flex-col items-center gap-2 max-w-3xl mx-auto">
           <div className="inline-flex items-center p-1.5 bg-white rounded-2xl border border-[#E2DBD0] shadow-sm">
             <button
               type="button"
@@ -392,403 +391,517 @@ export function MarketingWebsiteSynergy() {
               <span>HDM Revenue Engine</span>
             </button>
           </div>
+
+          {/* Slide Indicator Dots */}
+          <div className="flex items-center justify-center gap-2 pt-1" aria-hidden="true">
+            <button
+              type="button"
+              onClick={() => handleModeChange("leaky")}
+              className={cn(
+                "h-1.5 rounded-full transition-all duration-500 cursor-pointer",
+                !isHdm ? "w-6 bg-rose-500" : "w-1.5 bg-slate-300 hover:bg-slate-400"
+              )}
+              title="Slide 1: Typical Leaky Website"
+            />
+            <button
+              type="button"
+              onClick={() => handleModeChange("hdm")}
+              className={cn(
+                "h-1.5 rounded-full transition-all duration-500 cursor-pointer",
+                isHdm ? "w-6 bg-[#FFB020]" : "w-1.5 bg-slate-300 hover:bg-slate-400"
+              )}
+              title="Slide 2: HDM Revenue Engine"
+            />
+          </div>
         </div>
 
         {/* ============================================================ */}
-        {/* 3. SIGNATURE CONVERGING CIRCUIT ARCHITECTURE (PASTED STYLE)   */}
+        {/* 3. HORIZONTAL SLIDING CARD VIEWPORT (SLIDES FROM LEAKY TO HDM)*/}
         {/* ============================================================ */}
-        <div
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          className="bg-white rounded-2xl sm:rounded-3xl border border-[#E2DBD0] p-4 sm:p-7 lg:p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden text-left space-y-4 sm:space-y-6"
-        >
-          {/* Top Engine State Bar */}
-          <div className="flex items-center justify-between pb-3 border-b border-[#E2DBD0]">
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-wider px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#060B22] text-[#FFB020] border border-[#FFB020]/30 shadow-xs">
-                {isHdm ? "HDM Engine Active" : "Leaky Template Funnel"}
-              </span>
-              <span className="text-[11px] sm:text-xs font-mono font-bold text-slate-500 hidden sm:inline">
-                Channel: {activeChannel.name} ({activeChannel.tag})
-              </span>
-            </div>
-
-            <span
-              className={cn(
-                "text-[9.5px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full border",
-                isHdm
-                  ? "bg-teal-50 text-teal-700 border-teal-200"
-                  : "bg-rose-50 text-rose-700 border-rose-200"
-              )}
-            >
-              {isHdm ? "96% EFFICIENCY" : "72% BUDGET LEAK"}
-            </span>
-          </div>
-
-          {/* ============================================================ */}
-          {/* INNER CIRCUIT BOARD: 4 SATELLITE CHANNELS -> CONVERGING HUB */}
-          {/* ============================================================ */}
+        <div className="overflow-hidden w-full rounded-2xl sm:rounded-3xl border border-[#E2DBD0] shadow-xl shadow-slate-200/50 bg-white">
           <div
-            className={cn(
-              "rounded-xl sm:rounded-2xl border p-2.5 sm:p-5 lg:p-6 relative overflow-hidden transition-colors duration-500",
-              isHdm ? "bg-[#FAF8F5] border-[#E2DBD0]" : "bg-[#FFF5F5] border-rose-200"
-            )}
+            className="flex w-[200%] transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+            style={{
+              transform: mode === "leaky" ? "translateX(0%)" : "translateX(-50%)",
+            }}
           >
-            {/* 1. 4 Satellite Technology & Channel Nodes */}
-            <div className="grid grid-cols-4 gap-1.5 sm:gap-3 text-center relative z-10">
-              {CHANNELS.map((ch) => {
-                const IconComp = ch.icon;
-                const isSelected = ch.id === activeChannelId;
-
-                return (
-                  <button
-                    key={ch.id}
-                    type="button"
-                    onClick={() => handleChannelChange(ch.id)}
-                    className={cn(
-                      "flex flex-col items-center gap-1 sm:gap-2 p-1.5 sm:p-3 rounded-xl border transition-all duration-300 cursor-pointer text-center group",
-                      isSelected
-                        ? isHdm
-                          ? "bg-white border-[#FFB020] shadow-md ring-2 ring-[#FFB020]/30 scale-[1.02]"
-                          : "bg-white border-rose-500 shadow-md ring-2 ring-rose-500/30 scale-[1.02]"
-                        : "bg-white/80 border-[#E2DBD0] hover:bg-white hover:border-slate-400 shadow-xs"
-                    )}
-                  >
-                    {/* Big Real Authentic Brand Icon Container */}
-                    <div
-                      className={cn(
-                        "w-7 h-7 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center border transition-transform group-hover:scale-105 shrink-0 shadow-2xs",
-                        isHdm
-                          ? "bg-[#FAF8F5] border-[#E2DBD0]"
-                          : "bg-rose-50/60 border-rose-200"
-                      )}
-                    >
-                      <IconComp className="w-4 h-4 sm:w-6 sm:h-6" />
-                    </div>
-
-                    <div className="w-full min-w-0">
-                      <div className="text-[9px] sm:text-xs font-display font-black text-[#0B1B3A] tracking-tight truncate">
-                        <span className="sm:hidden">{ch.shortName}</span>
-                        <span className="hidden sm:inline">{ch.name}</span>
-                      </div>
-                      <div className="text-[8px] sm:text-[9.5px] font-mono text-slate-500 truncate hidden sm:block">
-                        {ch.tag}
-                      </div>
-                    </div>
-
-                    {/* Micro Status Badge */}
-                    <span
-                      className={cn(
-                        "text-[7px] sm:text-[9px] font-mono font-bold px-1 sm:px-1.5 py-0.5 rounded-md border truncate max-w-full",
-                        isHdm
-                          ? isSelected
-                            ? "bg-teal-100 text-teal-800 border-teal-300"
-                            : "bg-slate-100 text-slate-600 border-slate-200"
-                          : isSelected
-                          ? "bg-rose-100 text-rose-800 border-rose-300"
-                          : "bg-slate-100 text-slate-600 border-slate-200"
-                      )}
-                    >
-                      {isHdm ? ch.hdmBadge : ch.leakyBadge}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* 2. Curved Converging Circuit Lines (SVG with Glowing Photons) */}
-            <div className="relative w-full h-11 sm:h-20 my-0.5 sm:my-1 pointer-events-none">
-              <svg
-                className="w-full h-full overflow-visible"
-                viewBox="0 0 600 90"
-                fill="none"
-                preserveAspectRatio="none"
-              >
-                <defs>
-                  {/* Glowing filter for HDM Gold Beam */}
-                  <filter id="circuit-gold-glow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="3.5" result="blur" />
-                    <feMerge>
-                      <feMergeNode in="blur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-
-                  {/* Glowing filter for Leaky Red Beam */}
-                  <filter id="circuit-rose-glow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="3.5" result="blur" />
-                    <feMerge>
-                      <feMergeNode in="blur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-
-                  {/* Base Track Gradient */}
-                  <linearGradient id="circuit-base-wire" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor={isHdm ? "#DDD5C9" : "#E8D5D8"} />
-                    <stop offset="100%" stopColor={isHdm ? "#C5BDB1" : "#D8BAC0"} />
-                  </linearGradient>
-
-                  {/* HDM Radiant Gold Stream */}
-                  <linearGradient id="circuit-hdm-stream" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#DDD5C9" stopOpacity="0.3" />
-                    <stop offset="45%" stopColor="#2DD4BF" stopOpacity="0.85" />
-                    <stop offset="100%" stopColor="#FFB020" stopOpacity="1" />
-                  </linearGradient>
-
-                  {/* Leaky Crimson Stream */}
-                  <linearGradient id="circuit-leaky-stream" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#E8D5D8" stopOpacity="0.3" />
-                    <stop offset="50%" stopColor="#F43F5E" stopOpacity="0.85" />
-                    <stop offset="100%" stopColor="#E11D48" stopOpacity="1" />
-                  </linearGradient>
-                </defs>
-
-                {satelliteXCoords.map((x, sIdx) => {
-                  const isChActive = CHANNELS[sIdx]?.id === activeChannelId;
-                  const pathD = `M ${x} 0 C ${x} 45, ${hubCenterX + (x - hubCenterX) * 0.15} 60, ${hubCenterX} ${hubCenterY}`;
-
-                  return (
-                    <g key={sIdx}>
-                      {/* 1. Base Wire Track */}
-                      <path
-                        d={pathD}
-                        stroke="url(#circuit-base-wire)"
-                        strokeWidth={isChActive ? "2.2" : "1.8"}
-                        strokeLinecap="round"
-                      />
-
-                      {/* 2. Flowing Energy Beam */}
-                      <path
-                        d={pathD}
-                        stroke={isHdm ? "url(#circuit-hdm-stream)" : "url(#circuit-leaky-stream)"}
-                        strokeWidth={isChActive ? "3" : "2"}
-                        strokeLinecap="round"
-                        opacity={isChActive ? "1" : "0.75"}
-                      />
-
-                      {/* 3. Glowing Radiant Photon Particle */}
-                      <circle
-                        r={isChActive ? "4.5" : "3.5"}
-                        fill={isHdm ? "#FFB020" : "#F43F5E"}
-                        filter={isHdm ? "url(#circuit-gold-glow)" : "url(#circuit-rose-glow)"}
-                      >
-                        <animateMotion
-                          path={pathD}
-                          dur={`${2.0 + sIdx * 0.3}s`}
-                          repeatCount="indefinite"
-                        />
-                      </circle>
-
-                      {/* 4. White-hot center core for sharpness */}
-                      <circle r="2" fill="#FFFFFF">
-                        <animateMotion
-                          path={pathD}
-                          dur={`${2.0 + sIdx * 0.3}s`}
-                          repeatCount="indefinite"
-                        />
-                      </circle>
-                    </g>
-                  );
-                })}
-              </svg>
-            </div>
-
-            {/* 3. Central Compiled Hub Capsule (Converging Point) */}
-            <div className="flex justify-center relative z-10 -mt-1 sm:-mt-2">
-              <div
-                className={cn(
-                  "inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-1.5 sm:px-6 sm:py-2.5 rounded-full font-display font-black text-[11px] sm:text-sm shadow-xl border-2 transition-all duration-300",
-                  isHdm
-                    ? "bg-gradient-to-r from-[#060B22] via-[#0B1638] to-[#060B22] text-white border-[#FFB020] shadow-[0_0_25px_rgba(255,176,32,0.35)]"
-                    : "bg-gradient-to-r from-rose-950 via-[#2A0B13] to-rose-950 text-rose-100 border-rose-500 shadow-[0_0_25px_rgba(244,63,94,0.35)]"
-                )}
-              >
-                {isHdm ? (
-                  <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FFB020] fill-[#FFB020] animate-pulse" />
-                ) : (
-                  <AlertTriangle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-400 animate-pulse" />
-                )}
-                <span>
-                  {isHdm ? "Compiled Conversion Engine" : "Leaky Template Funnel (72% Dropoff)"}
-                </span>
-              </div>
-            </div>
-
-            {/* 4. Real-Time Telemetry Bar */}
-            <div className="mt-2.5 sm:mt-5 space-y-1.5 sm:space-y-2 pt-2 sm:pt-3.5 border-t border-[#E2DBD0]">
-              <div className="flex items-center justify-between text-[10px] sm:text-xs font-mono">
-                <div className="flex items-center gap-1.5 sm:gap-2 text-slate-700 min-w-0">
-                  <span
-                    className={cn(
-                      "relative inline-flex rounded-full h-2 w-2 shrink-0",
-                      isHdm ? "bg-teal-500" : "bg-rose-500"
-                    )}
-                  />
-                  <span className="truncate text-left font-bold text-slate-800">
-                    <span className="sm:hidden">
-                      {isHdm ? `Stream: ${activeChannel.shortName}` : `Friction: ${activeChannel.shortName}`}
-                    </span>
-                    <span className="hidden sm:inline">
-                      {isHdm
-                        ? `Routing: ${activeChannel.name} • Sub-Second Edge Delivery`
-                        : `Friction: ${activeChannel.name} • 3.6s Template Freeze`}
-                    </span>
+            {/* ============================================================ */}
+            {/* SLIDE 1: TYPICAL LEAKY WEBSITE CARD                          */}
+            {/* ============================================================ */}
+            <div className="w-1/2 p-4 sm:p-7 lg:p-8 space-y-4 sm:space-y-6 shrink-0 text-left">
+              {/* Top Engine State Bar */}
+              <div className="flex items-center justify-between pb-3 border-b border-[#E2DBD0]">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-wider px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-rose-950 text-rose-300 border border-rose-500/30 shadow-xs">
+                    Typical Template Leak
+                  </span>
+                  <span className="text-[11px] sm:text-xs font-mono font-bold text-slate-500 hidden sm:inline">
+                    Channel: {activeChannel.name} ({activeChannel.tag})
                   </span>
                 </div>
-                <span
-                  className={cn(
-                    "font-extrabold shrink-0 ml-1.5",
-                    isHdm ? "text-teal-700" : "text-rose-700"
-                  )}
-                >
-                  {isHdm ? "96% Retained" : "72% Leaked"}
+
+                <span className="text-[9.5px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full border bg-rose-50 text-rose-700 border-rose-200">
+                  72% BUDGET LEAK
                 </span>
               </div>
 
-              <div className="h-1.5 sm:h-2 w-full bg-slate-200 rounded-full overflow-hidden p-0.5 border border-slate-300/60">
-                <div
-                  className={cn(
-                    "h-full rounded-full transition-all duration-700 ease-out",
-                    isHdm
-                      ? "bg-gradient-to-r from-teal-400 via-emerald-400 to-[#FFB020] shadow-[0_0_10px_rgba(45,212,191,0.6)]"
-                      : "bg-gradient-to-r from-rose-600 to-red-600 shadow-[0_0_10px_rgba(244,63,94,0.6)]"
-                  )}
-                  style={{ width: isHdm ? "96%" : "28%" }}
-                />
+              {/* Inner Circuit Board (Leaky Crimson Tracks) */}
+              <div className="rounded-xl sm:rounded-2xl border p-2.5 sm:p-5 lg:p-6 relative overflow-hidden bg-[#FFF5F5] border-rose-200">
+                {/* 4 Satellite Channel Cards */}
+                <div className="grid grid-cols-4 gap-1.5 sm:gap-3 text-center relative z-10">
+                  {CHANNELS.map((ch) => {
+                    const IconComp = ch.icon;
+                    const isSelected = ch.id === activeChannelId;
+
+                    return (
+                      <button
+                        key={ch.id}
+                        type="button"
+                        onClick={() => handleChannelChange(ch.id)}
+                        className={cn(
+                          "flex flex-col items-center gap-1 sm:gap-2 p-1.5 sm:p-3 rounded-xl border transition-all duration-300 cursor-pointer text-center group",
+                          isSelected
+                            ? "bg-white border-rose-500 shadow-md ring-2 ring-rose-500/30 scale-[1.02]"
+                            : "bg-white/80 border-[#E2DBD0] hover:bg-white hover:border-slate-400 shadow-xs"
+                        )}
+                      >
+                        <div className="w-7 h-7 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center border transition-transform group-hover:scale-105 shrink-0 shadow-2xs bg-rose-50/60 border-rose-200">
+                          <IconComp className="w-4 h-4 sm:w-6 sm:h-6" />
+                        </div>
+                        <div className="w-full min-w-0">
+                          <div className="text-[9px] sm:text-xs font-display font-black text-[#0B1B3A] tracking-tight truncate">
+                            <span className="sm:hidden">{ch.shortName}</span>
+                            <span className="hidden sm:inline">{ch.name}</span>
+                          </div>
+                          <div className="text-[8px] sm:text-[9.5px] font-mono text-slate-500 truncate hidden sm:block">
+                            {ch.tag}
+                          </div>
+                        </div>
+                        <span className="text-[7px] sm:text-[9px] font-mono font-bold px-1 sm:px-1.5 py-0.5 rounded-md border truncate max-w-full bg-rose-100 text-rose-800 border-rose-300">
+                          {ch.leakyBadge}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Curved Leaky Circuit Lines (SVG) */}
+                <div className="relative w-full h-11 sm:h-20 my-0.5 sm:my-1 pointer-events-none">
+                  <svg
+                    className="w-full h-full overflow-visible"
+                    viewBox="0 0 600 90"
+                    fill="none"
+                    preserveAspectRatio="none"
+                  >
+                    <defs>
+                      <filter id="circuit-rose-glow-slide1" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="3.5" result="blur" />
+                        <feMerge>
+                          <feMergeNode in="blur" />
+                          <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                      </filter>
+                      <linearGradient id="circuit-base-wire-slide1" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#E8D5D8" />
+                        <stop offset="100%" stopColor="#D8BAC0" />
+                      </linearGradient>
+                      <linearGradient id="circuit-leaky-stream-slide1" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#E8D5D8" stopOpacity="0.3" />
+                        <stop offset="50%" stopColor="#F43F5E" stopOpacity="0.85" />
+                        <stop offset="100%" stopColor="#E11D48" stopOpacity="1" />
+                      </linearGradient>
+                    </defs>
+
+                    {satelliteXCoords.map((x, sIdx) => {
+                      const isChActive = CHANNELS[sIdx]?.id === activeChannelId;
+                      const pathD = `M ${x} 0 C ${x} 45, ${hubCenterX + (x - hubCenterX) * 0.15} 60, ${hubCenterX} ${hubCenterY}`;
+
+                      return (
+                        <g key={sIdx}>
+                          <path
+                            d={pathD}
+                            stroke="url(#circuit-base-wire-slide1)"
+                            strokeWidth={isChActive ? "2.2" : "1.8"}
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d={pathD}
+                            stroke="url(#circuit-leaky-stream-slide1)"
+                            strokeWidth={isChActive ? "3" : "2"}
+                            strokeLinecap="round"
+                            opacity={isChActive ? "1" : "0.75"}
+                          />
+                          <circle
+                            r={isChActive ? "4.5" : "3.5"}
+                            fill="#F43F5E"
+                            filter="url(#circuit-rose-glow-slide1)"
+                          >
+                            <animateMotion
+                              path={pathD}
+                              dur={`${2.0 + sIdx * 0.3}s`}
+                              repeatCount="indefinite"
+                            />
+                          </circle>
+                          <circle r="2" fill="#FFFFFF">
+                            <animateMotion
+                              path={pathD}
+                              dur={`${2.0 + sIdx * 0.3}s`}
+                              repeatCount="indefinite"
+                            />
+                          </circle>
+                        </g>
+                      );
+                    })}
+                  </svg>
+                </div>
+
+                {/* Central Leaky Hub */}
+                <div className="flex justify-center relative z-10 -mt-1 sm:-mt-2">
+                  <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-1.5 sm:px-6 sm:py-2.5 rounded-full font-display font-black text-[11px] sm:text-sm shadow-xl border-2 transition-all duration-300 bg-gradient-to-r from-rose-950 via-[#2A0B13] to-rose-950 text-rose-100 border-rose-500 shadow-[0_0_25px_rgba(244,63,94,0.35)]">
+                    <AlertTriangle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-400 animate-pulse" />
+                    <span>Leaky Template Funnel (72% Dropoff)</span>
+                  </div>
+                </div>
+
+                {/* Leaky Telemetry Bar */}
+                <div className="mt-2.5 sm:mt-5 space-y-1.5 sm:space-y-2 pt-2 sm:pt-3.5 border-t border-rose-200/70">
+                  <div className="flex items-center justify-between text-[10px] sm:text-xs font-mono">
+                    <div className="flex items-center gap-1.5 sm:gap-2 text-slate-700 min-w-0">
+                      <span className="relative inline-flex rounded-full h-2 w-2 shrink-0 bg-rose-500" />
+                      <span className="truncate text-left font-bold text-slate-800">
+                        <span className="sm:hidden">Friction: {activeChannel.shortName}</span>
+                        <span className="hidden sm:inline">
+                          Friction: {activeChannel.name} • 3.6s Template Freeze
+                        </span>
+                      </span>
+                    </div>
+                    <span className="font-extrabold shrink-0 ml-1.5 text-rose-700">
+                      72% Leaked
+                    </span>
+                  </div>
+                  <div className="h-1.5 sm:h-2 w-full bg-slate-200 rounded-full overflow-hidden p-0.5 border border-slate-300/60">
+                    <div
+                      className="h-full bg-gradient-to-r from-rose-600 to-red-600 rounded-full shadow-[0_0_10px_rgba(244,63,94,0.6)]"
+                      style={{ width: "28%" }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Leaky Summary Banner */}
+              <div className="p-2.5 sm:p-3 rounded-xl border text-xs sm:text-sm font-medium flex items-center gap-2 sm:gap-2.5 bg-rose-50/70 border-rose-200/80 text-rose-950 min-h-[46px]">
+                <XCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                <p className="leading-snug">{activeChannel.leakySummary}</p>
+              </div>
+
+              {/* 3 Leaky Metric Dials */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3.5">
+                <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl border space-y-1 relative overflow-hidden min-h-[86px] sm:min-h-[92px] bg-rose-50/50 border-rose-200 shadow-xs">
+                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-500">
+                    <span>{activeChannel.speed.label}</span>
+                    <Clock className="w-3.5 h-3.5 text-slate-400" />
+                  </div>
+                  <div className="font-display font-black text-2xl sm:text-3xl text-rose-600">
+                    {activeChannel.speed.leakyValue}
+                  </div>
+                  <div className="text-[11px] text-slate-500 font-medium truncate">
+                    {activeChannel.speed.leakyNote}
+                  </div>
+                </div>
+
+                <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl border space-y-1 relative overflow-hidden min-h-[86px] sm:min-h-[92px] bg-rose-50/50 border-rose-200 shadow-xs">
+                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-500">
+                    <span>{activeChannel.quality.label}</span>
+                    <Gauge className="w-3.5 h-3.5 text-slate-400" />
+                  </div>
+                  <div className="font-display font-black text-2xl sm:text-3xl text-rose-600">
+                    {activeChannel.quality.leakyValue}
+                  </div>
+                  <div className="text-[11px] text-slate-500 font-medium truncate">
+                    {activeChannel.quality.leakyNote}
+                  </div>
+                </div>
+
+                <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl border space-y-1 relative overflow-hidden min-h-[86px] sm:min-h-[92px] bg-rose-50/50 border-rose-200 shadow-xs">
+                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-500">
+                    <span>{activeChannel.roas.label}</span>
+                    <TrendingDown className="w-3.5 h-3.5 text-rose-500" />
+                  </div>
+                  <div className="font-display font-black text-2xl sm:text-3xl text-rose-600">
+                    {activeChannel.roas.leakyValue}
+                  </div>
+                  <div className="text-[11px] text-slate-500 font-medium truncate">
+                    {activeChannel.roas.leakyNote}
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Audit Action Bar */}
+              <div className="pt-3 sm:pt-4 border-t border-[#E2DBD0] flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div className="flex items-center gap-2 text-xs text-slate-600 text-left">
+                  <ShieldCheck className="w-4 h-4 text-rose-600 shrink-0" />
+                  <span>
+                    Stop leaking ad budget. Our lead architects will audit your website conversion funnel.
+                  </span>
+                </div>
+
+                <StarBorder
+                  as={Link}
+                  href="/get-a-quote"
+                  className="w-full sm:w-auto py-2.5 sm:py-3 px-5 sm:px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-lg group"
+                  radius={12}
+                  color="#FFF8E7"
+                  trailColor="#FFB020"
+                  backgroundColor="#FFB020"
+                  textColor="#060B22"
+                  borderColor="rgba(255, 176, 32, 0.5)"
+                  sparkle={true}
+                  glow={0.8}
+                >
+                  <span>AUDIT YOUR WEBSITE FUNNEL</span>
+                  <ArrowRight className="w-4 h-4 text-[#060B22] group-hover:translate-x-1 transition-transform" />
+                </StarBorder>
               </div>
             </div>
-          </div>
 
-          {/* ============================================================ */}
-          {/* QUICK 1-LINE SUMMARY BANNER (LESS TEXT, MAXIMUM IMPACT)      */}
-          {/* ============================================================ */}
-          <div
-            className={cn(
-              "p-2.5 sm:p-3 rounded-xl border text-xs sm:text-sm font-medium flex items-center gap-2 sm:gap-2.5 transition-colors min-h-[46px]",
-              isHdm
-                ? "bg-teal-50/70 border-teal-200/80 text-teal-950"
-                : "bg-rose-50/70 border-rose-200/80 text-rose-950"
-            )}
-          >
-            {isHdm ? (
-              <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0" />
-            ) : (
-              <XCircle className="w-4 h-4 text-rose-600 shrink-0" />
-            )}
-            <p className="leading-snug">
-              {isHdm ? activeChannel.hdmSummary : activeChannel.leakySummary}
-            </p>
-          </div>
+            {/* ============================================================ */}
+            {/* SLIDE 2: HDM CONVERSION REVENUE ENGINE CARD                  */}
+            {/* ============================================================ */}
+            <div className="w-1/2 p-4 sm:p-7 lg:p-8 space-y-4 sm:space-y-6 shrink-0 text-left">
+              {/* Top Engine State Bar */}
+              <div className="flex items-center justify-between pb-3 border-b border-[#E2DBD0]">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-wider px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#060B22] text-[#FFB020] border border-[#FFB020]/30 shadow-xs">
+                    HDM Engine Active
+                  </span>
+                  <span className="text-[11px] sm:text-xs font-mono font-bold text-slate-500 hidden sm:inline">
+                    Channel: {activeChannel.name} ({activeChannel.tag})
+                  </span>
+                </div>
 
-          {/* ============================================================ */}
-          {/* 3 LIVE TELEMETRY METRIC DIALS (COMPACT, BOLD, ZERO SHIFT)     */}
-          {/* ============================================================ */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3.5">
-            {/* Dial 1: Initial Paint Speed */}
-            <div
-              className={cn(
-                "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-300 space-y-1 relative overflow-hidden min-h-[86px] sm:min-h-[92px]",
-                isHdm ? "bg-white border-[#E2DBD0] shadow-xs" : "bg-rose-50/50 border-rose-200 shadow-xs"
-              )}
-            >
-              <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-500">
-                <span>{activeChannel.speed.label}</span>
-                <Clock className="w-3.5 h-3.5 text-slate-400" />
+                <span className="text-[9.5px] sm:text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full border bg-teal-50 text-teal-700 border-teal-200">
+                  96% EFFICIENCY
+                </span>
               </div>
-              <div
-                className={cn(
-                  "font-display font-black text-2xl sm:text-3xl transition-colors",
-                  isHdm ? "text-teal-600" : "text-rose-600"
-                )}
-              >
-                {isHdm ? activeChannel.speed.hdmValue : activeChannel.speed.leakyValue}
+
+              {/* Inner Circuit Board (Radiant Gold & Teal Converging Tracks) */}
+              <div className="rounded-xl sm:rounded-2xl border p-2.5 sm:p-5 lg:p-6 relative overflow-hidden bg-[#FAF8F5] border-[#E2DBD0]">
+                {/* 4 Satellite Channel Cards */}
+                <div className="grid grid-cols-4 gap-1.5 sm:gap-3 text-center relative z-10">
+                  {CHANNELS.map((ch) => {
+                    const IconComp = ch.icon;
+                    const isSelected = ch.id === activeChannelId;
+
+                    return (
+                      <button
+                        key={ch.id}
+                        type="button"
+                        onClick={() => handleChannelChange(ch.id)}
+                        className={cn(
+                          "flex flex-col items-center gap-1 sm:gap-2 p-1.5 sm:p-3 rounded-xl border transition-all duration-300 cursor-pointer text-center group",
+                          isSelected
+                            ? "bg-white border-[#FFB020] shadow-md ring-2 ring-[#FFB020]/30 scale-[1.02]"
+                            : "bg-white/80 border-[#E2DBD0] hover:bg-white hover:border-slate-400 shadow-xs"
+                        )}
+                      >
+                        <div className="w-7 h-7 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center border transition-transform group-hover:scale-105 shrink-0 shadow-2xs bg-[#FAF8F5] border-[#E2DBD0]">
+                          <IconComp className="w-4 h-4 sm:w-6 sm:h-6" />
+                        </div>
+                        <div className="w-full min-w-0">
+                          <div className="text-[9px] sm:text-xs font-display font-black text-[#0B1B3A] tracking-tight truncate">
+                            <span className="sm:hidden">{ch.shortName}</span>
+                            <span className="hidden sm:inline">{ch.name}</span>
+                          </div>
+                          <div className="text-[8px] sm:text-[9.5px] font-mono text-slate-500 truncate hidden sm:block">
+                            {ch.tag}
+                          </div>
+                        </div>
+                        <span className="text-[7px] sm:text-[9px] font-mono font-bold px-1 sm:px-1.5 py-0.5 rounded-md border truncate max-w-full bg-teal-100 text-teal-800 border-teal-300">
+                          {ch.hdmBadge}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Curved Gold & Teal Circuit Lines (SVG) */}
+                <div className="relative w-full h-11 sm:h-20 my-0.5 sm:my-1 pointer-events-none">
+                  <svg
+                    className="w-full h-full overflow-visible"
+                    viewBox="0 0 600 90"
+                    fill="none"
+                    preserveAspectRatio="none"
+                  >
+                    <defs>
+                      <filter id="circuit-gold-glow-slide2" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="3.5" result="blur" />
+                        <feMerge>
+                          <feMergeNode in="blur" />
+                          <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                      </filter>
+                      <linearGradient id="circuit-base-wire-slide2" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#DDD5C9" />
+                        <stop offset="100%" stopColor="#C5BDB1" />
+                      </linearGradient>
+                      <linearGradient id="circuit-hdm-stream-slide2" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#DDD5C9" stopOpacity="0.3" />
+                        <stop offset="45%" stopColor="#2DD4BF" stopOpacity="0.85" />
+                        <stop offset="100%" stopColor="#FFB020" stopOpacity="1" />
+                      </linearGradient>
+                    </defs>
+
+                    {satelliteXCoords.map((x, sIdx) => {
+                      const isChActive = CHANNELS[sIdx]?.id === activeChannelId;
+                      const pathD = `M ${x} 0 C ${x} 45, ${hubCenterX + (x - hubCenterX) * 0.15} 60, ${hubCenterX} ${hubCenterY}`;
+
+                      return (
+                        <g key={sIdx}>
+                          <path
+                            d={pathD}
+                            stroke="url(#circuit-base-wire-slide2)"
+                            strokeWidth={isChActive ? "2.2" : "1.8"}
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d={pathD}
+                            stroke="url(#circuit-hdm-stream-slide2)"
+                            strokeWidth={isChActive ? "3" : "2"}
+                            strokeLinecap="round"
+                            opacity={isChActive ? "1" : "0.75"}
+                          />
+                          <circle
+                            r={isChActive ? "4.5" : "3.5"}
+                            fill="#FFB020"
+                            filter="url(#circuit-gold-glow-slide2)"
+                          >
+                            <animateMotion
+                              path={pathD}
+                              dur={`${2.0 + sIdx * 0.3}s`}
+                              repeatCount="indefinite"
+                            />
+                          </circle>
+                          <circle r="2" fill="#FFFFFF">
+                            <animateMotion
+                              path={pathD}
+                              dur={`${2.0 + sIdx * 0.3}s`}
+                              repeatCount="indefinite"
+                            />
+                          </circle>
+                        </g>
+                      );
+                    })}
+                  </svg>
+                </div>
+
+                {/* Central HDM Compiled Hub */}
+                <div className="flex justify-center relative z-10 -mt-1 sm:-mt-2">
+                  <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-1.5 sm:px-6 sm:py-2.5 rounded-full font-display font-black text-[11px] sm:text-sm shadow-xl border-2 transition-all duration-300 bg-gradient-to-r from-[#060B22] via-[#0B1638] to-[#060B22] text-white border-[#FFB020] shadow-[0_0_25px_rgba(255,176,32,0.35)]">
+                    <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FFB020] fill-[#FFB020] animate-pulse" />
+                    <span>Compiled Conversion Engine</span>
+                  </div>
+                </div>
+
+                {/* HDM Telemetry Bar */}
+                <div className="mt-2.5 sm:mt-5 space-y-1.5 sm:space-y-2 pt-2 sm:pt-3.5 border-t border-[#E2DBD0]">
+                  <div className="flex items-center justify-between text-[10px] sm:text-xs font-mono">
+                    <div className="flex items-center gap-1.5 sm:gap-2 text-slate-700 min-w-0">
+                      <span className="relative inline-flex rounded-full h-2 w-2 shrink-0 bg-teal-500" />
+                      <span className="truncate text-left font-bold text-slate-800">
+                        <span className="sm:hidden">Stream: {activeChannel.shortName}</span>
+                        <span className="hidden sm:inline">
+                          Routing: {activeChannel.name} • Sub-Second Edge Delivery
+                        </span>
+                      </span>
+                    </div>
+                    <span className="font-extrabold shrink-0 ml-1.5 text-teal-700">
+                      96% Retained
+                    </span>
+                  </div>
+                  <div className="h-1.5 sm:h-2 w-full bg-slate-200 rounded-full overflow-hidden p-0.5 border border-slate-300/60">
+                    <div
+                      className="h-full bg-gradient-to-r from-teal-400 via-emerald-400 to-[#FFB020] rounded-full shadow-[0_0_10px_rgba(45,212,191,0.6)]"
+                      style={{ width: "96%" }}
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="text-[11px] text-slate-500 font-medium truncate">
-                {isHdm ? activeChannel.speed.hdmNote : activeChannel.speed.leakyNote}
+
+              {/* HDM Summary Banner */}
+              <div className="p-2.5 sm:p-3 rounded-xl border text-xs sm:text-sm font-medium flex items-center gap-2 sm:gap-2.5 bg-teal-50/70 border-teal-200/80 text-teal-950 min-h-[46px]">
+                <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0" />
+                <p className="leading-snug">{activeChannel.hdmSummary}</p>
+              </div>
+
+              {/* 3 HDM Metric Dials */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3.5">
+                <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl border space-y-1 relative overflow-hidden min-h-[86px] sm:min-h-[92px] bg-white border-[#E2DBD0] shadow-xs">
+                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-500">
+                    <span>{activeChannel.speed.label}</span>
+                    <Clock className="w-3.5 h-3.5 text-slate-400" />
+                  </div>
+                  <div className="font-display font-black text-2xl sm:text-3xl text-teal-600">
+                    {activeChannel.speed.hdmValue}
+                  </div>
+                  <div className="text-[11px] text-slate-500 font-medium truncate">
+                    {activeChannel.speed.hdmNote}
+                  </div>
+                </div>
+
+                <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl border space-y-1 relative overflow-hidden min-h-[86px] sm:min-h-[92px] bg-white border-[#E2DBD0] shadow-xs">
+                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-500">
+                    <span>{activeChannel.quality.label}</span>
+                    <Gauge className="w-3.5 h-3.5 text-slate-400" />
+                  </div>
+                  <div className="font-display font-black text-2xl sm:text-3xl text-[#060B22]">
+                    {activeChannel.quality.hdmValue}
+                  </div>
+                  <div className="text-[11px] text-slate-500 font-medium truncate">
+                    {activeChannel.quality.hdmNote}
+                  </div>
+                </div>
+
+                <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl border space-y-1 relative overflow-hidden min-h-[86px] sm:min-h-[92px] bg-white border-[#E2DBD0] shadow-xs">
+                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-500">
+                    <span>{activeChannel.roas.label}</span>
+                    <TrendingUp className="w-3.5 h-3.5 text-teal-600" />
+                  </div>
+                  <div className="font-display font-black text-2xl sm:text-3xl text-teal-600">
+                    {activeChannel.roas.hdmValue}
+                  </div>
+                  <div className="text-[11px] text-slate-500 font-medium truncate">
+                    {activeChannel.roas.hdmNote}
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Audit Action Bar */}
+              <div className="pt-3 sm:pt-4 border-t border-[#E2DBD0] flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div className="flex items-center gap-2 text-xs text-slate-600 text-left">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>
+                    Stop leaking ad budget. Our lead architects will audit your website conversion funnel.
+                  </span>
+                </div>
+
+                <StarBorder
+                  as={Link}
+                  href="/get-a-quote"
+                  className="w-full sm:w-auto py-2.5 sm:py-3 px-5 sm:px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-lg group"
+                  radius={12}
+                  color="#FFF8E7"
+                  trailColor="#FFB020"
+                  backgroundColor="#FFB020"
+                  textColor="#060B22"
+                  borderColor="rgba(255, 176, 32, 0.5)"
+                  sparkle={true}
+                  glow={0.8}
+                >
+                  <span>AUDIT YOUR WEBSITE FUNNEL</span>
+                  <ArrowRight className="w-4 h-4 text-[#060B22] group-hover:translate-x-1 transition-transform" />
+                </StarBorder>
               </div>
             </div>
-
-            {/* Dial 2: Quality Score & Authority */}
-            <div
-              className={cn(
-                "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-300 space-y-1 relative overflow-hidden min-h-[86px] sm:min-h-[92px]",
-                isHdm ? "bg-white border-[#E2DBD0] shadow-xs" : "bg-rose-50/50 border-rose-200 shadow-xs"
-              )}
-            >
-              <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-500">
-                <span>{activeChannel.quality.label}</span>
-                <Gauge className="w-3.5 h-3.5 text-slate-400" />
-              </div>
-              <div
-                className={cn(
-                  "font-display font-black text-2xl sm:text-3xl transition-colors",
-                  isHdm ? "text-[#060B22]" : "text-rose-600"
-                )}
-              >
-                {isHdm ? activeChannel.quality.hdmValue : activeChannel.quality.leakyValue}
-              </div>
-              <div className="text-[11px] text-slate-500 font-medium truncate">
-                {isHdm ? activeChannel.quality.hdmNote : activeChannel.quality.leakyNote}
-              </div>
-            </div>
-
-            {/* Dial 3: Return on Ad Spend */}
-            <div
-              className={cn(
-                "p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-300 space-y-1 relative overflow-hidden min-h-[86px] sm:min-h-[92px]",
-                isHdm ? "bg-white border-[#E2DBD0] shadow-xs" : "bg-rose-50/50 border-rose-200 shadow-xs"
-              )}
-            >
-              <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-500">
-                <span>{activeChannel.roas.label}</span>
-                {isHdm ? (
-                  <TrendingUp className="w-3.5 h-3.5 text-teal-600" />
-                ) : (
-                  <TrendingDown className="w-3.5 h-3.5 text-rose-500" />
-                )}
-              </div>
-              <div
-                className={cn(
-                  "font-display font-black text-2xl sm:text-3xl transition-colors",
-                  isHdm ? "text-teal-600" : "text-rose-600"
-                )}
-              >
-                {isHdm ? activeChannel.roas.hdmValue : activeChannel.roas.leakyValue}
-              </div>
-              <div className="text-[11px] text-slate-500 font-medium truncate">
-                {isHdm ? activeChannel.roas.hdmNote : activeChannel.roas.leakyNote}
-              </div>
-            </div>
-          </div>
-
-          {/* ============================================================ */}
-          {/* BOTTOM AUDIT ACTION BAR (STARBORDER TO /GET-A-QUOTE)          */}
-          {/* ============================================================ */}
-          <div className="pt-3 sm:pt-4 border-t border-[#E2DBD0] flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div className="flex items-center gap-2 text-xs text-slate-600 text-left">
-              <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>
-                Stop leaking ad budget. Our lead architects will audit your website conversion funnel.
-              </span>
-            </div>
-
-            <StarBorder
-              as={Link}
-              href="/get-a-quote"
-              className="w-full sm:w-auto py-2.5 sm:py-3 px-5 sm:px-6 rounded-xl text-xs font-black uppercase tracking-wider inline-flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-lg group"
-              radius={12}
-              color="#FFF8E7"
-              trailColor="#FFB020"
-              backgroundColor="#FFB020"
-              textColor="#060B22"
-              borderColor="rgba(255, 176, 32, 0.5)"
-              sparkle={true}
-              glow={0.8}
-            >
-              <span>AUDIT YOUR WEBSITE FUNNEL</span>
-              <ArrowRight className="w-4 h-4 text-[#060B22] group-hover:translate-x-1 transition-transform" />
-            </StarBorder>
           </div>
         </div>
       </div>
