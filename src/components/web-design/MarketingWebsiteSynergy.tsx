@@ -264,8 +264,55 @@ const CHANNELS: ChannelData[] = [
 ];
 
 export function MarketingWebsiteSynergy() {
-  const [mode, setMode] = useState<EngineMode>("hdm");
+  // Default to "leaky" as requested: "keep by default on the leaky"
+  const [mode, setMode] = useState<EngineMode>("leaky");
   const [activeChannelId, setActiveChannelId] = useState<string>("google-ads");
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const sectionRef = React.useRef<HTMLElement>(null);
+
+  // Intersection Observer: Start timer only when section enters viewport
+  React.useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsInView(true);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Auto-slide to HDM (and cycle gently unless user interacts)
+  React.useEffect(() => {
+    if (hasUserInteracted || !isInView || isHovered) return;
+
+    // After 4.5s on leaky, auto-slide to HDM; then cycle every 6s unless interacted
+    const timer = setInterval(() => {
+      setMode((prev) => (prev === "leaky" ? "hdm" : "leaky"));
+    }, 4500);
+
+    return () => clearInterval(timer);
+  }, [hasUserInteracted, isInView, isHovered]);
+
+  const handleModeChange = (newMode: EngineMode) => {
+    setHasUserInteracted(true);
+    setMode(newMode);
+  };
+
+  const handleChannelChange = (chId: string) => {
+    setHasUserInteracted(true);
+    setActiveChannelId(chId);
+  };
 
   const activeChannel =
     CHANNELS.find((c) => c.id === activeChannelId) || CHANNELS[0];
@@ -278,6 +325,7 @@ export function MarketingWebsiteSynergy() {
 
   return (
     <section
+      ref={sectionRef}
       id="marketing-foundation"
       className="py-12 sm:py-16 lg:py-20 bg-[#FAF8F5] border-y border-[#E2DBD0] select-none scroll-mt-24 relative overflow-hidden text-left"
     >
@@ -307,9 +355,9 @@ export function MarketingWebsiteSynergy() {
           <div className="inline-flex items-center p-1.5 bg-white rounded-2xl border border-[#E2DBD0] shadow-sm">
             <button
               type="button"
-              onClick={() => setMode("leaky")}
+              onClick={() => handleModeChange("leaky")}
               className={cn(
-                "py-2 px-3 sm:px-5 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center gap-1.5 sm:gap-2 border",
+                "py-2 px-3 sm:px-5 rounded-xl text-xs font-bold transition-all duration-500 cursor-pointer flex items-center gap-1.5 sm:gap-2 border",
                 !isHdm
                   ? "bg-rose-950 text-rose-300 border-rose-500/40 shadow-sm font-black"
                   : "bg-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-50 border-transparent"
@@ -332,9 +380,9 @@ export function MarketingWebsiteSynergy() {
 
             <button
               type="button"
-              onClick={() => setMode("hdm")}
+              onClick={() => handleModeChange("hdm")}
               className={cn(
-                "py-2 px-3 sm:px-5 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center gap-1.5 sm:gap-2 border",
+                "py-2 px-3 sm:px-5 rounded-xl text-xs font-bold transition-all duration-500 cursor-pointer flex items-center gap-1.5 sm:gap-2 border",
                 isHdm
                   ? "bg-[#060B22] text-[#FFB020] border-[#FFB020]/60 shadow-sm font-black"
                   : "bg-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-50 border-transparent"
@@ -349,7 +397,11 @@ export function MarketingWebsiteSynergy() {
         {/* ============================================================ */}
         {/* 3. SIGNATURE CONVERGING CIRCUIT ARCHITECTURE (PASTED STYLE)   */}
         {/* ============================================================ */}
-        <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#E2DBD0] p-4 sm:p-7 lg:p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden text-left space-y-4 sm:space-y-6">
+        <div
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className="bg-white rounded-2xl sm:rounded-3xl border border-[#E2DBD0] p-4 sm:p-7 lg:p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden text-left space-y-4 sm:space-y-6"
+        >
           {/* Top Engine State Bar */}
           <div className="flex items-center justify-between pb-3 border-b border-[#E2DBD0]">
             <div className="flex items-center gap-2">
@@ -392,7 +444,7 @@ export function MarketingWebsiteSynergy() {
                   <button
                     key={ch.id}
                     type="button"
-                    onClick={() => setActiveChannelId(ch.id)}
+                    onClick={() => handleChannelChange(ch.id)}
                     className={cn(
                       "flex flex-col items-center gap-1 sm:gap-2 p-1.5 sm:p-3 rounded-xl border transition-all duration-300 cursor-pointer text-center group",
                       isSelected
