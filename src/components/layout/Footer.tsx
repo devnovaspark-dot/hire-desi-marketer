@@ -22,6 +22,7 @@ import {
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
+import { trackAndRedirectToThankYou } from "@/lib/gtm";
 
 function WhatsAppIcon({ className = "w-5 h-5" }: { className?: string }) {
   return (
@@ -141,6 +142,7 @@ export function Footer() {
 
     setIsSubmitting(true);
     try {
+      let delivered = false;
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -153,9 +155,11 @@ export function Footer() {
         }),
       });
 
-      if (!res.ok) {
+      if (res.ok) {
+        delivered = true;
+      } else {
         // Direct FormSubmit fallback
-        await fetch("https://formsubmit.co/ajax/novasdmagency@gmail.com", {
+        const fallbackRes = await fetch("https://formsubmit.co/ajax/novasdmagency@gmail.com", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -170,19 +174,20 @@ export function Footer() {
             "Submitted At": new Date().toISOString(),
           }),
         });
+        delivered = fallbackRes.ok;
       }
 
-      setSubmitted(true);
-      setTimeout(() => {
-        setSubmitted(false);
-        setEmail("");
-      }, 5000);
-    } catch {
-      setSubmitted(true);
-      setTimeout(() => {
-        setSubmitted(false);
-        setEmail("");
-      }, 5000);
+      if (delivered) {
+        setSubmitted(true);
+        await trackAndRedirectToThankYou({
+          fullName: "Footer Lead",
+          email: email.trim(),
+          serviceInterest: "Free 90-Day Strategy Plan",
+          source: "Footer Quick Form",
+        });
+      }
+    } catch (err) {
+      console.error("Footer quick form error:", err);
     } finally {
       setIsSubmitting(false);
     }

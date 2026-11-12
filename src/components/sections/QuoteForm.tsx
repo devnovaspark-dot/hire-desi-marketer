@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { trackAndRedirectToThankYou } from "@/lib/gtm";
 import {
   CheckCircle2,
   Clock,
@@ -105,8 +106,14 @@ export function QuoteForm() {
         }
       }
 
-      // Fast, immediate redirect directly to /thank-you-get-a-quote
-      window.location.href = "/thank-you-get-a-quote";
+      await trackAndRedirectToThankYou({
+        fullName: formData.fullName,
+        email: formData.email,
+        company: formData.company,
+        country: formData.country,
+        serviceInterest: formData.serviceInterest,
+        source: "Main Section Quote Form",
+      });
     } catch (err: unknown) {
       setIsLoading(false);
       if (err instanceof Error) {

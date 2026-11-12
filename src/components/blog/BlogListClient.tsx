@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { BlogPost, BlogCategory } from "@/types/blog";
 import { cn } from "@/lib/utils";
+import { pushToDataLayer } from "@/lib/gtm";
 
 function WhatsAppIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
@@ -56,6 +57,11 @@ export function BlogListClient({ initialPosts, categories }: BlogListClientProps
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newsletterEmail) return;
+    pushToDataLayer({
+      event: "newsletter_subscribe",
+      form_id: "Blog Newsletter Form",
+      lead_source: "Blog Sidebar Newsletter",
+    });
     setSubscribed(true);
     setTimeout(() => {
       setSubscribed(false);

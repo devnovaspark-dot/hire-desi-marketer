@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { trackAndRedirectToThankYou } from "@/lib/gtm";
 import {
   CheckCircle2,
   Clock,
@@ -117,8 +118,13 @@ export function QuoteFormPageClient() {
         }
       }
 
-      // Fast, immediate redirect directly to /thank-you-get-a-quote at the exact instant of submission
-      window.location.href = "/thank-you-get-a-quote";
+      await trackAndRedirectToThankYou({
+        fullName: formData.fullName,
+        email: formData.email,
+        company: formData.company,
+        serviceInterest: `${formData.serviceNeeded} (${formData.engagementModel})`,
+        source: "Dedicated Dual-Pane Quote Page (/get-a-quote)",
+      });
     } catch (err: unknown) {
       setIsLoading(false);
       if (err instanceof Error) {

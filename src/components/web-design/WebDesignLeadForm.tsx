@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import StarBorder from "@/components/ui/StarBorder";
+import { trackAndRedirectToThankYou } from "@/lib/gtm";
 
 interface WebDesignLeadFormProps {
   formId?: string;
@@ -95,14 +96,45 @@ export function WebDesignLeadForm({
         }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
 
       if (!res.ok) {
-        throw new Error(data.error || "Failed to submit inquiry.");
+        const fallbackRes = await fetch("https://formsubmit.co/ajax/novasdmagency@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            _subject: `New Web Design Lead: ${fullName.trim()} - ${serviceRequired}`,
+            _template: "table",
+            _captcha: "false",
+            "Full Name": fullName.trim(),
+            "Work Email": email.trim(),
+            "Company": company.trim() || "Not specified",
+            "Website URL": websiteUrl.trim() || "N/A",
+            "Service Interest": `[Web Dev] ${serviceRequired}`,
+            "Engagement Model": projectBudget,
+            "Project Scope": projectDescription.trim() || "No additional notes provided.",
+            "Source": sourceTag,
+            "Submitted At": new Date().toISOString(),
+          }),
+        });
+
+        if (!fallbackRes.ok) {
+          throw new Error(data?.error || "Failed to submit inquiry.");
+        }
       }
 
       setSubmitted(true);
-      window.location.href = "/thank-you-get-a-quote";
+      await trackAndRedirectToThankYou({
+        fullName: fullName.trim(),
+        email: email.trim(),
+        company: company.trim() || undefined,
+        serviceInterest: `[Web Dev] ${serviceRequired}`,
+        budget: projectBudget,
+        source: sourceTag,
+      });
     } catch (err: any) {
       console.error("Web design lead form submission error:", err);
       setError(

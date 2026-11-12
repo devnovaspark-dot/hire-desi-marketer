@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { BouncingGlassBall } from "@/components/ui/BouncingGlassBall";
+import { ThankYouGtmTracker } from "@/components/analytics/ThankYouGtmTracker";
 
 export const metadata: Metadata = {
   title: "Thank You! | Hire Desi Marketer",
@@ -30,6 +31,7 @@ export const metadata: Metadata = {
 export default function ThankYouGetAQuotePage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#FAF8F5] text-[#0B1B3A] selection:bg-[#FFB020] selection:text-[#060B22] overflow-x-hidden justify-between">
+      <ThankYouGtmTracker />
       {/* Floating Global Navigation Header */}
       <Header />
 

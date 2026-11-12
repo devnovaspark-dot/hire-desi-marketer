@@ -14,6 +14,7 @@ import {
   Check,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { trackAndRedirectToThankYou } from "@/lib/gtm";
 
 export function QuickQuoteHeroBanner() {
   const [formData, setFormData] = useState({
@@ -33,10 +34,11 @@ export function QuickQuoteHeroBanner() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.fullName || !formData.email) return;
+    if (!formData.fullName.trim() || !formData.email.trim()) return;
 
     setIsSubmitting(true);
     try {
+      let delivered = false;
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -47,10 +49,10 @@ export function QuickQuoteHeroBanner() {
         }),
       });
       if (res.ok) {
-        setSubmitted(true);
+        delivered = true;
       } else {
         // Fallback directly to FormSubmit
-        await fetch("https://formsubmit.co/ajax/novasdmagency@gmail.com", {
+        const fallbackRes = await fetch("https://formsubmit.co/ajax/novasdmagency@gmail.com", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -68,10 +70,21 @@ export function QuickQuoteHeroBanner() {
             "Submitted At": new Date().toISOString(),
           }),
         });
-        setSubmitted(true);
+        delivered = fallbackRes.ok;
       }
-    } catch {
-      setSubmitted(true);
+
+      if (delivered) {
+        setSubmitted(true);
+        await trackAndRedirectToThankYou({
+          fullName: formData.fullName,
+          email: formData.email,
+          country: formData.country,
+          serviceInterest: formData.serviceInterest,
+          source: "Hero Express Proposal Banner",
+        });
+      }
+    } catch (err) {
+      console.error("Hero quote form error:", err);
     } finally {
       setIsSubmitting(false);
     }
