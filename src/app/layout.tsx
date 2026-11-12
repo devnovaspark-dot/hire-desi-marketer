@@ -126,39 +126,6 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning className="min-h-screen bg-[#F6F4EE] text-[#0B1B3A] antialiased selection:bg-[#FFB020] selection:text-[#060B22]">
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-5RS9F324"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
-
-        {/* Google Tag Manager (GTM) — initialized in <head> before hydration */}
-        <Script id="gtm-bootstrap" strategy="beforeInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};
-            try {
-              var pendingRaw = window.sessionStorage && window.sessionStorage.getItem('hdm_pending_lead_conversion');
-              if (pendingRaw && window.location.pathname.indexOf('/thank-you-get-a-quote') !== -1) {
-                var pendingLead = JSON.parse(pendingRaw);
-                if (pendingLead && pendingLead.userData && (!pendingLead.timestamp || (Date.now() - pendingLead.timestamp < 600000))) {
-                  window.dataLayer.push({ user_data: pendingLead.userData });
-                  window.gtag('set', 'user_data', pendingLead.userData);
-                }
-              }
-            } catch (e) {}
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-5RS9F324');
-          `}
-        </Script>
-
         {/* Google Analytics (gtag.js) */}
         <Script
           id="gtag-script"

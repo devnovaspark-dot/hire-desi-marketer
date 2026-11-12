@@ -33,6 +33,7 @@ declare global {
   interface Window {
     dataLayer?: Array<Record<string, unknown> | unknown[]>;
     gtag?: (...args: unknown[]) => void;
+    __hdmConsumedLead?: StoredPendingLead | null;
   }
 }
 
@@ -146,6 +147,12 @@ export async function trackAndRedirectToThankYou(
 /** Reads and clears recent pending lead metadata (within 10 minutes) on the thank-you page. */
 export function consumePendingLeadConversion(): StoredPendingLead | null {
   if (typeof window === "undefined") return null;
+
+  if (window.__hdmConsumedLead) {
+    const cached = window.__hdmConsumedLead;
+    window.__hdmConsumedLead = null;
+    return cached;
+  }
 
   try {
     const raw = window.sessionStorage.getItem(PENDING_LEAD_STORAGE_KEY);

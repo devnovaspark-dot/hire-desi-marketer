@@ -1,6 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import {
   ArrowLeft,
   MessageCircle,
@@ -11,6 +12,7 @@ import {
 import { Header } from "@/components/layout/Header";
 import { BouncingGlassBall } from "@/components/ui/BouncingGlassBall";
 import { ThankYouGtmTracker } from "@/components/analytics/ThankYouGtmTracker";
+import { GTM_ID, PENDING_LEAD_STORAGE_KEY } from "@/lib/gtm";
 
 export const metadata: Metadata = {
   title: "Thank You! | Hire Desi Marketer",
@@ -31,6 +33,43 @@ export const metadata: Metadata = {
 export default function ThankYouGetAQuotePage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#FAF8F5] text-[#0B1B3A] selection:bg-[#FFB020] selection:text-[#060B22] overflow-x-hidden justify-between">
+      {/* Google Tag Manager (noscript) — Thank-You Page only */}
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+          height="0"
+          width="0"
+          style={{ display: "none", visibility: "hidden" }}
+        />
+      </noscript>
+
+      {/* Google Tag Manager (GTM) — Loaded ONLY on /thank-you-get-a-quote */}
+      <Script id="gtm-thank-you-bootstrap" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};
+          try {
+            var pendingRaw = window.sessionStorage && window.sessionStorage.getItem('${PENDING_LEAD_STORAGE_KEY}');
+            if (pendingRaw) {
+              var pendingLead = JSON.parse(pendingRaw);
+              if (pendingLead && (!pendingLead.timestamp || (Date.now() - pendingLead.timestamp < 600000))) {
+                window.__hdmConsumedLead = pendingLead;
+                if (pendingLead.userData) {
+                  window.dataLayer.push({ user_data: pendingLead.userData });
+                  window.gtag('set', 'user_data', pendingLead.userData);
+                }
+              }
+              window.sessionStorage.removeItem('${PENDING_LEAD_STORAGE_KEY}');
+            }
+          } catch (e) {}
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','${GTM_ID}');
+        `}
+      </Script>
+
       <ThankYouGtmTracker />
       {/* Floating Global Navigation Header */}
       <Header />
