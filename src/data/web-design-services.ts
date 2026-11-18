@@ -555,8 +555,8 @@ export const WEB_CASE_STUDIES: WebCaseStudy[] = [
       { label: "Core UX", value: "1-Tap Booking" },
       { label: "Compliance", value: "HIPAA Grade" },
     ],
-    image: "/images/ref-onemedical.jpg",
-    imageAlt: "One Medical healthcare and telehealth website reference preview",
+    image: "/images/healthcare-1.jpg",
+    imageAlt: "Healthcare and telehealth patient portal benchmark reference preview",
   },
   {
     id: "ecommerce-reference",
@@ -582,8 +582,8 @@ export const WEB_CASE_STUDIES: WebCaseStudy[] = [
       { label: "Checkout", value: "Frictionless" },
       { label: "Mobile UX", value: "App-Like" },
     ],
-    image: "/images/ref-allbirds.jpg",
-    imageAlt: "Allbirds direct-to-consumer e-commerce reference preview",
+    image: "/images/ecommerce-copy.jpg",
+    imageAlt: "High-velocity e-commerce and DTC digital storefront reference preview",
   },
   {
     id: "saas-reference",
@@ -609,8 +609,8 @@ export const WEB_CASE_STUDIES: WebCaseStudy[] = [
       { label: "Performance", value: "100/100 Vitals" },
       { label: "Interaction", value: "Fluid Micro-UI" },
     ],
-    image: "/images/ref-linear.jpg",
-    imageAlt: "Linear SaaS web application and modern software landing page reference",
+    image: "/images/darkweb.jpg",
+    imageAlt: "Modern dark-mode SaaS web application interface reference preview",
   },
   {
     id: "corporate-reference",
@@ -636,8 +636,8 @@ export const WEB_CASE_STUDIES: WebCaseStudy[] = [
       { label: "Typography", value: "Editorial High-End" },
       { label: "Reach", value: "Global Scale" },
     ],
-    image: "/images/ref-mckinsey.jpg",
-    imageAlt: "McKinsey & Company corporate consulting website reference preview",
+    image: "/images/business.jpg",
+    imageAlt: "Enterprise corporate B2B thought leadership and publishing platform reference preview",
   },
 ];
 
