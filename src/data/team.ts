@@ -15,13 +15,6 @@ export const LEADERSHIP_TEAM: TeamMember[] = [
     badge: "Operations",
     bio: "Overseeing day-to-day campaign governance, team training, client escalation resolution, and cross-border operational excellence.",
   },
-  {
-    name: "Bikram Keshari Sahu",
-    role: "Operations Executive",
-    image: "/images/team-bikram.webp",
-    badge: "Execution",
-    bio: "Ensuring smooth tooling setups, daily sprint pacing, task completion audits, and team shift adherence across all time zones.",
-  },
 ];
 
 export const DEPARTMENTS: Department[] = [

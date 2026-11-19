@@ -76,8 +76,8 @@ export function WebDesignTeamShowcase() {
               </p>
             </div>
 
-            {/* 3 Leadership Profiles Grid (3 side-by-side on mobile) */}
-            <div className="grid grid-cols-3 gap-1.5 sm:gap-3">
+            {/* 2 Leadership Profiles Grid */}
+            <div className="grid grid-cols-2 gap-2 sm:gap-4 max-w-sm">
               <div className="p-2 sm:p-3.5 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 flex flex-col items-center text-center space-y-1.5 sm:space-y-2 hover:border-[#FFB020]/40 transition-colors">
                 <div className="relative w-11 h-11 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-[#FFB020]/50 shadow-md">
                   <Image
@@ -118,28 +118,6 @@ export function WebDesignTeamShowcase() {
                   </span>
                   <span className="text-[9px] text-slate-400 hidden sm:block mt-0.5">
                     Client Delivery &amp; SLA
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-2 sm:p-3.5 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 flex flex-col items-center text-center space-y-1.5 sm:space-y-2 hover:border-[#FFB020]/40 transition-colors">
-                <div className="relative w-11 h-11 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-[#FFB020]/50 shadow-md">
-                  <Image
-                    src="/images/team-bikram.webp"
-                    alt="Bikram Keshari Sahu - Operations Executive"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div>
-                  <h4 className="font-display font-black text-[11px] sm:text-xs text-white leading-tight">
-                    Bikram K. Sahu
-                  </h4>
-                  <span className="text-[9px] sm:text-[10px] text-[#FFB020] font-bold block truncate">
-                    Ops Executive
-                  </span>
-                  <span className="text-[9px] text-slate-400 hidden sm:block mt-0.5">
-                    QA &amp; Deployments
                   </span>
                 </div>
               </div>

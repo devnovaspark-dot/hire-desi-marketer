@@ -49,18 +49,6 @@ const EXECUTIVE_LEADERSHIP: ExecutiveMember[] = [
     ctaLabel: "Sync With Operations",
     ctaHref: "/get-a-quote",
   },
-  {
-    name: "Bikram Keshari Sahu",
-    role: "Operations Executive",
-    badge: "Execution Desk",
-    experience: "6+ Yrs Technical Ops",
-    image: "/images/team-bikram.webp",
-    bio: "Ensuring smooth tooling setups, daily sprint pacing, task completion audits, and team shift adherence with zero gig-economy or freelance outsourcing.",
-    slaPill: "Daily Quality & Shift Audits",
-    tags: ["Tooling & CRM", "Sprint Audits", "Shift Adherence"],
-    ctaLabel: "Inquire Sprint Setup",
-    ctaHref: "/get-a-quote",
-  },
 ];
 
 export function TeamIntroduction() {
@@ -102,7 +90,7 @@ export function TeamIntroduction() {
         </div>
 
         {/* Executive Leadership Dossier Cards — Compact Single-Window Fit */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-4 lg:gap-5 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-stretch max-w-3xl mx-auto w-full">
           {EXECUTIVE_LEADERSHIP.map((member) => (
             <div
               key={member.name}
