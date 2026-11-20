@@ -129,7 +129,7 @@ export function Hero() {
                 {/* High-Resolution Team Showcase (1200x1000) */}
                 <div className="relative w-full aspect-[6/5] rounded-xl sm:rounded-2xl overflow-hidden border border-white/15 bg-slate-950/60 shadow-[0_12px_35px_rgba(0,0,0,0.5)] group">
                   <Image
-                    src="/images/hdmheri.jpeg"
+                    src="/images/1200_1000px.webp"
                     alt="Hire Desi Marketer Dedicated In-House Team at Bhubaneswar Headquarters"
                     fill
                     priority
