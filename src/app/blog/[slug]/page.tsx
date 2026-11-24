@@ -257,7 +257,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   alt={post.coverImageAlt}
                   className="rounded-3xl border border-[#E2DBD0] shadow-xl"
                 >
-                  <div className="relative aspect-[16/11] w-full rounded-3xl overflow-hidden skeuo-card-light group cursor-zoom-in">
+                  <div className="relative aspect-video w-full rounded-3xl overflow-hidden skeuo-card-light group cursor-zoom-in">
                     <Image
                       src={post.coverImage}
                       alt={post.coverImageAlt}
@@ -458,7 +458,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     <div>
                       <Link
                         href={`/blog/${rPost.slug}`}
-                        className="block relative aspect-[16/10] overflow-hidden"
+                        className="block relative aspect-video overflow-hidden"
                       >
                         <Image
                           src={rPost.coverImage}
