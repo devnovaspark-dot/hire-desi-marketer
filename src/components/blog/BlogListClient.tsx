@@ -189,89 +189,100 @@ export function BlogListClient({ initialPosts, categories }: BlogListClientProps
             </div>
           ) : (
             <>
-              {/* Featured Card (Tactile Skeuomorphic Light - 16:9 Banner) */}
+              {/* Featured Horizontal Card (Tactile Skeuomorphic Light) */}
               {featuredPost && (
                 <article className="group relative rounded-3xl skeuo-card-light overflow-hidden transition-all duration-300 hover:shadow-xl">
-                  {/* Full 16:9 Banner Image (Zero Cropping) */}
-                  <Link
-                    href={`/blog/${featuredPost.slug}`}
-                    className="block relative w-full aspect-video overflow-hidden bg-slate-950"
-                  >
-                    <Image
-                      src={featuredPost.coverImage}
-                      alt={featuredPost.coverImageAlt}
-                      fill
-                      priority
-                      className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                      sizes="(max-width: 1024px) 100vw, 820px"
-                    />
-                  </Link>
+                  <div className="grid grid-cols-1 sm:grid-cols-12 gap-0 items-stretch">
+                    {/* Thumbnail Image (Left - Uncropped 16:9 Display) */}
+                    <Link
+                      href={`/blog/${featuredPost.slug}`}
+                      className="sm:col-span-5 md:col-span-6 relative aspect-video sm:aspect-auto sm:min-h-full overflow-hidden block bg-slate-900"
+                    >
+                      {/* Ambient background matching image colors seamlessly */}
+                      <Image
+                        src={featuredPost.coverImage}
+                        alt=""
+                        fill
+                        aria-hidden="true"
+                        className="object-cover blur-xl opacity-75 scale-125"
+                      />
+                      {/* Main Image: fully visible with zero cropping */}
+                      <Image
+                        src={featuredPost.coverImage}
+                        alt={featuredPost.coverImageAlt}
+                        fill
+                        priority
+                        className="object-contain relative z-10 group-hover:scale-102 transition-transform duration-500"
+                        sizes="(max-width: 640px) 100vw, 420px"
+                      />
+                    </Link>
 
-                  {/* Content (Below) */}
-                  <div className="p-6 sm:p-7 flex flex-col justify-between space-y-4">
-                    <div className="space-y-2.5">
-                      <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-[#060B22] text-[#FFB020] text-[10px] font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
-                        {featuredPost.category.title}
+                    {/* Content (Right) */}
+                    <div className="sm:col-span-7 md:col-span-6 p-5 sm:p-6 lg:p-7 flex flex-col justify-between space-y-4">
+                      <div className="space-y-2.5">
+                        <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-[#060B22] text-[#FFB020] text-[10px] font-black uppercase tracking-wider border border-[#FFB020]/30 shadow-xs">
+                          {featuredPost.category.title}
+                        </div>
+
+                        <h3 className="font-display font-bold text-lg sm:text-xl lg:text-2xl text-[#0B1B3A] group-hover:text-[#FFB020] transition-colors leading-snug">
+                          <Link href={`/blog/${featuredPost.slug}`}>
+                            {featuredPost.title}
+                          </Link>
+                        </h3>
+
+                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-2">
+                          {featuredPost.excerpt}
+                        </p>
                       </div>
 
-                      <h3 className="font-display font-bold text-xl sm:text-2xl text-[#0B1B3A] group-hover:text-[#FFB020] transition-colors leading-snug">
-                        <Link href={`/blog/${featuredPost.slug}`}>
-                          {featuredPost.title}
-                        </Link>
-                      </h3>
-
-                      <p className="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-2">
-                        {featuredPost.excerpt}
-                      </p>
-                    </div>
-
-                    {/* Author row & Read button */}
-                    <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-                      <div className="flex items-center gap-2.5">
-                        <div className="relative w-8 h-8 rounded-full overflow-hidden border border-slate-200 shrink-0">
-                          <Image
-                            src={featuredPost.author.image}
-                            alt={featuredPost.author.name}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                        <div>
-                          <div className="text-xs font-black uppercase tracking-tight text-[#0B1B3A]">
-                            {featuredPost.author.name}
+                      {/* Author row & Read button */}
+                      <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <div className="flex items-center gap-2.5">
+                          <div className="relative w-8 h-8 rounded-full overflow-hidden border border-slate-200 shrink-0">
+                            <Image
+                              src={featuredPost.author.image}
+                              alt={featuredPost.author.name}
+                              fill
+                              className="object-cover"
+                            />
                           </div>
-                          <div className="text-[11px] text-slate-500">
-                            {new Date(featuredPost.publishedAt).toLocaleDateString(
-                              "en-US",
-                              { month: "short", day: "numeric", year: "numeric" }
-                            )}{" "}
-                            • {featuredPost.readTimeMinutes} min read
+                          <div>
+                            <div className="text-xs font-black uppercase tracking-tight text-[#0B1B3A]">
+                              {featuredPost.author.name}
+                            </div>
+                            <div className="text-[11px] text-slate-500">
+                              {new Date(featuredPost.publishedAt).toLocaleDateString(
+                                "en-US",
+                                { month: "short", day: "numeric", year: "numeric" }
+                              )}{" "}
+                              • {featuredPost.readTimeMinutes} min read
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={(e) => toggleBookmark(featuredPost.id, e)}
-                          title="Save for later"
-                          className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-[#0B1B3A] transition-colors cursor-pointer"
-                        >
-                          <Bookmark
-                            className={cn(
-                              "w-4 h-4",
-                              bookmarkedIds.has(featuredPost.id)
-                                ? "fill-[#FFB020] text-[#FFB020]"
-                                : ""
-                            )}
-                          />
-                        </button>
-                        <Link
-                          href={`/blog/${featuredPost.slug}`}
-                          className="btn-luxury-gold btn-shimmer px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider inline-flex items-center gap-1 shadow-sm"
-                        >
-                          <span>Read</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={(e) => toggleBookmark(featuredPost.id, e)}
+                            title="Save for later"
+                            className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-[#0B1B3A] transition-colors cursor-pointer"
+                          >
+                            <Bookmark
+                              className={cn(
+                                "w-4 h-4",
+                                bookmarkedIds.has(featuredPost.id)
+                                  ? "fill-[#FFB020] text-[#FFB020]"
+                                  : ""
+                              )}
+                            />
+                          </button>
+                          <Link
+                            href={`/blog/${featuredPost.slug}`}
+                            className="btn-luxury-gold btn-shimmer px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider inline-flex items-center gap-1 shadow-sm"
+                          >
+                            <span>Read</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
